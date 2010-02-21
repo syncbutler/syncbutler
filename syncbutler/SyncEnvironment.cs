@@ -7,13 +7,14 @@ namespace SyncButler
     /// <summary>
     /// Contains methods to load and store settings as well as handling access to the list of partnerships
     /// </summary>
-    class SyncEnvironment
+    public class SyncEnvironment
     {
         private List<Partnership> partnershipList;
 
         /// <summary>
         /// Returns the partnership at the specified index.
         /// </summary>
+        /// <param name="idx">The integer index of the partnership to load.</param>
         /// <returns>A Partnership object</returns>
         public Partnership LoadPartnership(int idx)
         {
