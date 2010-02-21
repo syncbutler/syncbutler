@@ -7,7 +7,7 @@ namespace SyncButler
     /// <summary>
     /// Represents a conflict detected in the sync.
     /// </summary>
-    class Conflict
+    public class Conflict
     {
         protected ISyncable left;
         protected ISyncable right;
