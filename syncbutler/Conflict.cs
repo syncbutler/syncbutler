@@ -12,7 +12,7 @@ namespace SyncButler
         protected ISyncable left;
         protected ISyncable right;
         private enum StatusOptions {Resolved, Unresolved, Resolving}
-        protected StatusOptions status;
+        private StatusOptions status;
 
         public enum Action { CopyToLeft, DeleteLeft, Merge, CopyToRight, DeleteRight };
         /// <summary>
