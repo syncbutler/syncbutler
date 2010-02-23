@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Diagnostics;
 
+
 namespace SyncButler
 {
     /// <summary>
@@ -43,9 +44,25 @@ namespace SyncButler
         /// Attempts to sync this partnership
         /// </summary>
         /// <returns>Null on no conflicts, else a list of conflicts.</returns>
+        /// <summary>
+        /// Attempts to sync this partnership
+        /// </summary>
+        /// <returns>Null on no conflicts, else a list of conflicts.</returns>
         public List<Conflict> Sync()
         {
-            Trace.Assert(false, "not implemented");
+            Trace.Assert(false, "not fully implemented");
+
+            List<Conflict> conflictList = new List<Conflict>();
+
+            // Check starting with the left ISyncable
+
+            // Check for ISyncables missed from the right ISyncable
+
+            return conflictList;
+        }
+
+        protected List<Conflict> Sync(ISyncable left, ISyncable right)
+        {
             return null;
         }
 
