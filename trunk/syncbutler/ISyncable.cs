@@ -11,18 +11,18 @@ namespace SyncButler
     public interface ISyncable
     {
         /// <summary>
+        /// Checks if it's in Sync with the other pair
+        /// </summary>
+        /// <param name="otherPair"></param>
+        /// <returns>List of conflicts detected</returns>
+        List<Conflict> Sync(ISyncable otherPair);
+
+        /// <summary>
         /// Not implemented. Performs a copy action based on the item provided.
         /// </summary>
         /// <param name="item">The other ISyncable item in question.</param>
         /// <returns>True if copy succeeded, false otherwise.</returns>
         object CopyTo(ISyncable item);
-
-        /// <summary>
-        /// Returns a list of children (eg. files in a folder) 
-        /// </summary>
-        /// <returns>List of ISyncables under this ISyncable</returns>
-        List<ISyncable> GetChildren();
-
 
         /// <summary>
         /// Not implemented. Performs a delete action.

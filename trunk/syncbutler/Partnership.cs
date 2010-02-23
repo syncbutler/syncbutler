@@ -50,21 +50,7 @@ namespace SyncButler
         /// <returns>Null on no conflicts, else a list of conflicts.</returns>
         public List<Conflict> Sync()
         {
-            Trace.Assert(false, "not fully implemented");
-
-            List<Conflict> conflictList = new List<Conflict>();
-
-            // Check starting with the left ISyncable
-
-            // Check for ISyncables missed from the right ISyncable
-
-            return conflictList;
+            return left.Sync(right);
         }
-
-        protected List<Conflict> Sync(ISyncable left, ISyncable right)
-        {
-            return null;
-        }
-
     }
 }
