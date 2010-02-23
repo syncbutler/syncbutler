@@ -16,7 +16,7 @@ namespace SyncButler
         private enum StatusOptions {Resolved, Unresolved, Resolving}
         private StatusOptions status;
 
-        public enum Action { CopyToLeft, DeleteLeft, Merge, CopyToRight, DeleteRight };
+        public enum Action { CopyToLeft, DeleteLeft, Merge, CopyToRight, DeleteRight, Unknown };
 
         public Conflict(ISyncable left, ISyncable right, Action RecommendedAction)
         {

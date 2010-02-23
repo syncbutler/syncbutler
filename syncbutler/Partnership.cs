@@ -23,21 +23,32 @@ namespace SyncButler
         /// <summary>
         /// right full path
         /// </summary>
-        private string rightFullPath;
+        protected internal string rightFullPath;
         /// <summary>
         /// left full path
         /// </summary>
-        private string leftFullPath;
+        protected internal string leftFullPath;
+
+        /// <summary>
+        /// A dictionary of the hash values from the last sync.
+        /// May be empty.
+        /// </summary>
+        protected internal Dictionary<string, long> hashDictionary;
 
         /// <summary>
         /// initialize the partership
         /// </summary>
         /// <param name="left">left side of the syncable</param>
         /// <param name="right">right side of the syncable</param>
-        public Partnership(ISyncable left, ISyncable right)
+        public Partnership( string leftFullPath, ISyncable left, 
+                            string rightFullPath, ISyncable right,
+                            Dictionary<string, long> hashDictionary)
         {
             this.left = left;
             this.right = right;
+            this.leftFullPath = leftFullPath;
+            this.rightFullPath = rightFullPath;
+            this.hashDictionary = hashDictionary;
         }
 
         /// <summary>
@@ -50,6 +61,8 @@ namespace SyncButler
         /// <returns>Null on no conflicts, else a list of conflicts.</returns>
         public List<Conflict> Sync()
         {
+            left.SetParentPartnership(this);
+            right.SetParentPartnership(this);
             return left.Sync(right);
         }
     }

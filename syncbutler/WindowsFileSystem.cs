@@ -13,6 +13,7 @@ namespace SyncButler
         protected String relativePath;
         protected String rootPath;
         protected FileSystemInfo nativeFileSystemObj;
+        protected Partnership parentPartnership = null;
 
         /// <summary>
         /// Gets the name of the current folder/file. Additional info, such as the directory structure prior to this folder/file, is stripped away.
@@ -114,6 +115,9 @@ namespace SyncButler
             }
         }
 
-        
+        public void SetParentPartnership(Partnership parentPartnership)
+        {
+            this.parentPartnership = parentPartnership;
+        }
     }
 }
