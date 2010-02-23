@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 using SyncButler.Checksums;
+using SyncButler.Exceptions;
 
 namespace SyncButler
 {
@@ -201,7 +202,10 @@ namespace SyncButler
 
         public List<Conflict> Sync(ISyncable otherPair)
         {
-            // TODO: Implement
+            WindowsFile partner;
+            if (otherPair is WindowsFile) partner = (WindowsFile)otherPair;
+            else throw new InvalidPartnershipException();
+            
             return null;
         }
         
