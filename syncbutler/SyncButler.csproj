@@ -34,6 +34,7 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -44,6 +45,7 @@
     <Compile Include="ProgramEnvironment\PartnershipSection.cs" />
     <Compile Include="ProgramEnvironment\SettingsConfigElement.cs" />
     <Compile Include="ProgramEnvironment\SettingsSection.cs" />
+    <Compile Include="SystemEnvironment\StorageDevices.cs" />
     <Compile Include="WindowsFileSystem.cs" />
     <Compile Include="Conflict.cs" />
     <Compile Include="ISyncable.cs" />
