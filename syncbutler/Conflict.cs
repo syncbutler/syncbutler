@@ -11,25 +11,37 @@ namespace SyncButler
     {
         protected ISyncable left;
         protected ISyncable right;
+        protected Action RecommendedAction;
+
         private enum StatusOptions {Resolved, Unresolved, Resolving}
         private StatusOptions status;
 
         public enum Action { CopyToLeft, DeleteLeft, Merge, CopyToRight, DeleteRight };
+
+        public Conflict(ISyncable left, ISyncable right, Action RecommendedAction)
+        {
+            this.left = left;
+            this.right = right;
+            this.RecommendedAction = RecommendedAction;
+        }
+
+        public Action GetRecommendedAction() { return RecommendedAction; }
+
         /// <summary>
         /// Not implemented. Attempts to resolve a conflict based on a specified user action.
         /// </summary>
         /// <returns>true if the conflict was successfully resolved, false otherwise.</returns>
         /// <exception cref="ArgumentException">This exception is generated when an invalid user action is passed into the method.</exception>
-        public Boolean Resolve(Action user)
+        public Object Resolve(Action user)
         {
             switch (user) {
                 case Action.CopyToLeft : 
                     {
-                        return left.Copy(right);
+                        return right.CopyTo(left);
                     }
                 case Action.DeleteLeft : 
                     {
-                        return left.Delete();                
+                        return left.Delete();           
                     }
                 case Action.Merge:
                     {
@@ -37,7 +49,7 @@ namespace SyncButler
                     }
                 case Action.CopyToRight:
                     {
-                        return right.Copy(left);
+                        return left.CopyTo(right);
                     }
                 case Action.DeleteRight:
                     {

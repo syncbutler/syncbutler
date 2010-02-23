@@ -7,6 +7,8 @@ using SyncButler.Checksums;
 
 namespace SyncButler
 {
+
+    public enum Error { NoError, NoPermission, PathTooLong, DirectoryDoesNotExist, InvalidPath, NotImplemented };
     /// <summary>
     /// Represents a file on the Windows file system.
     /// </summary>
@@ -83,19 +85,64 @@ namespace SyncButler
             return buffer;
         }
 
-        public bool Copy(ISyncable item)
+        /// <summary>
+        /// Attempt to overwrite its content to another file
+        /// </summary>
+        /// <param name="item">The target file to be overwrite</param>
+        /// <returns>Error.NoError if there is no error. Error.InvalidPath if the path is not valid. Error.NoPermission if the user has no permission to overwrite this file. Error.PathTooLong if the path given is too long for this system to handle</returns>
+        public object CopyTo(ISyncable item)
         {
-            throw new NotImplementedException();
+            Debug.Assert(item.GetType().Name.Equals("WindowsFiles"), "Different type, the given type is " + item.GetType().Name);
+
+            WindowsFile windowFiles = (WindowsFile)item;
+            try
+            {
+                nativeFileObj.CopyTo(windowFiles.relativePath + windowFiles.Name);
+                return Error.NoError;
+            }
+            catch (ArgumentException)
+            {
+                return Error.InvalidPath;
+            }
+            catch (NotSupportedException)
+            {
+                return Error.InvalidPath;
+            }
+            catch (UnauthorizedAccessException)
+            {
+                return Error.NoPermission;
+            }
+            catch (PathTooLongException)
+            {
+                return Error.PathTooLong;
+            }
+            
+                  
+        }
+        /// <summary>
+        /// Attempts to delete this file.
+        /// </summary>
+        /// <returns>Error.NoError on no error. Error.NoPermission if users does not have permission to delete this file. Error.InvalidPath if the path is not valid</returns>
+        public object Delete()
+        {
+            try
+            {
+                nativeFileObj.Delete();
+            }
+            catch (System.Security.SecurityException)
+            {
+                return Error.NoPermission;
+            }
+            catch (System.UnauthorizedAccessException)
+            {
+                return Error.InvalidPath;
+            }
+            return Error.NoError;
         }
 
-        public bool Delete()
+        public object Merge(ISyncable item)
         {
-            throw new NotImplementedException();
-        }
-
-        public bool Merge(ISyncable item)
-        {
-            throw new NotImplementedException();
+            return Error.NotImplemented;
         }
 
         /// <summary>
@@ -125,5 +172,33 @@ namespace SyncButler
 
             return hashAlgorithm.Value;
         }
+
+        /// <summary>
+        /// Determine if the file has been changed since it was last synced.
+        /// </summary>
+        /// <returns>true if the file has been changed, false otherwise</returns>
+        public bool HasChanged()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Determine if the two file is the same in content.
+        /// </summary>
+        /// <param name="item">The file to compare with</param>
+        /// <returns>true if the file content is the same, false otherwise</returns>
+        public bool Equals(ISyncable item)
+        {
+            if (!item.GetType().Name.Equals("WindowsFile"))
+            {
+                return false;
+            }
+
+            WindowsFile subject = (WindowsFile)item;
+            
+            return (subject.Checksum().Equals(Checksum()));
+        }
+
+        
     }
 }
