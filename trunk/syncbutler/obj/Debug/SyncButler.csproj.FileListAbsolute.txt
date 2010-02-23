@@ -1,0 +1,10 @@
+C:\Users\Bryan\Documents\Edu\BComp\CS3215 - Software Engineering Project\Temp\SyncButler\SyncButler\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Bryan\Documents\Edu\BComp\CS3215 - Software Engineering Project\Temp\SyncButler\SyncButler\bin\Debug\SyncButler.dll
+C:\Users\Bryan\Documents\Edu\BComp\CS3215 - Software Engineering Project\Temp\SyncButler\SyncButler\bin\Debug\SyncButler.pdb
+C:\Users\Bryan\Documents\Edu\BComp\CS3215 - Software Engineering Project\Temp\SyncButler\SyncButler\obj\Debug\SyncButler.dll
+C:\Users\Bryan\Documents\Edu\BComp\CS3215 - Software Engineering Project\Temp\SyncButler\SyncButler\obj\Debug\SyncButler.pdb
+D:\Documents\CS3215\src\SyncButler\obj\Debug\ResolveAssemblyReference.cache
+D:\Documents\CS3215\src\SyncButler\obj\Debug\SyncButler.dll
+D:\Documents\CS3215\src\SyncButler\obj\Debug\SyncButler.pdb
+D:\Documents\CS3215\src\SyncButler\bin\Debug\SyncButler.dll
+D:\Documents\CS3215\src\SyncButler\bin\Debug\SyncButler.pdb
