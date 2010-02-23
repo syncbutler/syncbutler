@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using System.Text;
 using System.Configuration;
 
-namespace SyncButler.MyEnvironment
+namespace SyncButler.ProgramEnvironment
 {
     public class PartnershipSection : ConfigurationSection
     {
-        [ConfigurationProperty("Partnership")]
-        public PartnershipConfigElement partnership
+        [ConfigurationProperty("partnership")]
+        public PartnershipConfigElement Partnership
         {
             get
             {
-                return ( (PartnershipConfigElement)this["Partnership"] );
+                return ( (PartnershipConfigElement)this["partnership"] );
             }
             set
             {
-                this["Partnership"] = value;
+                this["partnership"] = value;
             }
         }
     }
