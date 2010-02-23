@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Configuration;
 
-namespace SyncButler.MyEnvironment
+namespace SyncButler.ProgramEnvironment
 {
     public class PartnershipConfigElement : ConfigurationElement
     {
