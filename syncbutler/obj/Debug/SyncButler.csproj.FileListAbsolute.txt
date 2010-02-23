@@ -8,3 +8,8 @@ D:\Documents\CS3215\src\SyncButler\obj\Debug\SyncButler.dll
 D:\Documents\CS3215\src\SyncButler\obj\Debug\SyncButler.pdb
 D:\Documents\CS3215\src\SyncButler\bin\Debug\SyncButler.dll
 D:\Documents\CS3215\src\SyncButler\bin\Debug\SyncButler.pdb
+D:\University\CS3215 - Software Engineering Project\SyncButler\SyncButler\obj\Debug\ResolveAssemblyReference.cache
+D:\University\CS3215 - Software Engineering Project\SyncButler\SyncButler\obj\Debug\SyncButler.dll
+D:\University\CS3215 - Software Engineering Project\SyncButler\SyncButler\obj\Debug\SyncButler.pdb
+D:\University\CS3215 - Software Engineering Project\SyncButler\SyncButler\bin\Debug\SyncButler.dll
+D:\University\CS3215 - Software Engineering Project\SyncButler\SyncButler\bin\Debug\SyncButler.pdb

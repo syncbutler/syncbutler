@@ -7,6 +7,10 @@ namespace SyncButler.ProgramEnvironment
 {
     class SettingsSection : ConfigurationSection
     {
+        /// <summary>
+        /// This sectional attributes contains any and all states related
+        /// to the entire program.
+        /// </summary>
         [ConfigurationProperty("systemSettings")]
         public SettingsConfigElement SystemSettings
         {
