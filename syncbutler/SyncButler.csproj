@@ -40,10 +40,10 @@
     <Compile Include="Checksums\Adler32.cs" />
     <Compile Include="Checksums\IRollingHash.cs" />
     <Compile Include="Exceptions\InvalidPartnershipException.cs" />
-    <Compile Include="MyEnvironment\PartnershipConfigElement.cs" />
-    <Compile Include="MyEnvironment\PartnershipSection.cs" />
-    <Compile Include="MyEnvironment\SettingsConfigElement.cs" />
-    <Compile Include="MyEnvironment\SettingsSection.cs" />
+    <Compile Include="ProgramEnvironment\PartnershipConfigElement.cs" />
+    <Compile Include="ProgramEnvironment\PartnershipSection.cs" />
+    <Compile Include="ProgramEnvironment\SettingsConfigElement.cs" />
+    <Compile Include="ProgramEnvironment\SettingsSection.cs" />
     <Compile Include="WindowsFileSystem.cs" />
     <Compile Include="Conflict.cs" />
     <Compile Include="ISyncable.cs" />
