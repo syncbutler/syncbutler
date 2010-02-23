@@ -199,6 +199,14 @@ namespace SyncButler
             return (subject.Checksum().Equals(Checksum()));
         }
 
+
+
+        
+        public List<ISyncable> GetChildren()
+        {
+            throw new NotImplementedException();
+        }
+
         
     }
 }

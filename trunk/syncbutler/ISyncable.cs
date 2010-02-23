@@ -18,6 +18,13 @@ namespace SyncButler
         object CopyTo(ISyncable item);
 
         /// <summary>
+        /// Returns a list of children (eg. files in a folder) 
+        /// </summary>
+        /// <returns>List of ISyncables under this ISyncable</returns>
+        List<ISyncable> GetChildren();
+
+
+        /// <summary>
         /// Not implemented. Performs a delete action.
         /// </summary>
         /// <returns>True if delete succeeded, false otherwise.</returns>

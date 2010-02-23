@@ -191,5 +191,11 @@ namespace SyncButler
  	        throw new NotImplementedException();
         }
 
+        public List<ISyncable> GetChildren()
+        {
+            throw new NotImplementedException();
+        }
+
+        
     }
 }
