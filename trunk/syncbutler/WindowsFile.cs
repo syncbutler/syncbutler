@@ -8,7 +8,6 @@ using SyncButler.Exceptions;
 
 namespace SyncButler
 {
-
     public enum Error { NoError, NoPermission, PathTooLong, DirectoryDoesNotExist, InvalidPath, NotImplemented };
     /// <summary>
     /// Represents a file on the Windows file system.
@@ -200,13 +199,57 @@ namespace SyncButler
             return (subject.Checksum().Equals(Checksum()));
         }
 
+        public string EntityPath()
+        {
+            return "file:\\" + this.relativePath + nativeFileObj.Name;
+        }
+
+        /// <summary>
+        /// Synchronize this file with another
+        /// </summary>
+        /// <param name="otherPair"></param>
+        /// <returns></returns>
         public List<Conflict> Sync(ISyncable otherPair)
         {
             WindowsFile partner;
-            if (otherPair is WindowsFile) partner = (WindowsFile)otherPair;
-            else throw new InvalidPartnershipException();
+
+            Debug.Assert(parentPartnership != null, "The parent partnership has not been set; cannot sync");
+
+            if (otherPair is WindowsFile && this.EntityPath().Equals(otherPair.EntityPath()))
+            {
+                partner = (WindowsFile)otherPair;
+            }
+            else
+            {
+                throw new InvalidPartnershipException();
+            }
             
-            return null;
+            // Check if the files are in sync
+            if (this.Checksum().Equals(partner.Checksum())) return null;
+
+            Boolean leftChanged, rightChanged;
+
+            if (!parentPartnership.hashDictionary.ContainsKey(this.EntityPath()))
+            {
+                leftChanged = true;
+                rightChanged = true;
+            }
+            else
+            {
+                long lastHash = parentPartnership.hashDictionary[this.EntityPath()];
+                leftChanged = (this.Checksum() != lastHash);
+                rightChanged = (partner.Checksum() != lastHash);
+            }
+
+            Conflict.Action recommendedAction;
+
+            if (rightChanged) recommendedAction = Conflict.Action.CopyToLeft;
+            else if (leftChanged) recommendedAction = Conflict.Action.CopyToRight;
+            else recommendedAction = Conflict.Action.Unknown;
+
+            List<Conflict> returnValue = new List<Conflict>();
+            returnValue.Add(new Conflict(this, partner, recommendedAction));
+            return returnValue;
         }
         
     }

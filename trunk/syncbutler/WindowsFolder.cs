@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using SyncButler.Exceptions;
 
 namespace SyncButler
 {
@@ -191,10 +192,34 @@ namespace SyncButler
  	        throw new NotImplementedException();
         }
 
+        public string EntityPath()
+        {
+            return "folder:\\" + this.relativePath + nativeDirObj.Name;
+        }
+
         public List<Conflict> Sync(ISyncable otherPair) 
         {
-            // TODO: Implement
-            return null;
+            WindowsFolder partner;
+
+            System.Diagnostics.Debug.Assert(parentPartnership != null, "The parent partnership has not been set; cannot sync");
+
+            if (otherPair is WindowsFolder && this.EntityPath().Equals(otherPair.EntityPath()))
+            {
+                partner = (WindowsFolder)otherPair;
+            }
+            else
+            {
+                throw new InvalidPartnershipException();
+            }
+
+            // Compare the files and folders under this directory
+            List<Conflict> conflicts = new List<Conflict>();
+
+            // TODO: Compare files and folders. Generate conflicts for 
+            // non-existant files or folders on either side. Call
+            // WindowsFile.Sync() for every file encountered.
+
+            return conflicts;
         }        
     }
 }

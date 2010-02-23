@@ -11,6 +11,12 @@ namespace SyncButler
     public interface ISyncable
     {
         /// <summary>
+        /// Sets a reference to the parent Partnership object.
+        /// </summary>
+        /// <param name="?">The containing Partnership object</param>
+        void SetParentPartnership(Partnership parentPartnership);
+
+        /// <summary>
         /// Checks if it's in Sync with the other pair
         /// </summary>
         /// <param name="otherPair"></param>
@@ -49,5 +55,18 @@ namespace SyncButler
         /// <param name="item">The other ISyncable in quesstion</param>
         /// <returns>True if equal, false otherwise</returns>
         Boolean Equals(ISyncable item);
+
+        /// <summary>
+        /// Returns a checksum that represents the current state of the syncable object.
+        /// </summary>
+        /// <returns>the checksum</returns>
+        long Checksum();
+
+        /// <summary>
+        /// Returns a "path" to the node. (eg. In the case of Files,
+        /// it's relative path + file name)
+        /// </summary>
+        /// <returns>Path to the data</returns>
+        string EntityPath();
     }
 }
