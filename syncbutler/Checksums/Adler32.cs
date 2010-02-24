@@ -114,23 +114,5 @@ namespace SyncButler.Checksums
 
             checksum = (s2 << 16) | s1;
         }
-        public static long CalcuateChecksum(String filename)
-        {
-            /// get bytes
-            // bytes[] fileBytes = (new System.IO.BinaryReader(filename,System.IO.FileMode.Open,System.IO.FileAccess.Read)).;
-            FileStream fs = new FileStream(filename, FileMode.Open);
-            byte[] fileBytes = (new BinaryReader(fs)).ReadBytes(Convert.ToInt32(fs.Length) - 1);
-
-            IRollingHash hashAlgorithm = new Adler32();
-            long start = 0;
-
-            while (start < fileBytes.Length)
-            {
-                hashAlgorithm.Update(fileBytes);
-                start += 2048000;
-            }
-
-            return hashAlgorithm.Value;
-        }
     }
 }

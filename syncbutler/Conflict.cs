@@ -23,6 +23,7 @@ namespace SyncButler
             this.left = left;
             this.right = right;
             this.RecommendedAction = RecommendedAction;
+            this.status = StatusOptions.Unresolved;
         }
 
         public Action GetRecommendedAction() { return RecommendedAction; }

@@ -197,6 +197,19 @@ namespace SyncButler
             return "folder:\\" + this.relativePath + nativeDirObj.Name;
         }
 
+        /// <summary>
+        /// Synchronizes this folder with another.
+        /// 
+        /// Implemented:
+        /// * Detect missing files
+        /// * Detect modified files
+        /// 
+        /// Not yet Implemented:
+        /// * Detect deleted files
+        /// * Detect moved files
+        /// </summary>
+        /// <param name="otherPair"></param>
+        /// <returns>A list of conflicts detected</returns>
         public List<Conflict> Sync(ISyncable otherPair) 
         {
             WindowsFolder partner;
@@ -214,10 +227,93 @@ namespace SyncButler
 
             // Compare the files and folders under this directory
             List<Conflict> conflicts = new List<Conflict>();
+            string leftPath, rightPath;
+            Queue<string> workingList = new Queue<string>(128);
 
-            // TODO: Compare files and folders. Generate conflicts for 
-            // non-existant files or folders on either side. Call
-            // WindowsFile.Sync() for every file encountered.
+            leftPath = this.nativeDirObj.FullName;
+            rightPath = partner.nativeDirObj.FullName;
+
+            // Check Left to Right
+            workingList.Enqueue("");
+
+            string curDir;
+            while (workingList.Count > 0)
+            {
+                curDir = workingList.Dequeue();
+
+                //Console.WriteLine("[D] " + curDir);
+
+                // Check if there are folders missing on the right. Otherwise, add it to the queue
+                foreach (string subFolderLeft in Directory.GetDirectories(leftPath + curDir))
+                {
+                    string curFolderLeft = subFolderLeft.Substring(leftPath.Length) + "\\";
+
+                    if (Directory.Exists(rightPath + curFolderLeft)) workingList.Enqueue(curFolderLeft);
+                    else
+                    {
+                        //conflicts.Add("Dir !exist right: " + curFolderLeft);
+                        conflicts.Add(new Conflict(
+                                new WindowsFolder(leftPath, subFolderLeft),
+                                new WindowsFolder(rightPath, rightPath + curFolderLeft),
+                                Conflict.Action.CopyToRight
+                            ));
+                    }
+                }
+
+                // Check if there are folders missing on the left. Otherwise, add it to the queue
+                foreach (string subFolderRight in Directory.GetDirectories(rightPath + curDir))
+                {
+                    string curFolderRight = subFolderRight.Substring(rightPath.Length) + "\\";
+
+                    if (Directory.Exists(leftPath + curFolderRight)) workingList.Enqueue(curFolderRight);
+                    else
+                    {
+                        //conflicts.Add("Dir !exist left: " + curFolderRight);
+                        conflicts.Add(new Conflict(
+                            new WindowsFolder(leftPath, leftPath + curFolderRight),
+                            new WindowsFolder(rightPath, subFolderRight),
+                            Conflict.Action.CopyToLeft
+                        ));
+                    }
+                }
+
+                foreach (string subFileLeft in Directory.GetFiles(leftPath + curDir))
+                {
+                    string curFileLeft = subFileLeft.Substring(leftPath.Length) + "\\";
+
+                    if (File.Exists(rightPath + curFileLeft))
+                    {
+                        WindowsFile leftFile = new WindowsFile(leftPath, curFileLeft);
+                        WindowsFile rightFile = new WindowsFile(rightPath, rightPath + curFileLeft);
+
+                        conflicts.AddRange(leftFile.Sync(rightFile));
+                    }
+                    else
+                    {
+                        //conflicts.Add("File !exist right: " + curFileLeft);
+                        conflicts.Add(new Conflict(
+                                new WindowsFile(leftPath, subFileLeft),
+                                new WindowsFile(rightPath, rightPath + curFileLeft),
+                                Conflict.Action.CopyToRight
+                            ));
+                    }
+                }
+
+                foreach (string subFileRight in Directory.GetFiles(rightPath + curDir))
+                {
+                    string curFileRight = subFileRight.Substring(rightPath.Length) + "\\";
+
+                    if (!File.Exists(leftPath + curFileRight))
+                    {
+                        //conflicts.Add("File !exist left: " + curFileRight);
+                        conflicts.Add(new Conflict(
+                                new WindowsFile(leftPath, leftPath + curFileRight),
+                                new WindowsFile(rightPath, subFileRight),
+                                Conflict.Action.CopyToLeft
+                            ));
+                    }
+                }
+            }
 
             return conflicts;
         }        
