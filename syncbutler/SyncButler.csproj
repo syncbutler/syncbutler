@@ -40,6 +40,7 @@
   <ItemGroup>
     <Compile Include="Checksums\Adler32.cs" />
     <Compile Include="Checksums\IRollingHash.cs" />
+    <Compile Include="Controller.cs" />
     <Compile Include="Exceptions\InvalidPartnershipException.cs" />
     <Compile Include="ProgramEnvironment\PartnershipConfigElement.cs" />
     <Compile Include="ProgramEnvironment\PartnershipSection.cs" />

@@ -24,6 +24,13 @@ namespace SyncButler
             return partnershipList[idx];
         }
 
+        public void AddPartnership(Partnership partner)
+        {
+            
+                partnershipList.Add(partner);
+
+        }
+
         /// <summary>
         /// Returns the entire partnership list. This is useful when the controller
         /// needs to view what partnerships are there thus far.
