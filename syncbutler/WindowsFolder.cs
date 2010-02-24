@@ -252,11 +252,14 @@ namespace SyncButler
                     else
                     {
                         //conflicts.Add("Dir !exist right: " + curFolderLeft);
-                        conflicts.Add(new Conflict(
-                                new WindowsFolder(leftPath, subFolderLeft),
-                                new WindowsFolder(rightPath, rightPath + curFolderLeft),
-                                Conflict.Action.CopyToRight
-                            ));
+                        Conflict newConflict = new Conflict(
+                            new WindowsFolder(leftPath, subFolderLeft),
+                            new WindowsFolder(rightPath, rightPath + curFolderLeft),
+                            Conflict.Action.CopyToRight
+                        );
+                        newConflict.left.SetParentPartnership(this.parentPartnership);
+                        newConflict.right.SetParentPartnership(this.parentPartnership);
+                        conflicts.Add(newConflict);
                     }
                 }
 
@@ -269,11 +272,14 @@ namespace SyncButler
                     else
                     {
                         //conflicts.Add("Dir !exist left: " + curFolderRight);
-                        conflicts.Add(new Conflict(
+                        Conflict newConflict = new Conflict(
                             new WindowsFolder(leftPath, leftPath + curFolderRight),
                             new WindowsFolder(rightPath, subFolderRight),
                             Conflict.Action.CopyToLeft
-                        ));
+                        );
+                        newConflict.left.SetParentPartnership(this.parentPartnership);
+                        newConflict.right.SetParentPartnership(this.parentPartnership);
+                        conflicts.Add(newConflict);
                     }
                 }
 
@@ -286,16 +292,20 @@ namespace SyncButler
                         WindowsFile leftFile = new WindowsFile(leftPath, curFileLeft);
                         WindowsFile rightFile = new WindowsFile(rightPath, rightPath + curFileLeft);
 
-                        conflicts.AddRange(leftFile.Sync(rightFile));
+                        List<Conflict> returnedConflicts = leftFile.Sync(rightFile);
+                        if (returnedConflicts != null) conflicts.AddRange(returnedConflicts);
                     }
                     else
                     {
                         //conflicts.Add("File !exist right: " + curFileLeft);
-                        conflicts.Add(new Conflict(
-                                new WindowsFile(leftPath, subFileLeft),
-                                new WindowsFile(rightPath, rightPath + curFileLeft),
-                                Conflict.Action.CopyToRight
-                            ));
+                        Conflict newConflict = new Conflict(
+                            new WindowsFile(leftPath, subFileLeft),
+                            new WindowsFile(rightPath, rightPath + curFileLeft),
+                            Conflict.Action.CopyToRight
+                        );
+                        newConflict.left.SetParentPartnership(this.parentPartnership);
+                        newConflict.right.SetParentPartnership(this.parentPartnership);
+                        conflicts.Add(newConflict);
                     }
                 }
 
@@ -306,11 +316,14 @@ namespace SyncButler
                     if (!File.Exists(leftPath + curFileRight))
                     {
                         //conflicts.Add("File !exist left: " + curFileRight);
-                        conflicts.Add(new Conflict(
-                                new WindowsFile(leftPath, leftPath + curFileRight),
-                                new WindowsFile(rightPath, subFileRight),
-                                Conflict.Action.CopyToLeft
-                            ));
+                        Conflict newConflict = new Conflict(
+                            new WindowsFile(leftPath, leftPath + curFileRight),
+                            new WindowsFile(rightPath, subFileRight),
+                            Conflict.Action.CopyToLeft
+                        );
+                        newConflict.left.SetParentPartnership(this.parentPartnership);
+                        newConflict.right.SetParentPartnership(this.parentPartnership);
+                        conflicts.Add(newConflict);
                     }
                 }
             }

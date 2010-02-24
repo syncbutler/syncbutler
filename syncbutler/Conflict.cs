@@ -9,8 +9,8 @@ namespace SyncButler
     /// </summary>
     public class Conflict
     {
-        protected ISyncable left;
-        protected ISyncable right;
+        protected internal ISyncable left;
+        protected internal ISyncable right;
         protected Action RecommendedAction;
 
         private enum StatusOptions {Resolved, Unresolved, Resolving}
