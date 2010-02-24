@@ -16,7 +16,12 @@ namespace SyncButler
 
         }
 
-        public bool CreatePartnership(String leftPath, String rightPath)
+        /// <summary>
+        /// Creates a new Partnership based on 2 full paths and adds it to the the partnership list.
+        /// </summary>
+        /// <param name="leftPath"></param>
+        /// <param name="rightPath"></param>        
+        public void CreatePartnership(String leftPath, String rightPath)
         {
             FileInfo leftInfo = new FileInfo(leftPath);
             FileInfo rightInfo = new FileInfo(rightPath);
@@ -24,8 +29,8 @@ namespace SyncButler
             bool isFolderRight = rightInfo.Attributes.ToString().Equals("Directory");
             if (isFolderLeft && isFolderRight)
             {
-                ISyncable left = new WindowsFolder(leftPath);
-                ISyncable right = new WindowsFolder(rightPath);
+                ISyncable left = new WindowsFolder(leftPath, leftPath);
+                ISyncable right = new WindowsFolder(rightPath, rightPath);
                 Partnership partner = new Partnership(leftPath, left, rightPath, right, null);
                 syncEnvironment.AddPartnership(partner);
             }
@@ -35,8 +40,8 @@ namespace SyncButler
             }
             else 
             {
-                ISyncable left = new WindowsFile(leftPath);
-                ISyncable right = new WindowsFile(rightPath);
+                ISyncable left = new WindowsFile(leftInfo.DirectoryName, leftPath);
+                ISyncable right = new WindowsFile(rightInfo.DirectoryName, rightPath);
                 Partnership partner = new Partnership(leftPath, left, rightPath, right, null);
                 syncEnvironment.AddPartnership(partner);
             }
