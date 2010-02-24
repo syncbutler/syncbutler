@@ -26,9 +26,12 @@ namespace SyncButler
 
         public void AddPartnership(Partnership partner)
         {
-            
-                partnershipList.Add(partner);
+            partnershipList.Add(partner);
+        }
 
+        public void RemovePartnership(int idx)
+        {
+            partnershipList.RemoveAt(idx);
         }
 
         /// <summary>

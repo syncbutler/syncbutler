@@ -18,3 +18,8 @@ E:\syncbutler\SyncButler\bin\Debug\SyncButler.pdb
 E:\syncbutler\SyncButler\obj\Debug\ResolveAssemblyReference.cache
 E:\syncbutler\SyncButler\obj\Debug\SyncButler.dll
 E:\syncbutler\SyncButler\obj\Debug\SyncButler.pdb
+C:\Users\Benson\Desktop\SyncButler\SyncButler\bin\Debug\SyncButler.dll
+C:\Users\Benson\Desktop\SyncButler\SyncButler\bin\Debug\SyncButler.pdb
+C:\Users\Benson\Desktop\SyncButler\SyncButler\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Benson\Desktop\SyncButler\SyncButler\obj\Debug\SyncButler.dll
+C:\Users\Benson\Desktop\SyncButler\SyncButler\obj\Debug\SyncButler.pdb
