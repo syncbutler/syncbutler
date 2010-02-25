@@ -1,0 +1,2 @@
+C:\Users\user\Desktop\TestWpfApplication\TestWpfApplication\obj\Debug\TestWpfApplication.exe
+C:\Users\user\Desktop\TestWpfApplication\TestWpfApplication\obj\Debug\TestWpfApplication.pdb
