@@ -100,6 +100,18 @@ namespace SyncButler
         }
 
         /// <summary>
+        /// Synchronizes all partnerships.
+        /// </summary>
+        public void SyncAll()
+        {
+            int elements = GetPartnershipList().Count;
+            for (int i = 0; i < elements; i++)
+            {
+                SyncPartnership(i);
+            }
+        }
+
+        /// <summary>
         /// Not Implemented. Turns the recent file monitoring on/off.
         /// </summary>
         public void ToggleMonitor()
