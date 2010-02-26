@@ -5,7 +5,7 @@ using System.Configuration;
 
 namespace SyncButler.ProgramEnvironment
 {
-    class SettingsSection : ConfigurationSection
+    public class SettingsSection : ConfigurationSection
     {
         /// <summary>
         /// This sectional attributes contains any and all states related
