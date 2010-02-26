@@ -23,3 +23,8 @@ C:\Users\Benson\Desktop\SyncButler\SyncButler\bin\Debug\SyncButler.pdb
 C:\Users\Benson\Desktop\SyncButler\SyncButler\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\Benson\Desktop\SyncButler\SyncButler\obj\Debug\SyncButler.dll
 C:\Users\Benson\Desktop\SyncButler\SyncButler\obj\Debug\SyncButler.pdb
+C:\Documents and Settings\yongxin.EW\Desktop\src\SyncButler\bin\Debug\SyncButler.dll
+C:\Documents and Settings\yongxin.EW\Desktop\src\SyncButler\bin\Debug\SyncButler.pdb
+C:\Documents and Settings\yongxin.EW\Desktop\src\SyncButler\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\yongxin.EW\Desktop\src\SyncButler\obj\Debug\SyncButler.dll
+C:\Documents and Settings\yongxin.EW\Desktop\src\SyncButler\obj\Debug\SyncButler.pdb
