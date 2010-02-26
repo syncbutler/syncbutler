@@ -30,6 +30,21 @@ namespace SyncButler
         }
 
         /// <summary>
+        /// Constructor that takes in three parameters, a root path, the full path,
+        /// and the parent partnership
+        /// </summary>
+        /// <param name="rootPath">Path of the root directory</param>
+        /// <param name="fullPath">Full path to this file</param>
+        public WindowsFile(String rootPath, String fullPath, Partnership parentPartnership)
+        {
+            this.nativeFileObj = new FileInfo(fullPath);
+            this.relativePath = StripPrefix(rootPath, fullPath);
+            this.nativeFileSystemObj = this.nativeFileObj;
+            this.rootPath = rootPath;
+            this.parentPartnership = parentPartnership;
+        }
+
+        /// <summary>
         /// Get the length of the file, in bytes.
         /// </summary>
         /// <remarks>
@@ -205,10 +220,18 @@ namespace SyncButler
         }
 
         /// <summary>
-        /// Synchronize this file with another
+        /// Synchronize this file with another. 
+        /// IMPORTANT: This function should be called from lef tto right, ie. left.Sync(right);
         /// </summary>
-        /// <param name="otherPair"></param>
-        /// <returns></returns>
+        /// <param name="otherPair">The other ISyncable to sync with.</param>
+        /// <exception cref="InvalidPartnershipException">Tried to sync a windows folder with something else</exception>
+        /// <exception cref="FileNotFoundException">If the file is not found. (Probably while generating the checksum)</exception>
+        /// <exception cref="UnauthorizedAccessException">Path is read-only or is a directory. (Probably while generating the checksum)</exception>
+        /// <exception cref="DirectoryNotFoundException">The specified path is invalid, such as being on an unmapped drive. (Probably while generating the checksum)</exception>
+        /// <exception cref="IOException">The file is already open. (Probably while generating the checksum)</exception>
+        /// <exception cref="NotSupportedException">The current stream does not support reading. (Probably while generating the checksum)</exception>
+        /// <exception cref="ObjectDisposedException">The current stream is closed. (Probably while generating the checksum)</exception>
+        /// <returns>A list of conflicts (may be empty)</returns>
         public List<Conflict> Sync(ISyncable otherPair)
         {
             WindowsFile partner;
@@ -225,7 +248,8 @@ namespace SyncButler
             }
             
             // Check if the files are in sync
-            if (this.Checksum().Equals(partner.Checksum())) return null;
+            List<Conflict> returnValue = new List<Conflict>();
+            if (this.Checksum().Equals(partner.Checksum())) return returnValue;
 
             Boolean leftChanged, rightChanged;
 
@@ -243,11 +267,10 @@ namespace SyncButler
 
             Conflict.Action recommendedAction;
 
+            recommendedAction = Conflict.Action.Unknown;
             if (rightChanged) recommendedAction = Conflict.Action.CopyToLeft;
             else if (leftChanged) recommendedAction = Conflict.Action.CopyToRight;
-            else recommendedAction = Conflict.Action.Unknown;
 
-            List<Conflict> returnValue = new List<Conflict>();
             returnValue.Add(new Conflict(this, partner, recommendedAction));
             return returnValue;
         }

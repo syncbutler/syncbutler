@@ -33,6 +33,23 @@ namespace SyncButler
         }
 
         /// <summary>
+        /// Constructor that takes in three parameters, a root path, the full path,
+        /// and the parent partnership
+        /// </summary>
+        /// <param name="rootPath">Path of the root directory</param>
+        /// <param name="fullPath">Full path to this file</param>
+        public WindowsFolder(String rootPath, String fullPath, Partnership parentPartnership)
+        {
+            this.nativeDirObj = new DirectoryInfo(fullPath);
+            this.relativePath = StripPrefix(rootPath, fullPath);
+            this.nativeFileSystemObj = this.nativeDirObj;
+            this.subFolders = new SortedList<String, WindowsFolder>();
+            this.files = new SortedList<String, WindowsFile>();
+            this.rootPath = rootPath;
+            this.parentPartnership = parentPartnership;
+        }
+
+        /// <summary>
         /// Gets a sorted list of sub folders in this directory. Sorted by the name of the folder.
         /// </summary>
         public SortedList<String, WindowsFolder> SubFolders
@@ -209,6 +226,14 @@ namespace SyncButler
         /// * Detect moved files
         /// </summary>
         /// <param name="otherPair"></param>
+        /// <exception cref="InvalidPartnershipException">Tried to sync a windows folder with something else</exception>
+        /// <exception cref="UnauthorizedAccessException">Could not read one of the files/folders because of security permissions</exception>
+        /// <exception cref="UnauthorizedAccessException">Path is read-only or is a directory. (Probably while generating a file checksum)</exception>
+        /// <exception cref="DirectoryNotFoundException">The specified path is invalid, such as being on an unmapped drive. (Probably while generating a file checksum)</exception>
+        /// <exception cref="IOException">The file is already open. (Probably while generating a file checksum)</exception>
+        /// <exception cref="NotSupportedException">The current stream does not support reading. (Probably while generating a file checksum)</exception>
+        /// <exception cref="ObjectDisposedException">The current stream is closed. (Probably while generating a file checksum)</exception>
+        /// <exception cref="PathTooLongException">The directory depth is too long!</exception>
         /// <returns>A list of conflicts detected</returns>
         public List<Conflict> Sync(ISyncable otherPair) 
         {
@@ -250,36 +275,27 @@ namespace SyncButler
 
                     if (Directory.Exists(rightPath + curFolderLeft)) workingList.Enqueue(curFolderLeft);
                     else
-                    {
-                        //conflicts.Add("Dir !exist right: " + curFolderLeft);
-                        Conflict newConflict = new Conflict(
-                            new WindowsFolder(leftPath, subFolderLeft),
-                            new WindowsFolder(rightPath, rightPath + curFolderLeft),
+                    {   // Folder exists only on the left
+                        conflicts.Add(new Conflict(
+                            new WindowsFolder(leftPath, subFolderLeft, this.parentPartnership),
+                            new WindowsFolder(rightPath, rightPath + curFolderLeft, this.parentPartnership),
                             Conflict.Action.CopyToRight
-                        );
-                        newConflict.left.SetParentPartnership(this.parentPartnership);
-                        newConflict.right.SetParentPartnership(this.parentPartnership);
-                        conflicts.Add(newConflict);
+                        ));
                     }
                 }
 
-                // Check if there are folders missing on the left. Otherwise, add it to the queue
+                // Check if there are folders missing on the left.
                 foreach (string subFolderRight in Directory.GetDirectories(rightPath + curDir))
                 {
                     string curFolderRight = subFolderRight.Substring(rightPath.Length) + "\\";
 
-                    if (Directory.Exists(leftPath + curFolderRight)) workingList.Enqueue(curFolderRight);
-                    else
-                    {
-                        //conflicts.Add("Dir !exist left: " + curFolderRight);
-                        Conflict newConflict = new Conflict(
-                            new WindowsFolder(leftPath, leftPath + curFolderRight),
-                            new WindowsFolder(rightPath, subFolderRight),
+                    if (!Directory.Exists(leftPath + curFolderRight))
+                    {   // Folder exists only on the right
+                        conflicts.Add(new Conflict(
+                            new WindowsFolder(leftPath, leftPath + curFolderRight, this.parentPartnership),
+                            new WindowsFolder(rightPath, subFolderRight, this.parentPartnership),
                             Conflict.Action.CopyToLeft
-                        );
-                        newConflict.left.SetParentPartnership(this.parentPartnership);
-                        newConflict.right.SetParentPartnership(this.parentPartnership);
-                        conflicts.Add(newConflict);
+                        ));
                     }
                 }
 
@@ -288,24 +304,19 @@ namespace SyncButler
                     string curFileLeft = subFileLeft.Substring(leftPath.Length) + "\\";
 
                     if (File.Exists(rightPath + curFileLeft))
-                    {
-                        WindowsFile leftFile = new WindowsFile(leftPath, curFileLeft);
-                        WindowsFile rightFile = new WindowsFile(rightPath, rightPath + curFileLeft);
+                    {   // File exists on both sides. Check if they're the same
+                        WindowsFile leftFile = new WindowsFile(leftPath, curFileLeft, this.parentPartnership);
+                        WindowsFile rightFile = new WindowsFile(rightPath, rightPath + curFileLeft, this.parentPartnership);
 
-                        List<Conflict> returnedConflicts = leftFile.Sync(rightFile);
-                        if (returnedConflicts != null) conflicts.AddRange(returnedConflicts);
+                        conflicts.AddRange(leftFile.Sync(rightFile));
                     }
                     else
-                    {
-                        //conflicts.Add("File !exist right: " + curFileLeft);
-                        Conflict newConflict = new Conflict(
-                            new WindowsFile(leftPath, subFileLeft),
-                            new WindowsFile(rightPath, rightPath + curFileLeft),
+                    {   // File only exists on the left
+                        conflicts.Add(new Conflict(
+                            new WindowsFile(leftPath, subFileLeft, this.parentPartnership),
+                            new WindowsFile(rightPath, rightPath + curFileLeft, this.parentPartnership),
                             Conflict.Action.CopyToRight
-                        );
-                        newConflict.left.SetParentPartnership(this.parentPartnership);
-                        newConflict.right.SetParentPartnership(this.parentPartnership);
-                        conflicts.Add(newConflict);
+                        ));
                     }
                 }
 
@@ -314,16 +325,12 @@ namespace SyncButler
                     string curFileRight = subFileRight.Substring(rightPath.Length) + "\\";
 
                     if (!File.Exists(leftPath + curFileRight))
-                    {
-                        //conflicts.Add("File !exist left: " + curFileRight);
-                        Conflict newConflict = new Conflict(
-                            new WindowsFile(leftPath, leftPath + curFileRight),
-                            new WindowsFile(rightPath, subFileRight),
+                    {   // File only exists on the right
+                        conflicts.Add(new Conflict(
+                            new WindowsFile(leftPath, leftPath + curFileRight, this.parentPartnership),
+                            new WindowsFile(rightPath, subFileRight, this.parentPartnership),
                             Conflict.Action.CopyToLeft
-                        );
-                        newConflict.left.SetParentPartnership(this.parentPartnership);
-                        newConflict.right.SetParentPartnership(this.parentPartnership);
-                        conflicts.Add(newConflict);
+                        ));
                     }
                 }
             }
