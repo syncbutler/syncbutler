@@ -12,7 +12,14 @@ namespace SyncButler
     /// </summary>
     public class SyncEnvironment
     {
+        //List of persistant attributes
         private List<Partnership> partnershipList;
+        private bool allowAutoSyncForConflictFreeTasks;
+        private System.Configuration.Configuration config;
+        private string settingName = "systemSettings";
+        private string partnershipName = "partnership";
+        private SettingsSection storedSettings;
+        private PartnershipSection storedPartnerships;
 
         /// <summary>
         /// Returns the partnership at the specified index.
@@ -24,11 +31,19 @@ namespace SyncButler
             return partnershipList[idx];
         }
 
+        /// <summary>
+        /// Adds a properly created partner object into the list of partnership
+        /// </summary>
+        /// <param name="partner">A properly created partner object</param>
         public void AddPartnership(Partnership partner)
         {
             partnershipList.Add(partner);
         }
 
+        /// <summary>
+        /// Removes specified partnership in the partnership list
+        /// </summary>
+        /// <param name="idx">Removes the partnership at that particular index</param>
         public void RemovePartnership(int idx)
         {
             partnershipList.RemoveAt(idx);
@@ -45,6 +60,19 @@ namespace SyncButler
         }
 
         /// <summary>
+        /// When there is a change in any Partnership, this method is called
+        /// and supplied with the position of the Partnership object in the
+        /// List of Partnerships.
+        /// </summary>
+        /// <param name="idx">The position fo the Partnership in the List of Partnerships</param>
+        /// <param name="updated">The UPDATED Partnership object, that will replace the original one</param>
+        public void UpdatePartnership(int idx, Partnership updated)
+        {
+            partnershipList.RemoveAt(idx);
+            partnershipList.Insert(idx, updated);
+        }
+
+        /// <summary>
         /// Not implemented. Gets the settings for the program.
         /// </summary>
         /// <returns>A Dictionary object with strings as keys and value (subject to change).</returns>
@@ -57,62 +85,66 @@ namespace SyncButler
         /// Not implemented. Stores the settings for the program to persistent storage
         /// during program shut down
         /// </summary>
-        /// <returns>True if the store operation was successful false otherwise.</returns>
-        public bool StoreSettings()
+        public void StoreEnv()
         {
-            return false;
+            //Update the settings in the config file
+            storedPartnerships.Partnership.PartnershipList = partnershipList;
+            storedSettings.SystemSettings.AllowAutoSyncForConflictFreeTasks =
+                allowAutoSyncForConflictFreeTasks;
+
+            // Write to file
+            config.Save(ConfigurationSaveMode.Modified);
         }
 
         /// <summary>
         /// This method is called during program startup to restore all
         /// the previous states of the program.
         /// </summary>
-        public void IntialEnv()
+        /// <param name="storedSettings">This is a settings container that will be restored</param>
+        /// <param name="settingName">This is an XML description require to read settings to the real XML page</param>
+        /// <param name="storedPartnerships"></param>
+        /// <param name="partnershipName">This is an XML description require to read partnership to the real XML page</param>
+        public void RestoreEnv()
         {
-            //Get the location of the EXE and the config file SHOULD be there
-            //otherwise react!
-            string appName = Environment.GetCommandLineArgs()[0];
-            string configFile = string.Concat(
-                                appName.Substring(0, appName.Length - 4),
-                                ".config");
-
-            System.Configuration.Configuration config =
-                ConfigurationManager.OpenExeConfiguration(configFile);
-
-            //Console.WriteLine(config.FilePath);
-
-            if (config == null)
-            {
-                //Console.WriteLine(
-                //    "The configuration file does not exist.");
-                //Console.WriteLine(
-                //    "Use OpenExeConfiguration to create the file.");
-                throw new FileNotFoundException("Application Config File not Found");
-                //if it does not exist, opt to create!
-            }
-
-            // Prepare the retrieve the settings stored within the config files
-            string settingName = "systemSettings";
-            string partnershipName = "partnership";
-
-            SettingsSection storedSettings =
-                (SettingsSection)config.GetSection(settingName);
-
-            PartnershipSection storedPartnerships =
-                (PartnershipSection)config.GetSection(partnershipName);
-
-            if(storedSettings == null)
-                throw new ApplicationException("Could not load Stored Settings");
+            //Restore partnership stored in the XML settings file
+            storedPartnerships = (PartnershipSection)config.GetSection(partnershipName);
 
             if (storedPartnerships == null)
                 throw new ApplicationException("Could not load Stored Partnership List");
 
-            ConfigurationManager.RefreshSection(settingName);
-            ConfigurationManager.RefreshSection(partnershipName);
-
-            //Assign the respective program settings
+            //This restores the partnership list
             partnershipList = storedPartnerships.Partnership.PartnershipList;
 
+            //This one restores general program settings
+            allowAutoSyncForConflictFreeTasks =
+                storedSettings.SystemSettings.AllowAutoSyncForConflictFreeTasks;
+        }
+
+        /// <summary>
+        /// If the settings files do not exist. A basic framework is created and stored. This
+        /// will store the settings of a previous interations.
+        /// </summary>
+        /// <param name="storedSettings">This is a settings container that will be saved</param>
+        /// <param name="settingName">This is an XML description require to write settings to the real XML page</param>
+        /// <param name="storedPartnerships">This is a partnership container that will be saved</param>
+        /// <param name="partnershipName">This is an XML description require to write partnership to the real XML page</param>
+        public void CreateEnv()
+        {
+            // Add in default settings
+            storedSettings.SystemSettings.AllowAutoSyncForConflictFreeTasks = true;
+            storedSettings.SystemSettings.FirstRunComplete = true;
+            storedPartnerships.Partnership.PartnershipList = new List<Partnership>();
+
+            // Add the custom sections to the config
+            config.Sections.Add(settingName, storedSettings);
+            config.Sections.Add(partnershipName, storedPartnerships);
+
+            // Write to file
+            config.Save(ConfigurationSaveMode.Modified);
+
+            // Just to reload the configuration
+            ConfigurationManager.RefreshSection(settingName);
+            ConfigurationManager.RefreshSection(partnershipName);
         }
 
         /// <summary>
@@ -120,66 +152,73 @@ namespace SyncButler
         /// is called to setup the program config file is expectedly,
         /// stored with the program.
         /// </summary>
-        public void FirstRunEnvPrep()
+        public void IntialEnv()
         {
-            System.Configuration.Configuration config =
-                ConfigurationManager.OpenExeConfiguration(
-                ConfigurationUserLevel.None);
+            //This will detect if settings are already stored
+            bool createSettings = true;
 
-            //Console.WriteLine(config.FilePath);
+            // The config file will be the name of our app, less the extension
+            string configFilename = GetSettingsFileName();
+            
+            // Map the new configuration file
+            ExeConfigurationFileMap configFileMap = new ExeConfigurationFileMap();
+            configFileMap.ExeConfigFilename = configFilename;
 
-            if (config == null)
+            // Create out own configuration file
+            config = ConfigurationManager.OpenMappedExeConfiguration(
+                configFileMap, ConfigurationUserLevel.None);
+
+            // Prepare to read the custom sections (Pre declared needed for valid settings
+            // file check. (Hint, the first run complete is hidden in the xml file)
+
+            // Warn that it already exist, overwriting, might allow for reuse!
+            if (config != null)
             {
                 //Console.WriteLine(
-                //    "The configuration file already exist! Overwriting");
+                //    "A Settings file was found, checking its validity");
+
+                storedSettings =
+                    (SettingsSection)config.GetSection(settingName);
+
+                if (storedSettings == null)
+                {
+                    //Console.WriteLine(
+                    //    "A invliad settings file was found, recreating one");
+                    storedSettings = new SettingsSection();
+                }
+
+                //Not necessary an error, we will just create the .settings file
+                //throw new ApplicationException("Could not load Stored Settings");
+
+                if(storedSettings.SystemSettings.FirstRunComplete)
+                    createSettings = false;
+
+                //else
+                //Console.WriteLine(
+                //    "A invliad settings file was found, recreating one");
             }
 
-            // Create a new configuration file by saving 
-            // the application configuration to a new file.
-            string appName = Environment.GetCommandLineArgs()[0];
+            storedPartnerships = new PartnershipSection();
 
-            string configFile = string.Concat(appName.Substring(0, appName.Length - 4),
-                                ".config");
-            config.SaveAs(configFile, ConfigurationSaveMode.Full);
+            if (createSettings)
+                CreateEnv();
 
-            // Map the new configuration file.
-            ExeConfigurationFileMap configFileMap = new ExeConfigurationFileMap();
-            configFileMap.ExeConfigFilename = configFile;
-
-            // Get the mapped configuration file
-            config =
-            ConfigurationManager.OpenMappedExeConfiguration(
-              configFileMap, ConfigurationUserLevel.None);
-
-            // Make changes to the new configuration file. 
-            // This is to show that this file is the 
-            // one that is used.
-            string settingName = "systemSettings";
-            string partnershipName = "partnership";
-
-            SettingsSection storedSettings =
-                (SettingsSection)config.GetSection(settingName);
-
-            PartnershipSection storedPartnerships =
-                (PartnershipSection)config.GetSection(partnershipName);
-
-            ConfigurationManager.RefreshSection(settingName);
-            ConfigurationManager.RefreshSection(partnershipName);
-
-            config.Save(ConfigurationSaveMode.Full);
+            else
+                RestoreEnv();
         }
 
         /// <summary>
-        /// When there is a change in any Partnership, this method is called
-        /// and supplied with the position of the Partnership object in the
-        /// List of Partnerships.
+        /// This method is widely reused. It obtains the name of the config file
+        /// by detecting name of the app.
         /// </summary>
-        /// <param name="idx">The position fo the Partnership in the List of Partnerships</param>
-        /// <param name="updated">The UPDATED Partnership object, that will replace the original one</param>
-        public void UpdatePartnership(int idx, Partnership updated)
+        /// <returns>A String in the format of 'appname.settings'</returns>
+        private string GetSettingsFileName()
         {
-            partnershipList.RemoveAt(idx);
-            partnershipList.Insert(idx, updated);
+            string appName = Environment.GetCommandLineArgs()[0];
+            int extensionPoint = appName.LastIndexOf('.');
+            string configFilename = string.Concat(appName.Substring(0, extensionPoint),
+                                        ".settings");
+            return configFilename;
         }
 
         //There are 1001 options to change, need to revise this

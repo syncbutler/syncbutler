@@ -5,13 +5,13 @@ using System.Configuration;
 
 namespace SyncButler.ProgramEnvironment
 {
-    class SettingsConfigElement : ConfigurationElement
+    public class SettingsConfigElement : ConfigurationElement
     {
         /// <summary>
         /// At the moment, this will list all the possible options editable
         /// and/or used by the program.
         /// </summary>
-        public enum Options { AllowAutoSyncForConflictFreeTasks };
+        public enum Options { AllowAutoSyncForConflictFreeTasks, FirstRunComplete };
 
         /// <summary>
         /// This is a flag to allow multithreading during user conflict
@@ -30,5 +30,19 @@ namespace SyncButler.ProgramEnvironment
                 this["allowAutoSyncForConflictFreeTasks"] = value;
             }
         }
+
+        [ConfigurationProperty("firstRunComplete")]
+        public bool FirstRunComplete
+        {
+            get
+            {
+                return (bool)this["firstRunComplete"];
+            }
+            set
+            {
+                this["firstRunComplete"] = value;
+            }
+        }
+
     }
 }
