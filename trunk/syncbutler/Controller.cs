@@ -119,6 +119,21 @@ namespace SyncButler
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Not Implemented. 
+        /// </summary>
+        public void EditMonitor()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Not Implemented. Returns a list of files which have been synced by the monitor.
+        /// </summary>
+        public List<WindowsFile> getMonitoredFiles()
+        { 
+            throw new NotImplementedException();
+        }
 
     }
 }
