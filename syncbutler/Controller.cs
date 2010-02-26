@@ -130,10 +130,11 @@ namespace SyncButler
         /// <summary>
         /// Not Implemented. Returns a list of files which have been synced by the monitor.
         /// </summary>
-        public List<WindowsFile> getMonitoredFiles()
+        public List<WindowsFile> GetMonitoredFiles()
         { 
             throw new NotImplementedException();
         }
+
 
     }
 }
