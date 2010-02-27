@@ -20,6 +20,14 @@ namespace SyncButler
         private string partnershipName = "partnership";
         private SettingsSection storedSettings;
         private PartnershipSection storedPartnerships;
+        
+        /// <summary>
+        /// Constructor to facilitate testing since exception is thrown when calling InitialEnv()
+        /// </summary>
+        public SyncEnvironment()
+        {
+            partnershipList = new List<Partnership>();
+        }
 
         /// <summary>
         /// Returns the partnership at the specified index.

@@ -5,14 +5,14 @@ using System.IO;
 
 namespace SyncButler
 {
-    class Controller
+    public class Controller
     {
         SyncEnvironment syncEnvironment;
 
         public Controller()
         {
             syncEnvironment = new SyncEnvironment();
-            syncEnvironment.IntialEnv();
+            //syncEnvironment.IntialEnv();
         }
 
         /// <summary>
@@ -130,9 +130,9 @@ namespace SyncButler
         /// <summary>
         /// Not Implemented. Returns a list of files which have been synced by the monitor.
         /// </summary>
-        public List<WindowsFile> GetMonitoredFiles()
-        { 
-            throw new NotImplementedException();
+        public SortedList<String,String> GetMonitoredFiles()
+        {
+            return MostRecentlyUsedFile.Get();
         }
 
 
