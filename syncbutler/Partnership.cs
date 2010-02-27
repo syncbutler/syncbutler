@@ -65,5 +65,10 @@ namespace SyncButler
             right.SetParentPartnership(this);
             return left.Sync(right);
         }
+
+        public String ToString()
+        {
+            return leftFullPath + " <-> " + rightFullPath;
+        }
     }
 }
