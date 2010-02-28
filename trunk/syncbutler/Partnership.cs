@@ -66,7 +66,7 @@ namespace SyncButler
             return left.Sync(right);
         }
 
-        public String ToString()
+        public override String ToString()
         {
             return leftFullPath + " <-> " + rightFullPath;
         }

@@ -8,47 +8,84 @@ namespace SyncButler.ProgramEnvironment
     public class PartnershipConfigElement : ConfigurationElement
     {
         /// <summary>
-        /// This attribute contains the list of partnerships that
-        /// exist for this system
+        /// A default constructor for the class
         /// </summary>
-        [ConfigurationProperty("partnershipList", IsRequired = true)]
-        public List<Partnership> PartnershipList
+        public PartnershipConfigElement()
+        {
+        }
+
+        /// <summary>
+        /// Generic constructor to create a config element using a details of Partnership object
+        /// </summary>
+        /// <param name="leftPath">Path to one of the folder in the partnership</param>
+        /// <param name="rightPath">Path to another folder in the partnership</param>
+        public PartnershipConfigElement(string leftPath, string rightPath)
+        {
+            LeftPath = leftPath;
+            RightPath = rightPath;
+        }
+
+        /// <summary>
+        /// This stores the path to one of the folder in the partnership in string format
+        /// </summary>
+        [ConfigurationProperty("rightPath")]
+        public string RightPath
         {
             get
             {
-                return (List<Partnership>)this["partnershipList"];
+                return (string)this["rightPath"];
             }
             set
             {
-                this["partnershipList"] = value;
+                this["rightPath"] = value;
+            }
+        }
+
+        /// <summary>
+        /// This stores the path to one (another) of the folder in the partnership in string format
+        /// </summary>
+        [ConfigurationProperty("leftPath")]
+        public string LeftPath
+        {
+            get
+            {
+                return (string)this["leftPath"];
+            }
+            set
+            {
+                this["leftPath"] = value;
             }
         }
     }
 }
 /*
+/// <summary>
+/// This attribute contains the details of one partnerships that
+/// exist for this system
+/// </summary>
+[ConfigurationProperty("partnership", IsRequired = true)]
+public Partnership Partnership
+{
+    get
+    {
+        return (Partnership)this["partnership"];
+    }
+    set
+    {
+        this["partnership"] = value;
+    }
+}
+ * 
 [ConfigurationProperty("leftUniqueIdent", IsRequired = true)]
 public String LeftUniqueIdent
 {
     get
     {
-        return (String) this["leftUniqueIdent"];
+        return (String)this["leftUniqueIdent"];
     }
     set
     {
         this["leftUniqueIdent"] = value;
-    }
-}
-
-[ConfigurationProperty("leftPath", DefaultValue = "\\")]
-public String LeftPath
-{
-    get
-    {
-        return (String) this["leftPath"];
-    }
-    set
-    {
-        this["leftPath"] = value;
     }
 }
 

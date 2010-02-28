@@ -44,7 +44,6 @@ namespace SyncButler
                 Partnership partner = new Partnership(leftPath, left, rightPath, right, null);
                 return partner;
             }
-
         }
 
         /// <summary>
@@ -78,7 +77,6 @@ namespace SyncButler
             Partnership partner = CreatePartnership(leftPath, rightPath);
             syncEnvironment.UpdatePartnership(idx, partner);
         }
-        
 
         /// <summary>
         /// Retrieves the list of partnerships from the sync environment. Allows for the user interface to display the list.
@@ -135,6 +133,22 @@ namespace SyncButler
             return MostRecentlyUsedFile.Get();
         }
 
+        /// <summary>
+        /// This method is required to be run when the program is closed. It
+        /// saves all the necessary state into memory
+        /// </summary>
+        public void Shutdown()
+        {
+            syncEnvironment.StoreEnv();
+        }
 
+        /// <summary>
+        /// This checks in with sync environment to check if the program has ran before.
+        /// </summary>
+        /// <returns>True if has ran before, false otherwise</returns>
+        public bool programRanBefore()
+        {
+            return syncEnvironment.isFirstRunComplete();
+        }
     }
 }
