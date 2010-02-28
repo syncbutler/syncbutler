@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,21 +12,26 @@ using System.Windows.Shapes;
 
 namespace SyncButlerUI
 {
-	/// <summary>
-	/// Interaction logic for MainWindow.xaml
-	/// </summary>
-	public partial class MainWindow : Window
+	public class PartnershipTempData
 	{
-		public MainWindow()
+		public PartnershipTempData()
 		{
-			this.InitializeComponent();
-
 			// Insert code required on object creation below this point.
+		    sourcePath="";
+			destinationPath="";
+			partnershipName="";
 		}
-		private void goHome(object sender, RoutedEventArgs e)
-		{
-			//homeWindow1.goHome(sender,e);
-			VisualStateManager.GoToState(homeWindow1,"Home",false);
+		public static string sourcePath{
+		get;set;}
+		public static string destinationPath{
+		get;set;}
+		public static string partnershipName{
+		get;set;}
+		
+		public static void clear(){
+			sourcePath="";
+			destinationPath="";
+			partnershipName="";	
 		}
 	}
 }
