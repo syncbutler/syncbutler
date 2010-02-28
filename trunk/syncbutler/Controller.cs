@@ -30,7 +30,7 @@ namespace SyncButler
             {
                 ISyncable left = new WindowsFolder(leftPath, leftPath);
                 ISyncable right = new WindowsFolder(rightPath, rightPath);
-                Partnership partner = new Partnership(leftPath, left, rightPath, right, null);
+                Partnership partner = new Partnership(left, right, null);
                 return partner;
             }
             else if (isFolderLeft || isFolderRight) 
@@ -41,7 +41,7 @@ namespace SyncButler
             {
                 ISyncable left = new WindowsFile(leftInfo.DirectoryName, leftPath);
                 ISyncable right = new WindowsFile(rightInfo.DirectoryName, rightPath);
-                Partnership partner = new Partnership(leftPath, left, rightPath, right, null);
+                Partnership partner = new Partnership(left, right, null);
                 return partner;
             }
         }
