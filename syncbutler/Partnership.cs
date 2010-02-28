@@ -20,6 +20,8 @@ namespace SyncButler
         /// </summary>
         private ISyncable right;
 
+        public SyncableStatusMonitor statusMonitor = null;
+
         /// <summary>
         /// A dictionary of the hash values from the last sync.
         /// May be empty.
@@ -51,6 +53,8 @@ namespace SyncButler
         {
             left.SetParentPartnership(this);
             right.SetParentPartnership(this);
+            left.SetStatusMonitor(statusMonitor);
+            right.SetStatusMonitor(statusMonitor);
             return left.Sync(right);
         }
 
