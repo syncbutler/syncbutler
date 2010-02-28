@@ -1,33 +1,34 @@
-C:\Users\user\Desktop\TestWpfApplication\TestWpfApplication\obj\Debug\TestWpfApplication.exe
-C:\Users\user\Desktop\TestWpfApplication\TestWpfApplication\obj\Debug\TestWpfApplication.pdb
-D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\bin\Debug\SyncButlerUI.exe
-D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\bin\Debug\SyncButlerUI.pdb
-D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\bin\Debug\System.Windows.Interactivity.xml
-D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\bin\Debug\Microsoft.Expression.Interactions.xml
-D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\bin\Debug\WPFToolkit.pdb
-D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\bin\Debug\de\System.Windows.Interactivity.resources.dll
-D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\bin\Debug\en\System.Windows.Interactivity.resources.dll
-D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\bin\Debug\es\System.Windows.Interactivity.resources.dll
-D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\bin\Debug\fr\System.Windows.Interactivity.resources.dll
-D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\bin\Debug\it\System.Windows.Interactivity.resources.dll
-D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\bin\Debug\ja\System.Windows.Interactivity.resources.dll
-D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\bin\Debug\ko\System.Windows.Interactivity.resources.dll
-D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\bin\Debug\zh-Hans\System.Windows.Interactivity.resources.dll
-D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
-D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\bin\Debug\de\Microsoft.Expression.Interactions.resources.dll
-D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\bin\Debug\en\Microsoft.Expression.Interactions.resources.dll
-D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\bin\Debug\es\Microsoft.Expression.Interactions.resources.dll
-D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\bin\Debug\fr\Microsoft.Expression.Interactions.resources.dll
-D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\bin\Debug\it\Microsoft.Expression.Interactions.resources.dll
-D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\bin\Debug\ja\Microsoft.Expression.Interactions.resources.dll
-D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\bin\Debug\ko\Microsoft.Expression.Interactions.resources.dll
-D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\bin\Debug\zh-Hans\Microsoft.Expression.Interactions.resources.dll
-D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\bin\Debug\zh-Hant\Microsoft.Expression.Interactions.resources.dll
-D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\obj\Debug\ResolveAssemblyReference.cache
-D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\obj\Debug\MainWindow.baml
-D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\obj\Debug\MainWindow.g.cs
-D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\obj\Debug\App.g.cs
-D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\obj\Debug\SyncButlerUI_MarkupCompile.cache
-D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\obj\Debug\SyncButlerUI.g.resources
-D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\obj\Debug\SyncButlerUI.exe
-D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\obj\Debug\SyncButlerUI.pdb
+C:\Users\Rachel^_^\Documents\My Dropbox\syncbutler-ui\SyncButlerUI\bin\Debug\TestWpfApplication.exe
+C:\Users\Rachel^_^\Documents\My Dropbox\syncbutler-ui\SyncButlerUI\bin\Debug\TestWpfApplication.pdb
+C:\Users\Rachel^_^\Documents\My Dropbox\syncbutler-ui\SyncButlerUI\bin\Debug\Microsoft.Expression.Interactions.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\syncbutler-ui\SyncButlerUI\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\syncbutler-ui\SyncButlerUI\bin\Debug\WPFToolkit.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\syncbutler-ui\SyncButlerUI\bin\Debug\System.Windows.Interactivity.xml
+C:\Users\Rachel^_^\Documents\My Dropbox\syncbutler-ui\SyncButlerUI\bin\Debug\Microsoft.Expression.Interactions.xml
+C:\Users\Rachel^_^\Documents\My Dropbox\syncbutler-ui\SyncButlerUI\bin\Debug\WPFToolkit.pdb
+C:\Users\Rachel^_^\Documents\My Dropbox\syncbutler-ui\SyncButlerUI\bin\Debug\de\System.Windows.Interactivity.resources.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\syncbutler-ui\SyncButlerUI\bin\Debug\en\System.Windows.Interactivity.resources.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\syncbutler-ui\SyncButlerUI\bin\Debug\es\System.Windows.Interactivity.resources.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\syncbutler-ui\SyncButlerUI\bin\Debug\fr\System.Windows.Interactivity.resources.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\syncbutler-ui\SyncButlerUI\bin\Debug\it\System.Windows.Interactivity.resources.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\syncbutler-ui\SyncButlerUI\bin\Debug\ja\System.Windows.Interactivity.resources.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\syncbutler-ui\SyncButlerUI\bin\Debug\ko\System.Windows.Interactivity.resources.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\syncbutler-ui\SyncButlerUI\bin\Debug\zh-Hans\System.Windows.Interactivity.resources.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\syncbutler-ui\SyncButlerUI\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\syncbutler-ui\SyncButlerUI\bin\Debug\de\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\syncbutler-ui\SyncButlerUI\bin\Debug\en\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\syncbutler-ui\SyncButlerUI\bin\Debug\es\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\syncbutler-ui\SyncButlerUI\bin\Debug\fr\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\syncbutler-ui\SyncButlerUI\bin\Debug\it\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\syncbutler-ui\SyncButlerUI\bin\Debug\ja\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\syncbutler-ui\SyncButlerUI\bin\Debug\ko\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\syncbutler-ui\SyncButlerUI\bin\Debug\zh-Hans\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\syncbutler-ui\SyncButlerUI\bin\Debug\zh-Hant\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\syncbutler-ui\SyncButlerUI\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Rachel^_^\Documents\My Dropbox\syncbutler-ui\SyncButlerUI\obj\Debug\MainWindow.baml
+C:\Users\Rachel^_^\Documents\My Dropbox\syncbutler-ui\SyncButlerUI\obj\Debug\MainWindow.g.cs
+C:\Users\Rachel^_^\Documents\My Dropbox\syncbutler-ui\SyncButlerUI\obj\Debug\App.g.cs
+C:\Users\Rachel^_^\Documents\My Dropbox\syncbutler-ui\SyncButlerUI\obj\Debug\TestWpfApplication_MarkupCompile.cache
+C:\Users\Rachel^_^\Documents\My Dropbox\syncbutler-ui\SyncButlerUI\obj\Debug\TestWpfApplication.g.resources
+C:\Users\Rachel^_^\Documents\My Dropbox\syncbutler-ui\SyncButlerUI\obj\Debug\TestWpfApplication.exe
+C:\Users\Rachel^_^\Documents\My Dropbox\syncbutler-ui\SyncButlerUI\obj\Debug\TestWpfApplication.pdb

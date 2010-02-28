@@ -64,10 +64,19 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="HomeWindowControl.xaml.cs">
+      <DependentUpon>HomeWindowControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PartnershipTempData.cs" />
+    <Compile Include="HeaderToImageConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="HomeWindowControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -78,21 +87,27 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Arrow-Left.png" />
-    <Resource Include="Broken.png" />
-    <Resource Include="bullet_arrow_down.png" />
-    <Resource Include="bullet_arrow_up.png" />
-    <Resource Include="Computer.png" />
-    <Resource Include="Defragmentation.png" />
-    <Resource Include="Doc.png" />
-    <Resource Include="Folder.png" />
-    <Resource Include="HD.png" />
-    <Resource Include="Mac-Display.png" />
-    <Resource Include="Misc.png" />
-    <Resource Include="Search.png" />
-    <Resource Include="Synchonize.png" />
-    <Resource Include="Usbstick.png" />
-    <Resource Include="WLM.png" />
+    <Resource Include="Images\Arrow-Left.png" />
+    <Resource Include="Images\Broken.png" />
+    <Resource Include="Images\bullet_arrow_down.png" />
+    <Resource Include="Images\bullet_arrow_up.png" />
+    <Resource Include="Images\Computer.png" />
+    <Resource Include="Images\Defragmentation.png" />
+    <Resource Include="Images\diskdrive.png" />
+    <Resource Include="Images\Doc.png" />
+    <Resource Include="Images\Folder.png" />
+    <Resource Include="Images\HD.png" />
+    <Resource Include="Images\logo.png" />
+    <Resource Include="Images\logowTransparency.png" />
+    <Resource Include="Images\Mac-Display.png" />
+    <Resource Include="Images\Misc.png" />
+    <Resource Include="Images\Search.png" />
+    <Resource Include="Images\Settings.png" />
+    <Resource Include="Images\Symbol-Check.png" />
+    <Resource Include="Images\Synchonize.png" />
+    <Resource Include="Images\treefolder.png" />
+    <Resource Include="Images\Usbstick.png" />
+    <Resource Include="Images\WLM.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -4,10 +4,13 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d" xmlns:Microsoft_Windows_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" xmlns:Custom="http://schemas.microsoft.com/wpf/2008/toolkit" xmlns:ic="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
 	xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-	x:Class="TestWpfApplication.MainWindow"
+	xmlns:WPF_Explorer_Tree="clr-namespace:WPF_Explorer_Tree"
+	xmlns:local="clr-namespace:SyncButlerUI"
+	x:Class="SyncButlerUI.MainWindow"
 	x:Name="Window"
-	Title="SyncButler"
-	Width="651" Height="480">
+	Title="SyncButler" 
+	Width="651" Height="480"
+	 >
 
 	<Window.Resources>
 		<Style x:Key="ButtonFocusVisual">
@@ -66,7 +69,7 @@
 									<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
 									<SplineDoubleKeyFrame KeyTime="00:00:04" Value="360"/>
 								</DoubleAnimationUsingKeyFrames>
-								<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="image1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+								<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="GreenArrow" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
 									<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
 									<SplineDoubleKeyFrame KeyTime="00:00:00.5000000" Value="27"/>
 									<SplineDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
@@ -93,7 +96,7 @@
 									</RadialGradientBrush>
 								</Rectangle.Fill>
 							</Rectangle>
-							<Image x:Name="image" Cursor="Hand" HorizontalAlignment="Left" Margin="19.5,55.231,0,55.269" Width="149.5" Opacity="0.6" RenderTransformOrigin="0.5,0.5" Source="Synchonize.png" Stretch="Fill">
+							<Image x:Name="image" Cursor="Hand" HorizontalAlignment="Left" Margin="19.5,55.231,0,55.269" Width="149.5" Opacity="0.6" RenderTransformOrigin="0.5,0.5" Source="Images/Synchonize.png" Stretch="Fill">
 								<Image.RenderTransform>
 									<TransformGroup>
 										<ScaleTransform/>
@@ -114,7 +117,7 @@
 									</LinearGradientBrush>
 								</Rectangle.Fill>
 							</Rectangle>
-							<Image x:Name="image1" Cursor="Hand" HorizontalAlignment="Right" Margin="0,0,28.484,6.269" VerticalAlignment="Bottom" Width="97" Height="97" Opacity="0.6" RenderTransformOrigin="0.5,0.5" Source="Arrow-Left.png" Stretch="Fill">
+							<Image x:Name="GreenArrow" Cursor="Hand" HorizontalAlignment="Right" Margin="0,0,28.484,6.269" VerticalAlignment="Bottom" Width="97" Height="97" Opacity="0.6" RenderTransformOrigin="0.5,0.5" Source="Images/Arrow-Left.png" Stretch="Fill">
 								<Image.RenderTransform>
 									<TransformGroup>
 										<ScaleTransform/>
@@ -169,7 +172,7 @@
 								</Rectangle.Fill>
 							</Rectangle>
 							<TextBlock Margin="11,131.717,0,0" Opacity="0.5" FontFamily="Arial" FontSize="16" Foreground="White" TextWrapping="Wrap" Cursor="Hand" TextAlignment="Right" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150.307" Height="75.052"><Run Text="View your "/><LineBreak/><Run Text="synchronizing folders"/></TextBlock>
-							<Image Cursor="Hand" HorizontalAlignment="Left" Margin="30.5,83.769,0,56" Width="66" Opacity="0.6" Source="Search.png" Stretch="Fill"/>
+							<Image Cursor="Hand" HorizontalAlignment="Left" Margin="30.5,83.769,0,56" Width="66" Opacity="0.6" Source="Images\Search.png" Stretch="Fill"/>
 							<TextBlock Margin="25.166,12.769,31.834,0" VerticalAlignment="Top" Height="49" TextWrapping="Wrap" TextAlignment="Center" Opacity="0.7"><Run FontStyle="Normal" Text="View "/><Run Text="Partnerships"/></TextBlock>
 						</Grid>
 						<ControlTemplate.Triggers>
@@ -202,10 +205,10 @@
 								</Rectangle.Fill>
 							</Rectangle>
 							<TextBlock Margin="14,132.217,14.176,0" VerticalAlignment="Top" Height="49.052" Opacity="0.5" FontFamily="Arial" FontSize="16" Foreground="White" TextWrapping="Wrap" Cursor="Hand" TextAlignment="Right"><Run Text="Select what "/><LineBreak/><Run Text="you want to Sync"/></TextBlock>
-							<Image Margin="23.198,86.105,0,61.56" Source="Folder.png" Stretch="Fill" Opacity="0.595" HorizontalAlignment="Left" Width="60.604"/>
+							<Image Margin="23.198,86.105,0,61.56" Source="Images\Folder.png" Stretch="Fill" Opacity="0.595" HorizontalAlignment="Left" Width="60.604"/>
 							<ContentPresenter HorizontalAlignment="Right" Margin="0,15.217,16.176,0" VerticalAlignment="Top" Width="136" Height="72" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True"/>
 							<TextBlock Margin="24.5,15.769,31.983,0" VerticalAlignment="Top" Height="48" TextAlignment="Center" TextWrapping="Wrap" Opacity="0.68"><Run FontStyle="Normal" Text="Create"/><Run Text=" Partnership"/></TextBlock>
-							<Image Margin="29.198,78.105,88.681,69.56" Source="Folder.png" Stretch="Fill" HorizontalAlignment="Stretch" Width="Auto" Opacity="0.595"/>
+							<Image Margin="29.198,78.105,88.681,69.56" Source="Images\Folder.png" Stretch="Fill" HorizontalAlignment="Stretch" Width="Auto" Opacity="0.595"/>
 						</Grid>
 						<ControlTemplate.Triggers>
 							<Trigger Property="IsFocused" Value="True"/>
@@ -222,14 +225,6 @@
 			<Setter Property="FontStyle" Value="Italic"/>
 			<Setter Property="Foreground" Value="White"/>
 		</Style>
-		<Storyboard x:Key="ViewSyncPartnerships">
-			<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="HomeWindow" Storyboard.TargetProperty="(UIElement.Visibility)">
-				<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
-			</ObjectAnimationUsingKeyFrames>
-			<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="SelectPartnership" Storyboard.TargetProperty="(UIElement.Visibility)">
-				<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
-			</ObjectAnimationUsingKeyFrames>
-		</Storyboard>
 		<Style x:Key="HomeButton" TargetType="{x:Type Button}">
 			<Setter Property="Template">
 				<Setter.Value>
@@ -247,7 +242,78 @@
 								</Rectangle.Fill>
 							</Rectangle>
 							<ContentPresenter Margin="62.5,24.5,14.833,1.5" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True"/>
-							<Image HorizontalAlignment="Left" Margin="16.668,12.168,0,10.499" VerticalAlignment="Stretch" Width="39.333" Height="Auto" Opacity="0.58" Source="Computer.png" Stretch="Fill"/>
+							<Image HorizontalAlignment="Left" Margin="16.668,12.168,0,10.499" VerticalAlignment="Stretch" Width="39.333" Height="Auto" Opacity="0.58" Source="Images\Computer.png" Stretch="Fill"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsFocused" Value="True"/>
+							<Trigger Property="IsDefaulted" Value="True"/>
+							<Trigger Property="IsMouseOver" Value="True"/>
+							<Trigger Property="IsPressed" Value="True"/>
+							<Trigger Property="IsEnabled" Value="False"/>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Arial"/>
+			<Setter Property="FontSize" Value="18.667"/>
+			<Setter Property="Foreground" Value="White"/>
+		</Style>
+		<Style x:Key="SettingsButton" TargetType="{x:Type Button}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type Button}">
+						<Grid x:Name="SettingsButton">
+							<Rectangle Cursor="Hand">
+								<Rectangle.Fill>
+									<LinearGradientBrush EndPoint="1.005,0.575" StartPoint="0.051,0.657" MappingMode="RelativeToBoundingBox">
+										<GradientStop Color="#00000000" Offset="1"/>
+										<GradientStop Color="#FF080808" Offset="0.489"/>
+										<GradientStop Offset="1"/>
+										<GradientStop Color="#00000000"/>
+										<GradientStop Color="Black"/>
+									</LinearGradientBrush>
+								</Rectangle.Fill>
+							</Rectangle>
+							<ContentPresenter Margin="62.5,24.5,8,1.5" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True" Content="Settings"/>
+							<Image HorizontalAlignment="Left" Margin="16.668,12.168,0,10.499" VerticalAlignment="Stretch" Width="39.333" Height="Auto" Opacity="0.58" Source="Images/Settings.png" Stretch="Fill"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsFocused" Value="True"/>
+							<Trigger Property="IsDefaulted" Value="True"/>
+							<Trigger Property="IsMouseOver" Value="True"/>
+							<Trigger Property="IsPressed" Value="True"/>
+							<Trigger Property="IsEnabled" Value="False"/>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Arial"/>
+			<Setter Property="FontSize" Value="18.667"/>
+			<Setter Property="Foreground" Value="White"/>
+		</Style>
+		<Style x:Key="SyncButtonTemplate" TargetType="{x:Type Button}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type Button}">
+						<Grid x:Name="SettingsButton">
+							<Rectangle Cursor="Hand" VerticalAlignment="Top" Height="86" Width="Auto">
+								<Rectangle.Fill>
+									<LinearGradientBrush EndPoint="1.005,0.575" StartPoint="0.051,0.657" MappingMode="RelativeToBoundingBox">
+										<GradientStop Color="#00000000" Offset="1"/>
+										<GradientStop Color="#FF080808" Offset="0.489"/>
+										<GradientStop Offset="1"/>
+										<GradientStop Color="#00000000"/>
+										<GradientStop Color="Black"/>
+									</LinearGradientBrush>
+								</Rectangle.Fill>
+							</Rectangle>
+							<ContentPresenter Margin="56.001,24.5,8,0" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True" Content="" VerticalAlignment="Top" Height="61.5" RenderTransformOrigin="0.515,0.772" IsEnabled="False"/>
+							<Image HorizontalAlignment="Left" Margin="16.668,12.168,0,10.499" VerticalAlignment="Stretch" Width="39.333" Height="Auto" Opacity="1" Source="Images/LogowTransparency.png" Stretch="Fill">
+								<Image.OpacityMask>
+									<SolidColorBrush Color="#FFF2AEAE"/>
+								</Image.OpacityMask>
+							</Image>
+							<TextBlock Margin="57.001,13.5,-13,-22" Text="Sync,Butler Sync" TextWrapping="Wrap" FontSize="16"/>
 						</Grid>
 						<ControlTemplate.Triggers>
 							<Trigger Property="IsFocused" Value="True"/>
@@ -265,14 +331,6 @@
 		</Style>
 		
 	</Window.Resources>
-	<Window.Triggers>
-		<EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ViewPartnerships">
-			<BeginStoryboard x:Name="ViewSyncPartnerships_BeginStoryboard" Storyboard="{StaticResource ViewSyncPartnerships}"/>
-		</EventTrigger>
-		<EventTrigger RoutedEvent="ButtonBase.Click" SourceName="HomeButton">
-			<StopStoryboard BeginStoryboardName="ViewSyncPartnerships_BeginStoryboard"/>
-		</EventTrigger>
-	</Window.Triggers>
 
 	<Grid x:Name="LayoutRoot" Background="White">
 		<Grid.ColumnDefinitions>
@@ -282,112 +340,9 @@
 			<ColumnDefinition MinWidth="66" Width="Auto"/>
 			<ColumnDefinition MinWidth="165.5" Width="Auto"/>
 		</Grid.ColumnDefinitions>
-		<VisualStateManager.CustomVisualStateManager>
-			<ic:ExtendedVisualStateManager/>
-		</VisualStateManager.CustomVisualStateManager>
-		<VisualStateManager.VisualStateGroups>
-			<VisualStateGroup x:Name="VisualStateGroup">
-				<VisualStateGroup.Transitions>
-					<VisualTransition GeneratedDuration="00:00:00">
-						<Storyboard>
-							<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="SelectPartnership" Storyboard.TargetProperty="(UIElement.Visibility)">
-								<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
-							</ObjectAnimationUsingKeyFrames>
-						</Storyboard>
-					</VisualTransition>
-					<VisualTransition GeneratedDuration="00:00:00" To="SelectPartnerState">
-						<Storyboard>
-							<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="HomeWindow" Storyboard.TargetProperty="(UIElement.Visibility)">
-								<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
-							</ObjectAnimationUsingKeyFrames>
-						</Storyboard>
-					</VisualTransition>
-					<VisualTransition From="SelectPartnerState" GeneratedDuration="00:00:00"/>
-				</VisualStateGroup.Transitions>
-				<VisualState x:Name="SelectPartnerState">
-					<Storyboard>
-						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="SelectPartnership" Storyboard.TargetProperty="(UIElement.Visibility)">
-							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
-						</ObjectAnimationUsingKeyFrames>
-					</Storyboard>
-				</VisualState>
-			</VisualStateGroup>
-		</VisualStateManager.VisualStateGroups>
-		<Grid x:Name="HomeWindow" Margin="19.5,0,19,0" VerticalAlignment="Bottom" Height="444" Grid.Column="1" Grid.ColumnSpan="4">
-			<Rectangle x:Name="background" RadiusX="1" RadiusY="2" Margin="0,0,-1.5,0" VerticalAlignment="Top" Height="448" Cursor="Hand">
-				<Rectangle.Fill>
-					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.504,0.026">
-						<GradientStop Color="Black" Offset="1"/>
-						<GradientStop Color="Black"/>
-					</LinearGradientBrush>
-				</Rectangle.Fill>
-			</Rectangle>
-			<Button x:Name="SyncButton" Margin="6,1,1.388,183" Style="{DynamicResource SyncButton}" Content=""/>
-			<Rectangle x:Name="Reflection_Copy" Opacity="0.045" Margin="1.176,0,-1.5,92.052" RadiusX="7" RadiusY="6" VerticalAlignment="Bottom" Height="88.217" Cursor="Hand">
-				<Rectangle.Effect>
-					<BlurEffect/>
-				</Rectangle.Effect>
-				<Rectangle.Fill>
-					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-						<GradientStop Color="Black"/>
-						<GradientStop Color="White" Offset="1"/>
-					</LinearGradientBrush>
-				</Rectangle.Fill>
-			</Rectangle>
-			<Button x:Name="ViewPartnerships" HorizontalAlignment="Right" Margin="0,260.231,173.5,-22" Style="{DynamicResource ViewPartnershipButton}" Width="167" Content=""/>
-			<Rectangle x:Name="bigButton_Copy3" Margin="0,0,5.5,2" VerticalAlignment="Bottom" Height="182.269" Stroke="Black" Cursor="Hand" HorizontalAlignment="Right" Width="169.25" d:LayoutOverrides="VerticalAlignment">
-				<Rectangle.Fill>
-					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" MappingMode="RelativeToBoundingBox">
-						<GradientStop Color="#00000000" Offset="1"/>
-						<GradientStop Color="#FF005F74" Offset="0.433"/>
-						<GradientStop Color="#8F004A5B" Offset="1"/>
-					</LinearGradientBrush>
-				</Rectangle.Fill>
-			</Rectangle>
-			<TextBlock Margin="0,0,21.791,98.052" VerticalAlignment="Bottom" Height="72" Opacity="0.6" FontFamily="Arial" FontSize="21.333" Foreground="White" TextAlignment="Center" TextWrapping="Wrap" Cursor="Hand" HorizontalAlignment="Right" Width="128.723" d:LayoutOverrides="HorizontalAlignment"><Run Text="Explore "/><Run FontStyle="Italic" Text="Features"/></TextBlock>
-			<TextBlock Margin="0,390.948,10,0" VerticalAlignment="Top" Height="75.052" Opacity="0.5" FontFamily="Arial" FontSize="16" Foreground="White" TextWrapping="Wrap" TextAlignment="Right" Cursor="Hand" HorizontalAlignment="Right" Width="177.307"><Run Text="Discover"/><LineBreak/><Run Text="The easy way of life"/></TextBlock>
-			<Image Cursor="Hand" HorizontalAlignment="Right" Margin="0,0,76.807,33" VerticalAlignment="Bottom" Width="68.67" Height="68.938" Opacity="0.6" Source="Broken.png" Stretch="Fill"/>
-			<Button HorizontalAlignment="Left" Margin="7,0,0,0.5" Style="{DynamicResource CreatePartnersButton}" VerticalAlignment="Bottom" Width="164.483" Height="183.269" Content=""/>
-		</Grid>
-		<Grid x:Name="SelectPartnership" Margin="19.5,0,19,0" VerticalAlignment="Bottom" Height="444" Grid.Column="1" Grid.ColumnSpan="4" Visibility="Hidden">
-			<Rectangle x:Name="background_Copy" RadiusX="1" RadiusY="2" Margin="0,0,-1.5,0" VerticalAlignment="Top" Height="448" Cursor="None">
-				<Rectangle.Fill>
-					<RadialGradientBrush GradientOrigin="0.265,0.184" RadiusX="1.237" RadiusY="1.237">
-						<GradientStop Color="Black" Offset="1"/>
-						<GradientStop Color="White"/>
-						<GradientStop Color="#FFA3A3A3" Offset="1"/>
-						<GradientStop Color="#FFA1A1A1" Offset="1"/>
-						<GradientStop Color="White" Offset="0.378"/>
-					</RadialGradientBrush>
-				</Rectangle.Fill>
-			</Rectangle>
-			<Image HorizontalAlignment="Left" Margin="29,29,0,0" VerticalAlignment="Top" Width="73" Height="73" Source="Doc.png" Stretch="Fill"/>
-			<TextBlock Margin="111.5,53,136.307,0" VerticalAlignment="Top" Height="61.5" FontFamily="Arial" FontSize="24" FontWeight="Bold" Text="Select Partnership" TextWrapping="Wrap"/>
-			<TextBlock Margin="113,84.5,139.307,0" VerticalAlignment="Top" Height="54" FontSize="13.333" TextWrapping="Wrap"><Run Text="Please select a partnership to start "/><Run FontStyle="Italic" Text="syncing"/><Run Text="."/></TextBlock>
-		</Grid>
-		<Grid x:Name="CreatePartnership" Margin="19.5,0,19,0" VerticalAlignment="Bottom" Height="444" Grid.Column="1" Grid.ColumnSpan="4" Visibility="Hidden">
-			<Rectangle x:Name="background_Copy1" RadiusX="1" RadiusY="2" Margin="0,0,-1.5,0" VerticalAlignment="Top" Height="448" Cursor="None">
-				<Rectangle.Fill>
-					<RadialGradientBrush GradientOrigin="0.265,0.184" RadiusX="1.237" RadiusY="1.237">
-						<GradientStop Color="Black" Offset="1"/>
-						<GradientStop Color="White"/>
-						<GradientStop Color="#FFA3A3A3" Offset="1"/>
-						<GradientStop Color="#FFA1A1A1" Offset="1"/>
-						<GradientStop Color="White" Offset="0.378"/>
-					</RadialGradientBrush>
-				</Rectangle.Fill>
-			</Rectangle>
-			<TextBlock Margin="111.5,53,136.307,0" VerticalAlignment="Top" Height="61.5" FontFamily="Arial" FontSize="24" FontWeight="Bold" Text="Create Partnership" TextWrapping="Wrap"/>
-			<TextBlock Margin="113,84.5,139.307,0" VerticalAlignment="Top" Height="54" FontSize="13.333" TextWrapping="Wrap" Text="Please select 2 folders that you want to sync"/>
-			<Image HorizontalAlignment="Left" Margin="18.499,33.333,0,0" VerticalAlignment="Top" Width="90" Height="90" Opacity="0.79" Source="Defragmentation.png" Stretch="Fill"/>
-			<Image HorizontalAlignment="Left" Margin="60.5,187,0,216" Width="41" Source="Misc.png" Stretch="Fill"/>
-			<Image HorizontalAlignment="Left" Margin="64.5,0,0,91" VerticalAlignment="Bottom" Width="44" Height="44" Source="Folder.png" Stretch="Fill"/>
-			<TextBlock Margin="59.5,144,233.947,0" VerticalAlignment="Top" Height="28" FontSize="14.667" FontWeight="Bold" Text="Source Folder" TextWrapping="Wrap"/>
-			<TextBlock Margin="61,163.5,191.307,0" VerticalAlignment="Top" Height="54" FontSize="13.333" TextWrapping="Wrap" Text="Select the source folder you want to sync"/>
-			<TextBox Margin="108.5,192,133.947,0" VerticalAlignment="Top" Height="25" TextWrapping="Wrap"/>
-		</Grid>
-		<Rectangle x:Name="Sidebar" RadiusX="1" RadiusY="2" Margin="0,0,-82.5,0" Fill="Black" Clip="M-2,-2.5 L137.5,-1 C137.5,-1 134.5,284 136,363.5 137.47077,441.45068 170.87586,444.0002 180,444 189,443.9998 -3,445 -3,445 z" d:IsLocked="True"/>
-		<Rectangle x:Name="Sidebar_Copy" RadiusX="1" RadiusY="2" Margin="0,0,-82.5,0" Clip="M-2,-2.5 L137.5,-1 C137.5,-1 134.5,284 136,363.5 137.47077,441.45068 167.87586,445.0002 177,445 186,444.9998 -2,445 -2,445 z" d:IsLocked="True">
+		<local:HomeWindowControl x:Name="homeWindow1" Margin="135.666,-1,-46.473,1"/>
+		<Rectangle x:Name="Sidebar" RadiusX="1" RadiusY="2" Margin="0,0,-82.5,0" Fill="Black" Clip="M-2,-2.5 L137.5,-1 C137.5,-1 134.5,284 136,363.5 137.47077,441.45068 170.87586,444.0002 180,444 189,443.9998 -3,445 -3,445 z"/>
+		<Rectangle x:Name="Sidebar_Copy" RadiusX="1" RadiusY="2" Clip="M-2,-2.5 L137.5,-1 C137.5,-1 134.5,284 136,363.5 137.47077,441.45068 167.87586,445.0002 177,445 186,444.9998 -2,445 -2,445 z" HorizontalAlignment="Left" Width="187.527" VerticalAlignment="Bottom" Height="444">
 			<Rectangle.Fill>
 				<LinearGradientBrush EndPoint="0.698,0.619" StartPoint="-0.784,0.619" MappingMode="RelativeToBoundingBox">
 					<GradientStop Color="#00000000" Offset="0.579"/>
@@ -395,6 +350,8 @@
 				</LinearGradientBrush>
 			</Rectangle.Fill>
 		</Rectangle>
-		<Button x:Name="HomeButton" Margin="0,-1.5,-27.333,0" Style="{DynamicResource HomeButton}" VerticalAlignment="Top" Height="62" Content="Home" d:IsLocked="True"/>
+		<Button x:Name="HomeButton" Margin="-6,-1.5,0,0" Style="{DynamicResource HomeButton}" VerticalAlignment="Top" Height="62" Content="Home" HorizontalAlignment="Left" Width="141.666" Click="goHome"/>
+		<Button x:Name="SettingsButton" Margin="-6,50.5,0,0" Style="{DynamicResource SettingsButton}" VerticalAlignment="Top" Height="62" Content="Home" HorizontalAlignment="Left" Width="141.666" Click="goHome"/>
+		<Button x:Name="SyncButlerSyncButton" Margin="-6,109,0,0" Style="{DynamicResource SyncButtonTemplate}" VerticalAlignment="Top" Height="62" Content="Home" HorizontalAlignment="Left" Width="141.666" Click="goHome"/>
 	</Grid>
 </Window>
