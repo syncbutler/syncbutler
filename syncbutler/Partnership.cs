@@ -21,15 +21,6 @@ namespace SyncButler
         private ISyncable right;
 
         /// <summary>
-        /// right full path
-        /// </summary>
-        protected internal string rightFullPath;
-        /// <summary>
-        /// left full path
-        /// </summary>
-        protected internal string leftFullPath;
-
-        /// <summary>
         /// A dictionary of the hash values from the last sync.
         /// May be empty.
         /// </summary>
@@ -40,14 +31,11 @@ namespace SyncButler
         /// </summary>
         /// <param name="left">left side of the syncable</param>
         /// <param name="right">right side of the syncable</param>
-        public Partnership( string leftFullPath, ISyncable left, 
-                            string rightFullPath, ISyncable right,
+        public Partnership( ISyncable left, ISyncable right,
                             Dictionary<string, long> hashDictionary)
         {
             this.left = left;
             this.right = right;
-            this.leftFullPath = leftFullPath;
-            this.rightFullPath = rightFullPath;
             this.hashDictionary = hashDictionary;
         }
 
@@ -68,7 +56,7 @@ namespace SyncButler
 
         public override String ToString()
         {
-            return leftFullPath + " <-> " + rightFullPath;
+            return left.EntityPath() + " <-> " + right.EntityPath();
         }
     }
 }

@@ -65,6 +65,11 @@ namespace SyncButler
             }
 
         }
+
+        public override String ToString()
+        {
+            return left.EntityPath() + "\n" + right.EntityPath() + "\n    " + this.RecommendedAction + "\n";
+        }
     }
 }
 /*

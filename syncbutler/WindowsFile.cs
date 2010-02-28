@@ -97,6 +97,7 @@ namespace SyncButler
             for (long i = 0; i < (actualBufferSize); i++)
                 buffer[i] = (byte)fileStream.ReadByte();
 
+            fileStream.Close();
             return buffer;
         }
 
@@ -107,12 +108,13 @@ namespace SyncButler
         /// <returns>Error.NoError if there is no error. Error.InvalidPath if the path is not valid. Error.NoPermission if the user has no permission to overwrite this file. Error.PathTooLong if the path given is too long for this system to handle</returns>
         public object CopyTo(ISyncable item)
         {
-            Debug.Assert(item.GetType().Name.Equals("WindowsFiles"), "Different type, the given type is " + item.GetType().Name);
+            Debug.Assert(!item.GetType().Name.Equals("WindowsFiles"), "Different type, the given type is " + item.GetType().Name);
 
             WindowsFile windowFiles = (WindowsFile)item;
+
             try
             {
-                nativeFileObj.CopyTo(windowFiles.relativePath + windowFiles.Name);
+                nativeFileObj.CopyTo(windowFiles.rootPath + windowFiles.relativePath);
                 return Error.NoError;
             }
             catch (ArgumentException)
@@ -131,7 +133,6 @@ namespace SyncButler
             {
                 return Error.PathTooLong;
             }
-            
                   
         }
         /// <summary>
@@ -166,6 +167,9 @@ namespace SyncButler
         /// <remarks>
         /// A size of 2,048,000 bytes (approx. 2MB) is used.
         /// Adler32 is the preferred algorithm for calculating the checksum, as it has been proven to be fast, with an acceptable level of collision.
+        /// 
+        /// Future TODO: Cache the result so that checksum calculations do not need to be
+        /// repeated.
         /// </remarks>
         /// <returns>A long of the checksum.</returns>
         /// <exception cref="FileNotFoundException">If the file is not found.</exception>
@@ -190,11 +194,22 @@ namespace SyncButler
 
         /// <summary>
         /// Determine if the file has been changed since it was last synced.
+        /// If no metadata is available, it assumes the file has been changed.
         /// </summary>
+        /// <exception cref="FileNotFoundException">If the file is not found.</exception>
+        /// <exception cref="UnauthorizedAccessException">Path is read-only or is a directory.</exception>
+        /// <exception cref="DirectoryNotFoundException">The specified path is invalid, such as being on an unmapped drive.</exception>
+        /// <exception cref="IOException">The file is already open.</exception>
+        /// <exception cref="NotSupportedException">The current stream does not support reading.</exception>
+        /// <exception cref="ObjectDisposedException">The current stream is closed.</exception>
         /// <returns>true if the file has been changed, false otherwise</returns>
         public bool HasChanged()
         {
-            throw new NotImplementedException();
+            Debug.Assert(parentPartnership != null, "parentPartnership not set! Cannot determine if this File has changed");
+            
+            if (!parentPartnership.hashDictionary.ContainsKey(this.EntityPath())) return true;
+
+            return (parentPartnership.hashDictionary[this.EntityPath()] != this.Checksum());
         }
 
         /// <summary>
@@ -216,7 +231,7 @@ namespace SyncButler
 
         public string EntityPath()
         {
-            return "file:\\" + this.relativePath + nativeFileObj.Name;
+            return "file:\\\\" + this.relativePath;
         }
 
         /// <summary>
@@ -238,7 +253,7 @@ namespace SyncButler
 
             Debug.Assert(parentPartnership != null, "The parent partnership has not been set; cannot sync");
 
-            if (otherPair is WindowsFile && this.EntityPath().Equals(otherPair.EntityPath()))
+            if (otherPair is WindowsFile)// && this.EntityPath().Equals(otherPair.EntityPath()))
             {
                 partner = (WindowsFile)otherPair;
             }
@@ -249,27 +264,34 @@ namespace SyncButler
             
             // Check if the files are in sync
             List<Conflict> returnValue = new List<Conflict>();
-            if (this.Checksum().Equals(partner.Checksum())) return returnValue;
+            Conflict.Action recommendedAction = Conflict.Action.Unknown;
 
-            Boolean leftChanged, rightChanged;
-
-            if (!parentPartnership.hashDictionary.ContainsKey(this.EntityPath()))
+            if (!(this.nativeFileObj.Exists || partner.nativeFileObj.Exists))
             {
-                leftChanged = true;
-                rightChanged = true;
+                return returnValue;
+            }
+            else if (!this.nativeFileObj.Exists) 
+            {
+                recommendedAction = Conflict.Action.CopyToLeft;
+            }
+            else if (!partner.nativeFileObj.Exists)
+            {
+                recommendedAction = Conflict.Action.CopyToRight;
             }
             else
             {
-                long lastHash = parentPartnership.hashDictionary[this.EntityPath()];
-                leftChanged = (this.Checksum() != lastHash);
-                rightChanged = (partner.Checksum() != lastHash);
+                if (this.Checksum().Equals(partner.Checksum())) return returnValue;
+                
+                Boolean leftChanged, rightChanged;
+                leftChanged = this.HasChanged();
+                rightChanged = partner.HasChanged();
+
+                if (rightChanged ^ leftChanged)
+                {
+                    if (rightChanged) recommendedAction = Conflict.Action.CopyToLeft;
+                    else if (leftChanged) recommendedAction = Conflict.Action.CopyToRight;
+                }
             }
-
-            Conflict.Action recommendedAction;
-
-            recommendedAction = Conflict.Action.Unknown;
-            if (rightChanged) recommendedAction = Conflict.Action.CopyToLeft;
-            else if (leftChanged) recommendedAction = Conflict.Action.CopyToRight;
 
             returnValue.Add(new Conflict(this, partner, recommendedAction));
             return returnValue;

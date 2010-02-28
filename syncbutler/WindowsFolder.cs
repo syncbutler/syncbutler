@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using SyncButler.Exceptions;
+using SyncButler.Checksums;
+using System.Collections;
+using System.Diagnostics;
 
 namespace SyncButler
 {
-    
+
     /// <summary>
     /// Represents a folder on the Windows file system.
     /// </summary>
@@ -14,8 +17,6 @@ namespace SyncButler
     {
         public enum Error { IsWorkingFolder, NoPermission, NoError };
         protected DirectoryInfo nativeDirObj;
-        protected SortedList<String, WindowsFolder> subFolders;
-        protected SortedList<String, WindowsFile> files;
 
         /// <summary>
         /// Constructor that takes in two parameters, a root path and the full path.
@@ -24,11 +25,12 @@ namespace SyncButler
         /// <param name="fullPath">Full path to this file</param>
         public WindowsFolder(String rootPath, String fullPath)
         {
+            if (!rootPath.EndsWith("\\")) rootPath += "\\";
+            if (!fullPath.EndsWith("\\")) fullPath += "\\";
+
             this.nativeDirObj = new DirectoryInfo(fullPath);
             this.relativePath = StripPrefix(rootPath, fullPath);
             this.nativeFileSystemObj = this.nativeDirObj;
-            this.subFolders = new SortedList<String, WindowsFolder>();
-            this.files = new SortedList<String, WindowsFile>();
             this.rootPath = rootPath;
         }
 
@@ -40,136 +42,74 @@ namespace SyncButler
         /// <param name="fullPath">Full path to this file</param>
         public WindowsFolder(String rootPath, String fullPath, Partnership parentPartnership)
         {
+            if (!rootPath.EndsWith("\\")) rootPath += "\\";
+            if (!fullPath.EndsWith("\\")) fullPath += "\\";
+
             this.nativeDirObj = new DirectoryInfo(fullPath);
             this.relativePath = StripPrefix(rootPath, fullPath);
             this.nativeFileSystemObj = this.nativeDirObj;
-            this.subFolders = new SortedList<String, WindowsFolder>();
-            this.files = new SortedList<String, WindowsFile>();
             this.rootPath = rootPath;
             this.parentPartnership = parentPartnership;
         }
 
         /// <summary>
-        /// Gets a sorted list of sub folders in this directory. Sorted by the name of the folder.
-        /// </summary>
-        public SortedList<String, WindowsFolder> SubFolders
-        {
-            get { return this.subFolders; }
-        }
-
-        /// <summary>
-        /// Gets a sorted list of files in this directory. Sorted by the name of the file.
-        /// </summary>
-        public SortedList<String, WindowsFile> Files
-        {
-            get { return this.files; }
-        }
-
-        /// <summary>
-        /// Gets the number of sub folders in this directory.
-        /// </summary>
-        public long SubFolderCount
-        {
-            get { return this.subFolders.Count; }
-        }
-
-        /// <summary>
-        /// Gets the number of files in this directory.
-        /// </summary>
-        public long FileCount
-        {
-            get { return this.files.Count; }
-        }
-
-        /// <summary>
-        /// Add a file to this directory.
-        /// </summary>
-        /// <remarks>
-        /// If the file is already contained in this directory, nothing is done.
-        /// </remarks>
-        /// <param name="file">The file to add.</param>
-        public void AddFile(WindowsFile file)
-        {
-            if (!this.files.ContainsKey(file.Name))
-                this.files.Add(file.Name, file);
-        }
-
-        /// <summary>
-        /// Add a sub folder to this directory.
-        /// </summary>
-        /// <remarks>
-        /// If the folder is already contained in this directory, nothing is done.
-        /// </remarks>
-        /// <param name="folder">The folder to add.</param>
-        public void AddSubFolder(WindowsFolder folder)
-        {
-            if (!this.subFolders.ContainsKey(folder.Name))
-                this.subFolders.Add(folder.Name, folder);
-        }
-
-        /// <summary>
-        /// attempt to copy the content of the file over
+        /// Copy the entire folder over
         /// </summary>
         /// <param name="item"></param>
+        /// <exception cref="IOException"></exception>
+        /// <exception cref="UnauthorizedAccessException">ONe of the files/folders are read-only or we do not have security permissions</exception>
+        /// <exception cref="PathTooLongException"></exception>
+        /// <exception cref="DirectoryNotFoundException">Possibly the file/folder structure changed while the operation was in progress</exception>
+        /// <exception cref="FileNotFoundException">Possibly the file/folder structure changed while the operation was in progress</exception>
         /// <returns></returns>
-        public object CopyTo(ISyncable item)
+        public object CopyTo(ISyncable dest)
         {
-            WindowsFolder subject = (WindowsFolder)item;
-            
-            Directory.SetCurrentDirectory(subject.rootPath);
-            List<string> fileList = new List<string>();
-            List<String> totalDirectoryListing = new List<string>();
-            List<String> workingList = new List<string>();
-            List<String> subFolders = new List<string>();
+            WindowsFolder destFolder;
 
-            
-            foreach (DirectoryInfo dir in nativeDirObj.GetDirectories())
+            if (dest is WindowsFolder)// && this.EntityPath().Equals(dest.EntityPath()))
             {
-                String dirName = dir.FullName;
-                workingList.Add(StripPrefix(rootPath, dirName));
-                
+                destFolder = (WindowsFolder)dest;
             }
-            foreach (FileInfo fi in nativeDirObj.GetFiles())
+            else
             {
-                string filename = fi.FullName;
-                fileList.Add(filename);
+                throw new InvalidPartnershipException();
             }
-            
-            do
+
+            string srcPath, destPath;
+            Queue<string> workingList = new Queue<string>(128);
+
+            srcPath = this.nativeDirObj.FullName;
+            destPath = destFolder.nativeDirObj.FullName;
+
+            if (destFolder.nativeDirObj.Exists) destFolder.nativeDirObj.Delete(true);
+
+            workingList.Enqueue(srcPath);
+
+            string curDir;
+            while (workingList.Count > 0)
             {
-                totalDirectoryListing.AddRange(workingList);
-                // for each level
-                foreach (string dir in workingList)
+                curDir = workingList.Dequeue();
+
+                foreach (string subFolder in Directory.GetDirectories(curDir))
                 {
-                    DirectoryInfo workingdir = new DirectoryInfo(Path.Combine(rootPath,dir));
-                    // add each subfolders into list
-                    foreach (DirectoryInfo subfolders in workingdir.GetDirectories())
-                    {
-                        subFolders.Add(StripPrefix(rootPath, subfolders.FullName));
-                        foreach (FileInfo fi in subfolders.GetFiles())
-                        {
-                            string filename = fi.FullName;
-                            fileList.Add(filename);
-                        }
-                        
-                    }
+                    workingList.Enqueue(subFolder);
                 }
-                workingList.AddRange(subFolders);
-                
-            } while (subFolders.Count != 0);
 
-            foreach (string dir in totalDirectoryListing)
-            {
-                Directory.CreateDirectory(Path.Combine(subject.rootPath, dir));
+                Directory.CreateDirectory(destPath + curDir.Substring(srcPath.Length));
+
+                foreach (string file in Directory.GetFiles(curDir))
+                {
+                    File.Copy(file, destPath + file.Substring(srcPath.Length));
+                }
             }
 
-            foreach (string file in fileList)
-            {
-                File.Copy(file, Path.Combine(subject.rootPath, StripPrefix(rootPath, file)));
-            }
             return Error.NoError;
         }
 
+        /// <summary>
+        /// Deletes this folder
+        /// </summary>
+        /// <returns></returns>
         public object Delete()
         {
             try
@@ -185,33 +125,85 @@ namespace SyncButler
                 return Error.NoPermission;
             }
             return Error.NoError;
-            
+
         }
 
         public object Merge(ISyncable item)
         {
-            
+
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Returns a checksum of the folder. Note that the folder checksum is
+        /// only done over the file/folder names contained within it. In other
+        /// words, if two folder checksum matches, it ONLY means that the number
+        /// of files/folder and file/folder names are the same.
+        /// </summary>
+        /// <exception cref="DirectoryNotFoundException">This folder doesn't exist</exception>
+        /// <returns>A long representing the checksum</returns>
         public override long Checksum()
         {
-            throw new NotImplementedException();
+            IRollingHash hashAlgorithm = new Adler32();
+            System.Text.UTF8Encoding UTF8 = new System.Text.UTF8Encoding();
+
+            FileSystemInfo[] children = this.nativeDirObj.GetFileSystemInfos();
+
+            if (children.Length == 0) return hashAlgorithm.Value;
+
+            string[] childrenNames = new string[children.Length];
+
+            for (int i = 0; i < children.Length; i++)
+            {
+                childrenNames[i] = children[i].Name;
+            }
+
+            Array.Sort(childrenNames);
+
+            foreach (string childName in childrenNames)
+            {
+                hashAlgorithm.Update(UTF8.GetBytes(("\\" + childName).ToCharArray()));
+            }
+
+            return hashAlgorithm.Value;
         }
 
-        public bool  HasChanged()
+        /// <summary>
+        /// Determine if the folder has been changed since it was last synced.
+        /// If no metadata is available, it assumes the folder has been changed.
+        /// </summary>
+        /// <exception cref="DirectoryNotFoundException">This folder doesn't exist</exception>
+        /// <returns></returns>
+        public bool HasChanged()
         {
- 	        throw new NotImplementedException();
+            Debug.Assert(parentPartnership != null, "parentPartnership not set! Cannot determine if this Folder has changed");
+
+            if (!parentPartnership.hashDictionary.ContainsKey(this.EntityPath())) return true;
+
+            return (parentPartnership.hashDictionary[this.EntityPath()] != this.Checksum());
         }
 
-        public bool  Equals(ISyncable item)
+        /// <summary>
+        /// Determine if the number and names of the files and folders contained within
+        /// this folders are the same.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public bool Equals(ISyncable item)
         {
- 	        throw new NotImplementedException();
+            if (!item.GetType().Name.Equals("WindowsFolder"))
+            {
+                return false;
+            }
+
+            WindowsFolder subject = (WindowsFolder)item;
+
+            return (subject.Checksum().Equals(Checksum()));
         }
 
         public string EntityPath()
         {
-            return "folder:\\" + this.relativePath + nativeDirObj.Name;
+            return "folder:\\\\" + this.relativePath;
         }
 
         /// <summary>
@@ -228,20 +220,19 @@ namespace SyncButler
         /// <param name="otherPair"></param>
         /// <exception cref="InvalidPartnershipException">Tried to sync a windows folder with something else</exception>
         /// <exception cref="UnauthorizedAccessException">Could not read one of the files/folders because of security permissions</exception>
-        /// <exception cref="UnauthorizedAccessException">Path is read-only or is a directory. (Probably while generating a file checksum)</exception>
         /// <exception cref="DirectoryNotFoundException">The specified path is invalid, such as being on an unmapped drive. (Probably while generating a file checksum)</exception>
         /// <exception cref="IOException">The file is already open. (Probably while generating a file checksum)</exception>
         /// <exception cref="NotSupportedException">The current stream does not support reading. (Probably while generating a file checksum)</exception>
         /// <exception cref="ObjectDisposedException">The current stream is closed. (Probably while generating a file checksum)</exception>
         /// <exception cref="PathTooLongException">The directory depth is too long!</exception>
         /// <returns>A list of conflicts detected</returns>
-        public List<Conflict> Sync(ISyncable otherPair) 
+        public List<Conflict> Sync(ISyncable otherPair)
         {
             WindowsFolder partner;
 
             System.Diagnostics.Debug.Assert(parentPartnership != null, "The parent partnership has not been set; cannot sync");
 
-            if (otherPair is WindowsFolder && this.EntityPath().Equals(otherPair.EntityPath()))
+            if (otherPair is WindowsFolder)// && this.EntityPath().Equals(otherPair.EntityPath()))
             {
                 partner = (WindowsFolder)otherPair;
             }
@@ -265,8 +256,7 @@ namespace SyncButler
             while (workingList.Count > 0)
             {
                 curDir = workingList.Dequeue();
-
-                //Console.WriteLine("[D] " + curDir);
+                //Console.WriteLine("Checking: " + curDir);
 
                 // Check if there are folders missing on the right. Otherwise, add it to the queue
                 foreach (string subFolderLeft in Directory.GetDirectories(leftPath + curDir))
@@ -301,11 +291,11 @@ namespace SyncButler
 
                 foreach (string subFileLeft in Directory.GetFiles(leftPath + curDir))
                 {
-                    string curFileLeft = subFileLeft.Substring(leftPath.Length) + "\\";
+                    string curFileLeft = subFileLeft.Substring(leftPath.Length);
 
                     if (File.Exists(rightPath + curFileLeft))
                     {   // File exists on both sides. Check if they're the same
-                        WindowsFile leftFile = new WindowsFile(leftPath, curFileLeft, this.parentPartnership);
+                        WindowsFile leftFile = new WindowsFile(leftPath, subFileLeft, this.parentPartnership);
                         WindowsFile rightFile = new WindowsFile(rightPath, rightPath + curFileLeft, this.parentPartnership);
 
                         conflicts.AddRange(leftFile.Sync(rightFile));
@@ -322,8 +312,8 @@ namespace SyncButler
 
                 foreach (string subFileRight in Directory.GetFiles(rightPath + curDir))
                 {
-                    string curFileRight = subFileRight.Substring(rightPath.Length) + "\\";
-
+                    string curFileRight = subFileRight.Substring(rightPath.Length);
+                    
                     if (!File.Exists(leftPath + curFileRight))
                     {   // File only exists on the right
                         conflicts.Add(new Conflict(
@@ -336,6 +326,6 @@ namespace SyncButler
             }
 
             return conflicts;
-        }        
+        }
     }
 }
