@@ -28,3 +28,6 @@ D:\University\CS3215 - Software Engineering Project\SyncButler\SyncButler\bin\De
 D:\University\CS3215 - Software Engineering Project\SyncButler\SyncButler\obj\Debug\ResolveAssemblyReference.cache
 D:\University\CS3215 - Software Engineering Project\SyncButler\SyncButler\obj\Debug\SyncButler.dll
 D:\University\CS3215 - Software Engineering Project\SyncButler\SyncButler\obj\Debug\SyncButler.pdb
+C:\Documents and Settings\tan-ce.EW.000\Desktop\CS3215 Project Source\SyncButler\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\tan-ce.EW.000\Desktop\CS3215 Project Source\SyncButler\obj\Debug\SyncButler.dll
+C:\Documents and Settings\tan-ce.EW.000\Desktop\CS3215 Project Source\SyncButler\obj\Debug\SyncButler.pdb

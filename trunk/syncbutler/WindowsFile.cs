@@ -15,6 +15,7 @@ namespace SyncButler
     public class WindowsFile : WindowsFileSystem, ISyncable
     {
         protected FileInfo nativeFileObj;
+        protected SyncableStatusMonitor statusMonitor = null;
 
         /// <summary>
         /// Constructor that takes in two parameters, a root path and the full path.
@@ -42,6 +43,11 @@ namespace SyncButler
             this.nativeFileSystemObj = this.nativeFileObj;
             this.rootPath = rootPath;
             this.parentPartnership = parentPartnership;
+        }
+
+        public void SetStatusMonitor(SyncableStatusMonitor statusMonitor)
+        {
+            this.statusMonitor = statusMonitor;
         }
 
         /// <summary>
@@ -252,6 +258,9 @@ namespace SyncButler
             WindowsFile partner;
 
             Debug.Assert(parentPartnership != null, "The parent partnership has not been set; cannot sync");
+
+            // Temporary -- give basic functionality first.
+            statusMonitor(new SyncableStatus(this.EntityPath(), 0));
 
             if (otherPair is WindowsFile)// && this.EntityPath().Equals(otherPair.EntityPath()))
             {

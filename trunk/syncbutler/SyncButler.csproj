@@ -48,6 +48,7 @@
     <Compile Include="ProgramEnvironment\PartnershipSection.cs" />
     <Compile Include="ProgramEnvironment\SettingsConfigElement.cs" />
     <Compile Include="ProgramEnvironment\SettingsSection.cs" />
+    <Compile Include="SyncableStatus.cs" />
     <Compile Include="SystemEnvironment\StorageDevices.cs" />
     <Compile Include="WindowsFileSystem.cs" />
     <Compile Include="Conflict.cs" />

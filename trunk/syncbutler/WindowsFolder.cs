@@ -17,6 +17,7 @@ namespace SyncButler
     {
         public enum Error { IsWorkingFolder, NoPermission, NoError };
         protected DirectoryInfo nativeDirObj;
+        protected SyncableStatusMonitor statusMonitor = null;
 
         /// <summary>
         /// Constructor that takes in two parameters, a root path and the full path.
@@ -50,6 +51,11 @@ namespace SyncButler
             this.nativeFileSystemObj = this.nativeDirObj;
             this.rootPath = rootPath;
             this.parentPartnership = parentPartnership;
+        }
+
+        public void SetStatusMonitor(SyncableStatusMonitor statusMonitor)
+        {
+            this.statusMonitor = statusMonitor;
         }
 
         /// <summary>
@@ -256,7 +262,8 @@ namespace SyncButler
             while (workingList.Count > 0)
             {
                 curDir = workingList.Dequeue();
-                //Console.WriteLine("Checking: " + curDir);
+                // Temporary -- give basic functionality first.
+                statusMonitor(new SyncableStatus("folder:\\\\" + curDir, 0));
 
                 // Check if there are folders missing on the right. Otherwise, add it to the queue
                 foreach (string subFolderLeft in Directory.GetDirectories(leftPath + curDir))
@@ -298,6 +305,7 @@ namespace SyncButler
                         WindowsFile leftFile = new WindowsFile(leftPath, subFileLeft, this.parentPartnership);
                         WindowsFile rightFile = new WindowsFile(rightPath, rightPath + curFileLeft, this.parentPartnership);
 
+                        leftFile.SetStatusMonitor(statusMonitor);
                         conflicts.AddRange(leftFile.Sync(rightFile));
                     }
                     else

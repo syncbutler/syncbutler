@@ -5,11 +5,25 @@ using System.Text;
 namespace SyncButler
 {
     /// <summary>
+    /// A callback to monitor the progress of the Syncing.
+    /// 
+    /// </summary>
+    /// <param name="status">Status of the current Sync operation</param>
+    /// <returns>False to abort</returns>
+    public delegate Boolean SyncableStatusMonitor(SyncableStatus status);
+
+    /// <summary>
     /// Interface containing the methods necessary for items to be syncable.
     /// All items that can be synchronised must implement this interface.
     /// </summary>
     public interface ISyncable
     {
+        /// <summary>
+        /// Used to defines a callback which may be used to monitor the progress of a Sync
+        /// </summary>
+        /// <param name="monitor"></param>
+        void SetStatusMonitor(SyncableStatusMonitor monitor);
+
         /// <summary>
         /// Sets a reference to the parent Partnership object.
         /// </summary>
