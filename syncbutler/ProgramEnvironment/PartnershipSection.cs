@@ -9,18 +9,18 @@ namespace SyncButler.ProgramEnvironment
     {
         /// <summary>
         /// This sectional attributes contains all the states related to
-        /// Partnerships
+        /// Partnerships (particularly holding on to a list of them)
         /// </summary>
-        [ConfigurationProperty("partnership")]
-        public PartnershipConfigElement Partnership
+        [ConfigurationProperty("partnershipList")]
+        public PartnershipListConfigCollection Partnership
         {
             get
             {
-                return ( (PartnershipConfigElement)this["partnership"] );
+                return ((PartnershipListConfigCollection)this["partnershipList"]);
             }
             set
             {
-                this["partnership"] = value;
+                this["partnershipList"] = value;
             }
         }
     }

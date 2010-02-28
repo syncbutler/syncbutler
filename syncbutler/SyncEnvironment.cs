@@ -12,9 +12,15 @@ namespace SyncButler
     /// </summary>
     public class SyncEnvironment
     {
-        //List of persistant attributes
+        /// <param name="storedSettings">This is a settings container that will be saved</param>
+        /// <param name="settingName">This is an XML description require to write settings to the real XML page</param>
+        /// <param name="storedPartnerships">This is a partnership container that will be saved</param>
+        /// <param name="partnershipName">This is an XML description require to write partnership to the real XML page</param>
+
+        //List of persistence attributes
         private List<Partnership> partnershipList;
         private bool allowAutoSyncForConflictFreeTasks;
+        private bool firstRunComplete;
         private System.Configuration.Configuration config;
         private string settingName = "systemSettings";
         private string partnershipName = "partnership";
@@ -22,11 +28,14 @@ namespace SyncButler
         private PartnershipSection storedPartnerships;
         
         /// <summary>
-        /// Constructor to facilitate testing since exception is thrown when calling InitialEnv()
+        /// This constructor will automatically restore a previous sessions or
+        /// create new ones
         /// </summary>
         public SyncEnvironment()
         {
-            partnershipList = new List<Partnership>();
+            firstRunComplete = false;
+            IntialEnv();
+            //partnershipList = new List<Partnership>();
         }
 
         /// <summary>
@@ -96,7 +105,7 @@ namespace SyncButler
         public void StoreEnv()
         {
             //Update the settings in the config file
-            storedPartnerships.Partnership.PartnershipList = partnershipList;
+            ConvertPartnershipList2XML();
             storedSettings.SystemSettings.AllowAutoSyncForConflictFreeTasks =
                 allowAutoSyncForConflictFreeTasks;
 
@@ -121,7 +130,7 @@ namespace SyncButler
                 throw new ApplicationException("Could not load Stored Partnership List");
 
             //This restores the partnership list
-            partnershipList = storedPartnerships.Partnership.PartnershipList;
+            ConvertXML2PartnershipList();
 
             //This one restores general program settings
             allowAutoSyncForConflictFreeTasks =
@@ -132,16 +141,15 @@ namespace SyncButler
         /// If the settings files do not exist. A basic framework is created and stored. This
         /// will store the settings of a previous interations.
         /// </summary>
-        /// <param name="storedSettings">This is a settings container that will be saved</param>
-        /// <param name="settingName">This is an XML description require to write settings to the real XML page</param>
-        /// <param name="storedPartnerships">This is a partnership container that will be saved</param>
-        /// <param name="partnershipName">This is an XML description require to write partnership to the real XML page</param>
         public void CreateEnv()
         {
+            //Create the list of partnerships
+            partnershipList = new List<Partnership>();
+
             // Add in default settings
             storedSettings.SystemSettings.AllowAutoSyncForConflictFreeTasks = true;
             storedSettings.SystemSettings.FirstRunComplete = true;
-            storedPartnerships.Partnership.PartnershipList = new List<Partnership>();
+            ConvertPartnershipList2XML();
 
             // Add the custom sections to the config
             config.Sections.Add(settingName, storedSettings);
@@ -178,8 +186,6 @@ namespace SyncButler
 
             // Prepare to read the custom sections (Pre declared needed for valid settings
             // file check. (Hint, the first run complete is hidden in the xml file)
-
-            // Warn that it already exist, overwriting, might allow for reuse!
             if (config != null)
             {
                 //Console.WriteLine(
@@ -187,23 +193,27 @@ namespace SyncButler
 
                 storedSettings =
                     (SettingsSection)config.GetSection(settingName);
-
                 if (storedSettings == null)
                 {
                     //Console.WriteLine(
-                    //    "A invliad settings file was found, recreating one");
+                    //    "A invalid settings file was found, recreating one");
                     storedSettings = new SettingsSection();
                 }
 
                 //Not necessary an error, we will just create the .settings file
                 //throw new ApplicationException("Could not load Stored Settings");
 
-                if(storedSettings.SystemSettings.FirstRunComplete)
+                if (storedSettings.SystemSettings.FirstRunComplete)
+                {
                     createSettings = false;
+                    firstRunComplete = true;
+                    //It remains as false for the rest of the execution of the program
+                    //during the real run
+                }
 
                 //else
                 //Console.WriteLine(
-                //    "A invliad settings file was found, recreating one");
+                //    "A invalid settings file was found, recreating one");
             }
 
             storedPartnerships = new PartnershipSection();
@@ -227,6 +237,78 @@ namespace SyncButler
             string configFilename = string.Concat(appName.Substring(0, extensionPoint),
                                         ".settings");
             return configFilename;
+        }
+
+        /// <summary>
+        /// Rewrap the list of partnership in XML friendly format
+        /// </summary>
+        private void ConvertPartnershipList2XML()
+        {
+            //Clean up the database first
+            storedPartnerships.Partnership.Clear();
+
+            //Convert to store in XML format
+            foreach(Partnership element in partnershipList)
+            {
+                storedPartnerships.Partnership.Add(element.leftFullPath, element.rightFullPath);
+            }
+        }
+
+        /// <summary>
+        /// Unwrap the list of partnership from a XML friendly format
+        /// </summary>
+        private void ConvertXML2PartnershipList()
+        {
+            //Prepare the partnership list
+            partnershipList = new List<Partnership>();
+
+            //Convert to store in XML format
+            foreach (PartnershipConfigElement element in storedPartnerships.Partnership)
+            {
+                Partnership newElement = CreatePartnership(element.LeftPath, element.RightPath);
+                partnershipList.Add(newElement);
+            }   
+        }
+
+        /// <summary>
+        /// This will determine whether the program is being executed for the
+        /// first time or otherwise
+        /// </summary>
+        /// <returns></returns>
+        public bool isFirstRunComplete()
+        {
+            return firstRunComplete;
+        }
+
+        /// <summary>
+        /// Creates a new Partnership based on 2 full paths.
+        /// </summary>
+        /// <param name="leftPath">Full Path to the left of a partnership</param>
+        /// <param name="rightPath">Full Path to the right of a partnership</param>        
+        private Partnership CreatePartnership(String leftPath, String rightPath)
+        {
+            FileInfo leftInfo = new FileInfo(leftPath);
+            FileInfo rightInfo = new FileInfo(rightPath);
+            bool isFolderLeft = leftInfo.Attributes.ToString().Equals("Directory");
+            bool isFolderRight = rightInfo.Attributes.ToString().Equals("Directory");
+            if (isFolderLeft && isFolderRight)
+            {
+                ISyncable left = new WindowsFolder(leftPath, leftPath);
+                ISyncable right = new WindowsFolder(rightPath, rightPath);
+                Partnership partner = new Partnership(leftPath, left, rightPath, right, null);
+                return partner;
+            }
+            else if (isFolderLeft || isFolderRight)
+            {
+                throw new ArgumentException("Folder cannot sync with a non-folder");
+            }
+            else
+            {
+                ISyncable left = new WindowsFile(leftInfo.DirectoryName, leftPath);
+                ISyncable right = new WindowsFile(rightInfo.DirectoryName, rightPath);
+                Partnership partner = new Partnership(leftPath, left, rightPath, right, null);
+                return partner;
+            }
         }
 
         //There are 1001 options to change, need to revise this

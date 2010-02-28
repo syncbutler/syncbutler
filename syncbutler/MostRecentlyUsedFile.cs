@@ -133,7 +133,7 @@ namespace SyncButler
 
             if (value == null)
                 throw new NullReferenceException();
-
+                
             byte[] data = (byte[])(value);
 
             IntPtr p = Marshal.AllocHGlobal(data.Length);

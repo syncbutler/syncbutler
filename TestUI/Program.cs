@@ -11,6 +11,7 @@ namespace TestUI
     class Program
     {
         static Controller controller;
+
         public static void Main(String[] args)
         {
             try
@@ -18,20 +19,29 @@ namespace TestUI
                 controller = new Controller();
                 controller.AddPartnership(@"C:\test", @"D:\test");
                 PrintMRU();
-                controller.AddPartnership(@"C:\test", @"D:\test\tesets");
+                
                 Console.Out.WriteLine("Before");
                 PrintPartnerships();
+                controller.AddPartnership(@"C:\test", @"D:\test\test");
+
                 Console.Out.WriteLine("After");
                 controller.DeletePartnership(0);
                 PrintPartnerships();
-                Thread updateThread = new Thread(new ThreadStart(updateMonitor));
-                updateThread.Start();
+
+                Console.WriteLine("Had the program ran before? : " + controller.programRanBefore());
+
+                //Thread updateThread = new Thread(new ThreadStart(updateMonitor));
+                //updateThread.Start();
+
+                //Write code for shutting down
+                controller.Shutdown();
             }
             catch (Exception ex)
             {
                 Console.Out.WriteLine(ex);
             }
         }
+
         private static void PrintMRU()
         {
             foreach (KeyValuePair<String,String> kvp in controller.GetMonitoredFiles())
