@@ -17,6 +17,7 @@ namespace TestUI
             try
             {
                 controller = new Controller();
+                MainMenu();
                 controller.AddPartnership(@"C:\test", @"D:\test");
                 PrintMRU();
                 
@@ -40,6 +41,52 @@ namespace TestUI
             {
                 Console.Out.WriteLine(ex);
             }
+        }
+
+        private static void MainMenu()
+        {
+            Console.Out.WriteLine("1) Create a Partnership");
+            Console.Out.WriteLine("2) View Partnerships");
+            Console.Out.WriteLine("3) Show Recent Files From Registry Entries");
+            Console.Out.WriteLine("------------------------------------------");
+            Console.Out.WriteLine("Select an action: ");
+
+            bool validSelection = false;
+            while (!validSelection)
+            {
+                String action = Console.In.ReadLine().Trim();
+                switch (action)
+                {
+                    case "1":
+                        CreatePartnershipMenu();
+                        validSelection = true;
+                        break;
+                    case "2":
+                        PrintPartnerships();
+                        validSelection = true;
+                        break;
+                    case "3":
+                        PrintMRU();
+                        validSelection = true;
+                        break;
+                    default:
+                        Console.Out.WriteLine("Invalid Command");
+                        break;
+                }
+
+            }
+        }
+
+        private static void CreatePartnershipMenu()
+        {
+            Console.Out.WriteLine("Creating a Partnership");
+            Console.Out.WriteLine("Enter Path to 1st Partner:");
+            String leftPath = Console.In.ReadLine();
+            Console.Out.WriteLine("Enter Path to 2nd Partner:");
+            String rightPath = Console.In.ReadLine();
+            controller.AddPartnership(leftPath, rightPath);
+            Console.Out.WriteLine("Partnership Created!");
+
         }
 
         private static void PrintMRU()
