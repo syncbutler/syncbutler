@@ -92,7 +92,6 @@
     <Resource Include="Images\bullet_arrow_down.png" />
     <Resource Include="Images\bullet_arrow_up.png" />
     <Resource Include="Images\Computer.png" />
-    <Resource Include="Images\Defragmentation.png" />
     <Resource Include="Images\diskdrive.png" />
     <Resource Include="Images\Doc.png" />
     <Resource Include="Images\Folder.png" />
@@ -101,13 +100,13 @@
     <Resource Include="Images\logowTransparency.png" />
     <Resource Include="Images\Mac-Display.png" />
     <Resource Include="Images\Misc.png" />
+    <Resource Include="Images\Refresh.png" />
     <Resource Include="Images\Search.png" />
     <Resource Include="Images\Settings.png" />
     <Resource Include="Images\Symbol-Check.png" />
     <Resource Include="Images\Synchonize.png" />
     <Resource Include="Images\treefolder.png" />
     <Resource Include="Images\Usbstick.png" />
-    <Resource Include="Images\WLM.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

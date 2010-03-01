@@ -300,11 +300,11 @@
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="grid" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
 						</ObjectAnimationUsingKeyFrames>
-						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="SelectPartnership" Storyboard.TargetProperty="(UIElement.Visibility)">
-							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="ViewPartnership" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
 						</ObjectAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="SelectPartnership" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-468"/>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="ViewPartnership" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-6"/>
 						</DoubleAnimationUsingKeyFrames>
 						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="listBox" Storyboard.TargetProperty="(UIElement.Opacity)">
 							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
@@ -327,6 +327,12 @@
 						</ObjectAnimationUsingKeyFrames>
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="grid" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="ViewPartnership" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-12"/>
+						</DoubleAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="CreatePartnership2" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
 						</ObjectAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
@@ -366,45 +372,12 @@
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="CreatePartnership3" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
 						</ObjectAnimationUsingKeyFrames>
-						<BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="destinationTextBox1" Storyboard.TargetProperty="(UIElement.IsEnabled)">
-							<DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="False"/>
-						</BooleanAnimationUsingKeyFrames>
-						<BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="sourceTextBox1" Storyboard.TargetProperty="(UIElement.IsEnabled)">
-							<DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="False"/>
-						</BooleanAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="sourceTextBox1" Storyboard.TargetProperty="(FrameworkElement.Height)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="25"/>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="partnershipNameTextBox" Storyboard.TargetProperty="(FrameworkElement.Height)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="21.96"/>
 						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-42"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="sourceTextBox1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-42"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="24"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="destinationTextBox1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="24"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-248"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="destinationTextBox1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-111.5"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="sourceTextBox1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="2.379"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="sourceTextBox1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="136.5"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="destinationTextBox1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="2.379"/>
-						</DoubleAnimationUsingKeyFrames>
-						<BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="button" Storyboard.TargetProperty="(UIElement.IsEnabled)">
-							<DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="False"/>
-						</BooleanAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="CreatePartnership2" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
 				<VisualState x:Name="CreatePartnershipDone1">
@@ -436,6 +409,19 @@
 						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="image" Storyboard.TargetProperty="(UIElement.Opacity)">
 							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.595"/>
 						</DoubleAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="CreatePartnershipDone" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="6"/>
+						</DoubleAnimationUsingKeyFrames>
+					</Storyboard>
+				</VisualState>
+				<VisualState x:Name="ViewPartnership1">
+					<Storyboard>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="HomeWindow" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="ViewPartnership" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
 			</VisualStateGroup>
@@ -461,7 +447,7 @@
 					</LinearGradientBrush>
 				</Rectangle.Fill>
 			</Rectangle>
-			<Button x:Name="ViewPartnerships" HorizontalAlignment="Right" Margin="0,260.231,171.5,-22" Style="{DynamicResource ViewPartnershipButton}" Width="167" Content=""/>
+			<Button x:Name="ViewPartnerships" HorizontalAlignment="Right" Margin="0,260.231,171.5,-22" Style="{DynamicResource ViewPartnershipButton}" Width="167" Content="" Click="goToViewPartnerships"/>
 			<Rectangle x:Name="bigButton_Copy3" Margin="0,0,2.5,2" VerticalAlignment="Bottom" Height="182.269" Stroke="Black" Cursor="Hand" HorizontalAlignment="Right" Width="169.25" d:LayoutOverrides="VerticalAlignment">
 				<Rectangle.Fill>
 					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" MappingMode="RelativeToBoundingBox">
@@ -477,18 +463,19 @@
 			<Button x:Name="CreatePartnershipButton" HorizontalAlignment="Left" Margin="7,0,0,0.5" Style="{DynamicResource CreatePartnersButton}" VerticalAlignment="Bottom" Width="164.483" Height="183.269" Content="" Cursor="Hand" Click="goToCreatePartnership"/>
 		</Grid>
 		<Grid x:Name="grid" Margin="-14.5,0,-36.193,0" Visibility="Hidden" >
+			<Rectangle x:Name="background_Copy1" RadiusX="1" RadiusY="2" Margin="0,0,37,0" VerticalAlignment="Top" Height="448" Cursor="None">
+				<Rectangle.Fill>
+					<RadialGradientBrush GradientOrigin="0.265,0.184" RadiusX="1.237" RadiusY="1.237">
+						<GradientStop Color="Black" Offset="1"/>
+						<GradientStop Color="White"/>
+						<GradientStop Color="#FFA3A3A3" Offset="1"/>
+						<GradientStop Color="#FFA1A1A1" Offset="1"/>
+						<GradientStop Color="White" Offset="0.378"/>
+					</RadialGradientBrush>
+				</Rectangle.Fill>
+			</Rectangle>
+			<Image x:Name="image1" Margin="184.36,116.094,50.666,8" Source="Images\logo.png" Stretch="Fill" Opacity="0.04"/>
 			<Grid x:Name="CreatePartnership" Margin="0,0,38.5,0" VerticalAlignment="Bottom" Height="444" d:LayoutOverrides="GridBox" Loaded="TreeWindow_Loaded" >
-				<Rectangle x:Name="background_Copy1" RadiusX="1" RadiusY="2" Margin="0,0,-1.5,0" VerticalAlignment="Top" Height="448" Cursor="None">
-					<Rectangle.Fill>
-						<RadialGradientBrush GradientOrigin="0.265,0.184" RadiusX="1.237" RadiusY="1.237">
-							<GradientStop Color="Black" Offset="1"/>
-							<GradientStop Color="White"/>
-							<GradientStop Color="#FFA3A3A3" Offset="1"/>
-							<GradientStop Color="#FFA1A1A1" Offset="1"/>
-							<GradientStop Color="White" Offset="0.378"/>
-						</RadialGradientBrush>
-					</Rectangle.Fill>
-				</Rectangle>
 				<TextBlock Margin="0,25,36.447,0" FontFamily="Arial" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" Text="Creating a Sync Partnership" VerticalAlignment="Top" Height="83.5" HorizontalAlignment="Right" Width="202.72"/>
 				<TextBlock Margin="0,109.5,55.947,0" FontSize="16" TextWrapping="Wrap" Text="Please select a folder on this computer" HorizontalAlignment="Right" Width="183.22" d:LayoutOverrides="HorizontalAlignment" VerticalAlignment="Top" Height="63.5" FontWeight="Bold" FontStyle="Italic"/>
 				<TextBlock Margin="0,181.5,71.947,137.5" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="167.22" d:LayoutOverrides="HorizontalAlignment"><Run Text="This folder will be 1 of 2  folders in a syncing partnership."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="Any updates will be reflected on the other folder in the partnership"/></TextBlock>
@@ -497,18 +484,7 @@
 				<TextBlock Margin="0,0,99.527,14.5" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="85.64" VerticalAlignment="Bottom" Height="25" Text="Step 1 of 3" d:LayoutOverrides="HorizontalAlignment"/>
 				<Button x:Name="toPartnershipDestButton" HorizontalAlignment="Right" Margin="0,0,31.947,19" VerticalAlignment="Bottom" Width="69" Height="23" Content="Next&gt;" RenderTransformOrigin="0.79,1.043" Click="goToPartnershipDest" />
 			</Grid>
-			<Grid x:Name="CreatePartnership2" Margin="0,0,38.5,0" VerticalAlignment="Bottom" Height="444" d:LayoutOverrides="GridBox" Loaded="TreeWindow_Loaded" Visibility="Hidden" >
-				<Rectangle x:Name="background_Copy3" RadiusX="1" RadiusY="2" Margin="0,0,-1.5,0" VerticalAlignment="Top" Height="448" Cursor="None">
-					<Rectangle.Fill>
-						<RadialGradientBrush GradientOrigin="0.265,0.184" RadiusX="1.237" RadiusY="1.237">
-							<GradientStop Color="Black" Offset="1"/>
-							<GradientStop Color="White"/>
-							<GradientStop Color="#FFA3A3A3" Offset="1"/>
-							<GradientStop Color="#FFA1A1A1" Offset="1"/>
-							<GradientStop Color="White" Offset="0.378"/>
-						</RadialGradientBrush>
-					</Rectangle.Fill>
-				</Rectangle>
+			<Grid x:Name="CreatePartnership2" Margin="0,0,38.5,0" VerticalAlignment="Bottom" Height="444" d:LayoutOverrides="GridBox" Loaded="TreeWindow_Loaded" >
 				<TextBlock Margin="0,25,36.447,0" FontFamily="Arial" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" Text="Creating a Sync Partnership" VerticalAlignment="Top" Height="83.5" HorizontalAlignment="Right" Width="202.72"/>
 				<TextBlock Margin="0,109.5,55.947,0" FontSize="16" TextWrapping="Wrap" Text="Please select another folder on this computer" HorizontalAlignment="Right" Width="183.22" d:LayoutOverrides="HorizontalAlignment" VerticalAlignment="Top" Height="63.5" FontWeight="Bold" FontStyle="Italic"/>
 				<TextBlock Margin="0,181.5,71.947,137.5" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="167.22" d:LayoutOverrides="HorizontalAlignment"><Run Text="This folder will be 1 of 2  folders in a syncing partnership."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="Any updates will be reflected on the other folder in the partnership"/></TextBlock>
@@ -519,21 +495,7 @@
 				<Button HorizontalAlignment="Right" Margin="0,0,109.527,19" VerticalAlignment="Bottom" Width="64.253" Height="23" Content="&lt;Back" Click="goBackToCreatePartnershipSrc"/>
 			</Grid>
 			<Grid x:Name="CreatePartnership3" Margin="0,0,38.5,0" VerticalAlignment="Bottom" Height="444" d:LayoutOverrides="GridBox" Visibility="Hidden">
-				<Rectangle x:Name="background_Copy2" RadiusX="1" RadiusY="2" Margin="0,34,-1.5,0" VerticalAlignment="Top" Height="448" Cursor="None">
-					<Rectangle.Fill>
-						<RadialGradientBrush GradientOrigin="0.265,0.184" RadiusX="1.237" RadiusY="1.237">
-							<GradientStop Color="Black" Offset="1"/>
-							<GradientStop Color="White"/>
-							<GradientStop Color="#FFA3A3A3" Offset="1"/>
-							<GradientStop Color="#FFA1A1A1" Offset="1"/>
-							<GradientStop Color="White" Offset="0.378"/>
-						</RadialGradientBrush>
-					</Rectangle.Fill>
-				</Rectangle>
-				<TextBlock Margin="111.5,53,31.947,0" VerticalAlignment="Top" Height="61.5" FontFamily="Arial" FontSize="24" FontWeight="Bold" Text="Create Partnership ( Step 3 of 3 )" TextWrapping="Wrap"/>
-				<TextBlock Margin="113,84.5,139.307,0" VerticalAlignment="Top" Height="54" FontSize="13.333" TextWrapping="Wrap" Text="Please give the partnership a name"/>
-				<Image HorizontalAlignment="Left" Margin="18.499,33.333,0,0" VerticalAlignment="Top" Width="90" Height="90" Opacity="0.79" Source="Images\Defragmentation.png" Stretch="Fill"/>
-				<TextBlock x:Name="textBlock" Margin="30.499,0,0,126" FontSize="14.667" FontWeight="Bold" Text="Source Folder" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="28" HorizontalAlignment="Left" Width="222.08" RenderTransformOrigin="0.5,0.5">
+				<TextBlock x:Name="textBlock" Margin="30.499,35,0,0" FontSize="14.667" FontWeight="Bold" Text="Source Folder" TextWrapping="Wrap" HorizontalAlignment="Left" Width="222.08" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" Height="28">
 					<TextBlock.RenderTransform>
 						<TransformGroup>
 							<ScaleTransform/>
@@ -543,7 +505,7 @@
 						</TransformGroup>
 					</TextBlock.RenderTransform>
 				</TextBlock>
-				<TextBox x:Name="sourceTextBox1" Margin="30.499,0,0,111" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="25" HorizontalAlignment="Left" Width="198" RenderTransformOrigin="0.5,0.5">
+				<TextBox x:Name="sourceTextBox1" Margin="30.499,53.333,0,0" TextWrapping="Wrap" HorizontalAlignment="Left" Width="198" RenderTransformOrigin="0.5,0.5" Height="81" VerticalAlignment="Top" IsEnabled="False">
 					<TextBox.RenderTransform>
 						<TransformGroup>
 							<ScaleTransform/>
@@ -553,7 +515,8 @@
 						</TransformGroup>
 					</TextBox.RenderTransform>
 				</TextBox>
-				<TextBlock x:Name="textBlock1" Margin="0,0,14.947,126" FontSize="14.667" FontWeight="Bold" Text="Destination Folder" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="28" HorizontalAlignment="Right" Width="222.08" RenderTransformOrigin="0.5,0.5">
+				<TextBlock Margin="0,25,36.447,0" FontFamily="Arial" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" Text="Creating a Sync Partnership" VerticalAlignment="Top" Height="83.5" HorizontalAlignment="Right" Width="202.72"/>
+				<TextBlock x:Name="textBlock1" Margin="37,0,256.447,183" FontSize="14.667" FontWeight="Bold" Text="Destination Folder" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="28" RenderTransformOrigin="0.5,0.5">
 					<TextBlock.RenderTransform>
 						<TransformGroup>
 							<ScaleTransform/>
@@ -563,7 +526,7 @@
 						</TransformGroup>
 					</TextBlock.RenderTransform>
 				</TextBlock>
-				<TextBox x:Name="destinationTextBox1" Margin="0,0,38.987,111" VerticalAlignment="Bottom" Height="25" TextWrapping="Wrap" Width="198" HorizontalAlignment="Right" d:LayoutOverrides="Width" RenderTransformOrigin="0.5,0.5">
+				<TextBox x:Name="destinationTextBox1" Margin="30.499,0,0,112" VerticalAlignment="Bottom" Height="81" TextWrapping="Wrap" Width="198" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" IsEnabled="False">
 					<TextBox.RenderTransform>
 						<TransformGroup>
 							<ScaleTransform/>
@@ -573,14 +536,25 @@
 						</TransformGroup>
 					</TextBox.RenderTransform>
 				</TextBox>
-				<Button x:Name="button" Margin="233.58,0,188.947,18" VerticalAlignment="Bottom" Height="23" Content="Advanced..."/>
+				<Button x:Name="button" Margin="233.58,0,188.947,18" VerticalAlignment="Bottom" Height="23" Content="Advanced..." IsEnabled="False"/>
 				<Button HorizontalAlignment="Right" Margin="0,0,31.947,18" VerticalAlignment="Bottom" Width="69" Height="23" Content="Create!" RenderTransformOrigin="0.79,1.043" Click="createPartnership"/>
-				<TextBlock Margin="187.5,176.5,105.947,0" FontSize="14.667" FontWeight="Bold" Text="Partnership Name" TextWrapping="Wrap" VerticalAlignment="Top" Height="28"/>
-				<TextBox x:Name="partnershipNameTextBox" Margin="120.5,195.5,121.947,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="25"/>
+				<TextBlock Margin="30,0,0,68.5" FontSize="14.667" FontWeight="Bold" Text="Partnership Name" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="28" HorizontalAlignment="Left" Width="222.08"/>
+				<TextBox x:Name="partnershipNameTextBox" Margin="30.5,0,0,52" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="25" HorizontalAlignment="Left" Width="166.58"/>
 				<Button HorizontalAlignment="Right" Margin="0,0,111.027,18" VerticalAlignment="Bottom" Width="70.92" Height="23" Content="&lt;Back" Click="goBackToCreatePartnershipDes"/>
 				<TextBlock Margin="0,0,272.027,13" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="85.64" VerticalAlignment="Bottom" Height="25" Text="Step 3 of 3"/>
+				<TextBlock Margin="0,109.5,55.947,0" FontSize="16" TextWrapping="Wrap" Text="Please give the partnership a name and review your selection" HorizontalAlignment="Right" Width="183.22" VerticalAlignment="Top" Height="63.5" FontWeight="Bold" FontStyle="Italic" d:LayoutOverrides="HorizontalAlignment"/>
+				<TextBlock Margin="0,199.5,71.947,119.5" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="167.22" d:LayoutOverrides="HorizontalAlignment"><Run Text="The name will allow you to identify your partnerships with ease."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="Remember, Any updates will be reflected on the other folder in partnership"/></TextBlock>
+				<Image HorizontalAlignment="Left" Margin="96.5,163.54,0,0" VerticalAlignment="Top" Width="56.5" Height="56.5" Source="Images\Refresh.png" Stretch="Fill"/>
 			</Grid>
-			<Grid x:Name="CreatePartnershipDone" Margin="0,0,38.5,0" VerticalAlignment="Bottom" Height="444" Visibility="Hidden" d:LayoutOverrides="GridBox">
+			<Grid x:Name="CreatePartnershipDone" Margin="0,0,38.5,0" VerticalAlignment="Bottom" Height="444" Visibility="Hidden" d:LayoutOverrides="GridBox" RenderTransformOrigin="0.5,0.5">
+				<Grid.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Grid.RenderTransform>
 				<Rectangle x:Name="background_Copy4" RadiusX="1" RadiusY="2" Margin="0,0,-1.5,0" VerticalAlignment="Top" Height="448" Cursor="None">
 					<Rectangle.Fill>
 						<RadialGradientBrush GradientOrigin="0.265,0.184" RadiusX="1.237" RadiusY="1.237">
@@ -613,8 +587,8 @@
 				<TextBlock x:Name="destinationFolderPath" Margin="30.499,0,0,93" FontSize="13.333" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="28" HorizontalAlignment="Left" Width="222.08"/>
 				<TextBlock x:Name="partnerShipName" Margin="30.499,191,0,0" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Left" Width="222.08" VerticalAlignment="Top" Height="28"/>
 			</Grid>
-			<TextBox x:Name="sourceTextBox" Margin="72.5,352.04,106.447,0" VerticalAlignment="Top" TextWrapping="Wrap" MaxLength="266" Width="375.08" d:LayoutOverrides="GridBox" d:IsHidden="True"/>
-			<TreeView Margin="55.5,48,0,149.5" x:Name="foldersItem" SelectedItemChanged="foldersItem_SelectedItemChanged" Background="#FFFFFFFF" BorderBrush="#FF7C7C7C" Foreground="#FFFFFFFF" HorizontalAlignment="Left" Width="189.58" d:IsHidden="True">
+			<TextBox x:Name="sourceTextBox" Margin="72.5,352.04,106.447,0" VerticalAlignment="Top" TextWrapping="Wrap" MaxLength="266" Width="375.08" d:LayoutOverrides="GridBox"/>
+			<TreeView Margin="55.5,48,0,149.5" x:Name="foldersItem" SelectedItemChanged="foldersItem_SelectedItemChanged" Background="#FFFFFFFF" BorderBrush="#FF7C7C7C" Foreground="#FFFFFFFF" HorizontalAlignment="Left" Width="189.58">
 				<TreeView.Resources>
 					<Style TargetType="{x:Type TreeViewItem}">
 						<Setter Property="HeaderTemplate">
@@ -633,7 +607,7 @@
 				</TreeView.Resources>
 			</TreeView>
 		</Grid>
-		<Grid x:Name="SelectPartnership" Margin="0.027,0,-0.027,0" VerticalAlignment="Bottom" Height="444" RenderTransformOrigin="0.5,0.5">
+		<Grid x:Name="ViewPartnership" Margin="0.027,0,-0.027,0" VerticalAlignment="Bottom" Height="444" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
 			<Grid.RenderTransform>
 				<TransformGroup>
 					<ScaleTransform/>
@@ -668,6 +642,5 @@
 				<ListBoxItem x:Name="listBoxItem" Background="White" Style="{DynamicResource ListBoxItemStyle1}" Content="listBoxItem" BorderBrush="#FF393939" BorderThickness="1"/>
 			</ListBox>
 		</Grid>
-		<Image Margin="184.36,116.094,-0.027,8" Source="Images\logo.png" Stretch="Fill" Opacity="0.04"/>
 	</Grid>
 </UserControl>
