@@ -24,12 +24,18 @@ namespace SyncButlerUI
 			this.InitializeComponent();
 		}
 
-			 /// <summary>
+	/// <summary>
     /// Interaction logic for Creating Partnership
     /// </summary>
 
         private object dummyNode = null;
         public string SelectedImagePath { get; set; }
+		
+		/// <summary>
+		/// Populate the tree view with storage devices that are ready
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
         void TreeWindow_Loaded(object sender, RoutedEventArgs e)
         {
 			foldersItem.Items.Clear();
@@ -48,6 +54,12 @@ namespace SyncButlerUI
             }
 
         }
+		
+		/// <summary>
+		/// populate the list when folder is expanded
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 
         void folder_Expanded(object sender, RoutedEventArgs e)
         {
@@ -71,7 +83,12 @@ namespace SyncButlerUI
                 catch (Exception) { }
             }
         }
-
+		
+		/// <summary>
+		/// populate the textbox with current selected value when folder is expanded
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
         private void foldersItem_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             TreeView tree = (TreeView)sender;
@@ -103,6 +120,11 @@ namespace SyncButlerUI
 			//  MessageBox.Show(SelectedImagePath);
         }
 		
+		/// <summary>
+		/// Goes the 2nd Page of Create Partnership to set Destination Values
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void goToPartnershipDest(object sender, RoutedEventArgs e){
 		    try{
 				checkInput();
@@ -130,7 +152,7 @@ namespace SyncButlerUI
 		}
 		
 		/// <summary>
-		/// go to
+		/// go to the 1st page of create partnership to set source Textbox
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
@@ -139,6 +161,12 @@ namespace SyncButlerUI
 		   VisualStateManager.GoToState(this,"CreatePartnershipState1",false);
 		   sourceTextBox.Text="";
 		}
+		
+		/// <summary>
+		/// goes back to the 1st page from the 2nd page of create partnership
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void goBackToCreatePartnershipSrc(object sender, RoutedEventArgs e){
 		  	try{
 
@@ -149,6 +177,11 @@ namespace SyncButlerUI
 			MessageBox.Show(ex.Message);
 			}
 		}
+		/// <summary>
+		/// goes to the 3rd page of create partnership
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void goToCreatePartnershipName(object sender, RoutedEventArgs e){
 			try{
 			checkInput();
@@ -164,13 +197,23 @@ namespace SyncButlerUI
 			MessageBox.Show(ex.Message);
 			}	
 		}
-		
+		/// <summary>
+		/// goes back to the 2nd page from the 3rd page of create partnership
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void goBackToCreatePartnershipDes(object sender, RoutedEventArgs e){
 		   PartnershipTempData.partnershipName=partnershipNameTextBox.Text;
 		   destinationTextBox1.Text=PartnershipTempData.destinationPath;
 		   VisualStateManager.GoToState(this,"CreatePartnershipState2",false);
 		}
 		
+		
+		/// <summary>
+		/// done to submit the create partnership to controller
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void createPartnership(object sender, RoutedEventArgs e){
 		 try{
 			if(partnershipNameTextBox.Text.Equals("")){
@@ -191,9 +234,24 @@ namespace SyncButlerUI
 			}	
 		}
 		
+		/// <summary>
+		/// goes back to Home state
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void goHome(object sender, RoutedEventArgs e){
 				VisualStateManager.GoToState(this,"Home",false);
 		}
 		
+		/// <summary>
+		/// goes to view
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+        private void goToViewPartnerships(object sender, RoutedEventArgs e)
+        {
+				VisualStateManager.GoToState(this,"ViewPartnership1",false);
+		
+        }
 	}
 }

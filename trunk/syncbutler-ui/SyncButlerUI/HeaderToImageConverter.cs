@@ -15,7 +15,7 @@ namespace WPF_Explorer_Tree
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((value as string).Contains(@"\"))
+          /*  if ((value as string).Contains(@"\"))
             {
                 Uri uri = new Uri("pack://application:,,,/Images/diskdrive.png");
                 BitmapImage source = new BitmapImage(uri);
@@ -26,7 +26,10 @@ namespace WPF_Explorer_Tree
                 Uri uri = new Uri("pack://application:,,,/Images/treefolder.png");
                 BitmapImage source = new BitmapImage(uri);
                 return source;
-            }
+            }*/
+			     Uri uri = new Uri("pack://application:,,,/Images/treefolder.png");
+                BitmapImage source = new BitmapImage(uri);
+                return source;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
