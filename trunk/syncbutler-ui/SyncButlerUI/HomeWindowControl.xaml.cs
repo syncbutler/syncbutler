@@ -141,7 +141,7 @@ namespace SyncButlerUI
 		/// Checks the sourceTextbox for values if its empty or if the directory exists
 		/// </summary>
 		private void checkInput(){
-			   if(sourceTextBox.Text.Length>266){
+			if(sourceTextBox.Text.Length>266){
 				throw new Exception("Folder Path is too long");
 			}else if(sourceTextBox.Text.Equals("")){
 				throw new Exception("Please select a Folder");
@@ -189,6 +189,12 @@ namespace SyncButlerUI
 			PartnershipTempData.destinationPath=sourceTextBox.Text;
 		    if(PartnershipTempData.destinationPath.Equals(PartnershipTempData.sourcePath)){
 			throw new Exception("Same Folders selected: Please pick another Folder");	
+			}else if ( PartnershipTempData.sourcePath.IndexOf(PartnershipTempData.destinationPath)==0 )	
+			{
+				throw new Exception("Error- 1st Folder is under the 2nd Folder  ");	
+			}
+			else if (PartnershipTempData.destinationPath.IndexOf(PartnershipTempData.sourcePath)==0){
+				throw new Exception("Error- 2nd Folder is under the 1st Folder  ");	
 			}
 			sourceTextBox1.Text=PartnershipTempData.sourcePath;
 			destinationTextBox1.Text=PartnershipTempData.destinationPath;
@@ -218,7 +224,7 @@ namespace SyncButlerUI
 		private void createPartnership(object sender, RoutedEventArgs e){
 		 try{
 			if(partnershipNameTextBox.Text.Equals("")){
-			throw new Exception("Please input a partnership Name");	
+			throw new Exception("Please input a partnership name");	
 			
 			}
 			PartnershipTempData.partnershipName=partnershipNameTextBox.Text;

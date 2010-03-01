@@ -230,19 +230,19 @@
 				<Setter.Value>
 					<ControlTemplate TargetType="{x:Type Button}">
 						<Grid x:Name="HomeButton">
-							<Rectangle Cursor="Hand">
+							<Rectangle Cursor="Hand" Margin="0,0,-42,0">
 								<Rectangle.Fill>
 									<LinearGradientBrush EndPoint="1.005,0.575" StartPoint="0.051,0.657" MappingMode="RelativeToBoundingBox">
 										<GradientStop Color="#00000000" Offset="1"/>
-										<GradientStop Color="#FF080808" Offset="0.489"/>
+										<GradientStop Color="#FF080808"/>
 										<GradientStop Offset="1"/>
 										<GradientStop Color="#00000000"/>
 										<GradientStop Color="Black"/>
 									</LinearGradientBrush>
 								</Rectangle.Fill>
 							</Rectangle>
-							<ContentPresenter Margin="62.5,24.5,14.833,1.5" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True"/>
-							<Image HorizontalAlignment="Left" Margin="16.668,12.168,0,10.499" VerticalAlignment="Stretch" Width="39.333" Height="Auto" Opacity="0.58" Source="Images\Computer.png" Stretch="Fill"/>
+							<ContentPresenter Margin="54.496,24.5,22.837,1.5" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True"/>
+							<Image HorizontalAlignment="Left" Margin="13.333,12.168,0,10.499" VerticalAlignment="Stretch" Width="39.333" Height="Auto" Opacity="0.58" Source="Images\Computer.png" Stretch="Fill"/>
 						</Grid>
 						<ControlTemplate.Triggers>
 							<Trigger Property="IsFocused" Value="True"/>
@@ -274,8 +274,8 @@
 									</LinearGradientBrush>
 								</Rectangle.Fill>
 							</Rectangle>
-							<ContentPresenter Margin="62.5,24.5,8,1.5" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True" Content="Settings"/>
-							<Image HorizontalAlignment="Left" Margin="16.668,12.168,0,10.499" VerticalAlignment="Stretch" Width="39.333" Height="Auto" Opacity="0.58" Source="Images/Settings.png" Stretch="Fill"/>
+							<ContentPresenter Margin="54,24.5,16.5,1.5" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True" Content="Settings"/>
+							<Image HorizontalAlignment="Left" Margin="12.168,12.168,0,10.499" VerticalAlignment="Stretch" Width="39.333" Height="Auto" Opacity="0.58" Source="Images/Settings.png" Stretch="Fill"/>
 						</Grid>
 						<ControlTemplate.Triggers>
 							<Trigger Property="IsFocused" Value="True"/>
@@ -308,12 +308,12 @@
 								</Rectangle.Fill>
 							</Rectangle>
 							<ContentPresenter Margin="56.001,24.5,8,0" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True" Content="" VerticalAlignment="Top" Height="61.5" RenderTransformOrigin="0.515,0.772" IsEnabled="False"/>
-							<Image HorizontalAlignment="Left" Margin="16.668,12.168,0,10.499" VerticalAlignment="Stretch" Width="39.333" Height="Auto" Opacity="1" Source="Images/LogowTransparency.png" Stretch="Fill">
+							<Image HorizontalAlignment="Left" Margin="13.001,12.168,0,10.499" VerticalAlignment="Stretch" Width="39.333" Height="Auto" Opacity="1" Source="Images/LogowTransparency.png" Stretch="Fill" Cursor="Hand">
 								<Image.OpacityMask>
-									<SolidColorBrush Color="#FFF2AEAE"/>
+									<SolidColorBrush Color="White"/>
 								</Image.OpacityMask>
 							</Image>
-							<TextBlock Margin="57.001,13.5,-13,-22" Text="Sync Butler, Sync!" TextWrapping="Wrap" FontSize="16"/>
+							<TextBlock Margin="53,13.5,-8.999,-22" Text="Sync Butler, Sync!" TextWrapping="Wrap" FontSize="16"/>
 						</Grid>
 						<ControlTemplate.Triggers>
 							<Trigger Property="IsFocused" Value="True"/>
@@ -342,7 +342,7 @@
 		</Grid.ColumnDefinitions>
 		<local:HomeWindowControl x:Name="homeWindow1" Margin="135.666,-1,-46.473,1"/>
 		<Rectangle x:Name="Sidebar" RadiusX="1" RadiusY="2" Margin="0,0,-82.5,0" Fill="Black" Clip="M-2,-2.5 L137.5,-1 C137.5,-1 134.5,284 136,363.5 137.47077,441.45068 170.87586,444.0002 180,444 189,443.9998 -3,445 -3,445 z"/>
-		<Rectangle x:Name="Sidebar_Copy" RadiusX="1" RadiusY="2" Clip="M-2,-2.5 L137.5,-1 C137.5,-1 134.5,284 136,363.5 137.47077,441.45068 167.87586,445.0002 177,445 186,444.9998 -2,445 -2,445 z" HorizontalAlignment="Left" Width="187.527" VerticalAlignment="Bottom" Height="444">
+		<Rectangle x:Name="Sidebar_Copy" RadiusX="1" RadiusY="2" Clip="M-2,-2.5 L181,-1 C181,-1 139,6 137.25139,63.919018 135.10359,135.06058 134.77045,298.3337 136,363.5 137.47077,441.45068 167.87586,445.0002 177,445 186,444.9998 -2,445 -2,445 z" HorizontalAlignment="Left" Width="187.527" VerticalAlignment="Bottom" Height="444">
 			<Rectangle.Fill>
 				<LinearGradientBrush EndPoint="0.698,0.619" StartPoint="-0.784,0.619" MappingMode="RelativeToBoundingBox">
 					<GradientStop Color="#00000000" Offset="0.579"/>
@@ -350,8 +350,8 @@
 				</LinearGradientBrush>
 			</Rectangle.Fill>
 		</Rectangle>
-		<Button x:Name="HomeButton" Margin="-6,-1.5,0,0" Style="{DynamicResource HomeButton}" VerticalAlignment="Top" Height="62" Content="Home" HorizontalAlignment="Left" Width="141.666" Click="goHome"/>
-		<Button x:Name="SettingsButton" Margin="-6,50.5,0,0" Style="{DynamicResource SettingsButton}" VerticalAlignment="Top" Height="62" Content="Home" HorizontalAlignment="Left" Width="141.666" Click="goHome"/>
-		<Button x:Name="SyncButlerSyncButton" Margin="-6,109,0,0" Style="{DynamicResource SyncButtonTemplate}" VerticalAlignment="Top" Height="62" Content="Home" HorizontalAlignment="Left" Width="141.666" Click="goHome"/>
+		<Button x:Name="HomeButton" Margin="-6,-1.5,0,0" Style="{DynamicResource HomeButton}" VerticalAlignment="Top" Height="62" Content="Home" HorizontalAlignment="Left" Width="141.666" Click="goHome" Cursor="Hand"/>
+		<Button x:Name="SettingsButton" Margin="-6,50.5,0,0" Style="{DynamicResource SettingsButton}" VerticalAlignment="Top" Height="62" Content="Home" HorizontalAlignment="Left" Width="141.666" Cursor="Hand"/>
+		<Button x:Name="SyncButlerSyncButton" Margin="-6,109,0,0" Style="{DynamicResource SyncButtonTemplate}" VerticalAlignment="Top" Height="62" Content="Home" HorizontalAlignment="Left" Width="141.666" Cursor="Hand" Click="goToSyncButlerSync"/>
 	</Grid>
 </Window>

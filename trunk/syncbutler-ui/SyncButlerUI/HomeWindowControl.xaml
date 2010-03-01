@@ -286,6 +286,66 @@
 				<TextBlock x:Name="partnershipName" Margin="-120,-4.04,0,8.08" Text="" TextWrapping="Wrap" HorizontalAlignment="Left" Width="102"/>
 			</Grid>
 		</DataTemplate>
+		<Style x:Key="weirdFilesListItemsStyle" TargetType="{x:Type ListBox}">
+			<Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+			<Setter Property="BorderBrush" Value="{StaticResource ListBorder}"/>
+			<Setter Property="BorderThickness" Value="1"/>
+			<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+			<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+			<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+			<Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type ListBox}">
+						<Border x:Name="Bd" SnapsToDevicePixels="true" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="1">
+							<ScrollViewer Padding="{TemplateBinding Padding}" Focusable="false" Template="{DynamicResource weirdListItemScrollViewerControlTemplate2}">
+								<ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+							</ScrollViewer>
+						</Border>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsEnabled" Value="false">
+								<Setter Property="Background" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+							</Trigger>
+							<Trigger Property="IsGrouping" Value="true">
+								<Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+							</Trigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		<ControlTemplate x:Key="weirdListItemScrollViewerControlTemplate2" TargetType="{x:Type ScrollViewer}">
+			<ControlTemplate.Resources>
+				<Storyboard x:Key="ShowWeirdFiles">
+					<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="PART_ScrollContentPresenter" Storyboard.TargetProperty="(UIElement.Visibility)">
+						<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+					</ObjectAnimationUsingKeyFrames>
+				</Storyboard>
+			</ControlTemplate.Resources>
+			<Grid x:Name="Grid" Background="{TemplateBinding Background}">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="Auto"/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+				<Rectangle x:Name="Corner" Fill="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Grid.Column="1" Grid.Row="1"/>
+				<ScrollContentPresenter x:Name="PART_ScrollContentPresenter" Margin="{TemplateBinding Padding}" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Grid.Column="0" Grid.Row="0" CanContentScroll="{TemplateBinding CanContentScroll}" CanHorizontallyScroll="False" CanVerticallyScroll="False" Visibility="Hidden"/>
+				<ScrollBar x:Name="PART_VerticalScrollBar" Cursor="Arrow" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Grid.Column="1" Grid.Row="0" ViewportSize="{TemplateBinding ViewportHeight}" Maximum="{TemplateBinding ScrollableHeight}" Minimum="0" Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" AutomationProperties.AutomationId="VerticalScrollBar"/>
+				<ScrollBar x:Name="PART_HorizontalScrollBar" Cursor="Arrow" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" Grid.Column="0" Grid.Row="1" Orientation="Horizontal" ViewportSize="{TemplateBinding ViewportWidth}" Maximum="{TemplateBinding ScrollableWidth}" Minimum="0" Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" AutomationProperties.AutomationId="HorizontalScrollBar"/>
+			</Grid>
+			<ControlTemplate.Triggers>
+				<EventTrigger RoutedEvent="Mouse.MouseEnter">
+					<BeginStoryboard x:Name="ShowWeirdFiles_BeginStoryboard" Storyboard="{StaticResource ShowWeirdFiles}"/>
+				</EventTrigger>
+				<EventTrigger RoutedEvent="Mouse.MouseLeave">
+					<StopStoryboard BeginStoryboardName="ShowWeirdFiles_BeginStoryboard"/>
+				</EventTrigger>
+			</ControlTemplate.Triggers>
+		</ControlTemplate>
 		
 	</UserControl.Resources>
 
@@ -424,6 +484,16 @@
 						</DoubleAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
+				<VisualState x:Name="SbsState1">
+					<Storyboard>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="HomeWindow" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="sbs" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+					</Storyboard>
+				</VisualState>
 			</VisualStateGroup>
 		</VisualStateManager.VisualStateGroups>
 		<Grid x:Name="HomeWindow" VerticalAlignment="Bottom" Height="444">
@@ -435,7 +505,7 @@
 					</LinearGradientBrush>
 				</Rectangle.Fill>
 			</Rectangle>
-			<Button x:Name="SyncButton" Margin="3,1,4.388,183" Style="{DynamicResource SyncButton}" Content=""/>
+			<Button x:Name="SyncButton" Margin="3,1,4.388,183" Style="{DynamicResource SyncButton}" Content="" Cursor="Hand"/>
 			<Rectangle x:Name="Reflection_Copy" Opacity="0.045" Margin="1.176,0,-1.5,92.052" RadiusX="7" RadiusY="6" VerticalAlignment="Bottom" Height="88.217" Cursor="Hand">
 				<Rectangle.Effect>
 					<BlurEffect/>
@@ -447,7 +517,7 @@
 					</LinearGradientBrush>
 				</Rectangle.Fill>
 			</Rectangle>
-			<Button x:Name="ViewPartnerships" HorizontalAlignment="Right" Margin="0,260.231,171.5,-22" Style="{DynamicResource ViewPartnershipButton}" Width="167" Content="" Click="goToViewPartnerships"/>
+			<Button x:Name="ViewPartnerships" HorizontalAlignment="Right" Margin="0,260.231,171.5,-22" Style="{DynamicResource ViewPartnershipButton}" Width="167" Content="" Click="goToViewPartnerships" Cursor="Hand"/>
 			<Rectangle x:Name="bigButton_Copy3" Margin="0,0,2.5,2" VerticalAlignment="Bottom" Height="182.269" Stroke="Black" Cursor="Hand" HorizontalAlignment="Right" Width="169.25" d:LayoutOverrides="VerticalAlignment">
 				<Rectangle.Fill>
 					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" MappingMode="RelativeToBoundingBox">
@@ -642,7 +712,7 @@
 				<ListBoxItem x:Name="listBoxItem1" Content="listBoxItem1" Opacity="0"/>
 			</ListBox>
 		</Grid>
-		<Grid x:Name="CreatePartnership_Copy" Margin="-7.5,0,-4.693,0" VerticalAlignment="Bottom" Height="444" Loaded="TreeWindow_Loaded" d:LayoutOverrides="GridBox" >
+		<Grid x:Name="sbs" Margin="-7.5,0,-4.693,0" VerticalAlignment="Bottom" Height="444" Loaded="TreeWindow_Loaded" d:LayoutOverrides="GridBox" Visibility="Hidden" >
 			<Rectangle x:Name="background_Copy2" RadiusX="1" RadiusY="2" Margin="0,0,-1.5,0" VerticalAlignment="Top" Height="448" Cursor="None">
 				<Rectangle.Fill>
 					<RadialGradientBrush GradientOrigin="0.265,0.184" RadiusX="1.237" RadiusY="1.237">
@@ -657,9 +727,13 @@
 			<TextBlock Margin="0,25,36.447,0" FontFamily="Arial" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="83.5" HorizontalAlignment="Right" Width="202.72"><Run Text="Sneak Preview:"/><LineBreak/><Run Text="Sync Butler, Sync!"/></TextBlock>
 			<TextBlock Margin="0,114,13.947,94" FontSize="16" TextWrapping="Wrap" HorizontalAlignment="Right" Width="225.22" d:LayoutOverrides="HorizontalAlignment" FontWeight="Bold" FontStyle="Italic"><Run Text="These are the list of files that were detected to be your favorite documents."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="You can click enable feature to allow Sync Butler to automatically "/><LineBreak/><Run Text="update these files on your storage device"/></TextBlock>
 			<TextBlock Margin="0,0,17.947,54.5" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="221.22" d:LayoutOverrides="HorizontalAlignment" VerticalAlignment="Bottom" Height="73" Text="This feature is useful when  you forget to copy an important file and you need to refer it somewhere else"/>
-			<Button x:Name="Enable_Feature" HorizontalAlignment="Right" Margin="0,0,108.447,19" VerticalAlignment="Bottom" Width="93" Height="23" Content="Enable Feature" RenderTransformOrigin="0.79,1.043" Click="goToPartnershipDest" />
-			<Button x:Name="Cancel" HorizontalAlignment="Right" Margin="0,0,25.947,19" VerticalAlignment="Bottom" Width="69" Height="23" Content="Cancel" RenderTransformOrigin="0.79,1.043" Click="goToPartnershipDest" />
-			<Button x:Name="Enable_Feature_Copy" Margin="18.58,0,0,19" VerticalAlignment="Bottom" Height="23" Content="Enable Feature" RenderTransformOrigin="0.79,1.043" Click="goToPartnershipDest" HorizontalAlignment="Left" Width="93" />
+			<Button x:Name="Enable_Feature" HorizontalAlignment="Right" Margin="0,0,108.447,19" VerticalAlignment="Bottom" Width="103.5" Height="23" Content="Enable Feature" RenderTransformOrigin="0.79,1.043" Cursor="Hand" />
+			<Button x:Name="Cancel" HorizontalAlignment="Right" Margin="0,0,25.947,19" VerticalAlignment="Bottom" Width="69" Height="23" Content="Cancel" RenderTransformOrigin="0.79,1.043" Click="goHome" Cursor="Hand" />
+			<Button x:Name="Edit_Selector" Margin="41.08,0,0,19" VerticalAlignment="Bottom" Height="23" Content="Edit Selector" RenderTransformOrigin="0.79,1.043" HorizontalAlignment="Left" Width="93" Cursor="Hand" />
+			<ListBox x:Name="Favourites_List" HorizontalAlignment="Left" Margin="40.5,58.5,0,0" VerticalAlignment="Top" Width="204" Height="136.5"/>
+			<ListBox x:Name="WeirdFile_List" HorizontalAlignment="Left" Margin="39,0,0,70.5" VerticalAlignment="Bottom" Width="204" Height="81" Style="{DynamicResource weirdFilesListItemsStyle}"/>
+			<TextBlock Margin="42.36,25,0,0" FontFamily="Arial" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="26.5" HorizontalAlignment="Left" Width="202.72" Text="Favourites"/>
+			<TextBlock Margin="0,213,267.447,155.5" FontSize="16" TextWrapping="Wrap" HorizontalAlignment="Right" Width="207.22" FontWeight="Bold" FontStyle="Italic"><Run Text="Other files that maybe copied as well"/><LineBreak/><Run FontSize="13.333" FontStyle="Normal" FontWeight="Normal" Text="Mouse over to see"/></TextBlock>
 		</Grid>
 	</Grid>
 </UserControl>
