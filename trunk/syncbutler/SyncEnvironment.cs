@@ -17,7 +17,7 @@ namespace SyncButler
         /// <param name="storedPartnerships">This is a partnership container that will be saved</param>
         /// <param name="partnershipName">This is an XML description require to write partnership to the real XML page</param>
         ///List of persistence attributes
-        private List<Partnership> partnershipList;
+        private SortedList<String,Partnership> partnershipList;
         private bool allowAutoSyncForConflictFreeTasks;
         private bool firstRunComplete;
         private System.Configuration.Configuration config;
@@ -42,18 +42,18 @@ namespace SyncButler
         /// </summary>
         /// <param name="idx">The integer index of the partnership to load.</param>
         /// <returns>A Partnership object</returns>
-        public Partnership LoadPartnership(int idx)
+        public Partnership LoadPartnership(string name)
         {
-            return partnershipList[idx];
+            return partnershipList[name];
         }
 
         /// <summary>
         /// Adds a properly created partner object into the list of partnership
         /// </summary>
         /// <param name="partner">A properly created partner object</param>
-        public void AddPartnership(Partnership partner)
+        public void AddPartnership(String name, Partnership partner)
         {
-            partnershipList.Add(partner);
+            partnershipList.Add(name,partner);
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace SyncButler
         /// needs to view what partnerships are there thus far.
         /// </summary>
         /// <returns>A List containing all existing Partnership</returns>
-        public List<Partnership> GetPartnerships()
+        public SortedList<String,Partnership> GetPartnerships()
         {
             return partnershipList;
         }
@@ -82,10 +82,10 @@ namespace SyncButler
         /// </summary>
         /// <param name="idx">The position fo the Partnership in the List of Partnerships</param>
         /// <param name="updated">The UPDATED Partnership object, that will replace the original one</param>
-        public void UpdatePartnership(int idx, Partnership updated)
+        public void UpdatePartnership(string name, Partnership updated)
         {
-            partnershipList.RemoveAt(idx);
-            partnershipList.Insert(idx, updated);
+            partnershipList.Remove(name);
+            partnershipList.Add(name,updated);
         }
 
         /// <summary>
@@ -143,7 +143,7 @@ namespace SyncButler
         public void CreateEnv()
         {
             //Create the list of partnerships
-            partnershipList = new List<Partnership>();
+            partnershipList = new SortedList<String,Partnership>();
 
             // Add in default settings
             storedSettings.SystemSettings.AllowAutoSyncForConflictFreeTasks = true;
@@ -247,7 +247,7 @@ namespace SyncButler
             storedPartnerships.Partnership.Clear();
 
             //Convert to store in XML format
-            foreach(Partnership element in partnershipList)
+            foreach(Partnership element in partnershipList.Values)
             {
                 //storedPartnerships.Partnership.Add(element. leftFullPath, element.rightFullPath);
             }
@@ -259,7 +259,7 @@ namespace SyncButler
         private void ConvertXML2PartnershipList()
         {
             //Prepare the partnership list
-            partnershipList = new List<Partnership>();
+            partnershipList = new SortedList<String,Partnership>();
 
             //Convert to store in XML format
             foreach (PartnershipConfigElement element in storedPartnerships.Partnership)

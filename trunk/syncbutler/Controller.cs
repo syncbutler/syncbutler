@@ -20,7 +20,7 @@ namespace SyncButler
         /// </summary>
         /// <param name="leftPath">Full Path to the left of a partnership</param>
         /// <param name="rightPath">Full Path to the right of a partnership</param>        
-        private Partnership CreatePartnership(String leftPath, String rightPath)
+        private Partnership CreatePartnership(String name, String leftPath, String rightPath)
         {
             FileInfo leftInfo = new FileInfo(leftPath);
             FileInfo rightInfo = new FileInfo(rightPath);
@@ -30,7 +30,7 @@ namespace SyncButler
             {
                 ISyncable left = new WindowsFolder(leftPath, leftPath);
                 ISyncable right = new WindowsFolder(rightPath, rightPath);
-                Partnership partner = new Partnership(left, right, null);
+                Partnership partner = new Partnership(name, left, right, null);
                 return partner;
             }
             else if (isFolderLeft || isFolderRight) 
@@ -41,7 +41,7 @@ namespace SyncButler
             {
                 ISyncable left = new WindowsFile(leftInfo.DirectoryName, leftPath);
                 ISyncable right = new WindowsFile(rightInfo.DirectoryName, rightPath);
-                Partnership partner = new Partnership(left, right, null);
+                Partnership partner = new Partnership(name, left, right, null);
                 return partner;
             }
         }
@@ -51,10 +51,10 @@ namespace SyncButler
         /// </summary>
         /// <param name="leftPath">Full Path to the left of a partnership</param>
         /// <param name="rightPath">Full Path to the right of a partnership</param>
-        public void AddPartnership(String leftPath, String rightPath) 
+        public void AddPartnership(String name, String leftPath, String rightPath) 
         {
-            Partnership partner = CreatePartnership(leftPath, rightPath);
-            syncEnvironment.AddPartnership(partner);
+            Partnership partner = CreatePartnership(name, leftPath, rightPath);
+            syncEnvironment.AddPartnership(name,partner);
         }
         
         /// <summary>
@@ -72,17 +72,17 @@ namespace SyncButler
         /// <param name="idx">Index of the partnership to be updated</param>
         /// <param name="leftPath">New Full Path to the left of the partnership</param>
         /// <param name="rightPath">New Full Path to the right of a partnership</param>
-        public void UpdatePartnership(int idx, String leftPath, String rightPath)
+        public void UpdatePartnership(String name, String leftPath, String rightPath)
         {
-            Partnership partner = CreatePartnership(leftPath, rightPath);
-            syncEnvironment.UpdatePartnership(idx, partner);
+            Partnership partner = CreatePartnership(name, leftPath, rightPath);
+            syncEnvironment.UpdatePartnership(name, partner);
         }
 
         /// <summary>
         /// Retrieves the list of partnerships from the sync environment. Allows for the user interface to display the list.
         /// </summary>
         /// <returns>The list of all partnerships</returns>
-        public List<Partnership> GetPartnershipList()
+        public SortedList<String,Partnership> GetPartnershipList()
         {
             return syncEnvironment.GetPartnerships();
         }
@@ -92,9 +92,9 @@ namespace SyncButler
         /// </summary>
         /// <param name="idx">Index of the partnership to be synced.</param>
         /// <returns>A list of conflicts. Will be null if there are no conflicts.</returns>
-        public List<Conflict> SyncPartnership(int idx) 
+        public List<Conflict> SyncPartnership(String name) 
         {
-            return syncEnvironment.GetPartnerships()[idx].Sync();
+            return syncEnvironment.GetPartnerships()[name].Sync();
         }
 
         /// <summary>
@@ -102,10 +102,10 @@ namespace SyncButler
         /// </summary>
         public void SyncAll()
         {
-            int elements = GetPartnershipList().Count;
-            for (int i = 0; i < elements; i++)
+
+            foreach (String  name in GetPartnershipList().Keys)
             {
-                SyncPartnership(i);
+                SyncPartnership(name);
             }
         }
 

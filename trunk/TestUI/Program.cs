@@ -18,12 +18,13 @@ namespace TestUI
             {
                 controller = new Controller();
                 MainMenu();
-                controller.AddPartnership(@"C:\test", @"D:\test");
+                
+                controller.AddPartnership("Test Name",@"C:\test", @"D:\test");
                 PrintMRU();
                 
                 Console.Out.WriteLine("Before");
                 PrintPartnerships();
-                controller.AddPartnership(@"C:\test", @"D:\test\test");
+                controller.AddPartnership("Test Name",@"C:\test", @"D:\test\test");
 
                 Console.Out.WriteLine("After");
                 controller.DeletePartnership(0);
@@ -80,11 +81,13 @@ namespace TestUI
         private static void CreatePartnershipMenu()
         {
             Console.Out.WriteLine("Creating a Partnership");
+            Console.Out.WriteLine("Enter a friendly name for this partnership");
+            String name = Console.In.ReadLine();
             Console.Out.WriteLine("Enter Path to 1st Partner:");
             String leftPath = Console.In.ReadLine();
             Console.Out.WriteLine("Enter Path to 2nd Partner:");
             String rightPath = Console.In.ReadLine();
-            controller.AddPartnership(leftPath, rightPath);
+            controller.AddPartnership(name,leftPath, rightPath);
             Console.Out.WriteLine("Partnership Created!");
 
         }
@@ -99,7 +102,7 @@ namespace TestUI
         
         private static void PrintPartnerships()
         {
-            foreach (Partnership pt in controller.GetPartnershipList())
+            foreach (Partnership pt in controller.GetPartnershipList().Values)
             {
                 Console.Out.WriteLine(pt.ToString());
             }
