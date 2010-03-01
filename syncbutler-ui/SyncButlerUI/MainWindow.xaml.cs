@@ -29,5 +29,10 @@ namespace SyncButlerUI
 			//homeWindow1.goHome(sender,e);
 			VisualStateManager.GoToState(homeWindow1,"Home",false);
 		}
+		private void goToSyncButlerSync(object sender, RoutedEventArgs e)
+		{
+			//homeWindow1.goHome(sender,e);
+			VisualStateManager.GoToState(homeWindow1,"SbsState1",false);
+		}
 	}
 }

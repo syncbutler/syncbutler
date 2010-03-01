@@ -70,3 +70,41 @@ C:\Users\user\Desktop\SyncButler\trunk\syncbutler-ui\SyncButlerUI\obj\Debug\Main
 C:\Users\user\Desktop\SyncButler\trunk\syncbutler-ui\SyncButlerUI\obj\Debug\SyncButlerUI.g.resources
 C:\Users\user\Desktop\SyncButler\trunk\syncbutler-ui\SyncButlerUI\obj\Debug\SyncButlerUI.exe
 C:\Users\user\Desktop\SyncButler\trunk\syncbutler-ui\SyncButlerUI\obj\Debug\SyncButlerUI.pdb
+C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\trunk\syncbutler-ui\SyncButlerUI\bin\Debug\SyncButlerUI.exe
+C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\trunk\syncbutler-ui\SyncButlerUI\bin\Debug\SyncButlerUI.pdb
+C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\trunk\syncbutler-ui\SyncButlerUI\bin\Debug\Microsoft.Expression.Interactions.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\trunk\syncbutler-ui\SyncButlerUI\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\trunk\syncbutler-ui\SyncButlerUI\bin\Debug\WPFToolkit.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\trunk\syncbutler-ui\SyncButlerUI\bin\Debug\System.Windows.Interactivity.xml
+C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\trunk\syncbutler-ui\SyncButlerUI\bin\Debug\Microsoft.Expression.Interactions.xml
+C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\trunk\syncbutler-ui\SyncButlerUI\bin\Debug\WPFToolkit.pdb
+C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\trunk\syncbutler-ui\SyncButlerUI\bin\Debug\de\System.Windows.Interactivity.resources.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\trunk\syncbutler-ui\SyncButlerUI\bin\Debug\en\System.Windows.Interactivity.resources.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\trunk\syncbutler-ui\SyncButlerUI\bin\Debug\es\System.Windows.Interactivity.resources.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\trunk\syncbutler-ui\SyncButlerUI\bin\Debug\fr\System.Windows.Interactivity.resources.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\trunk\syncbutler-ui\SyncButlerUI\bin\Debug\it\System.Windows.Interactivity.resources.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\trunk\syncbutler-ui\SyncButlerUI\bin\Debug\ja\System.Windows.Interactivity.resources.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\trunk\syncbutler-ui\SyncButlerUI\bin\Debug\ko\System.Windows.Interactivity.resources.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\trunk\syncbutler-ui\SyncButlerUI\bin\Debug\zh-Hans\System.Windows.Interactivity.resources.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\trunk\syncbutler-ui\SyncButlerUI\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\trunk\syncbutler-ui\SyncButlerUI\bin\Debug\de\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\trunk\syncbutler-ui\SyncButlerUI\bin\Debug\en\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\trunk\syncbutler-ui\SyncButlerUI\bin\Debug\es\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\trunk\syncbutler-ui\SyncButlerUI\bin\Debug\fr\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\trunk\syncbutler-ui\SyncButlerUI\bin\Debug\it\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\trunk\syncbutler-ui\SyncButlerUI\bin\Debug\ja\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\trunk\syncbutler-ui\SyncButlerUI\bin\Debug\ko\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\trunk\syncbutler-ui\SyncButlerUI\bin\Debug\zh-Hans\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\trunk\syncbutler-ui\SyncButlerUI\bin\Debug\zh-Hant\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\trunk\syncbutler-ui\SyncButlerUI\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\trunk\syncbutler-ui\SyncButlerUI\obj\Debug\HomeWindowControl.g.cs
+C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\trunk\syncbutler-ui\SyncButlerUI\obj\Debug\MainWindow.g.cs
+C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\trunk\syncbutler-ui\SyncButlerUI\obj\Debug\App.g.cs
+C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\trunk\syncbutler-ui\SyncButlerUI\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\trunk\syncbutler-ui\SyncButlerUI\obj\Debug\SyncButlerUI_MarkupCompile.cache
+C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\trunk\syncbutler-ui\SyncButlerUI\obj\Debug\SyncButlerUI_MarkupCompile.lref
+C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\trunk\syncbutler-ui\SyncButlerUI\obj\Debug\HomeWindowControl.baml
+C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\trunk\syncbutler-ui\SyncButlerUI\obj\Debug\MainWindow.baml
+C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\trunk\syncbutler-ui\SyncButlerUI\obj\Debug\SyncButlerUI.g.resources
+C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\trunk\syncbutler-ui\SyncButlerUI\obj\Debug\SyncButlerUI.exe
+C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\trunk\syncbutler-ui\SyncButlerUI\obj\Debug\SyncButlerUI.pdb
