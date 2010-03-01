@@ -4,15 +4,15 @@
 winexe
 C#
 .cs
-D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\obj\Debug\
+C:\Users\Benson\Desktop\SyncButler\syncbutler-ui\SyncButlerUI\obj\Debug\
 SyncButlerUI
 none
 false
 DEBUG;TRACE
-D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\App.xaml
-11151548125
+C:\Users\Benson\Desktop\SyncButler\syncbutler-ui\SyncButlerUI\App.xaml
+22085604653
 
-31698397669
-13196157017
-MainWindow.xaml;
+6-657471964
+14720114241
+HomeWindowControl.xaml;MainWindow.xaml;
 

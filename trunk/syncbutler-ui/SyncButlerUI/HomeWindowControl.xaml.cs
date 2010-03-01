@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using System.IO;
 using WPF_Explorer_Tree;
 using SyncButler;
+
 namespace SyncButlerUI
 {
 	/// <summary>
@@ -21,10 +22,13 @@ namespace SyncButlerUI
 	/// </summary>
 	public partial class HomeWindowControl : UserControl
 	{
+        //Controller controller;
 		public HomeWindowControl()
 		{
 			this.InitializeComponent();
-			
+			//Temporary testing link to Controller
+            //controller = new Controller();
+            //partnershipList.ItemsSource = controller.GetPartnershipList();
 		}
 		public SyncButler.Controller Controller{get;set;}
 		

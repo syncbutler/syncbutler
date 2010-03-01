@@ -652,4 +652,3 @@ namespace SyncButlerUI {
         }
     }
 }
-

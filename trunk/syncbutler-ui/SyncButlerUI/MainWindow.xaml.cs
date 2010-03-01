@@ -36,7 +36,7 @@ namespace SyncButlerUI
 			this.homeWindow1.Favourites_List.Items.Clear();
 			//homeWindow1.goHome(sender,e);
 			VisualStateManager.GoToState(homeWindow1,"SbsState1",false);
-			SortedList<string,string> mru = controller.GetMRU();
+			SortedList<string,string> mru = controller.GetMonitoredFiles();
 			foreach(string filenames in mru.Values)
 			{
 				this.homeWindow1.Favourites_List.Items.Add(filenames);
