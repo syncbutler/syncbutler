@@ -292,8 +292,8 @@ namespace SyncButler
         {
             FileInfo leftInfo = new FileInfo(leftPath);
             FileInfo rightInfo = new FileInfo(rightPath);
-            bool isFolderLeft = leftInfo.Attributes.ToString().Equals("Directory");
-            bool isFolderRight = rightInfo.Attributes.ToString().Equals("Directory");
+            bool isFolderLeft = leftInfo.Attributes.ToString().Contains("Directory");
+            bool isFolderRight = rightInfo.Attributes.ToString().Contains("Directory");
             if (isFolderLeft && isFolderRight)
             {
                 ISyncable left = new WindowsFolder(leftPath, leftPath);
