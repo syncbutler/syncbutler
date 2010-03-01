@@ -313,7 +313,7 @@
 									<SolidColorBrush Color="#FFF2AEAE"/>
 								</Image.OpacityMask>
 							</Image>
-							<TextBlock Margin="57.001,13.5,-13,-22" Text="Sync,Butler Sync" TextWrapping="Wrap" FontSize="16"/>
+							<TextBlock Margin="57.001,13.5,-13,-22" Text="Sync Butler, Sync!" TextWrapping="Wrap" FontSize="16"/>
 						</Grid>
 						<ControlTemplate.Triggers>
 							<Trigger Property="IsFocused" Value="True"/>
