@@ -20,6 +20,36 @@ namespace SyncButler
         /// </summary>
         private ISyncable right;
 
+        private string name;
+
+        public string Name
+        {
+            get
+            {
+                return this.name;
+            }
+            set
+            {
+                this.name = value;
+            }
+        }
+
+        public string LeftFullPath
+        {
+            get
+            {
+                return this.left.ToString();
+            }
+        }
+
+        public string RightFullPath
+        {
+            get
+            {
+                return this.right.ToString();
+            }
+        }
+
         public SyncableStatusMonitor statusMonitor = null;
 
         /// <summary>
@@ -33,9 +63,10 @@ namespace SyncButler
         /// </summary>
         /// <param name="left">left side of the syncable</param>
         /// <param name="right">right side of the syncable</param>
-        public Partnership( ISyncable left, ISyncable right,
+        public Partnership(String name, ISyncable left, ISyncable right,
                             Dictionary<string, long> hashDictionary)
         {
+            this.name = name;
             this.left = left;
             this.right = right;
             this.hashDictionary = hashDictionary;
@@ -57,7 +88,7 @@ namespace SyncButler
             right.SetStatusMonitor(statusMonitor);
             return left.Sync(right);
         }
-
+        
         public override String ToString()
         {
             return left.ToString() + " <-> " + right.ToString();
