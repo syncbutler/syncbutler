@@ -32,10 +32,12 @@ namespace SyncButler.ProgramEnvironment
         /// Creates a Partnership object that is automatically encapsulated in Partnership
         /// Config element
         /// </summary>
-        /// <param name="partnership">A Partnership Config Element that in it contains a partnership object</param>
-        public void Add(string leftPath, string rightPath)
+        /// <param name="friendlyName">Friendly name of the partnership</param>
+        /// <param name="leftPath">Full left path to one of the folders in the partnership</param>
+        /// <param name="rightPath">Full right path to two of the folders in the partnership</param>
+        public void Add(string friendlyName, string leftPath, string rightPath)
         {
-            PartnershipConfigElement newElement = new PartnershipConfigElement(leftPath, rightPath);
+            PartnershipConfigElement newElement = new PartnershipConfigElement(friendlyName, leftPath, rightPath);
             BaseAdd(newElement);
         }
 
@@ -58,7 +60,7 @@ namespace SyncButler.ProgramEnvironment
         /// already boxed to be PartnershipConfigElement</returns>
         protected override Object GetElementKey(ConfigurationElement element)
         {
-            return ((PartnershipConfigElement) element).LeftPath;
+            return ((PartnershipConfigElement)element).FriendlyName;
         }
 
         /// <summary>
@@ -68,6 +70,5 @@ namespace SyncButler.ProgramEnvironment
         {
             BaseClear();
         }
-
     }
 }

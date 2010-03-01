@@ -19,10 +19,27 @@ namespace SyncButler.ProgramEnvironment
         /// </summary>
         /// <param name="leftPath">Path to one of the folder in the partnership</param>
         /// <param name="rightPath">Path to another folder in the partnership</param>
-        public PartnershipConfigElement(string leftPath, string rightPath)
+        public PartnershipConfigElement(string friendlyName, string leftPath, string rightPath)
         {
             LeftPath = leftPath;
             RightPath = rightPath;
+            FriendlyName = friendlyName;
+        }
+
+        /// <summary>
+        /// This is the friendly name given by the user during partnership creation
+        /// </summary>
+        [ConfigurationProperty("friendlyName")]
+        public string FriendlyName
+        {
+            get
+            {
+                return (string)this["friendlyName"];
+            }
+            set
+            {
+                this["friendlyName"] = value;
+            }
         }
 
         /// <summary>
