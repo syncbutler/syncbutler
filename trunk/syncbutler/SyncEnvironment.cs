@@ -16,8 +16,7 @@ namespace SyncButler
         /// <param name="settingName">This is an XML description require to write settings to the real XML page</param>
         /// <param name="storedPartnerships">This is a partnership container that will be saved</param>
         /// <param name="partnershipName">This is an XML description require to write partnership to the real XML page</param>
-
-        //List of persistence attributes
+        ///List of persistence attributes
         private List<Partnership> partnershipList;
         private bool allowAutoSyncForConflictFreeTasks;
         private bool firstRunComplete;
@@ -265,8 +264,8 @@ namespace SyncButler
             //Convert to store in XML format
             foreach (PartnershipConfigElement element in storedPartnerships.Partnership)
             {
-                Partnership newElement = CreatePartnership(element.LeftPath, element.RightPath);
-                partnershipList.Add(newElement);
+                //Partnership newElement = CreatePartnership(element.LeftPath, element.RightPath);
+                //partnershipList.Add(newElement);
             }   
         }
 
@@ -280,42 +279,10 @@ namespace SyncButler
             return firstRunComplete;
         }
 
-        /// <summary>
-        /// Creates a new Partnership based on 2 full paths.
-        /// </summary>
-        /// <param name="leftPath">Full Path to the left of a partnership</param>
-        /// <param name="rightPath">Full Path to the right of a partnership</param>        
-        private Partnership CreatePartnership(String leftPath, String rightPath)
-        {
-            FileInfo leftInfo = new FileInfo(leftPath);
-            FileInfo rightInfo = new FileInfo(rightPath);
-            bool isFolderLeft = leftInfo.Attributes.ToString().Equals("Directory");
-            bool isFolderRight = rightInfo.Attributes.ToString().Equals("Directory");
-            if (isFolderLeft && isFolderRight)
-            {
-                ISyncable left = new WindowsFolder(leftPath, leftPath);
-                ISyncable right = new WindowsFolder(rightPath, rightPath);
-                Partnership partner = new Partnership(left, right, null);
-                return partner;
-            }
-            else if (isFolderLeft || isFolderRight)
-            {
-                throw new ArgumentException("Folder cannot sync with a non-folder");
-            }
-            else
-            {
-                ISyncable left = new WindowsFile(leftInfo.DirectoryName, leftPath);
-                ISyncable right = new WindowsFile(rightInfo.DirectoryName, rightPath);
-                Partnership partner = new Partnership(left, right, null);
-                return partner;
-            }
-        }
-
         //There are 1001 options to change, need to revise this
         /*
         public void UpdateSystemSetting(SettingsConfigElement.Options option, )
-        {
-            
+        {            
         }
         */
     }

@@ -31,6 +31,10 @@ namespace SyncButler.ProgramEnvironment
             }
         }
 
+        /// <summary>
+        /// When this flag is turned on, it will reduce the amount of load required
+        /// to create the initial environment
+        /// </summary>
         [ConfigurationProperty("firstRunComplete")]
         public bool FirstRunComplete
         {
