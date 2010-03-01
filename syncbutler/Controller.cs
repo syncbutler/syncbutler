@@ -16,45 +16,15 @@ namespace SyncButler
         }
 
         /// <summary>
-        /// Creates a new Partnership based on 2 full paths.
-        /// </summary>
-        /// <param name="leftPath">Full Path to the left of a partnership</param>
-        /// <param name="rightPath">Full Path to the right of a partnership</param>        
-        private Partnership CreatePartnership(String name, String leftPath, String rightPath)
-        {
-            FileInfo leftInfo = new FileInfo(leftPath);
-            FileInfo rightInfo = new FileInfo(rightPath);
-            bool isFolderLeft = leftInfo.Attributes.ToString().Equals("Directory");
-            bool isFolderRight = rightInfo.Attributes.ToString().Equals("Directory");
-            if (isFolderLeft && isFolderRight)
-            {
-                ISyncable left = new WindowsFolder(leftPath, leftPath);
-                ISyncable right = new WindowsFolder(rightPath, rightPath);
-                Partnership partner = new Partnership(name, left, right, null);
-                return partner;
-            }
-            else if (isFolderLeft || isFolderRight) 
-            {
-                throw new ArgumentException("Folder cannot sync with a non-folder");
-            }
-            else 
-            {
-                ISyncable left = new WindowsFile(leftInfo.DirectoryName, leftPath);
-                ISyncable right = new WindowsFile(rightInfo.DirectoryName, rightPath);
-                Partnership partner = new Partnership(name, left, right, null);
-                return partner;
-            }
-        }
-
-        /// <summary>
         /// Adds a partnership to the list of Partnerships based on 2 full paths
+        /// (calls SyncEnvironment)
         /// </summary>
+        /// <param name="name">Friendly name of a partnership</param>
         /// <param name="leftPath">Full Path to the left of a partnership</param>
         /// <param name="rightPath">Full Path to the right of a partnership</param>
         public void AddPartnership(String name, String leftPath, String rightPath) 
         {
-            Partnership partner = CreatePartnership(name, leftPath, rightPath);
-            syncEnvironment.AddPartnership(name,partner);
+            syncEnvironment.AddPartnership(name, leftPath, rightPath);
         }
         
         /// <summary>
@@ -67,15 +37,13 @@ namespace SyncButler
         }
 
         /// <summary>
-        /// Updates the paths of a partnership in the partnership list.
+        /// Updates the details of an existing partnership in the partnership list
         /// </summary>
-        /// <param name="idx">Index of the partnership to be updated</param>
-        /// <param name="leftPath">New Full Path to the left of the partnership</param>
-        /// <param name="rightPath">New Full Path to the right of a partnership</param>
-        public void UpdatePartnership(String name, String leftPath, String rightPath)
+        /// <param name="name">The friendly name of the partnership</param>
+        /// <param name="updated">The updated Partnership object</param>
+        public void UpdatePartnership(string name, Partnership updated)
         {
-            Partnership partner = CreatePartnership(name, leftPath, rightPath);
-            syncEnvironment.UpdatePartnership(name, partner);
+            syncEnvironment.UpdatePartnership(name, updated);
         }
 
         /// <summary>
@@ -102,7 +70,6 @@ namespace SyncButler
         /// </summary>
         public void SyncAll()
         {
-
             foreach (String  name in GetPartnershipList().Keys)
             {
                 SyncPartnership(name);
