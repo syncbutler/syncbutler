@@ -12,7 +12,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
-
+using WPF_Explorer_Tree;
+using SyncButler;
 namespace SyncButlerUI
 {
 	/// <summary>
@@ -23,8 +24,11 @@ namespace SyncButlerUI
 		public HomeWindowControl()
 		{
 			this.InitializeComponent();
+			
 		}
-
+		public SyncButler.Controller Controller{get;set;}
+		
+//#region UICODE
 	/// <summary>
     /// Interaction logic for Creating Partnership
     /// </summary>
@@ -227,6 +231,7 @@ namespace SyncButlerUI
 			throw new Exception("Please input a partnership name");	
 			
 			}
+			this.Controller.AddPartnership(partnerShipName.Text,sourceFolderPath.Text,destinationFolderPath.Text);
 			PartnershipTempData.partnershipName=partnershipNameTextBox.Text;
 			sourceFolderPath.Text=PartnershipTempData.sourcePath;
 			destinationFolderPath.Text=PartnershipTempData.destinationPath;
@@ -257,8 +262,21 @@ namespace SyncButlerUI
 		/// <param name="e"></param>
         private void goToViewPartnerships(object sender, RoutedEventArgs e)
         {
-				VisualStateManager.GoToState(this,"ViewPartnership1",false);
-		
+			VisualStateManager.GoToState(this,"ViewPartnership1",false);
+			SortedList<string,Partnership> partnershiplist = this.Controller.GetPartnershipList();
+			foreach (Partnership p in partnershiplist.Values)
+			{
+				this.partnershipList.Items.Add(p);
+			}
+			
         }
+//#endregion
+		
+		private void Sync(object sender, RoutedEventArgs e)
+		{
+			//controller.SyncAll();
+		}
+		
+		
 	}
 }

@@ -18,10 +18,12 @@ namespace SyncButlerUI
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		private SyncButler.Controller controller;
 		public MainWindow()
 		{
 			this.InitializeComponent();
-
+			controller = new SyncButler.Controller();
+			this.homeWindow1.Controller = this.controller;
 			// Insert code required on object creation below this point.
 		}
 		private void goHome(object sender, RoutedEventArgs e)
@@ -31,8 +33,17 @@ namespace SyncButlerUI
 		}
 		private void goToSyncButlerSync(object sender, RoutedEventArgs e)
 		{
+			this.homeWindow1.Favourites_List.Items.Clear();
 			//homeWindow1.goHome(sender,e);
 			VisualStateManager.GoToState(homeWindow1,"SbsState1",false);
+			SortedList<string,string> mru = controller.GetMRU();
+			foreach(string filenames in mru.Values)
+			{
+				this.homeWindow1.Favourites_List.Items.Add(filenames);
+			}
+			this.homeWindow1.WeirdFile_List.Items.Clear();
+			this.homeWindow1.WeirdFile_List.Items.Add("C:\\xxx.jpg");
+			this.homeWindow1.WeirdFile_List.Items.Add("C:\\xxx\\weird stuff.jpg");
 		}
 	}
 }
