@@ -243,15 +243,15 @@
 			<Setter Property="Template">
 				<Setter.Value>
 					<ControlTemplate TargetType="{x:Type ListBoxItem}">
-						<Border x:Name="Bd" SnapsToDevicePixels="true" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" Height="42.638">
-							<Grid Width="58.263" Height="15.96">
-								<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="Top" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="-118,-12,0,0" Content="" d:IsHidden="True"/>
-								<Image Margin="-166.5,-12,0,-9.636" Source="Images/Misc.png" Stretch="Fill" HorizontalAlignment="Left" Width="37.596"/>
-								<TextBlock Margin="21.632,-12,-42.369,0" Text="Source Path:" TextWrapping="Wrap" VerticalAlignment="Top" Height="15.96"/>
-								<TextBlock Margin="-2.368,4,-42.369,-4" Text="Destination Path:" TextWrapping="Wrap" VerticalAlignment="Stretch" Height="Auto"/>
-								<TextBlock x:Name="folder1" Margin="0,-12,-115.369,0" Text="" TextWrapping="Wrap" HorizontalAlignment="Right" Width="79" VerticalAlignment="Top" Height="15.96"/>
-								<TextBlock x:Name="folder2" Margin="0,6,-115.369,-6" Text="" TextWrapping="Wrap" HorizontalAlignment="Right" Width="79" VerticalAlignment="Stretch" Height="Auto"/>
-								<TextBlock x:Name="partnershipName" Margin="-120,-4.04,0,4.04" Text="" TextWrapping="Wrap" HorizontalAlignment="Left" Width="102"/>
+						<Border x:Name="Bd" SnapsToDevicePixels="true" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" Height="42.638" d:IsLocked="True">
+							<Grid Width="58.264" Height="15.96" Background="White" Margin="0,0,0,12.339" VerticalAlignment="Bottom" d:LayoutOverrides="Height" d:IsLocked="True">
+								<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="Top" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="-118,-12,0,0" Content=""/>
+								<Image Margin="-166.5,-12,0,-9.636" Source="Images/Misc.png" Stretch="Fill" HorizontalAlignment="Left" Width="37.596" d:IsLocked="True"/>
+								<TextBlock Margin="21.632,-12,-42.369,0" Text="Source Path:" TextWrapping="Wrap" VerticalAlignment="Top" Height="15.96" d:IsLocked="True"/>
+								<TextBlock Margin="-2.368,4,-42.369,-4" Text="Destination Path:" TextWrapping="Wrap" VerticalAlignment="Stretch" Height="Auto" d:IsLocked="True"/>
+								<TextBlock x:Name="folder1" Margin="0,-12,-115.369,0" Text="" TextWrapping="Wrap" HorizontalAlignment="Right" Width="79" VerticalAlignment="Top" Height="15.96" d:IsLocked="True"/>
+								<TextBlock x:Name="folder2" Margin="0,6,-115.369,-6" Text="" TextWrapping="Wrap" HorizontalAlignment="Right" Width="79" VerticalAlignment="Stretch" Height="Auto" d:IsLocked="True"/>
+								<TextBlock x:Name="partnershipName" Margin="-120,-4.04,0,4.04" Text="" TextWrapping="Wrap" HorizontalAlignment="Left" Width="102" d:IsLocked="True"/>
 							</Grid>
 						</Border>
 						<ControlTemplate.Triggers>
@@ -314,9 +314,6 @@
 						</DoubleAnimationUsingKeyFrames>
 						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="listBox" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
 							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-18"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="listBoxItem" Storyboard.TargetProperty="(UIElement.Opacity)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
 						</DoubleAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
@@ -422,6 +419,9 @@
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="ViewPartnership" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
 						</ObjectAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="listBoxItem1" Storyboard.TargetProperty="(UIElement.Opacity)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+						</DoubleAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
 			</VisualStateGroup>
@@ -630,7 +630,7 @@
 			<Image HorizontalAlignment="Left" Margin="29,29,0,0" VerticalAlignment="Top" Width="73" Height="73" Source="Images\Doc.png" Stretch="Fill"/>
 			<TextBlock Margin="111.5,53,136.307,0" VerticalAlignment="Top" Height="61.5" FontFamily="Arial" FontSize="24" FontWeight="Bold" Text="View Partnership" TextWrapping="Wrap"/>
 			<TextBlock Margin="113,84.5,139.307,0" VerticalAlignment="Top" Height="54" FontSize="13.333" TextWrapping="Wrap" Text="List of partnerships you created."/>
-			<ListBox x:Name="listBox" Margin="53.973,175.5,56.361,46.5" Style="{DynamicResource ListBoxStyle1}" Background="White" BorderBrush="#FF787878" Foreground="Black" RenderTransformOrigin="0.5,0.5" ItemTemplate="{DynamicResource DataTemplate1}">
+			<ListBox x:Name="listBox" Margin="53.973,175.5,56.361,46.5" Style="{DynamicResource ListBoxStyle1}" ItemContainerStyle="{DynamicResource ListBoxItemStyle1}" Background="White" BorderBrush="#FF787878" Foreground="Black" RenderTransformOrigin="0.5,0.5" ItemTemplate="{DynamicResource DataTemplate1}">
 				<ListBox.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
@@ -639,8 +639,27 @@
 						<TranslateTransform/>
 					</TransformGroup>
 				</ListBox.RenderTransform>
-				<ListBoxItem x:Name="listBoxItem" Background="White" Style="{DynamicResource ListBoxItemStyle1}" Content="listBoxItem" BorderBrush="#FF393939" BorderThickness="1"/>
+				<ListBoxItem x:Name="listBoxItem1" Content="listBoxItem1" Opacity="0"/>
 			</ListBox>
+		</Grid>
+		<Grid x:Name="CreatePartnership_Copy" Margin="-7.5,0,-4.693,0" VerticalAlignment="Bottom" Height="444" Loaded="TreeWindow_Loaded" d:LayoutOverrides="GridBox" >
+			<Rectangle x:Name="background_Copy2" RadiusX="1" RadiusY="2" Margin="0,0,-1.5,0" VerticalAlignment="Top" Height="448" Cursor="None">
+				<Rectangle.Fill>
+					<RadialGradientBrush GradientOrigin="0.265,0.184" RadiusX="1.237" RadiusY="1.237">
+						<GradientStop Color="Black" Offset="1"/>
+						<GradientStop Color="White"/>
+						<GradientStop Color="#FFA3A3A3" Offset="1"/>
+						<GradientStop Color="#FFA1A1A1" Offset="1"/>
+						<GradientStop Color="White" Offset="0.378"/>
+					</RadialGradientBrush>
+				</Rectangle.Fill>
+			</Rectangle>
+			<TextBlock Margin="0,25,36.447,0" FontFamily="Arial" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="83.5" HorizontalAlignment="Right" Width="202.72"><Run Text="Sneak Preview:"/><LineBreak/><Run Text="Sync Butler, Sync!"/></TextBlock>
+			<TextBlock Margin="0,114,13.947,94" FontSize="16" TextWrapping="Wrap" HorizontalAlignment="Right" Width="225.22" d:LayoutOverrides="HorizontalAlignment" FontWeight="Bold" FontStyle="Italic"><Run Text="These are the list of files that were detected to be your favorite documents."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="You can click enable feature to allow Sync Butler to automatically "/><LineBreak/><Run Text="update these files on your storage device"/></TextBlock>
+			<TextBlock Margin="0,0,17.947,54.5" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="221.22" d:LayoutOverrides="HorizontalAlignment" VerticalAlignment="Bottom" Height="73" Text="This feature is useful when  you forget to copy an important file and you need to refer it somewhere else"/>
+			<Button x:Name="Enable_Feature" HorizontalAlignment="Right" Margin="0,0,108.447,19" VerticalAlignment="Bottom" Width="93" Height="23" Content="Enable Feature" RenderTransformOrigin="0.79,1.043" Click="goToPartnershipDest" />
+			<Button x:Name="Cancel" HorizontalAlignment="Right" Margin="0,0,25.947,19" VerticalAlignment="Bottom" Width="69" Height="23" Content="Cancel" RenderTransformOrigin="0.79,1.043" Click="goToPartnershipDest" />
+			<Button x:Name="Enable_Feature_Copy" Margin="18.58,0,0,19" VerticalAlignment="Bottom" Height="23" Content="Enable Feature" RenderTransformOrigin="0.79,1.043" Click="goToPartnershipDest" HorizontalAlignment="Left" Width="93" />
 		</Grid>
 	</Grid>
 </UserControl>
