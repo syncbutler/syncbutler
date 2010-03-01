@@ -5,7 +5,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyncButler", "SyncButler\Sy
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestUI", "TestUI\TestUI.csproj", "{D16F8146-3A1C-4F77-A9B8-3340353EF11B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E82CAA7C-E351-42F5-9524-F76CE5551F2E}"
+	ProjectSection(SolutionItems) = preProject
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+		SyncButler.vsmdi = SyncButler.vsmdi
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "syncbutler-test", "syncbutler-test\syncbutler-test.csproj", "{27D4D7A9-61AA-42E7-A367-EA1BAC89B8C3}"
+EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = SyncButler.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -19,6 +30,10 @@ Global
 		{D16F8146-3A1C-4F77-A9B8-3340353EF11B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D16F8146-3A1C-4F77-A9B8-3340353EF11B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D16F8146-3A1C-4F77-A9B8-3340353EF11B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27D4D7A9-61AA-42E7-A367-EA1BAC89B8C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27D4D7A9-61AA-42E7-A367-EA1BAC89B8C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27D4D7A9-61AA-42E7-A367-EA1BAC89B8C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27D4D7A9-61AA-42E7-A367-EA1BAC89B8C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
