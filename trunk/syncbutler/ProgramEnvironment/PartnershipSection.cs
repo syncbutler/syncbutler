@@ -5,6 +5,9 @@ using System.Configuration;
 
 namespace SyncButler.ProgramEnvironment
 {
+    /// <summary>
+    /// This stores the list of partnerships, in XML descriptor form
+    /// </summary>
     public class PartnershipSection : ConfigurationSection
     {
         /// <summary>

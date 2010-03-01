@@ -10,13 +10,15 @@ namespace SyncButler
     /// <summary>
     /// Contains methods to load and store settings as well as handling access to the list of partnerships
     /// </summary>
+
+    //To Do: Allow the restoration of dictionary object
     public class SyncEnvironment
     {
+        ///List of persistence attributes
         /// <param name="storedSettings">This is a settings container that will be saved</param>
         /// <param name="settingName">This is an XML description require to write settings to the real XML page</param>
         /// <param name="storedPartnerships">This is a partnership container that will be saved</param>
         /// <param name="partnershipName">This is an XML description require to write partnership to the real XML page</param>
-        ///List of persistence attributes
         private SortedList<String,Partnership> partnershipList;
         private bool allowAutoSyncForConflictFreeTasks;
         private bool firstRunComplete;
@@ -51,9 +53,10 @@ namespace SyncButler
         /// Adds a properly created partner object into the list of partnership
         /// </summary>
         /// <param name="partner">A properly created partner object</param>
-        public void AddPartnership(String name, Partnership partner)
+        public void AddPartnership(string name, String leftPath, String rightPath)
         {
-            partnershipList.Add(name,partner);
+            Partnership element = CreatePartnership(name, leftPath, rightPath);
+            partnershipList.Add(name, element);
         }
 
         /// <summary>
@@ -80,8 +83,8 @@ namespace SyncButler
         /// and supplied with the position of the Partnership object in the
         /// List of Partnerships.
         /// </summary>
-        /// <param name="idx">The position fo the Partnership in the List of Partnerships</param>
-        /// <param name="updated">The UPDATED Partnership object, that will replace the original one</param>
+        /// <param name="idx">The position of the Partnership in the List of Partnerships</param>
+        /// <param name="updated">The UPDATED Partnership object will replace the original one</param>
         public void UpdatePartnership(string name, Partnership updated)
         {
             partnershipList.Remove(name);
@@ -249,7 +252,7 @@ namespace SyncButler
             //Convert to store in XML format
             foreach(Partnership element in partnershipList.Values)
             {
-                //storedPartnerships.Partnership.Add(element. leftFullPath, element.rightFullPath);
+                storedPartnerships.Partnership.Add(element.Name, element.LeftFullPath, element.RightFullPath);
             }
         }
 
@@ -264,8 +267,9 @@ namespace SyncButler
             //Convert to store in XML format
             foreach (PartnershipConfigElement element in storedPartnerships.Partnership)
             {
-                //Partnership newElement = CreatePartnership(element.LeftPath, element.RightPath);
-                //partnershipList.Add(newElement);
+                Partnership newElement = CreatePartnership(element.FriendlyName, element.LeftPath,
+                                            element.RightPath);
+                partnershipList.Add(element.FriendlyName, newElement);
             }   
         }
 
@@ -277,6 +281,37 @@ namespace SyncButler
         public bool isFirstRunComplete()
         {
             return firstRunComplete;
+        }
+
+        /// <summary>
+        /// Creates a new Partnership based on 2 full paths.
+        /// </summary>
+        /// <param name="leftPath">Full Path to the left of a partnership</param>
+        /// <param name="rightPath">Full Path to the right of a partnership</param>        
+        private Partnership CreatePartnership(String name, String leftPath, String rightPath)
+        {
+            FileInfo leftInfo = new FileInfo(leftPath);
+            FileInfo rightInfo = new FileInfo(rightPath);
+            bool isFolderLeft = leftInfo.Attributes.ToString().Equals("Directory");
+            bool isFolderRight = rightInfo.Attributes.ToString().Equals("Directory");
+            if (isFolderLeft && isFolderRight)
+            {
+                ISyncable left = new WindowsFolder(leftPath, leftPath);
+                ISyncable right = new WindowsFolder(rightPath, rightPath);
+                Partnership partner = new Partnership(name, left, right, null);
+                return partner;
+            }
+            else if (isFolderLeft || isFolderRight)
+            {
+                throw new ArgumentException("Folder cannot sync with a non-folder");
+            }
+            else
+            {
+                ISyncable left = new WindowsFile(leftInfo.DirectoryName, leftPath);
+                ISyncable right = new WindowsFile(rightInfo.DirectoryName, rightPath);
+                Partnership partner = new Partnership(name, left, right, null);
+                return partner;
+            }
         }
 
         //There are 1001 options to change, need to revise this

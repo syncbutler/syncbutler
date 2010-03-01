@@ -5,6 +5,11 @@ using System.Configuration;
 
 namespace SyncButler.ProgramEnvironment
 {
+    //To Do: Serialise Dictionary
+
+    /// <summary>
+    /// This represent one to one a partnership object but in the form of a XML descriptor
+    /// </summary>
     public class PartnershipConfigElement : ConfigurationElement
     {
         /// <summary>
