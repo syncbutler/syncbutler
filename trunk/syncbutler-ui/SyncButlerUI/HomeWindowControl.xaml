@@ -243,15 +243,15 @@
 			<Setter Property="Template">
 				<Setter.Value>
 					<ControlTemplate TargetType="{x:Type ListBoxItem}">
-						<Border x:Name="Bd" SnapsToDevicePixels="true" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" Height="42.638" d:IsLocked="True">
-							<Grid Width="58.264" Height="15.96" Background="White" Margin="0,0,0,12.339" VerticalAlignment="Bottom" d:LayoutOverrides="Height" d:IsLocked="True">
-								<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="Top" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="-118,-12,0,0" Content=""/>
-								<Image Margin="-166.5,-12,0,-9.636" Source="Images/Misc.png" Stretch="Fill" HorizontalAlignment="Left" Width="37.596" d:IsLocked="True"/>
-								<TextBlock Margin="21.632,-12,-42.369,0" Text="Source Path:" TextWrapping="Wrap" VerticalAlignment="Top" Height="15.96" d:IsLocked="True"/>
-								<TextBlock Margin="-2.368,4,-42.369,-4" Text="Destination Path:" TextWrapping="Wrap" VerticalAlignment="Stretch" Height="Auto" d:IsLocked="True"/>
-								<TextBlock x:Name="folder1" Margin="0,-12,-115.369,0" Text="" TextWrapping="Wrap" HorizontalAlignment="Right" Width="79" VerticalAlignment="Top" Height="15.96" d:IsLocked="True"/>
-								<TextBlock x:Name="folder2" Margin="0,6,-115.369,-6" Text="" TextWrapping="Wrap" HorizontalAlignment="Right" Width="79" VerticalAlignment="Stretch" Height="Auto" d:IsLocked="True"/>
-								<TextBlock x:Name="partnershipName" Margin="-120,-4.04,0,4.04" Text="" TextWrapping="Wrap" HorizontalAlignment="Left" Width="102" d:IsLocked="True"/>
+						<Border x:Name="Bd" SnapsToDevicePixels="true" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" Height="42.638">
+							<Grid Width="58.264" Height="15.96" Margin="0,0,0,12.339" VerticalAlignment="Bottom" d:LayoutOverrides="Height">
+								<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="Top" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="-118,-12,0,0" Content="" Visibility="Hidden"/>
+								<Image Margin="-166.5,-12,0,-9.636" Source="Images/Misc.png" Stretch="Fill" HorizontalAlignment="Left" Width="37.596"/>
+								<TextBlock Margin="21.632,-12,-42.369,0" Text="Source Path:" TextWrapping="Wrap" VerticalAlignment="Top" Height="15.96"/>
+								<TextBlock Margin="-2.368,4,-42.369,-4" Text="Destination Path:" TextWrapping="Wrap" VerticalAlignment="Stretch" Height="Auto"/>
+								<TextBlock x:Name="folder1" Margin="0,-12,-115.369,0" Text="" TextWrapping="Wrap" HorizontalAlignment="Right" Width="79" VerticalAlignment="Top" Height="15.96"/>
+								<TextBlock x:Name="folder2" Margin="0,6,-115.369,-6" Text="" TextWrapping="Wrap" HorizontalAlignment="Right" Width="79" VerticalAlignment="Stretch" Height="Auto"/>
+								<TextBlock x:Name="partnershipName" Margin="-120,-4.04,0,4.04" Text="" TextWrapping="Wrap" HorizontalAlignment="Left" Width="102"/>
 							</Grid>
 						</Border>
 						<ControlTemplate.Triggers>
@@ -479,9 +479,6 @@
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="ViewPartnership" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
 						</ObjectAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="listBoxItem1" Storyboard.TargetProperty="(UIElement.Opacity)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
-						</DoubleAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
 				<VisualState x:Name="SbsState1">
@@ -709,7 +706,6 @@
 						<TranslateTransform/>
 					</TransformGroup>
 				</ListBox.RenderTransform>
-				<ListBoxItem x:Name="listBoxItem1" Content="listBoxItem1" Opacity="0"/>
 			</ListBox>
 		</Grid>
 		<Grid x:Name="sbs" Margin="-7.5,0,-4.693,0" VerticalAlignment="Bottom" Height="444" Loaded="TreeWindow_Loaded" d:LayoutOverrides="GridBox" Visibility="Hidden" >
