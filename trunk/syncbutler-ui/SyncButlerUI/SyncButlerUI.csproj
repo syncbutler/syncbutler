@@ -108,6 +108,12 @@
     <Resource Include="Images\treefolder.png" />
     <Resource Include="Images\Usbstick.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\syncbutler\SyncButler.csproj">
+      <Project>{91049E12-5D15-4092-ADBA-C8883AC12AA0}</Project>
+      <Name>SyncButler</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
 		 Other similar extension points exist, see Microsoft.Common.targets.

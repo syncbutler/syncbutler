@@ -366,13 +366,13 @@
 						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="ViewPartnership" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
 							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-6"/>
 						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="listBox" Storyboard.TargetProperty="(UIElement.Opacity)">
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="partnershipList" Storyboard.TargetProperty="(UIElement.Opacity)">
 							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
 						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="listBox" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="partnershipList" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
 							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.162"/>
 						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="listBox" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="partnershipList" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
 							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-18"/>
 						</DoubleAnimationUsingKeyFrames>
 					</Storyboard>
@@ -502,7 +502,7 @@
 					</LinearGradientBrush>
 				</Rectangle.Fill>
 			</Rectangle>
-			<Button x:Name="SyncButton" Margin="3,1,4.388,183" Style="{DynamicResource SyncButton}" Content="" Cursor="Hand"/>
+			<Button x:Name="SyncButton" Margin="3,1,4.388,183" Style="{DynamicResource SyncButton}" Content="" Cursor="Hand" Click="Sync"/>
 			<Rectangle x:Name="Reflection_Copy" Opacity="0.045" Margin="1.176,0,-1.5,92.052" RadiusX="7" RadiusY="6" VerticalAlignment="Bottom" Height="88.217" Cursor="Hand">
 				<Rectangle.Effect>
 					<BlurEffect/>
@@ -697,7 +697,7 @@
 			<Image HorizontalAlignment="Left" Margin="29,29,0,0" VerticalAlignment="Top" Width="73" Height="73" Source="Images\Doc.png" Stretch="Fill"/>
 			<TextBlock Margin="111.5,53,136.307,0" VerticalAlignment="Top" Height="61.5" FontFamily="Arial" FontSize="24" FontWeight="Bold" Text="View Partnership" TextWrapping="Wrap"/>
 			<TextBlock Margin="113,84.5,139.307,0" VerticalAlignment="Top" Height="54" FontSize="13.333" TextWrapping="Wrap" Text="List of partnerships you created."/>
-			<ListBox x:Name="listBox" Margin="53.973,175.5,56.361,46.5" Style="{DynamicResource ListBoxStyle1}" ItemContainerStyle="{DynamicResource ListBoxItemStyle1}" Background="White" BorderBrush="#FF787878" Foreground="Black" RenderTransformOrigin="0.5,0.5" ItemTemplate="{DynamicResource DataTemplate1}">
+			<ListBox x:Name="partnershipList" Margin="53.973,175.5,56.361,46.5" Style="{DynamicResource ListBoxStyle1}" ItemContainerStyle="{DynamicResource ListBoxItemStyle1}" Background="White" BorderBrush="#FF787878" Foreground="Black" RenderTransformOrigin="0.5,0.5" ItemTemplate="{DynamicResource DataTemplate1}">
 				<ListBox.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
