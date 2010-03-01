@@ -212,6 +212,11 @@ namespace SyncButler
             return "folder:\\\\" + this.relativePath;
         }
 
+        public override string ToString()
+        {
+            return this.rootPath + this.relativePath;
+        }
+
         /// <summary>
         /// Synchronizes this folder with another.
         /// 

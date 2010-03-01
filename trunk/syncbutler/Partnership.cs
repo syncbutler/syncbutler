@@ -60,7 +60,7 @@ namespace SyncButler
 
         public override String ToString()
         {
-            return left.EntityPath() + " <-> " + right.EntityPath();
+            return left.ToString() + " <-> " + right.ToString();
         }
     }
 }
