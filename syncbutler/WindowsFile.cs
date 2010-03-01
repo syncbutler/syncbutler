@@ -239,6 +239,10 @@ namespace SyncButler
         {
             return "file:\\\\" + this.relativePath;
         }
+        public override string ToString()
+        {
+            return this.rootPath + this.relativePath;
+        }
 
         /// <summary>
         /// Synchronize this file with another. 
