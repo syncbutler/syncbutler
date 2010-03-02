@@ -12,8 +12,7 @@ namespace SyncButlerTest
     [TestClass()]
     public class ControllerTest
     {
-
-
+        Partnership actual;
         private TestContext testContextInstance;
 
         /// <summary>
@@ -72,8 +71,8 @@ namespace SyncButlerTest
             string name = "Test Partnership";
             string leftPath = @"C:\Folder1";
             string rightPath = @"C:\Folder2\test.txt";
-            Partnership actual;
-            actual = target.CreatePartnership(name, leftPath, rightPath);
+            //Partnership actual;
+            target.AddPartnership(name, leftPath, rightPath);
         }
 
         [TestMethod()]
@@ -85,8 +84,8 @@ namespace SyncButlerTest
             string name = "Test Partnership";
             string leftPath = @"C:\Folder1";
             string rightPath = @"C:\Folder2\test.txt";
-            Partnership actual;
-            actual = target.CreatePartnership(name, leftPath, rightPath);
+            //Partnership actual;
+            target.AddPartnership(name, leftPath, rightPath);
         }
 
         [TestMethod()]
@@ -99,8 +98,8 @@ namespace SyncButlerTest
             string name = "Test Partnership";
             string leftPath = @"C:\FolderNOTFOUND";
             string rightPath = @"C:\FolderNOTFOUND2";
-            Partnership actual;
-            actual = target.CreatePartnership(name, leftPath, rightPath);
+            //Partnership actual;
+            target.AddPartnership(name, leftPath, rightPath);
         }
 
         [TestMethod()]
@@ -113,8 +112,8 @@ namespace SyncButlerTest
             string name = "Test Partnership";
             string leftPath = @"C:\FolderNOTFOUND";
             string rightPath = @"C:\Folder2";
-            Partnership actual;
-            actual = target.CreatePartnership(name, leftPath, rightPath);
+            //Partnership actual;
+            target.AddPartnership(name, leftPath, rightPath);
         }
 
         [TestMethod()]
@@ -127,8 +126,7 @@ namespace SyncButlerTest
             string name = "Test Partnership";
             string leftPath = @"C:\Folder1";
             string rightPath = @"C:\FolderNOTFOUND";
-            Partnership actual;
-            actual = target.CreatePartnership(name, leftPath, rightPath);
+            target.AddPartnership(name, leftPath, rightPath);
         }
 
         [TestMethod()]
@@ -141,8 +139,7 @@ namespace SyncButlerTest
             string name = "Test Partnership";
             string leftPath = @"C:\Folder1\NOTFOUND.txt";
             string rightPath = @"C:\Folder2\NOTFOUND.txt";
-            Partnership actual;
-            actual = target.CreatePartnership(name, leftPath, rightPath);
+            target.AddPartnership(name, leftPath, rightPath);
         }
 
         [TestMethod()]
@@ -155,8 +152,7 @@ namespace SyncButlerTest
             string name = "Test Partnership";
             string leftPath = @"C:\Folder1\NOTFOUND.txt";
             string rightPath = @"C:\Folder2";
-            Partnership actual;
-            actual = target.CreatePartnership(name, leftPath, rightPath);
+            target.AddPartnership(name, leftPath, rightPath);
         }
 
         [TestMethod()]
@@ -169,8 +165,7 @@ namespace SyncButlerTest
             string name = "Test Partnership";
             string leftPath = @"C:\Folder1";
             string rightPath = @"C:\Folder2\NOTFOUND.txt";
-            Partnership actual;
-            actual = target.CreatePartnership(name, leftPath, rightPath);
+            target.AddPartnership(name, leftPath, rightPath);
         }
 
         [TestMethod()]
@@ -181,8 +176,7 @@ namespace SyncButlerTest
             string name = "Test Partnership";
             string leftPath = @"C:\Folder1\";
             string rightPath = @"C:\Folder2\";
-            Partnership actual;
-            actual = target.CreatePartnership(name, leftPath, rightPath);
+            target.AddPartnership(name, leftPath, rightPath);
             Assert.AreEqual(actual.Name, name);
             Assert.AreEqual(actual.LeftFullPath, leftPath);
             Assert.AreEqual(actual.RightFullPath, rightPath);
@@ -196,8 +190,7 @@ namespace SyncButlerTest
             string name = "Test Partnership";
             string leftPath = @"C:\Folder1\test.txt";
             string rightPath = @"C:\Folder2\test.txt";
-            Partnership actual;
-            actual = target.CreatePartnership(name, leftPath, rightPath);
+            target.AddPartnership(name, leftPath, rightPath);
             Assert.AreEqual(actual.Name, name);
             Assert.AreEqual(actual.LeftFullPath, leftPath);
             Assert.AreEqual(actual.RightFullPath, rightPath);

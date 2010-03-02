@@ -14,9 +14,9 @@ namespace SyncButler
             syncEnvironment = new SyncEnvironment();
             //syncEnvironment.IntialEnv();
             //fake tests
-            AddPartnership("test01",@"C:\",@"D:\");
-            AddPartnership("test02", @"C:\test2", @"D:\test2");
-            AddPartnership("test03", @"C:\test3", @"D:\test3");
+            //AddPartnership("test01",@"C:\",@"D:\");
+            //AddPartnership("test02", @"C:\test2", @"D:\test2");
+            //AddPartnership("test03", @"C:\test3", @"D:\test3");
         }
 
         /// <summary>
