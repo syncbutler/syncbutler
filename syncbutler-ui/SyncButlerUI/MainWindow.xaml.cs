@@ -40,11 +40,12 @@ namespace SyncButlerUI
 			SortedList<string,string> mru = controller.GetMonitoredFiles();
 			foreach(string filenames in mru.Values)
 			{
-				this.homeWindow1.Favourites_List.Items.Add(filenames);
+				
+				this.homeWindow1.Favourites_List.Items.Add(filenames.Substring(filenames.LastIndexOf('\\')+1));
 			}
 			this.homeWindow1.WeirdFile_List.Items.Clear();
-			this.homeWindow1.WeirdFile_List.Items.Add("C:\\xxx.jpg");
-			this.homeWindow1.WeirdFile_List.Items.Add("C:\\xxx\\weird stuff.jpg");
+			this.homeWindow1.WeirdFile_List.Items.Add("C:\\secret.jpg");
+			this.homeWindow1.WeirdFile_List.Items.Add("C:\\abc co\\secret stuff.jpg");
 		}
 		
 		private void cleanUp(object sender,  System.ComponentModel.CancelEventArgs e)
