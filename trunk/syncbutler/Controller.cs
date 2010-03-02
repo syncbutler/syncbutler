@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using SyncButler.Exceptions;
 
 namespace SyncButler
 {
@@ -80,8 +81,13 @@ namespace SyncButler
                 foreach (Conflict conflict in conflicts)
                 {
                     //If unknown ignore 1st
-                    if (conflict.GetRecommendedAction() == Conflict.Action.Unknown) continue;
-                    conflict.Resolve(conflict.GetRecommendedAction());
+                    try
+                    {
+                        conflict.Resolve();
+                    }
+                    catch (InvalidActionException e)
+                    {
+                    }
                 }
             }
         }
