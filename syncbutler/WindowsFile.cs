@@ -264,7 +264,7 @@ namespace SyncButler
             Debug.Assert(parentPartnership != null, "The parent partnership has not been set; cannot sync");
 
             // Temporary -- give basic functionality first.
-            statusMonitor(new SyncableStatus(this.EntityPath(), 0));
+            if (statusMonitor != null) statusMonitor(new SyncableStatus(this.EntityPath(), 0));
 
             if (otherPair is WindowsFile)// && this.EntityPath().Equals(otherPair.EntityPath()))
             {
