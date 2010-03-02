@@ -281,7 +281,8 @@ namespace SyncButlerUI
 		
 		private void Sync(object sender, RoutedEventArgs e)
 		{
-			//controller.SyncAll();
+			this.Controller.SyncAll();
+			MessageBox.Show("Sync-ed.\r\nPlease check.");
 		}
 		
 		
