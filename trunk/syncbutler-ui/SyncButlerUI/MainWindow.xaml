@@ -10,6 +10,7 @@
 	x:Name="Window"
 	Title="SyncButler" 
 	Width="651" Height="480"
+	Closing = "cleanUp"
 	 >
 
 	<Window.Resources>
@@ -340,7 +341,7 @@
 			<ColumnDefinition MinWidth="66" Width="Auto"/>
 			<ColumnDefinition MinWidth="165.5" Width="Auto"/>
 		</Grid.ColumnDefinitions>
-		<local:HomeWindowControl x:Name="homeWindow1" Margin="135.666,-1,-46.473,1"/>
+		<local:HomeWindowControl x:Name="homeWindow1" Margin="135.666,-1,-46.473,1" />
 		<Rectangle x:Name="Sidebar" RadiusX="1" RadiusY="2" Margin="0,0,-82.5,0" Fill="Black" Clip="M-2,-2.5 L137.5,-1 C137.5,-1 134.5,284 136,363.5 137.47077,441.45068 170.87586,444.0002 180,444 189,443.9998 -3,445 -3,445 z"/>
 		<Rectangle x:Name="Sidebar_Copy" RadiusX="1" RadiusY="2" Clip="M-2,-2.5 L181,-1 C181,-1 139,6 137.25139,63.919018 135.10359,135.06058 134.77045,298.3337 136,363.5 137.47077,441.45068 167.87586,445.0002 177,445 186,444.9998 -2,445 -2,445 z" HorizontalAlignment="Left" Width="187.527" VerticalAlignment="Bottom" Height="444">
 			<Rectangle.Fill>

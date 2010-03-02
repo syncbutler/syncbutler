@@ -232,21 +232,21 @@ namespace SyncButlerUI
 		private void createPartnership(object sender, RoutedEventArgs e){
 		 try{
 			if(partnershipNameTextBox.Text.Equals("")){
-			throw new Exception("Please input a partnership name");	
+			    throw new Exception("Please input a partnership name");	
 			
 			}
-			this.Controller.AddPartnership(partnerShipName.Text,sourceFolderPath.Text,destinationFolderPath.Text);
 			PartnershipTempData.partnershipName=partnershipNameTextBox.Text;
 			sourceFolderPath.Text=PartnershipTempData.sourcePath;
 			destinationFolderPath.Text=PartnershipTempData.destinationPath;
 		    partnerShipName.Text=PartnershipTempData.partnershipName;
+			this.Controller.AddPartnership(partnerShipName.Text,sourceFolderPath.Text,destinationFolderPath.Text);
 			VisualStateManager.GoToState(this,"CreatePartnershipDone1",false);
 			sourceTextBox1.Text="";
 			destinationTextBox1.Text="";
 			sourceTextBox.Text="";
 		    PartnershipTempData.clear();
 		   }catch(Exception ex){
-			MessageBox.Show(ex.Message);
+			    MessageBox.Show(ex.Message);
 			}	
 		}
 		
@@ -267,11 +267,14 @@ namespace SyncButlerUI
         private void goToViewPartnerships(object sender, RoutedEventArgs e)
         {
 			VisualStateManager.GoToState(this,"ViewPartnership1",false);
+	//		this.partnershipList.ItemsSource = GetListOfPartnerShip();
 			SortedList<string,Partnership> partnershiplist = this.Controller.GetPartnershipList();
-			foreach (Partnership p in partnershiplist.Values)
-			{
-				this.partnershipList.Items.Add(p);
-			}
+			this.partnershipList.ItemsSource = partnershiplist.Values;
+			//foreach (Partnership p in partnershiplist.Values)
+			//{
+//
+			//	this.partnershipList.Items.Add(new PartnershipTempData(p));
+			//}
 			
         }
 //#endregion

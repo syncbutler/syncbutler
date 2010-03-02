@@ -9,11 +9,12 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using SyncButler;
 namespace SyncButlerUI
 {
 	public class PartnershipTempData
 	{
+
 		public PartnershipTempData()
 		{
 			// Insert code required on object creation below this point.
@@ -21,6 +22,13 @@ namespace SyncButlerUI
 			destinationPath="";
 			partnershipName="";
 		}
+        public PartnershipTempData(Partnership p)
+        {
+            sourcePath = p.LeftFullPath;
+            destinationPath = p.RightFullPath;
+            partnershipName = p.Name;
+        }
+		
 		public static string sourcePath{
 		get;set;}
 		public static string destinationPath{
