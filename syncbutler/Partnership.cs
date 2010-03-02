@@ -69,7 +69,14 @@ namespace SyncButler
             this.name = name;
             this.left = left;
             this.right = right;
-            this.hashDictionary = hashDictionary;
+            if (hashDictionary == null)
+            {
+                this.hashDictionary = new Dictionary<string, long>();
+            }
+            else
+            {
+                this.hashDictionary = hashDictionary;
+            }
         }
 
         /// <summary>
