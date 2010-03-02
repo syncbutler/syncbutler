@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using SyncButler.Exceptions;
 
 namespace SyncButler
 {
@@ -29,7 +30,17 @@ namespace SyncButler
         public Action GetRecommendedAction() { return RecommendedAction; }
 
         /// <summary>
-        /// Not implemented. Attempts to resolve a conflict based on a specified user action.
+        /// Attempts to rsolve a conflict based on th recommended action.
+        /// </summary>
+        /// <returns></returns>
+        public Object Resolve()
+        {
+            if (this.RecommendedAction == Action.Unknown) throw new InvalidActionException();
+            return this.Resolve(this.RecommendedAction);
+        }
+
+        /// <summary>
+        /// Attempts to resolve a conflict based on a specified user action.
         /// </summary>
         /// <returns>true if the conflict was successfully resolved, false otherwise.</returns>
         /// <exception cref="ArgumentException">This exception is generated when an invalid user action is passed into the method.</exception>
