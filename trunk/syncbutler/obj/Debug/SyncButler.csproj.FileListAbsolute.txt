@@ -8,11 +8,6 @@ D:\Documents\CS3215\src\SyncButler\obj\Debug\SyncButler.dll
 D:\Documents\CS3215\src\SyncButler\obj\Debug\SyncButler.pdb
 D:\Documents\CS3215\src\SyncButler\bin\Debug\SyncButler.dll
 D:\Documents\CS3215\src\SyncButler\bin\Debug\SyncButler.pdb
-E:\syncbutler\SyncButler\bin\Debug\SyncButler.dll
-E:\syncbutler\SyncButler\bin\Debug\SyncButler.pdb
-E:\syncbutler\SyncButler\obj\Debug\ResolveAssemblyReference.cache
-E:\syncbutler\SyncButler\obj\Debug\SyncButler.dll
-E:\syncbutler\SyncButler\obj\Debug\SyncButler.pdb
 C:\Users\Benson\Desktop\SyncButler\SyncButler\bin\Debug\SyncButler.dll
 C:\Users\Benson\Desktop\SyncButler\SyncButler\bin\Debug\SyncButler.pdb
 C:\Users\Benson\Desktop\SyncButler\SyncButler\obj\Debug\ResolveAssemblyReference.cache
@@ -31,3 +26,8 @@ D:\University\CS3215 - Software Engineering Project\SyncButler\SyncButler\obj\De
 C:\Documents and Settings\tan-ce.EW.000\Desktop\CS3215 Project Source\SyncButler\obj\Debug\ResolveAssemblyReference.cache
 C:\Documents and Settings\tan-ce.EW.000\Desktop\CS3215 Project Source\SyncButler\obj\Debug\SyncButler.dll
 C:\Documents and Settings\tan-ce.EW.000\Desktop\CS3215 Project Source\SyncButler\obj\Debug\SyncButler.pdb
+E:\syncbutler\SyncButler\bin\Debug\SyncButler.dll
+E:\syncbutler\SyncButler\bin\Debug\SyncButler.pdb
+E:\syncbutler\SyncButler\obj\Debug\ResolveAssemblyReference.cache
+E:\syncbutler\SyncButler\obj\Debug\SyncButler.dll
+E:\syncbutler\SyncButler\obj\Debug\SyncButler.pdb

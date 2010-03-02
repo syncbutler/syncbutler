@@ -74,9 +74,15 @@ namespace SyncButler
         /// </summary>
         public void SyncAll()
         {
-            foreach (String  name in GetPartnershipList().Keys)
+            foreach (String name in GetPartnershipList().Keys)
             {
-                SyncPartnership(name);
+                List<Conflict> conflicts = SyncPartnership(name);
+                foreach (Conflict conflict in conflicts)
+                {
+                    //If unknown ignore 1st
+                    if (conflict.GetRecommendedAction() == Conflict.Action.Unknown) continue;
+                    conflict.Resolve(conflict.GetRecommendedAction());
+                }
             }
         }
 
