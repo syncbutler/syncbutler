@@ -249,9 +249,9 @@
 								<Image Margin="-166.5,-12,0,-9.636" Source="Images/Misc.png" Stretch="Fill" HorizontalAlignment="Left" Width="37.596"/>
 								<TextBlock Margin="21.632,-12,-42.369,0" Text="Source Path:" TextWrapping="Wrap" VerticalAlignment="Top" Height="15.96"/>
 								<TextBlock Margin="-2.368,4,-42.369,-4" Text="Destination Path:" TextWrapping="Wrap" VerticalAlignment="Stretch" Height="Auto"/>
-								<TextBlock x:Name="folder1" Margin="0,-12,-115.369,0" Text="" TextWrapping="Wrap" HorizontalAlignment="Right" Width="79" VerticalAlignment="Top" Height="15.96"/>
-								<TextBlock x:Name="folder2" Margin="0,6,-115.369,-6" Text="" TextWrapping="Wrap" HorizontalAlignment="Right" Width="79" VerticalAlignment="Stretch" Height="Auto"/>
-								<TextBlock x:Name="partnershipName" Margin="-120,-4.04,0,4.04" Text="" TextWrapping="Wrap" HorizontalAlignment="Left" Width="102"/>
+								<TextBlock x:Name="folder1" Margin="0,-12,-115.369,0" Text="{Binding Path=LeftFullPath}" TextWrapping="Wrap" HorizontalAlignment="Right" Width="79" VerticalAlignment="Top" Height="15.96"/>
+								<TextBlock x:Name="folder2" Margin="0,6,-115.369,-6" Text="{Binding Path=RightFullPath}" TextWrapping="Wrap" HorizontalAlignment="Right" Width="79" VerticalAlignment="Stretch" Height="Auto"/>
+								<TextBlock x:Name="partnershipName" Margin="-120,-4.04,0,4.04" Text="{Binding Path=Name}" TextWrapping="Wrap" HorizontalAlignment="Left" Width="102"/>
 							</Grid>
 						</Border>
 						<ControlTemplate.Triggers>
@@ -275,15 +275,15 @@
 				</Setter.Value>
 			</Setter>
 		</Style>
-		<DataTemplate x:Key="DataTemplate1">
+		<DataTemplate x:Key="DataTemplate1" DataType="PartnershipTempData">
 			<Grid Width="102.297">
 				<ContentPresenter HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}" Margin="-118,-12,0,0" VerticalAlignment="Top" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Content="" d:IsHidden="True"/>
 				<Image HorizontalAlignment="Left" Margin="-166.5,-12,0,-5.596" Width="37.596" Source="Images\Misc.png" Stretch="Fill"/>
 				<TextBlock Margin="21.632,-12,-55.352,0" VerticalAlignment="Top" Height="15.96" Text="Source Path:" TextWrapping="Wrap"/>
 				<TextBlock Margin="-2.368,4,-55.352,0.04" Text="Destination Path:" TextWrapping="Wrap" VerticalAlignment="Stretch" Height="Auto"/>
-				<TextBlock x:Name="folder1" Margin="0,-12,-128.352,0" Text="" TextWrapping="Wrap" HorizontalAlignment="Right" VerticalAlignment="Top" Width="79" Height="15.96"/>
-				<TextBlock x:Name="folder2" Margin="0,6,-128.352,-1.96" Text="" TextWrapping="Wrap" HorizontalAlignment="Right" Width="79" VerticalAlignment="Stretch" Height="Auto"/>
-				<TextBlock x:Name="partnershipName" Margin="-120,-4.04,0,8.08" Text="" TextWrapping="Wrap" HorizontalAlignment="Left" Width="102"/>
+				<TextBlock x:Name="folder1" Margin="0,-12,-128.352,0" Text="{Binding Path=LeftFullPath}" TextWrapping="Wrap" HorizontalAlignment="Right" VerticalAlignment="Top" Width="79" Height="15.96"/>
+				<TextBlock x:Name="folder2" Margin="0,6,-128.352,-1.96" Text="{Binding Path=RightFullPath}" TextWrapping="Wrap" HorizontalAlignment="Right" Width="79" VerticalAlignment="Stretch" Height="Auto"/>
+				<TextBlock x:Name="partnershipName" Margin="-120,-4.04,0,8.08" Text="{Binding Path=Name}" TextWrapping="Wrap" HorizontalAlignment="Left" Width="102"/>
 			</Grid>
 		</DataTemplate>
 		<Style x:Key="weirdFilesListItemsStyle" TargetType="{x:Type ListBox}">
@@ -479,6 +479,9 @@
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="ViewPartnership" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
 						</ObjectAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="background_Copy" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="5"/>
+						</DoubleAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
 				<VisualState x:Name="SbsState1">
@@ -683,7 +686,15 @@
 					<TranslateTransform/>
 				</TransformGroup>
 			</Grid.RenderTransform>
-			<Rectangle x:Name="background_Copy" RadiusX="1" RadiusY="2" Margin="0,0,-1.5,0" VerticalAlignment="Top" Height="448" Cursor="None">
+			<Rectangle x:Name="background_Copy" RadiusX="1" RadiusY="2" Margin="0,0,-1.5,0" VerticalAlignment="Top" Height="448" Cursor="None" RenderTransformOrigin="0.5,0.5">
+				<Rectangle.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Rectangle.RenderTransform>
 				<Rectangle.Fill>
 					<RadialGradientBrush GradientOrigin="0.265,0.184" RadiusX="1.237" RadiusY="1.237">
 						<GradientStop Color="Black" Offset="1"/>
@@ -697,7 +708,7 @@
 			<Image HorizontalAlignment="Left" Margin="29,29,0,0" VerticalAlignment="Top" Width="73" Height="73" Source="Images\Doc.png" Stretch="Fill"/>
 			<TextBlock Margin="111.5,53,136.307,0" VerticalAlignment="Top" Height="61.5" FontFamily="Arial" FontSize="24" FontWeight="Bold" Text="View Partnership" TextWrapping="Wrap"/>
 			<TextBlock Margin="113,84.5,139.307,0" VerticalAlignment="Top" Height="54" FontSize="13.333" TextWrapping="Wrap" Text="List of partnerships you created."/>
-			<ListBox x:Name="partnershipList" Margin="53.973,175.5,56.361,46.5" Style="{DynamicResource ListBoxStyle1}" ItemContainerStyle="{DynamicResource ListBoxItemStyle1}" Background="White" BorderBrush="#FF787878" Foreground="Black" RenderTransformOrigin="0.5,0.5" ItemTemplate="{DynamicResource DataTemplate1}">
+			<ListBox x:Name="partnershipList" Margin="53.973,175.5,56.361,46.5" Style="{DynamicResource ListBoxStyle1}" ItemContainerStyle="{DynamicResource ListBoxItemStyle1}" Background="White" BorderBrush="#FF787878" Foreground="Black" RenderTransformOrigin="0.5,0.5"  ItemTemplate="{DynamicResource DataTemplate1}">
 				<ListBox.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>

@@ -10,7 +10,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using WPF_Explorer_Tree;
+using SyncButler;
 namespace SyncButlerUI
 {
 	/// <summary>
@@ -44,6 +45,11 @@ namespace SyncButlerUI
 			this.homeWindow1.WeirdFile_List.Items.Clear();
 			this.homeWindow1.WeirdFile_List.Items.Add("C:\\xxx.jpg");
 			this.homeWindow1.WeirdFile_List.Items.Add("C:\\xxx\\weird stuff.jpg");
+		}
+		
+		private void cleanUp(object sender,  System.ComponentModel.CancelEventArgs e)
+		{
+			this.controller.Shutdown();
 		}
 	}
 }
