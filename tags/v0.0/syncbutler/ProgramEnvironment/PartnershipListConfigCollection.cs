@@ -1,0 +1,77 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Configuration;
+
+namespace SyncButler.ProgramEnvironment
+{
+    /// <summary>
+    /// This is one to one representation of the list of partnership in XML descriptor form
+    /// </summary>
+    public class PartnershipListConfigCollection : ConfigurationElementCollection
+    {
+        /// <summary>
+        /// Returns the the partnership object that is stored at the particular index
+        /// </summary>
+        /// <param name="index">Index, 0 is inclusive</param>
+        /// <returns>A Partnership Config Element that in it contains a partnership object</returns>
+        public PartnershipConfigElement this[int index]
+        {
+            get
+            {
+                return (PartnershipConfigElement)BaseGet(index);
+            }
+            set
+            {
+                if (BaseGet(index) != null)
+                {
+                    BaseRemoveAt(index);
+                }
+                BaseAdd(index, value);
+            }
+        }
+
+        /// <summary>
+        /// Creates a Partnership object that is automatically encapsulated in Partnership
+        /// Config element
+        /// </summary>
+        /// <param name="friendlyName">Friendly name of the partnership</param>
+        /// <param name="leftPath">Full left path to one of the folders in the partnership</param>
+        /// <param name="rightPath">Full right path to two of the folders in the partnership</param>
+        public void Add(string friendlyName, string leftPath, string rightPath)
+        {
+            PartnershipConfigElement newElement = new PartnershipConfigElement(friendlyName, leftPath, rightPath);
+            BaseAdd(newElement);
+        }
+
+        /// <summary>
+        /// A generic method required by ConfigCollection to create a Configuration
+        /// Element (specifically PartnershipConfigElement)
+        /// </summary>
+        /// <returns>A new declared Partnership Config Element</returns>
+        protected override ConfigurationElement CreateNewElement()
+        {
+            return new PartnershipConfigElement();
+        }
+
+        /// <summary>
+        /// A generic method required by ConfigCollection to return a Configuration
+        /// Element (specifically PartnershipConfigElement)
+        /// </summary>
+        /// <param name="element"></param>
+        /// <returns>An object containing the information stored in the ConfigElement object,
+        /// already boxed to be PartnershipConfigElement</returns>
+        protected override Object GetElementKey(ConfigurationElement element)
+        {
+            return ((PartnershipConfigElement)element).FriendlyName;
+        }
+
+        /// <summary>
+        /// Clear out the list stored in the XML settings file
+        /// </summary>
+        public void Clear()
+        {
+            BaseClear();
+        }
+    }
+}
