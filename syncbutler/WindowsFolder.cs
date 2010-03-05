@@ -19,12 +19,15 @@ namespace SyncButler
         protected DirectoryInfo nativeDirObj;
         protected SyncableStatusMonitor statusMonitor = null;
 
+        protected long checksumCache;
+        protected bool checksumCacheFresh = false;
+
         /// <summary>
         /// Constructor that takes in two parameters, a root path and the full path.
         /// </summary>
         /// <param name="rootPath">Path of the root directory</param>
         /// <param name="fullPath">Full path to this file</param>
-        public WindowsFolder(String rootPath, String fullPath)
+        public WindowsFolder(string rootPath, string fullPath)
         {
             if (!rootPath.EndsWith("\\")) rootPath += "\\";
             if (!fullPath.EndsWith("\\")) fullPath += "\\";
@@ -41,7 +44,7 @@ namespace SyncButler
         /// </summary>
         /// <param name="rootPath">Path of the root directory</param>
         /// <param name="fullPath">Full path to this file</param>
-        public WindowsFolder(String rootPath, String fullPath, Partnership parentPartnership)
+        public WindowsFolder(string rootPath, string fullPath, Partnership parentPartnership)
         {
             if (!rootPath.EndsWith("\\")) rootPath += "\\";
             if (!fullPath.EndsWith("\\")) fullPath += "\\";
@@ -51,6 +54,26 @@ namespace SyncButler
             this.nativeFileSystemObj = this.nativeDirObj;
             this.rootPath = rootPath;
             this.parentPartnership = parentPartnership;
+        }
+
+        /// <summary>
+        /// Used to create an instance of the topmost left or right IScynable WindowsFolder
+        /// </summary>
+        /// <param name="fullPath"></param>
+        public WindowsFolder(string fullPath) : this(fullPath, fullPath)
+        {
+
+        }
+
+        /// <summary>
+        /// Used to create an instance of the topmost left or right IScynable WindowsFolder
+        /// </summary>
+        /// <param name="fullPath"></param>
+        /// <param name="parentPartnership"></param>
+        public WindowsFolder(string fullPath, Partnership parentPartnership)
+            : this(fullPath, fullPath, parentPartnership)
+        {
+
         }
 
         public void SetStatusMonitor(SyncableStatusMonitor statusMonitor)
@@ -150,6 +173,8 @@ namespace SyncButler
         /// <returns>A long representing the checksum</returns>
         public override long Checksum()
         {
+            if (checksumCacheFresh) return checksumCache;
+
             IRollingHash hashAlgorithm = new Adler32();
             System.Text.UTF8Encoding UTF8 = new System.Text.UTF8Encoding();
 
@@ -171,7 +196,8 @@ namespace SyncButler
                 hashAlgorithm.Update(UTF8.GetBytes(("\\" + childName).ToCharArray()));
             }
 
-            return hashAlgorithm.Value;
+            checksumCache = hashAlgorithm.Value;
+            return checksumCache;
         }
 
         /// <summary>
@@ -262,6 +288,8 @@ namespace SyncButler
 
             // Check Left to Right
             workingList.Enqueue("");
+
+            checksumCacheFresh = false; // Make sure we're really comparing with the current folder
 
             string curDir;
             while (workingList.Count > 0)

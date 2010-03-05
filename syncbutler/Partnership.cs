@@ -80,6 +80,25 @@ namespace SyncButler
         }
 
         /// <summary>
+        /// Retrieves the last known checksum from the dictionary
+        /// </summary>
+        /// <param name="syncable"></param>
+        /// <returns>The last known checksum of the ISyncable</returns>
+        /// <exception cref="SyncableNotExistsException">The dictionary does not have the last checksum of this Syncable</exception>
+        public long GetLastChecksum(ISyncable syncable)
+        {
+            string key = this.name + ":" + syncable.EntityPath();
+            if (!hashDictionary.ContainsKey(key)) throw new Exceptions.SyncableNotExistsException();
+
+            return hashDictionary[key];
+        }
+
+        public void UpdateLastChecksum(ISyncable syncable)
+        {
+
+        }
+
+        /// <summary>
         /// Attempts to sync this partnership
         /// </summary>
         /// <returns>Null on no conflicts, else a list of conflicts.</returns>
