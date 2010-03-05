@@ -93,9 +93,32 @@ namespace SyncButler
             return hashDictionary[key];
         }
 
+        public long GetLastChecksum(string entityPath)
+        {
+            string key = this.name + ":" + entityPath;
+            if (!hashDictionary.ContainsKey(key)) throw new Exceptions.SyncableNotExistsException();
+
+            return hashDictionary[key];
+        }
+
+        /// <summary>
+        /// Checks whether the given syncable has an entry in the checksum dictionary
+        /// </summary>
+        /// <param name="syncable"></param>
+        /// <returns></returns>
+        public bool ChecksumExists(ISyncable syncable)
+        {
+            return hashDictionary.ContainsKey(this.name + ":" + syncable.EntityPath());
+        }
+
+        public bool ChecksumExists(string entityPath)
+        {
+            return hashDictionary.ContainsKey(this.name + ":" + entityPath);
+        }
+
         public void UpdateLastChecksum(ISyncable syncable)
         {
-
+            hashDictionary[this.name + ":" + syncable.EntityPath()] = syncable.Checksum();
         }
 
         /// <summary>
