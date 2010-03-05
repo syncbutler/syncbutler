@@ -10,7 +10,7 @@ namespace SyncButler
     /// </summary>
     /// <param name="status">Status of the current Sync operation</param>
     /// <returns>False to abort</returns>
-    public delegate Boolean SyncableStatusMonitor(SyncableStatus status);
+    public delegate bool SyncableStatusMonitor(SyncableStatus status);
 
     /// <summary>
     /// Interface containing the methods necessary for items to be syncable.

@@ -17,6 +17,9 @@ namespace SyncButler
         protected FileInfo nativeFileObj;
         protected SyncableStatusMonitor statusMonitor = null;
 
+        protected long checksumCache;
+        protected bool checksumCacheFresh = false;
+
         /// <summary>
         /// Constructor that takes in two parameters, a root path and the full path.
         /// </summary>
@@ -186,6 +189,8 @@ namespace SyncButler
         /// <exception cref="ObjectDisposedException">The current stream is closed.</exception>
         public override long Checksum()
         {
+            if (checksumCacheFresh) return checksumCache;
+
             IRollingHash hashAlgorithm = new Adler32();
             long start = 0;
 
@@ -195,7 +200,9 @@ namespace SyncButler
                 start += 2048000;
             }
 
-            return hashAlgorithm.Value;
+            checksumCache = hashAlgorithm.Value;
+
+            return checksumCache;
         }
 
         /// <summary>
@@ -212,10 +219,15 @@ namespace SyncButler
         public bool HasChanged()
         {
             Debug.Assert(parentPartnership != null, "parentPartnership not set! Cannot determine if this File has changed");
-            
-            if (!parentPartnership.hashDictionary.ContainsKey(this.EntityPath())) return true;
 
-            return (parentPartnership.hashDictionary[this.EntityPath()] != this.Checksum());
+            try
+            {
+                return (parentPartnership.GetLastChecksum(this) != this.Checksum());
+            }
+            catch (SyncableNotExistsException e)
+            {
+                return true; // assume the file has change if we know nothgin about it.
+            }
         }
 
         /// <summary>
@@ -261,8 +273,6 @@ namespace SyncButler
         {
             WindowsFile partner;
 
-            Debug.Assert(parentPartnership != null, "The parent partnership has not been set; cannot sync");
-
             // Temporary -- give basic functionality first.
             if (statusMonitor != null) statusMonitor(new SyncableStatus(this.EntityPath(), 0));
 
@@ -276,6 +286,9 @@ namespace SyncButler
             }
             
             // Check if the files are in sync
+
+            checksumCacheFresh = false; // Make sure we're really comparing with the current file
+
             List<Conflict> returnValue = new List<Conflict>();
             Conflict.Action recommendedAction = Conflict.Action.Unknown;
 
