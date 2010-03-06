@@ -231,7 +231,7 @@
 				<Setter.Value>
 					<ControlTemplate TargetType="{x:Type Button}">
 						<Grid x:Name="HomeButton">
-							<Rectangle Cursor="Hand" Margin="0,0,-42,0">
+							<Rectangle Cursor="Hand" Margin="0,0,1,0">
 								<Rectangle.Fill>
 									<LinearGradientBrush EndPoint="1.005,0.575" StartPoint="0.051,0.657" MappingMode="RelativeToBoundingBox">
 										<GradientStop Color="#00000000" Offset="1"/>

@@ -244,14 +244,32 @@
 				<Setter.Value>
 					<ControlTemplate TargetType="{x:Type ListBoxItem}">
 						<Border x:Name="Bd" SnapsToDevicePixels="true" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" Height="42.638">
-							<Grid Width="58.264" Height="15.96" Margin="0,0,0,12.339" VerticalAlignment="Bottom" d:LayoutOverrides="Height">
-								<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="Top" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="-118,-12,0,0" Content="" Visibility="Hidden"/>
-								<Image Margin="-166.5,-12,0,-9.636" Source="Images/Misc.png" Stretch="Fill" HorizontalAlignment="Left" Width="37.596"/>
-								<TextBlock Margin="21.632,-12,-42.369,0" Text="Source Path:" TextWrapping="Wrap" VerticalAlignment="Top" Height="15.96"/>
-								<TextBlock Margin="-2.368,4,-42.369,-4" Text="Destination Path:" TextWrapping="Wrap" VerticalAlignment="Stretch" Height="Auto"/>
-								<TextBlock x:Name="folder1" Margin="0,-12,-115.369,0" Text="{Binding Path=LeftFullPath}" TextWrapping="Wrap" HorizontalAlignment="Right" Width="79" VerticalAlignment="Top" Height="15.96"/>
-								<TextBlock x:Name="folder2" Margin="0,6,-115.369,-6" Text="{Binding Path=RightFullPath}" TextWrapping="Wrap" HorizontalAlignment="Right" Width="79" VerticalAlignment="Stretch" Height="Auto"/>
-								<TextBlock x:Name="partnershipName" Margin="-120,-4.04,0,4.04" Text="{Binding Path=Name}" TextWrapping="Wrap" HorizontalAlignment="Left" Width="102"/>
+							<Grid Height="42.293" Margin="0" VerticalAlignment="Top" Width="388.931" Background="White">
+								<ContentPresenter HorizontalAlignment="Right" VerticalAlignment="Top" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="0,4.5,85.132,0" Content="" Visibility="Hidden"/>
+								<Image Margin="1.5,4.5,0,2.864" Source="Images/Misc.png" Stretch="Fill" HorizontalAlignment="Left" Width="37.596"/>
+								<TextBlock Margin="190.798,4.5,130.632,24.5" Text="Source Path:" TextWrapping="Wrap" VerticalAlignment="Stretch" Height="Auto" HorizontalAlignment="Stretch" Width="Auto"/>
+								<TextBlock Margin="166.965,20.5,130.298,8.5" Text="Destination Path:" TextWrapping="Wrap" VerticalAlignment="Stretch" Height="Auto" HorizontalAlignment="Stretch" Width="Auto"/>
+								<TextBlock x:Name="folder1" Margin="0,4.5,4.298,0" ToolTip="{Binding LeftFullPath}" Text="{Binding LeftFullPath}" TextWrapping="Wrap" HorizontalAlignment="Right" Width="123.167" VerticalAlignment="Top" Height="15.96" RenderTransformOrigin="0.5,0.5">
+									<TextBlock.RenderTransform>
+										<TransformGroup>
+											<ScaleTransform ScaleX="1"/>
+											<SkewTransform/>
+											<RotateTransform/>
+											<TranslateTransform/>
+										</TransformGroup>
+									</TextBlock.RenderTransform>
+								</TextBlock>
+								<TextBlock x:Name="folder2" Margin="0,0,3.964,4.5" ToolTip="{Binding RightFullPath}" Text="{Binding RightFullPath}" TextWrapping="Wrap" HorizontalAlignment="Right" Width="122.667" VerticalAlignment="Bottom" Height="15.96" d:LayoutOverrides="VerticalAlignment, Height" RenderTransformOrigin="0.5,0.5">
+									<TextBlock.RenderTransform>
+										<TransformGroup>
+											<ScaleTransform ScaleX="1"/>
+											<SkewTransform/>
+											<RotateTransform/>
+											<TranslateTransform/>
+										</TransformGroup>
+									</TextBlock.RenderTransform>
+								</TextBlock>
+								<TextBlock x:Name="partnershipName" Margin="48,12.46,0,16.54" Text="{Binding Name}" TextWrapping="Wrap" HorizontalAlignment="Left" Width="102" VerticalAlignment="Stretch" Height="Auto"/>
 							</Grid>
 						</Border>
 						<ControlTemplate.Triggers>
@@ -346,6 +364,35 @@
 				</EventTrigger>
 			</ControlTemplate.Triggers>
 		</ControlTemplate>
+		<Style x:Key="ExploreFeaturesButton" TargetType="{x:Type Button}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type Button}">
+						<Grid>
+							<Rectangle x:Name="bigButton_Copy3" Stroke="Black" Cursor="Hand">
+								<Rectangle.Fill>
+									<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" MappingMode="RelativeToBoundingBox">
+										<GradientStop Color="#00000000" Offset="1"/>
+										<GradientStop Color="#FF005F74" Offset="0.433"/>
+										<GradientStop Color="#8F004A5B" Offset="1"/>
+									</LinearGradientBrush>
+								</Rectangle.Fill>
+							</Rectangle>
+							<TextBlock Margin="0,11.948,17.707,0" VerticalAlignment="Top" Height="72" Opacity="0.6" FontFamily="Arial" FontSize="21.333" Foreground="White" TextAlignment="Center" TextWrapping="Wrap" Cursor="Hand" HorizontalAlignment="Right" Width="128.723"><Run Text="Explore "/><Run FontStyle="Italic" Text="Features"/></TextBlock>
+							<TextBlock Margin="-19.973,130.948,11.916,0" VerticalAlignment="Top" Height="75.052" Opacity="0.5" FontFamily="Arial" FontSize="16" Foreground="White" TextWrapping="Wrap" TextAlignment="Right" Cursor="Hand"><Run Text="Discover"/><LineBreak/><Run Text="The easy way of life"/></TextBlock>
+							<Image Cursor="Hand" Margin="21.857,79.062,78.723,34.269" Opacity="0.6" Source="Images\Broken.png" Stretch="Fill"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsFocused" Value="True"/>
+							<Trigger Property="IsDefaulted" Value="True"/>
+							<Trigger Property="IsMouseOver" Value="True"/>
+							<Trigger Property="IsPressed" Value="True"/>
+							<Trigger Property="IsEnabled" Value="False"/>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
 		
 	</UserControl.Resources>
 
@@ -482,6 +529,13 @@
 						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="background_Copy" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
 							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="5"/>
 						</DoubleAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="background_Copy" Storyboard.TargetProperty="(FrameworkElement.Cursor)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00">
+								<DiscreteObjectKeyFrame.Value>
+									<Cursor>Arrow</Cursor>
+								</DiscreteObjectKeyFrame.Value>
+							</DiscreteObjectKeyFrame>
+						</ObjectAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
 				<VisualState x:Name="SbsState1">
@@ -497,7 +551,7 @@
 			</VisualStateGroup>
 		</VisualStateManager.VisualStateGroups>
 		<Grid x:Name="HomeWindow" VerticalAlignment="Bottom" Height="444">
-			<Rectangle x:Name="background" RadiusX="1" RadiusY="2" Margin="0,0,-1.5,0" VerticalAlignment="Top" Height="448" Cursor="Hand">
+			<Rectangle x:Name="background" RadiusX="1" RadiusY="2" Margin="0,0,-1.5,0" VerticalAlignment="Top" Height="448" Cursor="Arrow">
 				<Rectangle.Fill>
 					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.504,0.026">
 						<GradientStop Color="Black" Offset="1"/>
@@ -518,22 +572,11 @@
 				</Rectangle.Fill>
 			</Rectangle>
 			<Button x:Name="ViewPartnerships" HorizontalAlignment="Right" Margin="0,260.231,171.5,-22" Style="{DynamicResource ViewPartnershipButton}" Width="167" Content="" Click="goToViewPartnerships" Cursor="Hand"/>
-			<Rectangle x:Name="bigButton_Copy3" Margin="0,0,2.5,2" VerticalAlignment="Bottom" Height="182.269" Stroke="Black" Cursor="Hand" HorizontalAlignment="Right" Width="169.25" d:LayoutOverrides="VerticalAlignment">
-				<Rectangle.Fill>
-					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" MappingMode="RelativeToBoundingBox">
-						<GradientStop Color="#00000000" Offset="1"/>
-						<GradientStop Color="#FF005F74" Offset="0.433"/>
-						<GradientStop Color="#8F004A5B" Offset="1"/>
-					</LinearGradientBrush>
-				</Rectangle.Fill>
-			</Rectangle>
-			<TextBlock Margin="0,0,21.791,100.052" VerticalAlignment="Bottom" Height="72" Opacity="0.6" FontFamily="Arial" FontSize="21.333" Foreground="White" TextAlignment="Center" TextWrapping="Wrap" Cursor="Hand" HorizontalAlignment="Right" Width="128.723" d:LayoutOverrides="HorizontalAlignment"><Run Text="Explore "/><Run FontStyle="Italic" Text="Features"/></TextBlock>
-			<TextBlock Margin="0,390.948,16,0" VerticalAlignment="Top" Height="75.052" Opacity="0.5" FontFamily="Arial" FontSize="16" Foreground="White" TextWrapping="Wrap" TextAlignment="Right" Cursor="Hand" HorizontalAlignment="Right" Width="177.307"><Run Text="Discover"/><LineBreak/><Run Text="The easy way of life"/></TextBlock>
-			<Image Cursor="Hand" HorizontalAlignment="Right" Margin="0,0,82.807,36" VerticalAlignment="Bottom" Width="68.67" Height="68.938" Opacity="0.6" Source="Images\Broken.png" Stretch="Fill"/>
-			<Button x:Name="CreatePartnershipButton" HorizontalAlignment="Left" Margin="7,0,0,0.5" Style="{DynamicResource CreatePartnersButton}" VerticalAlignment="Bottom" Width="164.483" Height="183.269" Content="" Cursor="Hand" Click="goToCreatePartnership"/>
+			<Button HorizontalAlignment="Right" Margin="0,0,2.5,2" Style="{DynamicResource ExploreFeaturesButton}" VerticalAlignment="Bottom" Width="169.25" Height="182.269" Content="Button" d:LayoutOverrides="VerticalAlignment"/>
+			<Button x:Name="CreatePartnershipButton" HorizontalAlignment="Left" Margin="7,0,0,0.5" Style="{DynamicResource CreatePartnersButton}" VerticalAlignment="Bottom" Width="164.483" Height="183.269" Content="" Cursor="Hand" Click="goToCreatePartnership_Click"/>
 		</Grid>
 		<Grid x:Name="grid" Margin="-14.5,0,-36.193,0" Visibility="Hidden" >
-			<Rectangle x:Name="background_Copy1" RadiusX="1" RadiusY="2" Margin="0,0,37,0" VerticalAlignment="Top" Height="448" Cursor="None">
+			<Rectangle x:Name="background_Copy1" RadiusX="1" RadiusY="2" Margin="0,0,37,0" VerticalAlignment="Top" Height="448" Cursor="Arrow">
 				<Rectangle.Fill>
 					<RadialGradientBrush GradientOrigin="0.265,0.184" RadiusX="1.237" RadiusY="1.237">
 						<GradientStop Color="Black" Offset="1"/>
@@ -545,7 +588,7 @@
 				</Rectangle.Fill>
 			</Rectangle>
 			<Image x:Name="image1" Margin="184.36,116.094,50.666,8" Source="Images\logo.png" Stretch="Fill" Opacity="0.04"/>
-			<Grid x:Name="CreatePartnership" Margin="0,0,38.5,0" VerticalAlignment="Bottom" Height="444" d:LayoutOverrides="GridBox" Loaded="TreeWindow_Loaded" >
+			<Grid x:Name="CreatePartnership" Margin="0,0,38.5,0" VerticalAlignment="Bottom" Height="444" d:LayoutOverrides="GridBox">
 				<TextBlock Margin="0,25,36.447,0" FontFamily="Arial" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" Text="Creating a Sync Partnership" VerticalAlignment="Top" Height="83.5" HorizontalAlignment="Right" Width="202.72"/>
 				<TextBlock Margin="0,109.5,55.947,0" FontSize="16" TextWrapping="Wrap" Text="Please select a folder on this computer" HorizontalAlignment="Right" Width="183.22" d:LayoutOverrides="HorizontalAlignment" VerticalAlignment="Top" Height="63.5" FontWeight="Bold" FontStyle="Italic"/>
 				<TextBlock Margin="0,181.5,71.947,137.5" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="167.22" d:LayoutOverrides="HorizontalAlignment"><Run Text="This folder will be 1 of 2  folders in a syncing partnership."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="Any updates will be reflected on the other folder in the partnership"/></TextBlock>
@@ -554,7 +597,7 @@
 				<TextBlock Margin="0,0,99.527,14.5" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="85.64" VerticalAlignment="Bottom" Height="25" Text="Step 1 of 3" d:LayoutOverrides="HorizontalAlignment"/>
 				<Button x:Name="toPartnershipDestButton" HorizontalAlignment="Right" Margin="0,0,31.947,19" VerticalAlignment="Bottom" Width="69" Height="23" Content="Next&gt;" RenderTransformOrigin="0.79,1.043" Click="goToPartnershipDest" />
 			</Grid>
-			<Grid x:Name="CreatePartnership2" Margin="0,0,38.5,0" VerticalAlignment="Bottom" Height="444" d:LayoutOverrides="GridBox" Loaded="TreeWindow_Loaded" >
+			<Grid x:Name="CreatePartnership2" Margin="0,0,38.5,0" VerticalAlignment="Bottom" Height="444" d:LayoutOverrides="GridBox" >
 				<TextBlock Margin="0,25,36.447,0" FontFamily="Arial" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" Text="Creating a Sync Partnership" VerticalAlignment="Top" Height="83.5" HorizontalAlignment="Right" Width="202.72"/>
 				<TextBlock Margin="0,109.5,55.947,0" FontSize="16" TextWrapping="Wrap" Text="Please select another folder on this computer" HorizontalAlignment="Right" Width="183.22" d:LayoutOverrides="HorizontalAlignment" VerticalAlignment="Top" Height="63.5" FontWeight="Bold" FontStyle="Italic"/>
 				<TextBlock Margin="0,181.5,71.947,137.5" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="167.22" d:LayoutOverrides="HorizontalAlignment"><Run Text="This folder will be 1 of 2  folders in a syncing partnership."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="Any updates will be reflected on the other folder in the partnership"/></TextBlock>
@@ -652,7 +695,7 @@
 				<TextBlock Margin="30.499,0,0,112" FontSize="14.667" FontWeight="Bold" Text="Destination Folder" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="28" HorizontalAlignment="Left" Width="222.08"/>
 				<Button HorizontalAlignment="Right" Margin="0,0,38.5,160.643" VerticalAlignment="Bottom" Width="127.667" Height="23" Content="Go back to Home" RenderTransformOrigin="0.79,1.043" Click="goHome"/>
 				<TextBlock Margin="30.499,172.5,0,0" FontSize="14.667" FontWeight="Bold" Text="Partnership Name" TextWrapping="Wrap" VerticalAlignment="Top" Height="28" HorizontalAlignment="Left" Width="222.08"/>
-				<Button HorizontalAlignment="Right" Margin="0,0,38.5,88.643" VerticalAlignment="Bottom" Width="127.667" Height="47" Content="Create another&#xa; Partnership" RenderTransformOrigin="0.79,1.043" Click="goToCreatePartnership"/>
+				<Button HorizontalAlignment="Right" Margin="0,0,38.5,88.643" VerticalAlignment="Bottom" Width="127.667" Height="47" Content="Create another&#xa; Partnership" RenderTransformOrigin="0.79,1.043" Click="goToCreatePartnership_Click"/>
 				<TextBlock x:Name="sourceFolderPath" Margin="30.499,0,0,147" FontSize="13.333" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="28" HorizontalAlignment="Left" Width="222.08"/>
 				<TextBlock x:Name="destinationFolderPath" Margin="30.499,0,0,93" FontSize="13.333" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="28" HorizontalAlignment="Left" Width="222.08"/>
 				<TextBlock x:Name="partnerShipName" Margin="30.499,191,0,0" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Left" Width="222.08" VerticalAlignment="Top" Height="28"/>
@@ -686,7 +729,7 @@
 					<TranslateTransform/>
 				</TransformGroup>
 			</Grid.RenderTransform>
-			<Rectangle x:Name="background_Copy" RadiusX="1" RadiusY="2" Margin="0,0,-1.5,0" VerticalAlignment="Top" Height="448" Cursor="None" RenderTransformOrigin="0.5,0.5">
+			<Rectangle x:Name="background_Copy" RadiusX="1" RadiusY="2" Margin="0,0,-1.5,0" VerticalAlignment="Top" Height="448" Cursor="Arrow" RenderTransformOrigin="0.5,0.5">
 				<Rectangle.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
@@ -708,7 +751,7 @@
 			<Image HorizontalAlignment="Left" Margin="29,29,0,0" VerticalAlignment="Top" Width="73" Height="73" Source="Images\Doc.png" Stretch="Fill"/>
 			<TextBlock Margin="111.5,53,136.307,0" VerticalAlignment="Top" Height="61.5" FontFamily="Arial" FontSize="24" FontWeight="Bold" Text="View Partnership" TextWrapping="Wrap"/>
 			<TextBlock Margin="113,84.5,139.307,0" VerticalAlignment="Top" Height="54" FontSize="13.333" TextWrapping="Wrap" Text="List of partnerships you created."/>
-			<ListBox x:Name="partnershipList" Margin="53.973,175.5,56.361,46.5" Style="{DynamicResource ListBoxStyle1}" ItemContainerStyle="{DynamicResource ListBoxItemStyle1}" Background="White" BorderBrush="#FF787878" Foreground="Black" RenderTransformOrigin="0.5,0.5"  ItemTemplate="{DynamicResource DataTemplate1}">
+			<ListBox x:Name="partnershipList" Margin="53.973,145.5,56.361,76.5" Style="{DynamicResource ListBoxStyle1}" ItemContainerStyle="{DynamicResource ListBoxItemStyle1}" Background="White" BorderBrush="#FF787878" Foreground="Black" RenderTransformOrigin="0.5,0.5"  ItemTemplate="{DynamicResource DataTemplate1}">
 				<ListBox.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
@@ -718,8 +761,12 @@
 					</TransformGroup>
 				</ListBox.RenderTransform>
 			</ListBox>
+			<Button Margin="198.973,0,241.361,22" VerticalAlignment="Bottom" Height="34" Content="Sync"/>
+			<Button HorizontalAlignment="Right" Margin="0,0,166.361,22" VerticalAlignment="Bottom" Width="63" Height="34" Content="Edit"/>
+			<Button HorizontalAlignment="Right" Margin="0,0,91.361,22" VerticalAlignment="Bottom" Width="63" Height="34" Content="Create" Click="goToCreatePartnership_Click"/>
+			<Button HorizontalAlignment="Right" Margin="0,0,18.361,21" VerticalAlignment="Bottom" Width="63" Height="34" Content="Delete" Click="deletePartnership_Click"/>
 		</Grid>
-		<Grid x:Name="sbs" Margin="-7.5,0,-4.693,0" VerticalAlignment="Bottom" Height="444" Loaded="TreeWindow_Loaded" d:LayoutOverrides="GridBox" Visibility="Hidden" >
+		<Grid x:Name="sbs" Margin="-7.5,0,-4.693,0" VerticalAlignment="Bottom" Height="444" d:LayoutOverrides="GridBox" Visibility="Hidden" >
 			<Rectangle x:Name="background_Copy2" RadiusX="1" RadiusY="2" Margin="0,0,-1.5,0" VerticalAlignment="Top" Height="448" Cursor="None">
 				<Rectangle.Fill>
 					<RadialGradientBrush GradientOrigin="0.265,0.184" RadiusX="1.237" RadiusY="1.237">

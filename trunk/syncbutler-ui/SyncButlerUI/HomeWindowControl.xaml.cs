@@ -45,7 +45,7 @@ namespace SyncButlerUI
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-        void TreeWindow_Loaded(object sender, RoutedEventArgs e)
+        private void clearTreeView()
         {
 			foldersItem.Items.Clear();
             foreach (DriveInfo d in DriveInfo.GetDrives())
@@ -54,23 +54,49 @@ namespace SyncButlerUI
 				string s = d.Name;
                 TreeViewItem item = new TreeViewItem();
                 item.Header = s;
-                item.Tag = s;
-                item.FontWeight = FontWeights.Normal;
-                item.Items.Add(dummyNode);
-                item.Expanded += new RoutedEventHandler(folder_Expanded);
+             	item.Tag = s;
+            	item.FontWeight = FontWeights.Normal;
+             	item.Items.Add(dummyNode);
+             	item.Expanded += new RoutedEventHandler(folder_Expanded);
+			 	item.Collapsed += new RoutedEventHandler(folder_Collapsed);
+						
                 foldersItem.Items.Add(item);
 				}
             }
 
         }
-		
+	
+		/// <summary>
+		/// remove subItems of the list and repopulate when collasped
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void folder_Collapsed(object sender, RoutedEventArgs e)
+		{
+		 TreeViewItem item=(TreeViewItem)sender;
+			   item.Items.Clear();
+			    try
+                {
+                    foreach (string s in Directory.GetDirectories(item.Tag.ToString()))
+                    {
+                        TreeViewItem subitem = new TreeViewItem();
+                        subitem.Header = s.Substring(s.LastIndexOf("\\") + 1);
+                        subitem.Tag = s;
+                        subitem.FontWeight = FontWeights.Normal;
+                        subitem.Items.Add(dummyNode);
+                        subitem.Expanded += new RoutedEventHandler(folder_Expanded);
+						subitem.Collapsed += new RoutedEventHandler(folder_Collapsed);
+                        item.Items.Add(subitem);
+                    }
+                }catch (Exception) { }
+		}
 		/// <summary>
 		/// populate the list when folder is expanded
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 
-        void folder_Expanded(object sender, RoutedEventArgs e)
+        private void folder_Expanded(object sender, RoutedEventArgs e)
         {
             TreeViewItem item = (TreeViewItem)sender;
             if (item.Items.Count == 1 && item.Items[0] == dummyNode)
@@ -86,6 +112,7 @@ namespace SyncButlerUI
                         subitem.FontWeight = FontWeights.Normal;
                         subitem.Items.Add(dummyNode);
                         subitem.Expanded += new RoutedEventHandler(folder_Expanded);
+						subitem.Collapsed += new RoutedEventHandler(folder_Collapsed);
                         item.Items.Add(subitem);
                     }
                 }
@@ -136,8 +163,9 @@ namespace SyncButlerUI
 		/// <param name="e"></param>
 		private void goToPartnershipDest(object sender, RoutedEventArgs e){
 		    try{
-				checkInput();
+			checkInput();
 			PartnershipTempData.sourcePath=sourceTextBox.Text;
+		    clearTreeView();	
 		    sourceTextBox.Text=PartnershipTempData.destinationPath;
 			VisualStateManager.GoToState(this,"CreatePartnershipState2",false);
 		    }catch(Exception ex){
@@ -166,9 +194,9 @@ namespace SyncButlerUI
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		
-		private void goToCreatePartnership(object sender, RoutedEventArgs e){
+		private void goToCreatePartnership_Click(object sender, RoutedEventArgs e){
+		   clearTreeView();
 		   VisualStateManager.GoToState(this,"CreatePartnershipState1",false);
-		   sourceTextBox.Text="";
 		}
 		
 		/// <summary>
@@ -181,6 +209,7 @@ namespace SyncButlerUI
 
 			PartnershipTempData.destinationPath=sourceTextBox.Text;
 		    sourceTextBox.Text=PartnershipTempData.sourcePath;
+		    clearTreeView();	
 			VisualStateManager.GoToState(this,"CreatePartnershipState1",false);
 		    }catch(Exception ex){
 			MessageBox.Show(ex.Message);
@@ -220,6 +249,7 @@ namespace SyncButlerUI
 		private void goBackToCreatePartnershipDes(object sender, RoutedEventArgs e){
 		   PartnershipTempData.partnershipName=partnershipNameTextBox.Text;
 		   destinationTextBox1.Text=PartnershipTempData.destinationPath;
+		   clearTreeView();	
 		   VisualStateManager.GoToState(this,"CreatePartnershipState2",false);
 		}
 		
@@ -285,6 +315,10 @@ namespace SyncButlerUI
 			MessageBox.Show("Sync-ed.\r\nPlease check.");
 		}
 		
+		private void deletePartnership_Click(object sender, RoutedEventArgs e)
+		{
+		  this.Controller.DeletePartnership(partnershipList.SelectedIndex);
+		}
 		
 	}
 }

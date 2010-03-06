@@ -27,7 +27,7 @@ namespace WPF_Explorer_Tree
                 BitmapImage source = new BitmapImage(uri);
                 return source;
             }
-
+			
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

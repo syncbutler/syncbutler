@@ -22,9 +22,14 @@ namespace SyncButlerUI
 		private SyncButler.Controller controller;
 		public MainWindow()
 		{
+			try{
 			this.InitializeComponent();
             controller = Controller.getInstance();
 			this.homeWindow1.Controller = this.controller;
+			}catch(Exception ex){
+				
+			Console.WriteLine(ex.Message);	
+			}
 			// Insert code required on object creation below this point.
 		}
 		private void goHome(object sender, RoutedEventArgs e)
