@@ -106,5 +106,13 @@ namespace SyncButler
         /// </summary>
         /// <returns>Path to the data</returns>
         string EntityPath();
+
+        /// <summary>
+        /// Creates a child from an EntityPath. Assumes this Syncable is a root Syncable
+        /// </summary>
+        /// <param name="EntityPath"></param>
+        /// <returns></returns>
+        /// <exception cref="ArguementException">The entityPath cannot be a child of the current syncable.</exception>
+        ISyncable CreateChild(string entityPath);
     }
 }

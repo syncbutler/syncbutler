@@ -425,5 +425,23 @@ namespace SyncButler
 
             return conflicts;
         }
+
+        public override ISyncable CreateChild(string entityPath)
+        {
+            if (entityPath.StartsWith("file:\\\\"))
+            {
+                return new WindowsFile(this.rootPath, this.rootPath + entityPath.Substring(7), this.parentPartnership);
+            }
+            else if (entityPath.StartsWith("folder:\\\\"))
+            {
+                return new WindowsFolder(this.rootPath, this.rootPath + entityPath.Substring(9), this.parentPartnership);
+            }
+            else 
+            {
+                throw new ArgumentException();
+            }
+
+            
+        }
     }
 }

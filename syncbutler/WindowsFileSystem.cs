@@ -151,5 +151,7 @@ namespace SyncButler
         public abstract bool Equals(ISyncable item);
 
         public abstract string EntityPath();
+
+        public abstract ISyncable CreateChild(string entityPath);
     }
 }
