@@ -16,7 +16,7 @@ namespace TestUI
         {
             try
             {
-                controller = Controller.getController();
+                controller = Controller.getInstance;
                 MainMenu();
                 
                 controller.AddPartnership("Test Name",@"C:\test", @"D:\test");
