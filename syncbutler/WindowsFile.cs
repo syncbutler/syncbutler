@@ -8,7 +8,6 @@ using SyncButler.Exceptions;
 
 namespace SyncButler
 {
-    public enum Error { NoError, NoPermission, PathTooLong, DirectoryDoesNotExist, InvalidPath, NotImplemented };
     /// <summary>
     /// Represents a file on the Windows file system.
     /// </summary>
@@ -115,7 +114,7 @@ namespace SyncButler
         /// </summary>
         /// <param name="item">The target file to be overwrite</param>
         /// <returns>Error.NoError if there is no error. Error.InvalidPath if the path is not valid. Error.NoPermission if the user has no permission to overwrite this file. Error.PathTooLong if the path given is too long for this system to handle</returns>
-        public object CopyTo(ISyncable item)
+        public Error CopyTo(ISyncable item)
         {
             Debug.Assert(!item.GetType().Name.Equals("WindowsFiles"), "Different type, the given type is " + item.GetType().Name);
 
@@ -148,7 +147,7 @@ namespace SyncButler
         /// Attempts to delete this file.
         /// </summary>
         /// <returns>Error.NoError on no error. Error.NoPermission if users does not have permission to delete this file. Error.InvalidPath if the path is not valid</returns>
-        public object Delete()
+        public Error Delete()
         {
             try
             {
@@ -165,7 +164,7 @@ namespace SyncButler
             return Error.NoError;
         }
 
-        public object Merge(ISyncable item)
+        public Error Merge(ISyncable item)
         {
             return Error.NotImplemented;
         }
