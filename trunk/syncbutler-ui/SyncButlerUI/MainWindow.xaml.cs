@@ -24,6 +24,7 @@ namespace SyncButlerUI
 		{
 			try{
 			this.InitializeComponent();
+	
             controller = Controller.getInstance();
 			this.homeWindow1.Controller = this.controller;
 			}catch(Exception ex){
