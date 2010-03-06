@@ -305,7 +305,11 @@ namespace SyncButler
             }
             else
             {
-                if (this.Checksum().Equals(partner.Checksum())) return returnValue;
+                if (this.Checksum().Equals(partner.Checksum()))
+                {
+                    if (!parentPartnership.ChecksumExists(this)) this.UpdateStoredChecksum();
+                    return returnValue;
+                }
                 
                 Boolean leftChanged, rightChanged;
                 leftChanged = this.HasChanged();

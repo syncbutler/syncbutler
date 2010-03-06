@@ -31,7 +31,7 @@ namespace SyncButler
         /// Attempts to rsolve a conflict based on th recommended action.
         /// </summary>
         /// <returns></returns>
-        public Object Resolve()
+        public Error Resolve()
         {
             if (this.RecommendedAction == Action.Unknown) throw new InvalidActionException();
             return this.Resolve(this.RecommendedAction);
@@ -42,7 +42,7 @@ namespace SyncButler
         /// </summary>
         /// <returns>true if the conflict was successfully resolved, false otherwise.</returns>
         /// <exception cref="ArgumentException">This exception is generated when an invalid user action is passed into the method.</exception>
-        public Object Resolve(Action user)
+        public Error Resolve(Action user)
         {
             Error ret;
 
@@ -90,7 +90,7 @@ namespace SyncButler
 
         public override String ToString()
         {
-            return left.EntityPath() + "\n    " + this.RecommendedAction + "\n";
+            return left.EntityPath() + "\n    " + this.RecommendedAction + "";
         }
     }
 }
