@@ -276,39 +276,35 @@ namespace SyncButler
             if (statusMonitor != null) statusMonitor(new SyncableStatus(this.EntityPath(), 0));
 
             if (otherPair is WindowsFile)// && this.EntityPath().Equals(otherPair.EntityPath()))
-            {
                 partner = (WindowsFile)otherPair;
-            }
             else
-            {
                 throw new InvalidPartnershipException();
-            }
             
             // Check if the files are in sync
 
             checksumCacheFresh = false; // Make sure we're really comparing with the current file
 
-            List<Conflict> returnValue = new List<Conflict>();
+            List<Conflict> conflictList = new List<Conflict>();
             Conflict.Action recommendedAction = Conflict.Action.Unknown;
-
+            
             if (!(this.nativeFileObj.Exists || partner.nativeFileObj.Exists))
-            {
-                return returnValue;
-            }
-            else if (!this.nativeFileObj.Exists) 
-            {
+                return conflictList;
+            else if (!this.nativeFileObj.Exists)
                 recommendedAction = Conflict.Action.CopyToLeft;
-            }
             else if (!partner.nativeFileObj.Exists)
-            {
                 recommendedAction = Conflict.Action.CopyToRight;
-            }
             else
             {
-                if (this.Checksum().Equals(partner.Checksum()))
+                if (this.Length != partner.Length)
+                    recommendedAction = Conflict.Action.Unknown;
+                else if (this.LastWriteTime.Equals(partner.LastWriteTime))
+                    return conflictList;
+                //else if (HaveEqualChecksums(this, partner))
+                else if (this.Checksum().Equals(partner.Checksum()))
                 {
-                    if (!parentPartnership.ChecksumExists(this)) this.UpdateStoredChecksum();
-                    return returnValue;
+                    if (!parentPartnership.ChecksumExists(this))
+                        this.UpdateStoredChecksum();
+                    return conflictList;
                 }
                 
                 Boolean leftChanged, rightChanged;
@@ -317,18 +313,43 @@ namespace SyncButler
 
                 if (rightChanged ^ leftChanged)
                 {
-                    if (rightChanged) recommendedAction = Conflict.Action.CopyToLeft;
-                    else if (leftChanged) recommendedAction = Conflict.Action.CopyToRight;
+                    if (rightChanged)
+                        recommendedAction = Conflict.Action.CopyToLeft;
+                    else if (leftChanged)
+                        recommendedAction = Conflict.Action.CopyToRight;
                 }
             }
 
-            returnValue.Add(new Conflict(this, partner, recommendedAction));
-            return returnValue;
+            conflictList.Add(new Conflict(this, partner, recommendedAction));
+            return conflictList;
         }
 
         public override ISyncable CreateChild(string entityPath)
         {
             throw new ArgumentException();
+        }
+
+        public static bool HaveEqualChecksums(WindowsFile left, WindowsFile right)
+        {
+            if (left.Length != right.Length)
+                return false;
+
+            IRollingHash leftHash = new Adler32();
+            IRollingHash rightHash = new Adler32();
+
+            long start = 0;
+
+            while (start < left.Length)
+            {
+                leftHash.Update(left.GetBytes(start, 2048000));
+                rightHash.Update(right.GetBytes(start, 2048000));
+                start += 2048000;
+
+                if (leftHash.Value != rightHash.Value)
+                    return false;
+            }
+
+            return true;
         }
         
     }
