@@ -20,7 +20,7 @@ namespace SyncButler
         /// Replaces the controller constructor with a method for other classes to retrieve the controller instead of creating one.
         /// </summary>
         /// <returns>The controller of the program</returns>
-        public static Controller getController()
+        public static Controller getInstance()
         {
             if (controller == null)
                 controller = new Controller();
