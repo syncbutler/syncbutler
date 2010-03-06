@@ -17,7 +17,10 @@ namespace TestUI
             try
             {
                 controller = Controller.getInstance();
-                MainMenu();
+                while (true)
+                {
+                    MainMenu();
+                }
                 
                 controller.AddPartnership("Test Name",@"C:\test", @"D:\test");
                 PrintMRU();
@@ -46,6 +49,7 @@ namespace TestUI
 
         private static void MainMenu()
         {
+            Console.Out.WriteLine();
             Console.Out.WriteLine("1) Create a Partnership");
             Console.Out.WriteLine("2) View Partnerships");
             Console.Out.WriteLine("3) Show Recent Files From Registry Entries");
