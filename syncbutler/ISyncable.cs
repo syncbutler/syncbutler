@@ -91,7 +91,7 @@ namespace SyncButler
         long GetStoredChecksum();
 
         /// <summary>
-        /// Updates the checksum dictionary in the parentPartnership object
+        /// Adds/Updates the checksum dictionary in the parentPartnership object
         /// </summary>
         void UpdateStoredChecksum();
 
@@ -108,7 +108,13 @@ namespace SyncButler
         string EntityPath();
 
         /// <summary>
-        /// Creates a child from an EntityPath. Assumes this Syncable is a root Syncable
+        /// Does this Suncable actually exist on the storage device/disk?
+        /// </summary>
+        /// <returns></returns>
+        bool Exists();
+
+        /// <summary>
+        /// Creates a child from an EntityPath. (ie. provides the absolute path then creates the ISyncable)
         /// </summary>
         /// <param name="EntityPath"></param>
         /// <returns></returns>

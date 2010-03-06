@@ -109,6 +109,11 @@ namespace SyncButler
             }
         }
 
+        public bool Exists()
+        {
+            return nativeFileSystemObj.Exists;
+        }
+
         public void SetParentPartnership(Partnership parentPartnership)
         {
             this.parentPartnership = parentPartnership;

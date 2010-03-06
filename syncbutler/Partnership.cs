@@ -118,12 +118,15 @@ namespace SyncButler
         }
 
         /// <summary>
-        /// Updates the checksum dictionary
+        /// Adds/Updates the checksum dictionary
         /// </summary>
         /// <param name="syncable"></param>
         public void UpdateLastChecksum(ISyncable syncable)
         {
-            hashDictionary[this.name + ":" + syncable.EntityPath()] = syncable.Checksum();
+            string key = this.name + ":" + syncable.EntityPath();
+
+            if (hashDictionary.ContainsKey(key)) hashDictionary[key] = syncable.Checksum();
+            else hashDictionary.Add(key, syncable.Checksum());
         }
 
         public void RemoveChecksum(ISyncable syncable)
@@ -153,7 +156,7 @@ namespace SyncButler
         /// </summary>
         public void CleanOrphanedChecksums()
         {
-            /* ChecksumKey key;
+            ChecksumKey key;
             List<string> toDelete = new List<string>();
 
             foreach (string skey in hashDictionary.Keys)
@@ -161,8 +164,13 @@ namespace SyncButler
                 key = SyncEnvironment.DecodeChecksumKey(skey);
                 if (key.partnershipName != this.name) continue;
 
-                
-            } */
+                ISyncable leftChild = left.CreateChild(key.entityPath);
+                ISyncable rightChild = right.CreateChild(key.entityPath);
+
+                if (!(leftChild.Exists() || rightChild.Exists())) toDelete.Add(skey);
+            }
+
+            foreach (string skey in toDelete) hashDictionary.Remove(skey);
 
         }
         
