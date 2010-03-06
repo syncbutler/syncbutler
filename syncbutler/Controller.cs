@@ -9,15 +9,24 @@ namespace SyncButler
     public class Controller
     {
         SyncEnvironment syncEnvironment;
+        private static Controller controller;
 
-        public Controller()
+        private Controller()
         {
             syncEnvironment = new SyncEnvironment();
-            //syncEnvironment.IntialEnv();
-            //fake tests
-            //AddPartnership("test01",@"C:\",@"D:\");
-            //AddPartnership("test02", @"C:\test2", @"D:\test2");
-            //AddPartnership("test03", @"C:\test3", @"D:\test3");
+        }
+
+        /// <summary>
+        /// Replaces the controller constructor with a method for other classes to retrieve the controller instead of creating one.
+        /// </summary>
+        /// <returns>The controller of the program</returns>
+        public static Controller getController()
+        {
+            if (controller == null)
+                controller = new Controller();
+
+            return controller;
+            
         }
 
         /// <summary>
