@@ -33,6 +33,12 @@ namespace SyncButler
         void SetParentPartnership(Partnership parentPartnership);
 
         /// <summary>
+        /// Gets a reference to the parent partnership object
+        /// </summary>
+        /// <returns></returns>
+        Partnership GetParentPartnership();
+
+        /// <summary>
         /// Checks if it's in Sync with the other pair
         /// </summary>
         /// <param name="otherPair"></param>
@@ -77,6 +83,22 @@ namespace SyncButler
         /// </summary>
         /// <returns>the checksum</returns>
         long Checksum();
+
+        /// <summary>
+        /// Retrieves the checksum from the checksum dictionary
+        /// </summary>
+        /// <returns></returns>
+        long GetStoredChecksum();
+
+        /// <summary>
+        /// Updates the checksum dictionary in the parentPartnership object
+        /// </summary>
+        void UpdateStoredChecksum();
+
+        /// <summary>
+        /// Removes itself from the checksum dictionary
+        /// </summary>
+        void RemoveStoredChecksum();
 
         /// <summary>
         /// Returns a "path" to the node. (eg. In the case of Files,

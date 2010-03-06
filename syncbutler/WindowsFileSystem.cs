@@ -8,7 +8,7 @@ namespace SyncButler
     /// <summary>
     /// Represents a Windows File System object, such as a folder or a file.
     /// </summary>
-    public abstract class WindowsFileSystem
+    public abstract class WindowsFileSystem : ISyncable
     {
         protected String relativePath;
         protected String rootPath;
@@ -92,12 +92,6 @@ namespace SyncButler
         }
 
         /// <summary>
-        /// Not implemented. Method to return the checksum of the specified file system object.
-        /// </summary>
-        /// <returns>The checksum of the specified file system object.</returns>
-        public abstract long Checksum();
-
-        /// <summary>
         /// Strips a prefix from a given string. Used mainly for obtaining a relative path from the full path.
         /// </summary>
         /// <param name="prefix">String prefix to remove.</param>
@@ -119,5 +113,43 @@ namespace SyncButler
         {
             this.parentPartnership = parentPartnership;
         }
+
+        public Partnership GetParentPartnership()
+        {
+            return this.parentPartnership;
+        }
+
+        public long GetStoredChecksum()
+        {
+            return parentPartnership.GetLastChecksum(this);
+        }
+
+        public void UpdateStoredChecksum()
+        {
+            parentPartnership.UpdateLastChecksum(this);
+        }
+
+        public void RemoveStoredChecksum()
+        {
+            parentPartnership.RemoveChecksum(this);
+        }
+
+        public abstract long Checksum();
+
+        public abstract void SetStatusMonitor(SyncableStatusMonitor monitor);
+
+        public abstract List<Conflict> Sync(ISyncable otherPair);
+
+        public abstract Error CopyTo(ISyncable item);
+
+        public abstract Error Delete();
+
+        public abstract Error Merge(ISyncable item);
+
+        public abstract bool HasChanged();
+
+        public abstract bool Equals(ISyncable item);
+
+        public abstract string EntityPath();
     }
 }

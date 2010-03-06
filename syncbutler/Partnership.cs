@@ -116,9 +116,18 @@ namespace SyncButler
             return hashDictionary.ContainsKey(this.name + ":" + entityPath);
         }
 
+        /// <summary>
+        /// Updates the checksum dictionary
+        /// </summary>
+        /// <param name="syncable"></param>
         public void UpdateLastChecksum(ISyncable syncable)
         {
             hashDictionary[this.name + ":" + syncable.EntityPath()] = syncable.Checksum();
+        }
+
+        public void RemoveChecksum(ISyncable syncable)
+        {
+            hashDictionary.Remove(this.name + ":" + syncable.EntityPath());
         }
 
         /// <summary>

@@ -13,7 +13,7 @@ namespace SyncButler
     /// <summary>
     /// Represents a folder on the Windows file system.
     /// </summary>
-    public class WindowsFolder : WindowsFileSystem, ISyncable
+    public class WindowsFolder : WindowsFileSystem
     {
         protected DirectoryInfo nativeDirObj;
         protected SyncableStatusMonitor statusMonitor = null;
@@ -75,7 +75,7 @@ namespace SyncButler
 
         }
 
-        public void SetStatusMonitor(SyncableStatusMonitor statusMonitor)
+        public override void SetStatusMonitor(SyncableStatusMonitor statusMonitor)
         {
             this.statusMonitor = statusMonitor;
         }
@@ -90,7 +90,7 @@ namespace SyncButler
         /// <exception cref="DirectoryNotFoundException">Possibly the file/folder structure changed while the operation was in progress</exception>
         /// <exception cref="FileNotFoundException">Possibly the file/folder structure changed while the operation was in progress</exception>
         /// <returns></returns>
-        public Error CopyTo(ISyncable dest)
+        public override Error CopyTo(ISyncable dest)
         {
             WindowsFolder destFolder;
 
@@ -138,7 +138,7 @@ namespace SyncButler
         /// Deletes this folder
         /// </summary>
         /// <returns></returns>
-        public Error Delete()
+        public override Error Delete()
         {
             try
             {
@@ -156,7 +156,7 @@ namespace SyncButler
 
         }
 
-        public Error Merge(ISyncable item)
+        public override Error Merge(ISyncable item)
         {
 
             throw new NotImplementedException();
@@ -205,7 +205,7 @@ namespace SyncButler
         /// </summary>
         /// <exception cref="DirectoryNotFoundException">This folder doesn't exist</exception>
         /// <returns></returns>
-        public bool HasChanged()
+        public override bool HasChanged()
         {
             Debug.Assert(parentPartnership != null, "parentPartnership not set! Cannot determine if this Folder has changed");
 
@@ -220,7 +220,7 @@ namespace SyncButler
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        public bool Equals(ISyncable item)
+        public override bool Equals(ISyncable item)
         {
             if (!item.GetType().Name.Equals("WindowsFolder"))
             {
@@ -232,7 +232,7 @@ namespace SyncButler
             return (subject.Checksum().Equals(Checksum()));
         }
 
-        public string EntityPath()
+        public override string EntityPath()
         {
             return "folder:\\\\" + this.relativePath;
         }
@@ -262,7 +262,7 @@ namespace SyncButler
         /// <exception cref="ObjectDisposedException">The current stream is closed. (Probably while generating a file checksum)</exception>
         /// <exception cref="PathTooLongException">The directory depth is too long!</exception>
         /// <returns>A list of conflicts detected</returns>
-        public List<Conflict> Sync(ISyncable otherPair)
+        public override List<Conflict> Sync(ISyncable otherPair)
         {
             WindowsFolder partner;
 

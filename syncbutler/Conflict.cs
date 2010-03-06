@@ -15,7 +15,6 @@ namespace SyncButler
         protected Action RecommendedAction;
 
         private enum StatusOptions {Resolved, Unresolved, Resolving}
-        private StatusOptions status;
 
         public enum Action { CopyToLeft, DeleteLeft, Merge, CopyToRight, DeleteRight, Unknown };
 
@@ -24,7 +23,6 @@ namespace SyncButler
             this.left = left;
             this.right = right;
             this.RecommendedAction = RecommendedAction;
-            this.status = StatusOptions.Unresolved;
         }
 
         public Action GetRecommendedAction() { return RecommendedAction; }
@@ -46,26 +44,38 @@ namespace SyncButler
         /// <exception cref="ArgumentException">This exception is generated when an invalid user action is passed into the method.</exception>
         public Object Resolve(Action user)
         {
+            Error ret;
+
             switch (user) {
                 case Action.CopyToLeft : 
                     {
-                        return right.CopyTo(left);
+                        ret = right.CopyTo(left);
+                        if (ret == Error.NoError) right.UpdateStoredChecksum();
+                        break;
                     }
                 case Action.DeleteLeft : 
                     {
-                        return left.Delete();           
+                        ret = left.Delete();
+                        if (ret == Error.NoError) left.RemoveStoredChecksum();
+                        break;
                     }
                 case Action.Merge:
                     {
-                        return left.Merge(right);
+                        ret = left.Merge(right);
+                        if (ret == Error.NoError) left.UpdateStoredChecksum();
+                        break;
                     }
                 case Action.CopyToRight:
                     {
-                        return left.CopyTo(right);
+                        ret = left.CopyTo(right);
+                        if (ret == Error.NoError) left.UpdateStoredChecksum();
+                        break;
                     }
                 case Action.DeleteRight:
                     {
-                        return right.Delete();
+                        ret = right.Delete();
+                        if (ret == Error.NoError) right.RemoveStoredChecksum();
+                        break;
                     }
                 default:
                     {
@@ -75,6 +85,7 @@ namespace SyncButler
 
             }
 
+            return ret;
         }
 
         public override String ToString()

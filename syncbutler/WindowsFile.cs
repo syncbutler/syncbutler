@@ -11,7 +11,7 @@ namespace SyncButler
     /// <summary>
     /// Represents a file on the Windows file system.
     /// </summary>
-    public class WindowsFile : WindowsFileSystem, ISyncable
+    public class WindowsFile : WindowsFileSystem
     {
         protected FileInfo nativeFileObj;
         protected SyncableStatusMonitor statusMonitor = null;
@@ -47,7 +47,7 @@ namespace SyncButler
             this.parentPartnership = parentPartnership;
         }
 
-        public void SetStatusMonitor(SyncableStatusMonitor statusMonitor)
+        public override void SetStatusMonitor(SyncableStatusMonitor statusMonitor)
         {
             this.statusMonitor = statusMonitor;
         }
@@ -114,7 +114,7 @@ namespace SyncButler
         /// </summary>
         /// <param name="item">The target file to be overwrite</param>
         /// <returns>Error.NoError if there is no error. Error.InvalidPath if the path is not valid. Error.NoPermission if the user has no permission to overwrite this file. Error.PathTooLong if the path given is too long for this system to handle</returns>
-        public Error CopyTo(ISyncable item)
+        public override Error CopyTo(ISyncable item)
         {
             Debug.Assert(!item.GetType().Name.Equals("WindowsFiles"), "Different type, the given type is " + item.GetType().Name);
 
@@ -147,7 +147,7 @@ namespace SyncButler
         /// Attempts to delete this file.
         /// </summary>
         /// <returns>Error.NoError on no error. Error.NoPermission if users does not have permission to delete this file. Error.InvalidPath if the path is not valid</returns>
-        public Error Delete()
+        public override Error Delete()
         {
             try
             {
@@ -164,7 +164,7 @@ namespace SyncButler
             return Error.NoError;
         }
 
-        public Error Merge(ISyncable item)
+        public override Error Merge(ISyncable item)
         {
             return Error.NotImplemented;
         }
@@ -215,7 +215,7 @@ namespace SyncButler
         /// <exception cref="NotSupportedException">The current stream does not support reading.</exception>
         /// <exception cref="ObjectDisposedException">The current stream is closed.</exception>
         /// <returns>true if the file has been changed, false otherwise</returns>
-        public bool HasChanged()
+        public override bool HasChanged()
         {
             Debug.Assert(parentPartnership != null, "parentPartnership not set! Cannot determine if this File has changed");
 
@@ -234,7 +234,7 @@ namespace SyncButler
         /// </summary>
         /// <param name="item">The file to compare with</param>
         /// <returns>true if the file content is the same, false otherwise</returns>
-        public bool Equals(ISyncable item)
+        public override bool Equals(ISyncable item)
         {
             if (!item.GetType().Name.Equals("WindowsFile"))
             {
@@ -246,7 +246,7 @@ namespace SyncButler
             return (subject.Checksum().Equals(Checksum()));
         }
 
-        public string EntityPath()
+        public override string EntityPath()
         {
             return "file:\\\\" + this.relativePath;
         }
@@ -268,7 +268,7 @@ namespace SyncButler
         /// <exception cref="NotSupportedException">The current stream does not support reading. (Probably while generating the checksum)</exception>
         /// <exception cref="ObjectDisposedException">The current stream is closed. (Probably while generating the checksum)</exception>
         /// <returns>A list of conflicts (may be empty)</returns>
-        public List<Conflict> Sync(ISyncable otherPair)
+        public override List<Conflict> Sync(ISyncable otherPair)
         {
             WindowsFile partner;
 
