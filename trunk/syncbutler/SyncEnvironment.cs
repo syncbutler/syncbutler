@@ -11,6 +11,20 @@ namespace SyncButler
     /// Contains methods to load and store settings as well as handling access to the list of partnerships
     /// </summary>
 
+    /// <summary>
+    /// Represents a key used in the checksum dictionary
+    /// </summary>
+    public struct ChecksumKey
+    {
+        public string entityPath, relativePath, partnershipName;
+        public ChecksumKey(string ep, string rp, string pn)
+        {
+            entityPath = ep;
+            relativePath = rp;
+            partnershipName = pn;
+        }
+    }
+
     //To Do: Allow the restoration of dictionary object
     public class SyncEnvironment
     {
@@ -320,6 +334,32 @@ namespace SyncButler
         {            
         }
         */
+
+        /// <summary>
+        /// Decodes a dictinoary key (string) into its components
+        /// </summary>
+        /// <param name="key">Dictionary key to decode</param>
+        /// <returns>The decoded key</returns>
+        /// <exception cref="ArguementExcpetion">The key provided was not a valid Checksum Dictionary key</exception>
+        public static ChecksumKey DecodeChecksumKey(string key)
+        {
+            int pos = key.IndexOf(':');
+
+            // Possible corruption of the dictionary?
+            if (pos < 0) throw new ArgumentException();
+
+            ChecksumKey returnValue;
+
+            returnValue.partnershipName = key.Substring(0, pos);
+            returnValue.entityPath = key.Substring(pos + 1);
+
+            pos = returnValue.entityPath.IndexOf(":\\\\");
+            if (pos < 0) throw new ArgumentException();
+
+            returnValue.relativePath = returnValue.entityPath.Substring(pos + 3);
+
+            return returnValue;
+        }
     }
 }
 /*

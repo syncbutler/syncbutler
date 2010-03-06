@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Diagnostics;
+using System.IO;
 
 
 namespace SyncButler
@@ -145,6 +146,24 @@ namespace SyncButler
             left.SetStatusMonitor(statusMonitor);
             right.SetStatusMonitor(statusMonitor);
             return left.Sync(right);
+        }
+
+        /// <summary>
+        /// Removes orphaned checksums from the dictionary
+        /// </summary>
+        public void CleanOrphanedChecksums()
+        {
+            /* ChecksumKey key;
+            List<string> toDelete = new List<string>();
+
+            foreach (string skey in hashDictionary.Keys)
+            {
+                key = SyncEnvironment.DecodeChecksumKey(skey);
+                if (key.partnershipName != this.name) continue;
+
+                
+            } */
+
         }
         
         public override String ToString()

@@ -321,6 +321,11 @@ namespace SyncButler
             returnValue.Add(new Conflict(this, partner, recommendedAction));
             return returnValue;
         }
+
+        public override ISyncable CreateChild(string entityPath)
+        {
+            throw new ArgumentException();
+        }
         
     }
 }
