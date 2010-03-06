@@ -23,7 +23,7 @@ namespace SyncButlerUI
 		public MainWindow()
 		{
 			this.InitializeComponent();
-			controller = new SyncButler.Controller();
+            controller = Controller.getController();
 			this.homeWindow1.Controller = this.controller;
 			// Insert code required on object creation below this point.
 		}
