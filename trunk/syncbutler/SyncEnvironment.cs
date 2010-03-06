@@ -308,26 +308,58 @@ namespace SyncButler
             FileInfo rightInfo = new FileInfo(rightPath);
             bool isFolderLeft = leftInfo.Attributes.ToString().Contains("Directory");
             bool isFolderRight = rightInfo.Attributes.ToString().Contains("Directory");
-            if (isFolderLeft && isFolderRight)
+            if (leftInfo.Exists && rightInfo.Exists) // true if both filesystem objects exist
             {
-                ISyncable left = new WindowsFolder(leftPath, leftPath);
-                ISyncable right = new WindowsFolder(rightPath, rightPath);
-                Partnership partner = new Partnership(name, left, right, null);
-                return partner;
+                if (isFolderLeft && isFolderRight)
+                {
+                    return CreateFolderPartner(leftPath, rightPath, name);
+                }
+                else if (isFolderLeft || isFolderRight) //when one side is a folder and one is a file
+                {
+                    throw new ArgumentException("Folder cannot sync with a file");
+                }
+                else
+                {
+                    return CreateFilePartner(leftInfo.DirectoryName, rightInfo.DirectoryName, leftPath, rightPath, name);
+                }
             }
-            else if (isFolderLeft || isFolderRight)
+            else 
             {
-                throw new ArgumentException("Folder cannot sync with a non-folder");
-            }
-            else
-            {
-                ISyncable left = new WindowsFile(leftInfo.DirectoryName, leftPath);
-                ISyncable right = new WindowsFile(rightInfo.DirectoryName, rightPath);
-                Partnership partner = new Partnership(name, left, right, null);
-                return partner;
+                //assumed if both sides are missing that they are folder pairs
+                if (!leftInfo.Exists && !rightInfo.Exists)
+                    return CreateFolderPartner(leftPath, rightPath, name);
+
+                if (leftInfo.Exists && isFolderLeft)
+                {
+                    return CreateFolderPartner(leftPath, rightPath, name);
+                }
+                else if (rightInfo.Exists && isFolderRight)
+                {
+                    return CreateFolderPartner(leftPath, rightPath, name);
+                }
+                else
+                {
+                    return CreateFilePartner(leftInfo.DirectoryName, rightInfo.DirectoryName, leftPath, rightPath, name);
+                }
+   
             }
         }
 
+        private Partnership CreateFolderPartner(String leftpath, String rightpath, String name)
+        {
+            ISyncable left = new WindowsFolder(leftpath, leftpath);
+            ISyncable right = new WindowsFolder(rightpath, rightpath);
+            Partnership partner = new Partnership(name, left, right, null);
+            return partner;
+        }
+
+        private Partnership CreateFilePartner(String leftdir, String rightdir, String leftpath, String rightpath, String name)
+        {
+            ISyncable left = new WindowsFile(leftdir, leftpath);
+            ISyncable right = new WindowsFile(rightdir, rightpath);
+            Partnership partner = new Partnership(name, left, right, null);
+            return partner;
+        }
         //There are 1001 options to change, need to revise this
         /*
         public void UpdateSystemSetting(SettingsConfigElement.Options option, )
