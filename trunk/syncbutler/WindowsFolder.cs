@@ -15,7 +15,6 @@ namespace SyncButler
     /// </summary>
     public class WindowsFolder : WindowsFileSystem, ISyncable
     {
-        public enum Error { IsWorkingFolder, NoPermission, NoError };
         protected DirectoryInfo nativeDirObj;
         protected SyncableStatusMonitor statusMonitor = null;
 
@@ -91,7 +90,7 @@ namespace SyncButler
         /// <exception cref="DirectoryNotFoundException">Possibly the file/folder structure changed while the operation was in progress</exception>
         /// <exception cref="FileNotFoundException">Possibly the file/folder structure changed while the operation was in progress</exception>
         /// <returns></returns>
-        public object CopyTo(ISyncable dest)
+        public Error CopyTo(ISyncable dest)
         {
             WindowsFolder destFolder;
 
@@ -139,7 +138,7 @@ namespace SyncButler
         /// Deletes this folder
         /// </summary>
         /// <returns></returns>
-        public object Delete()
+        public Error Delete()
         {
             try
             {
@@ -157,7 +156,7 @@ namespace SyncButler
 
         }
 
-        public object Merge(ISyncable item)
+        public Error Merge(ISyncable item)
         {
 
             throw new NotImplementedException();

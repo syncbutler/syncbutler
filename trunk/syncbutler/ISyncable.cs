@@ -4,6 +4,8 @@ using System.Text;
 
 namespace SyncButler
 {
+    public enum Error { NoError, NoPermission, PathTooLong, DirectoryDoesNotExist, InvalidPath, NotImplemented, IsWorkingFolder };
+
     /// <summary>
     /// A callback to monitor the progress of the Syncing.
     /// 
@@ -42,20 +44,20 @@ namespace SyncButler
         /// </summary>
         /// <param name="item">The other ISyncable item in question.</param>
         /// <returns>True if copy succeeded, false otherwise.</returns>
-        object CopyTo(ISyncable item);
+        Error CopyTo(ISyncable item);
 
         /// <summary>
         /// Not implemented. Performs a delete action.
         /// </summary>
         /// <returns>True if delete succeeded, false otherwise.</returns>
-        object Delete();
+        Error Delete();
 
         /// <summary>
         /// Not implemented. Performs a merge based on the item provided.
         /// </summary>
         /// <param name="item">The other ISyncable item in question.</param>
         /// <returns>True if merge succeeded, false otherwise.</returns>
-        object Merge(ISyncable item);
+        Error Merge(ISyncable item);
 
         /// <summary>
         /// Determines if the two isyncable has changed

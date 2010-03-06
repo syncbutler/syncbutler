@@ -83,15 +83,3 @@ namespace SyncButler
         }
     }
 }
-/*
- * Conflict
-
-Attributes:
-
-left:Syncables
-right:Syncables
-status:Enum
-Methods:
-
-Resolve(user:Action):boolean
- */
