@@ -308,13 +308,25 @@ namespace SyncButler
         }
 
         /// <summary>
-        /// This will determine whether the program is being executed for the
-        /// first time or otherwise
+        /// Gets whether the program is being executed for the first time or otherwise
         /// </summary>
-        /// <returns></returns>
-        public bool isFirstRunComplete()
+        public bool FirstRunComplete
         {
-            return firstRunComplete;
+            get
+            {
+                return firstRunComplete;
+            }
+        }
+
+        /// <summary>
+        /// Gets the size of the buffer to be used when reading from files.
+        /// </summary>
+        public long FileReadBufferSize
+        {
+            get
+            {
+                return fileReadBufferSize;
+            }
         }
 
         /// <summary>
@@ -388,7 +400,7 @@ namespace SyncButler
         */
 
         /// <summary>
-        /// Decodes a dictinoary key (string) into its components
+        /// Decodes a dictionary key (string) into its components
         /// </summary>
         /// <param name="key">Dictionary key to decode</param>
         /// <returns>The decoded key</returns>

@@ -143,7 +143,7 @@ namespace SyncButler
         /// <returns>True if has ran before, false otherwise</returns>
         public bool programRanBefore()
         {
-            return syncEnvironment.isFirstRunComplete();
+            return syncEnvironment.FirstRunComplete;
         }
     }
 }
