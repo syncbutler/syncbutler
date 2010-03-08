@@ -16,7 +16,7 @@ namespace TestUI
         {
             try
             {
-                controller = Controller.getInstance();
+                controller = Controller.GetInstance();
                 while (true)
                 {
                     MainMenu();

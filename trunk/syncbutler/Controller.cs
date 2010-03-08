@@ -11,16 +11,19 @@ namespace SyncButler
         SyncEnvironment syncEnvironment;
         private static Controller controller;
 
+        /// <summary>
+        /// This constructor should never be invoked directly. Use GetInstance() to obtain an instance of Controller.
+        /// </summary>
         private Controller()
         {
-            syncEnvironment = new SyncEnvironment();
+            syncEnvironment = SyncEnvironment.GetInstance();
         }
 
         /// <summary>
         /// Replaces the controller constructor with a method for other classes to retrieve the controller instead of creating one.
         /// </summary>
         /// <returns>The controller of the program</returns>
-        public static Controller getInstance()
+        public static Controller GetInstance()
         {
             if (controller == null)
                 controller = new Controller();

@@ -36,21 +36,36 @@ namespace SyncButler
         private SortedList<String,Partnership> partnershipList;
         private bool allowAutoSyncForConflictFreeTasks;
         private bool firstRunComplete;
+        private long fileReadBufferSize;
         private System.Configuration.Configuration config;
         private string settingName = "systemSettings";
         private string partnershipName = "partnership";
         private SettingsSection storedSettings;
         private PartnershipSection storedPartnerships;
+        private static SyncEnvironment syncEnv;
         
         /// <summary>
-        /// This constructor will automatically restore a previous sessions or
-        /// create new ones
+        /// This constructor will automatically restore a previous sessions or create new ones.
+        /// This constructor should never be invoked directly. Use GetInstance() to obtain an instance of SyncEnvironment.
         /// </summary>
-        public SyncEnvironment()
+        private SyncEnvironment()
         {
             firstRunComplete = false;
             IntialEnv();
             //partnershipList = new List<Partnership>();
+        }
+
+        /// <summary>
+        /// Returns an instance of SyncEnvironment.
+        /// Creates a new instance if necessary. Otherwise, it will use an already available instance.
+        /// </summary>
+        /// <returns>An instance of SyncEnvironment.</returns>
+        public static SyncEnvironment GetInstance()
+        {
+            if (syncEnv == null)
+                syncEnv = new SyncEnvironment();
+
+            return syncEnv;
         }
 
         /// <summary>
@@ -125,9 +140,8 @@ namespace SyncButler
         {
             //Update the settings in the config file
             ConvertPartnershipList2XML();
-            storedSettings.SystemSettings.AllowAutoSyncForConflictFreeTasks =
-                allowAutoSyncForConflictFreeTasks;
-
+            storedSettings.SystemSettings.AllowAutoSyncForConflictFreeTasks = allowAutoSyncForConflictFreeTasks;
+            storedSettings.SystemSettings.FileReadBufferSize = fileReadBufferSize;
             // Write to file
             config.Save(ConfigurationSaveMode.Modified);
         }
@@ -152,8 +166,10 @@ namespace SyncButler
             ConvertXML2PartnershipList();
 
             //This one restores general program settings
-            allowAutoSyncForConflictFreeTasks =
-                storedSettings.SystemSettings.AllowAutoSyncForConflictFreeTasks;
+            allowAutoSyncForConflictFreeTasks = storedSettings.SystemSettings.AllowAutoSyncForConflictFreeTasks;
+
+            //This one restores the buffer size for reading files
+            fileReadBufferSize = storedSettings.SystemSettings.FileReadBufferSize;
         }
 
         /// <summary>
@@ -168,6 +184,7 @@ namespace SyncButler
             // Add in default settings
             storedSettings.SystemSettings.AllowAutoSyncForConflictFreeTasks = true;
             storedSettings.SystemSettings.FirstRunComplete = true;
+            storedSettings.SystemSettings.FileReadBufferSize = 2048000; // 2MB
             ConvertPartnershipList2XML();
 
             // Add the custom sections to the config
