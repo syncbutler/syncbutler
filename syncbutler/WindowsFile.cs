@@ -192,11 +192,12 @@ namespace SyncButler
 
             IRollingHash hashAlgorithm = new Adler32();
             long start = 0;
+            long bufferSize = SyncEnvironment.GetInstance().FileReadBufferSize;
 
             while (start < this.Length)
             {
-                hashAlgorithm.Update(this.GetBytes(start, 2048000));
-                start += 2048000;
+                hashAlgorithm.Update(this.GetBytes(start, bufferSize));
+                start += bufferSize;
             }
 
             checksumCache = hashAlgorithm.Value;
@@ -329,6 +330,14 @@ namespace SyncButler
             throw new ArgumentException();
         }
 
+        /// <summary>
+        /// Checks whether two WindowsFile objects have equal checksums.
+        /// The difference in this method from the object's Checksum() method is that while both updates a rolling hash,
+        /// this method will stop the moment a difference is detected - which may save some cost.
+        /// </summary>
+        /// <param name="left">First WindowsFile object to compare with second</param>
+        /// <param name="right">Second WindowsFile object to compare with first</param>
+        /// <returns>True if the checksums are equal (after the whole file has been computed. False otherwise.</returns>
         public static bool HaveEqualChecksums(WindowsFile left, WindowsFile right)
         {
             if (left.Length != right.Length)
@@ -338,12 +347,13 @@ namespace SyncButler
             IRollingHash rightHash = new Adler32();
 
             long start = 0;
+            long bufferSize = SyncEnvironment.GetInstance().FileReadBufferSize;
 
             while (start < left.Length)
             {
-                leftHash.Update(left.GetBytes(start, 2048000));
-                rightHash.Update(right.GetBytes(start, 2048000));
-                start += 2048000;
+                leftHash.Update(left.GetBytes(start, bufferSize));
+                rightHash.Update(right.GetBytes(start, bufferSize));
+                start += bufferSize;
 
                 if (leftHash.Value != rightHash.Value)
                     return false;
