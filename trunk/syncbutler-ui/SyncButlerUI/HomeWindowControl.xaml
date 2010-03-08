@@ -6,6 +6,7 @@
 	mc:Ignorable="d"
 	xmlns:WPF_Explorer_Tree="clr-namespace:WPF_Explorer_Tree"
 	xmlns:Microsoft_Windows_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+	xmlns:Custom="http://schemas.microsoft.com/wpf/2008/toolkit"
 	x:Class="SyncButlerUI.HomeWindowControl"
 	x:Name="UserControl"
 	d:DesignWidth="503.334" d:DesignHeight="444" RenderTransformOrigin="0.5,0.5">
@@ -47,7 +48,7 @@
 									</RadialGradientBrush>
 								</Rectangle.Fill>
 							</Rectangle>
-							<Image x:Name="image" Cursor="Hand" HorizontalAlignment="Left" Margin="19.5,55.231,0,55.269" Width="149.5" Opacity="0.6" RenderTransformOrigin="0.5,0.5" Source="Images\Synchonize.png" Stretch="Fill">
+							<Image x:Name="image" Cursor="Hand" HorizontalAlignment="Left" Margin="19.5,55.231,0,55.269" Width="149.5" Opacity="0.6" RenderTransformOrigin="0.5,0.5" Source="Images\Synchonize.png" Stretch="Fill" Height="149.5">
 								<Image.RenderTransform>
 									<TransformGroup>
 										<ScaleTransform/>
@@ -176,21 +177,7 @@
 			<Setter Property="FontStyle" Value="Italic"/>
 			<Setter Property="Foreground" Value="White"/>
 		</Style>
-		<Storyboard x:Key="ViewSyncPartnerships">
-			<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="HomeWindow" Storyboard.TargetProperty="(UIElement.Visibility)">
-				<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
-			</ObjectAnimationUsingKeyFrames>
-		</Storyboard>
-		<Storyboard x:Key="CreatePartnership1">
-			<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="HomeWindow" Storyboard.TargetProperty="(UIElement.Visibility)">
-				<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
-			</ObjectAnimationUsingKeyFrames>
-		</Storyboard>
-		<Storyboard x:Key="CreatePartnershipStart">
-			<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="HomeWindow" Storyboard.TargetProperty="(UIElement.Visibility)">
-				<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
-			</ObjectAnimationUsingKeyFrames>
-		</Storyboard>
+
 		<SolidColorBrush x:Key="ListBorder" Color="#828790"/>
 		<Style x:Key="ListBoxStyle1" TargetType="{x:Type ListBox}">
 			<Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
@@ -332,7 +319,7 @@
 					</ObjectAnimationUsingKeyFrames>
 				</Storyboard>
 			</ControlTemplate.Resources>
-			<Grid x:Name="Grid" Background="{TemplateBinding Background}">
+			<Grid x:Name="Grid" Background="{TemplateBinding Background}" OpacityMask="Black">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="*"/>
 					<ColumnDefinition Width="Auto"/>
@@ -351,6 +338,7 @@
 					<BeginStoryboard x:Name="ShowWeirdFiles_BeginStoryboard" Storyboard="{StaticResource ShowWeirdFiles}"/>
 				</EventTrigger>
 				<EventTrigger RoutedEvent="Mouse.MouseLeave">
+					<StopStoryboard BeginStoryboardName="ShowWeirdFiles_BeginStoryboard"/>
 					<StopStoryboard BeginStoryboardName="ShowWeirdFiles_BeginStoryboard"/>
 				</EventTrigger>
 			</ControlTemplate.Triggers>
@@ -517,6 +505,12 @@
 			</Style.Triggers>
 		</Style>
 		
+		<Storyboard x:Key="MouseOverSecretFileList">
+			<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock_Copy" Storyboard.TargetProperty="(UIElement.Visibility)">
+				<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+			</ObjectAnimationUsingKeyFrames>
+		</Storyboard>
+		
 	</UserControl.Resources>
 	<UserControl.RenderTransform>
 		<TransformGroup>
@@ -526,6 +520,15 @@
 			<TranslateTransform/>
 		</TransformGroup>
 	</UserControl.RenderTransform>
+
+	<UserControl.Triggers>
+		<EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="WeirdFile_List">
+			<BeginStoryboard x:Name="MouseOverSecretFileList_BeginStoryboard" Storyboard="{StaticResource MouseOverSecretFileList}"/>
+		</EventTrigger>
+		<EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="WeirdFile_List">
+			<StopStoryboard BeginStoryboardName="MouseOverSecretFileList_BeginStoryboard"/>
+		</EventTrigger>
+	</UserControl.Triggers>
 
 	<Grid x:Name="LayoutRoot" Background="White">
 		<VisualStateManager.VisualStateGroups>
@@ -701,11 +704,11 @@
 					</LinearGradientBrush>
 				</Rectangle.Fill>
 			</Rectangle>
-			<Button x:Name="ViewPartnerships" HorizontalAlignment="Right" Margin="0,258.731,170,-20.5" Style="{DynamicResource ViewPartnershipButton}" Width="167" Content="" Click="goToViewPartnerships" Cursor="Hand"/>
-			<Button HorizontalAlignment="Right" Margin="0,0,2.5,3.334" Style="{DynamicResource ExploreFeaturesButton}" VerticalAlignment="Bottom" Width="169.25" Height="182.269" Content="Button" d:LayoutOverrides="VerticalAlignment"/>
+			<Button x:Name="ViewPartnerships" HorizontalAlignment="Right" Margin="0,258.731,168,-20.5" Style="{DynamicResource ViewPartnershipButton}" Width="167" Content="" Click="goToViewPartnerships" Cursor="Hand"/>
+			<Button x:Name="ExploreFeaturesButton" HorizontalAlignment="Right" Margin="0,0,-0.5,2.334" Style="{DynamicResource ExploreFeaturesButton}" VerticalAlignment="Bottom" Width="169.25" Height="182.269" Content="Button" d:LayoutOverrides="VerticalAlignment" Click="goToExploreFeatures_Click"/>
 			<Button x:Name="CreatePartnershipButton" HorizontalAlignment="Left" Margin="7,0,0,2" Style="{DynamicResource CreatePartnersButton}" VerticalAlignment="Bottom" Width="164.483" Height="183.269" Content="" Cursor="Hand" Click="goToCreatePartnership_Click"/>
+			<Button x:Name="SyncButton" Margin="-0.175,1,4.388,184.27" Style="{DynamicResource SyncButton}" Content="" Cursor="Hand" Click="Sync"/>
 		</Grid>
-		<Button x:Name="SyncButton" Margin="-0.175,1,4.388,184.27" Style="{DynamicResource SyncButton}" Content="" Cursor="Hand" Click="Sync"/>
 		<Grid x:Name="grid" Margin="-14.5,0,-36.193,0" Visibility="Hidden" >
 			<Rectangle x:Name="background_Copy1" RadiusX="1" RadiusY="2" Margin="0,0,37,0" VerticalAlignment="Top" Height="448" Cursor="Arrow">
 				<Rectangle.Fill>
@@ -733,7 +736,7 @@
 				<TextBlock Margin="0,109.5,55.947,0" FontSize="16" TextWrapping="Wrap" Text="Please select another folder on this computer" HorizontalAlignment="Right" Width="183.22" d:LayoutOverrides="HorizontalAlignment" VerticalAlignment="Top" Height="63.5" FontWeight="Bold" FontStyle="Italic"/>
 				<TextBlock Margin="0,181.5,71.947,137.5" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="167.22" d:LayoutOverrides="HorizontalAlignment"><Run Text="This folder will be 1 of 2  folders in a syncing partnership."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="Any updates will be reflected on the other folder in the partnership"/></TextBlock>
 				<Image HorizontalAlignment="Left" Margin="24,0,0,70" VerticalAlignment="Bottom" Width="44" Height="44" Source="Images\Folder.png" Stretch="Fill"/>
-				<TextBlock Margin="0,0,407.027,89" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="36.5" VerticalAlignment="Bottom" Height="25" Text="Path:"/>
+				<TextBlock Margin="0,330,407.027,96.619" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="36.5" Text="Path:"/>
 				<TextBlock Margin="0,0,162.527,14.5" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="85.64" VerticalAlignment="Bottom" Height="25" Text="Step 2 of 3" d:LayoutOverrides="HorizontalAlignment"/>
 				<Button HorizontalAlignment="Right" Margin="0,0,31.947,19" VerticalAlignment="Bottom" Width="69" Height="23" Content="Next&gt;" RenderTransformOrigin="0.79,1.043" Click="goToCreatePartnershipName"/>
 				<Button HorizontalAlignment="Right" Margin="0,0,109.527,19" VerticalAlignment="Bottom" Width="64.253" Height="23" Content="&lt;Back" Click="goBackToCreatePartnershipSrc"/>
@@ -881,7 +884,7 @@
 			</Rectangle>
 			<Image HorizontalAlignment="Left" Margin="29,29,0,0" VerticalAlignment="Top" Width="73" Height="73" Source="Images\Doc.png" Stretch="Fill"/>
 			<TextBlock Margin="111.5,53,136.307,0" VerticalAlignment="Top" Height="61.5" FontFamily="Arial" FontSize="24" FontWeight="Bold" Text="View Partnership" TextWrapping="Wrap"/>
-			<TextBlock Margin="113,84.5,139.307,0" VerticalAlignment="Top" Height="54" FontSize="13.333" TextWrapping="Wrap" Text="List of partnerships you created."/>
+			<TextBlock Margin="113,84.5,139.307,0" VerticalAlignment="Top" Height="54" FontSize="13.333" TextWrapping="Wrap" Text="List of partnerships you have created."/>
 			<ListBox x:Name="partnershipList" Margin="53.973,145.5,56.361,76.5" Style="{DynamicResource ListBoxStyle1}" ItemContainerStyle="{DynamicResource ListBoxItemStyle1}" Background="White" BorderBrush="#FF787878" Foreground="Black" RenderTransformOrigin="0.5,0.5" >
 				<ListBox.RenderTransform>
 					<TransformGroup>
@@ -897,7 +900,7 @@
 			<Button HorizontalAlignment="Right" Margin="0,0,91.361,22" VerticalAlignment="Bottom" Width="63" Height="34" Content="Create" Click="goToCreatePartnership_Click"/>
 			<Button HorizontalAlignment="Right" Margin="0,0,18.361,22" VerticalAlignment="Bottom" Width="63" Height="34" Content="Delete" Click="deletePartnership_Click"/>
 		</Grid>
-		<Grid x:Name="sbs" Margin="-7.5,0,-4.693,0" VerticalAlignment="Bottom" Height="444" d:LayoutOverrides="GridBox" Visibility="Hidden" >
+		<Grid x:Name="sbs" Margin="-7.5,0,-4.693,0" VerticalAlignment="Bottom" Height="444" d:LayoutOverrides="GridBox" Visibility="Hidden" Background="Black" >
 			<Rectangle x:Name="background_Copy2" RadiusX="1" RadiusY="2" Margin="0,0,-1.5,0" VerticalAlignment="Top" Height="448" Cursor="Arrow">
 				<Rectangle.Fill>
 					<RadialGradientBrush GradientOrigin="0.265,0.184" RadiusX="1.237" RadiusY="1.237">
@@ -910,15 +913,16 @@
 				</Rectangle.Fill>
 			</Rectangle>
 			<TextBlock Margin="0,25,36.447,0" FontFamily="Arial" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="83.5" HorizontalAlignment="Right" Width="202.72"><Run Text="Sneak Preview:"/><LineBreak/><Run Text="Sync Butler, Sync!"/></TextBlock>
-			<TextBlock Margin="0,114,13.947,94" FontSize="16" TextWrapping="Wrap" HorizontalAlignment="Right" Width="225.22" d:LayoutOverrides="HorizontalAlignment" FontWeight="Bold" FontStyle="Italic"><Run Text="These are the list of files that were detected to be your favorite documents."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="You can click enable feature to allow Sync Butler to automatically "/><LineBreak/><Run Text="update these files on your storage device"/></TextBlock>
+			<TextBlock Margin="0,127,13.947,0" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="225.22" d:LayoutOverrides="HorizontalAlignment" VerticalAlignment="Top" Height="148.381"><Run Text="These are the list of files that were detected to be your favorite documents."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="You can click enable feature to allow Sync Butler to automatically "/><LineBreak/><Run Text="update these files on your storage device"/></TextBlock>
 			<TextBlock Margin="0,0,17.947,54.5" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="221.22" d:LayoutOverrides="HorizontalAlignment" VerticalAlignment="Bottom" Height="73" Text="This feature is useful when  you forget to copy an important file and you need to refer it somewhere else"/>
 			<Button x:Name="Enable_Feature" HorizontalAlignment="Right" Margin="0,0,108.447,19" VerticalAlignment="Bottom" Width="103.5" Height="23" Content="Enable Feature" RenderTransformOrigin="0.79,1.043" Cursor="Hand" />
 			<Button x:Name="Cancel" HorizontalAlignment="Right" Margin="0,0,25.947,19" VerticalAlignment="Bottom" Width="69" Height="23" Content="Cancel" RenderTransformOrigin="0.79,1.043" Click="goHome" Cursor="Hand" />
 			<Button x:Name="Edit_Selector" Margin="41.08,0,0,19" VerticalAlignment="Bottom" Height="23" Content="Edit Selector" RenderTransformOrigin="0.79,1.043" HorizontalAlignment="Left" Width="93" Cursor="Hand" />
 			<ListBox x:Name="Favourites_List" HorizontalAlignment="Left" Margin="40.5,58.5,0,0" VerticalAlignment="Top" Width="204" Height="136.5"/>
-			<ListBox x:Name="WeirdFile_List" HorizontalAlignment="Left" Margin="39,0,0,70.5" VerticalAlignment="Bottom" Width="204" Height="81" Style="{DynamicResource weirdFilesListItemsStyle}"/>
+			<ListBox x:Name="WeirdFile_List" HorizontalAlignment="Left" Margin="39,0,0,70.5" VerticalAlignment="Bottom" Width="204" Height="98.143" Style="{DynamicResource weirdFilesListItemsStyle}"/>
 			<TextBlock Margin="42.36,25,0,0" FontFamily="Arial" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="26.5" HorizontalAlignment="Left" Width="202.72" Text="Favourites"/>
-			<TextBlock Margin="0,213,267.447,155.5" FontSize="16" TextWrapping="Wrap" HorizontalAlignment="Right" Width="207.22" FontWeight="Bold" FontStyle="Italic"><Run Text="Other files that maybe copied as well"/><LineBreak/><Run FontSize="13.333" FontStyle="Normal" FontWeight="Normal" Text="Mouse over to see"/></TextBlock>
+			<TextBlock Margin="0,213,267.447,155.5" FontSize="16" TextWrapping="Wrap" HorizontalAlignment="Right" Width="207.22" FontWeight="Bold" FontStyle="Italic" Text="Other files that maybe copied as well"/>
+			<TextBlock x:Name="textBlock_Copy" Margin="42.208,0,0,109.812" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Left" Width="196.885" Text="Mouse over to see" FontStyle="Italic" VerticalAlignment="Bottom" Height="19.162" TextAlignment="Center"/>
 		</Grid>
 		<Grid x:Name="Conflict" Margin="0.027,0,-0.027,0" VerticalAlignment="Bottom" Height="444" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
 			<Grid.RenderTransform>
@@ -948,9 +952,24 @@
 					</RadialGradientBrush>
 				</Rectangle.Fill>
 			</Rectangle>
-			<Image HorizontalAlignment="Left" Margin="29,29,0,0" VerticalAlignment="Top" Width="73" Height="73" Source="Images\Doc.png" Stretch="Fill"/>
-			<TextBlock Margin="111.5,53,136.307,0" VerticalAlignment="Top" Height="61.5" FontFamily="Arial" FontSize="24" FontWeight="Bold" Text="Conflicts" TextWrapping="Wrap"/>
-			<TextBlock Margin="113,84.5,139.307,0" VerticalAlignment="Top" Height="54" FontSize="13.333" TextWrapping="Wrap" Text="Please resolve conflicts below to complete syncing"/>
+			<Rectangle Stroke="Black" RadiusX="5" RadiusY="2" Margin="0.58,0,-0.579,-0.857" VerticalAlignment="Bottom" Height="120.952"/>
+			<TextBlock x:Name="PartnershipName" Margin="29.032,0,229.541,80.596" VerticalAlignment="Bottom" Height="28.571" FontSize="16" FontWeight="Bold" Text="Partnership Name" TextWrapping="Wrap"/>
+			<TextBlock x:Name="CurrentSyncingFile" Margin="29.032,0,10.493,51.596" VerticalAlignment="Bottom" Height="24.761" TextWrapping="Wrap" Text="Currently Syncing: C:/doc/xml.xml"/>
+			<ProgressBar x:Name="SubProgressBar" Margin="38.623,0,28.52,34.69" VerticalAlignment="Bottom" Height="14.286"/>
+			<ProgressBar x:Name="TotalProgressBar" Margin="38.623,0,28.52,15.69" VerticalAlignment="Bottom" Height="14.286"/>
+			<TextBlock x:Name="PartnershipName_Copy" Margin="38.032,42.333,0,0" FontSize="16" FontWeight="Bold" Text="Conflicts" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Width="177.618" Height="28.571"/>
+			<Custom:DataGrid x:Name="ConflictList" Margin="39.1,79.143,34.234,0" VerticalAlignment="Top" Height="125.714">
+				<Custom:DataGrid.ItemTemplate>
+					<DataTemplate>
+						<Grid/>
+					</DataTemplate>
+				</Custom:DataGrid.ItemTemplate>
+				<Custom:DataGrid.Columns>
+					<Custom:DataGridCheckBoxColumn/>
+					<Custom:DataGridCheckBoxColumn/>
+					<Custom:DataGridTextColumn/>
+				</Custom:DataGrid.Columns>
+			</Custom:DataGrid>
 		</Grid>
 	</Grid>
 </UserControl>

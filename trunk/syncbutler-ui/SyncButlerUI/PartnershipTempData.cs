@@ -14,14 +14,18 @@ namespace SyncButlerUI
 {
 	public class PartnershipTempData
 	{
-
+		///Instantiate variables with empty strings to prevent null reference as Texbox will refer to it
 		public PartnershipTempData()
 		{
-			// Insert code required on object creation below this point.
 		    sourcePath="";
 			destinationPath="";
 			partnershipName="";
 		}
+		
+		/// <summary>
+		/// Instantiate partnership variable 
+		/// </summary>
+		/// <param name="p"></param>
         public PartnershipTempData(Partnership p)
         {
             sourcePath = p.LeftFullPath;
@@ -29,10 +33,24 @@ namespace SyncButlerUI
             partnershipName = p.Name;
         }
 		
+		/// <summary>
+		/// get set for folder1 path
+		/// </summary>
+		/// <returns></returns>
 		public static string sourcePath{
 		get;set;}
+		
+		/// <summary>
+		/// get set for folder2 Path
+		/// </summary>
+		/// <returns></returns>
 		public static string destinationPath{
 		get;set;}
+		
+		/// <summary>
+		/// get set for partnershipName
+		/// </summary>
+		/// <returns></returns>
 		public static string partnershipName{
 		get;set;}
 		

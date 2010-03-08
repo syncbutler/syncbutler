@@ -11,6 +11,7 @@
 	Title="SyncButler" 
 	Width="651" Height="480"
 	Closing = "cleanUp" Cursor="Arrow" ShowInTaskbar="False" WindowStyle="ThreeDBorderWindow" ResizeMode="NoResize"
+	DataContext="{Binding RelativeSource={RelativeSource Self}}"
 	 >
 
 	<Window.Resources>

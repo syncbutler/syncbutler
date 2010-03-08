@@ -275,6 +275,7 @@ namespace SyncButlerUI
 			destinationTextBox1.Text="";
 			sourceTextBox.Text="";
 		    PartnershipTempData.clear();
+			partnershipList.Items.Refresh();
 		   }catch(Exception ex){
 			    MessageBox.Show(ex.Message);
 			}	
@@ -312,7 +313,21 @@ namespace SyncButlerUI
 		
 		private void deletePartnership_Click(object sender, RoutedEventArgs e)
 		{
-		  this.Controller.DeletePartnership(partnershipList.SelectedIndex);
+			try{
+		  	if(partnershipList.SelectedIndex<0){
+				throw new Exception("Please select a partnership to delete.");
+			}
+				this.Controller.DeletePartnership(partnershipList.SelectedIndex);
+				partnershipList.Items.Refresh();
+			}catch(Exception ex){
+			MessageBox.Show(ex.Message);	
+			}
+		}
+		
+		private void goToExploreFeatures_Click(object sender, RoutedEventArgs e)
+		{
+			CustomDialog dialog=new CustomDialog("Exploring New Features is still in construction!");
+			dialog.ShowDialog();
 		}
 		
 	}
