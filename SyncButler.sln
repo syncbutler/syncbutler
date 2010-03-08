@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyncButlerUI", "syncbutler-
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestUI", "TestUI\TestUI.csproj", "{D16F8146-3A1C-4F77-A9B8-3340353EF11B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyncButlerTest", "syncbutler-test\SyncButlerTest.csproj", "{441CC1BD-93E7-4B3E-8801-0590413F787D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyncButlerTest", "syncbutler-test\SyncButlerTest.csproj", "{27D4D7A9-61AA-42E7-A367-EA1BAC89B8C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,10 +33,10 @@ Global
 		{D16F8146-3A1C-4F77-A9B8-3340353EF11B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D16F8146-3A1C-4F77-A9B8-3340353EF11B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D16F8146-3A1C-4F77-A9B8-3340353EF11B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{441CC1BD-93E7-4B3E-8801-0590413F787D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{441CC1BD-93E7-4B3E-8801-0590413F787D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{441CC1BD-93E7-4B3E-8801-0590413F787D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{441CC1BD-93E7-4B3E-8801-0590413F787D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27D4D7A9-61AA-42E7-A367-EA1BAC89B8C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27D4D7A9-61AA-42E7-A367-EA1BAC89B8C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27D4D7A9-61AA-42E7-A367-EA1BAC89B8C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27D4D7A9-61AA-42E7-A367-EA1BAC89B8C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
