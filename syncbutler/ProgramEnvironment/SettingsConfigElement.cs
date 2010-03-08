@@ -11,7 +11,7 @@ namespace SyncButler.ProgramEnvironment
         /// At the moment, this will list all the possible options editable
         /// and/or used by the program.
         /// </summary>
-        public enum Options { AllowAutoSyncForConflictFreeTasks, FirstRunComplete };
+        public enum Options { AllowAutoSyncForConflictFreeTasks, FirstRunComplete, FileReadBufferSize };
 
         /// <summary>
         /// This is a flag to allow multithreading during user conflict
@@ -45,6 +45,23 @@ namespace SyncButler.ProgramEnvironment
             set
             {
                 this["firstRunComplete"] = value;
+            }
+        }
+
+        /// <summary>
+        /// The size of the buffer when reading from files.
+        /// This should grow/shrink in proportion to the memory available.
+        /// </summary>
+        [ConfigurationProperty("fileReadBufferSize")]
+        public long FileReadBufferSize
+        {
+            get
+            {
+                return (long)this["fileReadBufferSize"];
+            }
+            set
+            {
+                this["fileReadBufferSize"] = value;
             }
         }
 
