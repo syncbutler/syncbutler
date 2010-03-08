@@ -73,10 +73,10 @@ namespace SyncButlerUI
 		/// <param name="e"></param>
 		private void folder_Collapsed(object sender, RoutedEventArgs e)
 		{
-		 TreeViewItem item=(TreeViewItem)sender;
+		      try
+               {
+			   TreeViewItem item=(TreeViewItem)sender;
 			   item.Items.Clear();
-			    try
-                {
                     foreach (string s in Directory.GetDirectories(item.Tag.ToString()))
                     {
                         TreeViewItem subitem = new TreeViewItem();

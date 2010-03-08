@@ -5,6 +5,7 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d"
 	xmlns:WPF_Explorer_Tree="clr-namespace:WPF_Explorer_Tree"
+	xmlns:Microsoft_Windows_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
 	x:Class="SyncButlerUI.HomeWindowControl"
 	x:Name="UserControl"
 	d:DesignWidth="503.334" d:DesignHeight="444" RenderTransformOrigin="0.5,0.5">
@@ -37,8 +38,8 @@
 								</ColorAnimationUsingKeyFrames>
 							</Storyboard>
 						</ControlTemplate.Resources>
-						<Grid x:Name="Sync_Button">
-							<Rectangle x:Name="bigButton_Copy" Margin="-6,0,-0.307,0.269" VerticalAlignment="Bottom" Height="259.731" Cursor="Hand">
+						<Grid x:Name="Sync_Button" Margin="0.318,0,0,0">
+							<Rectangle x:Name="bigButton_Copy" Margin="-2.19,0,-5.069,0.269" VerticalAlignment="Bottom" Height="259.731" Cursor="Hand">
 								<Rectangle.Fill>
 									<RadialGradientBrush RadiusX="1.264" RadiusY="1.006">
 										<GradientStop Color="#00000000" Offset="0.978"/>
@@ -231,7 +232,7 @@
 					<RowDefinition Height="Auto"/>
 				</Grid.RowDefinitions>
 				<Rectangle x:Name="Corner" Fill="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Grid.Column="1" Grid.Row="1"/>
-				<ScrollBar x:Name="PART_VerticalScrollBar" Cursor="Arrow" Grid.Column="0" Grid.Row="0" AutomationProperties.AutomationId="VerticalScrollBar" Maximum="{TemplateBinding ScrollableHeight}" Minimum="0" Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" ViewportSize="{TemplateBinding ViewportHeight}" HorizontalAlignment="Left" Width="389" Grid.ColumnSpan="2" Background="#FFE2E2E2"/>
+				<ScrollBar x:Name="PART_VerticalScrollBar" Cursor="Arrow" Grid.Column="0" Grid.Row="0" AutomationProperties.AutomationId="VerticalScrollBar" Maximum="{TemplateBinding ScrollableHeight}" Minimum="0" Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" ViewportSize="{TemplateBinding ViewportHeight}" HorizontalAlignment="Left" Width="389" Grid.ColumnSpan="2" Background="#FFE2E2E2" Style="{DynamicResource ScrollBarStyle1}"/>
 				<ScrollContentPresenter x:Name="PART_ScrollContentPresenter" Margin="0,21" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Grid.Column="0" Grid.Row="0" CanContentScroll="{TemplateBinding CanContentScroll}" CanHorizontallyScroll="False" CanVerticallyScroll="False"/>
 			</Grid>
 		</ControlTemplate>
@@ -244,11 +245,9 @@
 				<Setter.Value>
 					<ControlTemplate TargetType="{x:Type ListBoxItem}">
 						<Border x:Name="Bd" SnapsToDevicePixels="true" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" Height="42.638">
-							<Grid Height="42.293" Margin="0" VerticalAlignment="Top" Width="388.931" Background="{x:Null}">
+							<Grid Height="42.293" Margin="0,0,0,0.345" VerticalAlignment="Bottom" Width="388.931">
 								<ContentPresenter HorizontalAlignment="Right" VerticalAlignment="Top" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="0,4.5,85.132,0" Content="" Visibility="Hidden"/>
 								<Image Margin="1.5,4.5,0,2.864" Source="Images/Misc.png" Stretch="Fill" HorizontalAlignment="Left" Width="37.596"/>
-								<TextBlock Margin="190.798,4.5,130.632,24.5" Text="Source Path:" TextWrapping="Wrap" VerticalAlignment="Stretch" Height="Auto" HorizontalAlignment="Stretch" Width="Auto"/>
-								<TextBlock Margin="166.965,20.5,130.298,8.5" Text="Destination Path:" TextWrapping="Wrap" VerticalAlignment="Stretch" Height="Auto" HorizontalAlignment="Stretch" Width="Auto"/>
 								<TextBlock x:Name="folder1" Margin="0,4.5,4.298,0" ToolTip="{Binding LeftFullPath}" Text="{Binding LeftFullPath}" TextWrapping="Wrap" HorizontalAlignment="Right" Width="123.167" VerticalAlignment="Top" Height="15.96" RenderTransformOrigin="0.5,0.5">
 									<TextBlock.RenderTransform>
 										<TransformGroup>
@@ -269,7 +268,9 @@
 										</TransformGroup>
 									</TextBlock.RenderTransform>
 								</TextBlock>
-								<TextBlock x:Name="partnershipName" Margin="48,12.46,0,5.54" Text="{Binding Name}" TextWrapping="Wrap" HorizontalAlignment="Left" Width="102" VerticalAlignment="Stretch" Height="Auto"/>
+								<TextBlock x:Name="partnershipName" Margin="48,12.46,0,5.54" Text="{Binding Name}" TextWrapping="Wrap" HorizontalAlignment="Left" Width="129.333" VerticalAlignment="Stretch" Height="Auto"/>
+								<TextBlock Margin="169.596,4,132.651,0" VerticalAlignment="Top" Height="15.96" Text="Folder 1 Path:" TextWrapping="Wrap" TextAlignment="Right"/>
+								<TextBlock Margin="167.632,20,132.615,6.333" Text="Folder 2 Path:" TextWrapping="Wrap" TextAlignment="Right"/>
 							</Grid>
 						</Border>
 						<ControlTemplate.Triggers>
@@ -293,14 +294,7 @@
 				</Setter.Value>
 			</Setter>
 		</Style>
-		<DataTemplate x:Key="DataTemplate1" DataType="PartnershipTempData">
-			<Grid Width="102.297">
-				<ContentPresenter HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}" Margin="-118,-12,0,0" VerticalAlignment="Top" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Content="" d:IsHidden="True"/>
-				<Image HorizontalAlignment="Left" Margin="-166.5,-12,0,-5.596" Width="37.596" Source="Images\Misc.png" Stretch="Fill"/>
-				<TextBlock Margin="21.632,-12,-55.352,0" VerticalAlignment="Top" Height="15.96" Text="Source Path:" TextWrapping="Wrap"/>
-				<TextBlock Margin="-2.368,4,-55.352,0.04" Text="Destination Path:" TextWrapping="Wrap" VerticalAlignment="Stretch" Height="Auto"/>
-			</Grid>
-		</DataTemplate>
+	
 		<Style x:Key="weirdFilesListItemsStyle" TargetType="{x:Type ListBox}">
 			<Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
 			<Setter Property="BorderBrush" Value="{StaticResource ListBorder}"/>
@@ -389,6 +383,138 @@
 					</ControlTemplate>
 				</Setter.Value>
 			</Setter>
+		</Style>
+		
+		<LinearGradientBrush x:Key="VerticalScrollBarBackground" EndPoint="1,0" StartPoint="0,0">
+			<GradientStop Color="#E1E1E1" Offset="0"/>
+			<GradientStop Color="#EDEDED" Offset="0.20"/>
+			<GradientStop Color="#EDEDED" Offset="0.80"/>
+			<GradientStop Color="#E3E3E3" Offset="1"/>
+		</LinearGradientBrush>
+		<SolidColorBrush x:Key="ScrollBarDisabledBackground" Color="#F4F4F4"/>
+		<Style x:Key="ScrollBarButton" TargetType="{x:Type RepeatButton}">
+			<Setter Property="OverridesDefaultStyle" Value="true"/>
+			<Setter Property="Focusable" Value="false"/>
+			<Setter Property="IsTabStop" Value="false"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type RepeatButton}">
+						<Microsoft_Windows_Themes:ScrollChrome x:Name="Chrome" SnapsToDevicePixels="true" RenderMouseOver="{TemplateBinding IsMouseOver}" RenderPressed="{TemplateBinding IsPressed}" Microsoft_Windows_Themes:ScrollChrome.ScrollGlyph="{TemplateBinding Microsoft_Windows_Themes:ScrollChrome.ScrollGlyph}"/>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		<Style x:Key="VerticalScrollBarPageButton" TargetType="{x:Type RepeatButton}">
+			<Setter Property="OverridesDefaultStyle" Value="true"/>
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="Focusable" Value="false"/>
+			<Setter Property="IsTabStop" Value="false"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type RepeatButton}">
+						<Rectangle Fill="{TemplateBinding Background}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"/>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		<Style x:Key="ScrollBarThumb" TargetType="{x:Type Thumb}">
+			<Setter Property="OverridesDefaultStyle" Value="true"/>
+			<Setter Property="IsTabStop" Value="false"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type Thumb}">
+						<Microsoft_Windows_Themes:ScrollChrome x:Name="Chrome" SnapsToDevicePixels="true" RenderMouseOver="{TemplateBinding IsMouseOver}" RenderPressed="{TemplateBinding IsDragging}" Microsoft_Windows_Themes:ScrollChrome.ScrollGlyph="{TemplateBinding Microsoft_Windows_Themes:ScrollChrome.ScrollGlyph}"/>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		<LinearGradientBrush x:Key="HorizontalScrollBarBackground" EndPoint="0,1" StartPoint="0,0">
+			<GradientStop Color="#E1E1E1" Offset="0"/>
+			<GradientStop Color="#EDEDED" Offset="0.20"/>
+			<GradientStop Color="#EDEDED" Offset="0.80"/>
+			<GradientStop Color="#E3E3E3" Offset="1"/>
+		</LinearGradientBrush>
+		<Style x:Key="HorizontalScrollBarPageButton" TargetType="{x:Type RepeatButton}">
+			<Setter Property="OverridesDefaultStyle" Value="true"/>
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="Focusable" Value="false"/>
+			<Setter Property="IsTabStop" Value="false"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type RepeatButton}">
+						<Rectangle Fill="{TemplateBinding Background}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"/>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		<Style x:Key="ScrollBarStyle1" TargetType="{x:Type ScrollBar}">
+			<Setter Property="Background" Value="{StaticResource VerticalScrollBarBackground}"/>
+			<Setter Property="Stylus.IsPressAndHoldEnabled" Value="false"/>
+			<Setter Property="Stylus.IsFlicksEnabled" Value="false"/>
+			<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+			<Setter Property="Width" Value="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}"/>
+			<Setter Property="MinWidth" Value="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type ScrollBar}">
+						<Grid x:Name="Bg" SnapsToDevicePixels="true" Background="{TemplateBinding Background}">
+							<Grid.RowDefinitions>
+								<RowDefinition MaxHeight="{DynamicResource {x:Static SystemParameters.VerticalScrollBarButtonHeightKey}}"/>
+								<RowDefinition Height="0.00001*"/>
+								<RowDefinition MaxHeight="{DynamicResource {x:Static SystemParameters.VerticalScrollBarButtonHeightKey}}"/>
+							</Grid.RowDefinitions>
+							<RepeatButton Style="{StaticResource ScrollBarButton}" IsEnabled="{TemplateBinding IsMouseOver}" Command="{x:Static ScrollBar.LineUpCommand}" Microsoft_Windows_Themes:ScrollChrome.ScrollGlyph="UpArrow"/>
+							<Track x:Name="PART_Track" IsEnabled="{TemplateBinding IsMouseOver}" Grid.Row="1" IsDirectionReversed="true"/>
+							<RepeatButton Style="{StaticResource ScrollBarButton}" IsEnabled="{TemplateBinding IsMouseOver}" Command="{x:Static ScrollBar.LineDownCommand}" Grid.Row="2" Microsoft_Windows_Themes:ScrollChrome.ScrollGlyph="DownArrow"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsEnabled" Value="false">
+								<Setter Property="Background" TargetName="Bg" Value="{StaticResource ScrollBarDisabledBackground}"/>
+							</Trigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Style.Triggers>
+				<Trigger Property="Orientation" Value="Horizontal">
+					<Setter Property="Width" Value="Auto"/>
+					<Setter Property="MinWidth" Value="0"/>
+					<Setter Property="Height" Value="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarHeightKey}}"/>
+					<Setter Property="MinHeight" Value="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarHeightKey}}"/>
+					<Setter Property="Background" Value="{StaticResource HorizontalScrollBarBackground}"/>
+					<Setter Property="Template">
+						<Setter.Value>
+							<ControlTemplate TargetType="{x:Type ScrollBar}">
+								<Grid x:Name="Bg" SnapsToDevicePixels="true" Background="{TemplateBinding Background}">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition MaxWidth="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarButtonWidthKey}}"/>
+										<ColumnDefinition Width="0.00001*"/>
+										<ColumnDefinition MaxWidth="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarButtonWidthKey}}"/>
+									</Grid.ColumnDefinitions>
+									<RepeatButton Style="{StaticResource ScrollBarButton}" IsEnabled="{TemplateBinding IsMouseOver}" Command="{x:Static ScrollBar.LineLeftCommand}" Microsoft_Windows_Themes:ScrollChrome.ScrollGlyph="LeftArrow"/>
+									<Track x:Name="PART_Track" IsEnabled="{TemplateBinding IsMouseOver}" Grid.Column="1">
+										<Track.DecreaseRepeatButton>
+											<RepeatButton Style="{StaticResource HorizontalScrollBarPageButton}" Command="{x:Static ScrollBar.PageLeftCommand}"/>
+										</Track.DecreaseRepeatButton>
+										<Track.IncreaseRepeatButton>
+											<RepeatButton Style="{StaticResource HorizontalScrollBarPageButton}" Command="{x:Static ScrollBar.PageRightCommand}"/>
+										</Track.IncreaseRepeatButton>
+										<Track.Thumb>
+											<Thumb Style="{StaticResource ScrollBarThumb}" Microsoft_Windows_Themes:ScrollChrome.ScrollGlyph="HorizontalGripper"/>
+										</Track.Thumb>
+									</Track>
+									<RepeatButton Style="{StaticResource ScrollBarButton}" IsEnabled="{TemplateBinding IsMouseOver}" Command="{x:Static ScrollBar.LineRightCommand}" Grid.Column="2" Microsoft_Windows_Themes:ScrollChrome.ScrollGlyph="RightArrow"/>
+								</Grid>
+								<ControlTemplate.Triggers>
+									<Trigger Property="IsEnabled" Value="false">
+										<Setter Property="Background" TargetName="Bg" Value="{StaticResource ScrollBarDisabledBackground}"/>
+									</Trigger>
+								</ControlTemplate.Triggers>
+							</ControlTemplate>
+						</Setter.Value>
+					</Setter>
+				</Trigger>
+			</Style.Triggers>
 		</Style>
 		
 	</UserControl.Resources>
@@ -579,7 +705,7 @@
 			<Button HorizontalAlignment="Right" Margin="0,0,2.5,3.334" Style="{DynamicResource ExploreFeaturesButton}" VerticalAlignment="Bottom" Width="169.25" Height="182.269" Content="Button" d:LayoutOverrides="VerticalAlignment"/>
 			<Button x:Name="CreatePartnershipButton" HorizontalAlignment="Left" Margin="7,0,0,2" Style="{DynamicResource CreatePartnersButton}" VerticalAlignment="Bottom" Width="164.483" Height="183.269" Content="" Cursor="Hand" Click="goToCreatePartnership_Click"/>
 		</Grid>
-		<Button x:Name="SyncButton" Margin="3,1,4.388,183" Style="{DynamicResource SyncButton}" Content="" Cursor="Hand" Click="Sync"/>
+		<Button x:Name="SyncButton" Margin="-0.175,1,4.388,184.27" Style="{DynamicResource SyncButton}" Content="" Cursor="Hand" Click="Sync"/>
 		<Grid x:Name="grid" Margin="-14.5,0,-36.193,0" Visibility="Hidden" >
 			<Rectangle x:Name="background_Copy1" RadiusX="1" RadiusY="2" Margin="0,0,37,0" VerticalAlignment="Top" Height="448" Cursor="Arrow">
 				<Rectangle.Fill>
@@ -613,7 +739,7 @@
 				<Button HorizontalAlignment="Right" Margin="0,0,109.527,19" VerticalAlignment="Bottom" Width="64.253" Height="23" Content="&lt;Back" Click="goBackToCreatePartnershipSrc"/>
 			</Grid>
 			<Grid x:Name="CreatePartnership3" Margin="0,0,38.5,0" VerticalAlignment="Bottom" Height="444" d:LayoutOverrides="GridBox" Visibility="Hidden">
-				<TextBlock x:Name="textBlock" Margin="30.499,35,0,0" FontSize="14.667" FontWeight="Bold" Text="Source Folder" TextWrapping="Wrap" HorizontalAlignment="Left" Width="222.08" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" Height="28">
+				<TextBlock x:Name="textBlock" Margin="30.499,35,0,0" FontSize="14.667" FontWeight="Bold" Text="Folder 1 Path" TextWrapping="Wrap" HorizontalAlignment="Left" Width="222.08" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" Height="28">
 					<TextBlock.RenderTransform>
 						<TransformGroup>
 							<ScaleTransform/>
@@ -634,7 +760,7 @@
 					</TextBox.RenderTransform>
 				</TextBox>
 				<TextBlock Margin="0,25,36.447,0" FontFamily="Arial" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" Text="Creating a Sync Partnership" VerticalAlignment="Top" Height="83.5" HorizontalAlignment="Right" Width="202.72"/>
-				<TextBlock x:Name="textBlock1" Margin="37,0,256.447,183" FontSize="14.667" FontWeight="Bold" Text="Destination Folder" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="28" RenderTransformOrigin="0.5,0.5">
+				<TextBlock x:Name="textBlock1" Margin="37,0,256.447,183" FontSize="14.667" FontWeight="Bold" Text="Folder 2 Path" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="28" RenderTransformOrigin="0.5,0.5">
 					<TextBlock.RenderTransform>
 						<TransformGroup>
 							<ScaleTransform/>
@@ -696,8 +822,8 @@
 						</TransformGroup>
 					</Image.RenderTransform>
 				</Image>
-				<TextBlock Margin="30.499,0,0,164" FontSize="14.667" FontWeight="Bold" Text="Source Folder" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="28" HorizontalAlignment="Left" Width="222.08"/>
-				<TextBlock Margin="30.499,0,0,112" FontSize="14.667" FontWeight="Bold" Text="Destination Folder" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="28" HorizontalAlignment="Left" Width="222.08"/>
+				<TextBlock Margin="30.499,0,0,164" FontSize="14.667" FontWeight="Bold" Text="Folder 1 Path" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="28" HorizontalAlignment="Left" Width="222.08"/>
+				<TextBlock Margin="30.499,0,0,112" FontSize="14.667" FontWeight="Bold" Text="Folder 2 Path" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="28" HorizontalAlignment="Left" Width="222.08"/>
 				<Button HorizontalAlignment="Right" Margin="0,0,38.5,160.643" VerticalAlignment="Bottom" Width="127.667" Height="23" Content="Go back to Home" RenderTransformOrigin="0.79,1.043" Click="goHome"/>
 				<TextBlock Margin="30.499,172.5,0,0" FontSize="14.667" FontWeight="Bold" Text="Partnership Name" TextWrapping="Wrap" VerticalAlignment="Top" Height="28" HorizontalAlignment="Left" Width="222.08"/>
 				<Button HorizontalAlignment="Right" Margin="0,0,38.5,88.643" VerticalAlignment="Bottom" Width="127.667" Height="47" Content="Create another&#xa; Partnership" RenderTransformOrigin="0.79,1.043" Click="goToCreatePartnership_Click"/>
@@ -756,7 +882,7 @@
 			<Image HorizontalAlignment="Left" Margin="29,29,0,0" VerticalAlignment="Top" Width="73" Height="73" Source="Images\Doc.png" Stretch="Fill"/>
 			<TextBlock Margin="111.5,53,136.307,0" VerticalAlignment="Top" Height="61.5" FontFamily="Arial" FontSize="24" FontWeight="Bold" Text="View Partnership" TextWrapping="Wrap"/>
 			<TextBlock Margin="113,84.5,139.307,0" VerticalAlignment="Top" Height="54" FontSize="13.333" TextWrapping="Wrap" Text="List of partnerships you created."/>
-			<ListBox x:Name="partnershipList" Margin="53.973,145.5,56.361,76.5" Style="{DynamicResource ListBoxStyle1}" ItemContainerStyle="{DynamicResource ListBoxItemStyle1}" Background="White" BorderBrush="#FF787878" Foreground="Black" RenderTransformOrigin="0.5,0.5"  ItemTemplate="{DynamicResource DataTemplate1}">
+			<ListBox x:Name="partnershipList" Margin="53.973,145.5,56.361,76.5" Style="{DynamicResource ListBoxStyle1}" ItemContainerStyle="{DynamicResource ListBoxItemStyle1}" Background="White" BorderBrush="#FF787878" Foreground="Black" RenderTransformOrigin="0.5,0.5" >
 				<ListBox.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
@@ -766,13 +892,13 @@
 					</TransformGroup>
 				</ListBox.RenderTransform>
 			</ListBox>
-			<Button Margin="198.973,0,241.361,22" VerticalAlignment="Bottom" Height="34" Content="Sync"/>
+			<Button Margin="198.973,0,241.361,22" VerticalAlignment="Bottom" Width="63" Height="34" Content="Sync"/>
 			<Button HorizontalAlignment="Right" Margin="0,0,166.361,22" VerticalAlignment="Bottom" Width="63" Height="34" Content="Edit"/>
 			<Button HorizontalAlignment="Right" Margin="0,0,91.361,22" VerticalAlignment="Bottom" Width="63" Height="34" Content="Create" Click="goToCreatePartnership_Click"/>
-			<Button HorizontalAlignment="Right" Margin="0,0,18.361,21" VerticalAlignment="Bottom" Width="63" Height="34" Content="Delete" Click="deletePartnership_Click"/>
+			<Button HorizontalAlignment="Right" Margin="0,0,18.361,22" VerticalAlignment="Bottom" Width="63" Height="34" Content="Delete" Click="deletePartnership_Click"/>
 		</Grid>
 		<Grid x:Name="sbs" Margin="-7.5,0,-4.693,0" VerticalAlignment="Bottom" Height="444" d:LayoutOverrides="GridBox" Visibility="Hidden" >
-			<Rectangle x:Name="background_Copy2" RadiusX="1" RadiusY="2" Margin="0,0,-1.5,0" VerticalAlignment="Top" Height="448" Cursor="None">
+			<Rectangle x:Name="background_Copy2" RadiusX="1" RadiusY="2" Margin="0,0,-1.5,0" VerticalAlignment="Top" Height="448" Cursor="Arrow">
 				<Rectangle.Fill>
 					<RadialGradientBrush GradientOrigin="0.265,0.184" RadiusX="1.237" RadiusY="1.237">
 						<GradientStop Color="Black" Offset="1"/>
@@ -793,6 +919,38 @@
 			<ListBox x:Name="WeirdFile_List" HorizontalAlignment="Left" Margin="39,0,0,70.5" VerticalAlignment="Bottom" Width="204" Height="81" Style="{DynamicResource weirdFilesListItemsStyle}"/>
 			<TextBlock Margin="42.36,25,0,0" FontFamily="Arial" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="26.5" HorizontalAlignment="Left" Width="202.72" Text="Favourites"/>
 			<TextBlock Margin="0,213,267.447,155.5" FontSize="16" TextWrapping="Wrap" HorizontalAlignment="Right" Width="207.22" FontWeight="Bold" FontStyle="Italic"><Run Text="Other files that maybe copied as well"/><LineBreak/><Run FontSize="13.333" FontStyle="Normal" FontWeight="Normal" Text="Mouse over to see"/></TextBlock>
+		</Grid>
+		<Grid x:Name="Conflict" Margin="0.027,0,-0.027,0" VerticalAlignment="Bottom" Height="444" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
+			<Grid.RenderTransform>
+				<TransformGroup>
+					<ScaleTransform/>
+					<SkewTransform/>
+					<RotateTransform/>
+					<TranslateTransform/>
+				</TransformGroup>
+			</Grid.RenderTransform>
+			<Rectangle x:Name="background_Copy3" RadiusX="1" RadiusY="2" Margin="0,0,-1.5,0" VerticalAlignment="Top" Height="448" Cursor="Arrow" RenderTransformOrigin="0.5,0.5">
+				<Rectangle.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Rectangle.RenderTransform>
+				<Rectangle.Fill>
+					<RadialGradientBrush GradientOrigin="0.265,0.184" RadiusX="1.237" RadiusY="1.237">
+						<GradientStop Color="Black" Offset="1"/>
+						<GradientStop Color="White"/>
+						<GradientStop Color="#FFA3A3A3" Offset="1"/>
+						<GradientStop Color="#FFA1A1A1" Offset="1"/>
+						<GradientStop Color="White" Offset="0.378"/>
+					</RadialGradientBrush>
+				</Rectangle.Fill>
+			</Rectangle>
+			<Image HorizontalAlignment="Left" Margin="29,29,0,0" VerticalAlignment="Top" Width="73" Height="73" Source="Images\Doc.png" Stretch="Fill"/>
+			<TextBlock Margin="111.5,53,136.307,0" VerticalAlignment="Top" Height="61.5" FontFamily="Arial" FontSize="24" FontWeight="Bold" Text="Conflicts" TextWrapping="Wrap"/>
+			<TextBlock Margin="113,84.5,139.307,0" VerticalAlignment="Top" Height="54" FontSize="13.333" TextWrapping="Wrap" Text="Please resolve conflicts below to complete syncing"/>
 		</Grid>
 	</Grid>
 </UserControl>
