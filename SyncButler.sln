@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyncButler", "syncbutler\Sy
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyncButlerUI", "syncbutler-ui\SyncButlerUI\SyncButlerUI.csproj", "{14E59299-D03C-44C8-9C0C-E2B4CC5C2BDB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "syncbutler-test", "syncbutler-test\syncbutler-test.csproj", "{27D4D7A9-61AA-42E7-A367-EA1BAC89B8C3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyncButlerTest", "syncbutler-test\SyncButlerTest.csproj", "{27D4D7A9-61AA-42E7-A367-EA1BAC89B8C3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestUI", "TestUI\TestUI.csproj", "{D16F8146-3A1C-4F77-A9B8-3340353EF11B}"
 EndProject
