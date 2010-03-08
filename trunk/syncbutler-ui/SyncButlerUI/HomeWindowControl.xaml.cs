@@ -300,7 +300,7 @@ namespace SyncButlerUI
 			VisualStateManager.GoToState(this,"ViewPartnership1",false);
 			SortedList<string,Partnership> partnershiplist = this.Controller.GetPartnershipList();
 			this.partnershipList.ItemsSource = partnershiplist.Values;
-
+            this.partnershipList.Items.Refresh();
 			
         }
 //#endregion
@@ -326,8 +326,8 @@ namespace SyncButlerUI
 		
 		private void goToExploreFeatures_Click(object sender, RoutedEventArgs e)
 		{
-			CustomDialog dialog=new CustomDialog("Exploring New Features is still in construction!");
-			dialog.ShowDialog();
+			//CustomDialog dialog=new CustomDialog("Exploring New Features is still in construction!");
+			//dialog.ShowDialog();
 		}
 		
 	}
