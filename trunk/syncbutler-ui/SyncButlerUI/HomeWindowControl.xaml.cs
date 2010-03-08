@@ -297,14 +297,9 @@ namespace SyncButlerUI
         private void goToViewPartnerships(object sender, RoutedEventArgs e)
         {
 			VisualStateManager.GoToState(this,"ViewPartnership1",false);
-	//		this.partnershipList.ItemsSource = GetListOfPartnerShip();
 			SortedList<string,Partnership> partnershiplist = this.Controller.GetPartnershipList();
 			this.partnershipList.ItemsSource = partnershiplist.Values;
-			//foreach (Partnership p in partnershiplist.Values)
-			//{
-//
-			//	this.partnershipList.Items.Add(new PartnershipTempData(p));
-			//}
+
 			
         }
 //#endregion
