@@ -4,7 +4,6 @@ using System.Text;
 using System.Diagnostics;
 using System.IO;
 
-
 namespace SyncButler
 {
     /// <summary>

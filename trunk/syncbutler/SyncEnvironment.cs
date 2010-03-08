@@ -8,10 +8,6 @@ using SyncButler.ProgramEnvironment;
 namespace SyncButler
 {
     /// <summary>
-    /// Contains methods to load and store settings as well as handling access to the list of partnerships
-    /// </summary>
-
-    /// <summary>
     /// Represents a key used in the checksum dictionary
     /// </summary>
     public struct ChecksumKey
@@ -25,18 +21,16 @@ namespace SyncButler
         }
     }
 
-    //To Do: Allow the restoration of dictionary object
+    /// <summary>
+    /// Contains methods to load and store settings as well as handling access to the list of partnerships
+    /// </summary>
     public class SyncEnvironment
     {
         ///List of persistence attributes
-        /// <param name="storedSettings">This is a settings container that will be saved</param>
-        /// <param name="settingName">This is an XML description require to write settings to the real XML page</param>
-        /// <param name="storedPartnerships">This is a partnership container that will be saved</param>
-        /// <param name="partnershipName">This is an XML description require to write partnership to the real XML page</param>
         private SortedList<String,Partnership> partnershipList;
         private bool allowAutoSyncForConflictFreeTasks;
         private bool firstRunComplete;
-        private long fileReadBufferSize;
+        private long fileReadBufferSize; //How much of the data file is read each cycle
         private System.Configuration.Configuration config;
         private string settingName = "systemSettings";
         private string partnershipName = "partnership";
@@ -52,14 +46,13 @@ namespace SyncButler
         {
             firstRunComplete = false;
             IntialEnv();
-            //partnershipList = new List<Partnership>();
         }
 
         /// <summary>
-        /// Returns an instance of SyncEnvironment.
-        /// Creates a new instance if necessary. Otherwise, it will use an already available instance.
+        /// Returns an instance of SyncEnvironment
+        /// Creates a new instance if necessary, otherwise, it will use an already available instance
         /// </summary>
-        /// <returns>An instance of SyncEnvironment.</returns>
+        /// <returns>An instance of SyncEnvironment</returns>
         public static SyncEnvironment GetInstance()
         {
             if (syncEnv == null)
@@ -69,10 +62,10 @@ namespace SyncButler
         }
 
         /// <summary>
-        /// Returns the partnership at the specified index.
+        /// Returns the partnership at the specified index
         /// </summary>
-        /// <param name="idx">The integer index of the partnership to load.</param>
-        /// <returns>A Partnership object</returns>
+        /// <param name="name">The name (used as index) of the partnership that is to be loaded</param>
+        /// <returns>A Partnership object (Possible to be null if not found)</returns>
         public Partnership LoadPartnership(string name)
         {
             return partnershipList[name];
@@ -81,13 +74,19 @@ namespace SyncButler
         /// <summary>
         /// Adds a properly created partner object into the list of partnership
         /// </summary>
-        /// <param name="partner">A properly created partner object</param>
+        /// <param name="name">Friendly name of the partnership, must be unique, caps ignored</param>
+        /// <param name="leftPath">Full path of the left folder of the partnership, must be unique, caps ignored</param>
+        /// <param name="rightPath">Full path of the right folder of the partnership, must be unique, caps ignored</param>
         /// <exception cref="ArgumentNullException">Thrown if the key is a null reference.</exception>
         /// <exception cref="ArgumentException">Thrown if the name of the partnership already exists.</exception>
         public void AddPartnership(string name, String leftPath, String rightPath)
         {
             System.Diagnostics.Debug.Assert((name != null) && (name.Length > 0));
             Partnership element = CreatePartnership(name, leftPath, rightPath);
+
+            if (CheckIsUniquePartnership(name, leftPath, rightPath))
+                throw new ArgumentException("Friend name already in used or such file/folder partnership already exist");
+
             partnershipList.Add(name, element);
         }
 
@@ -115,33 +114,36 @@ namespace SyncButler
         /// and supplied with the position of the Partnership object in the
         /// List of Partnerships.
         /// </summary>
-        /// <param name="idx">The position of the Partnership in the List of Partnerships</param>
+        /// <param name="name">The position of the Partnership in the List of Partnerships</param>
         /// <param name="updated">The UPDATED Partnership object will replace the original one</param>
         public void UpdatePartnership(string name, Partnership updated)
         {
+            Partnership backupElement = partnershipList[name];
             partnershipList.Remove(name);
+
+            //Checks if the user try to update the partnership with existing partnerships
+            if (CheckIsUniquePartnership(updated.Name, updated.LeftFullPath, updated.RightFullPath))
+            {
+                partnershipList.Add(name, backupElement);
+                throw new ArgumentException("Such file/folder partnership already exist. Update failure. Previous Partnership restored");
+            }
+
             partnershipList.Add(name,updated);
         }
 
         /// <summary>
-        /// Not implemented. Gets the settings for the program.
-        /// </summary>
-        /// <returns>A Dictionary object with strings as keys and value (subject to change).</returns>
-        public Dictionary<String, String> ReadSettings()
-        {
-            return null;
-        }
-
-        /// <summary>
-        /// Not implemented. Stores the settings for the program to persistent storage
+        /// Stores the settings for the program to persistent storage
         /// during program shut down
         /// </summary>
+        /// <exception cref="ConfigurationErrorsException">Throws ConfigurationErrorsException if the program
+        /// is unable to write to disk</exception>
         public void StoreEnv()
         {
             //Update the settings in the config file
             ConvertPartnershipList2XML();
             storedSettings.SystemSettings.AllowAutoSyncForConflictFreeTasks = allowAutoSyncForConflictFreeTasks;
             storedSettings.SystemSettings.FileReadBufferSize = fileReadBufferSize;
+
             // Write to file
             config.Save(ConfigurationSaveMode.Modified);
         }
@@ -150,10 +152,6 @@ namespace SyncButler
         /// This method is called during program startup to restore all
         /// the previous states of the program.
         /// </summary>
-        /// <param name="storedSettings">This is a settings container that will be restored</param>
-        /// <param name="settingName">This is an XML description require to read settings to the real XML page</param>
-        /// <param name="storedPartnerships"></param>
-        /// <param name="partnershipName">This is an XML description require to read partnership to the real XML page</param>
         public void RestoreEnv()
         {
             //Restore partnership stored in the XML settings file
@@ -174,8 +172,10 @@ namespace SyncButler
 
         /// <summary>
         /// If the settings files do not exist. A basic framework is created and stored. This
-        /// will store the settings of a previous interations.
+        /// will store the settings of a previous interations. 
         /// </summary>
+        /// <exception cref="ConfigurationErrorsException">Throws ConfigurationErrorsException if the program
+        /// is unable to write to disk</exception>
         public void CreateEnv()
         {
             //Create the list of partnerships
@@ -204,6 +204,8 @@ namespace SyncButler
         /// is called to setup the program config file is expectedly,
         /// stored with the program.
         /// </summary>
+        /// <exception cref="ConfigurationErrorsException">Throws ConfigurationErrorsException if the program
+        /// is unable to write to disk</exception>
         public void IntialEnv()
         {
             //This will detect if settings are already stored
@@ -237,8 +239,6 @@ namespace SyncButler
                 }
 
                 //Not necessary an error, we will just create the .settings file
-                //throw new ApplicationException("Could not load Stored Settings");
-
                 if (storedSettings.SystemSettings.FirstRunComplete)
                 {
                     createSettings = false;
@@ -246,10 +246,6 @@ namespace SyncButler
                     //It remains as false for the rest of the execution of the program
                     //during the real run
                 }
-
-                //else
-                //Console.WriteLine(
-                //    "A invalid settings file was found, recreating one");
             }
 
             storedPartnerships = new PartnershipSection();
@@ -276,7 +272,8 @@ namespace SyncButler
         }
 
         /// <summary>
-        /// Rewrap the list of partnership in XML friendly format
+        /// Rewrap the list of partnership in XML friendly format. The list is guaranted to
+        /// have only unique partnerships.
         /// </summary>
         private void ConvertPartnershipList2XML()
         {
@@ -291,7 +288,8 @@ namespace SyncButler
         }
 
         /// <summary>
-        /// Unwrap the list of partnership from a XML friendly format
+        /// Unwrap the list of partnership from a XML friendly format. The list is guaranted to
+        /// have only unique partnerships.
         /// </summary>
         private void ConvertXML2PartnershipList()
         {
@@ -330,8 +328,10 @@ namespace SyncButler
         }
 
         /// <summary>
-        /// Creates a new Partnership based on 2 full paths.
+        /// Creates a new Partnership based on 2 full paths. Note it merely creates a partnership
+        /// object. It is not its place to check if there are duplicated partnerships.
         /// </summary>
+        /// <param name="name">Friendly name of a partnership</param>
         /// <param name="leftPath">Full Path to the left of a partnership</param>
         /// <param name="rightPath">Full Path to the right of a partnership</param>        
         private Partnership CreatePartnership(String name, String leftPath, String rightPath)
@@ -352,6 +352,10 @@ namespace SyncButler
                 }
                 else
                 {
+                    //Ensuring the left and right files are the same
+                    if (!CheckFilePartnerAbility(leftPath, rightPath))
+                        throw new ArgumentException("Left file not the same as right file for windows file partnership");
+
                     return CreateFilePartner(leftInfo.DirectoryName, rightInfo.DirectoryName, leftPath, rightPath, name);
                 }
             }
@@ -371,33 +375,112 @@ namespace SyncButler
                 }
                 else
                 {
+                    //Ensuring the left and right files are the same
+                    if (!CheckFilePartnerAbility(leftPath, rightPath))
+                        throw new ArgumentException("Left file not the same as right file for windows file partnership");
                     return CreateFilePartner(leftInfo.DirectoryName, rightInfo.DirectoryName, leftPath, rightPath, name);
                 }
-   
             }
         }
 
-        private Partnership CreateFolderPartner(String leftpath, String rightpath, String name)
+        /// <summary>
+        /// This method will only create a partnership for the same file on the two folders.
+        /// Required to be the same for it to work
+        /// </summary>
+        /// <param name="leftpath">Left Full Path to the file on the left</param>
+        /// <param name="rightpath">Left Full Path to the file on the left</param>
+        /// <param name="name">Friendly name of the partnership</param>
+        /// <returns>A well formed Partnership object</returns>
+        private Partnership CreateFolderPartner(string leftpath, string rightpath, string name)
         {
             ISyncable left = new WindowsFolder(leftpath, leftpath);
             ISyncable right = new WindowsFolder(rightpath, rightpath);
             Partnership partner = new Partnership(name, left, right, null);
             return partner;
         }
-
-        private Partnership CreateFilePartner(String leftdir, String rightdir, String leftpath, String rightpath, String name)
+        
+        /// <summary>
+        /// Creates a Partnership object between two files. Ideally, between two SAME file
+        /// but in different location. (Like Micro Partnership)
+        /// </summary>
+        /// <param name="leftdir">Root Path of the left file</param>
+        /// <param name="rightdir">Root Path of the right file</param>
+        /// <param name="leftpath">Full Path of the left file</param>
+        /// <param name="rightpath">Full Path of the right file</param>
+        /// <param name="name">Friendly name of the partnership</param>
+        /// <returns>A well formed Partnership object</returns>
+        private Partnership CreateFilePartner(string leftdir, string rightdir, string leftpath, string rightpath, string name)
         {
+            //Meaning that an invalid pair has been specified
+            System.Diagnostics.Debug.Assert(CheckFilePartnerAbility(leftpath, rightpath));
+
             ISyncable left = new WindowsFile(leftdir, leftpath);
             ISyncable right = new WindowsFile(rightdir, rightpath);
             Partnership partner = new Partnership(name, left, right, null);
             return partner;
         }
-        //There are 1001 options to change, need to revise this
-        /*
-        public void UpdateSystemSetting(SettingsConfigElement.Options option, )
-        {            
+
+        /// <summary>
+        /// Checks if the path supplied for file partnership creation are for the same file,
+        /// ignores case
+        /// </summary>
+        /// <param name="leftPath">Full Path of the left file</param>
+        /// <param name="rightPath">Full Path of the right file</param>
+        /// <returns>True if they are compatible</returns>
+        private bool CheckFilePartnerAbility(string leftpath, string rightpath)
+        {
+            //Ensuring the left and right files are the same
+            int positionLeft = leftpath.LastIndexOf("\\");
+            int positionRight = rightpath.LastIndexOf("\\");
+            string filenameLeft = leftpath.Substring(positionLeft, leftpath.Length - positionLeft);
+            string filenameRight = rightpath.Substring(positionRight, rightpath.Length - positionRight);
+            filenameLeft = filenameLeft.ToLower();
+            filenameRight = filenameRight.ToLower();
+
+            //Meaning that an invalid pair has been specified
+            return filenameLeft.Equals(filenameRight);
         }
-        */
+
+        /// <summary>
+        /// Checks if the Friendly Name is already in used. Also, the pair of partnership
+        /// folders/files must be unique. Caps are ignored. The paths must fulfill the conditions below
+        /// (Incoming Left != Left in List && Incoming Right != Right in List)
+        /// (Incoming Left != Right in List && Incoming Right != Left in List)
+        /// </summary>
+        /// <param name="name">Friendly Name</param>
+        /// <param name="leftPath">Full path to the incoming left folder or file</param>
+        /// <param name="rightPath">Full path to the incoming right folder or file</param>
+        /// <returns></returns>
+        private bool CheckIsUniquePartnership(string name, String leftPath, String rightPath)
+        {
+            bool pathAlreadyExist1 = false; //Checks left with left, right with right
+            bool pathAlreadyExist2 = false; //Checks left with right, right with left
+
+            foreach (Partnership storedElement in partnershipList.Values)
+            {
+                pathAlreadyExist1 = false;
+                pathAlreadyExist2 = false;
+
+                if (storedElement.Name.ToLower().Equals(name.ToLower()))
+                    throw new ArgumentException("Friendly name already in used");
+
+                if (storedElement.LeftFullPath.ToLower().Equals(leftPath.ToLower()))
+                    pathAlreadyExist1 = true;
+                //Don't throw exception first, left and right must already exist
+
+                if (pathAlreadyExist1 && storedElement.RightFullPath.ToLower().Equals(rightPath.ToLower()))
+                    return false;
+
+                if (storedElement.LeftFullPath.ToLower().Equals(rightPath.ToLower()))
+                    pathAlreadyExist2 = true;
+                //Don't throw exception first, left and right must already exist
+
+                if (pathAlreadyExist2 && storedElement.RightFullPath.ToLower().Equals(leftPath.ToLower()))
+                    return false;
+            }
+
+            return true;
+        }
 
         /// <summary>
         /// Decodes a dictionary key (string) into its components
@@ -426,16 +509,3 @@ namespace SyncButler
         }
     }
 }
-/*
-Environment
-
-Attributes:
-
-partnershipList:List<partnership>
-
-Methods:
-
-loadPartnership(input:int):Partnership
-readSettings():Dictionary
-storeSettings():boolean
-*/
