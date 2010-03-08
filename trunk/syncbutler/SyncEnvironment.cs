@@ -67,8 +67,11 @@ namespace SyncButler
         /// Adds a properly created partner object into the list of partnership
         /// </summary>
         /// <param name="partner">A properly created partner object</param>
+        /// <exception cref="ArgumentNullException">Thrown if the key is a null reference.</exception>
+        /// <exception cref="ArgumentException">Thrown if the name of the partnership already exists.</exception>
         public void AddPartnership(string name, String leftPath, String rightPath)
         {
+            System.Diagnostics.Debug.Assert((name != null) && (name.Length > 0));
             Partnership element = CreatePartnership(name, leftPath, rightPath);
             partnershipList.Add(name, element);
         }
