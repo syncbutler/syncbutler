@@ -16,20 +16,35 @@ namespace SyncButler
         protected FileInfo nativeFileObj;
         protected SyncableStatusMonitor statusMonitor = null;
 
+        protected FileStream fileStream = null;
+
         protected long checksumCache;
         protected bool checksumCacheFresh = false;
+
+        /// <summary>
+        /// Destructor. Makes sure fileStream is closed
+        /// </summary>
+        ~WindowsFile()
+        {
+            CloseFile();
+        }
 
         /// <summary>
         /// Constructor that takes in two parameters, a root path and the full path.
         /// </summary>
         /// <param name="rootPath">Path of the root directory</param>
         /// <param name="fullPath">Full path to this file</param>
-        public WindowsFile(String rootPath, String fullPath)
+        public WindowsFile(string rootPath, string fullPath)
         {
             this.nativeFileObj = new FileInfo(fullPath);
             this.relativePath = StripPrefix(rootPath, fullPath);
             this.nativeFileSystemObj = this.nativeFileObj;
             this.rootPath = rootPath;
+        }
+
+        public WindowsFile(string fullPath) : this(fullPath, fullPath)
+        {
+
         }
 
         /// <summary>
@@ -38,13 +53,19 @@ namespace SyncButler
         /// </summary>
         /// <param name="rootPath">Path of the root directory</param>
         /// <param name="fullPath">Full path to this file</param>
-        public WindowsFile(String rootPath, String fullPath, Partnership parentPartnership)
+        public WindowsFile(string rootPath, string fullPath, Partnership parentPartnership)
         {
             this.nativeFileObj = new FileInfo(fullPath);
             this.relativePath = StripPrefix(rootPath, fullPath);
             this.nativeFileSystemObj = this.nativeFileObj;
             this.rootPath = rootPath;
             this.parentPartnership = parentPartnership;
+        }
+
+        public WindowsFile(string fullPath, Partnership parentPartnership)
+            : this(fullPath, fullPath, parentPartnership)
+        {
+
         }
 
         public override void SetStatusMonitor(SyncableStatusMonitor statusMonitor)
@@ -69,12 +90,47 @@ namespace SyncButler
             }
         }
 
+        public bool ReadEOF
+        {
+            get
+            {
+                if (fileStream == null) OpenFile();
+                return fileStream.Position >= nativeFileObj.Length;
+            }
+        }
+
+        /// <summary>
+        /// Opens the file for reading
+        /// </summary>
+        /// <exception cref="FileNotFoundException">If the file is not found.</exception>
+        /// <exception cref="UnauthorizedAccessException">Path is read-only or is a directory.</exception>
+        /// <exception cref="DirectoryNotFoundException">The specified path is invalid, such as being on an unmapped drive.</exception>
+        /// <exception cref="IOException">The file is already open.</exception>
+        public void OpenFile()
+        {
+            string fullPath = this.rootPath + this.relativePath;
+
+            if (!File.Exists(fullPath))
+            {
+                throw new FileNotFoundException("Could not find file.", fullPath);
+            }
+
+            fileStream = this.nativeFileObj.OpenRead();
+        }
+
+        public void CloseFile()
+        {
+            if (fileStream != null) fileStream.Close();
+            else fileStream = null;
+        }
+
         /// <summary>
         /// Reads the file and returns a byte array of data.
+        /// WARNING: The array returned may not be of the length wantedBufferSize if the end of file was reached!
         /// </summary>
         /// <param name="start">The offset to start reading the bytes from.</param>
         /// <param name="wantedBufferSize">The desired size of the buffer. This is subject to the file's actual size.</param>
-        /// <returns>A byte array of the file's contents.</returns>
+        /// <returns>A byte array of the file's contents or null on EOF</returns>
         /// <exception cref="FileNotFoundException">If the file is not found.</exception>
         /// <exception cref="UnauthorizedAccessException">Path is read-only or is a directory.</exception>
         /// <exception cref="DirectoryNotFoundException">The specified path is invalid, such as being on an unmapped drive.</exception>
@@ -83,30 +139,46 @@ namespace SyncButler
         /// <exception cref="ObjectDisposedException">The current stream is closed.</exception>
         public byte[] GetBytes(long start, long wantedBufferSize)
         {
-            String fullPath = this.rootPath + this.relativePath;
+            if (fileStream == null) OpenFile();
+
+            fileStream.Seek(start, 0);
+
+            return GetBytes(wantedBufferSize);
+        }
+
+        /// <summary>
+        /// Reads the next wantedBufferSize bytes from the file
+        /// WARNING: The array returned may not be of the length wantedBufferSize if the end of file was reached!
+        /// </summary>
+        /// <param name="wantedBufferSize"></param>
+        /// <returns>The bytes read in or null on EOF</returns>
+        /// <exception cref="FileNotFoundException">If the file is not found.</exception>
+        /// <exception cref="UnauthorizedAccessException">Path is read-only or is a directory.</exception>
+        /// <exception cref="DirectoryNotFoundException">The specified path is invalid, such as being on an unmapped drive.</exception>
+        /// <exception cref="IOException">The file is already open.</exception>
+        /// <exception cref="NotSupportedException">The current stream does not support reading.</exception>
+        /// <exception cref="ObjectDisposedException">The current stream is closed.</exception>
+        public byte[] GetBytes(long wantedBufferSize)
+        {
+            if (fileStream == null) OpenFile();
+
             long actualBufferSize;
-
-            if (!File.Exists(fullPath))
-            {
-                throw new FileNotFoundException("Could not find file.", fullPath);
-            }
-
-            FileStream fileStream = this.nativeFileObj.OpenRead();
+            long start = fileStream.Position;
 
             if ((this.Length - start) >= wantedBufferSize)
                 actualBufferSize = wantedBufferSize;
             else
-                actualBufferSize = (this.Length - start);
+                actualBufferSize = this.Length - start;
+
+            if (actualBufferSize < 1) return null;
 
             byte[] buffer = new byte[actualBufferSize];
 
-            fileStream.Seek(start, 0);
-
-            for (long i = 0; i < (actualBufferSize); i++)
+            for (long i = 0; i < actualBufferSize; i++)
                 buffer[i] = (byte)fileStream.ReadByte();
 
-            fileStream.Close();
             return buffer;
+
         }
 
         /// <summary>
@@ -191,15 +263,18 @@ namespace SyncButler
             if (checksumCacheFresh) return checksumCache;
 
             IRollingHash hashAlgorithm = new Adler32();
-            long start = 0;
             long bufferSize = SyncEnvironment.GetInstance().FileReadBufferSize;
 
-            while (start < this.Length)
+            this.OpenFile();
+
+            while (!this.ReadEOF)
             {
-                hashAlgorithm.Update(this.GetBytes(start, bufferSize));
-                start += bufferSize;
+                hashAlgorithm.Update(this.GetBytes(bufferSize));
             }
 
+            this.CloseFile();
+
+            checksumCacheFresh = true;
             checksumCache = hashAlgorithm.Value;
 
             return checksumCache;
@@ -300,8 +375,7 @@ namespace SyncButler
                     recommendedAction = Conflict.Action.Unknown;
                 else if (this.LastWriteTime.Equals(partner.LastWriteTime))
                     return conflictList;
-                //else if (HaveEqualChecksums(this, partner))
-                else if (this.Checksum().Equals(partner.Checksum()))
+                else if (this.Checksum() == partner.Checksum())
                 {
                     if (!parentPartnership.ChecksumExists(this))
                         this.UpdateStoredChecksum();
@@ -334,6 +408,8 @@ namespace SyncButler
         /// Checks whether two WindowsFile objects have equal checksums.
         /// The difference in this method from the object's Checksum() method is that while both updates a rolling hash,
         /// this method will stop the moment a difference is detected - which may save some cost.
+        /// 
+        /// In short -- a potentially more efficient way to compare two files checksums than left.Checksum() == right.Checksum()
         /// </summary>
         /// <param name="left">First WindowsFile object to compare with second</param>
         /// <param name="right">Second WindowsFile object to compare with first</param>
@@ -343,21 +419,35 @@ namespace SyncButler
             if (left.Length != right.Length)
                 return false;
 
+            if (left.checksumCacheFresh && right.checksumCacheFresh)
+                return (left.checksumCache == right.checksumCache);
+
             IRollingHash leftHash = new Adler32();
             IRollingHash rightHash = new Adler32();
 
-            long start = 0;
             long bufferSize = SyncEnvironment.GetInstance().FileReadBufferSize;
 
-            while (start < left.Length)
+            left.OpenFile();
+            right.OpenFile();
+
+            while (!left.ReadEOF)
             {
-                leftHash.Update(left.GetBytes(start, bufferSize));
-                rightHash.Update(right.GetBytes(start, bufferSize));
-                start += bufferSize;
+                leftHash.Update(left.GetBytes(bufferSize));
+                rightHash.Update(right.GetBytes(bufferSize));
 
                 if (leftHash.Value != rightHash.Value)
+                {
+                    left.CloseFile();
+                    right.CloseFile();
                     return false;
+                }
             }
+
+            left.CloseFile();
+            right.CloseFile();
+
+            left.checksumCache = right.checksumCache = leftHash.Value;
+            left.checksumCacheFresh = right.checksumCacheFresh = true;
 
             return true;
         }
