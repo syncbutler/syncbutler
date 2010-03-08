@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using SyncButler.Exceptions;
+using System.Windows.Forms;
 
 namespace SyncButler
 {
@@ -10,6 +11,7 @@ namespace SyncButler
     {
         SyncEnvironment syncEnvironment;
         private static Controller controller;
+        private SyncButlerConsole.Form1 console;
 
         /// <summary>
         /// This constructor should never be invoked directly. Use GetInstance() to obtain an instance of Controller.
@@ -17,6 +19,8 @@ namespace SyncButler
         private Controller()
         {
             syncEnvironment = SyncEnvironment.GetInstance();
+            this.console = new SyncButlerConsole.Form1();
+            this.console.Show();
         }
 
         /// <summary>
@@ -30,6 +34,39 @@ namespace SyncButler
 
             return controller;
             
+        }
+
+        /// <summary>
+        /// Writes a line to the debugging console.
+        /// </summary>
+        /// <param name="text">Text to write</param>
+        public void WriteDebug(string text)
+        {
+            this.console.WriteLine(text);
+        }
+
+        /// <summary>
+        /// Clears the debugging console.
+        /// </summary>
+        public void ClearDebug()
+        {
+            this.console.ClearScreen();
+        }
+
+        /// <summary>
+        /// Hide the debugging console.
+        /// </summary>
+        public void HideDebug()
+        {
+            this.console.Hide();
+        }
+
+        /// <summary>
+        /// Show the debugging console.
+        /// </summary>
+        public void ShowDebug()
+        {
+            this.console.Show();
         }
 
         /// <summary>
@@ -97,7 +134,7 @@ namespace SyncButler
                     {
                         conflict.Resolve();
                     }
-                    catch (InvalidActionException e)
+                    catch (InvalidActionException)
                     {
                     }
                 }

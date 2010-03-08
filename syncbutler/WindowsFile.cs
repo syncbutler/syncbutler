@@ -299,7 +299,7 @@ namespace SyncButler
             {
                 return (parentPartnership.GetLastChecksum(this) != this.Checksum());
             }
-            catch (SyncableNotExistsException e)
+            catch (SyncableNotExistsException)
             {
                 return true; // assume the file has change if we know nothgin about it.
             }
