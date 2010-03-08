@@ -4,6 +4,9 @@ using System.Text;
 using System.Configuration;
 using System.IO;
 using SyncButler.ProgramEnvironment;
+using System.Xml;
+using System.Reflection;
+using System.Diagnostics;
 
 namespace SyncButler
 {
@@ -37,6 +40,8 @@ namespace SyncButler
         private SettingsSection storedSettings;
         private PartnershipSection storedPartnerships;
         private static SyncEnvironment syncEnv;
+
+        private static Assembly syncButlerAssembly = null;
         
         /// <summary>
         /// This constructor will automatically restore a previous sessions or create new ones.
@@ -46,6 +51,18 @@ namespace SyncButler
         {
             firstRunComplete = false;
             IntialEnv();
+
+            foreach (Assembly asm in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                if (asm.FullName.StartsWith("SyncButler,"))
+                {
+                    syncButlerAssembly = asm;
+                    break;
+                }
+            }
+
+            if (syncButlerAssembly == null)
+                throw new Exception("Unable to load the backend assembly!");
         }
 
         /// <summary>
@@ -506,6 +523,39 @@ namespace SyncButler
             returnValue.relativePath = returnValue.entityPath.Substring(pos + 3);
 
             return returnValue;
+        }
+
+        /// <summary>
+        /// Unserializes an object. Depends on the name of the root element to figure out
+        /// what class the object is. Also assumes the object implements a constructor 
+        /// which takes one arguement - an XmlReader. The actual unserialization takes place
+        /// in that constructor
+        /// </summary>
+        /// <param name="xmlString">The XML to unserialize</param>
+        /// <returns>An Object of the correct type</returns>
+        /// <exception cref="InvalidDataException">The XML was not valid</exception>
+        public static Object ReflectiveUnserialize(string xmlString)
+        {
+            Debug.Assert(syncButlerAssembly != null, "The backend assembly has not been initialized!");
+
+            XmlReader xmlData = XmlTextReader.Create(new StringReader(xmlString));
+
+            xmlData.Read();
+            if (xmlData.NodeType != XmlNodeType.Element) throw new InvalidDataException();
+            string className = xmlData.Name;
+            xmlData = XmlTextReader.Create(new StringReader(xmlString));
+
+            Type t;
+
+            try
+            {
+                t = syncButlerAssembly.GetType("SyncButler." + className);
+                return Activator.CreateInstance(t, xmlData);
+            }
+            catch (Exception e)
+            {
+                throw new InvalidDataException();
+            }
         }
     }
 }

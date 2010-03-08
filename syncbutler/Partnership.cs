@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Diagnostics;
+using System.Xml;
 using System.IO;
 
 namespace SyncButler
@@ -57,6 +58,57 @@ namespace SyncButler
         /// May be empty.
         /// </summary>
         protected internal Dictionary<string, long> hashDictionary;
+
+        /// <summary>
+        /// Unserialize this class
+        /// </summary>
+        /// <param name="xmlData"></param>
+        public Partnership(XmlReader xmlData)
+        {
+            hashDictionary = new Dictionary<string, long>();
+
+            xmlData.Read();
+            if (xmlData.Name != "Partnership") throw new InvalidDataException("This is not data for a Partnership");
+            
+            this.name = xmlData.GetAttribute("name");
+            if (this.name == null) throw new InvalidDataException("Partnership is missing the name");
+
+            ISyncable[] pair = new ISyncable[2];
+            int curPair = 0;
+            
+            while (xmlData.Read())
+            {
+                if (xmlData.NodeType != XmlNodeType.Element) continue;
+
+                if (xmlData.Name == "Pair")
+                {
+                    while (xmlData.Read())
+                    {
+                        if (xmlData.NodeType == XmlNodeType.Element)
+                        {
+                            if (curPair > 1) throw new InvalidDataException("Too many children under Pair");
+                            try
+                            {
+                                pair[curPair] = (ISyncable)SyncEnvironment.ReflectiveUnserialize(xmlData.ReadOuterXml());
+                                curPair++;
+                            }
+                            catch (InvalidCastException e)
+                            {
+                                throw new InvalidDataException("The nodes under Pair was not an ISyncable");
+                            }
+                        }
+                    }
+
+                    break;
+                }
+                else xmlData.Skip();
+            }
+
+            if (curPair != 2) throw new InvalidDataException("Missing node under Pair");
+
+            this.left = pair[0];
+            this.right = pair[1];
+        }
 
         /// <summary>
         /// initialize the partership
@@ -176,6 +228,35 @@ namespace SyncButler
         public override String ToString()
         {
             return left.ToString() + " <-> " + right.ToString();
+        }
+
+        public void SerializeXML(XmlWriter xmlData)
+        {
+            xmlData.WriteStartElement("Partnership");
+            xmlData.WriteAttributeString("name", this.name);
+            // ---
+            xmlData.WriteStartElement("Pair");
+            left.SerializeXML(xmlData);
+            right.SerializeXML(xmlData);
+            xmlData.WriteEndElement();
+            // ---
+            xmlData.WriteEndElement();
+        }
+
+        public string Serialize()
+        {
+            StringWriter output = new StringWriter();
+            XmlWriterSettings xmlSettings = new XmlWriterSettings();
+            xmlSettings.OmitXmlDeclaration = true;
+            xmlSettings.Indent = true;
+            XmlWriter xmlData = XmlWriter.Create(output, xmlSettings);
+
+            xmlData.WriteStartDocument();
+            SerializeXML(xmlData);
+            xmlData.WriteEndDocument();
+            xmlData.Close();
+
+            return output.ToString();
         }
     }
 }

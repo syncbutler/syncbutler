@@ -5,6 +5,7 @@ using System.IO;
 using System.Text;
 using SyncButler.Checksums;
 using SyncButler.Exceptions;
+using System.Xml;
 
 namespace SyncButler
 {
@@ -27,6 +28,23 @@ namespace SyncButler
         ~WindowsFile()
         {
             CloseFile();
+        }
+
+        public WindowsFile(XmlReader xmlData)
+        {
+            relativePath = rootPath = null;
+
+            xmlData.Read();
+            if (xmlData.Name != "WindowsFile") throw new InvalidDataException();
+
+            relativePath = xmlData.GetAttribute("RelativePath").Trim();
+            rootPath = xmlData.GetAttribute("RootPath").Trim();
+
+            if (relativePath == null || rootPath == null) throw new InvalidDataException("Missing path");
+            if ((relativePath.Length > 0) && !rootPath.EndsWith("\\")) rootPath += "\\";
+
+            nativeFileObj = new FileInfo(rootPath + relativePath);
+            nativeFileSystemObj = nativeFileObj;
         }
 
         /// <summary>
@@ -451,6 +469,13 @@ namespace SyncButler
 
             return true;
         }
-        
+
+        public override void SerializeXML(XmlWriter xmlData)
+        {
+            xmlData.WriteStartElement("WindowsFile");
+            xmlData.WriteAttributeString("RelativePath", relativePath);
+            xmlData.WriteAttributeString("RootPath", rootPath);
+            xmlData.WriteEndElement();
+        }
     }
 }

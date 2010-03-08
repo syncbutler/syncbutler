@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml;
 
 namespace SyncButler
 {
@@ -120,5 +121,17 @@ namespace SyncButler
         /// <returns></returns>
         /// <exception cref="ArguementException">The entityPath cannot be a child of the current syncable.</exception>
         ISyncable CreateChild(string entityPath);
+
+        /// <summary>
+        /// Serializes the object as a string
+        /// </summary>
+        /// <returns>The serialized output of the syncable</returns>
+        string Serialize();
+
+        /// <summary>
+        /// Serializes the object to an XmlTextWriter
+        /// </summary>
+        /// <param name="xmlData"></param>
+        void SerializeXML(XmlWriter xmlData);
     }
 }

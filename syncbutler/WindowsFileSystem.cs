@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Xml;
 
 namespace SyncButler
 {
@@ -139,6 +140,22 @@ namespace SyncButler
             parentPartnership.RemoveChecksum(this);
         }
 
+        public string Serialize()
+        {
+            StringWriter output = new StringWriter();
+            XmlWriterSettings xmlSettings = new XmlWriterSettings();
+            xmlSettings.OmitXmlDeclaration = true;
+            xmlSettings.Indent = true;
+            XmlWriter xmlData = XmlWriter.Create(output, xmlSettings); 
+
+            xmlData.WriteStartDocument();
+            SerializeXML(xmlData);
+            xmlData.WriteEndDocument();
+            xmlData.Close();
+
+            return output.ToString();
+        }
+
         public abstract long Checksum();
 
         public abstract void SetStatusMonitor(SyncableStatusMonitor monitor);
@@ -158,5 +175,7 @@ namespace SyncButler
         public abstract string EntityPath();
 
         public abstract ISyncable CreateChild(string entityPath);
+
+        public abstract void SerializeXML(XmlWriter xmlData);
     }
 }
