@@ -84,7 +84,7 @@ namespace SyncButler
             System.Diagnostics.Debug.Assert((name != null) && (name.Length > 0));
             Partnership element = CreatePartnership(name, leftPath, rightPath);
 
-            if (CheckIsUniquePartnership(name, leftPath, rightPath))
+            if (!CheckIsUniquePartnership(name, leftPath, rightPath))
                 throw new ArgumentException("Friend name already in used or such file/folder partnership already exist");
 
             partnershipList.Add(name, element);
