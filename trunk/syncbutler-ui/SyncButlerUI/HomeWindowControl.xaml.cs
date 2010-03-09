@@ -338,7 +338,10 @@ namespace SyncButlerUI
 			MessageBox.Show(ex.Message);	
 			}
 		}
-		
+        private void MRUSync(object sender, RoutedEventArgs e)
+        {
+            this.Controller.SyncMRUs("c");
+        }
 		/// <summary>
 		/// Executes when clicking on the explore features button
 		/// </summary>
