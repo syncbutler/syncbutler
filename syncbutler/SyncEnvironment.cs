@@ -51,18 +51,6 @@ namespace SyncButler
         {
             firstRunComplete = false;
             IntialEnv();
-
-            foreach (Assembly asm in AppDomain.CurrentDomain.GetAssemblies())
-            {
-                if (asm.FullName.StartsWith("SyncButler,"))
-                {
-                    syncButlerAssembly = asm;
-                    break;
-                }
-            }
-
-            if (syncButlerAssembly == null)
-                throw new Exception("Unable to load the backend assembly!");
         }
 
         /// <summary>
@@ -200,7 +188,7 @@ namespace SyncButler
         {
             //Create the list of partnerships
             partnershipList = new SortedList<String,Partnership>();
-
+            
             // Add in default settings
             storedSettings.SystemSettings.AllowAutoSyncForConflictFreeTasks = true;
             storedSettings.SystemSettings.FirstRunComplete = true;
@@ -298,12 +286,12 @@ namespace SyncButler
         private void ConvertPartnershipList2XML()
         {
             //Clean up the database first
-            storedPartnerships.Partnership.Clear();
+            storedPartnerships.PartnershipList.Clear();
 
             //Convert to store in XML format
             foreach(Partnership element in partnershipList.Values)
             {
-                storedPartnerships.Partnership.Add(element.Name, element.LeftFullPath, element.RightFullPath);
+                storedPartnerships.PartnershipList.Add(element);
             }
         }
 
@@ -317,12 +305,11 @@ namespace SyncButler
             partnershipList = new SortedList<String,Partnership>();
 
             //Convert to store in XML format
-            foreach (PartnershipConfigElement element in storedPartnerships.Partnership)
+            foreach (PartnershipElement element in storedPartnerships.PartnershipList)
             {
-                Partnership newElement = CreatePartnership(element.FriendlyName, element.LeftPath,
-                                            element.RightPath);
-                partnershipList.Add(element.FriendlyName, newElement);
-            }   
+                Partnership newElement = element.obj;
+                partnershipList.Add(element.friendlyName, newElement);
+            } 
         }
 
         /// <summary>
@@ -539,7 +526,7 @@ namespace SyncButler
         /// <exception cref="InvalidDataException">The XML was not valid</exception>
         public static Object ReflectiveUnserialize(string xmlString)
         {
-            Debug.Assert(syncButlerAssembly != null, "The backend assembly has not been initialized!");
+            if (syncButlerAssembly == null) InitSyncButlerAssembly();
 
             XmlReader xmlData = XmlTextReader.Create(new StringReader(xmlString));
 
@@ -559,6 +546,21 @@ namespace SyncButler
             {
                 throw new InvalidDataException();
             }
+        }
+
+        private static void InitSyncButlerAssembly()
+        {
+            foreach (Assembly asm in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                if (asm.FullName.StartsWith("SyncButler,"))
+                {
+                    syncButlerAssembly = asm;
+                    break;
+                }
+            }
+
+            if (syncButlerAssembly == null)
+                throw new Exception("Unable to load the backend assembly!");
         }
     }
 }
