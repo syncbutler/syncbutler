@@ -11,3 +11,5 @@ Jargon Decoder aims to clarify some of the terms and ideas we used\have in the p
     # Means the full path to a folder or a file. Includes the Drive letter.
   # WindowsFile
     # This has been defined as a partnership between two SAME files but in different location. Much like our Micro Partnership. (Thus checking is done to make sure this is so).
+  # MRU
+    # This means `Most Recently Used`. In this context, it refers to the recently used files of the user in a Windows system (XP/Vista/7). When it is referred to in an user context, it is described as favourties.
