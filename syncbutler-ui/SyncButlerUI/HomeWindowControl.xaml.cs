@@ -169,7 +169,7 @@ namespace SyncButlerUI
 		    sourceTextBox.Text=PartnershipTempData.destinationPath;
 			VisualStateManager.GoToState(this,"CreatePartnershipState2",false);
 		    }catch(Exception ex){
-			MessageBox.Show(ex.Message);
+				showMessageBox(CustomDialog.MessageType.Error,ex.Message);
 			}
 		}
 		
@@ -212,7 +212,7 @@ namespace SyncButlerUI
 		    clearTreeView();	
 			VisualStateManager.GoToState(this,"CreatePartnershipState1",false);
 		    }catch(Exception ex){
-			MessageBox.Show(ex.Message);
+				showMessageBox(CustomDialog.MessageType.Error,ex.Message);
 			}
 		}
 		/// <summary>
@@ -238,7 +238,7 @@ namespace SyncButlerUI
 			partnershipNameTextBox.Text=PartnershipTempData.partnershipName;	
 			VisualStateManager.GoToState(this,"CreatePartnershipState3",false);
 		    }catch(Exception ex){
-			MessageBox.Show(ex.Message);
+				showMessageBox(CustomDialog.MessageType.Error,ex.Message);
 			}	
 		}
 		/// <summary>
@@ -277,7 +277,7 @@ namespace SyncButlerUI
 		    PartnershipTempData.clear();
 			partnershipList.Items.Refresh();
 		   }catch(Exception ex){
-			   MessageBox.Show(ex.Message);
+				showMessageBox(CustomDialog.MessageType.Error,ex.Message);
 			}	
 		}
 		
@@ -307,10 +307,25 @@ namespace SyncButlerUI
 		
 		private void Sync(object sender, RoutedEventArgs e)
 		{
+			try{
+			if(this.Controller.GetPartnershipList().Count<1 ){
+				throw new Exception("No Partnerships created yet");	
+			}
+			if (showMessageBox(CustomDialog.MessageType.Question,"Are you sure?")==true){
 			this.Controller.SyncAll();
-			MessageBox.Show("Sync-ed.\r\nPlease check.");
+			showMessageBox(CustomDialog.MessageType.Message,"Sync-ed.\r\nPlease check.");
+			}
+			}catch(Exception ex){
+			 	
+				showMessageBox(CustomDialog.MessageType.Error,ex.Message);
+			}
 		}
 		
+		/// <summary>
+		/// Checks for the index selected and delete the partnership
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void deletePartnership_Click(object sender, RoutedEventArgs e)
 		{
 			try{
@@ -324,11 +339,29 @@ namespace SyncButlerUI
 			}
 		}
 		
+		/// <summary>
+		/// Executes when clicking on the explore features button
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void goToExploreFeatures_Click(object sender, RoutedEventArgs e)
 		{
-			//CustomDialog dialog=new CustomDialog("Exploring New Features is still in construction!");
-			//dialog.ShowDialog();
+			showMessageBox(CustomDialog.MessageType.Message,"Exploring New Features is still under construction!");
 		}
 		
+		/// <summary>
+		/// Display Custom Dialog Box. 
+		/// </summary>
+		/// <param name="messagetype">MessageType Enumerator, to tell what kind of message it is: Error, Question, Warning, Message</param>
+		/// <param name="msg">String msg to tell what message the error is</param>
+		private bool showMessageBox(CustomDialog.MessageType messagetype,string msg){
+			CustomDialog dialog=new CustomDialog(messagetype,msg);
+			var parent = Window.GetWindow(this);
+			if(parent!=null){
+				dialog.Owner=parent;
+			}
+			dialog.ShowDialog();
+			return (bool)dialog.DialogResult;
+		}
 	}
 }

@@ -13,10 +13,11 @@
     <ApplicationVersion>1.0.0.*</ApplicationVersion>
     <ApplicationRevision>0</ApplicationRevision>
     <AlwaysCompileMarkupFilesInSeparateDomain>false</AlwaysCompileMarkupFilesInSeparateDomain>
-    <ApplicationIcon>Application.ico</ApplicationIcon>
+    <ApplicationIcon>Images\Icons\SyncButler.ico</ApplicationIcon>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
+    <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -101,6 +102,7 @@
     <Resource Include="Images\Computer.png" />
     <Resource Include="Images\diskdrive.png" />
     <Resource Include="Images\Doc.png" />
+    <Resource Include="Images\error.png" />
     <Resource Include="Images\Folder.png" />
     <Resource Include="Images\HD.png" />
     <Resource Include="Images\Icons\SyncButler.ico" />
