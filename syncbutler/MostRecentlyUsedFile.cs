@@ -8,7 +8,7 @@ using System.IO;
 namespace SyncButler
 {
     /// <summary>
-    /// A class to retrive most recently used file for windows and to represent a mru data
+    /// A service class to retrive most recently used file for windows
     /// </summary>
     public class MostRecentlyUsedFile
     {
@@ -24,37 +24,6 @@ namespace SyncButler
         private static extern void ILFree(
             IntPtr pidl);
 
-
-        public string OrginalPath { get; set; }
-        public string SyncedTo { get; set; }
-        
-        /// <summary>
-        /// initial a repesentation of MRU
-        /// </summary>
-        /// <param name="OrginalPath">Orginal path of the file</param>
-        /// <param name="SyncedTo">Path where the file is synced to</param>
-        public MostRecentlyUsedFile(String OrginalPath, String SyncedTo)
-        {
-            this.OrginalPath = OrginalPath;
-            this.SyncedTo = SyncedTo;
-        }
-
-        /// <summary>
-        /// Sync the mru to a folder
-        /// </summary>
-        public void Sync()
-        {
-            if (File.Exists(SyncedTo))
-            {
-                File.Delete(SyncedTo);
-            }
-            if (!Directory.Exists(Path.GetDirectoryName(SyncedTo)))
-            {
-                Directory.CreateDirectory(Path.GetDirectoryName(SyncedTo));
-                
-            }
-            File.Copy(OrginalPath, SyncedTo);
-        }
 
         /// <summary>
         /// Get the most recently used (MRU) file

@@ -353,7 +353,7 @@ namespace SyncButler
 
         /// <summary>
         /// Synchronize this file with another. 
-        /// IMPORTANT: This function should be called from lef tto right, ie. left.Sync(right);
+        /// IMPORTANT: This function should be called from left to right, ie. left.Sync(right);
         /// </summary>
         /// <param name="otherPair">The other ISyncable to sync with.</param>
         /// <exception cref="InvalidPartnershipException">Tried to sync a windows folder with something else</exception>
