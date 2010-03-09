@@ -277,7 +277,7 @@ namespace SyncButlerUI
 		    PartnershipTempData.clear();
 			partnershipList.Items.Refresh();
 		   }catch(Exception ex){
-			    MessageBox.Show(ex.Message);
+			   MessageBox.Show(ex.Message);
 			}	
 		}
 		

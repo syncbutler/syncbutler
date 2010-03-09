@@ -15,11 +15,11 @@ namespace SyncButler.ProgramEnvironment
         /// Partnerships (particularly holding on to a list of them)
         /// </summary>
         [ConfigurationProperty("partnershipList")]
-        public PartnershipListConfigCollection Partnership
+        public PartnershipCollection PartnershipList
         {
             get
             {
-                return ((PartnershipListConfigCollection)this["partnershipList"]);
+                return ((PartnershipCollection)this["partnershipList"]);
             }
             set
             {

@@ -46,8 +46,8 @@
     <Compile Include="Exceptions\InvalidActionException.cs" />
     <Compile Include="Exceptions\InvalidPartnershipException.cs" />
     <Compile Include="MostRecentlyUsedFile.cs" />
-    <Compile Include="ProgramEnvironment\PartnershipConfigElement.cs" />
-    <Compile Include="ProgramEnvironment\PartnershipListConfigCollection.cs" />
+    <Compile Include="ProgramEnvironment\PartnershipElement.cs" />
+    <Compile Include="ProgramEnvironment\PartnershipCollection.cs" />
     <Compile Include="ProgramEnvironment\PartnershipSection.cs" />
     <Compile Include="ProgramEnvironment\SettingsConfigElement.cs" />
     <Compile Include="ProgramEnvironment\SettingsSection.cs" />
@@ -67,9 +67,6 @@
       <Project>{CD271A2A-1A70-43A5-BB6B-ED171A11A222}</Project>
       <Name>SyncButlerConsole</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
