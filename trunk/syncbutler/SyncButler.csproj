@@ -46,6 +46,7 @@
     <Compile Include="Exceptions\InvalidActionException.cs" />
     <Compile Include="Exceptions\InvalidPartnershipException.cs" />
     <Compile Include="MostRecentlyUsedFile.cs" />
+    <Compile Include="MRUList.cs" />
     <Compile Include="ProgramEnvironment\PartnershipElement.cs" />
     <Compile Include="ProgramEnvironment\PartnershipCollection.cs" />
     <Compile Include="ProgramEnvironment\PartnershipSection.cs" />
