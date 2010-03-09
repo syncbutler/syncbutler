@@ -24,6 +24,28 @@ namespace SyncButler
         private static extern void ILFree(
             IntPtr pidl);
 
+        /// <summary>
+        /// Do a cleanup of the given list of MRUs, to remove non existance files.
+        /// </summary>
+        /// <param name="MRUs">the list of MRUs</param>
+        /// <returns>the cleaned list of MRU</returns>
+        private static SortedList<string, string> CleanUP(SortedList<string, string> MRUs)
+        {
+            List<string> keys = new List<string>();
+            foreach (string key in MRUs.Keys)
+            {
+                string filename = MRUs[key];
+                if (!File.Exists(filename))
+                {
+                    keys.Add(key);
+                }
+            }
+            foreach (string key in keys)
+            {
+                MRUs.Remove(key);
+            }
+            return MRUs;
+        }
 
         /// <summary>
         /// Get the most recently used (MRU) file
@@ -47,9 +69,9 @@ namespace SyncButler
         public static SortedList<string,string> Get()
         {
             if (Environment.OSVersion.Version.Major >= 6)
-                return GetPidl("Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ComDlg32\\OpenSavePidlMRU\\*");
+                return CleanUP(GetPidl("Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ComDlg32\\OpenSavePidlMRU\\*"));
             else
-                return GetNonPidl("Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ComDlg32\\OpenSaveMRU\\*");
+                return CleanUP(GetNonPidl("Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ComDlg32\\OpenSaveMRU\\*"));
         }
 
         /// <summary>

@@ -12,6 +12,9 @@ namespace SyncButler
     {
         private List<string> MRUs;
 
+        /// <summary>
+        /// Initialize an instance of MRU.
+        /// </summary>
         public MRUList()
         {
             MRUs = new List<string>();
@@ -19,6 +22,12 @@ namespace SyncButler
             MRUs.AddRange(MostRecentlyUsedFile.Get().Values);
         }
 
+        /// <summary>
+        /// Sync the MRU to SyncButler folder
+        /// </summary>
+        /// <param name="ComputerName">Name of the computer</param>
+        /// <param name="LetterDrive">Letter drive of the device to the target folder</param>
+        /// <returns>The list of conflic</returns>
         public List<Conflict> Sync(string ComputerName, string LetterDrive)
         {
             String SyncTo = LetterDrive + ":\\SyncButler\\" + ComputerName + "\\";
