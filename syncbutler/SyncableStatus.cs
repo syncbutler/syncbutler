@@ -1,10 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-//using System.Linq;
-using System.Text;
 
 namespace SyncButler
 {
+    /// <summary>
+    /// This class is used to report the status of the sync to the GUI. Largely for progress
+    /// for a particular sync.
+    /// </summary>
     public class SyncableStatus
     {
         protected string _curObject;

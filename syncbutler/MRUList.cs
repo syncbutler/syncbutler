@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
 
 namespace SyncButler
@@ -23,11 +22,13 @@ namespace SyncButler
         }
 
         /// <summary>
-        /// Sync the MRU to SyncButler folder
+        /// Sync the MRU to SyncButler folder. Syncs in a manner similar to
+        /// the classic synchorinisation used for files and folders. It will
+        /// not sync files not found but listed in MRU
         /// </summary>
         /// <param name="ComputerName">Name of the computer</param>
         /// <param name="LetterDrive">Letter drive of the device to the target folder</param>
-        /// <returns>The list of conflic</returns>
+        /// <returns>The list of conflics</returns>
         public List<Conflict> Sync(string ComputerName, string LetterDrive)
         {
             String SyncTo = LetterDrive + ":\\SyncButler\\" + ComputerName + "\\";
@@ -58,13 +59,11 @@ namespace SyncButler
                         {
                             Conflicts.Add(new Conflict(MRUFile, Target, Conflict.Action.CopyToRight));
                         }
-
                     }
 
                 }
             }
            return Conflicts;
         }
-
     }
 }

@@ -36,6 +36,5 @@ namespace SyncButler.Checksums
         /// <param name="off">int offset to start the reading from.</param>
         /// <param name="len">int length of bytes to read, starting from the offset.</param>
         void Update(byte[] buf, int off, int len);
-
     }
 }
