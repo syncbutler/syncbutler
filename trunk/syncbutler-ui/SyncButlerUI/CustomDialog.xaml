@@ -3,16 +3,12 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	Title="Message"
-	x:Class="SyncButlerUI.CustomDialog" mc:Ignorable="d" Width="407" Height="177" WindowStyle="ToolWindow" ResizeMode="NoResize">
+	x:Class="SyncButlerUI.CustomDialog" mc:Ignorable="d" Width="407" Height="177" WindowStyle="ToolWindow" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
 	<Grid Width="407" Height="177" Margin="0,-10,-16,-26">
-	<StackPanel Margin="6,-20,10,36" Orientation="Horizontal">
-	
-		<Image Margin="1,0,0,9.272" Width="105.2" Source="Images/logowTransparency.png" Stretch="Fill" VerticalAlignment="Bottom" Height="105.2"/>
-	
-		<Button  Content="Ok" IsDefault="true" Click="OkClick" HorizontalAlignment="Right" Width="71   " VerticalAlignment="Bottom" Height="29" Margin="64,0,0,0" />
-		<Button Content="Cancel" IsCancel="True" HorizontalAlignment="Right" Width="71" VerticalAlignment="Top" Height="29" Margin="6,132.018,0,0" />
-	
-	</StackPanel>
-	<TextBlock x:Name="SyncButlerMessage" Margin="144,35,39,72" TextWrapping="Wrap"/>
+	<Image x:Name="messageImage" Margin="10,0,0,43.272" Width="105.2" Source="Images/logowTransparency.png" Stretch="Fill" VerticalAlignment="Bottom" Height="105.2" HorizontalAlignment="Left"/>
+	<Button x:Name="okButton"  Content="Ok" IsDefault="true" HorizontalAlignment="Right" Width="71   " VerticalAlignment="Top" Height="29" Margin="0,121,28,0" d:LayoutOverrides="HorizontalAlignment" />
+	<TextBlock x:Name="syncButlerMessage" Margin="144,54,39,63" TextWrapping="Wrap"/>
+	<Button x:Name="noButton"  Content="No" IsDefault="true" Click="noClick" HorizontalAlignment="Right" Width="71   " VerticalAlignment="Top" Height="29" Margin="0,121,28,0" d:LayoutOverrides="HorizontalAlignment" />
+	<Button x:Name="yesButton"  Content="Yes" IsDefault="true" Click="yesClick" HorizontalAlignment="Right" Width="71   " VerticalAlignment="Top" Height="29" Margin="0,121,107,0" d:LayoutOverrides="HorizontalAlignment" />
 	</Grid>
 </Window>

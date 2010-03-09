@@ -10,7 +10,7 @@
 	x:Name="Window"
 	Title="SyncButler" 
 	Width="662" Height="480"
-	Closing = "cleanUp" Cursor="Arrow" ShowInTaskbar="False" WindowStyle="ThreeDBorderWindow" ResizeMode="NoResize" Icon="Images/Icons/SyncButler.ico"
+	Closing = "cleanUp" Cursor="Arrow" WindowStyle="ThreeDBorderWindow" ResizeMode="CanMinimize" Icon="Images/Icons/SyncButler.ico" WindowStartupLocation="CenterScreen"
 	>
 
 	<Window.Resources>
