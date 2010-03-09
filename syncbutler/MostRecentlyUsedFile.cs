@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
 using Microsoft.Win32;
+using System.IO;
 
 namespace SyncButler
 {
     /// <summary>
-    /// A service class to retrive most recently used file for windows
+    /// A class to retrive most recently used file for windows and to represent a mru data
     /// </summary>
     public class MostRecentlyUsedFile
     {
         [DllImport("shell32.dll")]
         private static extern Int32 SHGetPathFromIDListW(
             UIntPtr pidl, [MarshalAs(UnmanagedType.LPWStr)] StringBuilder pszPath);
-        //        IntPtr pidl, [MarshalAs(UnmanagedType.LPWStr)] StringBuilder pszPath);
 
         [DllImport("shell32.dll")]
         private static extern IntPtr ILCombine(
@@ -23,6 +23,34 @@ namespace SyncButler
         [DllImport("shell32.dll")]
         private static extern void ILFree(
             IntPtr pidl);
+
+
+        public string OrginalPath { get; set; }
+        public string SyncedTo { get; set; }
+        
+        /// <summary>
+        /// initial a repesentation of MRU
+        /// </summary>
+        /// <param name="OrginalPath">Orginal path of the file</param>
+        /// <param name="SyncedTo">Path where the file is synced to</param>
+        public MostRecentlyUsedFile(String OrginalPath, String SyncedTo)
+        {
+            this.OrginalPath = OrginalPath;
+            this.SyncedTo = SyncedTo;
+        }
+
+        /// <summary>
+        /// Sync the mru to a folder
+        /// </summary>
+        public void Sync()
+        {
+            if (File.Exists(SyncedTo))
+            {
+                File.Delete(SyncedTo);
+            }
+
+            File.Copy(OrginalPath, SyncedTo);
+        }
 
         /// <summary>
         /// Get the most recently used (MRU) file
