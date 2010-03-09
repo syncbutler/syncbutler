@@ -1,0 +1,5 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <StartWorkingDirectory>C:\Users\Bryan\Documents\Edu\BComp\CS3215 - Software Engineering Project\SyncButler\SyncButlerTest\bin\Debug\</StartWorkingDirectory>
+  </PropertyGroup>
+</Project>
