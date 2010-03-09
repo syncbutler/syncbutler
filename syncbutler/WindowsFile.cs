@@ -233,6 +233,7 @@ namespace SyncButler
             }
                   
         }
+
         /// <summary>
         /// Attempts to delete this file.
         /// </summary>
@@ -344,6 +345,7 @@ namespace SyncButler
         {
             return "file:\\\\" + this.relativePath;
         }
+
         public override string ToString()
         {
             return this.rootPath + this.relativePath;

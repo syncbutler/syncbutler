@@ -3,8 +3,6 @@ using SyncButler;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace SyncButlerTest
 {
-    
-    
     /// <summary>
     ///This is a test class for ControllerTest and is intended
     ///to contain all ControllerTest Unit Tests
