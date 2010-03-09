@@ -103,6 +103,7 @@
     <Resource Include="Images\Doc.png" />
     <Resource Include="Images\Folder.png" />
     <Resource Include="Images\HD.png" />
+    <Resource Include="Images\Icons\SyncButler.ico" />
     <Resource Include="Images\logo.png" />
     <Resource Include="Images\logowTransparency.png" />
     <Resource Include="Images\Mac-Display.png" />

@@ -9,10 +9,9 @@
 	x:Class="SyncButlerUI.MainWindow"
 	x:Name="Window"
 	Title="SyncButler" 
-	Width="651" Height="480"
-	Closing = "cleanUp" Cursor="Arrow" ShowInTaskbar="False" WindowStyle="ThreeDBorderWindow" ResizeMode="NoResize"
-	DataContext="{Binding RelativeSource={RelativeSource Self}}"
-	 >
+	Width="662" Height="480"
+	Closing = "cleanUp" Cursor="Arrow" ShowInTaskbar="False" WindowStyle="ThreeDBorderWindow" ResizeMode="NoResize" Icon="Images/Icons/SyncButler.ico"
+	>
 
 	<Window.Resources>
 		<Style x:Key="ButtonFocusVisual">
