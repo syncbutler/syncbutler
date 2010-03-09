@@ -682,6 +682,16 @@
 						</ObjectAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
+				<VisualState x:Name="ConflictState1">
+					<Storyboard>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="Conflict" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="HomeWindow" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+					</Storyboard>
+				</VisualState>
 			</VisualStateGroup>
 		</VisualStateManager.VisualStateGroups>
 		<Grid x:Name="HomeWindow" VerticalAlignment="Bottom" Height="444">
@@ -958,18 +968,20 @@
 			<ProgressBar x:Name="SubProgressBar" Margin="38.623,0,28.52,34.69" VerticalAlignment="Bottom" Height="14.286"/>
 			<ProgressBar x:Name="TotalProgressBar" Margin="38.623,0,28.52,15.69" VerticalAlignment="Bottom" Height="14.286"/>
 			<TextBlock x:Name="PartnershipName_Copy" Margin="38.032,42.333,0,0" FontSize="16" FontWeight="Bold" Text="Conflicts" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Width="177.618" Height="28.571"/>
-			<Custom:DataGrid x:Name="ConflictList" Margin="39.1,79.143,34.234,0" VerticalAlignment="Top" Height="125.714">
+			<Custom:DataGrid x:Name="ConflictList" Margin="39.1,93.429,34.234,187.714">
 				<Custom:DataGrid.ItemTemplate>
 					<DataTemplate>
 						<Grid/>
 					</DataTemplate>
 				</Custom:DataGrid.ItemTemplate>
 				<Custom:DataGrid.Columns>
-					<Custom:DataGridCheckBoxColumn/>
-					<Custom:DataGridCheckBoxColumn/>
-					<Custom:DataGridTextColumn/>
+					<Custom:DataGridTextColumn x:Name="File_Name" Width="310" MinWidth="310" Header="File Name"/>
+					<Custom:DataGridCheckBoxColumn x:Name="FolderOneBox" Width="60" MinWidth="40" Header="Folder 1"/>
+					<Custom:DataGridCheckBoxColumn x:Name="FolderTwoBox" Width="60" MinWidth="40" Header="Folder 2"/>
 				</Custom:DataGrid.Columns>
 			</Custom:DataGrid>
+			<Button HorizontalAlignment="Right" Margin="0,0,21.853,79.143" VerticalAlignment="Bottom" Width="70.476" Height="24.762" Content="Done" IsEnabled="False"/>
+			<TextBlock x:Name="CurrentSyncingFile_Copy" Margin="29.032,67.643,10.493,0" TextWrapping="Wrap" Text="Please choose the file that you want to sync." VerticalAlignment="Top" Height="24.761"/>
 		</Grid>
 	</Grid>
 </UserControl>

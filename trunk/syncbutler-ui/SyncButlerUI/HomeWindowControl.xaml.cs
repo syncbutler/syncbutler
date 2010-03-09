@@ -313,7 +313,9 @@ namespace SyncButlerUI
 			}
 			if (showMessageBox(CustomDialog.MessageType.Question,"Are you sure?")==true){
 			this.Controller.SyncAll();
-			showMessageBox(CustomDialog.MessageType.Message,"Sync-ed.\r\nPlease check.");
+			VisualStateManager.GoToState(this,"ConflictState1",false);
+			
+			//showMessageBox(CustomDialog.MessageType.Message,"Sync-ed.\r\nPlease check.");
 			}
 			}catch(Exception ex){
 			 	
