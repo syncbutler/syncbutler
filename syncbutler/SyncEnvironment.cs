@@ -33,7 +33,7 @@ namespace SyncButler
         private SortedList<String,Partnership> partnershipList;
         private bool allowAutoSyncForConflictFreeTasks;
         private bool firstRunComplete;
-        private long fileReadBufferSize; //How much of the data file is read each cycle
+        private static long fileReadBufferSize = 2048000; //2MB, How much of the data file is read each cycle
         private System.Configuration.Configuration config;
         private string settingName = "systemSettings";
         private string partnershipName = "partnership";
@@ -96,7 +96,7 @@ namespace SyncButler
         /// <param name="rightPath">Full path of the right folder of the partnership, must be unique, caps ignored</param>
         /// <exception cref="ArgumentNullException">Thrown if the key is a null reference.</exception>
         /// <exception cref="ArgumentException">Thrown if the name of the partnership already exists.</exception>
-        public void AddPartnership(string name, String leftPath, String rightPath)
+        public void AddPartnership(string name, string leftPath, string rightPath)
         {
             System.Diagnostics.Debug.Assert((name != null) && (name.Length > 0));
             Partnership element = CreatePartnership(name, leftPath, rightPath);
@@ -105,6 +105,7 @@ namespace SyncButler
                 throw new ArgumentException("Friendly name already in used or such file/folder partnership already exist");
 
             partnershipList.Add(name, element);
+            StoreEnv(); //Save the partnership immediately
         }
 
         /// <summary>
@@ -114,6 +115,7 @@ namespace SyncButler
         public void RemovePartnership(int idx)
         {
             partnershipList.RemoveAt(idx);
+            StoreEnv(); //Save the partnership immediately
         }
 
         /// <summary>
@@ -146,6 +148,7 @@ namespace SyncButler
             }
 
             partnershipList.Add(name,updated);
+            StoreEnv(); //Save the partnership immediately
         }
 
         /// <summary>
@@ -201,7 +204,7 @@ namespace SyncButler
             // Add in default settings
             storedSettings.SystemSettings.AllowAutoSyncForConflictFreeTasks = true;
             storedSettings.SystemSettings.FirstRunComplete = true;
-            storedSettings.SystemSettings.FileReadBufferSize = 2048000; // 2MB
+            storedSettings.SystemSettings.FileReadBufferSize = fileReadBufferSize; // 2MB
             ConvertPartnershipList2XML();
 
             // Add the custom sections to the config
@@ -351,7 +354,7 @@ namespace SyncButler
         /// <param name="name">Friendly name of a partnership</param>
         /// <param name="leftPath">Full Path to the left of a partnership</param>
         /// <param name="rightPath">Full Path to the right of a partnership</param>        
-        private Partnership CreatePartnership(String name, String leftPath, String rightPath)
+        private Partnership CreatePartnership(string name, string leftPath, string rightPath)
         {
             FileInfo leftInfo = new FileInfo(leftPath);
             FileInfo rightInfo = new FileInfo(rightPath);
@@ -468,7 +471,7 @@ namespace SyncButler
         /// <param name="leftPath">Full path to the incoming left folder or file</param>
         /// <param name="rightPath">Full path to the incoming right folder or file</param>
         /// <returns></returns>
-        private bool CheckIsUniquePartnership(string name, String leftPath, String rightPath)
+        private bool CheckIsUniquePartnership(string name, string leftPath, string rightPath)
         {
             bool pathAlreadyExist1 = false; //Checks left with left, right with right
             bool pathAlreadyExist2 = false; //Checks left with right, right with left
