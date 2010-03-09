@@ -7,6 +7,7 @@ using SyncButler.ProgramEnvironment;
 using System.Xml;
 using System.Reflection;
 using System.Diagnostics;
+using System.IO;
 
 namespace SyncButler
 {
@@ -29,6 +30,10 @@ namespace SyncButler
     /// </summary>
     public class SyncEnvironment
     {
+        //List of constants used in the Sync Butler
+        private const string DEFAULT_SBS_RELATIVE_PATH = "SyncButler\\";
+        private const string DEFAULT_SBS_FILENAME_POSTFIX = "_Details.txt";
+        
         ///List of persistence attributes
         private SortedList<String,Partnership> partnershipList;
         private bool allowAutoSyncForConflictFreeTasks;
@@ -40,7 +45,6 @@ namespace SyncButler
         private SettingsSection storedSettings;
         private PartnershipSection storedPartnerships;
         private static SyncEnvironment syncEnv;
-
         private static Assembly syncButlerAssembly = null;
         
         /// <summary>
@@ -548,6 +552,10 @@ namespace SyncButler
             }
         }
 
+        /// <summary>
+        /// This is required for reflective unserialise. It will determine what
+        /// class this is from.
+        /// </summary>
         private static void InitSyncButlerAssembly()
         {
             foreach (Assembly asm in AppDomain.CurrentDomain.GetAssemblies())
@@ -561,6 +569,66 @@ namespace SyncButler
 
             if (syncButlerAssembly == null)
                 throw new Exception("Unable to load the backend assembly!");
+        }
+
+        /// <summary>
+        /// This reads MRU details from the textfile stored in the MRU folder.
+        /// 
+        /// For eg, friendly name = partnership, drive prefix = D:\,
+        /// The folder and file name is = D:\SyncButler\partnership\parnership_Details.txt
+        /// </summary>
+        /// <param name="drivePrefix">The drive of the SBS folder, it has to be in the form
+        /// of "X:\\"</param>
+        /// <param name="friendlyName">The friendly name of the MRU parent</param>
+        /// <param name="content">Contents in a MRU file. May include date/time, original
+        /// location, present filename (maybe renamed forcibly if there are same file names)</param>
+        /// <exception cref="IOException">An I/O error occurs</exception>
+        private void writeMRUFile(string drivePrefix, string friendlyName, string content)
+        {
+            // Create a writer and open the file
+            // For eg, friendly name = partnership, drive prefix = D:\,
+            // The folder and file name is = D:\SyncButler\partnership\parnership_Details.txt
+            TextWriter tw = new StreamWriter(drivePrefix + DEFAULT_SBS_RELATIVE_PATH +
+                                friendlyName + "\\" + friendlyName + DEFAULT_SBS_FILENAME_POSTFIX);
+
+            // Write a line of text to the file
+            tw.WriteLine(content);
+
+            // Close the stream
+            tw.Close();
+        }
+
+        /// <summary>
+        /// This reads MRU details from the textfile stored in the MRU folder.
+        /// 
+        /// For eg, friendly name = partnership, drive prefix = D:\,
+        /// The folder and file name is = D:\SyncButler\partnership\parnership_Details.txt
+        /// </summary>
+        /// <param name="drivePrefix">The drive of the SBS folder, it has to be in the form
+        /// of "X:\\"</param>
+        /// <param name="friendlyName">The friendly name of the MRU parent</param>
+        /// <returns>Contents of the MRU file</returns>
+        /// <exception cref="IOException">An I/O error occurs</exception>
+        /// <exception cref="OutOfMemoryException">There is insufficient memory to allocate a
+        /// buffer for the returned string</exception>
+        /// <exception cref="ArgumentOutOfRangeException">The number of characters in the next line is
+        /// larger than MaxValue (Int32, Signed)</exception>
+        private string readMRUFile(string drivePrefix, string friendlyName)
+        {
+            // The content of the textfile, less the first date/time
+            string content = "";
+
+            // Create reader & open file
+            TextReader tr = new StreamReader(drivePrefix + DEFAULT_SBS_RELATIVE_PATH +
+                                friendlyName + "\\" + friendlyName + DEFAULT_SBS_FILENAME_POSTFIX);
+
+            // Read all the text inside
+            content = tr.ReadToEnd();
+
+            // close the stream
+            tr.Close();
+
+            return content;
         }
     }
 }
