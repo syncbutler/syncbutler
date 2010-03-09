@@ -164,6 +164,24 @@ namespace SyncButler
         {
             return MostRecentlyUsedFile.Get();
         }
+        
+        /// <summary>
+        /// Sync the mrus that are listed.
+        /// </summary>
+        /// <param name="driveLetter"></param>
+        public void SyncMRUs(String driveLetter)
+        {
+            string syncTo = driveLetter + ":\\SyncButler\\" + SyncEnvironment.GetComputerName() + "\\";
+            foreach (string s in MostRecentlyUsedFile.Get().Values)
+            {
+                if (File.Exists(s))
+                {
+                    string filename = Path.GetFileName(s);
+                    MostRecentlyUsedFile mruFiles = new MostRecentlyUsedFile(s, syncTo + filename);
+                    mruFiles.Sync();
+                }
+            }
+        }
 
         /// <summary>
         /// This method is required to be run when the program is closed. It

@@ -48,7 +48,11 @@ namespace SyncButler
             {
                 File.Delete(SyncedTo);
             }
-
+            if (!Directory.Exists(Path.GetDirectoryName(SyncedTo)))
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(SyncedTo));
+                
+            }
             File.Copy(OrginalPath, SyncedTo);
         }
 
@@ -59,6 +63,7 @@ namespace SyncButler
         /// <returns>return path of the file</returns>
         public static string Get(string key)
         {
+            
             if (Environment.OSVersion.Version.Major >= 6)
                 return GetPidl(key, "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ComDlg32\\OpenSavePidlMRU\\*");
             else

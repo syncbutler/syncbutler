@@ -69,6 +69,14 @@ namespace SyncButler
 
             return syncEnv;
         }
+        /// <summary>
+        /// Not implemented
+        /// </summary>
+        /// <returns></returns>
+        public static string GetComputerName()
+        {
+            return "computer1";
+        }
 
         /// <summary>
         /// Returns the partnership at the specified index
