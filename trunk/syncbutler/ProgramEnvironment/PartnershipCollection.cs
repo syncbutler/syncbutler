@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Configuration;
 
 namespace SyncButler.ProgramEnvironment
 {
+    /// <summary>
+    /// This class is used to wrap collection typed variables in XML descriptors.
+    /// In this case, PartnershipList is represented by this entire list
+    /// </summary>
     public class PartnershipCollection : ConfigurationElementCollection
     {
         public PartnershipElement this[int index]
@@ -39,6 +42,5 @@ namespace SyncButler.ProgramEnvironment
         {
             return ((PartnershipElement)element).friendlyName;
         }
-
     }
 }

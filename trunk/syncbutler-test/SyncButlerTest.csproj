@@ -39,6 +39,7 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -52,6 +53,10 @@
     <Compile Include="SyncEnvironmentTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\syncbutler-console\SyncButlerConsole.csproj">
+      <Project>{CD271A2A-1A70-43A5-BB6B-ED171A11A222}</Project>
+      <Name>SyncButlerConsole</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SyncButler\SyncButler.csproj">
       <Project>{91049E12-5D15-4092-ADBA-C8883AC12AA0}</Project>
       <Name>SyncButler</Name>

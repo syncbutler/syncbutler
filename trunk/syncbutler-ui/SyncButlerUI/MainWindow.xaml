@@ -368,7 +368,7 @@
 				</LinearGradientBrush>
 			</Rectangle.Fill>
 		</Rectangle>
-		<Button x:Name="HomeButton" Margin="-6,-1.5,0,0" Style="{DynamicResource HomeButton}" VerticalAlignment="Top" Height="62" Content="Home" HorizontalAlignment="Left" Width="141.666" Click="goHome" Cursor="Hand"/>
+		<Button x:Name="HomeButton" Margin="-6,-1.5,0,0" Style="{DynamicResource HomeButton}" VerticalAlignment="Top" Height="62" Content="Home" HorizontalAlignment="Left" Width="141.666" Click="goHome" Cursor="Hand" FontSize="18.667"/>
 		<Button x:Name="SettingsButton" Margin="-6,50.5,0,0" Style="{DynamicResource SettingsButton}" VerticalAlignment="Top" Height="62" Content="Home" HorizontalAlignment="Left" Width="141.666" Cursor="Hand"/>
 		<Button x:Name="SyncButlerSyncButton" Margin="-6,109,0,0" Style="{DynamicResource SyncButtonTemplate}" VerticalAlignment="Top" Height="62" Content="Home" HorizontalAlignment="Left" Width="141.666" Cursor="Hand" Click="goToSyncButlerSync"/>
 	</Grid>

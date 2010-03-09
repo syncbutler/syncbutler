@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Configuration;
 using System.IO;
 using SyncButler.ProgramEnvironment;
 using System.Xml;
 using System.Reflection;
 using System.Diagnostics;
-using System.IO;
 
 namespace SyncButler
 {
@@ -26,7 +24,7 @@ namespace SyncButler
     }
 
     /// <summary>
-    /// Contains methods to load and store settings as well as handling access to the list of partnerships
+    /// Contains methods to load and store settings as well as handling access to any environmental attributes
     /// </summary>
     public class SyncEnvironment
     {
@@ -38,7 +36,9 @@ namespace SyncButler
         private SortedList<String,Partnership> partnershipList;
         private bool allowAutoSyncForConflictFreeTasks;
         private bool firstRunComplete;
-        private static long fileReadBufferSize = 2048000; //2MB, How much of the data file is read each cycle
+        private static long fileReadBufferSize = 2048000; //2MB, How much of the data file is read each cycle. Editable.
+
+        //List of runtime variables
         private System.Configuration.Configuration config;
         private string settingName = "systemSettings";
         private string partnershipName = "partnership";
@@ -48,7 +48,7 @@ namespace SyncButler
         private static Assembly syncButlerAssembly = null;
         
         /// <summary>
-        /// This constructor will automatically restore a previous sessions or create new ones.
+        /// This constructor will automatically restore a previous sessions or create new ones if one is not found.
         /// This constructor should never be invoked directly. Use GetInstance() to obtain an instance of SyncEnvironment.
         /// </summary>
         private SyncEnvironment()
@@ -58,7 +58,7 @@ namespace SyncButler
         }
 
         /// <summary>
-        /// Returns an instance of SyncEnvironment
+        /// Returns an instance of SyncEnvironment (ensures 1 to 1 coupling with controller)
         /// Creates a new instance if necessary, otherwise, it will use an already available instance
         /// </summary>
         /// <returns>An instance of SyncEnvironment</returns>
@@ -69,6 +69,7 @@ namespace SyncButler
 
             return syncEnv;
         }
+
         /// <summary>
         /// Not implemented
         /// </summary>
@@ -81,15 +82,15 @@ namespace SyncButler
         /// <summary>
         /// Returns the partnership at the specified index
         /// </summary>
-        /// <param name="name">The name (used as index) of the partnership that is to be loaded</param>
-        /// <returns>A Partnership object (Possible to be null if not found)</returns>
+        /// <param name="name">The name (used as an index) of the partnership that is to be loaded</param>
+        /// <returns>A Partnership object (possible to be null if not found)</returns>
         public Partnership LoadPartnership(string name)
         {
             return partnershipList[name];
         }
 
         /// <summary>
-        /// Adds a properly created partner object into the list of partnership
+        /// Adds a properly created Partnership object into the list of partnership
         /// </summary>
         /// <param name="name">Friendly name of the partnership, must be unique, caps ignored</param>
         /// <param name="leftPath">Full path of the left folder of the partnership, must be unique, caps ignored</param>
@@ -105,7 +106,7 @@ namespace SyncButler
                 throw new ArgumentException("Friendly name already in used or such file/folder partnership already exist");
 
             partnershipList.Add(name, element);
-            StoreEnv(); //Save the partnership immediately
+            StoreEnv(); //Save the partnership to disk immediately
         }
 
         /// <summary>
@@ -115,7 +116,7 @@ namespace SyncButler
         public void RemovePartnership(int idx)
         {
             partnershipList.RemoveAt(idx);
-            StoreEnv(); //Save the partnership immediately
+            StoreEnv(); //Save the partnership to disk immediately
         }
 
         /// <summary>
@@ -148,7 +149,7 @@ namespace SyncButler
             }
 
             partnershipList.Add(name,updated);
-            StoreEnv(); //Save the partnership immediately
+            StoreEnv(); //Save the partnership to disk immediately
         }
 
         /// <summary>
@@ -483,6 +484,7 @@ namespace SyncButler
                 if (storedElement.Name.ToLower().Equals(name.ToLower()))
                     throw new ArgumentException("Friendly name already in used");
 
+                //For (Incoming Left != Left in List && Incoming Right != Right in List)
                 if (storedElement.LeftFullPath.ToLower().Equals(leftPath.ToLower()))
                     pathAlreadyExist1 = true;
                 //Don't throw exception first, left and right must already exist
@@ -490,6 +492,7 @@ namespace SyncButler
                 if (pathAlreadyExist1 && storedElement.RightFullPath.ToLower().Equals(rightPath.ToLower()))
                     return false;
 
+                //For (Incoming Left != Right in List && Incoming Right != Left in List)
                 if (storedElement.LeftFullPath.ToLower().Equals(rightPath.ToLower()))
                     pathAlreadyExist2 = true;
                 //Don't throw exception first, left and right must already exist
@@ -511,8 +514,8 @@ namespace SyncButler
         {
             int pos = key.IndexOf(':');
 
-            // Possible corruption of the dictionary?
-            if (pos < 0) throw new ArgumentException();
+            // Possible corruption of the dictionary
+            if (pos < 0) throw new ArgumentException("Malformed Key for Partnership Record");
 
             ChecksumKey returnValue;
 
@@ -520,7 +523,7 @@ namespace SyncButler
             returnValue.entityPath = key.Substring(pos + 1);
 
             pos = returnValue.entityPath.IndexOf(":\\\\");
-            if (pos < 0) throw new ArgumentException();
+            if (pos < 0) throw new ArgumentException("Malformed Key for Partnership Record");
 
             returnValue.relativePath = returnValue.entityPath.Substring(pos + 3);
 
@@ -556,7 +559,7 @@ namespace SyncButler
             }
             catch (Exception e)
             {
-                throw new InvalidDataException();
+                throw new InvalidDataException("Unable to Create Instance of Deserialised Object", e);
             }
         }
 

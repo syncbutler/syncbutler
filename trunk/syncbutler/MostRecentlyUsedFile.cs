@@ -52,9 +52,13 @@ namespace SyncButler
         /// </summary>
         /// <param name="key">The key of the MRU</param>
         /// <returns>return path of the file</returns>
+        /// <exception cref="SystemException">Is thrown when incompatible version of windows is detected
+        /// (i.e., too new (>6.2) or too old (<5.1)</exception>
         public static string Get(string key)
         {
-            
+            if (Environment.OSVersion.Version > new Version(6, 2) || Environment.OSVersion.Version < new Version(5, 1))
+                throw new SystemException("Imcompatible (Newer) Version of Windows Detected. Feature Disabled");
+
             if (Environment.OSVersion.Version.Major >= 6)
                 return GetPidl(key, "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ComDlg32\\OpenSavePidlMRU\\*");
             else
@@ -66,8 +70,13 @@ namespace SyncButler
         /// </summary>
         /// <param name="key">The key of the MRU</param>
         /// <returns>return path of the file</returns>
+        /// <exception cref="SystemException">Is thrown when incompatible version of windows is detected
+        /// (i.e., too new (>6.2) or too old (<5.1)</exception>
         public static SortedList<string,string> Get()
         {
+            if (Environment.OSVersion.Version > new Version(6, 2) || Environment.OSVersion.Version < new Version(5, 1))
+                throw new SystemException("Incompatible (Newer) Version of Windows Detected. Feature Disabled");
+
             if (Environment.OSVersion.Version.Major >= 6)
                 return CleanUP(GetPidl("Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ComDlg32\\OpenSavePidlMRU\\*"));
             else
@@ -95,7 +104,6 @@ namespace SyncButler
             }
 
             return mrus;
-            
         }
 
         /// <summary>
@@ -119,7 +127,6 @@ namespace SyncButler
             }
             return mrus;
         }
-
 
         /// <summary>
         /// Get the most recently used (MRU) file for windows xp and below
@@ -177,8 +184,6 @@ namespace SyncButler
             Marshal.Release(p);
 
             return path.ToString();
-
         }
-
     }
 }

@@ -59,7 +59,6 @@ namespace SyncButlerTest
         //
         #endregion
 
-
         [TestMethod()]
         [DeploymentItem("SyncButler.dll")]
         [ExpectedException(typeof(ArgumentException), "A folder was allowed to partner with a non-folder.")]

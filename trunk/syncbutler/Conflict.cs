@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using SyncButler.Exceptions;
 
 namespace SyncButler
 {
     /// <summary>
-    /// Represents a conflict detected in the sync.
+    /// Represents a conflict detected in the sync. The state can be
+    /// CopyToLeft, DeleteLeft, Merge, CopyToRight, DeleteRight, Unknown.
     /// </summary>
     public class Conflict
     {
@@ -14,7 +14,7 @@ namespace SyncButler
         protected internal ISyncable right;
         protected Action RecommendedAction;
 
-        private enum StatusOptions {Resolved, Unresolved, Resolving}
+        //private enum StatusOptions {Resolved, Unresolved, Resolving}
 
         public enum Action { CopyToLeft, DeleteLeft, Merge, CopyToRight, DeleteRight, Unknown };
 
@@ -90,7 +90,7 @@ namespace SyncButler
 
         public override String ToString()
         {
-            return left.EntityPath() + "\n    " + this.RecommendedAction + "";
+            return left.EntityPath() + "\n" + this.RecommendedAction + "";
         }
     }
 }

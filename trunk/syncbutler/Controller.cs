@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
 using SyncButler.Exceptions;
 using System.Windows.Forms;
@@ -19,8 +18,8 @@ namespace SyncButler
         private Controller()
         {
             syncEnvironment = SyncEnvironment.GetInstance();
-            this.console = new SyncButlerConsole.Form1();
-            this.console.Show();
+            //this.console = new SyncButlerConsole.Form1();
+            //this.console.Show();
         }
 
         /// <summary>
@@ -166,7 +165,7 @@ namespace SyncButler
         }
         
         /// <summary>
-        /// Sync the mrus that are listed.
+        /// Sync the mrus that are listed. Please read MRUList to understand how file is actually saved.
         /// </summary>
         /// <param name="driveLetter"></param>
         public void SyncMRUs(String driveLetter)

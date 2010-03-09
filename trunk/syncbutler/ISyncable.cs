@@ -5,11 +5,14 @@ using System.Xml;
 
 namespace SyncButler
 {
-    public enum Error { NoError, NoPermission, PathTooLong, DirectoryDoesNotExist, InvalidPath, NotImplemented, IsWorkingFolder };
+    /// <summary>
+    /// Types of errors (non hard errors) that maybe encountered in ISyncable
+    /// </summary>
+    public enum Error { NoError, NoPermission, PathTooLong, DirectoryDoesNotExist,
+                        InvalidPath, NotImplemented, IsWorkingFolder };
 
     /// <summary>
     /// A callback to monitor the progress of the Syncing.
-    /// 
     /// </summary>
     /// <param name="status">Status of the current Sync operation</param>
     /// <returns>False to abort</returns>
