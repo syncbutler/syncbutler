@@ -30,15 +30,24 @@ namespace SyncButler
             CloseFile();
         }
 
+        /// <summary>
+        /// Constructor to unserialise XML string and create an instance of itself.
+        /// </summary>
+        /// <param name="xmlData">The XMLReader object to read the XML from.</param>
+        /// <exception cref="ArgumentNullException">If, when parsing the boolean, the argument is null.</exception>
+        /// <exception cref="FormatException">If, when parsing the boolean, the argument is in a format that is not recognised.</exception>
         public WindowsFile(XmlReader xmlData)
         {
-            relativePath = rootPath = null;
+            driveId = relativePath = rootPath = null;
+            isPortableStorage = false;
 
             xmlData.Read();
             if (xmlData.Name != "WindowsFile") throw new InvalidDataException();
 
             relativePath = xmlData.GetAttribute("RelativePath").Trim();
             rootPath = xmlData.GetAttribute("RootPath").Trim();
+            driveId = xmlData.GetAttribute("DriveID").Trim();
+            isPortableStorage = bool.Parse(xmlData.GetAttribute("IsPortableStorage").Trim());
 
             if (relativePath == null || rootPath == null) throw new InvalidDataException("Missing path");
             if ((relativePath.Length > 0) && !rootPath.EndsWith("\\")) rootPath += "\\";
@@ -58,8 +67,16 @@ namespace SyncButler
             this.relativePath = StripPrefix(rootPath, fullPath);
             this.nativeFileSystemObj = this.nativeFileObj;
             this.rootPath = rootPath;
+            this.IsPortableStorage = SystemEnvironment.StorageDevices.IsUSBDrive(GetDriveLetter(fullPath));
+            this.DriveID = SystemEnvironment.StorageDevices.GetDriveID(GetDriveLetter(fullPath));
         }
 
+        /// <summary>
+        /// Constructor that takes in one parameter, only the full path to the file.
+        /// Calls the constructor that takes in two parameters and passes the full path.
+        /// Useful when creating a file partnership.
+        /// </summary>
+        /// <param name="fullPath">Full path to this file</param>
         public WindowsFile(string fullPath) : this(fullPath, fullPath)
         {
 
@@ -212,7 +229,7 @@ namespace SyncButler
 
             try
             {
-                nativeFileObj.CopyTo(windowFiles.rootPath + windowFiles.relativePath);
+                nativeFileObj.CopyTo(windowFiles.rootPath + windowFiles.relativePath, true);
                 return Error.NoError;
             }
             catch (ArgumentException)
@@ -477,6 +494,8 @@ namespace SyncButler
             xmlData.WriteStartElement("WindowsFile");
             xmlData.WriteAttributeString("RelativePath", relativePath);
             xmlData.WriteAttributeString("RootPath", rootPath);
+            xmlData.WriteAttributeString("IsPortableStorage", isPortableStorage.ToString());
+            xmlData.WriteAttributeString("DriveID", driveId);
             xmlData.WriteEndElement();
         }
     }
