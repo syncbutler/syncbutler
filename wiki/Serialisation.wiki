@@ -2,7 +2,7 @@
 
 = Introduction =
 
-As of r102, we have began refactoring Serialisation to be a part of the Partnership class and the ISyncables. This documents describes how these object are serialised and recreated
+Starting with r102, we have began refactoring Serialisation to be a part of the Partnership class and the ISyncables. (As of r107, these methods are now fully in use.) This documents describes how these object are serialised and recreated
 
 = Details =
 
