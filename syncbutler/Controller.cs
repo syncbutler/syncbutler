@@ -37,6 +37,43 @@ namespace SyncButler
         }
 
         /// <summary>
+        /// Tests for the existence of another instance and sets up single instance listener if this is the first instance
+        /// </summary>
+        /// <param name="args">Command line arguments</param>
+        public static Boolean TestSingleInstance(String[] args)
+        {
+            // test if this is the first instance and register receiver, if so.
+            if (SingleInstance.IsFirst(new SingleInstance.ReceiveDelegate(receiveAction)))
+            {
+                // This is the 1st instance.
+                return true;
+            }
+            else
+            {
+                // send command line args to running app, then terminate
+                SingleInstance.Send(args);
+                SingleInstance.Cleanup();
+                return false;
+            }
+            // SingleInstance.Cleanup(); to be run during shutdown
+        }
+
+        /// <summary>
+        /// Handles incoming data from other instances.
+        /// </summary>
+        /// <param name="args">Command line arguments</param>
+        private static void receiveAction(string[] args)
+        {
+            string path="";
+            foreach (string str in args) 
+            {
+                path = path + " " + str;
+            }
+            Console.WriteLine("Path Received:  " + path);
+
+        }
+
+        /// <summary>
         /// Writes a line to the debugging console.
         /// </summary>
         /// <param name="text">Text to write</param>
@@ -174,6 +211,15 @@ namespace SyncButler
             string syncTo = driveLetter + ":\\SyncButler\\" + SyncEnvironment.GetComputerName() + "\\";
             MRUList mruList = new MRUList();
             mruList.Sync(SyncEnvironment.GetComputerName(), driveLetter);
+            //foreach (string s in MostRecentlyUsedFile.Get().Values)
+            //{
+            //    if (File.Exists(s))
+            //    {
+            //        string filename = Path.GetFileName(s);
+            //        MostRecentlyUsedFile mruFiles = new MostRecentlyUsedFile(s, syncTo + filename);
+            //        mruFiles.Sync();
+            //    }
+            //}
         }
 
         /// <summary>
@@ -183,6 +229,7 @@ namespace SyncButler
         public void Shutdown()
         {
             syncEnvironment.StoreEnv();
+
         }
 
         /// <summary>
