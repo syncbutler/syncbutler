@@ -5,6 +5,9 @@ using System.Xml.Serialization;
 
 namespace SyncButler.MRU
 {
+    /// <summary>
+    /// This is a data container to faciliate the usage of XMLSerializer 
+    /// </summary>
     public class SyncedMRU
     {
 
