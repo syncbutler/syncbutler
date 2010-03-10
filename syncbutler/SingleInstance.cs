@@ -115,13 +115,12 @@ namespace SyncButler
             try
             {
                 ctrl = (SingleInstance)Activator.GetObject(typeof(SingleInstance), "tcp://localhost:" + portNumber + "/SingleInstance");
+                ctrl.Receive(s);
             }
             catch (Exception e)
             {
                 Console.WriteLine("Exception: " + e.Message);
-                throw;
             }
-            ctrl.Receive(s);
         }
 
         public void Receive(string[] s)
