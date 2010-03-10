@@ -13,11 +13,14 @@ namespace SyncButlerUI
 	/// </summary>
 	public partial class App : Application
 	{
+        /// <summary>
+        /// Overrides the default OnStartup to provide for testing of single instance.
+        /// </summary>
+        /// <param name="e">Contains arguments from the event; used to access command line parameters.</param>
         protected override void OnStartup(StartupEventArgs e)
         {
             if (Controller.TestSingleInstance(e.Args))
             {
-                Console.Out.WriteLine("OK IS SINGLE INSTANCE");
                 new MainWindow().ShowDialog();
             }
             else

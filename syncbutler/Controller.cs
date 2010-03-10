@@ -51,10 +51,9 @@ namespace SyncButler
             {
                 // send command line args to running app, then terminate
                 SingleInstance.Send(args);
-                SingleInstance.Cleanup();
+                SingleInstance.Cleanup(); // Cleanup for if path to be run during shutdown
                 return false;
             }
-            // SingleInstance.Cleanup(); to be run during shutdown
         }
 
         /// <summary>
@@ -194,7 +193,7 @@ namespace SyncButler
         }
 
         /// <summary>
-        /// Not Implemented. Returns a list of files which have been synced by the monitor.
+        /// Returns a list of most recently used files.
         /// </summary>
         public SortedList<String,String> GetMonitoredFiles()
         {
@@ -220,7 +219,7 @@ namespace SyncButler
         public void Shutdown()
         {
             syncEnvironment.StoreEnv();
-
+            SingleInstance.Cleanup();
         }
 
         /// <summary>
