@@ -11,7 +11,7 @@ namespace SyncButler
     {
         SyncEnvironment syncEnvironment;
         private static Controller controller;
-        private SyncButlerConsole.Form1 console;
+        private static SyncButlerConsole.Form1 console;
 
         /// <summary>
         /// This constructor should never be invoked directly. Use GetInstance() to obtain an instance of Controller.
@@ -19,8 +19,8 @@ namespace SyncButler
         private Controller()
         {
             syncEnvironment = SyncEnvironment.GetInstance();
-            //this.console = new SyncButlerConsole.Form1();
-            //this.console.Show();
+            //console = new SyncButlerConsole.Form1();
+            //console.Show();
         }
 
         /// <summary>
@@ -33,7 +33,6 @@ namespace SyncButler
                 controller = new Controller();
 
             return controller;
-            
         }
 
         /// <summary>
@@ -69,7 +68,7 @@ namespace SyncButler
             {
                 path = path + " " + str;
             }
-            Console.WriteLine("Path Received:  " + path);
+            console.WriteLine("Path Received:  " + path);
 
         }
 
@@ -79,7 +78,7 @@ namespace SyncButler
         /// <param name="text">Text to write</param>
         public void WriteDebug(string text)
         {
-            this.console.WriteLine(text);
+            console.WriteLine(text);
         }
 
         /// <summary>
@@ -87,7 +86,7 @@ namespace SyncButler
         /// </summary>
         public void ClearDebug()
         {
-            this.console.ClearScreen();
+            console.ClearScreen();
         }
 
         /// <summary>
@@ -95,7 +94,7 @@ namespace SyncButler
         /// </summary>
         public void HideDebug()
         {
-            this.console.Hide();
+            console.Hide();
         }
 
         /// <summary>
@@ -103,7 +102,7 @@ namespace SyncButler
         /// </summary>
         public void ShowDebug()
         {
-            this.console.Show();
+            console.Show();
         }
 
         /// <summary>

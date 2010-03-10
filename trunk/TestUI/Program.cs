@@ -22,24 +22,24 @@ namespace TestUI
                     MainMenu();
                 }
                 
-                controller.AddPartnership("Test Name",@"C:\test", @"D:\test");
-                PrintMRU();
+                //controller.AddPartnership("Test Name",@"C:\test", @"D:\test");
+                //PrintMRU();
                 
-                Console.Out.WriteLine("Before");
-                PrintPartnerships();
-                controller.AddPartnership("Test Name",@"C:\test", @"D:\test\test");
+                //Console.Out.WriteLine("Before");
+                //PrintPartnerships();
+                //controller.AddPartnership("Test Name",@"C:\test", @"D:\test\test");
 
-                Console.Out.WriteLine("After");
-                controller.DeletePartnership(0);
-                PrintPartnerships();
+                //Console.Out.WriteLine("After");
+                //controller.DeletePartnership(0);
+                //PrintPartnerships();
 
-                Console.WriteLine("Had the program ran before? : " + controller.programRanBefore());
+                //Console.WriteLine("Had the program ran before? : " + controller.programRanBefore());
 
-                //Thread updateThread = new Thread(new ThreadStart(updateMonitor));
-                //updateThread.Start();
+                ////Thread updateThread = new Thread(new ThreadStart(updateMonitor));
+                ////updateThread.Start();
 
-                //Write code for shutting down
-                controller.Shutdown();
+                ////Write code for shutting down
+                //controller.Shutdown();
             }
             catch (Exception ex)
             {
