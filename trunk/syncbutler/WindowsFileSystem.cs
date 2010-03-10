@@ -14,6 +14,7 @@ namespace SyncButler
         protected string relativePath;
         protected string rootPath;
         protected string driveId;
+        protected int partitionIndex;
         protected bool isPortableStorage;
         protected FileSystemInfo nativeFileSystemObj;
         protected Partnership parentPartnership = null;
@@ -58,6 +59,21 @@ namespace SyncButler
             set
             {
                 this.driveId = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets/Sets the partition index of this drive. Useful when recovering the drive letter on a storage device with multiple partitions.
+        /// </summary>
+        public int PartitionIndex
+        {
+            get
+            {
+                return this.partitionIndex;
+            }
+            set
+            {
+                this.partitionIndex = value;
             }
         }
 
@@ -215,7 +231,7 @@ namespace SyncButler
         /// </summary>
         protected void UpdateDriveLetter()
         {
-            string driveLetter = SystemEnvironment.StorageDevices.GetDriveLetter(this.DriveID);
+            string driveLetter = SystemEnvironment.StorageDevices.GetDriveLetter(this.DriveID, this.PartitionIndex);
             this.rootPath = ReplaceDriveLetter(this.rootPath, driveLetter);
         }
 
@@ -224,7 +240,7 @@ namespace SyncButler
         /// It can return the drive letter from any path that contains it.
         /// </summary>
         /// <param name="somePath">A path containing the drive letter</param>
-        /// <returns>The drive letter in the format of C:\</returns>
+        /// <returns>The drive letter in the format of C:</returns>
         /// <exception cref="Exceptions.InvalidPathException">If the drive letter could not be obtained from the path.</exception>
         public static string GetDriveLetter(string somePath)
         {
@@ -232,7 +248,7 @@ namespace SyncButler
             string[] parts = somePath.Split(':');
 
             if ((parts.Length > 0) && (parts[0].Length > 0))
-                return (parts[0] + @":\");
+                return (parts[0] + @":");
             else
                 throw new Exceptions.InvalidPathException("The drive letter could not be obtained from the path '" + somePath + "'");
         }
@@ -241,14 +257,14 @@ namespace SyncButler
         /// Returns the provided path with the drive letter changed to the provided drive letter.
         /// </summary>
         /// <param name="somePath">The path containing the drive letter to change</param>
-        /// <param name="driveLetter">The drive letter to change to, in the format of C:\</param>
+        /// <param name="driveLetter">The drive letter to change to, in the format of C:</param>
         /// <returns>The path with drive letter replaced</returns>
         /// <exception cref="ArgumentOutOfRangeException">If when calculating the substring, the index was out of range.</exception>
         public static string ReplaceDriveLetter(string somePath, string driveLetter)
         {
             somePath = somePath.Trim();
             int stopIndex = somePath.IndexOf(':');
-            return (driveLetter + somePath.Substring(stopIndex + 2));
+            return (driveLetter + somePath.Substring(stopIndex + 1));
         }
     }
 }
