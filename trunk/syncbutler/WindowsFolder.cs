@@ -306,6 +306,12 @@ namespace SyncButler
             else
                 throw new InvalidPartnershipException();
 
+            // Update the drive letter.
+            // It is actually faster to update the drive letter than to check whether it needs updating.
+            // Unless we decide to store the drive letter, but then it's memory vs speed.
+            this.UpdateDriveLetter();
+            partner.UpdateDriveLetter();
+
             // Compare the files and folders under this directory
             List<Conflict> conflicts = new List<Conflict>();
             string leftPath, rightPath;
