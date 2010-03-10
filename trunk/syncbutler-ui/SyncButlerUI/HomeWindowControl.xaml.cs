@@ -12,6 +12,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
+using System.Data;
+using System.Threading;
+using System.ComponentModel;
 using WPF_Explorer_Tree;
 using SyncButler;
 
@@ -22,7 +25,16 @@ namespace SyncButlerUI
 	/// </summary>
 	public partial class HomeWindowControl : UserControl
 	{
-        //Controller controller;
+    
+	#region fields&Attributes 
+    /// <summary>
+    /// Defines the size of a single increment of the progress bar.
+    /// </summary>
+    //private int progressBarIncrement = 5;
+	#endregion
+		
+		
+		//Controller controller;
 		public HomeWindowControl()
 		{
 			this.InitializeComponent();
@@ -32,7 +44,7 @@ namespace SyncButlerUI
 		}
 		public SyncButler.Controller Controller{get;set;}
 		
-//#region UICODE
+	#region UIcode
 	/// <summary>
     /// Interaction logic for Creating Partnership
     /// </summary>
@@ -226,11 +238,11 @@ namespace SyncButlerUI
 			PartnershipTempData.destinationPath=sourceTextBox.Text;
 		    if(PartnershipTempData.destinationPath.Equals(PartnershipTempData.sourcePath)){
 			throw new Exception("Same Folders selected: Please pick another Folder");	
-			}else if ( PartnershipTempData.sourcePath.IndexOf(PartnershipTempData.destinationPath)==0 )	
+			}else if ( PartnershipTempData.sourcePath.IndexOf(PartnershipTempData.destinationPath+"\\")==0 )	
 			{
 				throw new Exception("Error- 1st Folder is under the 2nd Folder  ");	
 			}
-			else if (PartnershipTempData.destinationPath.IndexOf(PartnershipTempData.sourcePath)==0){
+			else if (PartnershipTempData.destinationPath.IndexOf(PartnershipTempData.sourcePath+"\\")==0){
 				throw new Exception("Error- 2nd Folder is under the 1st Folder  ");	
 			}
 			sourceTextBox1.Text=PartnershipTempData.sourcePath;
@@ -303,25 +315,7 @@ namespace SyncButlerUI
             this.partnershipList.Items.Refresh();
 			
         }
-//#endregion
 		
-		private void Sync(object sender, RoutedEventArgs e)
-		{
-			try{
-			if(this.Controller.GetPartnershipList().Count<1 ){
-				throw new Exception("No Partnerships created yet");	
-			}
-			if (showMessageBox(CustomDialog.MessageType.Question,"Are you sure?")==true){
-			this.Controller.SyncAll();
-			VisualStateManager.GoToState(this,"ConflictState1",false);
-			
-			//showMessageBox(CustomDialog.MessageType.Message,"Sync-ed.\r\nPlease check.");
-			}
-			}catch(Exception ex){
-			 	
-				showMessageBox(CustomDialog.MessageType.Error,ex.Message);
-			}
-		}
 		
 		/// <summary>
 		/// Checks for the index selected and delete the partnership
@@ -334,12 +328,53 @@ namespace SyncButlerUI
 		  	if(partnershipList.SelectedIndex<0){
 				throw new Exception("Please select a partnership to delete.");
 			}
+			if (showMessageBox(CustomDialog.MessageType.Question,"Are you sure?")==true){
 				this.Controller.DeletePartnership(partnershipList.SelectedIndex);
 				partnershipList.Items.Refresh();
+			}
 			}catch(Exception ex){
-			MessageBox.Show(ex.Message);	
+					showMessageBox(CustomDialog.MessageType.Error,ex.Message);
 			}
 		}
+		
+		#endregion
+		
+		/// <summary>
+		/// Executes when SyncAll button is clicked.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void Sync(object sender, RoutedEventArgs e)
+		{
+			try{
+			if(this.Controller.GetPartnershipList().Count<1 ){
+				throw new Exception("No Partnerships created yet");	
+			}
+			if (showMessageBox(CustomDialog.MessageType.Question,"Are you sure?")==true){
+			VisualStateManager.GoToState(this,"ConflictState1",false);
+			
+				
+			//Instantiates background worker 
+			BackgroundWorker worker = new BackgroundWorker();
+				worker.WorkerReportsProgress=true;
+				worker.WorkerSupportsCancellation=true;
+				
+			this.Controller.SyncAll();
+			createAndBindSamples();
+			showMessageBox(CustomDialog.MessageType.Message,"Sync-ed.\r\nPlease check.");
+			}
+			}catch(Exception ex){
+			 	
+				showMessageBox(CustomDialog.MessageType.Error,ex.Message);
+			}
+		}
+		
+		
+		/// <summary>
+		/// Syncs MRUs
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
         private void MRUSync(object sender, RoutedEventArgs e)
         {
             this.Controller.SyncMRUs("c");
@@ -368,5 +403,16 @@ namespace SyncButlerUI
 			dialog.ShowDialog();
 			return (bool)dialog.DialogResult;
 		}
+		/// <summary>
+		/// this is a test methods to bimd the sample list into the datagrid
+		/// </summary>
+		private void createAndBindSamples(){
+			List<SamplePartnershipConflict> conflictList=SamplePartnershipConflict.getSamplePartnershipConflictCollection();
+			this.ConflictList.ItemsSource=conflictList;
+			
+			this.ConflictList.Items.Refresh();
+		
+		}
+
 	}
 }

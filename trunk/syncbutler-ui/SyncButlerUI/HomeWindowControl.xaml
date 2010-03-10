@@ -660,16 +660,6 @@
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="ViewPartnership" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
 						</ObjectAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="background_Copy" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="5"/>
-						</DoubleAnimationUsingKeyFrames>
-						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="background_Copy" Storyboard.TargetProperty="(FrameworkElement.Cursor)">
-							<DiscreteObjectKeyFrame KeyTime="00:00:00">
-								<DiscreteObjectKeyFrame.Value>
-									<Cursor>Arrow</Cursor>
-								</DiscreteObjectKeyFrame.Value>
-							</DiscreteObjectKeyFrame>
-						</ObjectAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
 				<VisualState x:Name="SbsState1">
@@ -736,8 +726,8 @@
 				<TextBlock Margin="0,25,36.447,0" FontFamily="Arial" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" Text="Creating a Sync Partnership" VerticalAlignment="Top" Height="83.5" HorizontalAlignment="Right" Width="202.72"/>
 				<TextBlock Margin="0,109.5,55.947,0" FontSize="16" TextWrapping="Wrap" Text="Please select a folder on this computer" HorizontalAlignment="Right" Width="183.22" d:LayoutOverrides="HorizontalAlignment" VerticalAlignment="Top" Height="63.5" FontWeight="Bold" FontStyle="Italic"/>
 				<TextBlock Margin="0,181.5,71.947,137.5" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="167.22" d:LayoutOverrides="HorizontalAlignment"><Run Text="This folder will be 1 of 2  folders in a syncing partnership."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="Any updates will be reflected on the other folder in the partnership"/></TextBlock>
-				<Image HorizontalAlignment="Left" Margin="25.834,0,0,69.833" Width="41" Source="Images\Misc.png" Stretch="Fill" VerticalAlignment="Bottom" Height="41"/>
-				<TextBlock Margin="0,0,407.027,89" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="36.5" VerticalAlignment="Bottom" Height="25" Text="Path:"/>
+				<TextBlock Margin="0,328.095,398.773,94.079" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="44.754" Text="Path:"/>
+				<Image HorizontalAlignment="Left" Margin="25.834,0,0,69.833" Width="44" Height="44" Source="Images\Misc.png" Stretch="Fill" VerticalAlignment="Bottom" />
 				<TextBlock Margin="0,0,99.527,14.5" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="85.64" VerticalAlignment="Bottom" Height="25" Text="Step 1 of 3" d:LayoutOverrides="HorizontalAlignment"/>
 				<Button x:Name="toPartnershipDestButton" HorizontalAlignment="Right" Margin="0,0,31.947,19" VerticalAlignment="Bottom" Width="69" Height="23" Content="Next&gt;" RenderTransformOrigin="0.79,1.043" Click="goToPartnershipDest" />
 			</Grid>
@@ -746,7 +736,7 @@
 				<TextBlock Margin="0,109.5,55.947,0" FontSize="16" TextWrapping="Wrap" Text="Please select another folder on this computer" HorizontalAlignment="Right" Width="183.22" d:LayoutOverrides="HorizontalAlignment" VerticalAlignment="Top" Height="63.5" FontWeight="Bold" FontStyle="Italic"/>
 				<TextBlock Margin="0,181.5,71.947,137.5" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="167.22" d:LayoutOverrides="HorizontalAlignment"><Run Text="This folder will be 1 of 2  folders in a syncing partnership."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="Any updates will be reflected on the other folder in the partnership"/></TextBlock>
 				<Image HorizontalAlignment="Left" Margin="24,0,0,70" VerticalAlignment="Bottom" Width="44" Height="44" Source="Images\Folder.png" Stretch="Fill"/>
-				<TextBlock Margin="0,330,407.027,96.619" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="36.5" Text="Path:"/>
+				<TextBlock Margin="0,328.095,398.773,94.079" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="44.754" Text="Path:"/>
 				<TextBlock Margin="0,0,162.527,14.5" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="85.64" VerticalAlignment="Bottom" Height="25" Text="Step 2 of 3" d:LayoutOverrides="HorizontalAlignment"/>
 				<Button HorizontalAlignment="Right" Margin="0,0,31.947,19" VerticalAlignment="Bottom" Width="69" Height="23" Content="Next&gt;" RenderTransformOrigin="0.79,1.043" Click="goToCreatePartnershipName"/>
 				<Button HorizontalAlignment="Right" Margin="0,0,109.527,19" VerticalAlignment="Bottom" Width="64.253" Height="23" Content="&lt;Back" Click="goBackToCreatePartnershipSrc"/>
@@ -824,7 +814,7 @@
 					</Rectangle.Fill>
 				</Rectangle>
 				<TextBlock Margin="111.5,53,31.947,0" VerticalAlignment="Top" Height="61.5" FontFamily="Arial" FontSize="24" FontWeight="Bold" Text="You are done!" TextWrapping="Wrap"/>
-				<TextBlock Margin="0,167.94,31.947,209.06" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="195.22"><Run FontSize="16" FontWeight="Bold" Text="Congratulations on creating your partnership"/><LineBreak/><Run Text="Would you like to:"/></TextBlock>
+				<TextBlock Margin="0,206.94,31.947,170.06" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="195.22"><Run FontSize="16" FontWeight="Bold" Text="Congratulations on creating your partnership"/><LineBreak/><Run Text="Would you like to:"/></TextBlock>
 				<Image x:Name="image" HorizontalAlignment="Left" Margin="18.499,33.333,0,0" VerticalAlignment="Top" Width="90" Height="90" Opacity="0.79" Source="Images/Symbol-Check.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
 					<Image.RenderTransform>
 						<TransformGroup>
@@ -836,13 +826,13 @@
 					</Image.RenderTransform>
 				</Image>
 				<TextBlock Margin="30.499,0,0,164" FontSize="14.667" FontWeight="Bold" Text="Folder 1 Path" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="28" HorizontalAlignment="Left" Width="222.08"/>
-				<TextBlock Margin="30.499,0,0,112" FontSize="14.667" FontWeight="Bold" Text="Folder 2 Path" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="28" HorizontalAlignment="Left" Width="222.08"/>
-				<Button HorizontalAlignment="Right" Margin="0,0,38.5,160.643" VerticalAlignment="Bottom" Width="127.667" Height="23" Content="Go back to Home" RenderTransformOrigin="0.79,1.043" Click="goHome"/>
+				<TextBlock Margin="30.499,0,0,82" FontSize="14.667" FontWeight="Bold" Text="Folder 2 Path" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="28" HorizontalAlignment="Left" Width="222.08"/>
+				<Button HorizontalAlignment="Right" Margin="0,0,38.5,121.643" VerticalAlignment="Bottom" Width="127.667" Height="23" Content="Go back to Home" RenderTransformOrigin="0.79,1.043" Click="goHome"/>
 				<TextBlock Margin="30.499,172.5,0,0" FontSize="14.667" FontWeight="Bold" Text="Partnership Name" TextWrapping="Wrap" VerticalAlignment="Top" Height="28" HorizontalAlignment="Left" Width="222.08"/>
-				<Button HorizontalAlignment="Right" Margin="0,0,38.5,88.643" VerticalAlignment="Bottom" Width="127.667" Height="47" Content="Create another&#xa;   Partnership" RenderTransformOrigin="0.79,1.043" Click="goToCreatePartnership_Click"/>
-				<TextBlock x:Name="sourceFolderPath" Margin="30.499,0,0,147" FontSize="13.333" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="28" HorizontalAlignment="Left" Width="222.08"/>
-				<TextBlock x:Name="destinationFolderPath" Margin="30.499,0,0,93" FontSize="13.333" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="28" HorizontalAlignment="Left" Width="222.08"/>
-				<TextBlock x:Name="partnerShipName" Margin="30.499,191,0,0" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Left" Width="222.08" VerticalAlignment="Top" Height="28"/>
+				<Button HorizontalAlignment="Right" Margin="0,0,38.5,49.643" VerticalAlignment="Bottom" Width="127.667" Height="47" Content="Create another&#xa;   Partnership" RenderTransformOrigin="0.79,1.043" Click="goToCreatePartnership_Click"/>
+				<TextBlock x:Name="sourceFolderPath" Margin="30.499,0,0,108.429" FontSize="13.333" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="66.571" HorizontalAlignment="Left" Width="222.08"/>
+				<TextBlock x:Name="destinationFolderPath" Margin="30.499,0,0,24.429" FontSize="13.333" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="66.571" HorizontalAlignment="Left" Width="222.08"/>
+				<TextBlock x:Name="partnerShipName" Margin="30.499,191,0,196.429" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Left" Width="222.08"/>
 			</Grid>
 			<TextBox x:Name="sourceTextBox" Margin="72.5,352.04,106.447,0" VerticalAlignment="Top" TextWrapping="Wrap" MaxLength="266" Width="375.08" d:LayoutOverrides="GridBox"/>
 			<TreeView Margin="55.5,48,0,149.5" x:Name="foldersItem" SelectedItemChanged="foldersItem_SelectedItemChanged" Background="#FFFFFFFF" BorderBrush="#FF7C7C7C" Foreground="#FFFFFFFF" HorizontalAlignment="Left" Width="189.58">
@@ -905,10 +895,9 @@
 					</TransformGroup>
 				</ListBox.RenderTransform>
 			</ListBox>
-			<Button Margin="198.973,0,241.361,22" VerticalAlignment="Bottom" Width="63" Height="34" Content="Sync"/>
-			<Button HorizontalAlignment="Right" Margin="0,0,166.361,22" VerticalAlignment="Bottom" Width="63" Height="34" Content="Edit"/>
-			<Button HorizontalAlignment="Right" Margin="0,0,91.361,22" VerticalAlignment="Bottom" Width="63" Height="34" Content="Create" Click="goToCreatePartnership_Click"/>
-			<Button HorizontalAlignment="Right" Margin="0,0,18.361,22" VerticalAlignment="Bottom" Width="63" Height="34" Content="Delete" Click="deletePartnership_Click"/>
+			<Button Margin="220.154,0,220.18,22" VerticalAlignment="Bottom" Height="34" Content="Sync"/>
+			<Button Margin="0,0,146.68,22" VerticalAlignment="Bottom" Height="34" Content="Edit" HorizontalAlignment="Right" Width="63"/>
+			<Button HorizontalAlignment="Left" Margin="147.486,0,0,22" VerticalAlignment="Bottom" Width="63" Height="34" Content="Delete" Click="deletePartnership_Click"/>
 		</Grid>
 		<Grid x:Name="sbs" Margin="-7.5,0,-4.693,0" VerticalAlignment="Bottom" Height="444" d:LayoutOverrides="GridBox" Visibility="Hidden" Background="Black" >
 			<Rectangle x:Name="background_Copy2" RadiusX="1" RadiusY="2" Margin="0,0,-1.5,0" VerticalAlignment="Top" Height="448" Cursor="Arrow">
@@ -964,24 +953,29 @@
 			</Rectangle>
 			<Rectangle Stroke="Black" RadiusX="5" RadiusY="2" Margin="0.58,0,-0.579,-0.857" VerticalAlignment="Bottom" Height="120.952"/>
 			<TextBlock x:Name="PartnershipName" Margin="29.032,0,229.541,80.596" VerticalAlignment="Bottom" Height="28.571" FontSize="16" FontWeight="Bold" Text="Partnership Name" TextWrapping="Wrap"/>
-			<TextBlock x:Name="CurrentSyncingFile" Margin="29.032,0,10.493,51.596" VerticalAlignment="Bottom" Height="24.761" TextWrapping="Wrap" Text="Currently Syncing: C:/doc/xml.xml"/>
+			<TextBlock x:Name="CurrentSyncingFile" Margin="32.032,0,7.493,48.596" VerticalAlignment="Bottom" Height="24.761" TextWrapping="Wrap" Text="Currently Syncing: C:/doc/xml.xml"/>
 			<ProgressBar x:Name="SubProgressBar" Margin="38.623,0,28.52,34.69" VerticalAlignment="Bottom" Height="14.286"/>
 			<ProgressBar x:Name="TotalProgressBar" Margin="38.623,0,28.52,15.69" VerticalAlignment="Bottom" Height="14.286"/>
-			<TextBlock x:Name="PartnershipName_Copy" Margin="38.032,42.333,0,0" FontSize="16" FontWeight="Bold" Text="Conflicts" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Width="177.618" Height="28.571"/>
-			<Custom:DataGrid x:Name="ConflictList" Margin="39.1,93.429,34.234,187.714">
-				<Custom:DataGrid.ItemTemplate>
-					<DataTemplate>
-						<Grid/>
-					</DataTemplate>
-				</Custom:DataGrid.ItemTemplate>
+			<TextBlock x:Name="ConflictsLabel" Margin="38.032,42.333,0,0" FontSize="16" FontWeight="Bold" Text="Conflicts" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Width="177.618" Height="28.571"/>
+			<Custom:DataGrid x:Name="ConflictList" Margin="39.1,93.429,27.091,187.714" RowDetailsVisibilityMode="VisibleWhenSelected"  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True" CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False" GridLinesVisibility="Vertical" Width="437.143" Height="162.857" HorizontalScrollBarVisibility="Hidden" IsReadOnly="True">
 				<Custom:DataGrid.Columns>
-					<Custom:DataGridTextColumn x:Name="File_Name" Width="310" MinWidth="310" Header="File Name"/>
-					<Custom:DataGridCheckBoxColumn x:Name="FolderOneBox" Width="60" MinWidth="40" Header="Folder 1"/>
-					<Custom:DataGridCheckBoxColumn x:Name="FolderTwoBox" Width="60" MinWidth="40" Header="Folder 2"/>
+					<Custom:DataGridTextColumn x:Name="conflictlistPartnershipName" Width="430" MinWidth="430" Header="Partnerships" Binding="{Binding partnershipName}"/>
 				</Custom:DataGrid.Columns>
+			<Custom:DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <Custom:DataGrid x:Name="InnerGrid" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" ItemsSource="{Binding sampleConflictList}" CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False">
+					<Custom:DataGrid.Columns>
+					<Custom:DataGridTextColumn x:Name="File_Name" Width="310" MinWidth="310" Header="File Name" Binding="{Binding fileName}"/>
+					<Custom:DataGridCheckBoxColumn x:Name="FolderOneBox" Width="60" MinWidth="40" Header="Folder 1" Binding="{Binding folder1}"/>
+					<Custom:DataGridCheckBoxColumn x:Name="FolderTwoBox" Width="60" MinWidth="40" Header="Folder 2" Binding="{Binding folder2}"/>
+					</Custom:DataGrid.Columns>
+					</Custom:DataGrid>
+                </DataTemplate>
+            </Custom:DataGrid.RowDetailsTemplate>
+
 			</Custom:DataGrid>
 			<Button HorizontalAlignment="Right" Margin="0,0,21.853,79.143" VerticalAlignment="Bottom" Width="70.476" Height="24.762" Content="Done" IsEnabled="False"/>
-			<TextBlock x:Name="CurrentSyncingFile_Copy" Margin="29.032,67.643,10.493,0" TextWrapping="Wrap" Text="Please choose the file that you want to sync." VerticalAlignment="Top" Height="24.761"/>
+			<TextBlock x:Name="CurrentSyncingFile_Copy" Margin="39.032,67.643,0.493,0" TextWrapping="Wrap" Text="Please choose the file that you want to sync." VerticalAlignment="Top" Height="24.761"/>
 		</Grid>
 	</Grid>
 </UserControl>
