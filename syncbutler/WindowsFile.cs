@@ -48,6 +48,10 @@ namespace SyncButler
             rootPath = xmlData.GetAttribute("RootPath").Trim();
             driveId = xmlData.GetAttribute("DriveID").Trim();
             isPortableStorage = bool.Parse(xmlData.GetAttribute("IsPortableStorage").Trim());
+            
+            // Update the drive letter immediately after parsing the XML
+            if (isPortableStorage)
+                this.UpdateDriveLetter();
 
             if (relativePath == null || rootPath == null) throw new InvalidDataException("Missing path");
             if ((relativePath.Length > 0) && !rootPath.EndsWith("\\")) rootPath += "\\";
