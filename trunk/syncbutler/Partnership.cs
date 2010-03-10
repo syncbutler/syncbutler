@@ -73,8 +73,10 @@ namespace SyncButler
         {
             hashDictionary = new Dictionary<string, long>();
 
-            xmlData.Read();
-            if (xmlData.Name != "Partnership") throw new InvalidDataException("This is not Data for a Partnership");
+            while ((xmlData.NodeType != XmlNodeType.Element) && (xmlData.Name != "Partnership"))
+            {
+                if (!(xmlData.Read())) throw new InvalidDataException();
+            }
             
             this.name = xmlData.GetAttribute("name");
             if (this.name == null) throw new InvalidDataException("Partnership is Missing the (Friendly) Name");
