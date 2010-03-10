@@ -210,16 +210,8 @@ namespace SyncButler
         {
             string syncTo = driveLetter + ":\\SyncButler\\" + SyncEnvironment.GetComputerName() + "\\";
             MRUList mruList = new MRUList();
+            mruList.Load();
             mruList.Sync(SyncEnvironment.GetComputerName(), driveLetter);
-            //foreach (string s in MostRecentlyUsedFile.Get().Values)
-            //{
-            //    if (File.Exists(s))
-            //    {
-            //        string filename = Path.GetFileName(s);
-            //        MostRecentlyUsedFile mruFiles = new MostRecentlyUsedFile(s, syncTo + filename);
-            //        mruFiles.Sync();
-            //    }
-            //}
         }
 
         /// <summary>

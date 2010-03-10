@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using System.Xml.Serialization;
 using System.Xml;
+using System.Reflection;
 
 namespace SyncButler.MRU
 {
@@ -110,7 +111,6 @@ namespace SyncButler.MRU
         }
 
 
-        /// TODO: find a way to embed xslt file to exe, and to extract it.
         /// <summary>
         /// Save information of a synced MRU into a xml format
         /// This xml file comes with a xslt file which can use to format the xml to a readable format
@@ -127,6 +127,17 @@ namespace SyncButler.MRU
             xtw.WriteProcessingInstruction("xml-stylesheet", "type=\"text/xsl\" href=\"SyncedFile.xslt\"");
             xmlS.Serialize(xtw, mrus);
             xtw.Close();
+
+            // extract the xslt file
+            Assembly assemby;
+            assemby = Assembly.GetExecutingAssembly();
+            Stream s = assemby.GetManifestResourceStream("SyncButler.MRU.SyncedFile.xslt");
+            StreamReader sr = new StreamReader(s);
+            string xsltFilename = Path.GetDirectoryName(filename) + "\\SyncedFile.xslt";
+            StreamWriter sw = new StreamWriter(xsltFilename);
+            sw.Write(sr.ReadToEnd());
+            sw.Close();
+            sr.Close();
         }
 
         /// <summary>
