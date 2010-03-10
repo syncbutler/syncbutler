@@ -6,14 +6,14 @@ Jargon Decoder aims to clarify some of the terms and ideas we used\have in the p
 
 = Details =
   # Root Path
-    # Means the part of directory path that do not change for a Left/Right folder. For example, Left: `C:\Nom\Ate\`, Right: `D:\Ated\` are root paths in a partnership. The Full Path may change to `C:\Nom\Ate\Yummy\Eatz.txt` but the root path of that folder in this partnership is still `C:\Nom\Ate\`. See Full Path for more information.
+    * Means the part of directory path that do not change for a Left/Right folder. For example, Left: `C:\Nom\Ate\`, Right: `D:\Ated\` are root paths in a partnership. The Full Path may change to `C:\Nom\Ate\Yummy\Eatz.txt` but the root path of that folder in this partnership is still `C:\Nom\Ate\`. See Full Path for more information.
   # Full Path
-    # Means the full path to a folder or a file. Includes the Drive letter.
+    * Means the full path to a folder or a file. Includes the Drive letter.
   # Relative Path
-    # The relative path from the root path to the file or folder
+    * The relative path from the root path to the file or folder
   # Entity Path
-    # A _symbolic_ reference to a file/folder without the root path. It is essentially the relative path plus some info on whether it is a file or folder. Note that the keys in the checksum dictionary are just partnership name concatenated with the entity path.
+    * A _symbolic_ reference to a file/folder without the root path. It is essentially the relative path plus some info on whether it is a file or folder. Note that the keys in the checksum dictionary are just partnership name concatenated with the entity path.
   # WindowsFile
-    # This has been defined as a partnership between two SAME files but in different location. Much like our Micro Partnership. (Thus checking is done to make sure this is so).
+    * This has been defined as a partnership between two SAME files but in different location. Much like our Micro Partnership. (Thus checking is done to make sure this is so).
   # MRU
-    # This means `Most Recently Used`. In this context, it refers to the recently used files of the user in a Windows system (XP/Vista/7). When it is referred to in an user context, it is described as favourties.
+    * This means `Most Recently Used`. In this context, it refers to the recently used files of the user in a Windows system (XP/Vista/7). When it is referred to in an user context, it is described as favourties.
