@@ -22,15 +22,25 @@ namespace SyncButler
         protected long checksumCache;
         protected bool checksumCacheFresh = false;
 
+        /// <summary>
+        /// Constructor to unserialise XML string and create an instance of itself.
+        /// </summary>
+        /// <param name="xmlData">The XMLReader object to read the XML from.</param>
+        /// <exception cref="ArgumentNullException">If, when parsing the boolean, the argument is null.</exception>
+        /// <exception cref="FormatException">If, when parsing the boolean, the argument is in a format that is not recognised.</exception>
         public WindowsFolder(XmlReader xmlData)
         {
-            relativePath = rootPath = null;
+            driveId = relativePath = rootPath = null;
+            isPortableStorage = false;
 
             xmlData.Read();
             if (xmlData.Name != "WindowsFolder") throw new InvalidDataException();
 
             relativePath = xmlData.GetAttribute("RelativePath").Trim();
             rootPath = xmlData.GetAttribute("RootPath").Trim();
+            driveId = xmlData.GetAttribute("DriveID").Trim();
+            isPortableStorage = bool.Parse(xmlData.GetAttribute("IsPortableStorage").Trim());
+
 
             if (relativePath == null || rootPath == null) throw new InvalidDataException("Missing path");
             if (!rootPath.EndsWith("\\")) rootPath += "\\";
@@ -54,6 +64,8 @@ namespace SyncButler
             this.relativePath = StripPrefix(rootPath, fullPath);
             this.nativeFileSystemObj = this.nativeDirObj;
             this.rootPath = rootPath;
+            this.IsPortableStorage = SystemEnvironment.StorageDevices.IsUSBDrive(GetDriveLetter(fullPath));
+            this.DriveID = SystemEnvironment.StorageDevices.GetDriveID(GetDriveLetter(fullPath));
         }
 
         /// <summary>
@@ -72,6 +84,8 @@ namespace SyncButler
             this.nativeFileSystemObj = this.nativeDirObj;
             this.rootPath = rootPath;
             this.parentPartnership = parentPartnership;
+            this.IsPortableStorage = SystemEnvironment.StorageDevices.IsUSBDrive(GetDriveLetter(fullPath));
+            this.DriveID = SystemEnvironment.StorageDevices.GetDriveID(GetDriveLetter(fullPath));
         }
 
         /// <summary>
@@ -203,16 +217,12 @@ namespace SyncButler
             string[] childrenNames = new string[children.Length];
 
             for (int i = 0; i < children.Length; i++)
-            {
                 childrenNames[i] = children[i].Name;
-            }
 
             Array.Sort(childrenNames);
 
             foreach (string childName in childrenNames)
-            {
                 hashAlgorithm.Update(UTF8.GetBytes(("\\" + childName).ToCharArray()));
-            }
 
             checksumCache = hashAlgorithm.Value;
             return checksumCache;
@@ -242,9 +252,7 @@ namespace SyncButler
         public override bool Equals(ISyncable item)
         {
             if (!item.GetType().Name.Equals("WindowsFolder"))
-            {
                 return false;
-            }
 
             WindowsFolder subject = (WindowsFolder)item;
 
@@ -253,7 +261,7 @@ namespace SyncButler
 
         public override string EntityPath()
         {
-            return "folder:\\\\" + this.relativePath;
+            return "folder:\\\\" + this.relativePath; 
         }
 
         public override string ToString()
@@ -288,13 +296,9 @@ namespace SyncButler
             System.Diagnostics.Debug.Assert(parentPartnership != null, "The parent partnership has not been set; cannot sync");
 
             if (otherPair is WindowsFolder)// && this.EntityPath().Equals(otherPair.EntityPath()))
-            {
                 partner = (WindowsFolder)otherPair;
-            }
             else
-            {
                 throw new InvalidPartnershipException();
-            }
 
             // Compare the files and folders under this directory
             List<Conflict> conflicts = new List<Conflict>();
@@ -326,14 +330,9 @@ namespace SyncButler
                     else
                     {   // Folder exists only on the left
                         if (parentPartnership.ChecksumExists("folder:\\\\" + curFolderLeft))
-                        {
-                            // The folder was deleted from the right.
-                            recommendedAction = Conflict.Action.DeleteLeft;
-                        }
+                            recommendedAction = Conflict.Action.DeleteLeft; // The folder was deleted from the right.
                         else
-                        {
                             recommendedAction = Conflict.Action.CopyToRight;
-                        }
 
                         conflicts.Add(new Conflict(
                             new WindowsFolder(leftPath, subFolderLeft, this.parentPartnership),
@@ -351,14 +350,9 @@ namespace SyncButler
                     if (!Directory.Exists(leftPath + curFolderRight))
                     {   // Folder exists only on the right
                         if (parentPartnership.ChecksumExists("folder:\\\\" + curFolderRight))
-                        {
-                            // The folder was deleted from the left
-                            recommendedAction = Conflict.Action.DeleteRight;
-                        }
+                            recommendedAction = Conflict.Action.DeleteRight; // The folder was deleted from the left
                         else
-                        {
                             recommendedAction = Conflict.Action.CopyToLeft;
-                        }
 
                         conflicts.Add(new Conflict(
                             new WindowsFolder(leftPath, leftPath + curFolderRight, this.parentPartnership),
@@ -386,14 +380,9 @@ namespace SyncButler
                         {
                             // File was deleted from the right
                             if (parentPartnership.GetLastChecksum(leftFile) == leftFile.Checksum())
-                            {
                                 recommendedAction = Conflict.Action.DeleteLeft;
-                            }
                             else
-                            {
-                                // ...but the file was since modified
-                                recommendedAction = Conflict.Action.Unknown;
-                            }
+                                recommendedAction = Conflict.Action.Unknown; // ...but the file was since modified
                         }
                         else
                         {
@@ -419,14 +408,9 @@ namespace SyncButler
                             WindowsFile rightFile = new WindowsFile(rightPath, subFileRight, this.parentPartnership);
                             // File was deleted from the left
                             if (parentPartnership.GetLastChecksum(rightFile) == rightFile.Checksum())
-                            {
                                 recommendedAction = Conflict.Action.DeleteRight;
-                            }
                             else
-                            {
-                                // ...but the file was since modified
-                                recommendedAction = Conflict.Action.Unknown;
-                            }
+                                recommendedAction = Conflict.Action.Unknown; // ...but the file was since modified
                         }
                         else
                         {
@@ -447,20 +431,12 @@ namespace SyncButler
 
         public override ISyncable CreateChild(string entityPath)
         {
-            if (entityPath.StartsWith("file:\\\\"))
-            {
+            if (entityPath.StartsWith(@"file:\\"))
                 return new WindowsFile(this.rootPath, this.rootPath + entityPath.Substring(7), this.parentPartnership);
-            }
-            else if (entityPath.StartsWith("folder:\\\\"))
-            {
+            else if (entityPath.StartsWith(@"folder:\\"))
                 return new WindowsFolder(this.rootPath, this.rootPath + entityPath.Substring(9), this.parentPartnership);
-            }
-            else 
-            {
+            else
                 throw new ArgumentException();
-            }
-
-            
         }
 
         public override void SerializeXML(XmlWriter xmlData)
@@ -468,6 +444,8 @@ namespace SyncButler
             xmlData.WriteStartElement("WindowsFolder");
             xmlData.WriteAttributeString("RelativePath", relativePath);
             xmlData.WriteAttributeString("RootPath", rootPath);
+            xmlData.WriteAttributeString("IsPortableStorage", isPortableStorage.ToString());
+            xmlData.WriteAttributeString("DriveID", driveId);
             xmlData.WriteEndElement();
         }
     }

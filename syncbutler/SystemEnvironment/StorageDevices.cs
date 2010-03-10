@@ -15,9 +15,9 @@ namespace SyncButler.SystemEnvironment
         /// </summary>
         /// <param name="driveID">The PNPDeviceID</param>
         /// <returns>String of drive letter</returns>
-        public static String GetDriveLetter(String driveID)
+        public static string GetDriveLetter(string driveID)
         {
-            String letter = "";
+            string letter = "";
             ManagementObjectSearcher DDMgmtObjSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
 
             foreach (ManagementObject DDObj in DDMgmtObjSearcher.Get())
@@ -42,9 +42,9 @@ namespace SyncButler.SystemEnvironment
         /// </summary>
         /// <param name="driveID">PNPDeviceID of the device</param>
         /// <returns>String drive letter</returns>
-        public static String GetUSBDriveLetter(String driveID)
+        public static string GetUSBDriveLetter(string driveID)
         {
-            String letter = "";
+            string letter = "";
             ManagementObjectSearcher DDMgmtObjSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive WHERE InterfaceType='USB'");
 
             foreach (ManagementObject DDObj in DDMgmtObjSearcher.Get())
@@ -65,13 +65,24 @@ namespace SyncButler.SystemEnvironment
         }
 
         /// <summary>
+        /// Returns whether the drive with the drive letter 
+        /// </summary>
+        /// <param name="driveLetter"></param>
+        /// <returns></returns>
+        public static bool IsUSBDrive(string driveLetter)
+        {
+            List<string> usbDriveList = GetUSBDriveLetters();
+            return (usbDriveList.Contains(driveLetter));
+        }
+
+        /// <summary>
         /// Returns a List of drive letters of USB storage devices attached to the computer.
         /// Drive letter format is of the format X:
         /// </summary>
         /// <returns>List of USB Drive letters</returns>
-        public static List<String> GetUSBDriveLetters()
+        public static List<string> GetUSBDriveLetters()
         {
-            List<String> list = new List<string>();
+            List<string> list = new List<string>();
             ManagementObjectSearcher DDMgmtObjSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive WHERE InterfaceType='USB'");
 
             foreach (ManagementObject DDObj in DDMgmtObjSearcher.Get())
@@ -94,9 +105,9 @@ namespace SyncButler.SystemEnvironment
         /// </summary>
         /// <param name="driveLetter">The drive letter</param>
         /// <returns>String containing the unique PNPDeviceID</returns>
-        public static String GetDriveID(String driveLetter)
+        public static string GetDriveID(string driveLetter)
         {
-            String id = "";
+            string id = "";
             ManagementObjectSearcher DDMgmtObjSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_LogicalDisk WHERE DeviceID='" + driveLetter.TrimEnd('\\') + "'");
 
             foreach (ManagementObject DDObj in DDMgmtObjSearcher.Get())

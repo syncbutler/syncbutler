@@ -11,8 +11,10 @@ namespace SyncButler
     /// </summary>
     public abstract class WindowsFileSystem : ISyncable
     {
-        protected String relativePath;
-        protected String rootPath;
+        protected string relativePath;
+        protected string rootPath;
+        protected string driveId;
+        protected bool isPortableStorage;
         protected FileSystemInfo nativeFileSystemObj;
         protected Partnership parentPartnership = null;
 
@@ -20,7 +22,7 @@ namespace SyncButler
         /// Gets the name of the current folder/file. Additional info, such as the directory structure prior to this folder/file, is stripped away.
         /// </summary>
         /// <remarks>Calls Refresh() prior to getting the name.</remarks>
-        public String Name
+        public string Name
         {
             get
             {
@@ -30,9 +32,39 @@ namespace SyncButler
         }
 
         /// <summary>
+        /// Gets/Sets whether the file/folder is stored on a portable storage device.
+        /// </summary>
+        public bool IsPortableStorage
+        {
+            get
+            {
+                return this.isPortableStorage;
+            }
+            set
+            {
+                this.isPortableStorage = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets/Sets the drive ID that uniquely identifies the drive. Used in conjunction with IsPortableStorage.
+        /// </summary>
+        public string DriveID
+        {
+            get
+            {
+                return this.driveId;
+            }
+            set
+            {
+                this.driveId = value;
+            }
+        }
+
+        /// <summary>
         /// Gets the relative path of the current folder/file. This is the full path with the root path stripped away.
         /// </summary>
-        public String RelativePath {
+        public string RelativePath {
             get
             {
                 return this.relativePath;
@@ -98,7 +130,7 @@ namespace SyncButler
         /// <param name="prefix">String prefix to remove.</param>
         /// <param name="data">String to remove prefix from.</param>
         /// <returns>String with the prefix removed.</returns>
-        public static String StripPrefix(String prefix, String data)
+        public static string StripPrefix(string prefix, string data)
         {
             if (data.StartsWith(prefix))
             {
@@ -177,5 +209,37 @@ namespace SyncButler
         public abstract ISyncable CreateChild(string entityPath);
 
         public abstract void SerializeXML(XmlWriter xmlData);
+
+        /// <summary>
+        /// Returns the drive letter in the format of C:\
+        /// It can return the drive letter from any path that contains it.
+        /// </summary>
+        /// <param name="somePath">A path containing the drive letter</param>
+        /// <returns>The drive letter in the format of C:\</returns>
+        /// <exception cref="Exceptions.InvalidPathException">If the drive letter could not be obtained from the path.</exception>
+        public static string GetDriveLetter(string somePath)
+        {
+            somePath = somePath.Trim();
+            string[] parts = somePath.Split(':');
+
+            if ((parts.Length > 0) && (parts[0].Length > 0))
+                return (parts[0] + @":\");
+            else
+                throw new Exceptions.InvalidPathException("The drive letter could not be obtained from the path '" + somePath + "'");
+        }
+
+        /// <summary>
+        /// Returns the provided path with the drive letter changed to the provided drive letter.
+        /// </summary>
+        /// <param name="somePath">The path containing the drive letter to change</param>
+        /// <param name="driveLetter">The drive letter to change to, in the format of C:\</param>
+        /// <returns>The path with drive letter replaced</returns>
+        /// <exception cref="ArgumentOutOfRangeException">If when calculating the substring, the index was out of range.</exception>
+        public static string ReplaceDriveLetter(string somePath, string driveLetter)
+        {
+            somePath = somePath.Trim();
+            int stopIndex = somePath.IndexOf(':');
+            return (driveLetter + somePath.Substring(stopIndex + 2));
+        }
     }
 }

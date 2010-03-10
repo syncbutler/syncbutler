@@ -70,7 +70,7 @@ namespace SyncButler
         Error Merge(ISyncable item);
 
         /// <summary>
-        /// Determines if the two isyncable has changed
+        /// Determines if the two ISyncables has changed
         /// </summary>
         /// <returns>true if the isyncable is changed, false otherwise</returns>
         Boolean HasChanged();
@@ -78,7 +78,7 @@ namespace SyncButler
         /// <summary>
         /// Determines the equality of two ISyncables
         /// </summary>
-        /// <param name="item">The other ISyncable in quesstion</param>
+        /// <param name="item">The other ISyncable in question</param>
         /// <returns>True if equal, false otherwise</returns>
         Boolean Equals(ISyncable item);
 
