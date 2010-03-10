@@ -1,0 +1,14 @@
+#summary Revision history of Sync Butler
+
+=v0.0=
+This version is not publicly released.
+
+ * Rough UI
+ * Very basic synchronisation functionalities (without conflict checking)
+
+=v0.4=
+This version is not publicly released.
+
+ * UI further developed
+ * Synchronisation functionality stabilised and basic support for conflict resolution introduced
+ * Proof-of-concept favourites introduced
