@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using SyncButler.Exceptions;
 using System.Windows.Forms;
+using SyncButler.MRU;
 
 namespace SyncButler
 {

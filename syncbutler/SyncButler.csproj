@@ -46,8 +46,9 @@
     <Compile Include="Exceptions\SyncableNotExistsException.cs" />
     <Compile Include="Exceptions\InvalidActionException.cs" />
     <Compile Include="Exceptions\InvalidPartnershipException.cs" />
-    <Compile Include="MostRecentlyUsedFile.cs" />
-    <Compile Include="MRUList.cs" />
+    <Compile Include="MRU\MostRecentlyUsedFile.cs" />
+    <Compile Include="MRU\MRUList.cs" />
+    <Compile Include="MRU\SyncedMRU.cs" />
     <Compile Include="ProgramEnvironment\PartnershipElement.cs" />
     <Compile Include="ProgramEnvironment\PartnershipCollection.cs" />
     <Compile Include="ProgramEnvironment\PartnershipSection.cs" />
@@ -69,6 +70,9 @@
       <Project>{CD271A2A-1A70-43A5-BB6B-ED171A11A222}</Project>
       <Name>SyncButlerConsole</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MRU\SyncedFile.xslt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

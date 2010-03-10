@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using Microsoft.Win32;
 using System.IO;
 
-namespace SyncButler
+namespace SyncButler.MRU
 {
     /// <summary>
     /// A service class to retrive most recently used file for windows
@@ -64,7 +64,7 @@ namespace SyncButler
             else
                 return GetNonPidl(key, "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ComDlg32\\OpenSaveMRU\\*");
         }
-        
+
         /// <summary>
         /// Get the most recently used (MRU) file as a sorted liist
         /// </summary>
@@ -72,7 +72,7 @@ namespace SyncButler
         /// <returns>return path of the file</returns>
         /// <exception cref="SystemException">Is thrown when incompatible version of windows is detected
         /// (i.e., too new (>6.2) or too old (<5.1)</exception>
-        public static SortedList<string,string> Get()
+        public static SortedList<string, string> Get()
         {
             if (Environment.OSVersion.Version > new Version(6, 2) || Environment.OSVersion.Version < new Version(5, 1))
                 throw new SystemException("Incompatible (Newer) Version of Windows Detected. Feature Disabled");
@@ -93,7 +93,7 @@ namespace SyncButler
         {
             SortedList<string, string> mrus = new SortedList<string, string>();
             RegistryKey regKey = Registry.CurrentUser.OpenSubKey(key);
-            if(regKey == null)
+            if (regKey == null)
                 throw new NullReferenceException();
             foreach (string index in regKey.GetValueNames())
             {
@@ -164,7 +164,7 @@ namespace SyncButler
 
             if (value == null)
                 throw new NullReferenceException();
-                
+
             byte[] data = (byte[])(value);
 
             IntPtr p = Marshal.AllocHGlobal(data.Length);
