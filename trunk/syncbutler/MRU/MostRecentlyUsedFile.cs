@@ -57,7 +57,7 @@ namespace SyncButler.MRU
         public static string Get(string key)
         {
             if (Environment.OSVersion.Version > new Version(6, 2) || Environment.OSVersion.Version < new Version(5, 1))
-                throw new SystemException("Imcompatible (Newer) Version of Windows Detected. Feature Disabled");
+                throw new NotSupportedException("Imcompatible (Newer) Version of Windows Detected. Feature not supported");
 
             if (Environment.OSVersion.Version.Major >= 6)
                 return GetPidl(key, "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ComDlg32\\OpenSavePidlMRU\\*");
@@ -75,7 +75,7 @@ namespace SyncButler.MRU
         public static SortedList<string, string> Get()
         {
             if (Environment.OSVersion.Version > new Version(6, 2) || Environment.OSVersion.Version < new Version(5, 1))
-                throw new SystemException("Incompatible (Newer) Version of Windows Detected. Feature Disabled");
+                throw new NotSupportedException("Incompatible (Newer) Version of Windows Detected. Feature not supported");
 
             if (Environment.OSVersion.Version.Major >= 6)
                 return CleanUP(GetPidl("Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ComDlg32\\OpenSavePidlMRU\\*"));
