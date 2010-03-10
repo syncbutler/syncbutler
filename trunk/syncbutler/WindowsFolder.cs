@@ -41,6 +41,10 @@ namespace SyncButler
             driveId = xmlData.GetAttribute("DriveID").Trim();
             isPortableStorage = bool.Parse(xmlData.GetAttribute("IsPortableStorage").Trim());
 
+            // Update the drive letter immediately after parsing the XML
+            if (isPortableStorage)
+                this.UpdateDriveLetter();
+
 
             if (relativePath == null || rootPath == null) throw new InvalidDataException("Missing path");
             if (!rootPath.EndsWith("\\")) rootPath += "\\";
@@ -139,8 +143,10 @@ namespace SyncButler
             string srcPath, destPath;
             Queue<string> workingList = new Queue<string>(128);
 
-            srcPath = this.nativeDirObj.FullName;
-            destPath = destFolder.nativeDirObj.FullName;
+            srcPath = this.rootPath + this.relativePath;
+            destPath = destFolder.rootPath + destFolder.RelativePath;
+            //srcPath = this.nativeDirObj.FullName; //--> RED FLAG
+            //destPath = destFolder.nativeDirObj.FullName; //--> RED FLAG
 
             if (destFolder.nativeDirObj.Exists) destFolder.nativeDirObj.Delete(true);
 
@@ -305,8 +311,10 @@ namespace SyncButler
             string leftPath, rightPath;
             Queue<string> workingList = new Queue<string>(128);
 
-            leftPath = this.nativeDirObj.FullName;
-            rightPath = partner.nativeDirObj.FullName;
+            leftPath = this.rootPath + this.relativePath;
+            rightPath = partner.rootPath + partner.relativePath;
+            //leftPath = this.nativeDirObj.FullName; //--> RED FLAG
+            //rightPath = partner.nativeDirObj.FullName; //--> RED FLAG
 
             // Check Left to Right
             workingList.Enqueue("");

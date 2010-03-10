@@ -211,6 +211,15 @@ namespace SyncButler
         public abstract void SerializeXML(XmlWriter xmlData);
 
         /// <summary>
+        /// Method that is used internally to update the drive letter of the root path, based on the current drive ID.
+        /// </summary>
+        protected void UpdateDriveLetter()
+        {
+            string driveLetter = SystemEnvironment.StorageDevices.GetDriveLetter(this.DriveID);
+            this.rootPath = ReplaceDriveLetter(this.rootPath, driveLetter);
+        }
+
+        /// <summary>
         /// Returns the drive letter in the format of C:\
         /// It can return the drive letter from any path that contains it.
         /// </summary>
