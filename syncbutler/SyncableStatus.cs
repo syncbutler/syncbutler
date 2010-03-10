@@ -17,6 +17,10 @@ namespace SyncButler
             this._percentComplete = percentComplete;
         }
 
+        /// <summary>
+        /// A string that represents the object currently being processed
+        /// (ie. relative path file/folder)
+        /// </summary>
         public string curObject
         {
             get
@@ -25,6 +29,10 @@ namespace SyncButler
             }
         }
 
+        /// <summary>
+        /// Percentage of work completed.
+        /// NOTE: Not implemented in the ISyncables yet!
+        /// </summary>
         public int percentComplete
         {
             get

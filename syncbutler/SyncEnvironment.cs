@@ -545,11 +545,11 @@ namespace SyncButler
 
             XmlReader xmlData = XmlTextReader.Create(new StringReader(xmlString));
 
-            xmlData.Read();
+            while (xmlData.NodeType != XmlNodeType.Element) xmlData.Read();
             if (xmlData.NodeType != XmlNodeType.Element) throw new InvalidDataException();
             string className = xmlData.Name;
-            xmlData = XmlTextReader.Create(new StringReader(xmlString));
-
+            //xmlData = XmlTextReader.Create(new StringReader(xmlString));
+            
             Type t;
 
             try

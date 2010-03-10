@@ -33,8 +33,10 @@ namespace SyncButler
             driveId = relativePath = rootPath = null;
             isPortableStorage = false;
 
-            xmlData.Read();
-            if (xmlData.Name != "WindowsFolder") throw new InvalidDataException();
+            while ((xmlData.NodeType != XmlNodeType.Element) && (xmlData.Name != "WindowsFolder"))
+            {
+                if (!(xmlData.Read())) throw new InvalidDataException();
+            }
 
             relativePath = xmlData.GetAttribute("RelativePath").Trim();
             rootPath = xmlData.GetAttribute("RootPath").Trim();

@@ -11,27 +11,27 @@ namespace SyncButler.ProgramEnvironment
     /// </summary>
     public class PartnershipElement : ConfigurationElement
     {
-        protected Partnership partnershipObject = null;
+        //protected Partnership partnershipObject = null;
 
-        public Partnership obj
+        /* public Partnership obj
         {
             get
             {
                 return partnershipObject;
             }
-        }
+        } */
 
         public PartnershipElement(Partnership elem)
         {
-            partnershipObject = elem;
+            //partnershipObject = elem;
+            obj = elem;
             friendlyName = elem.Name;
-            data = partnershipObject.Serialize();
         }
 
         public PartnershipElement()
         {
             friendlyName = "";
-            data = "";
+            obj = null;
         }
 
         [ConfigurationProperty("friendlyName")]
@@ -47,17 +47,35 @@ namespace SyncButler.ProgramEnvironment
             }
         }
 
-        [ConfigurationProperty("data")]
-        public string data
+        [ConfigurationProperty("obj")]
+        public Partnership obj
         {
             get
             {
-                return (string)this["data"];
+                return (Partnership)this["obj"];
             }
             set
             {
-                this["data"] = value;
+                this["obj"] = value;
             }
+        }
+
+        /// <summary>
+        /// Serializes the partnership using Partnership.SerializeXML instead of the default
+        /// ConfigurationElement.SerializaElement()
+        /// </summary>
+        /// <param name="writer">Required by XML Configurations to read XML Data</param>
+        /// <param name="serializeCollectionKey">Required format descriptor by XML Configurations
+        /// to read XML Data</param>
+        /// <returns>value indicating whether there is data to serialize</returns>
+        protected override bool SerializeElement(System.Xml.XmlWriter writer, bool serializeCollectionKey)
+        {
+            if (writer != null)
+            {
+                obj.SerializeXML(writer);
+                return true;
+            }
+            else return true;
         }
 
         /// <summary>
@@ -70,8 +88,13 @@ namespace SyncButler.ProgramEnvironment
         /// to read XML Data</param>
         protected override void DeserializeElement(System.Xml.XmlReader reader, bool serializeCollectionKey)
         {
-            base.DeserializeElement(reader, serializeCollectionKey);
-            partnershipObject = (Partnership)SyncEnvironment.ReflectiveUnserialize(data);
+            if (reader.Name != "add") return;
+            
+            obj = (Partnership)SyncEnvironment.ReflectiveUnserialize(reader.ReadInnerXml());
+            friendlyName = obj.Name;
+
+            //while (!((reader.NodeType == System.Xml.XmlNodeType.EndElement)
+            //    && (reader.Name == "add"))) reader.Read();
         }
     }
 }
