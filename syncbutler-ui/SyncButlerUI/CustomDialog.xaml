@@ -6,7 +6,7 @@
 	x:Class="SyncButlerUI.CustomDialog" mc:Ignorable="d" Width="407" Height="177" WindowStyle="ToolWindow" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
 	<Grid Width="407" Height="177" Margin="0,-10,-16,-26">
 	<Image x:Name="messageImage" Margin="10,0,0,43.272" Width="105.2" Source="Images/logowTransparency.png" Stretch="Fill" VerticalAlignment="Bottom" Height="105.2" HorizontalAlignment="Left"/>
-	<Button x:Name="okButton"  Content="Ok" IsDefault="true" HorizontalAlignment="Right" Width="71   " VerticalAlignment="Top" Height="29" Margin="0,121,28,0" d:LayoutOverrides="HorizontalAlignment" />
+	<Button x:Name="okButton"  Content="Ok" IsDefault="true" HorizontalAlignment="Right" Click="yesClick" Width="71" VerticalAlignment="Top" Height="29" Margin="0,121,28,0" d:LayoutOverrides="HorizontalAlignment" />
 	<TextBlock x:Name="syncButlerMessage" Margin="144,54,39,63" TextWrapping="Wrap"/>
 	<Button x:Name="noButton"  Content="No" IsDefault="true" Click="noClick" HorizontalAlignment="Right" Width="71   " VerticalAlignment="Top" Height="29" Margin="0,121,28,0" d:LayoutOverrides="HorizontalAlignment" />
 	<Button x:Name="yesButton"  Content="Yes" IsDefault="true" Click="yesClick" HorizontalAlignment="Right" Width="71   " VerticalAlignment="Top" Height="29" Margin="0,121,107,0" d:LayoutOverrides="HorizontalAlignment" />
