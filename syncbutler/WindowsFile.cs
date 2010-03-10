@@ -50,6 +50,7 @@ namespace SyncButler
             rootPath = xmlData.GetAttribute("RootPath").Trim();
             driveId = xmlData.GetAttribute("DriveID").Trim();
             isPortableStorage = bool.Parse(xmlData.GetAttribute("IsPortableStorage").Trim());
+            partitionIndex = int.Parse(xmlData.GetAttribute("PartitionIndex").Trim());
             
             // Update the drive letter immediately after parsing the XML
             if (isPortableStorage)
@@ -75,6 +76,7 @@ namespace SyncButler
             this.rootPath = rootPath;
             this.IsPortableStorage = SystemEnvironment.StorageDevices.IsUSBDrive(GetDriveLetter(fullPath));
             this.DriveID = SystemEnvironment.StorageDevices.GetDriveID(GetDriveLetter(fullPath));
+            this.PartitionIndex = SystemEnvironment.StorageDevices.GetDrivePartitionIndex(GetDriveLetter(fullPath));
         }
 
         /// <summary>
@@ -101,6 +103,9 @@ namespace SyncButler
             this.nativeFileSystemObj = this.nativeFileObj;
             this.rootPath = rootPath;
             this.parentPartnership = parentPartnership;
+            this.IsPortableStorage = SystemEnvironment.StorageDevices.IsUSBDrive(GetDriveLetter(fullPath));
+            this.DriveID = SystemEnvironment.StorageDevices.GetDriveID(GetDriveLetter(fullPath));
+            this.PartitionIndex = SystemEnvironment.StorageDevices.GetDrivePartitionIndex(GetDriveLetter(fullPath));
         }
 
         public WindowsFile(string fullPath, Partnership parentPartnership)
@@ -508,6 +513,7 @@ namespace SyncButler
             xmlData.WriteAttributeString("RootPath", rootPath);
             xmlData.WriteAttributeString("IsPortableStorage", isPortableStorage.ToString());
             xmlData.WriteAttributeString("DriveID", driveId);
+            xmlData.WriteAttributeString("PartitionIndex", partitionIndex.ToString());
             xmlData.WriteEndElement();
         }
     }
