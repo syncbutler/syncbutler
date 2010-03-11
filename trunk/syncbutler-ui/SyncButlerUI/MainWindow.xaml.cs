@@ -57,6 +57,7 @@ namespace SyncButlerUI
 		{
 			VisualStateManager.GoToState(homeWindow1, "Settings1",false);
 		}
+
 		private void cleanUp(object sender,  System.ComponentModel.CancelEventArgs e)
 		{
 			this.controller.Shutdown();

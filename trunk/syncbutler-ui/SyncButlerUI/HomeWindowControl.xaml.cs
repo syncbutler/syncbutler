@@ -413,6 +413,25 @@ namespace SyncButlerUI
 			this.ConflictList.Items.Refresh();
 		
 		}
+		
+		private void SaveSetting(object sender, RoutedEventArgs e)
+		{
+			string ComputerName = this.ComputerNameTextBox.Text;
+			bool SBSEnable = this.SBSSettingComboBox.SelectedItem.Equals("Enable");
+			char DriveLetter = (char)this.SBSWorkingDriveComboBox.SelectedItem;
+			
+			this.Controller.SaveSetting(ComputerName,SBSEnable,DriveLetter);
+		}
+		
+		private void SBSSettingChanged(object sender, RoutedEventArgs e)
+		{
+			this.SBSWorkingDriveComboBox.IsEnabled = this.SBSSettingComboBox.SelectedItem.Equals("Enable");
+		}
+		
+		private void DefaultSetting(object sender, RoutedEventArgs e)
+		{
+			
+		}
 
 	}
 }

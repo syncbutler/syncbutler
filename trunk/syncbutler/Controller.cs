@@ -223,5 +223,16 @@ namespace SyncButler
         {
             return syncEnvironment.FirstRunComplete;
         }
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="ComputerName">Computer name of the user</param>
+		/// <param name="EnableSBS">If the user wants sbs to be enabled</param>
+		/// <param name="SBSDrive">The working drive letter</param>
+		public void SaveSetting(string ComputerName, bool EnableSBS, char SBSDrive)
+		{
+			// do nothing?
+		}
     }
 }
