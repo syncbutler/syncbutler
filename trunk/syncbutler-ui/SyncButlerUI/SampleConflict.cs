@@ -18,10 +18,10 @@ namespace SyncButlerUI
 		public string partnershipName{get;set;}
 		public List<SampleConflict> listSampleConflict { get; set; }
 		//this is a sample conflict list Please delete when binded with the real data
-		public SamplePartnershipConflict(string a_partnershipName)
+		public SamplePartnershipConflict(string a_partnershipName,List<SampleConflict> sampleConflictList)
 		{
 			partnershipName=a_partnershipName;
-			listSampleConflict=SampleConflict.getSampleConflictCollection();
+			listSampleConflict=sampleConflictList;
 		}
 		
 		public static List<SamplePartnershipConflict> getSamplePartnershipConflictCollection()
@@ -42,8 +42,8 @@ namespace SyncButlerUI
 		return new List<SamplePartnershipConflict>
 		
 		{
-		new SamplePartnershipConflict("Test1"),		
-		new SamplePartnershipConflict("Test2"),
+		new SamplePartnershipConflict("Test1",SampleConflict.getSampleConflictCollection("Test1")),		
+		new SamplePartnershipConflict("Test2",SampleConflict.getSampleConflictCollection("Test2")),
 
 				};
 		
@@ -53,7 +53,7 @@ namespace SyncButlerUI
 	public class SampleConflict
 	{
 		private static List<SampleConflict> sampleConflictCollection = default(List<SampleConflict>);
-		public string filename{get;set;}
+		public string fileName{get;set;}
 		public bool folder1{get;set;}
 		public bool folder2{get;set;}
 		public int sizeFolder1{get;set;}
@@ -63,7 +63,7 @@ namespace SyncButlerUI
 		//this is a sample conflict list Please delete when binded with the real data
 		public SampleConflict(string a_filename,bool a_folder1,bool a_folder2, int a_sizeFolder1,int a_sizeFolder2,string a_dateWriteAccessed1,string a_dateWriteAccessed2)
 		{
-			filename=a_filename;
+			fileName=a_filename;
 			folder1=a_folder1;
 			folder2=a_folder2;
 			sizeFolder1=a_sizeFolder1;
@@ -72,20 +72,20 @@ namespace SyncButlerUI
 			dateWriteAccessed2=a_dateWriteAccessed2;			
 		}
 		
-		public static List<SampleConflict> getSampleConflictCollection()
+		public static List<SampleConflict> getSampleConflictCollection(string name)
 
-{		if (sampleConflictCollection == null)
+{	
 
-		sampleConflictCollection = createCollection();
+		sampleConflictCollection = createCollection(name);
 
 		return sampleConflictCollection;
 
 		}
 
-		private static List<SampleConflict> createCollection()
+		private static List<SampleConflict> createCollection(string name)
 		
 		{
-		
+		if(name.Equals("Test1")){
 		return new List<SampleConflict>
 		
 		{
@@ -95,6 +95,21 @@ namespace SyncButlerUI
 		new SampleConflict("/test/test3.doc", true , false, 20,21,"12/31/2009","12/31/2009"),
 		new SampleConflict("/test/test4.doc", true , false, 20,21,"12/31/2009","12/31/2009")
 				};
+		}else {
+			
+	return new List<SampleConflict>
+		
+		{
+		new SampleConflict("/test/test3.doc", true , false, 20,21,"12/31/2009","12/31/2009"),		
+		new SampleConflict("/test/test4.doc", true , false, 20,21,"12/31/2009","12/31/2009"),
+		new SampleConflict("/test/test2.doc", true , false, 20,21,"12/31/2009","12/31/2009"),
+		new SampleConflict("/test/test3.doc", true , false, 20,21,"12/31/2009","12/31/2009"),
+		new SampleConflict("/test/test4.doc", true , false, 20,21,"12/31/2009","12/31/2009")
+				};
+			
+			
+			
+		}
 		
 		}
 		

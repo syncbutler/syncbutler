@@ -512,6 +512,9 @@
 			</ObjectAnimationUsingKeyFrames>
 		</Storyboard>
 		
+	
+
+		
 	</UserControl.Resources>
 	<UserControl.RenderTransform>
 		<TransformGroup>
@@ -968,15 +971,16 @@
 			<ProgressBar x:Name="SubProgressBar" Margin="38.623,0,28.52,34.69" VerticalAlignment="Bottom" Height="14.286"/>
 			<ProgressBar x:Name="TotalProgressBar" Margin="38.623,0,28.52,15.69" VerticalAlignment="Bottom" Height="14.286"/>
 			<TextBlock x:Name="ConflictsLabel" Margin="38.032,42.333,0,0" FontSize="16" FontWeight="Bold" Text="Conflicts" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Width="177.618" Height="28.571"/>
-			<Custom:DataGrid x:Name="ConflictList" Margin="39.1,93.429,27.091,187.714" RowDetailsVisibilityMode="VisibleWhenSelected"  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True" CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False" GridLinesVisibility="Vertical" Width="437.143" Height="162.857" HorizontalScrollBarVisibility="Hidden" IsReadOnly="True">
+			<Custom:DataGrid x:Name="ConflictList" Margin="39.1,93.429,27.091,187.714" RowDetailsVisibilityMode="VisibleWhenSelected"  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True" CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False" GridLinesVisibility="Vertical" Width="437.143" Height="162.857" HorizontalScrollBarVisibility="Hidden" IsReadOnly="True" SelectionMode="Single" ItemsSource="{Binding Static}">
 				<Custom:DataGrid.Columns>
-					<Custom:DataGridTextColumn x:Name="conflictlistPartnershipName" Width="430" MinWidth="430" Header="Partnerships" Binding="{Binding partnershipName}"/>
+					<Custom:DataGridTextColumn x:Name="conflictlistPartnershipName" Width="430" MinWidth="430" Header="Partnerships" Binding="{Binding partnershipName}"  />
+				    
 				</Custom:DataGrid.Columns>
 			<Custom:DataGrid.RowDetailsTemplate>
                 <DataTemplate>
-                    <Custom:DataGrid x:Name="InnerGrid" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" ItemsSource="{Binding sampleConflictList}" CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False">
+                    <Custom:DataGrid x:Name="conflictListInnerGrid" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" ItemsSource="{Binding Path=listSampleConflict}" CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False" >
 					<Custom:DataGrid.Columns>
-					<Custom:DataGridTextColumn x:Name="File_Name" Width="310" MinWidth="310" Header="File Name" Binding="{Binding fileName}"/>
+					<Custom:DataGridTextColumn x:Name="File_Name"  IsReadOnly="True" Width="310" MinWidth="310" Header="File Name" Binding="{Binding fileName}" />
 					<Custom:DataGridCheckBoxColumn x:Name="FolderOneBox" Width="60" MinWidth="40" Header="Folder 1" Binding="{Binding folder1}"/>
 					<Custom:DataGridCheckBoxColumn x:Name="FolderTwoBox" Width="60" MinWidth="40" Header="Folder 2" Binding="{Binding folder2}"/>
 					</Custom:DataGrid.Columns>
@@ -987,6 +991,7 @@
 			</Custom:DataGrid>
 			<Button HorizontalAlignment="Right" Margin="0,0,21.853,79.143" VerticalAlignment="Bottom" Width="70.476" Height="24.762" Content="Done" IsEnabled="False"/>
 			<TextBlock x:Name="CurrentSyncingFile_Copy" Margin="39.032,67.643,0.493,0" TextWrapping="Wrap" Text="Please choose the file that you want to sync." VerticalAlignment="Top" Height="24.761"/>
+			<Button HorizontalAlignment="Right" Margin="0,0,22.853,138.19" VerticalAlignment="Bottom" Width="75.238" Height="25.715" Content="Resolve" Click="resolvePartnership_Click"/>
 		</Grid>
 		<Grid x:Name="Settings" Margin="0.027,0,-0.027,0" VerticalAlignment="Bottom" Height="444" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
 			<Grid.RenderTransform>

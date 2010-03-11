@@ -31,6 +31,10 @@ namespace SyncButlerUI
     /// Defines the size of a single increment of the progress bar.
     /// </summary>
     //private int progressBarIncrement = 5;
+		
+    private object dummyNode = null;
+    public string SelectedImagePath { get; set; }
+	public SyncButler.Controller Controller{get;set;}
 	#endregion
 		
 		
@@ -42,15 +46,11 @@ namespace SyncButlerUI
             //controller = new Controller();
             //partnershipList.ItemsSource = controller.GetPartnershipList();
 		}
-		public SyncButler.Controller Controller{get;set;}
 		
 	#region UIcode
 	/// <summary>
     /// Interaction logic for Creating Partnership
     /// </summary>
-
-        private object dummyNode = null;
-        public string SelectedImagePath { get; set; }
 		
 		/// <summary>
 		/// Populate the tree view with storage devices that are ready
@@ -337,7 +337,41 @@ namespace SyncButlerUI
 			}
 		}
 		
-		#endregion
+		/// <summary>
+		/// Executes upon clicking resolve partnership
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void resolvePartnership_Click(object sender, RoutedEventArgs e){
+			// resolve it here?
+			List<SamplePartnershipConflict> conflictList=(List<SamplePartnershipConflict>)this.ConflictList.ItemsSource;
+		}
+		
+		/// <summary>
+		/// Executes when clicking on the explore features button
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void goToExploreFeatures_Click(object sender, RoutedEventArgs e)
+		{
+			showMessageBox(CustomDialog.MessageType.Message,"Exploring New Features is still under construction!");
+		}
+		
+		/// <summary>
+		/// Display Custom Dialog Box. 
+		/// </summary>
+		/// <param name="messagetype">MessageType Enumerator, to tell what kind of message it is: Error, Question, Warning, Message</param>
+		/// <param name="msg">String msg to tell what message the error is</param>
+		private bool showMessageBox(CustomDialog.MessageType messagetype,string msg){
+			CustomDialog dialog=new CustomDialog(messagetype,msg);
+			var parent = Window.GetWindow(this);
+			if(parent!=null){
+				dialog.Owner=parent;
+			}
+			dialog.ShowDialog();
+			return (bool)dialog.DialogResult;
+		}
+		
 		
 		/// <summary>
 		/// Executes when SyncAll button is clicked.
@@ -368,7 +402,7 @@ namespace SyncButlerUI
 				showMessageBox(CustomDialog.MessageType.Error,ex.Message);
 			}
 		}
-		
+		#endregion	
 		
 		/// <summary>
 		/// Syncs MRUs
@@ -379,38 +413,15 @@ namespace SyncButlerUI
         {
             this.Controller.SyncMRUs("c");
         }
-		/// <summary>
-		/// Executes when clicking on the explore features button
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void goToExploreFeatures_Click(object sender, RoutedEventArgs e)
-		{
-			showMessageBox(CustomDialog.MessageType.Message,"Exploring New Features is still under construction!");
-		}
 		
-		/// <summary>
-		/// Display Custom Dialog Box. 
-		/// </summary>
-		/// <param name="messagetype">MessageType Enumerator, to tell what kind of message it is: Error, Question, Warning, Message</param>
-		/// <param name="msg">String msg to tell what message the error is</param>
-		private bool showMessageBox(CustomDialog.MessageType messagetype,string msg){
-			CustomDialog dialog=new CustomDialog(messagetype,msg);
-			var parent = Window.GetWindow(this);
-			if(parent!=null){
-				dialog.Owner=parent;
-			}
-			dialog.ShowDialog();
-			return (bool)dialog.DialogResult;
-		}
 		/// <summary>
 		/// this is a test methods to bimd the sample list into the datagrid
 		/// </summary>
 		private void createAndBindSamples(){
 			List<SamplePartnershipConflict> conflictList=SamplePartnershipConflict.getSamplePartnershipConflictCollection();
 			this.ConflictList.ItemsSource=conflictList;
-			
 			this.ConflictList.Items.Refresh();
+			
 		
 		}
 		
