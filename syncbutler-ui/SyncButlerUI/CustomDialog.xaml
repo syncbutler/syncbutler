@@ -4,11 +4,13 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	Title="Message"
 	x:Class="SyncButlerUI.CustomDialog" mc:Ignorable="d" Width="407" Height="177" WindowStyle="ToolWindow" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
-	<Grid Width="407" Height="177" Margin="0,-10,-16,-26">
-	<Image x:Name="messageImage" Margin="10,0,0,43.272" Width="105.2" Source="Images/logowTransparency.png" Stretch="Fill" VerticalAlignment="Bottom" Height="105.2" HorizontalAlignment="Left"/>
-	<Button x:Name="okButton"  Content="Ok" IsDefault="true" HorizontalAlignment="Right" Click="yesClick" Width="71" VerticalAlignment="Top" Height="29" Margin="0,121,28,0" d:LayoutOverrides="HorizontalAlignment" />
-	<TextBlock x:Name="syncButlerMessage" Margin="144,54,39,63" TextWrapping="Wrap"/>
-	<Button x:Name="noButton"  Content="No" IsDefault="true" Click="noClick" HorizontalAlignment="Right" Width="71   " VerticalAlignment="Top" Height="29" Margin="0,121,28,0" d:LayoutOverrides="HorizontalAlignment" />
-	<Button x:Name="yesButton"  Content="Yes" IsDefault="true" Click="yesClick" HorizontalAlignment="Right" Width="71   " VerticalAlignment="Top" Height="29" Margin="0,121,107,0" d:LayoutOverrides="HorizontalAlignment" />
+	<Grid Margin="5,-3.5,-6,-246.5">
+	<Image x:Name="messageImage" Margin="10,28.528,0,0" Width="105.2" Source="Images/logowTransparency.png" Stretch="Fill" HorizontalAlignment="Left" VerticalAlignment="Top" Height="105.2" d:LayoutOverrides="VerticalAlignment"/>
+	<Button x:Name="okButton"  Content="Ok" IsDefault="true" Click="yesClick" VerticalAlignment="Top" Height="29" Margin="308,121,23,0" d:LayoutOverrides="VerticalAlignment" />
+	<TextBlock x:Name="syncButlerMessage" Margin="144,54,34,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="60"/>
+	<Button x:Name="noButton"  Content="No" IsDefault="true" Click="noClick" Margin="308,121,0,0" HorizontalAlignment="Left" Width="71" VerticalAlignment="Top" Height="29" />
+	<Button x:Name="yesButton"  Content="Yes" IsDefault="true" Click="yesClick" Margin="229,121,0,0" HorizontalAlignment="Left" Width="71" VerticalAlignment="Top" Height="29" />
+	<TextBlock x:Name="Text1" Margin="144,27,34,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="50"/>
+	<TextBlock x:Name="Text2" Margin="144,88,34,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="50"/>
 	</Grid>
 </Window>

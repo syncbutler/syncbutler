@@ -51,7 +51,7 @@ namespace SyncButlerUI
 	/// <summary>
     /// Interaction logic for Creating Partnership
     /// </summary>
-		
+		#region TreeView
 		/// <summary>
 		/// Populate the tree view with storage devices that are ready
 		/// </summary>
@@ -167,6 +167,9 @@ namespace SyncButlerUI
           	sourceTextBox.Text=SelectedImagePath;
 			//  MessageBox.Show(SelectedImagePath);
         }
+		#endregion
+		
+		#region createPartnership
 		
 		/// <summary>
 		/// Goes the 2nd Page of Create Partnership to set Destination Values
@@ -183,21 +186,6 @@ namespace SyncButlerUI
 		    }catch(Exception ex){
 				showMessageBox(CustomDialog.MessageType.Error,ex.Message);
 			}
-		}
-		
-		/// <summary>
-		/// Checks the sourceTextbox for values if its empty or if the directory exists
-		/// </summary>
-		private void checkInput(){
-			if(sourceTextBox.Text.Length>266){
-				throw new Exception("Folder Path is too long");
-			}else if(sourceTextBox.Text.Equals("")){
-				throw new Exception("Please select a Folder");
-			}else if(!Directory.Exists(sourceTextBox.Text)){
-				throw new Exception("No Such Folder");
-		
-			}
-			
 		}
 		
 		/// <summary>
@@ -292,7 +280,7 @@ namespace SyncButlerUI
 				showMessageBox(CustomDialog.MessageType.Error,ex.Message);
 			}	
 		}
-		
+		#endregion
 		/// <summary>
 		/// goes back to Home state
 		/// </summary>
@@ -337,6 +325,30 @@ namespace SyncButlerUI
 			}
 		}
 		
+				/// <summary>
+		/// Checks for the index selected and syncs the partnership by name
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void syncPartnership_Click(object sender, RoutedEventArgs e)
+		{
+			try{
+		  	if(partnershipList.SelectedIndex<0){
+				throw new Exception("Please select a partnership to sync.");
+			}
+			if (showMessageBox(CustomDialog.MessageType.Question,"Are you sure?")==true){
+				Partnership partnershipSelected=(Partnership)partnershipList.SelectedValue;
+				this.Controller.SyncPartnership(partnershipSelected.Name);
+				VisualStateManager.GoToState(this,"ConflictState1",false);
+				this.ConflictList.ItemsSource=null;
+				this.ConflictList.Items.Refresh();
+			}
+			}catch(Exception ex){
+					showMessageBox(CustomDialog.MessageType.Error,ex.Message);
+			}
+		}
+		
+		
 		/// <summary>
 		/// Executes upon clicking resolve partnership
 		/// </summary>
@@ -345,6 +357,7 @@ namespace SyncButlerUI
 		private void resolvePartnership_Click(object sender, RoutedEventArgs e){
 			// resolve it here?
 			List<SamplePartnershipConflict> conflictList=(List<SamplePartnershipConflict>)this.ConflictList.ItemsSource;
+
 		}
 		
 		/// <summary>
@@ -444,6 +457,21 @@ namespace SyncButlerUI
 		{
 			
 		}
+		/// <summary>
+		/// Checks the sourceTextbox for values if its empty or if the directory exists
+		/// </summary>
+		private void checkInput(){
+			if(sourceTextBox.Text.Length>266){
+				throw new Exception("Folder Path is too long");
+			}else if(sourceTextBox.Text.Equals("")){
+				throw new Exception("Please select a Folder");
+			}else if(!Directory.Exists(sourceTextBox.Text)){
+				throw new Exception("No Such Folder");
+		
+			}
+			
+		}
+		
 
 	}
 }
