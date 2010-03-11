@@ -25,6 +25,58 @@ namespace SyncButler.MRU
             IntPtr pidl);
 
         /// <summary>
+        /// Scan for recently used file
+        /// </summary>
+        /// <param name="path">Start path to be scanned</param>
+        /// <param name="depth">To scan how deep</param>
+        /// <param name="howRecent">How many day old and below</param>
+        /// <returns>A list of recently use file</returns>
+        public List<string> Scan(string path, int depth, int howRecent)
+        {
+            List<string> files = new List<string>();
+            DirectoryInfo di = new DirectoryInfo(path);
+            List<string> upperDirectory = new List<string>();
+            List<string> working = new List<string>();
+            upperDirectory.Add(path);
+            for (int i = 0; i < depth; i++)
+            {
+                foreach (string s in upperDirectory)
+                {
+                    di = new DirectoryInfo(s);
+                    try
+                    {
+                        foreach (FileInfo fi in di.GetFiles())
+                        {
+                            if ((DateTime.Now - fi.LastWriteTime).TotalDays <= (howRecent))
+                            {
+                                files.Add(fi.FullName);
+                            }
+                        }
+                    }
+                    catch (UnauthorizedAccessException)
+                    {
+                        // do nothing
+                    }
+                    try
+                    {
+                        working.Clear();
+                        foreach (DirectoryInfo idi in di.GetDirectories())
+                        {
+                            working.Add(idi.FullName);
+                        }
+                    }
+                    catch (UnauthorizedAccessException)
+                    {
+                        /// do nothing
+                    }
+                }
+                upperDirectory.Clear();
+                upperDirectory.AddRange(working);
+            }
+            return files;
+        }
+
+        /// <summary>
         /// Do a cleanup of the given list of MRUs, to remove non existance files.
         /// </summary>
         /// <param name="MRUs">the list of MRUs</param>
