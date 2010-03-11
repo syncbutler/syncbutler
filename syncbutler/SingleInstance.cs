@@ -1,24 +1,24 @@
-// Adapted from http://www.codeproject.com/KB/threads/SingletonApp.aspx
-
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
-using System.Runtime.Remoting;
-using System.Runtime.Remoting.Channels;
-using System.Runtime.Remoting.Channels.Tcp;
-using System.Net.Sockets;
+using System.IO;
+using System.IO.Pipes;
+using System.Xml.Serialization;
 
 namespace SyncButler
 {
-    [Serializable]
-    class SingleInstance : MarshalByRefObject
+    public class SingleInstance
     {
-        private static TcpChannel m_TCPChannel = null;
+        // Fields required for named pipes
+        private static string pipeName = "SynButlerIPC"; // Eventually load this from settings?
+        private static NamedPipeServerStream pipeServer = null;
+        private static IAsyncResult listeningSession = null;
+        private static bool closingPipe = false;
+
+        // Fields for mutexes -- used for instance detection
         private static Mutex m_Mutex = null;
-        private static int portNumber = 1231; //Get from settings
         public delegate void ReceiveDelegate(string[] args); //acts as a storage for incoming data
 
+        // Stores the delegate which will be called when data arrives from a new instance of SyncButler
         static private ReceiveDelegate m_Receive = null;
         static public ReceiveDelegate Receiver
         {
@@ -32,6 +32,12 @@ namespace SyncButler
             }
         }
 
+        /// <summary>
+        /// Indicates whether this is the first running instance, and sets the receive delegate
+        /// if this is indeed the first running isntance.
+        /// </summary>
+        /// <param name="r">The delegate which will receive the parameters from new instances</param>
+        /// <returns>A boolean value indication whether this is the first running instance of the program</returns>
         public static bool IsFirst(ReceiveDelegate r)
         {
             if (IsFirst())
@@ -45,6 +51,10 @@ namespace SyncButler
             }
         }
 
+        /// <summary>
+        /// Indicates whether this is the first running instance
+        /// </summary>
+        /// <returns>A boolean value indication whether this is the first running instance of the program</returns>
         public static bool IsFirst()
         {
             string m_UniqueIdentifier;
@@ -68,29 +78,82 @@ namespace SyncButler
             }
         }
 
+        /// <summary>
+        /// Creates a named pipe and starts listening for information pushed by new instances
+        /// </summary>
         private static void CreateInstanceChannel()
         {
-            int[] portNumbers = new int[10] {1231,1232,1233,1234,1235,1236,1237,1238,1239,1240}; // may be replaced by a function to generate port numbers
-            for (int i = 0; i < 10; i++)
-            {
-                try
-                {
-                    portNumber = portNumbers[i]; //need to store this into settings file
-                    m_TCPChannel = new TcpChannel(portNumber);
-                }
-                catch (SocketException se)
-                {
-                    Console.Out.WriteLine(se + " exception while trying to bind to port " + portNumbers[i]);
-                    Console.Out.WriteLine("Trying next port...");
-                }
-            }
-            ChannelServices.RegisterChannel(m_TCPChannel, false);
-            RemotingConfiguration.RegisterWellKnownServiceType(
-                Type.GetType("SyncButler.SingleInstance"),
-                "SingleInstance",
-                WellKnownObjectMode.SingleCall);
+            if (closingPipe) return;
+
+            closingPipe = false;
+            if (pipeServer != null) pipeServer.Close();
+            pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.In, 1, PipeTransmissionMode.Message, PipeOptions.Asynchronous);
+            listeningSession = pipeServer.BeginWaitForConnection(NewConnection, null);
         }
 
+        /// <summary>
+        /// This method is called whenever there is a new connection, ie. whenever a new instance
+        /// of the program is trying to send data to the first instance.
+        /// </summary>
+        /// <param name="result"></param>
+        private static void NewConnection(IAsyncResult result)
+        {
+            MemoryStream mbuf = new MemoryStream();
+
+            try
+            {
+                // This may happen if the pipe is closing
+                if (pipeServer == null) return;
+                
+                pipeServer.EndWaitForConnection(result);
+
+                // Read one message off the pipe
+                byte[] buf = new byte[256];
+                do mbuf.Write(buf, 0, pipeServer.Read(buf, 0, buf.Length));
+                while (!pipeServer.IsMessageComplete);
+
+                if (mbuf.Length == 0) throw new IOException();
+                // Reset the position so that we can reuse this stream for reading
+                mbuf.Position = 0;
+            }
+            catch (IOException e)
+            {
+                // The pipe was broken
+                CreateInstanceChannel();
+                return;
+            }
+            catch (ObjectDisposedException e)
+            {
+                // The pipe was closed
+                CreateInstanceChannel();
+                return;
+            }
+
+            CreateInstanceChannel();
+
+            // Now it's time to unserialize...
+            XmlSerializer serializer = new XmlSerializer(typeof(string[]));
+            string[] data;
+
+            try
+            {
+                data = (string[]) serializer.Deserialize(mbuf);
+            }
+            catch (Exception e)
+            {
+                Controller.LogMessage("Message received over named pipe, but deserialization failed: " + e.Message);
+                return;
+            }
+
+            if (m_Receive != null)
+            {
+                m_Receive(data);
+            }
+        }
+
+        /// <summary>
+        /// Cleans up the mutex and pipes
+        /// </summary>
         public static void Cleanup()
         {
             if (m_Mutex != null)
@@ -98,36 +161,62 @@ namespace SyncButler
                 m_Mutex.Close();
             }
 
-            if (m_TCPChannel != null)
+            if (pipeServer != null) 
             {
-                m_TCPChannel.StopListening(null);
+                closingPipe = true;
+
+                try
+                {
+                    pipeServer.Close();
+                }
+                catch (IOException e)
+                {
+                    // The pipe connection got broken. Can ignore.
+                }
+                catch (ObjectDisposedException e)
+                {
+                    // The pipe is closed. Can ignore
+                }
             }
 
+            pipeServer = null;
             m_Mutex = null;
-            m_TCPChannel = null;
         }
 
+        /// <summary>
+        /// Sends a string array to the first instance of the program
+        /// </summary>
+        /// <param name="s">The string array to send</param>
         public static void Send(string[] s)
         {
-            SingleInstance ctrl;
-            TcpChannel channel = new TcpChannel();
-            ChannelServices.RegisterChannel(channel, false);
+            // Serialise the string array
+            XmlSerializer serializer = new XmlSerializer(typeof(string[]));
+            MemoryStream rawData = new MemoryStream();
+            serializer.Serialize(rawData, s);
+            byte[] buf = rawData.ToArray();
+            
+            NamedPipeClientStream pipeClient = new NamedPipeClientStream(".", pipeName, PipeDirection.Out);
+
             try
             {
-                ctrl = (SingleInstance)Activator.GetObject(typeof(SingleInstance), "tcp://localhost:" + portNumber + "/SingleInstance");
-                ctrl.Receive(s);
+                pipeClient.Connect(5000);
+                pipeClient.Write(buf, 0, buf.Length);
             }
-            catch (Exception e)
+            catch (TimeoutException e)
             {
-                Console.WriteLine("Exception: " + e.Message);
+                Controller.LogMessage("Timeout trying to connect to the named pipe!");
             }
-        }
-
-        public void Receive(string[] s)
-        {
-            if (m_Receive != null)
+            catch (IOException e)
             {
-                m_Receive(s);
+                // broken pipe?
+            }
+            catch (ObjectDisposedException e)
+            {
+                // object closed at other end?
+            }
+            finally
+            {
+                pipeClient.Close();
             }
         }
     }
