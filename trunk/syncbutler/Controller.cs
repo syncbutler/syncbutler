@@ -71,8 +71,8 @@ namespace SyncButler
             {
                 path = path + " " + str;
             }
-            console.WriteLine("Path Received:  " + path);
-
+            
+            // TODO: Process the arguements received
         }
 
         /// <summary>
@@ -275,6 +275,8 @@ namespace SyncButler
         /// <param name="message">The message to save</param>
         public static void LogMessage(string message)
         {
+            if (!enableLogging) return;
+
             XmlDocument xmlLog = new XmlDocument();
 
             if (File.Exists(logFile)) xmlLog.Load(logFile);
