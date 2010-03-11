@@ -280,16 +280,15 @@ namespace SyncButler
             return this.rootPath + this.relativePath;
         }
 
+
+
         /// <summary>
         /// Synchronizes this folder with another.
         /// 
         /// Implemented:
         /// * Detect missing files
         /// * Detect modified files
-        /// * Detect deleted files
-        /// 
-        /// Not yet Implemented:
-        /// * Detect moved files
+        /// * Detect deleted filesa
         /// </summary>
         /// <param name="otherPair"></param>
         /// <exception cref="InvalidPartnershipException">Tried to sync a windows folder with something else</exception>
@@ -333,7 +332,8 @@ namespace SyncButler
             checksumCacheFresh = false; // Make sure we're really comparing with the current folder
 
             string curDir;
-            Conflict.Action recommendedAction;
+            Conflict.Action autoResolveAction;
+
             while (workingList.Count > 0)
             {
                 curDir = workingList.Dequeue();
@@ -349,14 +349,14 @@ namespace SyncButler
                     else
                     {   // Folder exists only on the left
                         if (parentPartnership.ChecksumExists("folder:\\\\" + curFolderLeft))
-                            recommendedAction = Conflict.Action.DeleteLeft; // The folder was deleted from the right.
+                            autoResolveAction = Conflict.Action.DeleteLeft; // The folder was deleted from the right.
                         else
-                            recommendedAction = Conflict.Action.CopyToRight;
+                            autoResolveAction = Conflict.Action.CopyToRight;
 
                         conflicts.Add(new Conflict(
                             new WindowsFolder(leftPath, subFolderLeft, this.parentPartnership),
                             new WindowsFolder(rightPath, rightPath + curFolderLeft, this.parentPartnership),
-                            recommendedAction
+                            autoResolveAction
                         ));
                     }
                 }
@@ -369,14 +369,14 @@ namespace SyncButler
                     if (!Directory.Exists(leftPath + curFolderRight))
                     {   // Folder exists only on the right
                         if (parentPartnership.ChecksumExists("folder:\\\\" + curFolderRight))
-                            recommendedAction = Conflict.Action.DeleteRight; // The folder was deleted from the left
+                            autoResolveAction = Conflict.Action.DeleteRight; // The folder was deleted from the left
                         else
-                            recommendedAction = Conflict.Action.CopyToLeft;
+                            autoResolveAction = Conflict.Action.CopyToLeft;
 
                         conflicts.Add(new Conflict(
                             new WindowsFolder(leftPath, leftPath + curFolderRight, this.parentPartnership),
                             new WindowsFolder(rightPath, subFolderRight, this.parentPartnership),
-                            recommendedAction
+                            autoResolveAction
                         ));
                     }
                 }
@@ -399,19 +399,23 @@ namespace SyncButler
                         {
                             // File was deleted from the right
                             if (parentPartnership.GetLastChecksum(leftFile) == leftFile.Checksum())
-                                recommendedAction = Conflict.Action.DeleteLeft;
+                            {
+                                autoResolveAction = Conflict.Action.DeleteLeft;
+                            }
                             else
-                                recommendedAction = Conflict.Action.Unknown; // ...but the file was since modified
+                            {
+                                autoResolveAction = Conflict.Action.Unknown; // ...but the file was since modified
+                            }
                         }
                         else
                         {
-                            recommendedAction = Conflict.Action.CopyToRight;
+                            autoResolveAction = Conflict.Action.CopyToRight;
                         }
                         
                         conflicts.Add(new Conflict(
                             new WindowsFile(leftPath, subFileLeft, this.parentPartnership),
                             new WindowsFile(rightPath, rightPath + curFileLeft, this.parentPartnership),
-                            recommendedAction
+                            autoResolveAction
                         ));
                     }
                 }
@@ -427,19 +431,19 @@ namespace SyncButler
                             WindowsFile rightFile = new WindowsFile(rightPath, subFileRight, this.parentPartnership);
                             // File was deleted from the left
                             if (parentPartnership.GetLastChecksum(rightFile) == rightFile.Checksum())
-                                recommendedAction = Conflict.Action.DeleteRight;
+                                autoResolveAction = Conflict.Action.DeleteRight;
                             else
-                                recommendedAction = Conflict.Action.Unknown; // ...but the file was since modified
+                                autoResolveAction = Conflict.Action.Unknown; // ...but the file was since modified
                         }
                         else
                         {
-                            recommendedAction = Conflict.Action.CopyToLeft;
+                            autoResolveAction = Conflict.Action.CopyToLeft;
                         }
 
                         conflicts.Add(new Conflict(
                             new WindowsFile(leftPath, leftPath + curFileRight, this.parentPartnership),
                             new WindowsFile(rightPath, subFileRight, this.parentPartnership),
-                            recommendedAction
+                            autoResolveAction
                         ));
                     }
                 }

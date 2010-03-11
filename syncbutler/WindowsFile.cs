@@ -348,7 +348,7 @@ namespace SyncButler
             }
             catch (SyncableNotExistsException)
             {
-                return true; // assume the file has change if we know nothgin about it.
+                return true; // assume the file has change if we know nothing about it.
             }
         }
 
@@ -415,41 +415,57 @@ namespace SyncButler
             checksumCacheFresh = false; // Make sure we're really comparing with the current file
 
             List<Conflict> conflictList = new List<Conflict>();
-            Conflict.Action recommendedAction = Conflict.Action.Unknown;
+            Conflict.Action autoResolveAction = Conflict.Action.Unknown;
+            Conflict.Action suggestedAction = Conflict.Action.Unknown;
             
-            if (!(this.nativeFileObj.Exists || partner.nativeFileObj.Exists))
+            if (!(this.nativeFileObj.Exists || partner.nativeFileObj.Exists)) // Left and Right don't exist
                 return conflictList;
-            else if (!this.nativeFileObj.Exists)
-                recommendedAction = Conflict.Action.CopyToLeft;
-            else if (!partner.nativeFileObj.Exists)
-                recommendedAction = Conflict.Action.CopyToRight;
+            else if (!this.nativeFileObj.Exists) // Left does not exist
+                autoResolveAction = Conflict.Action.CopyToLeft;
+            else if (!partner.nativeFileObj.Exists) // Right does not exist
+                autoResolveAction = Conflict.Action.CopyToRight;
             else
             {
-                if (this.Length != partner.Length)
-                    recommendedAction = Conflict.Action.Unknown;
-                else if (this.LastWriteTime.Equals(partner.LastWriteTime))
+                if (this.Length != partner.Length) // Lengths are different
+                {
+                    autoResolveAction = Conflict.Action.Unknown;
+                }
+                else if (this.LastWriteTime.Equals(partner.LastWriteTime)) // Modified dates are the same + lengths are the same
+                {
                     return conflictList;
-                else if (this.Checksum() == partner.Checksum())
+                }
+                else if (this.Checksum() == partner.Checksum()) // Files checksums are the same
                 {
                     if (!parentPartnership.ChecksumExists(this))
                         this.UpdateStoredChecksum();
                     return conflictList;
                 }
                 
-                Boolean leftChanged, rightChanged;
+                bool leftChanged, rightChanged;
                 leftChanged = this.HasChanged();
                 rightChanged = partner.HasChanged();
 
-                if (rightChanged ^ leftChanged)
+                if (rightChanged ^ leftChanged) // Right OR Left changed (not both)
                 {
                     if (rightChanged)
-                        recommendedAction = Conflict.Action.CopyToLeft;
+                        autoResolveAction = Conflict.Action.CopyToLeft;
                     else if (leftChanged)
-                        recommendedAction = Conflict.Action.CopyToRight;
+                        autoResolveAction = Conflict.Action.CopyToRight;
+                }
+                else // Left and Right are both different
+                {
+                    int timeDifference = this.LastWriteTime.CompareTo(partner.LastWriteTime);
+
+                    if (timeDifference < 0) // Left is earlier than right
+                        suggestedAction = Conflict.Action.CopyToLeft;
+                    else if (timeDifference > 0) // Left is later than right
+                        suggestedAction = Conflict.Action.CopyToRight;
+                    else // Left and right are the same
+                        suggestedAction = Conflict.Action.Unknown;
                 }
             }
 
-            conflictList.Add(new Conflict(this, partner, recommendedAction));
+            conflictList.Add(new Conflict(this, partner, autoResolveAction, suggestedAction));
             return conflictList;
         }
 
