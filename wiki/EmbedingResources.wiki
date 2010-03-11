@@ -1,3 +1,4 @@
+#summary How to embed and access resources in binaries
 =How to embed and access resources in binaries=
 
 ==Steps to Embed resources:==
