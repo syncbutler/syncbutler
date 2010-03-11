@@ -682,6 +682,13 @@
 						</ObjectAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
+				<VisualState x:Name="Settings1">
+					<Storyboard>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="Settings" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+					</Storyboard>
+				</VisualState>
 			</VisualStateGroup>
 		</VisualStateManager.VisualStateGroups>
 		<Grid x:Name="HomeWindow" VerticalAlignment="Bottom" Height="444">
@@ -976,6 +983,45 @@
 			</Custom:DataGrid>
 			<Button HorizontalAlignment="Right" Margin="0,0,21.853,79.143" VerticalAlignment="Bottom" Width="70.476" Height="24.762" Content="Done" IsEnabled="False"/>
 			<TextBlock x:Name="CurrentSyncingFile_Copy" Margin="39.032,67.643,0.493,0" TextWrapping="Wrap" Text="Please choose the file that you want to sync." VerticalAlignment="Top" Height="24.761"/>
+		</Grid>
+		<Grid x:Name="Settings" Margin="0.027,0,-0.027,0" VerticalAlignment="Bottom" Height="444" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
+			<Grid.RenderTransform>
+				<TransformGroup>
+					<ScaleTransform/>
+					<SkewTransform/>
+					<RotateTransform/>
+					<TranslateTransform/>
+				</TransformGroup>
+			</Grid.RenderTransform>
+			<Rectangle x:Name="background_Copy5" RadiusX="1" RadiusY="2" Margin="0,0,-1.5,0" VerticalAlignment="Top" Height="448" Cursor="Arrow" RenderTransformOrigin="0.5,0.5">
+				<Rectangle.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Rectangle.RenderTransform>
+				<Rectangle.Fill>
+					<RadialGradientBrush GradientOrigin="0.265,0.184" RadiusX="1.237" RadiusY="1.237">
+						<GradientStop Color="Black" Offset="1"/>
+						<GradientStop Color="White"/>
+						<GradientStop Color="#FFA3A3A3" Offset="1"/>
+						<GradientStop Color="#FFA1A1A1" Offset="1"/>
+						<GradientStop Color="White" Offset="0.378"/>
+					</RadialGradientBrush>
+				</Rectangle.Fill>
+			</Rectangle>
+			<TextBlock x:Name="ConflictsLabel1" Margin="38.032,42.333,0,0" FontSize="16" FontWeight="Bold" Text="Settings" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Width="177.618" Height="28.571"/>
+			<Label HorizontalAlignment="Left" Margin="38.032,96.079,0,0" VerticalAlignment="Top" Content="This computer's name&#xd;&#xa;" Height="25.73"/>
+			<Label HorizontalAlignment="Left" Margin="38.032,129.809,0,0" VerticalAlignment="Top" Content="SBS Settings:"/>
+			<Label HorizontalAlignment="Left" Margin="38.032,159.769,0,0" VerticalAlignment="Top" Content="SBS Working Drive:"/>
+			<TextBox x:Name="ComputerNameTextBox" Margin="225.29,99.849,126.49,0" VerticalAlignment="Top" TextWrapping="Wrap"/>
+			<ComboBox x:Name="SBSSettingComboBox" Margin="225.29,129.809,126.49,0" VerticalAlignment="Top"/>
+			<ComboBox x:Name="SBSWorkingDriveComboBox" Margin="225.29,159.769,126.49,0" VerticalAlignment="Top"/>
+			<Button HorizontalAlignment="Left" Margin="74.489,0,0,47.659" VerticalAlignment="Bottom" Width="75" Content="Save"/>
+			<Button Margin="214.917,0,213.417,47.659" VerticalAlignment="Bottom" Content="Cancel"/>
+			<Button HorizontalAlignment="Right" Margin="0,0,74.472,47.659" VerticalAlignment="Bottom" Width="75" Content="Default"/>
 		</Grid>
 	</Grid>
 </UserControl>

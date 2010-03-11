@@ -53,7 +53,10 @@ namespace SyncButlerUI
 			this.homeWindow1.WeirdFile_List.Items.Add("C:\\secret.jpg");
 			this.homeWindow1.WeirdFile_List.Items.Add("C:\\abc co\\secret stuff.jpg");
 		}
-		
+		private void GoToSetting(object sender, RoutedEventArgs e)
+		{
+			VisualStateManager.GoToState(homeWindow1, "Settings1",false);
+		}
 		private void cleanUp(object sender,  System.ComponentModel.CancelEventArgs e)
 		{
 			this.controller.Shutdown();
