@@ -7,6 +7,7 @@
 	xmlns:WPF_Explorer_Tree="clr-namespace:WPF_Explorer_Tree"
 	xmlns:Microsoft_Windows_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
 	xmlns:Custom="http://schemas.microsoft.com/wpf/2008/toolkit"
+	xmlns:System="clr-namespace:System;assembly=mscorlib"
 	x:Class="SyncButlerUI.HomeWindowControl"
 	x:Name="UserControl"
 	d:DesignWidth="503.334" d:DesignHeight="444" RenderTransformOrigin="0.5,0.5">
@@ -687,6 +688,9 @@
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="Settings" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
 						</ObjectAnimationUsingKeyFrames>
+						<Int32AnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="SBSSettingComboBox" Storyboard.TargetProperty="(Selector.SelectedIndex)">
+							<SplineInt32KeyFrame KeyTime="00:00:00" Value="1"/>
+						</Int32AnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
 			</VisualStateGroup>
@@ -1013,15 +1017,18 @@
 				</Rectangle.Fill>
 			</Rectangle>
 			<TextBlock x:Name="ConflictsLabel1" Margin="38.032,42.333,0,0" FontSize="16" FontWeight="Bold" Text="Settings" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Width="177.618" Height="28.571"/>
-			<Label HorizontalAlignment="Left" Margin="38.032,96.079,0,0" VerticalAlignment="Top" Content="This computer's name&#xd;&#xa;" Height="25.73"/>
+			<Label HorizontalAlignment="Left" Margin="38.032,96.079,0,0" VerticalAlignment="Top" Content="This computer's name&#xa;" Height="25.73"/>
 			<Label HorizontalAlignment="Left" Margin="38.032,129.809,0,0" VerticalAlignment="Top" Content="SBS Settings:"/>
 			<Label HorizontalAlignment="Left" Margin="38.032,159.769,0,0" VerticalAlignment="Top" Content="SBS Working Drive:"/>
 			<TextBox x:Name="ComputerNameTextBox" Margin="225.29,99.849,126.49,0" VerticalAlignment="Top" TextWrapping="Wrap"/>
-			<ComboBox x:Name="SBSSettingComboBox" Margin="225.29,129.809,126.49,0" VerticalAlignment="Top"/>
+			<ComboBox x:Name="SBSSettingComboBox" Margin="225.29,129.809,126.49,0" VerticalAlignment="Top" SelectionChanged="SBSSettingChanged">
+				<System:String>Enable</System:String>
+				<System:String>Disable</System:String>
+			</ComboBox>
 			<ComboBox x:Name="SBSWorkingDriveComboBox" Margin="225.29,159.769,126.49,0" VerticalAlignment="Top"/>
-			<Button HorizontalAlignment="Left" Margin="74.489,0,0,47.659" VerticalAlignment="Bottom" Width="75" Content="Save"/>
-			<Button Margin="214.917,0,213.417,47.659" VerticalAlignment="Bottom" Content="Cancel"/>
-			<Button HorizontalAlignment="Right" Margin="0,0,74.472,47.659" VerticalAlignment="Bottom" Width="75" Content="Default"/>
+			<Button x:Name="SaveSettingButton" HorizontalAlignment="Left" Margin="74.489,0,0,47.659" VerticalAlignment="Bottom" Width="75" Content="Save" Click="SaveSetting"/>
+			<Button x:Name="CancelSettingButton" Margin="214.917,0,213.417,47.659" VerticalAlignment="Bottom" Content="Cancel" Click="goHome" />
+			<Button x:Name="DefaultSettingButton" HorizontalAlignment="Right" Margin="0,0,74.472,47.659" VerticalAlignment="Bottom" Width="75" Content="Default"  Click="DefaultSetting"/>
 		</Grid>
 	</Grid>
 </UserControl>
