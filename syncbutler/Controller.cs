@@ -157,23 +157,16 @@ namespace SyncButler
         /// <summary>
         /// Synchronizes all partnerships.
         /// </summary>
-        public void SyncAll()
+        public SortedList<string, List<Conflict>> SyncAll()
         {
-            foreach (String name in GetPartnershipList().Keys)
+            SortedList<string, List<Conflict>> AllConflict = new SortedList<string, List<Conflict>>();
+            foreach (string name in GetPartnershipList().Keys)
             {
-                List<Conflict> conflicts = SyncPartnership(name);
-                foreach (Conflict conflict in conflicts)
-                {
-                    //If unknown ignore 1st
-                    try
-                    {
-                        conflict.Resolve();
-                    }
-                    catch (InvalidActionException)
-                    {
-                    }
-                }
+                List<Conflict> conflict = SyncPartnership(name);
+                AllConflict.Add(name,conflict);
             }
+
+            return AllConflict;
         }
 
         /// <summary>
