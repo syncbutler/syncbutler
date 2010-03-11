@@ -1,4 +1,4 @@
-=How to embed and access resources=
+=How to embed and access resources in binaries=
 
 ==Steps to Embed resources:==
  # *Right click* on the file in the *Solution Explorer*
