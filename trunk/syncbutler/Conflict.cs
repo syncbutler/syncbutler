@@ -12,20 +12,74 @@ namespace SyncButler
     {
         protected internal ISyncable left;
         protected internal ISyncable right;
-        protected Action RecommendedAction;
+        protected Action autoResolveAction;
+        protected Action suggestedAction;
 
         //private enum StatusOptions {Resolved, Unresolved, Resolving}
 
+        /// <summary>
+        /// Possible actions for conflict resolution
+        /// </summary>
         public enum Action { CopyToLeft, DeleteLeft, Merge, CopyToRight, DeleteRight, Unknown };
 
-        public Conflict(ISyncable left, ISyncable right, Action RecommendedAction)
+        /// <summary>
+        /// Constructor used to instantiate a Conflict object.
+        /// </summary>
+        /// <param name="left">The left ISyncable</param>
+        /// <param name="right">The other (right) ISyncable</param>
+        /// <param name="autoResolveAction">The Action to be performed, or Unknown if this conflict cannot be automatically resolved.</param>
+        public Conflict(ISyncable left, ISyncable right, Action autoResolveAction)
         {
             this.left = left;
             this.right = right;
-            this.RecommendedAction = RecommendedAction;
+            this.autoResolveAction = autoResolveAction;
+            this.suggestedAction = Action.Unknown;
         }
 
-        public Action GetRecommendedAction() { return RecommendedAction; }
+        /// <summary>
+        /// Constructor used to instantiate a Conflict object.
+        /// </summary>
+        /// <param name="left">The left ISyncable</param>
+        /// <param name="right">The other (right) ISyncable</param>
+        /// <param name="autoResolveAction">The Action to be performed, or Unknown if this conflict cannot be automatically resolved.</param>
+        /// <param name="suggestedAction">If the conflict cannot be automatically resolved, then this should contain a suggested action.</param>
+        public Conflict(ISyncable left, ISyncable right, Action autoResolveAction, Action suggestedAction) : this(left, right, autoResolveAction)
+        {
+            this.suggestedAction = suggestedAction;
+        }
+
+        /// <summary>
+        /// Gets/Sets the suggested action for this conflict.
+        /// This property will contain a suggested action when the system fails to automatically resolve a conflict.
+        /// It acts as a hint for the UI to prompt the user with a default action.
+        /// </summary>
+        public Action SuggestedAction
+        {
+            get
+            {
+                return this.suggestedAction;
+            }
+            set
+            {
+                this.suggestedAction = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets/Sets the action to be performed when this conflict can be resolved automatically.
+        /// It will return unknown if the system could not find a solution automatically.
+        /// </summary>
+        public Action AutoResolveAction
+        {
+            get
+            {
+                return autoResolveAction;
+            }
+            set
+            {
+                this.autoResolveAction = value;
+            }
+        }
 
         /// <summary>
         /// Attempts to rsolve a conflict based on th recommended action.
@@ -33,8 +87,8 @@ namespace SyncButler
         /// <returns></returns>
         public Error Resolve()
         {
-            if (this.RecommendedAction == Action.Unknown) throw new InvalidActionException();
-            return this.Resolve(this.RecommendedAction);
+            if (this.autoResolveAction == Action.Unknown) throw new InvalidActionException();
+            return this.Resolve(this.autoResolveAction);
         }
 
         /// <summary>
@@ -90,7 +144,7 @@ namespace SyncButler
 
         public override String ToString()
         {
-            return left.EntityPath() + "\n" + this.RecommendedAction + "";
+            return left.EntityPath() + "\n" + this.autoResolveAction + "";
         }
     }
 }
