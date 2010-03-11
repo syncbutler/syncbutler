@@ -4,6 +4,7 @@ using System.IO;
 using SyncButler.Exceptions;
 using System.Windows.Forms;
 using SyncButler.MRU;
+using System.Xml;
 
 namespace SyncButler
 {
@@ -12,6 +13,9 @@ namespace SyncButler
         SyncEnvironment syncEnvironment;
         private static Controller controller;
         private static SyncButlerConsole.Form1 console;
+        private static bool enableLogging = true;
+        private static string logFile = "log.xml";
+        private static string logStyleFile = "logstyle.css";
 
         /// <summary>
         /// This constructor should never be invoked directly. Use GetInstance() to obtain an instance of Controller.
@@ -234,5 +238,67 @@ namespace SyncButler
 		{
 			// do nothing?
 		}
+
+        /// <summary>
+        /// Initializes the log file and returns the XmlDocument that represents this new
+        /// log file
+        /// </summary>
+        public static XmlDocument InitLogFile()
+        {
+            XmlDocument xmlLog = new XmlDocument();
+
+            xmlLog.AppendChild(xmlLog.CreateXmlDeclaration("1.0", "UTF-8", null));
+            xmlLog.AppendChild(xmlLog.CreateProcessingInstruction("xml-stylesheet","type=\"text/css\" href=\"" + logStyleFile + "\""));
+            xmlLog.AppendChild(xmlLog.CreateElement("SyncButlerLog"));
+
+            xmlLog.Save(logFile);
+
+            // Produce stylesheet
+            System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            Stream css = assembly.GetManifestResourceStream("SyncButler.logstyle.css");
+            byte[] cssData = new byte[css.Length];
+            css.Read(cssData, 0, (int) css.Length);
+            css.Close();
+
+            if (File.Exists(logStyleFile)) File.Delete(logStyleFile);
+            FileStream cssFile = new FileStream(logStyleFile, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
+            cssFile.Write(cssData, 0, cssData.Length);
+            cssFile.Close();
+
+            return xmlLog;
+        }
+
+        /// <summary>
+        /// Logs an event
+        /// </summary>
+        /// <param name="title">The title to give the message</param>
+        /// <param name="message">The message to save</param>
+        public static void LogMessage(string message)
+        {
+            XmlDocument xmlLog = new XmlDocument();
+
+            if (File.Exists(logFile)) xmlLog.Load(logFile);
+            else xmlLog = InitLogFile();
+
+            XmlNode rootElem;
+
+            rootElem = xmlLog.SelectSingleNode("SyncButlerLog");
+            if (rootElem == null)
+            {
+                xmlLog = InitLogFile();
+                rootElem = xmlLog.SelectSingleNode("SyncButlerLog");
+                if (rootElem == null) throw new Exception("An unexpection error occured while attempt to log an event -- could not create/repair the log file");
+            }
+            
+            XmlNode logElem = rootElem.AppendChild(xmlLog.CreateElement("log"));
+            
+            XmlNode timestamp = logElem.AppendChild(xmlLog.CreateElement("timestamp"));
+            timestamp.AppendChild(xmlLog.CreateTextNode(DateTime.Now.ToString("yyyy.MM.dd hh:mm:ss")));
+
+            XmlNode msg = logElem.AppendChild(xmlLog.CreateElement("message"));
+            msg.AppendChild(xmlLog.CreateTextNode(message));
+
+            xmlLog.Save(logFile);
+        }
     }
 }
