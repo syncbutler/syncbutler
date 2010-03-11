@@ -425,7 +425,8 @@ namespace SyncButlerUI
 		
 		private void SBSSettingChanged(object sender, RoutedEventArgs e)
 		{
-			this.SBSWorkingDriveComboBox.IsEnabled = this.SBSSettingComboBox.SelectedItem.Equals("Enable");
+            if (this.SBSSettingComboBox.SelectedItem != null)
+			    this.SBSWorkingDriveComboBox.IsEnabled = this.SBSSettingComboBox.SelectedItem.Equals("Enable");
 		}
 		
 		private void DefaultSetting(object sender, RoutedEventArgs e)
