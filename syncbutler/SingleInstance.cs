@@ -114,7 +114,7 @@ namespace SyncButler
 
                 if (mbuf.Length == 0)
                 {
-                    Controller.LogMessage("Attempted to read from pipe, but the pipe was empty");
+                    Logging.Logger.GetInstance().WARNING("Attempted to read from pipe, but the pipe was empty");
                     throw new IOException();
                 }
                 // Reset the position so that we can reuse this stream for reading
@@ -123,14 +123,14 @@ namespace SyncButler
             catch (IOException)
             {
                 // The pipe was broken
-                Controller.LogMessage("Attempted to read from pipe, but the pipe was broken");
+                Logging.Logger.GetInstance().WARNING("Attempted to read from pipe, but the pipe was broken");
                 CreateInstanceChannel();
                 return;
             }
             catch (ObjectDisposedException)
             {
                 // The pipe was closed
-                Controller.LogMessage("Attempted to read from pipe, but the pipe was closed");
+                Logging.Logger.GetInstance().WARNING("Attempted to read from pipe, but the pipe was closed");
                 CreateInstanceChannel();
                 return;
             }
