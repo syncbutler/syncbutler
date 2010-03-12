@@ -41,6 +41,15 @@ namespace SyncButler.Logging
                 this.xmlLog.Load(LOG_FILE);
             else
                 this.InitLogFile();
+
+            this.rootElem = this.xmlLog.SelectSingleNode("SyncButlerLog");
+            if (this.rootElem == null)
+            {
+                this.rootElem = this.xmlLog.SelectSingleNode("SyncButlerLog");
+
+                if (this.rootElem == null)
+                    throw new Exception("An unexpection error occured while attempt to log an event -- could not create/repair the log file");
+            }
         }
 
         /// <summary>
@@ -92,15 +101,6 @@ namespace SyncButler.Logging
             FileStream cssFile = new FileStream(LOG_STYLE, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
             cssFile.Write(cssData, 0, cssData.Length);
             cssFile.Close();
-
-            this.rootElem = this.xmlLog.SelectSingleNode("SyncButlerLog");
-            if (this.rootElem == null)
-            {
-                this.rootElem = this.xmlLog.SelectSingleNode("SyncButlerLog");
-
-                if (this.rootElem == null)
-                    throw new Exception("An unexpection error occured while attempt to log an event -- could not create/repair the log file");
-            }
         }
 
         /// <summary>
