@@ -338,7 +338,7 @@ namespace SyncButler
             {
                 curDir = workingList.Dequeue();
                 // Temporary -- give basic functionality first.
-                if (statusMonitor != null) statusMonitor(new SyncableStatus("folder:\\\\" + curDir, 0));
+                if (statusMonitor != null) statusMonitor(new SyncableStatus("folder:\\\\" + curDir, 0, 0, SyncableStatus.ActionType.Sync));
 
                 // Check if there are folders missing on the right. Otherwise, add it to the queue
                 foreach (string subFolderLeft in Directory.GetDirectories(leftPath + curDir))

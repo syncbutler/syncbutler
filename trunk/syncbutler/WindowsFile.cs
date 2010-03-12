@@ -238,11 +238,33 @@ namespace SyncButler
         {
             Debug.Assert(!item.GetType().Name.Equals("WindowsFiles"), "Different type, the given type is " + item.GetType().Name);
 
-            WindowsFile windowFiles = (WindowsFile)item;
+            WindowsFile destFile = (WindowsFile)item;
+            int bufferSize = (int) SyncEnvironment.FileReadBufferSize;
 
             try
             {
-                nativeFileObj.CopyTo(windowFiles.rootPath + windowFiles.relativePath, true);
+                FileStream inputStream = nativeFileObj.OpenRead();
+                if (destFile.nativeFileObj.Exists) destFile.nativeFileObj.Delete();
+                FileStream outputStream = destFile.nativeFileObj.OpenWrite();
+
+                byte [] buf = new byte[bufferSize];
+                long totalCopied = 0;
+                int amountRead;
+                float toPercent = 100f / nativeFileObj.Length;
+
+                do
+                {
+                    amountRead = inputStream.Read(buf, 0, bufferSize);
+                    if (amountRead > 0) outputStream.Write(buf, 0, amountRead);
+
+                    totalCopied += amountRead;
+                    if (statusMonitor != null) statusMonitor(new SyncableStatus(EntityPath(), 0, (int) (totalCopied * toPercent), SyncableStatus.ActionType.Copy));
+
+                } while (amountRead > 0);
+
+                inputStream.Close();
+                outputStream.Close();
+
                 return Error.NoError;
             }
             catch (ArgumentException)
@@ -399,7 +421,7 @@ namespace SyncButler
             WindowsFile partner;
 
             // Temporary -- give basic functionality first.
-            if (statusMonitor != null) statusMonitor(new SyncableStatus(this.EntityPath(), 0));
+            if (statusMonitor != null) statusMonitor(new SyncableStatus(this.EntityPath(), 0, 0, SyncableStatus.ActionType.Sync));
 
             if (otherPair is WindowsFile)// && this.EntityPath().Equals(otherPair.EntityPath()))
                 partner = (WindowsFile)otherPair;
