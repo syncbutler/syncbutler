@@ -36,6 +36,7 @@ namespace SyncButler
         private SortedList<String,Partnership> partnershipList;
         private static bool allowAutoSyncForConflictFreeTasks;
         private static bool firstRunComplete;
+        private static bool enableShellContext = false; //Defaults to false
         private static long fileReadBufferSize = 2048000; //2MB, How much of the data file is read each cycle. Editable.
         private static string computerName = "computer1";
 
@@ -174,6 +175,25 @@ namespace SyncButler
             ConvertPartnershipList2XML();
             storedSettings.SystemSettings.AllowAutoSyncForConflictFreeTasks = allowAutoSyncForConflictFreeTasks;
             storedSettings.SystemSettings.FileReadBufferSize = fileReadBufferSize;
+            storedSettings.SystemSettings.EnableShellContext = enableShellContext;
+            storedSettings.SystemSettings.ComputerName = computerName;
+
+            // Write to file
+            config.Save(ConfigurationSaveMode.Modified);
+        }
+
+        /// <summary>
+        /// This is a light weight version of the store environment. It only
+        /// saves the updated settings
+        /// </summary>
+        /// <exception cref="ConfigurationErrorsException">Throws ConfigurationErrorsException if the program
+        /// is unable to write to disk</exception>
+        public void StoreSettings()
+        {
+            //Update the settings in the config file
+            storedSettings.SystemSettings.AllowAutoSyncForConflictFreeTasks = allowAutoSyncForConflictFreeTasks;
+            storedSettings.SystemSettings.FileReadBufferSize = fileReadBufferSize;
+            storedSettings.SystemSettings.EnableShellContext = enableShellContext;
             storedSettings.SystemSettings.ComputerName = computerName;
 
             // Write to file
@@ -216,11 +236,12 @@ namespace SyncButler
             //Create the list of partnerships
             partnershipList = new SortedList<String,Partnership>();
             
-            // Add in default settings
+            // Add in default settings to XML file
             storedSettings.SystemSettings.AllowAutoSyncForConflictFreeTasks = true;
             storedSettings.SystemSettings.FirstRunComplete = true;
-            storedSettings.SystemSettings.FileReadBufferSize = fileReadBufferSize; // 2MB
-            storedSettings.SystemSettings.ComputerName = computerName;
+            //storedSettings.SystemSettings.EnableShellIntegration = enableShellContext;
+            //storedSettings.SystemSettings.FileReadBufferSize = fileReadBufferSize;
+            //storedSettings.SystemSettings.ComputerName = computerName;
             ConvertPartnershipList2XML();
 
             // Add the custom sections to the config
@@ -684,6 +705,21 @@ namespace SyncButler
             set
             {
                 computerName = value;
+            }
+        }
+
+        /// <summary>
+        /// Determines if shell integration context menu is to be kept on or off
+        /// </summary>
+        public static bool EnableShellContext
+        {
+            get
+            {
+                return enableShellContext;
+            }
+            set
+            {
+                enableShellContext = value;
             }
         }
     }
