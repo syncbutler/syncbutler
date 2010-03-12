@@ -60,7 +60,8 @@ namespace SyncButlerUI
 
 		private void cleanUp(object sender,  System.ComponentModel.CancelEventArgs e)
 		{
-			this.controller.Shutdown();
+            if(this.controller != null)
+			    this.controller.Shutdown();
 		}
 	}
 }
