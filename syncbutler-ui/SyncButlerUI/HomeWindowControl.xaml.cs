@@ -59,21 +59,27 @@ namespace SyncButlerUI
 		/// <param name="e"></param>
         private void clearTreeView()
         {
-			foldersItem.Items.Clear();
-            foreach (DriveInfo d in DriveInfo.GetDrives())
-            {
-				if(d.IsReady){
-				string s = d.Name;
-                TreeViewItem item = new TreeViewItem();
-                item.Header = s;
-             	item.Tag = s;
-            	item.FontWeight = FontWeights.Normal;
-             	item.Items.Add(dummyNode);
-             	item.Expanded += new RoutedEventHandler(folder_Expanded);
-			 	item.Collapsed += new RoutedEventHandler(folder_Collapsed);
-						
-                foldersItem.Items.Add(item);
-				}
+            try{
+			    foldersItem.Items.Clear();
+                foreach (DriveInfo d in DriveInfo.GetDrives())
+                {
+                    if (d.IsReady)
+                    {
+                        string s = d.Name;
+                        TreeViewItem item = new TreeViewItem();
+                        item.Header = s;
+                        item.Tag = s;
+                        item.FontWeight = FontWeights.Normal;
+                        item.Items.Add(dummyNode);
+                        item.Expanded += new RoutedEventHandler(folder_Expanded);
+                        item.Collapsed += new RoutedEventHandler(folder_Collapsed);
+
+                        foldersItem.Items.Add(item);
+
+                    }
+                }
+            }catch (Exception ex) {
+                    throw new UnhandledExceptionEventArgs("Tree failed to remove");
             }
 
         }
@@ -100,7 +106,9 @@ namespace SyncButlerUI
 						subitem.Collapsed += new RoutedEventHandler(folder_Collapsed);
                         item.Items.Add(subitem);
                     }
-                }catch (Exception) { }
+                }catch (Exception ex) {
+                    throw new UnhandledExceptionEventArgs("Tree failed to load ");
+                }
 		}
 		/// <summary>
 		/// populate the list when folder is expanded
@@ -128,7 +136,10 @@ namespace SyncButlerUI
                         item.Items.Add(subitem);
                     }
                 }
-                catch (Exception) { }
+                catch (Exception ex)
+                {
+                    throw new UnhandledExceptionEventArgs("Tree failed to load ");
+                }
             }
         }
 		
@@ -183,8 +194,10 @@ namespace SyncButlerUI
 		    clearTreeView();	
 		    sourceTextBox.Text=PartnershipTempData.destinationPath;
 			VisualStateManager.GoToState(this,"CreatePartnershipState2",false);
-		    }catch(Exception ex){
-				showMessageBox(CustomDialog.MessageType.Error,ex.Message);
+            }
+            catch (UserInputException uIException)
+            {
+				showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
 			}
 		}
 		
@@ -211,8 +224,10 @@ namespace SyncButlerUI
 		    sourceTextBox.Text=PartnershipTempData.sourcePath;
 		    clearTreeView();	
 			VisualStateManager.GoToState(this,"CreatePartnershipState1",false);
-		    }catch(Exception ex){
-				showMessageBox(CustomDialog.MessageType.Error,ex.Message);
+            }
+            catch (UserInputException uIException)
+            {
+				showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
 			}
 		}
 		/// <summary>
@@ -237,8 +252,10 @@ namespace SyncButlerUI
 			destinationTextBox1.Text=PartnershipTempData.destinationPath;
 			partnershipNameTextBox.Text=PartnershipTempData.partnershipName;	
 			VisualStateManager.GoToState(this,"CreatePartnershipState3",false);
-		    }catch(Exception ex){
-				showMessageBox(CustomDialog.MessageType.Error,ex.Message);
+            }
+            catch (UserInputException uIException)
+            {
+				showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
 			}	
 		}
 		/// <summary>
@@ -276,8 +293,10 @@ namespace SyncButlerUI
 			sourceTextBox.Text="";
 		    PartnershipTempData.clear();
 			partnershipList.Items.Refresh();
-		   }catch(Exception ex){
-				showMessageBox(CustomDialog.MessageType.Error,ex.Message);
+         }
+         catch (UserInputException uIException)
+         {
+				showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
 			}	
 		}
 		#endregion
@@ -314,14 +333,14 @@ namespace SyncButlerUI
 		{
 			try{
 		  	if(partnershipList.SelectedIndex<0){
-				throw new Exception("Please select a partnership to delete.");
+                throw new UserInputException("Please select a partnership to delete.");
 			}
 			if (showMessageBox(CustomDialog.MessageType.Question,"Are you sure?")==true){
 				this.Controller.DeletePartnership(partnershipList.SelectedIndex);
 				partnershipList.Items.Refresh();
 			}
-			}catch(Exception ex){
-					showMessageBox(CustomDialog.MessageType.Error,ex.Message);
+			}catch(UserInputException uIException){
+					showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
 			}
 		}
 		
@@ -334,7 +353,7 @@ namespace SyncButlerUI
 		{
 			try{
 		  	if(partnershipList.SelectedIndex<0){
-				throw new Exception("Please select a partnership to sync.");
+				throw new UserInputException("Please select a partnership to sync.");
 			}
 			if (showMessageBox(CustomDialog.MessageType.Question,"Are you sure?")==true){
 				Partnership partnershipSelected=(Partnership)partnershipList.SelectedValue;
@@ -343,9 +362,12 @@ namespace SyncButlerUI
 				this.ConflictList.ItemsSource=null;
 				this.ConflictList.Items.Refresh();
 			}
-			}catch(Exception ex){
-					showMessageBox(CustomDialog.MessageType.Error,ex.Message);
+            }
+            catch (UserInputException uIException)
+            {
+					showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
 			}
+            
 		}
 		
 		
@@ -395,7 +417,7 @@ namespace SyncButlerUI
 		{
 			try{
 			if(this.Controller.GetPartnershipList().Count<1 ){
-				throw new Exception("No Partnerships created yet");	
+                throw new UserInputException("No Partnerships created yet");	
 			}
 			if (showMessageBox(CustomDialog.MessageType.Question,"Are you sure?")==true){
 			VisualStateManager.GoToState(this,"ConflictState1",false);
@@ -403,16 +425,18 @@ namespace SyncButlerUI
 				
 			//Instantiates background worker 
 			BackgroundWorker worker = new BackgroundWorker();
-				worker.WorkerReportsProgress=true;
-				worker.WorkerSupportsCancellation=true;
+			worker.WorkerReportsProgress=true;
+			worker.WorkerSupportsCancellation=true;
 				
 			this.Controller.SyncAll();
 			createAndBindSamples();
 			showMessageBox(CustomDialog.MessageType.Message,"Sync-ed.\r\nPlease check.");
 			}
-			}catch(Exception ex){
+            }
+            catch (UserInputException uIException)
+            {
 			 	
-				showMessageBox(CustomDialog.MessageType.Error,ex.Message);
+				showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
 			}
 		}
 		#endregion	
@@ -462,11 +486,11 @@ namespace SyncButlerUI
 		/// </summary>
 		private void checkInput(){
 			if(sourceTextBox.Text.Length>266){
-				throw new Exception("Folder Path is too long");
+                throw new UserInputException("Folder Path is too long");
 			}else if(sourceTextBox.Text.Equals("")){
-				throw new Exception("Please select a Folder");
+                throw new UserInputException("Please select a Folder");
 			}else if(!Directory.Exists(sourceTextBox.Text)){
-				throw new Exception("No Such Folder");
+				throw new UserInputException("No Such Folder");
 		
 			}
 			
