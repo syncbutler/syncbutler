@@ -112,19 +112,25 @@ namespace SyncButler
                 do mbuf.Write(buf, 0, pipeServer.Read(buf, 0, buf.Length));
                 while (!pipeServer.IsMessageComplete);
 
-                if (mbuf.Length == 0) throw new IOException();
+                if (mbuf.Length == 0)
+                {
+                    Controller.LogMessage("Attempted to read from pipe, but the pipe was empty");
+                    throw new IOException();
+                }
                 // Reset the position so that we can reuse this stream for reading
                 mbuf.Position = 0;
             }
             catch (IOException e)
             {
                 // The pipe was broken
+                Controller.LogMessage("Attempted to read from pipe, but the pipe was broken");
                 CreateInstanceChannel();
                 return;
             }
             catch (ObjectDisposedException e)
             {
                 // The pipe was closed
+                Controller.LogMessage("Attempted to read from pipe, but the pipe was closed");
                 CreateInstanceChannel();
                 return;
             }
