@@ -120,14 +120,14 @@ namespace SyncButler
                 // Reset the position so that we can reuse this stream for reading
                 mbuf.Position = 0;
             }
-            catch (IOException e)
+            catch (IOException)
             {
                 // The pipe was broken
                 Controller.LogMessage("Attempted to read from pipe, but the pipe was broken");
                 CreateInstanceChannel();
                 return;
             }
-            catch (ObjectDisposedException e)
+            catch (ObjectDisposedException)
             {
                 // The pipe was closed
                 Controller.LogMessage("Attempted to read from pipe, but the pipe was closed");
@@ -147,7 +147,7 @@ namespace SyncButler
             }
             catch (Exception e)
             {
-                Controller.LogMessage("Message received over named pipe, but deserialization failed: " + e.Message);
+                Logging.Logger.GetInstance().FATAL("Message received over named pipe, but deserialization failed: " + e.Message);
                 return;
             }
 
@@ -175,11 +175,11 @@ namespace SyncButler
                 {
                     pipeServer.Close();
                 }
-                catch (IOException e)
+                catch (IOException)
                 {
                     // The pipe connection got broken. Can ignore.
                 }
-                catch (ObjectDisposedException e)
+                catch (ObjectDisposedException)
                 {
                     // The pipe is closed. Can ignore
                 }
@@ -208,15 +208,15 @@ namespace SyncButler
                 pipeClient.Connect(5000);
                 pipeClient.Write(buf, 0, buf.Length);
             }
-            catch (TimeoutException e)
+            catch (TimeoutException)
             {
-                Controller.LogMessage("Timeout trying to connect to the named pipe!");
+                Logging.Logger.GetInstance().FATAL("Timeout trying to connect to the named pipe!");
             }
-            catch (IOException e)
+            catch (IOException)
             {
                 // broken pipe?
             }
-            catch (ObjectDisposedException e)
+            catch (ObjectDisposedException)
             {
                 // object closed at other end?
             }

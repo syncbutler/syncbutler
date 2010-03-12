@@ -49,6 +49,7 @@
     <Compile Include="Exceptions\SyncableNotExistsException.cs" />
     <Compile Include="Exceptions\InvalidActionException.cs" />
     <Compile Include="Exceptions\InvalidPartnershipException.cs" />
+    <Compile Include="Logging\Logger.cs" />
     <Compile Include="MRU\MostRecentlyUsedFile.cs" />
     <Compile Include="MRU\MRUList.cs" />
     <Compile Include="MRU\SyncedMRU.cs" />
