@@ -17,6 +17,7 @@ using System.Threading;
 using System.ComponentModel;
 using WPF_Explorer_Tree;
 using SyncButler;
+using SyncButler.Exceptions;
 
 namespace SyncButlerUI
 {
@@ -78,9 +79,8 @@ namespace SyncButlerUI
 
                     }
                 }
-            }catch (Exception ex) {
-                    throw new UnhandledExceptionEventArgs("Tree failed to remove");
             }
+            catch (Exception) { }
 
         }
 	
@@ -91,24 +91,23 @@ namespace SyncButlerUI
 		/// <param name="e"></param>
 		private void folder_Collapsed(object sender, RoutedEventArgs e)
 		{
-		      try
-               {
-			   TreeViewItem item=(TreeViewItem)sender;
-			   item.Items.Clear();
-                    foreach (string s in Directory.GetDirectories(item.Tag.ToString()))
-                    {
-                        TreeViewItem subitem = new TreeViewItem();
-                        subitem.Header = s.Substring(s.LastIndexOf("\\") + 1);
-                        subitem.Tag = s;
-                        subitem.FontWeight = FontWeights.Normal;
-                        subitem.Items.Add(dummyNode);
-                        subitem.Expanded += new RoutedEventHandler(folder_Expanded);
-						subitem.Collapsed += new RoutedEventHandler(folder_Collapsed);
-                        item.Items.Add(subitem);
-                    }
-                }catch (Exception ex) {
-                    throw new UnhandledExceptionEventArgs("Tree failed to load ");
+            try
+            {
+                TreeViewItem item = (TreeViewItem)sender;
+                item.Items.Clear();
+                foreach (string s in Directory.GetDirectories(item.Tag.ToString()))
+                {
+                    TreeViewItem subitem = new TreeViewItem();
+                    subitem.Header = s.Substring(s.LastIndexOf("\\") + 1);
+                    subitem.Tag = s;
+                    subitem.FontWeight = FontWeights.Normal;
+                    subitem.Items.Add(dummyNode);
+                    subitem.Expanded += new RoutedEventHandler(folder_Expanded);
+                    subitem.Collapsed += new RoutedEventHandler(folder_Collapsed);
+                    item.Items.Add(subitem);
                 }
+            }
+            catch (Exception) { }
 		}
 		/// <summary>
 		/// populate the list when folder is expanded
@@ -136,10 +135,7 @@ namespace SyncButlerUI
                         item.Items.Add(subitem);
                     }
                 }
-                catch (Exception ex)
-                {
-                    throw new UnhandledExceptionEventArgs("Tree failed to load ");
-                }
+                catch (Exception) { }
             }
         }
 		
