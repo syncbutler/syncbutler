@@ -36,6 +36,50 @@ namespace SyncButler
             this.suggestedAction = Action.Unknown;
         }
 
+        public string OffendingPath
+        {
+            get
+            {
+                if (left != null)
+                {
+                    if (left.EntityPath().Length != 0)
+                    {
+                        return left.EntityPath();
+                    }
+                }
+                else if (right != null)
+                {
+                    if (right.EntityPath().Length != 0)
+                    {
+                        return right.EntityPath();
+                    }
+                }
+                throw new NullReferenceException("Non Existance EntityPath");
+            }
+        }
+        bool dummy;
+        public bool LeftOverwriteRight
+        {
+            get
+            {
+                return  (this.SuggestedAction == Conflict.Action.CopyToLeft || this.SuggestedAction == Conflict.Action.DeleteRight);
+            }
+            set
+            {
+                dummy = value;
+            }
+        }
+        public bool RightOverwriteLeft
+        {
+            get
+            {
+                return !LeftOverwriteRight;
+            }
+            set
+            {
+                dummy = value;
+            }
+        }
         /// <summary>
         /// Constructor used to instantiate a Conflict object.
         /// </summary>
