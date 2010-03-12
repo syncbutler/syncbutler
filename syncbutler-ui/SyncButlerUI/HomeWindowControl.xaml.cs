@@ -183,7 +183,7 @@ namespace SyncButlerUI
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void goToPartnershipDest(object sender, RoutedEventArgs e){
+		private void goToPartnershipDest_Click(object sender, RoutedEventArgs e){
 		    try{
 			checkInput();
 			PartnershipTempData.sourcePath=sourceTextBox.Text;
@@ -213,7 +213,7 @@ namespace SyncButlerUI
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void goBackToCreatePartnershipSrc(object sender, RoutedEventArgs e){
+		private void goBackToCreatePartnershipSrc_Click(object sender, RoutedEventArgs e){
 		  	try{
 
 			PartnershipTempData.destinationPath=sourceTextBox.Text;
@@ -231,7 +231,7 @@ namespace SyncButlerUI
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void goToCreatePartnershipName(object sender, RoutedEventArgs e){
+		private void goToCreatePartnershipName_Click(object sender, RoutedEventArgs e){
 			try{
 			checkInput();
 			PartnershipTempData.destinationPath=sourceTextBox.Text;
@@ -259,7 +259,7 @@ namespace SyncButlerUI
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void goBackToCreatePartnershipDes(object sender, RoutedEventArgs e){
+		private void goBackToCreatePartnershipDes_Click(object sender, RoutedEventArgs e){
 		   PartnershipTempData.partnershipName=partnershipNameTextBox.Text;
 		   destinationTextBox1.Text=PartnershipTempData.destinationPath;
 		   clearTreeView();	
@@ -272,7 +272,7 @@ namespace SyncButlerUI
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void createPartnership(object sender, RoutedEventArgs e){
+		private void createPartnership_Click(object sender, RoutedEventArgs e){
 		 try{
 			if(partnershipNameTextBox.Text.Equals("")){
 			    throw new Exception("Please input a partnership name");	
@@ -310,7 +310,7 @@ namespace SyncButlerUI
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-        private void goToViewPartnerships(object sender, RoutedEventArgs e)
+        private void goToViewPartnerships_Click(object sender, RoutedEventArgs e)
         {
 			VisualStateManager.GoToState(this,"ViewPartnership1",false);
 			SortedList<string,Partnership> partnershiplist = this.Controller.GetPartnershipList();
@@ -442,6 +442,134 @@ namespace SyncButlerUI
                 
 		    }
 		}
+		
+		private void SavePartnership_Click(object sender, RoutedEventArgs e)
+        {
+			 try{
+			if(partnershipNameTextBox.Text.Equals("")){
+			    throw new Exception("Please input a partnership name");	
+			
+			}
+			PartnershipTempData.partnershipName=partnershipNameTextBox.Text;
+			sourceFolderPath.Text=PartnershipTempData.sourcePath;
+			destinationFolderPath.Text=PartnershipTempData.destinationPath;
+		    partnerShipName.Text=PartnershipTempData.partnershipName;
+			this.Controller.UpdatePartnership(PartnershipTempData.oldPartnershipName,partnerShipName.Text,sourceFolderPath.Text,destinationFolderPath.Text);
+			VisualStateManager.GoToState(this,"CreatePartnershipDone1",false);
+			sourceTextBox1.Text="";
+			destinationTextBox1.Text="";
+			sourceTextBox.Text="";
+		    PartnershipTempData.clear();
+			partnershipList.Items.Refresh();
+         }
+         catch (UserInputException uIException)
+         {
+				showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
+			}	
+          }
+
+		
+		/// <summary>
+		/// go to the 1st page of edit partnership to set source Textbox
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		
+		private void goToEditPartnership_Click(object sender, RoutedEventArgs e){
+		   clearTreeView();
+			try{
+		  	if(partnershipList.SelectedIndex<0){
+                throw new UserInputException("Please select a partnership to edit.");
+			}
+				new PartnershipTempData();
+			//Uncomment this when controller method is present
+			// Partnership editingPartnership=this.Controller.GetEditablePartnership(this.partnershipList.SelectedIndex);
+		 	// new PartnershipTempData(editingPartnership.Name,editingPartnership.RightFullPath,editingPartnership.LeftFullPath);
+			// PartnershipTempData.oldPartnershipName= editingPartnership.Name;
+			sourceTextBox.Text=PartnershipTempData.sourcePath;
+			}catch(UserInputException uIException){
+					showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
+			}
+		   VisualStateManager.GoToState(this,"EditPartnershipState1",false);
+		}
+				/// <summary>
+		/// go to 2nd page of edit partnership
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void goToEditPartnershipDest_Click(object sender, RoutedEventArgs e){
+		    try{
+			checkInput();
+			PartnershipTempData.sourcePath=sourceTextBox.Text;
+		    clearTreeView();	
+		    sourceTextBox.Text=PartnershipTempData.destinationPath;
+			VisualStateManager.GoToState(this,"EditPartnershipState2",false);
+            }
+            catch (UserInputException uIException)
+            {
+				showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
+			}
+		}
+		
+		
+		/// <summary>
+		/// goes back to the 1st page from the 2nd page of create partnership
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void goBackToEditPartnershipSrc_Click(object sender, RoutedEventArgs e){
+		  	try{
+
+			PartnershipTempData.destinationPath=sourceTextBox.Text;
+		    sourceTextBox.Text=PartnershipTempData.sourcePath;
+		    clearTreeView();	
+			VisualStateManager.GoToState(this,"EditPartnershipState1",false);
+            }
+            catch (UserInputException uIException)
+            {
+				showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
+			}
+		}
+		/// <summary>
+		/// goes to the 3rd page of create partnership
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void goToEditPartnershipName_Click(object sender, RoutedEventArgs e){
+			try{
+			checkInput();
+			PartnershipTempData.destinationPath=sourceTextBox.Text;
+		    if(PartnershipTempData.destinationPath.Equals(PartnershipTempData.sourcePath)){
+			throw new Exception("Same Folders selected: Please pick another Folder");	
+			}else if ( PartnershipTempData.sourcePath.IndexOf(PartnershipTempData.destinationPath+"\\")==0 )	
+			{
+				throw new Exception("Error- 1st Folder is under the 2nd Folder  ");	
+			}
+			else if (PartnershipTempData.destinationPath.IndexOf(PartnershipTempData.sourcePath+"\\")==0){
+				throw new Exception("Error- 2nd Folder is under the 1st Folder  ");	
+			}
+			sourceTextBox1.Text=PartnershipTempData.sourcePath;
+			destinationTextBox1.Text=PartnershipTempData.destinationPath;
+			partnershipNameTextBox.Text=PartnershipTempData.partnershipName;	
+			VisualStateManager.GoToState(this,"EditPartnershipState3",false);
+            }
+            catch (UserInputException uIException)
+            {
+				showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
+			}	
+		}
+		/// <summary>
+		/// goes back to the 2nd page from the 3rd page of create partnership
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void goBackToEditPartnershipDes_Click(object sender, RoutedEventArgs e){
+		   PartnershipTempData.partnershipName=partnershipNameTextBox.Text;
+		   destinationTextBox1.Text=PartnershipTempData.destinationPath;
+		   clearTreeView();	
+		   VisualStateManager.GoToState(this,"EditPartnershipState2",false);
+		}
+		
 		#endregion	
 		
 		/// <summary>
