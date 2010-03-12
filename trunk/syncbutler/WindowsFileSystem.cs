@@ -158,8 +158,14 @@ namespace SyncButler
             }
         }
 
+        /// <summary>
+        /// Checks and returns whether the file or folder exists.
+        /// Calls Refresh() on the underlying native file system object before attempting the check.
+        /// </summary>
+        /// <returns>True if the file system object (File or Folder) exists. False otherwise.</returns>
         public bool Exists()
         {
+            this.nativeFileSystemObj.Refresh();
             return nativeFileSystemObj.Exists;
         }
 

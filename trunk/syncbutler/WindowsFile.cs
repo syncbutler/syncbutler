@@ -164,6 +164,9 @@ namespace SyncButler
             fileStream = this.nativeFileObj.OpenRead();
         }
 
+        /// <summary>
+        /// Closes the file
+        /// </summary>
         public void CloseFile()
         {
             if (fileStream != null) fileStream.Close();
@@ -224,7 +227,6 @@ namespace SyncButler
                 buffer[i] = (byte)fileStream.ReadByte();
 
             return buffer;
-
         }
 
         /// <summary>
