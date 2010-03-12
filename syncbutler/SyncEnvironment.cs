@@ -77,17 +77,17 @@ namespace SyncButler
         /// needs to view what partnerships are there thus far.
         /// </summary>
         /// <returns>A List containing all existing Partnership</returns>
-        public SortedList<String, Partnership> GetPartnerships()
+        public SortedList<String, Partnership> GetPartnershipsList()
         {
             return partnershipList;
         }
 
         /// <summary>
-        /// Returns the partnership at the specified index
+        /// Returns the partnership with unique key (the friendly name)
         /// </summary>
         /// <param name="name">The name (used as an index) of the partnership that is to be loaded</param>
         /// <returns>A Partnership object (possible to be null if not found)</returns>
-        public Partnership LoadPartnership(string name)
+        public Partnership GetPartnership(string name)
         {
             return partnershipList[name];
         }
@@ -313,20 +313,6 @@ namespace SyncButler
 
             else
                 RestoreEnv();
-        }
-
-        /// <summary>
-        /// This method is widely reused. It obtains the name of the config file
-        /// by detecting name of the app.
-        /// </summary>
-        /// <returns>A String in the format of 'appname.settings'</returns>
-        private string GetSettingsFileName()
-        {
-            string appName = Environment.GetCommandLineArgs()[0];
-            int extensionPoint = appName.LastIndexOf('.');
-            string configFilename = string.Concat(appName.Substring(0, extensionPoint),
-                                        ".settings");
-            return configFilename;
         }
 
         /// <summary>
@@ -608,6 +594,20 @@ namespace SyncButler
 
             if (syncButlerAssembly == null)
                 throw new Exception("Unable to load the backend assembly!");
+        }
+
+        /// <summary>
+        /// This method is widely reused. It obtains the name of the config file
+        /// by detecting name of the app.
+        /// </summary>
+        /// <returns>A String in the format of 'appname.settings'</returns>
+        private string GetSettingsFileName()
+        {
+            string appName = Environment.GetCommandLineArgs()[0];
+            int extensionPoint = appName.LastIndexOf('.');
+            string configFilename = string.Concat(appName.Substring(0, extensionPoint),
+                                        ".settings");
+            return configFilename;
         }
 
         /// <summary>
