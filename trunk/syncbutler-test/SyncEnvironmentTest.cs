@@ -164,20 +164,7 @@ namespace SyncButlerTest
             Assert.Inconclusive("Verify the correctness of this test method.");
         }
 
-        /// <summary>
-        ///A test for LoadPartnership
-        ///</summary>
-        [TestMethod()]
-        public void LoadPartnershipTest()
-        {
-            SyncEnvironment_Accessor target = new SyncEnvironment_Accessor(); // TODO: Initialize to an appropriate value
-            string name = string.Empty; // TODO: Initialize to an appropriate value
-            Partnership expected = null; // TODO: Initialize to an appropriate value
-            Partnership actual;
-            actual = target.LoadPartnership(name);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
-        }
+
 
         /// <summary>
         ///A test for IntialEnv
@@ -216,19 +203,6 @@ namespace SyncButlerTest
             Assert.Inconclusive("Verify the correctness of this test method.");
         }
 
-        /// <summary>
-        ///A test for GetPartnerships
-        ///</summary>
-        [TestMethod()]
-        public void GetPartnershipsTest()
-        {
-            SyncEnvironment_Accessor target = new SyncEnvironment_Accessor(); // TODO: Initialize to an appropriate value
-            SortedList<string, Partnership> expected = null; // TODO: Initialize to an appropriate value
-            SortedList<string, Partnership> actual;
-            actual = target.GetPartnerships();
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
-        }
 
         /// <summary>
         ///A test for GetInstance

@@ -43,7 +43,7 @@ namespace SyncButler
         public static Boolean TestSingleInstance(String[] args)
         {
             // test if this is the first instance and register receiver, if so.
-            if (SingleInstance.IsFirst(new SingleInstance.ReceiveDelegate(receiveAction)))
+            if (SingleInstance.IsFirst(new SingleInstance.ReceiveDelegate(ReceiveAction)))
             {
                 // This is the 1st instance.
                 return true;
@@ -61,7 +61,7 @@ namespace SyncButler
         /// Handles incoming data from other instances.
         /// </summary>
         /// <param name="args">Command line arguments</param>
-        private static void receiveAction(string[] args)
+        private static void ReceiveAction(string[] args)
         {
             string path="";
             foreach (string str in args) 
@@ -111,7 +111,18 @@ namespace SyncButler
         /// <returns>The list of all partnerships</returns>
         public SortedList<String,Partnership> GetPartnershipList()
         {
-            return syncEnvironment.GetPartnerships();
+            return syncEnvironment.GetPartnershipsList();
+        }
+
+        /// <summary>
+        /// It returns the partnership stored in the list with the given unique friendly
+        /// name.
+        /// </summary>
+        /// <param name="friendlyName">Friendly name of partnership</param>
+        /// <returns>The Partnership object with that unique friendly name</returns>
+        public Partnership GetPartnership(string friendlyName)
+        {
+            return SyncEnvironment.GetInstance().GetPartnership(friendlyName);
         }
 
         /// <summary>
@@ -121,7 +132,7 @@ namespace SyncButler
         /// <returns>A list of conflicts. Will be null if there are no conflicts.</returns>
         public List<Conflict> SyncPartnership(String name) 
         {
-            return syncEnvironment.GetPartnerships()[name].Sync();
+            return syncEnvironment.GetPartnershipsList()[name].Sync();
         }
 
         /// <summary>
