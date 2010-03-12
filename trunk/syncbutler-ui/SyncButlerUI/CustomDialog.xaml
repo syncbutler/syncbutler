@@ -10,7 +10,7 @@
 	<TextBlock x:Name="syncButlerMessage" Margin="144,54,34,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="60"/>
 	<Button x:Name="noButton"  Content="No" IsDefault="true" Click="noClick" Margin="308,121,0,0" HorizontalAlignment="Left" Width="71" VerticalAlignment="Top" Height="29" />
 	<Button x:Name="yesButton"  Content="Yes" IsDefault="true" Click="yesClick" Margin="229,121,0,0" HorizontalAlignment="Left" Width="71" VerticalAlignment="Top" Height="29" />
-	<TextBlock x:Name="Text1" Margin="144,27,34,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="50"/>
-	<TextBlock x:Name="Text2" Margin="144,88,34,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="50"/>
+	<TextBlock x:Name="Text1" Margin="144,27,34,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="50" Visibility="Hidden"/>
+	<TextBlock x:Name="Text2" Margin="144,88,34,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="50" Visibility="Hidden"/>
 	</Grid>
 </Window>
