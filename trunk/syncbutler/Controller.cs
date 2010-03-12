@@ -205,6 +205,8 @@ namespace SyncButler
 			// do nothing?
 
             SyncEnvironment.ComputerName = ComputerName;
+
+            SyncEnvironment.GetInstance().StoreSettings();
 		}
 
         /// <summary>
@@ -224,6 +226,32 @@ namespace SyncButler
         public void SetComputerName(string name)
         {
             SyncEnvironment.ComputerName = name;
+        }
+
+        /// <summary>
+        /// Remove the shell integration context menu from the registry
+        /// and disable the settings
+        /// </summary>
+        public void RemoveDisableContextMenu()
+        {
+            //Registry action to remove key
+
+            //Removing settings from history
+            SyncEnvironment.EnableShellContext = false;
+            SyncEnvironment.GetInstance().StoreSettings();
+        }
+
+        /// <summary>
+        /// Add the shell integration context menu into the registry
+        /// and activate the settings
+        /// </summary>
+        public void AddEnableContextMenu()
+        {
+            //Registry action to add key
+
+            //Removing settings from history
+            SyncEnvironment.EnableShellContext = true;
+            SyncEnvironment.GetInstance().StoreSettings();
         }
     }
 }

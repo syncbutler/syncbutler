@@ -11,7 +11,8 @@ namespace SyncButler.ProgramEnvironment
         /// At the moment, this will list all the possible options editable
         /// and/or used by the program.
         /// </summary>
-        public enum Options { AllowAutoSyncForConflictFreeTasks, FirstRunComplete, FileReadBufferSize };
+        public enum Options {AllowAutoSyncForConflictFreeTasks, FirstRunComplete,
+        FileReadBufferSize, ComputerName};
 
         /// <summary>
         /// This is a flag to allow multithreading during user conflict
@@ -78,6 +79,22 @@ namespace SyncButler.ProgramEnvironment
             set
             {
                 this["computerName"] = value;
+            }
+        }
+
+        /// <summary>
+        /// Determines if the shell integration menu should be kept on or off
+        /// </summary>
+        [ConfigurationProperty("enableShellContext")]
+        public bool EnableShellContext
+        {
+            get
+            {
+                return (bool) this["enableShellContext"];
+            }
+            set
+            {
+                this["enableShellContext"] = value;
             }
         }
     }
