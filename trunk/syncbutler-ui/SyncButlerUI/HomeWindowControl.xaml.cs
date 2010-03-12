@@ -375,16 +375,21 @@ namespace SyncButlerUI
 		private void resolvePartnership_Click(object sender, RoutedEventArgs e){
 			// resolve it here?
             //List<SamplePartnershipConflict> conflictList=(List<SamplePartnershipConflict>)this.ConflictList.ItemsSource;
-
-            foreach (ConflictList cl in mergedList)
+            try
             {
-                foreach (Conflict c in cl.conflicts)
+                foreach (ConflictList cl in mergedList)
                 {
-                    c.Resolve();
+                    foreach (Conflict c in cl.conflicts)
+                    {
+                        c.Resolve();
+                    }
                 }
+                showMessageBox(CustomDialog.MessageType.Message, "Done! yay");
             }
-            showMessageBox(CustomDialog.MessageType.Message, "Done! yay");
-
+            catch (InvalidActionException invalidActionex)
+            {
+                showMessageBox(CustomDialog.MessageType.Error, "Invalid Action Occurred-Unable to resolve Conflict");
+            }
 		}
 		
 		/// <summary>
