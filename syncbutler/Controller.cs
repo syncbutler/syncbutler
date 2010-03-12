@@ -21,7 +21,7 @@ namespace SyncButler
             syncEnvironment = SyncEnvironment.GetInstance();
             //console = new SyncButlerConsole.Form1();
             //console.Show();
-            Logging.Logger.GetInstance().DEBUG("it's working!");
+            Logging.Logger.GetInstance().DEBUG("Controller started up.");
         }
 
         /// <summary>
