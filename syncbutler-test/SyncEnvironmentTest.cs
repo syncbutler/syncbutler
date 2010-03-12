@@ -349,24 +349,6 @@ namespace SyncButlerTest
         }
 
         /// <summary>
-        ///A test for CheckIsUniquePartnership
-        ///</summary>
-        [TestMethod()]
-        [DeploymentItem("SyncButler.dll")]
-        public void CheckIsUniquePartnershipTest()
-        {
-            SyncEnvironment_Accessor target = new SyncEnvironment_Accessor(); // TODO: Initialize to an appropriate value
-            string name = string.Empty; // TODO: Initialize to an appropriate value
-            string leftPath = string.Empty; // TODO: Initialize to an appropriate value
-            string rightPath = string.Empty; // TODO: Initialize to an appropriate value
-            bool expected = false; // TODO: Initialize to an appropriate value
-            bool actual;
-            actual = target.CheckIsUniquePartnership(name, leftPath, rightPath);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
-        }
-
-        /// <summary>
         ///A test for CheckFilePartnerAbility
         ///</summary>
         [TestMethod()]
