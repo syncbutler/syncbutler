@@ -911,7 +911,7 @@
 					    <Custom:DataGrid.Columns>
 					    <Custom:DataGridTextColumn x:Name="File_Name"  IsReadOnly="True" Width="310" MinWidth="310" Header="File Name" Binding="{Binding OffendingPath}" />
 					    <Custom:DataGridCheckBoxColumn x:Name="FolderOneBox" Width="60" IsReadOnly="False" MinWidth="40" Header="Folder 1" Binding="{Binding RightOverwriteLeft}"/>
-					    <Custom:DataGridCheckBoxColumn x:Name="FolderTwoBox" Width="60" IsReadOnly="False" MinWidth="40" Header="Folder 2" Binding="{Binding LeftOverwriteRight}"/>
+					    <Custom:DataGridCheckBoxColumn x:Name="FolderTwoBox" Width="60" IsReadOnly="False" MinWidth="40" Header="Folder 2" Binding="{Binding LeftOverwriteRight}" />
 					    </Custom:DataGrid.Columns>
 					    </Custom:DataGrid>
                     </DataTemplate>

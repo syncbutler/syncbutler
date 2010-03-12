@@ -374,7 +374,16 @@ namespace SyncButlerUI
 		/// <param name="e"></param>
 		private void resolvePartnership_Click(object sender, RoutedEventArgs e){
 			// resolve it here?
-			List<SamplePartnershipConflict> conflictList=(List<SamplePartnershipConflict>)this.ConflictList.ItemsSource;
+            //List<SamplePartnershipConflict> conflictList=(List<SamplePartnershipConflict>)this.ConflictList.ItemsSource;
+
+            foreach (ConflictList cl in mergedList)
+            {
+                foreach (Conflict c in cl.conflicts)
+                {
+                    c.Resolve();
+                }
+            }
+            showMessageBox(CustomDialog.MessageType.Message, "Done! yay");
 
 		}
 		
@@ -402,8 +411,8 @@ namespace SyncButlerUI
 			dialog.ShowDialog();
 			return (bool)dialog.DialogResult;
 		}
-		
-		
+
+        public List<ConflictList> mergedList;
 		/// <summary>
 		/// Executes when SyncAll button is clicked.
 		/// </summary>
@@ -426,10 +435,11 @@ namespace SyncButlerUI
                 //worker.WorkerReportsProgress=true;
                 //worker.WorkerSupportsCancellation=true;
     				
-		        List<ConflictList> mergedList = this.Controller.SyncAll();
+		        mergedList = this.Controller.SyncAll();
                 
                 this.ConflictList.ItemsSource = mergedList;
                 this.ConflictList.Items.Refresh();
+                
 		    }
 		}
 		#endregion	

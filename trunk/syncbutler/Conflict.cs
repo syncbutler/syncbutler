@@ -57,27 +57,47 @@ namespace SyncButler
                 throw new NullReferenceException("Non Existance EntityPath");
             }
         }
-        bool dummy;
+        bool _LeftOverwriteRight;
+        bool _RightOverwriteLeft;
         public bool LeftOverwriteRight
         {
             get
             {
-                return  (this.SuggestedAction == Conflict.Action.CopyToLeft || this.SuggestedAction == Conflict.Action.DeleteRight);
+                if ((_LeftOverwriteRight == false) && (_RightOverwriteLeft == false))
+                    return _LeftOverwriteRight = (this.SuggestedAction == Conflict.Action.CopyToLeft || this.SuggestedAction == Conflict.Action.DeleteRight);
+                else
+                    return _LeftOverwriteRight;
             }
             set
             {
-                dummy = value;
+                if (value)
+                {
+                    autoResolveAction = this.SuggestedAction;
+                }
+                else
+                {
+                    RightOverwriteLeft = true;
+                }
+                _LeftOverwriteRight = value;
             }
         }
         public bool RightOverwriteLeft
         {
             get
             {
-                return !LeftOverwriteRight;
+                return !(bool)LeftOverwriteRight;
             }
             set
             {
-                dummy = value;
+                if (value)
+                {
+                    autoResolveAction = this.SuggestedAction;
+                }
+                else
+                {
+                    LeftOverwriteRight = true;
+                }
+                _RightOverwriteLeft = value;
             }
         }
         /// <summary>
