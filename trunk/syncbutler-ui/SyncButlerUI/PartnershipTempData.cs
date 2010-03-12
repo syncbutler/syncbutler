@@ -20,6 +20,7 @@ namespace SyncButlerUI
 		    sourcePath="";
 			destinationPath="";
 			partnershipName="";
+			oldPartnershipName="";
 		}
 		
 		/// <summary>
@@ -32,7 +33,11 @@ namespace SyncButlerUI
             destinationPath = p.RightFullPath;
             partnershipName = p.Name;
         }
+
 		
+		public static string oldPartnershipName{
+		get;set;	
+		}
 		/// <summary>
 		/// get set for folder1 path
 		/// </summary>
@@ -57,7 +62,8 @@ namespace SyncButlerUI
 		public static void clear(){
 			sourcePath="";
 			destinationPath="";
-			partnershipName="";	
+			partnershipName="";
+			oldPartnershipName="";
 		}
 	}
 }

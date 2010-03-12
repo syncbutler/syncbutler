@@ -461,7 +461,7 @@
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="HomeWindow" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
 						</ObjectAnimationUsingKeyFrames>
-						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="grid" Storyboard.TargetProperty="(UIElement.Visibility)">
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="CreateEditPartnershipsGrid" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
 						</ObjectAnimationUsingKeyFrames>
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="ViewPartnership" Storyboard.TargetProperty="(UIElement.Visibility)">
@@ -486,13 +486,16 @@
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="HomeWindow" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
 						</ObjectAnimationUsingKeyFrames>
-						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="grid" Storyboard.TargetProperty="(UIElement.Visibility)">
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="CreateEditPartnershipsGrid" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
 						</ObjectAnimationUsingKeyFrames>
 						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="ViewPartnership" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
 							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-12"/>
 						</DoubleAnimationUsingKeyFrames>
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="CreatePartnership2" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="EditPartnership" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
 						</ObjectAnimationUsingKeyFrames>
 					</Storyboard>
@@ -502,7 +505,7 @@
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="CreatePartnership" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
 						</ObjectAnimationUsingKeyFrames>
-						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="grid" Storyboard.TargetProperty="(UIElement.Visibility)">
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="CreateEditPartnershipsGrid" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
 						</ObjectAnimationUsingKeyFrames>
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="HomeWindow" Storyboard.TargetProperty="(UIElement.Visibility)">
@@ -512,7 +515,7 @@
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
 						</ObjectAnimationUsingKeyFrames>
 						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="foldersItem" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="204"/>
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="208.5"/>
 						</DoubleAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
@@ -521,7 +524,7 @@
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="HomeWindow" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
 						</ObjectAnimationUsingKeyFrames>
-						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="grid" Storyboard.TargetProperty="(UIElement.Visibility)">
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="CreateEditPartnershipsGrid" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
 						</ObjectAnimationUsingKeyFrames>
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="CreatePartnership" Storyboard.TargetProperty="(UIElement.Visibility)">
@@ -558,7 +561,7 @@
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="CreatePartnershipDone" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
 						</ObjectAnimationUsingKeyFrames>
-						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="grid" Storyboard.TargetProperty="(UIElement.Visibility)">
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="CreateEditPartnershipsGrid" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
 						</ObjectAnimationUsingKeyFrames>
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="sourceTextBox" Storyboard.TargetProperty="(UIElement.Visibility)">
@@ -618,6 +621,124 @@
 						</Int32AnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
+				<VisualState x:Name="EditPartnershipState1">
+					<Storyboard>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="HomeWindow" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="CreateEditPartnershipsGrid" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="CreatePartnership2" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock3" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="EditPartnership" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock5" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-1.5"/>
+						</DoubleAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="toPartnershipDestButton" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="EditNextButton1" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+					</Storyboard>
+				</VisualState>
+				<VisualState x:Name="EditPartnershipState2">
+					<Storyboard>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="HomeWindow" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="CreateEditPartnershipsGrid" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="CreatePartnership" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="foldersItem" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="211.5"/>
+						</DoubleAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="foldersItem" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-0.071"/>
+						</DoubleAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock4" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="EditPartnership" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock5" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-217.5"/>
+						</DoubleAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="button3" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="button4" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="BackButton1" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="EditNextButton2" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+					</Storyboard>
+				</VisualState>
+				<VisualState x:Name="EditPartnershipState3">
+					<Storyboard>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="HomeWindow" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="CreateEditPartnershipsGrid" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="CreatePartnership" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="CreatePartnership2" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="CreatePartnership3" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock6" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="foldersItem" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="sourceTextBox" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="button2" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="EditPartnership" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="SaveEditButton" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="button5" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="button" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="BackButton2" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="button_Copy" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+					</Storyboard>
+				</VisualState>
+				<VisualState x:Name="EditPartnershipDone1"/>
 			</VisualStateGroup>
 		</VisualStateManager.VisualStateGroups>
 		<Grid x:Name="HomeWindow" VerticalAlignment="Bottom" Height="444">
@@ -640,12 +761,12 @@
 					</LinearGradientBrush>
 				</Rectangle.Fill>
 			</Rectangle>
-			<Button x:Name="ViewPartnerships" HorizontalAlignment="Right" Margin="0,258.731,168,-20.5" Style="{DynamicResource ViewPartnershipButton}" Width="167" Content="" Click="goToViewPartnerships" Cursor="Hand"/>
+			<Button x:Name="ViewPartnerships" HorizontalAlignment="Right" Margin="0,258.731,168,-20.5" Style="{DynamicResource ViewPartnershipButton}" Width="167" Content="" Click="goToViewPartnerships_Click" Cursor="Hand"/>
 			<Button x:Name="ExploreFeaturesButton" HorizontalAlignment="Right" Margin="0,0,-0.5,2.334" Style="{DynamicResource ExploreFeaturesButton}" VerticalAlignment="Bottom" Width="169.25" Height="182.269" Content="Button" d:LayoutOverrides="VerticalAlignment" Click="goToExploreFeatures_Click"/>
 			<Button x:Name="CreatePartnershipButton" HorizontalAlignment="Left" Margin="7,0,0,2" Style="{DynamicResource CreatePartnersButton}" VerticalAlignment="Bottom" Width="164.483" Height="183.269" Content="" Cursor="Hand" Click="goToCreatePartnership_Click"/>
 			<Button x:Name="SyncButton" Margin="-0.175,1,4.388,184.27" Style="{DynamicResource SyncButton}" Content="" Cursor="Hand" Click="Sync"/>
 		</Grid>
-		<Grid x:Name="grid" Margin="-14.5,0,-36.193,0" Visibility="Hidden" >
+		<Grid x:Name="CreateEditPartnershipsGrid" Margin="-14.5,0,-36.193,0" Visibility="Hidden" >
 			<Rectangle x:Name="background_Copy1" RadiusX="1" RadiusY="2" Margin="0,0,37,0" VerticalAlignment="Top" Height="448" Cursor="Arrow">
 				<Rectangle.Fill>
 					<RadialGradientBrush GradientOrigin="0.265,0.184" RadiusX="1.237" RadiusY="1.237">
@@ -659,23 +780,23 @@
 			</Rectangle>
 			<Image x:Name="image1" Margin="184.36,116.094,50.666,8" Source="Images\logo.png" Stretch="Fill" Opacity="0.04"/>
 			<Grid x:Name="CreatePartnership" Margin="0,0,38.5,0" VerticalAlignment="Bottom" Height="444" d:LayoutOverrides="GridBox">
-				<TextBlock Margin="0,25,36.447,0" FontFamily="Arial" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" Text="Creating a Sync Partnership" VerticalAlignment="Top" Height="83.5" HorizontalAlignment="Right" Width="202.72"/>
+				<TextBlock x:Name="textBlock3" Margin="0,25,36.447,0" FontFamily="Arial" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" Text="Creating a Sync Partnership" VerticalAlignment="Top" Height="83.5" HorizontalAlignment="Right" Width="202.72"/>
 				<TextBlock Margin="0,109.5,55.947,0" FontSize="16" TextWrapping="Wrap" Text="Please select a folder on this computer" HorizontalAlignment="Right" Width="183.22" d:LayoutOverrides="HorizontalAlignment" VerticalAlignment="Top" Height="63.5" FontWeight="Bold" FontStyle="Italic"/>
 				<TextBlock Margin="0,181.5,71.947,137.5" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="167.22" d:LayoutOverrides="HorizontalAlignment"><Run Text="This folder will be 1 of 2  folders in a syncing partnership."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="Any updates will be reflected on the other folder in the partnership"/></TextBlock>
 				<TextBlock Margin="0,328.095,398.773,94.079" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="44.754" Text="Path:"/>
 				<Image HorizontalAlignment="Left" Margin="25.834,0,0,69.833" Width="44" Height="44" Source="Images\Misc.png" Stretch="Fill" VerticalAlignment="Bottom" />
 				<TextBlock Margin="0,0,99.527,14.5" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="85.64" VerticalAlignment="Bottom" Height="25" Text="Step 1 of 3" d:LayoutOverrides="HorizontalAlignment"/>
-				<Button x:Name="toPartnershipDestButton" HorizontalAlignment="Right" Margin="0,0,31.947,19" VerticalAlignment="Bottom" Width="69" Height="23" Content="Next&gt;" RenderTransformOrigin="0.79,1.043" Click="goToPartnershipDest" />
+				<Button x:Name="toPartnershipDestButton" HorizontalAlignment="Right" Margin="0,0,31.947,19" VerticalAlignment="Bottom" Width="69" Height="23" Content="Next&gt;" RenderTransformOrigin="0.79,1.043" Click="goToPartnershipDest_Click" />
 			</Grid>
 			<Grid x:Name="CreatePartnership2" Margin="0,0,38.5,0" VerticalAlignment="Bottom" Height="444" d:LayoutOverrides="GridBox" >
-				<TextBlock Margin="58.86,25,253.947,0" FontFamily="Arial" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" Text="Creating a Sync Partnership" VerticalAlignment="Top" Height="83.5"/>
+				<TextBlock x:Name="textBlock4" Margin="58.86,25,253.947,0" FontFamily="Arial" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" Text="Creating a Sync Partnership" VerticalAlignment="Top" Height="83.5"/>
 				<TextBlock Margin="0,109.5,273.447,0" FontSize="16" TextWrapping="Wrap" Text="Please select another folder on this computer" HorizontalAlignment="Right" Width="183.22" VerticalAlignment="Top" Height="63.5" FontWeight="Bold" FontStyle="Italic"/>
 				<TextBlock Margin="0,181.5,289.447,137.5" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="167.22"><Run Text="This folder will be 1 of 2  folders in a syncing partnership."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="Any updates will be reflected on the other folder in the partnership"/></TextBlock>
 				<Image HorizontalAlignment="Left" Margin="24,0,0,70" VerticalAlignment="Bottom" Width="44" Height="44" Source="Images\Folder.png" Stretch="Fill"/>
 				<TextBlock Margin="0,328.095,398.773,94.079" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="44.754" Text="Path:"/>
 				<TextBlock Margin="0,0,162.527,14.5" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="85.64" VerticalAlignment="Bottom" Height="25" Text="Step 2 of 3" d:LayoutOverrides="HorizontalAlignment"/>
-				<Button HorizontalAlignment="Right" Margin="0,0,31.947,19" VerticalAlignment="Bottom" Width="69" Height="23" Content="Next&gt;" RenderTransformOrigin="0.79,1.043" Click="goToCreatePartnershipName"/>
-				<Button HorizontalAlignment="Right" Margin="0,0,109.527,19" VerticalAlignment="Bottom" Width="64.253" Height="23" Content="&lt;Back" Click="goBackToCreatePartnershipSrc"/>
+				<Button x:Name="button3" HorizontalAlignment="Right" Margin="0,0,31.947,19" VerticalAlignment="Bottom" Width="69" Height="23" Content="Next&gt;" RenderTransformOrigin="0.79,1.043" Click="goToCreatePartnershipName_Click"/>
+				<Button x:Name="button4" HorizontalAlignment="Right" Margin="0,0,109.527,19" VerticalAlignment="Bottom" Width="64.253" Height="23" Content="&lt;Back" Click="goBackToCreatePartnershipSrc_Click"/>
 			</Grid>
 			<Grid x:Name="CreatePartnership3" Margin="0,0,38.5,0" VerticalAlignment="Bottom" Height="444" d:LayoutOverrides="GridBox" Visibility="Hidden">
 				<TextBlock x:Name="textBlock" Margin="30.499,35,0,0" FontSize="14.667" FontWeight="Bold" Text="Folder 1 Path" TextWrapping="Wrap" HorizontalAlignment="Left" Width="222.08" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" Height="28">
@@ -698,7 +819,7 @@
 						</TransformGroup>
 					</TextBox.RenderTransform>
 				</TextBox>
-				<TextBlock Margin="0,25,36.447,0" FontFamily="Arial" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" Text="Creating a Sync Partnership" VerticalAlignment="Top" Height="83.5" HorizontalAlignment="Right" Width="202.72"/>
+				<TextBlock x:Name="textBlock6" Margin="0,25,36.447,0" FontFamily="Arial" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" Text="Creating a Sync Partnership" VerticalAlignment="Top" Height="83.5" HorizontalAlignment="Right" Width="202.72"/>
 				<TextBlock x:Name="textBlock1" Margin="37,0,256.447,183" FontSize="14.667" FontWeight="Bold" Text="Folder 2 Path" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="28" RenderTransformOrigin="0.5,0.5">
 					<TextBlock.RenderTransform>
 						<TransformGroup>
@@ -720,10 +841,10 @@
 					</TextBox.RenderTransform>
 				</TextBox>
 				<Button x:Name="button" Margin="233.58,0,188.947,18" VerticalAlignment="Bottom" Height="23" Content="Advanced..." IsEnabled="False"/>
-				<Button HorizontalAlignment="Right" Margin="0,0,31.947,18" VerticalAlignment="Bottom" Width="69" Height="23" Content="Create!" RenderTransformOrigin="0.79,1.043" Click="createPartnership"/>
+				<Button x:Name="button2" HorizontalAlignment="Right" Margin="0,0,31.947,18" VerticalAlignment="Bottom" Width="69" Height="23" Content="Create!" RenderTransformOrigin="0.79,1.043" Click="createPartnership_Click"/>
 				<TextBlock Margin="30,0,0,68.5" FontSize="14.667" FontWeight="Bold" Text="Partnership Name" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="28" HorizontalAlignment="Left" Width="222.08"/>
 				<TextBox x:Name="partnershipNameTextBox" Margin="30.5,0,0,52" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="25" HorizontalAlignment="Left" Width="166.58"/>
-				<Button HorizontalAlignment="Right" Margin="0,0,111.027,18" VerticalAlignment="Bottom" Width="70.92" Height="23" Content="&lt;Back" Click="goBackToCreatePartnershipDes"/>
+				<Button x:Name="button5" HorizontalAlignment="Right" Margin="0,0,111.027,18" VerticalAlignment="Bottom" Width="70.92" Height="23" Content="&lt;Back" Click="goBackToCreatePartnershipDes_Click"/>
 				<TextBlock Margin="0,0,272.027,13" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="85.64" VerticalAlignment="Bottom" Height="25" Text="Step 3 of 3"/>
 				<TextBlock Margin="0,109.5,55.947,0" FontSize="16" TextWrapping="Wrap" Text="Please give the partnership a name and review your selection" HorizontalAlignment="Right" Width="183.22" VerticalAlignment="Top" Height="63.5" FontWeight="Bold" FontStyle="Italic" d:LayoutOverrides="HorizontalAlignment"/>
 				<TextBlock Margin="0,199.5,71.947,119.5" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="167.22" d:LayoutOverrides="HorizontalAlignment"><Run Text="The name will allow you to identify your partnerships with ease."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="Remember, Any updates will be reflected on the other folder in partnership"/></TextBlock>
@@ -797,6 +918,26 @@
 					</TransformGroup>
 				</TreeView.RenderTransform>
 			</TreeView>
+			<Grid x:Name="EditPartnership" Margin="0,0,38.5,0" VerticalAlignment="Bottom" Height="444" d:LayoutOverrides="GridBox" Visibility="Hidden">
+				<TextBlock x:Name="textBlock5" Margin="0,25,36.447,0" FontFamily="Arial" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" Text="Edit Existing Sync Partnership" VerticalAlignment="Top" Height="83.5" HorizontalAlignment="Right" Width="202.72" RenderTransformOrigin="0.5,0.5">
+					<TextBlock.RenderTransform>
+						<TransformGroup>
+							<ScaleTransform/>
+							<SkewTransform/>
+							<RotateTransform/>
+							<TranslateTransform/>
+						</TransformGroup>
+					</TextBlock.RenderTransform>
+				</TextBlock>
+				<TextBlock x:Name="textBlock2" Margin="0,206.94,31.947,170.06" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="195.22" Opacity="0"><Run FontSize="16" FontWeight="Bold" Text="Congratulations on creating your partnership"/><LineBreak/><Run Text="Would you like to:"/></TextBlock>
+				<Button x:Name="goToviewPartnershipsButton" HorizontalAlignment="Right" Margin="0,0,38.5,49.643" VerticalAlignment="Bottom" Width="127.667" Height="47" Content="Create another&#xa;   Partnership" RenderTransformOrigin="0.79,1.043" Click="goToViewPartnerships_Click" Opacity="0"/>
+				<Button x:Name="SaveEditButton" HorizontalAlignment="Right" Margin="0,0,31.947,18" VerticalAlignment="Bottom" Width="69" Height="23" Content="Save" RenderTransformOrigin="0.79,1.043" Click="SavePartnership_Click" Visibility="Hidden"/>
+				<Button x:Name="EditNextButton2" HorizontalAlignment="Right" Margin="0,0,31.947,19" VerticalAlignment="Bottom" Width="69" Height="23" Content="Next&gt;" RenderTransformOrigin="0.79,1.043" Click="goToEditPartnershipName_Click" Visibility="Hidden"/>
+				<Button x:Name="BackButton1" HorizontalAlignment="Right" Margin="0,0,109.527,19" VerticalAlignment="Bottom" Width="64.253" Height="23" Content="&lt;Back" Click="goBackToEditPartnershipSrc_Click" Visibility="Hidden"/>
+				<Button x:Name="EditNextButton1" HorizontalAlignment="Right" Margin="0,0,31.947,19" VerticalAlignment="Bottom" Width="69" Height="23" Content="Next&gt;" RenderTransformOrigin="0.79,1.043" Click="goToEditPartnershipDest_Click" Visibility="Hidden" />
+				<Button x:Name="button_Copy" Margin="233.58,0,188.947,18" VerticalAlignment="Bottom" Height="23" Content="Advanced..." IsEnabled="False" Visibility="Hidden"/>
+				<Button x:Name="BackButton2" HorizontalAlignment="Right" Margin="0,0,111.027,18" VerticalAlignment="Bottom" Width="70.92" Height="23" Content="&lt;Back" Click="goBackToEditPartnershipDes_Click" Visibility="Hidden"/>
+			</Grid>
 		</Grid>
 		<Grid x:Name="ViewPartnership" Margin="0.027,0,-0.027,0" VerticalAlignment="Bottom" Height="444" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
 			<Grid.RenderTransform>
@@ -840,7 +981,7 @@
 				</ListBox.RenderTransform>
 			</ListBox>
 			<Button Margin="220.154,0,220.18,22" VerticalAlignment="Bottom" Height="34" Content="Sync" Click="syncPartnership_Click"/>
-			<Button Margin="0,0,146.68,22" VerticalAlignment="Bottom" Height="34" Content="Edit" HorizontalAlignment="Right" Width="63"/>
+			<Button Margin="0,0,146.68,22" VerticalAlignment="Bottom" Height="34" Content="Edit" HorizontalAlignment="Right" Width="63" Click="goToEditPartnership_Click"/>
 			<Button HorizontalAlignment="Left" Margin="147.486,0,0,22" VerticalAlignment="Bottom" Width="63" Height="34" Content="Delete" Click="deletePartnership_Click"/>
 		</Grid>
 		<Grid x:Name="sbs" Margin="-7.5,0,-4.693,0" VerticalAlignment="Bottom" Height="444" d:LayoutOverrides="GridBox" Visibility="Hidden" Background="Black" >
@@ -901,13 +1042,13 @@
 			<ProgressBar x:Name="SubProgressBar" Margin="38.623,0,28.52,34.69" VerticalAlignment="Bottom" Height="14.286"/>
 			<ProgressBar x:Name="TotalProgressBar" Margin="38.623,0,28.52,15.69" VerticalAlignment="Bottom" Height="14.286"/>
 			<TextBlock x:Name="ConflictsLabel" Margin="38.032,42.333,0,0" FontSize="16" FontWeight="Bold" Text="Conflicts" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Width="177.618" Height="28.571"/>
-			<Custom:DataGrid x:Name="ConflictList" Margin="39.1,93.429,27.091,187.714" RowDetailsVisibilityMode="VisibleWhenSelected"  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True" CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False" GridLinesVisibility="Vertical" Width="437.143" Height="162.857" HorizontalScrollBarVisibility="Hidden" IsReadOnly="True" SelectionMode="Single" ItemsSource="{Binding Static}">
+			<Custom:DataGrid x:Name="ConflictList" Margin="39.1,93.429,27.091,187.714" RowDetailsVisibilityMode="VisibleWhenSelected"  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True" CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False" GridLinesVisibility="Vertical" Width="437.143" Height="162.857" HorizontalScrollBarVisibility="Hidden" IsReadOnly="True" SelectionMode="Single" ItemsSource="{Binding Static}" Custom:SelectiveScrollingGrid.SelectiveScrollingOrientation="Horizontal">
 				<Custom:DataGrid.Columns>
 					<Custom:DataGridTextColumn x:Name="conflictlistPartnershipName" Width="430" MinWidth="430" Header="Partnerships" Binding="{Binding PartnerShipName}"  />
 				</Custom:DataGrid.Columns>
 			    <Custom:DataGrid.RowDetailsTemplate>
                     <DataTemplate>
-                        <Custom:DataGrid x:Name="conflictListInnerGrid" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" ItemsSource="{Binding Path=conflicts}" CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False" >
+                        <Custom:DataGrid x:Name="conflictListInnerGrid" SelectionUnit="FullRow" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" ItemsSource="{Binding Path=conflicts}" CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False" >
 					    <Custom:DataGrid.Columns>
 					    <Custom:DataGridTextColumn x:Name="File_Name"  IsReadOnly="True" Width="310" MinWidth="310" Header="File Name" Binding="{Binding OffendingPath}" />
 					    <Custom:DataGridCheckBoxColumn x:Name="FolderOneBox" Width="60" IsReadOnly="False" MinWidth="40" Header="Folder 1" Binding="{Binding RightOverwriteLeft}"/>
