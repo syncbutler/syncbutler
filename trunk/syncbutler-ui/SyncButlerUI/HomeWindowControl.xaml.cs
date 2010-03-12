@@ -422,10 +422,15 @@ namespace SyncButlerUI
 		{
 		    if(this.Controller.GetPartnershipList().Count<1 )
             {
-                showMessageBox(CustomDialog.MessageType.Error,"No Partnerships created yet");
-				return;
+             if(showMessageBox(CustomDialog.MessageType.Question,"Sync Butler has detected that there are no partnerships created yet would you like to create one now?")==true){
+				   clearTreeView();
+		 	  VisualStateManager.GoToState(this,"CreatePartnershipState1",false);
+		 
+			}	
+			else{
+					return;
 		    }
-		    if (showMessageBox(CustomDialog.MessageType.Question,"Are you sure?")==true)
+			}else if (showMessageBox(CustomDialog.MessageType.Question,"Are you sure?")==true)
             {
 		        VisualStateManager.GoToState(this,"ConflictState1",false);
     			
@@ -445,11 +450,10 @@ namespace SyncButlerUI
 		
 		private void SavePartnership_Click(object sender, RoutedEventArgs e)
         {
-			 try{
-			if(partnershipNameTextBox.Text.Equals("")){
+			try{
+				if(partnershipNameTextBox.Text.Equals("")){
 			    throw new Exception("Please input a partnership name");	
-			
-			}
+				}
 			PartnershipTempData.partnershipName=partnershipNameTextBox.Text;
 			sourceFolderPath.Text=PartnershipTempData.sourcePath;
 			destinationFolderPath.Text=PartnershipTempData.destinationPath;
@@ -481,18 +485,15 @@ namespace SyncButlerUI
 		  	if(partnershipList.SelectedIndex<0){
                 throw new UserInputException("Please select a partnership to edit.");
 			}
-				new PartnershipTempData();
-			//Uncomment this when controller method is present
-			// Partnership editingPartnership=this.Controller.GetEditablePartnership(this.partnershipList.SelectedIndex);
-		 	// new PartnershipTempData(editingPartnership.Name,editingPartnership.RightFullPath,editingPartnership.LeftFullPath);
-			// PartnershipTempData.oldPartnershipName= editingPartnership.Name;
+		 	new PartnershipTempData((Partnership)this.partnershipList.SelectedItem);
+			 PartnershipTempData.oldPartnershipName= PartnershipTempData.partnershipName;
 			sourceTextBox.Text=PartnershipTempData.sourcePath;
 			}catch(UserInputException uIException){
 					showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
 			}
 		   VisualStateManager.GoToState(this,"EditPartnershipState1",false);
 		}
-				/// <summary>
+		/// <summary>
 		/// go to 2nd page of edit partnership
 		/// </summary>
 		/// <param name="sender"></param>
