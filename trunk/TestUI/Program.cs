@@ -53,6 +53,7 @@ namespace TestUI
             Console.Out.WriteLine("1) Create a Partnership");
             Console.Out.WriteLine("2) View Partnerships");
             Console.Out.WriteLine("3) Show Recent Files From Registry Entries");
+            Console.Out.WriteLine("4) Update Partnership");
             Console.Out.WriteLine("------------------------------------------");
             Console.Out.WriteLine("Select an action: ");
 
@@ -74,12 +75,31 @@ namespace TestUI
                         PrintMRU();
                         validSelection = true;
                         break;
+                    case "4":
+                        UpdatePartnership();
+                        validSelection = true;
+                        break;
                     default:
                         Console.Out.WriteLine("Invalid Command");
                         break;
                 }
 
             }
+        }
+
+        private static void UpdatePartnership()
+        {
+            Console.Out.WriteLine("Enter old partnership name");
+            string oldName = Console.In.ReadLine();
+            Console.Out.WriteLine("Enter new partnership name");
+            string newName = Console.In.ReadLine();
+            Console.Out.WriteLine("Enter leftpath");
+            string leftPath = Console.In.ReadLine();
+            Console.Out.WriteLine("Enter rightpath");
+            string rightPath = Console.In.ReadLine();
+
+            controller.UpdatePartnership(oldName, newName, leftPath, rightPath);
+
         }
 
         private static void CreatePartnershipMenu()

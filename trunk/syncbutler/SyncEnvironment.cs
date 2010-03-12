@@ -131,24 +131,30 @@ namespace SyncButler
 
         /// <summary>
         /// When there is a change in any Partnership, this method is called
-        /// and supplied with the position of the Partnership object in the
+        /// and supplied with the name of the Partnership object in the
         /// List of Partnerships.
         /// </summary>
-        /// <param name="name">The position of the Partnership in the List of Partnerships</param>
-        /// <param name="updated">The UPDATED Partnership object will replace the original one</param>
-        public void UpdatePartnership(string name, Partnership updated)
+        /// <param name="oldName">Old friendly name of a partnership</param>
+        /// <param name="newName">New friendly name of a partnership</param>
+        /// <param name="leftPath">Full Path to the left of a partnership</param>
+        /// <param name="rightPath">Full Path to the right of a partnership</param>
+        public void UpdatePartnership(string oldname, string newname, string leftpath, string rightpath)
         {
-            Partnership backupElement = partnershipList[name];
-            partnershipList.Remove(name);
-
-            //Checks if the user try to update the partnership with existing partnerships
-            if (CheckIsUniquePartnership(updated.Name, updated.LeftFullPath, updated.RightFullPath))
+            Partnership backupElement = partnershipList[oldname];
+            if (leftpath.Equals(backupElement.LeftFullPath) && rightpath.Equals(backupElement.RightFullPath))
+                backupElement.Name = newname;
+            else
             {
-                partnershipList.Add(name, backupElement);
-                throw new ArgumentException("Such file/folder partnership already exist. Update failure. Previous Partnership restored");
+                partnershipList.Remove(oldname);
+                Partnership updated = CreatePartnership(newname, leftpath, rightpath);
+                //Checks if the user try to update the partnership with existing partnerships
+                if (CheckIsUniquePartnership(updated.Name, updated.LeftFullPath, updated.RightFullPath))
+                {
+                    partnershipList.Add(oldname, backupElement);
+                    throw new ArgumentException("This file/folder partnership already exists. Update failure. Previous Partnership restored");
+                }
+                partnershipList.Add(newname, updated);
             }
-
-            partnershipList.Add(name,updated);
             StoreEnv(); //Save the partnership to disk immediately
         }
 

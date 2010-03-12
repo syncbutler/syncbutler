@@ -92,8 +92,10 @@ namespace SyncButlerTest
         {
             SyncEnvironment_Accessor target = new SyncEnvironment_Accessor(); // TODO: Initialize to an appropriate value
             string name = string.Empty; // TODO: Initialize to an appropriate value
-            Partnership updated = null; // TODO: Initialize to an appropriate value
-            target.UpdatePartnership(name, updated);
+            string newname = string.Empty; // TODO: Initialize to an appropriate value
+            string leftpath = string.Empty; // TODO: Initialize to an appropriate value
+            string rightpath = string.Empty; // TODO: Initialize to an appropriate value
+            target.UpdatePartnership(name, newname, leftpath, rightpath);
             Assert.Inconclusive("A method that does not return a value cannot be verified.");
         }
 
