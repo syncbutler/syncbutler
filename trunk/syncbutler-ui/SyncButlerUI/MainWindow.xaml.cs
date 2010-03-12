@@ -27,9 +27,9 @@ namespace SyncButlerUI
 	
             controller = Controller.GetInstance();
 			this.homeWindow1.Controller = this.controller;
-			}catch(Exception ex){
+			}catch(Exception uIException){
 				
-			Console.WriteLine(ex.Message);	
+			Console.WriteLine(uIException.Message);	
 			}
 			// Insert code required on object creation below this point.
 		}

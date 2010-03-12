@@ -32,6 +32,7 @@ namespace WPF_Explorer_Tree
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
+           //Cannot convert back
             throw new NotSupportedException("Cannot convert back");
         }
     }

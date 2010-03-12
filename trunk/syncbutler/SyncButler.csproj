@@ -31,6 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.VisualStudio.TeamSystem.Data.UnitTesting, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">
@@ -45,10 +47,12 @@
     <Compile Include="Checksums\Adler32.cs" />
     <Compile Include="Checksums\IRollingHash.cs" />
     <Compile Include="Controller.cs" />
+    <Compile Include="Exceptions\DatabaseSetup.cs" />
     <Compile Include="Exceptions\InvalidPathException.cs" />
     <Compile Include="Exceptions\SyncableNotExistsException.cs" />
     <Compile Include="Exceptions\InvalidActionException.cs" />
     <Compile Include="Exceptions\InvalidPartnershipException.cs" />
+    <Compile Include="Exceptions\UserInputException.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="MRU\MostRecentlyUsedFile.cs" />
     <Compile Include="MRU\MRUList.cs" />
@@ -81,6 +85,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="logstyle.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Exceptions\app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
