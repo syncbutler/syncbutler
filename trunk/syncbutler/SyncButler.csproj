@@ -47,7 +47,6 @@
     <Compile Include="Checksums\Adler32.cs" />
     <Compile Include="Checksums\IRollingHash.cs" />
     <Compile Include="Controller.cs" />
-    <Compile Include="Exceptions\DatabaseSetup.cs" />
     <Compile Include="Exceptions\InvalidPathException.cs" />
     <Compile Include="Exceptions\SyncableNotExistsException.cs" />
     <Compile Include="Exceptions\InvalidActionException.cs" />

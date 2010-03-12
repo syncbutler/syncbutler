@@ -5,7 +5,12 @@ using System.Text;
 
 namespace SyncButler.Exceptions
 {
-    class UserInputException:Exception
+    public class UserInputException:Exception
     {
+        public string message { get; set; }
+        public UserInputException(string a_message)
+        {
+            message = a_message;
+        }
     }
 }
