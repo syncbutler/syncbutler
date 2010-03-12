@@ -411,34 +411,26 @@ namespace SyncButlerUI
 		/// <param name="e"></param>
 		private void Sync(object sender, RoutedEventArgs e)
 		{
-			try{
-			    if(this.Controller.GetPartnershipList().Count<1 )
-                {
-                    throw new UserInputException("No Partnerships created yet");	
-			    }
-			    if (showMessageBox(CustomDialog.MessageType.Question,"Are you sure?")==true)
-                {
-			        VisualStateManager.GoToState(this,"ConflictState1",false);
-        			
-        				
-                    ////Instantiates background worker 
-                    //BackgroundWorker worker = new BackgroundWorker();
-                    //worker.WorkerReportsProgress=true;
-                    //worker.WorkerSupportsCancellation=true;
-        				
-			        List<ConflictList> mergedList = this.Controller.SyncAll();
-                    
-                    this.ConflictList.ItemsSource = mergedList;
-                    this.ConflictList.Items.Refresh();
-			       // createAndBindSamples();
-			        showMessageBox(CustomDialog.MessageType.Message,"Sync-ed.\r\nPlease check.");
-			    }
-            }
-            catch (UserInputException uIException)
+		    if(this.Controller.GetPartnershipList().Count<1 )
             {
-			 	
-				showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
-			}
+                showMessageBox(CustomDialog.MessageType.Error,"No Partnerships created yet");
+				return;
+		    }
+		    if (showMessageBox(CustomDialog.MessageType.Question,"Are you sure?")==true)
+            {
+		        VisualStateManager.GoToState(this,"ConflictState1",false);
+    			
+    				
+                ////Instantiates background worker 
+                //BackgroundWorker worker = new BackgroundWorker();
+                //worker.WorkerReportsProgress=true;
+                //worker.WorkerSupportsCancellation=true;
+    				
+		        List<ConflictList> mergedList = this.Controller.SyncAll();
+                
+                this.ConflictList.ItemsSource = mergedList;
+                this.ConflictList.Items.Refresh();
+		    }
 		}
 		#endregion	
 		
@@ -451,17 +443,6 @@ namespace SyncButlerUI
         {
             this.Controller.SyncMRUs("c");
         }
-		
-		/// <summary>
-		/// this is a test methods to bimd the sample list into the datagrid
-		/// </summary>
-		private void createAndBindSamples(){
-			List<SamplePartnershipConflict> conflictList=SamplePartnershipConflict.getSamplePartnershipConflictCollection();
-			this.ConflictList.ItemsSource=conflictList;
-			this.ConflictList.Items.Refresh();
-			
-		
-		}
 		
 		private void SaveSetting(object sender, RoutedEventArgs e)
 		{
