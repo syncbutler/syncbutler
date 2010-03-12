@@ -34,16 +34,17 @@ namespace SyncButler
         
         ///List of persistence attributes
         private SortedList<String,Partnership> partnershipList;
-        private bool allowAutoSyncForConflictFreeTasks;
-        private bool firstRunComplete;
+        private static bool allowAutoSyncForConflictFreeTasks;
+        private static bool firstRunComplete;
         private static long fileReadBufferSize = 2048000; //2MB, How much of the data file is read each cycle. Editable.
+        private static string computerName = "computer1";
 
         //List of runtime variables
-        private System.Configuration.Configuration config;
-        private string settingName = "systemSettings";
-        private string partnershipName = "partnership";
-        private SettingsSection storedSettings;
-        private PartnershipSection storedPartnerships;
+        private static System.Configuration.Configuration config;
+        private static string settingName = "systemSettings";
+        private static string partnershipName = "partnership";
+        private static SettingsSection storedSettings;
+        private static PartnershipSection storedPartnerships;
         private static SyncEnvironment syncEnv;
         private static Assembly syncButlerAssembly = null;
         
@@ -71,12 +72,13 @@ namespace SyncButler
         }
 
         /// <summary>
-        /// Not implemented
+        /// Returns the entire partnership list. This is useful when the controller
+        /// needs to view what partnerships are there thus far.
         /// </summary>
-        /// <returns></returns>
-        public static string GetComputerName()
+        /// <returns>A List containing all existing Partnership</returns>
+        public SortedList<String, Partnership> GetPartnerships()
         {
-            return "computer1";
+            return partnershipList;
         }
 
         /// <summary>
@@ -102,8 +104,13 @@ namespace SyncButler
             System.Diagnostics.Debug.Assert((name != null) && (name.Length > 0));
             Partnership element = CreatePartnership(name, leftPath, rightPath);
 
-            if (!CheckIsUniquePartnership(name, leftPath, rightPath))
-                throw new ArgumentException("Friendly name already in used or such file/folder partnership already exist");
+            if(!IsUniquePartnershipName(name))
+                throw new ArgumentException("Friendly name already in used");
+
+            //Usually CheckIsUniquePartnership will check for IsUniquePartnershipName too
+            //since we checked it already, the exception caught will be more specified
+            if (!IsUniquePartnershipPath(name, leftPath, rightPath))
+                throw new ArgumentException("Such file/folder partnership already exist");
 
             partnershipList.Add(name, element);
             StoreEnv(); //Save the partnership to disk immediately
@@ -120,16 +127,6 @@ namespace SyncButler
         }
 
         /// <summary>
-        /// Returns the entire partnership list. This is useful when the controller
-        /// needs to view what partnerships are there thus far.
-        /// </summary>
-        /// <returns>A List containing all existing Partnership</returns>
-        public SortedList<String,Partnership> GetPartnerships()
-        {
-            return partnershipList;
-        }
-
-        /// <summary>
         /// When there is a change in any Partnership, this method is called
         /// and supplied with the name of the Partnership object in the
         /// List of Partnerships.
@@ -140,21 +137,28 @@ namespace SyncButler
         /// <param name="rightPath">Full Path to the right of a partnership</param>
         public void UpdatePartnership(string oldname, string newname, string leftpath, string rightpath)
         {
+            //Prepare to write to Partnership list
             Partnership backupElement = partnershipList[oldname];
-            if (leftpath.Equals(backupElement.LeftFullPath) && rightpath.Equals(backupElement.RightFullPath))
-                backupElement.Name = newname;
-            else
+            partnershipList.Remove(oldname);
+            Partnership updated = CreatePartnership(newname, leftpath, rightpath);
+
+            //See if the friendly name is already in used (even after it is removed)
+            if (!IsUniquePartnershipName(newname))
             {
-                partnershipList.Remove(oldname);
-                Partnership updated = CreatePartnership(newname, leftpath, rightpath);
-                //Checks if the user try to update the partnership with existing partnerships
-                if (CheckIsUniquePartnership(updated.Name, updated.LeftFullPath, updated.RightFullPath))
-                {
-                    partnershipList.Add(oldname, backupElement);
-                    throw new ArgumentException("This file/folder partnership already exists. Update failure. Previous Partnership restored");
-                }
-                partnershipList.Add(newname, updated);
+                partnershipList.Add(oldname, backupElement);
+                throw new ArgumentException("Friendly name already in used. Update failure. Previous Partnership record kept");
             }
+
+            //Checks if the user try to update the partnership with existing partnerships
+            if (!IsUniquePartnershipPath(updated.Name, updated.LeftFullPath, updated.RightFullPath))
+            {
+                partnershipList.Add(oldname, backupElement);
+                throw new ArgumentException("This file/folder partnership already exists. Update failure. Previous Partnership record kept");
+            }
+
+            //if okay, go ahead and store
+            partnershipList.Add(newname, updated);
+            
             StoreEnv(); //Save the partnership to disk immediately
         }
 
@@ -170,6 +174,7 @@ namespace SyncButler
             ConvertPartnershipList2XML();
             storedSettings.SystemSettings.AllowAutoSyncForConflictFreeTasks = allowAutoSyncForConflictFreeTasks;
             storedSettings.SystemSettings.FileReadBufferSize = fileReadBufferSize;
+            storedSettings.SystemSettings.ComputerName = computerName;
 
             // Write to file
             config.Save(ConfigurationSaveMode.Modified);
@@ -195,6 +200,9 @@ namespace SyncButler
 
             //This one restores the buffer size for reading files
             fileReadBufferSize = storedSettings.SystemSettings.FileReadBufferSize;
+
+            //Gets the last stored friendly name of the computer
+            computerName = storedSettings.SystemSettings.ComputerName;
         }
 
         /// <summary>
@@ -212,6 +220,7 @@ namespace SyncButler
             storedSettings.SystemSettings.AllowAutoSyncForConflictFreeTasks = true;
             storedSettings.SystemSettings.FirstRunComplete = true;
             storedSettings.SystemSettings.FileReadBufferSize = fileReadBufferSize; // 2MB
+            storedSettings.SystemSettings.ComputerName = computerName;
             ConvertPartnershipList2XML();
 
             // Add the custom sections to the config
@@ -258,6 +267,7 @@ namespace SyncButler
 
                 storedSettings =
                     (SettingsSection)config.GetSection(settingName);
+
                 if (storedSettings == null)
                 {
                     //Console.WriteLine(
@@ -268,7 +278,7 @@ namespace SyncButler
                 //Not necessary an error, we will just create the .settings file
                 if (storedSettings.SystemSettings.FirstRunComplete)
                 {
-                    createSettings = false;
+                    createSettings = false; //Means old settings file found
                     firstRunComplete = true;
                     //It remains as false for the rest of the execution of the program
                     //during the real run
@@ -329,28 +339,6 @@ namespace SyncButler
                 Partnership newElement = element.obj;
                 partnershipList.Add(element.friendlyName, newElement);
             } 
-        }
-
-        /// <summary>
-        /// Gets whether the program is being executed for the first time or otherwise
-        /// </summary>
-        public bool FirstRunComplete
-        {
-            get
-            {
-                return firstRunComplete;
-            }
-        }
-
-        /// <summary>
-        /// Gets the size of the buffer to be used when reading from files.
-        /// </summary>
-        public long FileReadBufferSize
-        {
-            get
-            {
-                return fileReadBufferSize;
-            }
         }
 
         /// <summary>
@@ -468,16 +456,16 @@ namespace SyncButler
         }
 
         /// <summary>
-        /// Checks if the Friendly Name is already in used. Also, the pair of partnership
-        /// folders/files must be unique. Caps are ignored. The paths must fulfill the conditions below
+        /// Tthe pair of partnership folders/files must be unique. Caps are ignored.
+        /// The paths must fulfill the conditions below:
         /// (Incoming Left != Left in List && Incoming Right != Right in List)
         /// (Incoming Left != Right in List && Incoming Right != Left in List)
         /// </summary>
         /// <param name="name">Friendly Name</param>
         /// <param name="leftPath">Full path to the incoming left folder or file</param>
         /// <param name="rightPath">Full path to the incoming right folder or file</param>
-        /// <returns></returns>
-        private bool CheckIsUniquePartnership(string name, string leftPath, string rightPath)
+        /// <returns>True if it is a pair of unique partnership path, false otherwise</returns>
+        private bool IsUniquePartnershipPath(string name, string leftPath, string rightPath)
         {
             bool pathAlreadyExist1 = false; //Checks left with left, right with right
             bool pathAlreadyExist2 = false; //Checks left with right, right with left
@@ -486,9 +474,6 @@ namespace SyncButler
             {
                 pathAlreadyExist1 = false;
                 pathAlreadyExist2 = false;
-
-                if (storedElement.Name.ToLower().Equals(name.ToLower()))
-                    throw new ArgumentException("Friendly name already in used");
 
                 //For (Incoming Left != Left in List && Incoming Right != Right in List)
                 if (storedElement.LeftFullPath.ToLower().Equals(leftPath.ToLower()))
@@ -504,6 +489,22 @@ namespace SyncButler
                 //Don't throw exception first, left and right must already exist
 
                 if (pathAlreadyExist2 && storedElement.RightFullPath.ToLower().Equals(leftPath.ToLower()))
+                    return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Checks if the desired friendly name is already in used
+        /// </summary>
+        /// <param name="name">Desired friendly name of the partnership</param>
+        /// <returns>True if it is unique, false otherwise</returns>
+        private bool IsUniquePartnershipName(string name)
+        {
+            foreach (Partnership storedElement in partnershipList.Values)
+            {
+                if (storedElement.Name.ToLower().Equals(name.ToLower()))
                     return false;
             }
 
@@ -646,6 +647,44 @@ namespace SyncButler
             tr.Close();
 
             return content;
+        }
+
+        /// <summary>
+        /// Gets whether the program is being executed for the first time or otherwise
+        /// </summary>
+        public static bool FirstRunComplete
+        {
+            get
+            {
+                return firstRunComplete;
+            }
+        }
+
+        /// <summary>
+        /// Gets the size of the buffer to be used when reading from files.
+        /// </summary>
+        public static long FileReadBufferSize
+        {
+            get
+            {
+                return fileReadBufferSize;
+            }
+        }
+
+        /// <summary>
+        /// Not implemented
+        /// </summary>
+        /// <returns></returns>
+        public static string ComputerName
+        {
+            get
+            {
+                return computerName;
+            }
+            set
+            {
+                computerName = value;
+            }
         }
     }
 }

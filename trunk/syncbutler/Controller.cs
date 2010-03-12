@@ -169,10 +169,10 @@ namespace SyncButler
         /// <param name="driveLetter"></param>
         public void SyncMRUs(String driveLetter)
         {
-            string syncTo = driveLetter + ":\\SyncButler\\" + SyncEnvironment.GetComputerName() + "\\";
+            string syncTo = driveLetter + ":\\SyncButler\\" + SyncEnvironment.ComputerName + "\\";
             MRUList mruList = new MRUList();
             mruList.Load();
-            mruList.Sync(SyncEnvironment.GetComputerName(), driveLetter);
+            mruList.Sync(SyncEnvironment.ComputerName, driveLetter);
         }
 
         /// <summary>
@@ -189,9 +189,9 @@ namespace SyncButler
         /// This checks in with sync environment to check if the program has ran before.
         /// </summary>
         /// <returns>True if has ran before, false otherwise</returns>
-        public bool programRanBefore()
+        public bool ProgramRanBefore()
         {
-            return syncEnvironment.FirstRunComplete;
+            return SyncEnvironment.FirstRunComplete;
         }
 		
 		/// <summary>
@@ -203,6 +203,27 @@ namespace SyncButler
 		public void SaveSetting(string ComputerName, bool EnableSBS, char SBSDrive)
 		{
 			// do nothing?
+
+            SyncEnvironment.ComputerName = ComputerName;
 		}
+
+        /// <summary>
+        /// Get the friendly name of the comptuer
+        /// </summary>
+        /// <returns>The friendly name of the computer</returns>
+        public string GetComputerName()
+        {
+            return SyncEnvironment.ComputerName;
+        }
+
+        /// <summary>
+        /// Used to set the initial computer name or to replace an exisiting
+        /// computer name
+        /// </summary>
+        /// <param name="name">The computer name (new)</param>
+        public void SetComputerName(string name)
+        {
+            SyncEnvironment.ComputerName = name;
+        }
     }
 }

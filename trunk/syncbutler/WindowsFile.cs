@@ -312,7 +312,7 @@ namespace SyncButler
             if (checksumCacheFresh) return checksumCache;
 
             IRollingHash hashAlgorithm = new Adler32();
-            long bufferSize = SyncEnvironment.GetInstance().FileReadBufferSize;
+            long bufferSize = SyncEnvironment.FileReadBufferSize;
 
             this.OpenFile();
 
@@ -497,7 +497,7 @@ namespace SyncButler
             IRollingHash leftHash = new Adler32();
             IRollingHash rightHash = new Adler32();
 
-            long bufferSize = SyncEnvironment.GetInstance().FileReadBufferSize;
+            long bufferSize = SyncEnvironment.FileReadBufferSize;
 
             left.OpenFile();
             right.OpenFile();

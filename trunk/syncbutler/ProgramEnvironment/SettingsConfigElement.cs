@@ -40,7 +40,7 @@ namespace SyncButler.ProgramEnvironment
         {
             get
             {
-                return (bool)this["firstRunComplete"];
+                return (bool) this["firstRunComplete"];
             }
             set
             {
@@ -57,7 +57,7 @@ namespace SyncButler.ProgramEnvironment
         {
             get
             {
-                return (long)this["fileReadBufferSize"];
+                return (long) this["fileReadBufferSize"];
             }
             set
             {
@@ -65,5 +65,20 @@ namespace SyncButler.ProgramEnvironment
             }
         }
 
+        /// <summary>
+        /// The serilised version of the friendly name of the computer
+        /// </summary>
+        [ConfigurationProperty("computerName")]
+        public string ComputerName
+        {
+            get
+            {
+                return (string) this["computerName"];
+            }
+            set
+            {
+                this["computerName"] = value;
+            }
+        }
     }
 }
