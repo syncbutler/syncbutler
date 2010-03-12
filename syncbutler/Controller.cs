@@ -96,11 +96,13 @@ namespace SyncButler
         /// <summary>
         /// Updates the details of an existing partnership in the partnership list
         /// </summary>
-        /// <param name="name">The friendly name of the partnership</param>
-        /// <param name="updated">The updated Partnership object</param>
-        public void UpdatePartnership(string name, Partnership updated)
+        /// <param name="oldName">Old friendly name of a partnership</param>
+        /// <param name="newName">New friendly name of a partnership</param>
+        /// <param name="leftPath">Full Path to the left of a partnership</param>
+        /// <param name="rightPath">Full Path to the right of a partnership</param>
+        public void UpdatePartnership(string oldName, String newName, String leftPath, String rightPath)
         {
-            syncEnvironment.UpdatePartnership(name, updated);
+            syncEnvironment.UpdatePartnership(oldName, newName, leftPath, rightPath);
         }
 
         /// <summary>
