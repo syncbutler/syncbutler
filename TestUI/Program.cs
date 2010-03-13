@@ -128,6 +128,7 @@ namespace TestUI
         {
             foreach (Partnership pt in controller.GetPartnershipList().Values)
             {
+                Console.Out.WriteLine(pt.Name + ": ");
                 Console.Out.WriteLine(pt.ToString());
             }
         }

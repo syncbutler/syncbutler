@@ -97,7 +97,7 @@ namespace SyncButler
         /// </summary>
         /// <param name="result"></param>
         private static void NewConnection(IAsyncResult result)
-        {
+        {            
             MemoryStream mbuf = new MemoryStream();
 
             try

@@ -40,8 +40,10 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Management" />
+
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Checksums\Adler32.cs" />
@@ -75,6 +77,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ISyncButler\ISyncButler.csproj">
+      <Project>{6D4D0408-6DCF-4EAA-A350-759530FD84A6}</Project>
+      <Name>ISyncButler</Name>
+    </ProjectReference>
     <ProjectReference Include="..\syncbutler-console\SyncButlerConsole.csproj">
       <Project>{CD271A2A-1A70-43A5-BB6B-ED171A11A222}</Project>
       <Name>SyncButlerConsole</Name>

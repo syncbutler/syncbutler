@@ -120,6 +120,10 @@
     <Resource Include="Images\Usbstick.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\ISyncButler\ISyncButler.csproj">
+      <Project>{6D4D0408-6DCF-4EAA-A350-759530FD84A6}</Project>
+      <Name>ISyncButler</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\syncbutler\SyncButler.csproj">
       <Project>{91049E12-5D15-4092-ADBA-C8883AC12AA0}</Project>
       <Name>SyncButler</Name>

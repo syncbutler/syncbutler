@@ -12,20 +12,22 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WPF_Explorer_Tree;
 using SyncButler;
+using ISyncButler;
+
 namespace SyncButlerUI
 {
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml
 	/// </summary>
-	public partial class MainWindow : Window
+	public partial class MainWindow : Window, IGUI
 	{
 		private SyncButler.Controller controller;
 		public MainWindow()
 		{
 			try{
 			this.InitializeComponent();
-	
             controller = Controller.GetInstance();
+            controller.SetWindow(this);
 			this.homeWindow1.Controller = this.controller;
 			}catch(Exception uIException){
 				
@@ -33,6 +35,19 @@ namespace SyncButlerUI
 			}
 			// Insert code required on object creation below this point.
 		}
+        public void GrabFocus()
+        {
+            this.Dispatcher.Invoke(
+                System.Windows.Threading.DispatcherPriority.SystemIdle,
+                TimeSpan.FromSeconds(1),
+                new Action(
+                    delegate()
+                    {
+                        this.Activate();
+                    }
+                    ));
+            
+        }
 		private void goHome(object sender, RoutedEventArgs e)
 		{
 			//homeWindow1.goHome(sender,e);
