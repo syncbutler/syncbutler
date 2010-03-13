@@ -5,12 +5,14 @@ using SyncButler.Exceptions;
 using System.Windows.Forms;
 using SyncButler.MRU;
 using System.Xml;
+using ISyncButler;
 
 namespace SyncButler
 {
     public class Controller
     {
         SyncEnvironment syncEnvironment;
+        IGUI mainWindow;
         private static Controller controller;
 
         /// <summary>
@@ -22,6 +24,15 @@ namespace SyncButler
             //console = new SyncButlerConsole.Form1();
             //console.Show();
             Logging.Logger.GetInstance().DEBUG("Controller started up.");
+        }
+
+        public void SetWindow(IGUI win)
+        {
+            mainWindow = win;
+        }
+        public void GrabFocus()
+        {
+            mainWindow.GrabFocus();
         }
 
         /// <summary>
@@ -63,6 +74,7 @@ namespace SyncButler
         /// <param name="args">Command line arguments</param>
         private static void ReceiveAction(string[] args)
         {
+            Controller.GetInstance().GrabFocus(); // grab focus
             string path="";
             foreach (string str in args) 
             {

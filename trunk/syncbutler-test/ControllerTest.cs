@@ -61,7 +61,7 @@ namespace SyncButlerTest
 
         [TestMethod()]
         [DeploymentItem("SyncButler.dll")]
-        [ExpectedException(typeof(ArgumentException), "A folder was allowed to partner with a non-folder.")]
+        [ExpectedException(typeof(ArgumentException), "Folder cannot sync with a file")]
         public void LeftFolderRightFileCreatePartnershipTest()
         {
             Controller_Accessor target = new Controller_Accessor();
