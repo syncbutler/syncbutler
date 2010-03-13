@@ -31,6 +31,7 @@ namespace SyncButler
         //List of constants used in the Sync Butler
         private const string DEFAULT_SBS_RELATIVE_PATH = "SyncButler\\";
         private const string DEFAULT_SBS_FILENAME_POSTFIX = "_Details.txt";
+        private const string SYNCBUTLER_SETTINGS_EXTENSION = ".butler";
         
         ///List of persistence attributes
         private SortedList<String,Partnership> partnershipList;
@@ -239,9 +240,9 @@ namespace SyncButler
             // Add in default settings to XML file
             storedSettings.SystemSettings.AllowAutoSyncForConflictFreeTasks = true;
             storedSettings.SystemSettings.FirstRunComplete = true;
-            //storedSettings.SystemSettings.EnableShellIntegration = enableShellContext;
-            //storedSettings.SystemSettings.FileReadBufferSize = fileReadBufferSize;
-            //storedSettings.SystemSettings.ComputerName = computerName;
+            storedSettings.SystemSettings.EnableShellContext = enableShellContext;
+            storedSettings.SystemSettings.FileReadBufferSize = fileReadBufferSize;
+            storedSettings.SystemSettings.ComputerName = computerName;
             ConvertPartnershipList2XML();
 
             // Add the custom sections to the config
@@ -265,11 +266,15 @@ namespace SyncButler
         /// is unable to write to disk</exception>
         public void IntialEnv()
         {
-            //This will detect if settings are already stored
+            // This will detect if settings are already stored
             bool createSettings = true;
 
             // The config file will be the name of our app, less the extension
-            string configFilename = GetSettingsFileName();
+            // It might not be so if the user has changed the filename for some reason
+            // Attempt to locate the settings file (null if not found)
+            string configFilename = SearchForSettingsFile();;
+            if (configFilename == null)
+                configFilename = GetSettingsFileName();
             
             // Map the new configuration file
             ExeConfigurationFileMap configFileMap = new ExeConfigurationFileMap();
@@ -606,8 +611,37 @@ namespace SyncButler
             string appName = Environment.GetCommandLineArgs()[0];
             int extensionPoint = appName.LastIndexOf('.');
             string configFilename = string.Concat(appName.Substring(0, extensionPoint),
-                                        ".settings");
+                                        SYNCBUTLER_SETTINGS_EXTENSION);
             return configFilename;
+        }
+
+        /// <summary>
+        /// It attempts to look for the settings file (with the default extension
+        /// .butler) in the same directory as the program
+        /// </summary>
+        /// <returns>The filename of the settings file</returns>
+        private string SearchForSettingsFile()
+        {
+            string appName = Environment.GetCommandLineArgs()[0];
+            int parentDirectory = appName.LastIndexOf('\\');
+            string programDirectory = appName.Substring(0, parentDirectory);
+            DirectoryInfo programPath = new DirectoryInfo(programDirectory);
+
+            if (programPath.Exists)
+            {
+                FileInfo[] fileList = programPath.GetFiles();
+
+                foreach (FileInfo file in fileList)
+                {
+                    if (file.Extension.ToLower().Equals(SYNCBUTLER_SETTINGS_EXTENSION))
+                    {
+                        //parentDirectory index position can be reused cause it is in the same directory
+                        return file.FullName.Substring(parentDirectory + 1);
+                    }
+                }
+            }
+
+            return null;
         }
 
         /// <summary>
