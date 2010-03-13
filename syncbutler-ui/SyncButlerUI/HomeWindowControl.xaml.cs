@@ -385,9 +385,12 @@ namespace SyncButlerUI
                         c.Resolve();
                     }
                 }
-                showMessageBox(CustomDialog.MessageType.Message, "Done! yay");
-            }
-            catch (InvalidActionException invalidActionex)
+            	this.ConflictList.IsEnabled=false;
+				this.resolveButton.IsEnabled=false;
+				showMessageBox(CustomDialog.MessageType.Message, "Done! yay");
+            	this.doneButton.IsEnabled=true;
+			}
+            catch (InvalidActionException)
             {
                 showMessageBox(CustomDialog.MessageType.Error, "Invalid Action Occurred-Unable to resolve Conflict");
             }
