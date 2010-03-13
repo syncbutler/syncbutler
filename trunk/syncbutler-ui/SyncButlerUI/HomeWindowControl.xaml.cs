@@ -354,9 +354,8 @@ namespace SyncButlerUI
 			}
 			if (showMessageBox(CustomDialog.MessageType.Question,"Are you sure?")==true){
 				Partnership partnershipSelected=(Partnership)partnershipList.SelectedValue;
-				this.Controller.SyncPartnership(partnershipSelected.Name);
+				this.ConflictList.ItemsSource=this.Controller.SyncPartnership(partnershipSelected.Name);
 				VisualStateManager.GoToState(this,"ConflictState1",false);
-				this.ConflictList.ItemsSource=null;
 				this.ConflictList.Items.Refresh();
 			}
             }
@@ -456,19 +455,28 @@ namespace SyncButlerUI
                 
 		    }
 		}
-		
+		private void SyncThisPartnership_Click(object sender, RoutedEventArgs e){
+			
+			if (showMessageBox(CustomDialog.MessageType.Question,"Are you sure?")==true){
+				this.ConflictList.ItemsSource = this.Controller.SyncPartnership(PartnershipTempData.partnershipName);
+				VisualStateManager.GoToState(this,"ConflictState1",false);
+
+				this.ConflictList.Items.Refresh();
+			}
+      
+		}
 		private void SavePartnership_Click(object sender, RoutedEventArgs e)
         {
 			try{
 				if(partnershipNameTextBox.Text.Equals("")){
-			    throw new Exception("Please input a partnership name");	
+			    throw new UserInputException("Please input a partnership name");	
 				}
 			PartnershipTempData.partnershipName=partnershipNameTextBox.Text;
 			sourceFolderPath.Text=PartnershipTempData.sourcePath;
 			destinationFolderPath.Text=PartnershipTempData.destinationPath;
 		    partnerShipName.Text=PartnershipTempData.partnershipName;
 			this.Controller.UpdatePartnership(PartnershipTempData.oldPartnershipName,partnerShipName.Text,sourceFolderPath.Text,destinationFolderPath.Text);
-			VisualStateManager.GoToState(this,"CreatePartnershipDone1",false);
+			VisualStateManager.GoToState(this,"EditPartnershipDone1",false);
 			sourceTextBox1.Text="";
 			destinationTextBox1.Text="";
 			sourceTextBox.Text="";
