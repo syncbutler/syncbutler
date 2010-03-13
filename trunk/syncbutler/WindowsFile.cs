@@ -454,11 +454,8 @@ namespace SyncButler
                 {
                     autoResolveAction = Conflict.Action.Unknown;
                 }
-                else if (this.LastWriteTime.Equals(partner.LastWriteTime)) // Modified dates are the same + lengths are the same
-                {
-                    return conflictList;
-                }
-                else if (this.Checksum() == partner.Checksum()) // Files checksums are the same
+                else if (this.LastWriteTime.Equals(partner.LastWriteTime) || 
+                    (this.Checksum() == partner.Checksum())) // Files checksums are the same
                 {
                     if (!parentPartnership.ChecksumExists(this))
                         this.UpdateStoredChecksum();

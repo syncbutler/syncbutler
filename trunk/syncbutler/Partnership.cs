@@ -105,17 +105,47 @@ namespace SyncButler
                                 throw new InvalidDataException("The Nodes Under Pair was not an ISyncable", e);
                             }
                         }
-                    }
 
-                    break;
+                        if ((xmlData.NodeType == XmlNodeType.EndElement) &&
+                            (xmlData.Name == "Pair"))
+                        {
+                            if (curPair != 2) throw new InvalidDataException("Missing Node under Pair");
+                            this.left = pair[0];
+                            this.right = pair[1];
+                            break;
+                        }
+                    }
                 }
+                else if (xmlData.Name == "Checksums")
+                {
+                    while (xmlData.Read())
+                    {
+                        if ((xmlData.NodeType == XmlNodeType.Element) &&
+                            (xmlData.Name == "Entry"))
+                        {
+                            string key = xmlData.GetAttribute("key");
+                            long value;
+
+                            try
+                            {
+                                value = long.Parse(xmlData.GetAttribute("value"));
+                            }
+                            catch (FormatException e)
+                            {
+                                throw new InvalidDataException("Invalid value in the checksum dictionary");
+                            }
+
+                            hashDictionary.Add(key, value);
+                        }
+
+                        if ((xmlData.NodeType == XmlNodeType.EndElement) &&
+                            (xmlData.Name == "Checksums")) break;
+                    }
+                }
+                else if ((xmlData.NodeType == XmlNodeType.EndElement) &&
+                            (xmlData.Name == "Partnership")) break;
                 else xmlData.Skip();
             }
-
-            if (curPair != 2) throw new InvalidDataException("Missing Node under Pair");
-
-            this.left = pair[0];
-            this.right = pair[1];
         }
 
         /// <summary>
@@ -267,6 +297,16 @@ namespace SyncButler
             xmlData.WriteStartElement("Pair");
             left.SerializeXML(xmlData);
             right.SerializeXML(xmlData);
+            xmlData.WriteEndElement();
+            // ---
+            xmlData.WriteStartElement("Checksums");
+            foreach (KeyValuePair<string, long> element in hashDictionary)
+            {
+                xmlData.WriteStartElement("Entry");
+                xmlData.WriteAttributeString("key", element.Key);
+                xmlData.WriteAttributeString("value", element.Value.ToString());
+                xmlData.WriteEndElement();
+            }
             xmlData.WriteEndElement();
             // ---
             xmlData.WriteEndElement();
