@@ -980,9 +980,10 @@
 					</TransformGroup>
 				</ListBox.RenderTransform>
 			</ListBox>
-			<Button Margin="220.154,0,220.18,22" VerticalAlignment="Bottom" Height="34" Content="Sync" Click="syncPartnership_Click"/>
-			<Button Margin="0,0,146.68,22" VerticalAlignment="Bottom" Height="34" Content="Edit" HorizontalAlignment="Right" Width="63" Click="goToEditPartnership_Click"/>
-			<Button HorizontalAlignment="Left" Margin="147.486,0,0,22" VerticalAlignment="Bottom" Width="63" Height="34" Content="Delete" Click="deletePartnership_Click"/>
+			<Button Margin="180.154,0,0,22" VerticalAlignment="Bottom" Height="34" Content="Sync" Click="syncPartnership_Click" HorizontalAlignment="Left" Width="63"/>
+			<Button Margin="0,0,112.68,22" VerticalAlignment="Bottom" Height="34" Content="Edit" HorizontalAlignment="Right" Width="63" Click="goToEditPartnership_Click"/>
+			<Button HorizontalAlignment="Left" Margin="107.486,0,0,22" VerticalAlignment="Bottom" Width="63" Height="34" Content="Delete" Click="deletePartnership_Click"/>
+			<Button x:Name="Create" Margin="0,0,186.68,22" VerticalAlignment="Bottom" Height="34" Content="Create" Click="goToCreatePartnership_Click" HorizontalAlignment="Right" Width="63"/>
 		</Grid>
 		<Grid x:Name="sbs" Margin="-7.5,0,-4.693,0" VerticalAlignment="Bottom" Height="444" d:LayoutOverrides="GridBox" Visibility="Hidden" Background="Black" >
 			<Rectangle x:Name="background_Copy2" RadiusX="1" RadiusY="2" Margin="0,0,-1.5,0" VerticalAlignment="Top" Height="448" Cursor="Arrow">
@@ -1059,9 +1060,9 @@
                 </Custom:DataGrid.RowDetailsTemplate>
 
 			</Custom:DataGrid>
-			<Button HorizontalAlignment="Right" Margin="0,0,21.853,79.143" VerticalAlignment="Bottom" Width="70.476" Height="24.762" Content="Done" IsEnabled="False"/>
+			<Button x:Name="doneButton" HorizontalAlignment="Right" Margin="0,0,21.853,79.143" VerticalAlignment="Bottom" Width="70.476" Height="24.762" Content="Done" IsEnabled="False"/>
 			<TextBlock x:Name="CurrentSyncingFile_Copy" Margin="39.032,67.643,0.493,0" TextWrapping="Wrap" Text="Please choose the file that you want to sync." VerticalAlignment="Top" Height="24.761"/>
-			<Button HorizontalAlignment="Right" Margin="0,0,22.853,138.19" VerticalAlignment="Bottom" Width="75.238" Height="25.715" Content="Resolve" Click="resolvePartnership_Click"/>
+			<Button x:Name="resolveButton" HorizontalAlignment="Right" Margin="0,0,22.853,138.19" VerticalAlignment="Bottom" Width="75.238" Height="25.715" Content="Resolve" Click="resolvePartnership_Click"/>
 		</Grid>
 		<Grid x:Name="Settings" Margin="0.027,0,-0.027,0" VerticalAlignment="Bottom" Height="444" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
 			<Grid.RenderTransform>
