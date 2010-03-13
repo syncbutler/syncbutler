@@ -827,9 +827,9 @@
 					</LinearGradientBrush>
 				</Rectangle.Fill>
 			</Rectangle>
-			<Button x:Name="ViewPartnerships" HorizontalAlignment="Right" Margin="0,258.731,168,-20.5" Style="{DynamicResource ViewPartnershipButton}" Width="167" Content="" Click="goToViewPartnerships_Click" Cursor="Hand"/>
-			<Button x:Name="ExploreFeaturesButton" HorizontalAlignment="Right" Margin="0,0,-0.5,2.334" Style="{DynamicResource ExploreFeaturesButton}" VerticalAlignment="Bottom" Width="169.25" Height="182.269" Content="Button" d:LayoutOverrides="VerticalAlignment" Click="goToExploreFeatures_Click"/>
-			<Button x:Name="CreatePartnershipButton" HorizontalAlignment="Left" Margin="7,0,0,2" Style="{DynamicResource CreatePartnersButton}" VerticalAlignment="Bottom" Width="164.483" Height="183.269" Content="" Cursor="Hand" Click="goToCreatePartnership_Click"/>
+			<Button x:Name="ViewPartnerships" HorizontalAlignment="Right" Margin="0,258.731,168,-20.5" Style="{DynamicResource ViewPartnershipButton}" Width="167" Content="" Click="GoToViewPartnerships_Click" Cursor="Hand"/>
+			<Button x:Name="ExploreFeaturesButton" HorizontalAlignment="Right" Margin="0,0,-0.5,2.334" Style="{DynamicResource ExploreFeaturesButton}" VerticalAlignment="Bottom" Width="169.25" Height="182.269" Content="Button" d:LayoutOverrides="VerticalAlignment" Click="GoToExploreFeatures_Click"/>
+			<Button x:Name="CreatePartnershipButton" HorizontalAlignment="Left" Margin="7,0,0,2" Style="{DynamicResource CreatePartnersButton}" VerticalAlignment="Bottom" Width="164.483" Height="183.269" Content="" Cursor="Hand" Click="GoToCreatePartnership_Click"/>
 			<Button x:Name="SyncButton" Margin="-0.175,1,4.388,184.27" Style="{DynamicResource SyncButton}" Content="" Cursor="Hand" Click="Sync"/>
 		</Grid>
 		<Grid x:Name="CreateEditPartnershipsGrid" Margin="9.5,0,-60.193,0" Visibility="Hidden" RenderTransformOrigin="0.5,0.5" >
@@ -860,7 +860,7 @@
 				<TextBlock Margin="0,328.095,398.773,94.079" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="44.754" Text="Path:"/>
 				<Image HorizontalAlignment="Left" Margin="25.834,0,0,69.833" Width="44" Height="44" Source="Images\Misc.png" Stretch="Fill" VerticalAlignment="Bottom" />
 				<TextBlock Margin="0,0,99.527,14.5" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="85.64" VerticalAlignment="Bottom" Height="25" Text="Step 1 of 3" d:LayoutOverrides="HorizontalAlignment"/>
-				<Button x:Name="toPartnershipDestButton" HorizontalAlignment="Right" Margin="0,0,31.947,19" VerticalAlignment="Bottom" Width="69" Height="23" Content="Next&gt;" RenderTransformOrigin="0.79,1.043" Click="goToPartnershipDest_Click" />
+				<Button x:Name="toPartnershipDestButton" HorizontalAlignment="Right" Margin="0,0,31.947,19" VerticalAlignment="Bottom" Width="69" Height="23" Content="Next&gt;" RenderTransformOrigin="0.79,1.043" Click="GoToPartnershipDest_Click" />
 			</Grid>
 			<Grid x:Name="CreatePartnership2" Margin="0,0,38.5,0" VerticalAlignment="Bottom" Height="444" d:LayoutOverrides="GridBox" >
 				<TextBlock x:Name="textBlock4" Margin="58.86,25,253.947,0" FontFamily="Arial" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" Text="Creating a Sync Partnership" VerticalAlignment="Top" Height="83.5"/>
@@ -869,8 +869,8 @@
 				<Image HorizontalAlignment="Left" Margin="24,0,0,70" VerticalAlignment="Bottom" Width="44" Height="44" Source="Images\Folder.png" Stretch="Fill"/>
 				<TextBlock Margin="0,328.095,398.773,94.079" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="44.754" Text="Path:"/>
 				<TextBlock Margin="0,0,162.527,14.5" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="85.64" VerticalAlignment="Bottom" Height="25" Text="Step 2 of 3" d:LayoutOverrides="HorizontalAlignment"/>
-				<Button x:Name="button3" HorizontalAlignment="Right" Margin="0,0,31.947,19" VerticalAlignment="Bottom" Width="69" Height="23" Content="Next&gt;" RenderTransformOrigin="0.79,1.043" Click="goToCreatePartnershipName_Click"/>
-				<Button x:Name="button4" HorizontalAlignment="Right" Margin="0,0,109.527,19" VerticalAlignment="Bottom" Width="64.253" Height="23" Content="&lt;Back" Click="goBackToCreatePartnershipSrc_Click"/>
+				<Button x:Name="button3" HorizontalAlignment="Right" Margin="0,0,31.947,19" VerticalAlignment="Bottom" Width="69" Height="23" Content="Next&gt;" RenderTransformOrigin="0.79,1.043" Click="GoToCreatePartnershipName_Click"/>
+				<Button x:Name="button4" HorizontalAlignment="Right" Margin="0,0,109.527,19" VerticalAlignment="Bottom" Width="64.253" Height="23" Content="&lt;Back" Click="GoBackToCreatePartnershipSrc_Click"/>
 			</Grid>
 			<Grid x:Name="CreatePartnership3" Margin="0,0,38.5,0" VerticalAlignment="Bottom" Height="444" d:LayoutOverrides="GridBox" Visibility="Hidden">
 				<TextBlock x:Name="textBlock" Margin="30.499,35,0,0" FontSize="14.667" FontWeight="Bold" Text="Folder 1 Path" TextWrapping="Wrap" HorizontalAlignment="Left" Width="222.08" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" Height="28">
@@ -915,10 +915,10 @@
 					</TextBox.RenderTransform>
 				</TextBox>
 				<Button x:Name="button" Margin="233.58,0,188.947,18" VerticalAlignment="Bottom" Height="23" Content="Advanced..." IsEnabled="False"/>
-				<Button x:Name="button2" HorizontalAlignment="Right" Margin="0,0,31.947,18" VerticalAlignment="Bottom" Width="69" Height="23" Content="Create!" RenderTransformOrigin="0.79,1.043" Click="createPartnership_Click"/>
+				<Button x:Name="button2" HorizontalAlignment="Right" Margin="0,0,31.947,18" VerticalAlignment="Bottom" Width="69" Height="23" Content="Create!" RenderTransformOrigin="0.79,1.043" Click="CreatePartnership_Click"/>
 				<TextBlock Margin="30,0,0,68.5" FontSize="14.667" FontWeight="Bold" Text="Partnership Name" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="28" HorizontalAlignment="Left" Width="222.08"/>
 				<TextBox x:Name="partnershipNameTextBox" Margin="30.5,0,0,52" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="25" HorizontalAlignment="Left" Width="166.58"/>
-				<Button x:Name="button5" HorizontalAlignment="Right" Margin="0,0,111.027,18" VerticalAlignment="Bottom" Width="70.92" Height="23" Content="&lt;Back" Click="goBackToCreatePartnershipDes_Click"/>
+				<Button x:Name="button5" HorizontalAlignment="Right" Margin="0,0,111.027,18" VerticalAlignment="Bottom" Width="70.92" Height="23" Content="&lt;Back" Click="GoBackToCreatePartnershipDes_Click"/>
 				<TextBlock Margin="0,0,272.027,13" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="85.64" VerticalAlignment="Bottom" Height="25" Text="Step 3 of 3"/>
 				<TextBlock Margin="0,109.5,55.947,0" FontSize="16" TextWrapping="Wrap" Text="Please give the partnership a name and review your selection" HorizontalAlignment="Right" Width="183.22" VerticalAlignment="Top" Height="63.5" FontWeight="Bold" FontStyle="Italic" d:LayoutOverrides="HorizontalAlignment"/>
 				<TextBlock Margin="0,199.5,71.947,119.5" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="167.22" d:LayoutOverrides="HorizontalAlignment"><Run Text="The name will allow you to identify your partnerships with ease."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="Remember, Any updates will be reflected on the other folder in partnership"/></TextBlock>
@@ -955,7 +955,7 @@
 				</Image>
 				<TextBlock Margin="30.499,0,0,164" FontSize="14.667" FontWeight="Bold" Text="Folder 1 Path" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="28" HorizontalAlignment="Left" Width="222.08"/>
 				<TextBlock Margin="30.499,0,0,82" FontSize="14.667" FontWeight="Bold" Text="Folder 2 Path" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="28" HorizontalAlignment="Left" Width="222.08"/>
-				<Button x:Name="button7" HorizontalAlignment="Right" Margin="0,0,38.5,161.643" VerticalAlignment="Bottom" Width="127.667" Height="23" Content="Go back to Home" RenderTransformOrigin="0.79,1.043" Click="goHome">
+				<Button x:Name="button7" HorizontalAlignment="Right" Margin="0,0,38.5,161.643" VerticalAlignment="Bottom" Width="127.667" Height="23" Content="Go back to Home" RenderTransformOrigin="0.79,1.043" Click="GoHome">
 					<Button.RenderTransform>
 						<TransformGroup>
 							<ScaleTransform/>
@@ -966,7 +966,7 @@
 					</Button.RenderTransform>
 				</Button>
 				<TextBlock Margin="30.499,172.5,0,0" FontSize="14.667" FontWeight="Bold" Text="Partnership Name" TextWrapping="Wrap" VerticalAlignment="Top" Height="28" HorizontalAlignment="Left" Width="222.08"/>
-				<Button x:Name="button6" HorizontalAlignment="Right" Margin="0,0,38.5,49.643" VerticalAlignment="Bottom" Width="127.667" Height="47" Content="Create another&#xa;   Partnership" RenderTransformOrigin="0.79,1.043" Click="goToCreatePartnership_Click"/>
+				<Button x:Name="button6" HorizontalAlignment="Right" Margin="0,0,38.5,49.643" VerticalAlignment="Bottom" Width="127.667" Height="47" Content="Create another&#xa;   Partnership" RenderTransformOrigin="0.79,1.043" Click="GoToCreatePartnership_Click"/>
 				<TextBlock x:Name="sourceFolderPath" Margin="30.499,0,0,108.429" FontSize="13.333" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="66.571" HorizontalAlignment="Left" Width="222.08"/>
 				<TextBlock x:Name="destinationFolderPath" Margin="30.499,0,0,24.429" FontSize="13.333" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="66.571" HorizontalAlignment="Left" Width="222.08"/>
 				<TextBlock x:Name="partnerShipName" Margin="30.499,191,0,196.429" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Left" Width="222.08"/>
@@ -1018,7 +1018,7 @@
 							<TranslateTransform/>
 						</TransformGroup>
 					</TextBlock.RenderTransform><Run FontSize="16" FontWeight="Bold" Text="You have successfully changed your partnership!"/><LineBreak/><Run Text="Would you like to:"/></TextBlock>
-				<Button x:Name="goToviewPartnershipsButton" HorizontalAlignment="Right" Margin="0,0,38.5,49.643" VerticalAlignment="Bottom" Width="127.667" Height="47" Content="     Go Back to &#xd;&#xa;View Partnerships" RenderTransformOrigin="0.79,1.043" Click="goToViewPartnerships_Click" Opacity="0">
+				<Button x:Name="goToviewPartnershipsButton" HorizontalAlignment="Right" Margin="0,0,38.5,49.643" VerticalAlignment="Bottom" Width="127.667" Height="47" Content="     Go Back to &#xd;&#xa;View Partnerships" RenderTransformOrigin="0.79,1.043" Click="GoToViewPartnerships_Click" Opacity="0">
 					<Button.RenderTransform>
 						<TransformGroup>
 							<ScaleTransform/>
@@ -1029,11 +1029,11 @@
 					</Button.RenderTransform>
 				</Button>
 				<Button x:Name="SaveEditButton" HorizontalAlignment="Right" Margin="0,0,31.947,18" VerticalAlignment="Bottom" Width="69" Height="23" Content="Save" RenderTransformOrigin="0.79,1.043" Click="SavePartnership_Click" Visibility="Hidden"/>
-				<Button x:Name="EditNextButton2" HorizontalAlignment="Right" Margin="0,0,31.947,19" VerticalAlignment="Bottom" Width="69" Height="23" Content="Next&gt;" RenderTransformOrigin="0.79,1.043" Click="goToEditPartnershipName_Click" Visibility="Hidden"/>
-				<Button x:Name="BackButton1" HorizontalAlignment="Right" Margin="0,0,109.527,19" VerticalAlignment="Bottom" Width="64.253" Height="23" Content="&lt;Back" Click="goBackToEditPartnershipSrc_Click" Visibility="Hidden"/>
-				<Button x:Name="EditNextButton1" HorizontalAlignment="Right" Margin="0,0,31.947,19" VerticalAlignment="Bottom" Width="69" Height="23" Content="Next&gt;" RenderTransformOrigin="0.79,1.043" Click="goToEditPartnershipDest_Click" Visibility="Hidden" />
+				<Button x:Name="EditNextButton2" HorizontalAlignment="Right" Margin="0,0,31.947,19" VerticalAlignment="Bottom" Width="69" Height="23" Content="Next&gt;" RenderTransformOrigin="0.79,1.043" Click="GoToEditPartnershipName_Click" Visibility="Hidden"/>
+				<Button x:Name="BackButton1" HorizontalAlignment="Right" Margin="0,0,109.527,19" VerticalAlignment="Bottom" Width="64.253" Height="23" Content="&lt;Back" Click="GoBackToEditPartnershipSrc_Click" Visibility="Hidden"/>
+				<Button x:Name="EditNextButton1" HorizontalAlignment="Right" Margin="0,0,31.947,19" VerticalAlignment="Bottom" Width="69" Height="23" Content="Next&gt;" RenderTransformOrigin="0.79,1.043" Click="GoToEditPartnershipDest_Click" Visibility="Hidden" />
 				<Button x:Name="button_Copy" Margin="233.58,0,188.947,18" VerticalAlignment="Bottom" Height="23" Content="Advanced..." IsEnabled="False" Visibility="Hidden"/>
-				<Button x:Name="BackButton2" HorizontalAlignment="Right" Margin="0,0,111.027,18" VerticalAlignment="Bottom" Width="70.92" Height="23" Content="&lt;Back" Click="goBackToEditPartnershipDes_Click" Visibility="Hidden"/>
+				<Button x:Name="BackButton2" HorizontalAlignment="Right" Margin="0,0,111.027,18" VerticalAlignment="Bottom" Width="70.92" Height="23" Content="&lt;Back" Click="GoBackToEditPartnershipDes_Click" Visibility="Hidden"/>
 			</Grid>
 		</Grid>
 		<Grid x:Name="ViewPartnership" Margin="0.027,0,-0.027,0" VerticalAlignment="Bottom" Height="444" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
@@ -1079,9 +1079,9 @@
 				</ListBox.RenderTransform>
 			</ListBox>
 			<Button Margin="180.154,0,0,22" VerticalAlignment="Bottom" Height="34" Content="Sync" Click="syncPartnership_Click" HorizontalAlignment="Left" Width="63"/>
-			<Button Margin="0,0,112.68,22" VerticalAlignment="Bottom" Height="34" Content="Edit" HorizontalAlignment="Right" Width="63" Click="goToEditPartnership_Click"/>
-			<Button HorizontalAlignment="Left" Margin="107.486,0,0,22" VerticalAlignment="Bottom" Width="63" Height="34" Content="Delete" Click="deletePartnership_Click"/>
-			<Button x:Name="Create" Margin="0,0,186.68,22" VerticalAlignment="Bottom" Height="34" Content="Create" Click="goToCreatePartnership_Click" HorizontalAlignment="Right" Width="63"/>
+			<Button Margin="0,0,112.68,22" VerticalAlignment="Bottom" Height="34" Content="Edit" HorizontalAlignment="Right" Width="63" Click="GoToEditPartnership_Click"/>
+			<Button HorizontalAlignment="Left" Margin="107.486,0,0,22" VerticalAlignment="Bottom" Width="63" Height="34" Content="Delete" Click="DeletePartnership_Click"/>
+			<Button x:Name="Create" Margin="0,0,186.68,22" VerticalAlignment="Bottom" Height="34" Content="Create" Click="GoToCreatePartnership_Click" HorizontalAlignment="Right" Width="63"/>
 		</Grid>
 		<Grid x:Name="sbs" Margin="-7.5,0,-4.693,0" VerticalAlignment="Bottom" Height="444" d:LayoutOverrides="GridBox" Visibility="Hidden" Background="Black" >
 			<Rectangle x:Name="background_Copy2" RadiusX="1" RadiusY="2" Margin="0,0,-1.5,0" VerticalAlignment="Top" Height="448" Cursor="Arrow">
@@ -1100,7 +1100,7 @@
 			<TextBlock Margin="0,117.476,13.947,0" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="225.22" d:LayoutOverrides="HorizontalAlignment" VerticalAlignment="Top" Height="148.381"><Run Text="These are the list of files that were detected to be your favorite documents."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="You can click enable feature to allow Sync Butler to automatically "/><LineBreak/><Run Text="update these files on your storage device"/></TextBlock>
 			<TextBlock Margin="0,0,17.947,86.691" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="221.22" d:LayoutOverrides="HorizontalAlignment" VerticalAlignment="Bottom" Height="73" Text="This feature is useful when  you forget to copy an important file and you need to refer it somewhere else"/>
 			<Button x:Name="Enable_Feature" HorizontalAlignment="Right" Margin="0,0,108.447,19" VerticalAlignment="Bottom" Width="103.5" Height="23" Content="Enable Feature" RenderTransformOrigin="0.79,1.043" Cursor="Hand" Click="MRUSync"/>
-			<Button x:Name="Cancel" HorizontalAlignment="Right" Margin="0,0,25.947,19" VerticalAlignment="Bottom" Width="69" Height="23" Content="Cancel" RenderTransformOrigin="0.79,1.043" Click="goHome" Cursor="Hand" />
+			<Button x:Name="Cancel" HorizontalAlignment="Right" Margin="0,0,25.947,19" VerticalAlignment="Bottom" Width="69" Height="23" Content="Cancel" RenderTransformOrigin="0.79,1.043" Click="GoHome" Cursor="Hand" />
 			<Button x:Name="Edit_Selector" Margin="41.08,0,0,19" VerticalAlignment="Bottom" Height="23" Content="Edit Selector" RenderTransformOrigin="0.79,1.043" HorizontalAlignment="Left" Width="93" Cursor="Hand" />
 			<ListBox x:Name="Favourites_List" HorizontalAlignment="Left" Margin="40.5,58.5,0,0" VerticalAlignment="Top" Width="204" Height="136.5"/>
 			<ListBox x:Name="WeirdFile_List" HorizontalAlignment="Left" Margin="39,0,0,70.5" VerticalAlignment="Bottom" Width="204" Height="98.143" Style="{DynamicResource weirdFilesListItemsStyle}"/>
@@ -1162,7 +1162,7 @@
 			</Custom:DataGrid>
 			<Button x:Name="doneButton" HorizontalAlignment="Right" Margin="0,0,21.853,79.143" VerticalAlignment="Bottom" Width="70.476" Height="24.762" Content="Done" IsEnabled="False"/>
 			<TextBlock x:Name="CurrentSyncingFile_Copy" Margin="39.032,67.643,0.493,0" TextWrapping="Wrap" Text="Please choose the file that you want to sync." VerticalAlignment="Top" Height="24.761"/>
-			<Button x:Name="resolveButton" HorizontalAlignment="Right" Margin="0,0,22.853,138.19" VerticalAlignment="Bottom" Width="75.238" Height="25.715" Content="Resolve" Click="resolvePartnership_Click"/>
+			<Button x:Name="resolveButton" HorizontalAlignment="Right" Margin="0,0,22.853,138.19" VerticalAlignment="Bottom" Width="75.238" Height="25.715" Content="Resolve" Click="ResolvePartnership_Click"/>
 		</Grid>
 		<Grid x:Name="Settings" Margin="0.027,0,-0.027,0" VerticalAlignment="Bottom" Height="444" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
 			<Grid.RenderTransform>
@@ -1204,7 +1204,7 @@
 			</ComboBox>
 			<ComboBox x:Name="SBSWorkingDriveComboBox" Margin="225.29,159.769,126.49,0" VerticalAlignment="Top"/>
 			<Button x:Name="SaveSettingButton" HorizontalAlignment="Left" Margin="74.489,0,0,47.659" VerticalAlignment="Bottom" Width="75" Content="Save" Click="SaveSetting"/>
-			<Button x:Name="CancelSettingButton" Margin="214.917,0,213.417,47.659" VerticalAlignment="Bottom" Content="Cancel" Click="goHome" />
+			<Button x:Name="CancelSettingButton" Margin="214.917,0,213.417,47.659" VerticalAlignment="Bottom" Content="Cancel" Click="GoHome" />
 			<Button x:Name="DefaultSettingButton" HorizontalAlignment="Right" Margin="0,0,74.472,47.659" VerticalAlignment="Bottom" Width="75" Content="Default"  Click="DefaultSetting"/>
 		</Grid>
 	</Grid>
