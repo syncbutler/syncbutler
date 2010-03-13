@@ -34,6 +34,8 @@ namespace SyncButler
             this.right = right;
             this.autoResolveAction = autoResolveAction;
             this.suggestedAction = Action.Unknown;
+            _LeftOverwriteRight = (this.autoResolveAction == Conflict.Action.CopyToLeft || this.autoResolveAction == Conflict.Action.DeleteRight);
+            _RightOverwriteLeft = !_LeftOverwriteRight;
         }
 
         public string OffendingPath
@@ -63,41 +65,25 @@ namespace SyncButler
         {
             get
             {
-                if ((_LeftOverwriteRight == false) && (_RightOverwriteLeft == false))
-                    return _LeftOverwriteRight = (this.SuggestedAction == Conflict.Action.CopyToLeft || this.SuggestedAction == Conflict.Action.DeleteRight);
-                else
-                    return _LeftOverwriteRight;
+                return _LeftOverwriteRight;
             }
             set
             {
-                if (value)
-                {
-                    autoResolveAction = this.SuggestedAction;
-                }
-                else
-                {
-                    RightOverwriteLeft = true;
-                }
                 _LeftOverwriteRight = value;
+                _RightOverwriteLeft = !value;
+
             }
         }
         public bool RightOverwriteLeft
         {
             get
             {
-                return !(bool)LeftOverwriteRight;
+                return _RightOverwriteLeft;
             }
             set
             {
-                if (value)
-                {
-                    autoResolveAction = this.SuggestedAction;
-                }
-                else
-                {
-                    LeftOverwriteRight = true;
-                }
                 _RightOverwriteLeft = value;
+                _LeftOverwriteRight = !value;
             }
         }
         /// <summary>
@@ -151,8 +137,36 @@ namespace SyncButler
         /// <returns></returns>
         public Error Resolve()
         {
-            if (this.autoResolveAction == Action.Unknown) throw new InvalidActionException();
-            return this.Resolve(this.autoResolveAction);
+            if (_LeftOverwriteRight && _RightOverwriteLeft)
+                throw new NotSupportedException("Merging not support currently");
+            if (_LeftOverwriteRight)
+            {
+                if (!left.Exists())
+                {
+                    right.Delete();
+                    return Error.NoError;
+                }
+                else
+                {
+                    left.CopyTo(right);
+                    return Error.NoError;
+                }
+
+            }
+            if (_RightOverwriteLeft)
+            {
+                if (!right.Exists())
+                {
+                    left.Delete();
+                    return Error.NoError;
+                }
+                else
+                {
+                    right.CopyTo(left);
+                    return Error.NoError;
+                }
+            }
+            throw new InvalidActionException();
         }
 
         /// <summary>

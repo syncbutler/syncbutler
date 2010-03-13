@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using SyncButler.MRU;
 using System.Xml;
 using ISyncButler;
+using System.Collections.ObjectModel;
 
 namespace SyncButler
 {
@@ -150,13 +151,14 @@ namespace SyncButler
         /// <summary>
         /// Synchronizes all partnerships.
         /// </summary>
-        public List<ConflictList> SyncAll()
+        public ObservableCollection<ConflictList> SyncAll()
         {
-            List<ConflictList> AllConflict = new List<ConflictList>();
+
+            ObservableCollection<ConflictList> AllConflict = new ObservableCollection<ConflictList>();
             foreach (string name in GetPartnershipList().Keys)
             {
                 List<Conflict> conflict = SyncPartnership(name);
-                AllConflict.Add(new ConflictList(conflict,name));
+                AllConflict.Add(new ConflictList(conflict, name));
             }
 
             return AllConflict;
