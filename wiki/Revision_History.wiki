@@ -5,6 +5,8 @@ This version is not publicly released.
 
  * Rough UI
  * Very basic synchronisation functionalities (without conflict checking)
+ * Able to create/view partnership
+ * Sneak Preview of sync butler, sync!
 
 =v0.4=
 This version is not publicly released.
@@ -12,3 +14,16 @@ This version is not publicly released.
  * UI further developed
  * Synchronisation functionality stabilised and basic support for conflict resolution introduced
  * Proof-of-concept favourites introduced
+
+=v0.6=
+This version is not publicly released.
+
+ * UI further developed and more complete. Introduces common message dialogue
+ * Complete partnership viewing feature
+ * Syncing is multi threaded
+   * Syncing is performed autonomously for very large percentage of the differences in folders
+   * Conflicts are presented to the user while syncing is carried, use is able to specify desired action
+ * Settings page introduced
+ * Refined Sync Butler, Sync! (SBS)
+ * More rigourous checks done on behalf of user, smarter predetermination of action for conflicts
+   * Included recommended action for conflicts (differences)
