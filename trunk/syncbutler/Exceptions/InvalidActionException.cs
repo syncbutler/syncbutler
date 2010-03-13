@@ -7,7 +7,7 @@ namespace SyncButler.Exceptions
     /// This is SyncButler specific exception that is generated when
     /// an abnormal action has been specified by another method.
     /// </summary>
-    class InvalidActionException : Exception
+    public class InvalidActionException : Exception
     {
     }
 }
