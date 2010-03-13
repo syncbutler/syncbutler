@@ -130,7 +130,7 @@ namespace SyncButler
                             {
                                 value = long.Parse(xmlData.GetAttribute("value"));
                             }
-                            catch (FormatException e)
+                            catch (FormatException)
                             {
                                 throw new InvalidDataException("Invalid value in the checksum dictionary");
                             }
