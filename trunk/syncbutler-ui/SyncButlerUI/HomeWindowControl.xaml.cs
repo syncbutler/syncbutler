@@ -184,7 +184,7 @@ namespace SyncButlerUI
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void goToPartnershipDest_Click(object sender, RoutedEventArgs e){
+		private void GoToPartnershipDest_Click(object sender, RoutedEventArgs e){
 		    try{
 			checkInput();
 			PartnershipTempData.sourcePath=sourceTextBox.Text;
@@ -194,7 +194,7 @@ namespace SyncButlerUI
             }
             catch (UserInputException uIException)
             {
-				showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
+				showMessageBox(CustomDialog.MessageType.Error,uIException.message);
 			}
 		}
 		
@@ -204,8 +204,9 @@ namespace SyncButlerUI
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		
-		private void goToCreatePartnership_Click(object sender, RoutedEventArgs e){
+		private void GoToCreatePartnership_Click(object sender, RoutedEventArgs e){
 		   clearTreeView();
+           new PartnershipTempData();
 		   VisualStateManager.GoToState(this,"CreatePartnershipState1",false);
 		}
 		
@@ -214,7 +215,7 @@ namespace SyncButlerUI
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void goBackToCreatePartnershipSrc_Click(object sender, RoutedEventArgs e){
+		private void GoBackToCreatePartnershipSrc_Click(object sender, RoutedEventArgs e){
 		  	try{
 
 			PartnershipTempData.destinationPath=sourceTextBox.Text;
@@ -224,7 +225,7 @@ namespace SyncButlerUI
             }
             catch (UserInputException uIException)
             {
-				showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
+				showMessageBox(CustomDialog.MessageType.Error,uIException.message);
 			}
 		}
 		/// <summary>
@@ -232,19 +233,11 @@ namespace SyncButlerUI
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void goToCreatePartnershipName_Click(object sender, RoutedEventArgs e){
+		private void GoToCreatePartnershipName_Click(object sender, RoutedEventArgs e){
 			try{
 			checkInput();
 			PartnershipTempData.destinationPath=sourceTextBox.Text;
-		    if(PartnershipTempData.destinationPath.Equals(PartnershipTempData.sourcePath)){
-			throw new Exception("Same Folders selected: Please pick another Folder");	
-			}else if ( PartnershipTempData.sourcePath.IndexOf(PartnershipTempData.destinationPath+"\\")==0 )	
-			{
-				throw new Exception("Error- 1st Folder is under the 2nd Folder  ");	
-			}
-			else if (PartnershipTempData.destinationPath.IndexOf(PartnershipTempData.sourcePath+"\\")==0){
-				throw new Exception("Error- 2nd Folder is under the 1st Folder  ");	
-			}
+            ValidateFoldersHierachy();
 			sourceTextBox1.Text=PartnershipTempData.sourcePath;
 			destinationTextBox1.Text=PartnershipTempData.destinationPath;
 			partnershipNameTextBox.Text=PartnershipTempData.partnershipName;	
@@ -252,7 +245,7 @@ namespace SyncButlerUI
             }
             catch (UserInputException uIException)
             {
-				showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
+				showMessageBox(CustomDialog.MessageType.Error,uIException.message);
 			}	
 		}
 		/// <summary>
@@ -260,7 +253,7 @@ namespace SyncButlerUI
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void goBackToCreatePartnershipDes_Click(object sender, RoutedEventArgs e){
+		private void GoBackToCreatePartnershipDes_Click(object sender, RoutedEventArgs e){
 		   PartnershipTempData.partnershipName=partnershipNameTextBox.Text;
 		   destinationTextBox1.Text=PartnershipTempData.destinationPath;
 		   clearTreeView();	
@@ -273,7 +266,7 @@ namespace SyncButlerUI
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void createPartnership_Click(object sender, RoutedEventArgs e){
+		private void CreatePartnership_Click(object sender, RoutedEventArgs e){
 		 try{
 			if(partnershipNameTextBox.Text.Equals("")){
 			    throw new Exception("Please input a partnership name");	
@@ -293,7 +286,7 @@ namespace SyncButlerUI
          }
          catch (UserInputException uIException)
          {
-				showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
+				showMessageBox(CustomDialog.MessageType.Error,uIException.message);
 			}	
 		}
 		#endregion
@@ -302,7 +295,7 @@ namespace SyncButlerUI
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void goHome(object sender, RoutedEventArgs e){
+		private void GoHome(object sender, RoutedEventArgs e){
 				VisualStateManager.GoToState(this,"Home",false);
 		}
 		
@@ -311,7 +304,7 @@ namespace SyncButlerUI
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-        private void goToViewPartnerships_Click(object sender, RoutedEventArgs e)
+        private void GoToViewPartnerships_Click(object sender, RoutedEventArgs e)
         {
 			VisualStateManager.GoToState(this,"ViewPartnership1",false);
 			SortedList<string,Partnership> partnershiplist = this.Controller.GetPartnershipList();
@@ -326,7 +319,7 @@ namespace SyncButlerUI
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void deletePartnership_Click(object sender, RoutedEventArgs e)
+		private void DeletePartnership_Click(object sender, RoutedEventArgs e)
 		{
 			try{
 		  	if(partnershipList.SelectedIndex<0){
@@ -337,7 +330,7 @@ namespace SyncButlerUI
 				partnershipList.Items.Refresh();
 			}
 			}catch(UserInputException uIException){
-					showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
+					showMessageBox(CustomDialog.MessageType.Error,uIException.message);
 			}
 		}
 		
@@ -361,7 +354,7 @@ namespace SyncButlerUI
             }
             catch (UserInputException uIException)
             {
-					showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
+					showMessageBox(CustomDialog.MessageType.Error,uIException.message);
 			}
             
 		}
@@ -372,7 +365,7 @@ namespace SyncButlerUI
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void resolvePartnership_Click(object sender, RoutedEventArgs e){
+		private void ResolvePartnership_Click(object sender, RoutedEventArgs e){
 			// resolve it here?
             //List<SamplePartnershipConflict> conflictList=(List<SamplePartnershipConflict>)this.ConflictList.ItemsSource;
             try
@@ -400,7 +393,7 @@ namespace SyncButlerUI
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void goToExploreFeatures_Click(object sender, RoutedEventArgs e)
+		private void GoToExploreFeatures_Click(object sender, RoutedEventArgs e)
 		{
 			showMessageBox(CustomDialog.MessageType.Message,"Exploring New Features is still under construction!");
 		}
@@ -485,7 +478,7 @@ namespace SyncButlerUI
          }
          catch (UserInputException uIException)
          {
-				showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
+				showMessageBox(CustomDialog.MessageType.Error,uIException.message);
 			}	
           }
 
@@ -496,7 +489,7 @@ namespace SyncButlerUI
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		
-		private void goToEditPartnership_Click(object sender, RoutedEventArgs e){
+		private void GoToEditPartnership_Click(object sender, RoutedEventArgs e){
 		   clearTreeView();
 			try{
 		  	if(partnershipList.SelectedIndex<0){
@@ -506,7 +499,7 @@ namespace SyncButlerUI
 			 PartnershipTempData.oldPartnershipName= PartnershipTempData.partnershipName;
 			sourceTextBox.Text=PartnershipTempData.sourcePath;
 			}catch(UserInputException uIException){
-					showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
+					showMessageBox(CustomDialog.MessageType.Error,uIException.message);
 			}
 		   VisualStateManager.GoToState(this,"EditPartnershipState1",false);
 		}
@@ -515,7 +508,7 @@ namespace SyncButlerUI
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void goToEditPartnershipDest_Click(object sender, RoutedEventArgs e){
+		private void GoToEditPartnershipDest_Click(object sender, RoutedEventArgs e){
 		    try{
 			checkInput();
 			PartnershipTempData.sourcePath=sourceTextBox.Text;
@@ -525,7 +518,7 @@ namespace SyncButlerUI
             }
             catch (UserInputException uIException)
             {
-				showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
+				showMessageBox(CustomDialog.MessageType.Error,uIException.message);
 			}
 		}
 		
@@ -535,7 +528,7 @@ namespace SyncButlerUI
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void goBackToEditPartnershipSrc_Click(object sender, RoutedEventArgs e){
+		private void GoBackToEditPartnershipSrc_Click(object sender, RoutedEventArgs e){
 		  	try{
 
 			PartnershipTempData.destinationPath=sourceTextBox.Text;
@@ -545,7 +538,7 @@ namespace SyncButlerUI
             }
             catch (UserInputException uIException)
             {
-				showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
+				showMessageBox(CustomDialog.MessageType.Error,uIException.message);
 			}
 		}
 		/// <summary>
@@ -553,19 +546,11 @@ namespace SyncButlerUI
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void goToEditPartnershipName_Click(object sender, RoutedEventArgs e){
+		private void GoToEditPartnershipName_Click(object sender, RoutedEventArgs e){
 			try{
 			checkInput();
 			PartnershipTempData.destinationPath=sourceTextBox.Text;
-		    if(PartnershipTempData.destinationPath.Equals(PartnershipTempData.sourcePath)){
-			throw new Exception("Same Folders selected: Please pick another Folder");	
-			}else if ( PartnershipTempData.sourcePath.IndexOf(PartnershipTempData.destinationPath+"\\")==0 )	
-			{
-				throw new Exception("Error- 1st Folder is under the 2nd Folder  ");	
-			}
-			else if (PartnershipTempData.destinationPath.IndexOf(PartnershipTempData.sourcePath+"\\")==0){
-				throw new Exception("Error- 2nd Folder is under the 1st Folder  ");	
-			}
+            ValidateFoldersHierachy();
 			sourceTextBox1.Text=PartnershipTempData.sourcePath;
 			destinationTextBox1.Text=PartnershipTempData.destinationPath;
 			partnershipNameTextBox.Text=PartnershipTempData.partnershipName;	
@@ -573,7 +558,7 @@ namespace SyncButlerUI
             }
             catch (UserInputException uIException)
             {
-				showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
+				showMessageBox(CustomDialog.MessageType.Error,uIException.message);
 			}	
 		}
 		/// <summary>
@@ -581,7 +566,7 @@ namespace SyncButlerUI
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void goBackToEditPartnershipDes_Click(object sender, RoutedEventArgs e){
+		private void GoBackToEditPartnershipDes_Click(object sender, RoutedEventArgs e){
 		   PartnershipTempData.partnershipName=partnershipNameTextBox.Text;
 		   destinationTextBox1.Text=PartnershipTempData.destinationPath;
 		   clearTreeView();	
@@ -631,8 +616,34 @@ namespace SyncButlerUI
 				throw new UserInputException("No Such Folder");
 		
 			}
-			
+           
 		}
+        private void ValidateFoldersHierachy()
+        {
+
+            string tempfolder1Name = PartnershipTempData.sourcePath;
+            string tempfolder2Name = PartnershipTempData.destinationPath;
+            if (!PartnershipTempData.sourcePath.EndsWith("\\"))
+            {
+                tempfolder1Name += "\\";
+            }
+            if (!PartnershipTempData.destinationPath.EndsWith("\\"))
+            {
+                tempfolder2Name += "\\";
+            }
+            if (tempfolder2Name.Equals(tempfolder1Name))
+            {
+                throw new UserInputException("Same Folders selected: Please pick another Folder");
+            }
+            else if (tempfolder1Name.IndexOf(tempfolder2Name) == 0)
+            {
+                throw new UserInputException("Error- 1st Folder is under the 2nd Folder  ");
+            }
+            else if (tempfolder2Name.IndexOf(tempfolder1Name) == 0)
+            {
+                throw new UserInputException("Error- 2nd Folder is under the 1st Folder  ");
+            }
+        }
 		
 
 	}
