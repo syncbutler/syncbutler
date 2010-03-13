@@ -144,22 +144,46 @@ namespace SyncButler
             partnershipList.Remove(oldname);
             Partnership updated = CreatePartnership(newname, leftpath, rightpath);
 
+            //Conditions check
+            bool nameUnchanged = false;
+            bool pathUnchanged = false;
+
             //See if the friendly name is already in used (even after it is removed)
             if (!IsUniquePartnershipName(newname))
             {
-                partnershipList.Add(oldname, backupElement);
-                throw new ArgumentException("Friendly name already in used. Update failure. Previous Partnership record kept");
+                nameUnchanged = true;
+                //throw new ArgumentException("Friendly name already in used. Update failure. Previous Partnership record kept");
             }
 
             //Checks if the user try to update the partnership with existing partnerships
             if (!IsUniquePartnershipPath(updated.Name, updated.LeftFullPath, updated.RightFullPath))
             {
-                partnershipList.Add(oldname, backupElement);
-                throw new ArgumentException("This file/folder partnership already exists. Update failure. Previous Partnership record kept");
+                pathUnchanged = true;
             }
 
-            //if okay, go ahead and store
-            partnershipList.Add(newname, updated);
+            //Name is the same, only path is changed
+            if (nameUnchanged == true && pathUnchanged == false)
+            {
+                partnershipList.Add(newname, updated);
+            }
+
+            //Path is unchanged, only name is changed
+            else if (nameUnchanged == false && pathUnchanged == true)
+            {
+                //Partnership checksum dictionary is retained
+                partnershipList.Add(newname, backupElement);
+            }
+
+            else if (nameUnchanged == true && pathUnchanged == true)
+            {
+                throw new ArgumentException("This file/folder partnership already exists. Previous Partnership record kept");
+            }
+
+            //Both changed, old element is removed and new one is added
+            else
+            {
+                partnershipList.Add(newname, updated);
+            }
             
             StoreEnv(); //Save the partnership to disk immediately
         }
