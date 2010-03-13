@@ -40,10 +40,11 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Management" />
-
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Checksums\Adler32.cs" />

@@ -18,6 +18,7 @@ using System.ComponentModel;
 using WPF_Explorer_Tree;
 using SyncButler;
 using SyncButler.Exceptions;
+using System.Collections.ObjectModel;
 
 namespace SyncButlerUI
 {
@@ -417,7 +418,7 @@ namespace SyncButlerUI
 			return (bool)dialog.DialogResult;
 		}
 
-        public List<ConflictList> mergedList;
+        public ObservableCollection<ConflictList> mergedList;
 		/// <summary>
 		/// Executes when SyncAll button is clicked.
 		/// </summary>
