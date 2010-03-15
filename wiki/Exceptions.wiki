@@ -1,0 +1,14 @@
+#summary Special exceptions defined for various use
+
+= Introduction =
+
+Contains exceptions which are used in various circumstances.
+
+= Details =
+
+    * [InvalidActionException.cs]
+    * [InvalidPartnershipException.cs]
+    * [InvalidPathException.cs]
+    * [SyncableNotExistsException.cs]
+    * [UnknownStorageFormatException.cs]
+    * [UserInputException.cs]
