@@ -48,7 +48,7 @@ namespace SyncButlerUI
             //controller = new Controller();
             //partnershipList.ItemsSource = controller.GetPartnershipList();
 		}
-		
+        private string NewPartnershipName = "";
 	#region UIcode
 	/// <summary>
     /// Interaction logic for Creating Partnership
@@ -276,6 +276,7 @@ namespace SyncButlerUI
 			sourceFolderPath.Text=PartnershipTempData.sourcePath;
 			destinationFolderPath.Text=PartnershipTempData.destinationPath;
 		    partnerShipName.Text=PartnershipTempData.partnershipName;
+            NewPartnershipName = partnerShipName.Text;
 			this.Controller.AddPartnership(partnerShipName.Text,sourceFolderPath.Text,destinationFolderPath.Text);
 			VisualStateManager.GoToState(this,"CreatePartnershipDone1",false);
 			sourceTextBox1.Text="";
@@ -451,7 +452,7 @@ namespace SyncButlerUI
 		private void SyncThisPartnership_Click(object sender, RoutedEventArgs e){
 			
 			if (showMessageBox(CustomDialog.MessageType.Question,"Are you sure?")==true){
-				this.ConflictList.ItemsSource = this.Controller.SyncPartnership(PartnershipTempData.partnershipName);
+                this.ConflictList.ItemsSource = this.Controller.SyncPartnership(NewPartnershipName);
 				VisualStateManager.GoToState(this,"ConflictState1",false);
 
 				this.ConflictList.Items.Refresh();
@@ -460,27 +461,29 @@ namespace SyncButlerUI
 		}
 		private void SavePartnership_Click(object sender, RoutedEventArgs e)
         {
-			try{
-				if(partnershipNameTextBox.Text.Equals("")){
-			    throw new UserInputException("Please input a partnership name");	
+			try
+            {
+				if(partnershipNameTextBox.Text.Equals(""))
+                {
+			        throw new UserInputException("Please input a partnership name");	
 				}
-			PartnershipTempData.partnershipName=partnershipNameTextBox.Text;
-			sourceFolderPath.Text=PartnershipTempData.sourcePath;
-			destinationFolderPath.Text=PartnershipTempData.destinationPath;
-		    partnerShipName.Text=PartnershipTempData.partnershipName;
-			this.Controller.UpdatePartnership(PartnershipTempData.oldPartnershipName,partnerShipName.Text,sourceFolderPath.Text,destinationFolderPath.Text);
-			VisualStateManager.GoToState(this,"EditPartnershipDone1",false);
-			sourceTextBox1.Text="";
-			destinationTextBox1.Text="";
-			sourceTextBox.Text="";
-		    PartnershipTempData.clear();
-			partnershipList.Items.Refresh();
-         }
-         catch (UserInputException uIException)
-         {
+			    PartnershipTempData.partnershipName=partnershipNameTextBox.Text;
+			    sourceFolderPath.Text=PartnershipTempData.sourcePath;
+			    destinationFolderPath.Text=PartnershipTempData.destinationPath;
+		        partnerShipName.Text=PartnershipTempData.partnershipName;
+			    this.Controller.UpdatePartnership(PartnershipTempData.oldPartnershipName,partnerShipName.Text,sourceFolderPath.Text,destinationFolderPath.Text);
+			    VisualStateManager.GoToState(this,"EditPartnershipDone1",false);
+			    sourceTextBox1.Text="";
+			    destinationTextBox1.Text="";
+			    sourceTextBox.Text="";
+		        PartnershipTempData.clear();
+			    partnershipList.Items.Refresh();
+            }
+            catch (UserInputException uIException)
+            {
 				showMessageBox(CustomDialog.MessageType.Error,uIException.message);
 			}	
-          }
+        }
 
 		
 		/// <summary>
