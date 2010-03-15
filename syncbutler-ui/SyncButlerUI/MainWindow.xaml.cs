@@ -55,7 +55,7 @@ namespace SyncButlerUI
 			//homeWindow1.goHome(sender,e);
 			VisualStateManager.GoToState(homeWindow1,"Home",false);
 		}
-        private SortedList<string, string> MRUs;
+        private SortedList<string,SortedList<string, string>> MRUs;
 
 		private void goToSyncButlerSync(object sender, RoutedEventArgs e)
 		{
@@ -63,14 +63,19 @@ namespace SyncButlerUI
 			//homeWindow1.goHome(sender,e);
 			VisualStateManager.GoToState(homeWindow1,"SbsState1",false);
             MRUs = controller.GetMonitoredFiles();
-            foreach (string filenames in MRUs.Keys)
+            foreach (string filenames in MRUs["interesting"].Keys)
 			{
 				//this.homeWindow1.Favourites_List.Items.Add(filenames.Substring(filenames.LastIndexOf('\\')+1));
                 this.homeWindow1.Favourites_List.Items.Add(filenames);
 			}
-			this.homeWindow1.WeirdFile_List.Items.Clear();
-			this.homeWindow1.WeirdFile_List.Items.Add("C:\\secret.jpg");
-			this.homeWindow1.WeirdFile_List.Items.Add("C:\\abc co\\secret stuff.jpg");
+            this.homeWindow1.WeirdFile_List.Items.Clear();
+            foreach (string filenames in MRUs["sensitive"].Keys)
+            {
+                this.homeWindow1.WeirdFile_List.Items.Add(filenames);
+            }
+			
+            //this.homeWindow1.WeirdFile_List.Items.Add("C:\\secret.jpg");
+            //this.homeWindow1.WeirdFile_List.Items.Add("C:\\abc co\\secret stuff.jpg");
 		}
 		private void GoToSetting(object sender, RoutedEventArgs e)
 		{

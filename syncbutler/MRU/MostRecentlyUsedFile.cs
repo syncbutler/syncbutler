@@ -117,18 +117,18 @@ namespace SyncButler.MRU
         /// <returns>the cleaned list of MRU</returns>
         private static List<string> CleanUP(List<string> MRUs)
         {
-            SortedList<string,int> filenames = new SortedList<string,int>();
+            List<string> filenames = new List<string>();
             foreach (string filename in MRUs)
             {
-                if (File.Exists(filename))
+                if (!filenames.Contains(filename))
                 {
-                    if(!filenames.Keys.Contains(filename))
-                        filenames.Add(filename,0);
+                    if (File.Exists(filename))
+                    {
+                        filenames.Add(filename);
+                    }
                 }
             }
-            List<string> rtn = new List<string>();
-            rtn.AddRange(filenames.Keys);
-            return (rtn);
+            return (filenames);
         }
 
         /// <summary>

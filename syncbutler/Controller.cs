@@ -187,9 +187,9 @@ namespace SyncButler
         /// <summary>
         /// Returns a list of most recently used files.
         /// </summary>
-        public SortedList<string,string> GetMonitoredFiles()
+        public SortedList<string,SortedList<string,string>> GetMonitoredFiles()
         {
-            return MostRecentlyUsedFile.ConvertToSortedList(MostRecentlyUsedFile.GetAll());
+            return ContentFilters.Spilt(MostRecentlyUsedFile.ConvertToSortedList(MostRecentlyUsedFile.GetAll()));
         }
         
         /// <summary>
@@ -200,7 +200,7 @@ namespace SyncButler
         {
             string syncTo = driveLetter + ":\\SyncButler\\" + SyncEnvironment.ComputerName + "\\";
             MRUList mruList = new MRUList();
-            mruList.Load(GetMonitoredFiles());
+            mruList.Load(GetMonitoredFiles()["interesting"]);
             mruList.Sync(SyncEnvironment.ComputerName, driveLetter);
             MRUList.SaveInfoTo(syncTo + "logs.xml", mruList);
         }
