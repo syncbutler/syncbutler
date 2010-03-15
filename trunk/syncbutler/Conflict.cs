@@ -14,6 +14,8 @@ namespace SyncButler
         protected internal ISyncable right;
         protected Action autoResolveAction;
         protected Action suggestedAction;
+        protected bool leftOverwriteRight;
+        protected bool rightOverwriteLeft;
 
         //private enum StatusOptions {Resolved, Unresolved, Resolving}
 
@@ -34,8 +36,8 @@ namespace SyncButler
             this.right = right;
             this.autoResolveAction = autoResolveAction;
             this.suggestedAction = Action.Unknown;
-            _LeftOverwriteRight = (this.autoResolveAction == Conflict.Action.CopyToLeft || this.autoResolveAction == Conflict.Action.DeleteRight);
-            _RightOverwriteLeft = !_LeftOverwriteRight;
+            leftOverwriteRight = (this.autoResolveAction == Conflict.Action.CopyToRight || this.autoResolveAction == Conflict.Action.DeleteRight);
+            rightOverwriteLeft = !leftOverwriteRight;
         }
 
         public string OffendingPath
@@ -59,18 +61,17 @@ namespace SyncButler
                 throw new NullReferenceException("Non Existance EntityPath");
             }
         }
-        bool _LeftOverwriteRight;
-        bool _RightOverwriteLeft;
+
         public bool LeftOverwriteRight
         {
             get
             {
-                return _LeftOverwriteRight;
+                return leftOverwriteRight;
             }
             set
             {
-                _LeftOverwriteRight = value;
-                _RightOverwriteLeft = !value;
+                leftOverwriteRight = value;
+                rightOverwriteLeft = !value;
 
             }
         }
@@ -78,12 +79,12 @@ namespace SyncButler
         {
             get
             {
-                return _RightOverwriteLeft;
+                return rightOverwriteLeft;
             }
             set
             {
-                _RightOverwriteLeft = value;
-                _LeftOverwriteRight = !value;
+                rightOverwriteLeft = value;
+                leftOverwriteRight = !value;
             }
         }
         /// <summary>
@@ -137,9 +138,10 @@ namespace SyncButler
         /// <returns></returns>
         public Error Resolve()
         {
-            if (_LeftOverwriteRight && _RightOverwriteLeft)
+            if (leftOverwriteRight && rightOverwriteLeft)
                 throw new NotSupportedException("Merging not support currently");
-            if (_LeftOverwriteRight)
+
+            if (leftOverwriteRight)
             {
                 if (!left.Exists())
                 {
@@ -153,7 +155,7 @@ namespace SyncButler
                 }
 
             }
-            if (_RightOverwriteLeft)
+            else if (rightOverwriteLeft)
             {
                 if (!right.Exists())
                 {
@@ -166,6 +168,7 @@ namespace SyncButler
                     return Error.NoError;
                 }
             }
+
             throw new InvalidActionException();
         }
 
