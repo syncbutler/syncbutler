@@ -11,6 +11,9 @@ namespace SyncButler
     /// </summary>
     public abstract class WindowsFileSystem : ISyncable
     {
+        protected static string PREF_FOLDER = @"folder:\\";
+        protected static string PREF_FILE = @"file:\\";
+        protected string driveLetter = null;
         protected string relativePath;
         protected string rootPath;
         protected string driveId;
@@ -29,6 +32,21 @@ namespace SyncButler
             {
                 this.nativeFileSystemObj.Refresh();
                 return this.nativeFileSystemObj.Name;
+            }
+        }
+        
+        /// <summary>
+        /// Gets/Sets the drive letter. This value is null by default.
+        /// </summary>
+        public string DriveLetter
+        {
+            get
+            {
+                return this.driveLetter;
+            }
+            set
+            {
+                this.driveLetter = value;
             }
         }
 
@@ -235,10 +253,22 @@ namespace SyncButler
         /// <summary>
         /// Method that is used internally to update the drive letter of the root path, based on the current drive ID.
         /// </summary>
-        protected void UpdateDriveLetter()
+        public void UpdateDriveLetter()
         {
             string driveLetter = SystemEnvironment.StorageDevices.GetDriveLetter(this.DriveID, this.PartitionIndex);
-            this.rootPath = ReplaceDriveLetter(this.rootPath, driveLetter);
+            this.driveLetter = driveLetter;
+            this.rootPath = ReplaceDriveLetter(this.rootPath, this.driveLetter);
+        }
+
+        /// <summary>
+        /// Method that is used internally to update the drive letter of the root path.
+        /// This method accepts a parameter that is the drive letter.
+        /// </summary>
+        /// <param name="driveLetter">Drive letter in the format of C:</param>
+        public void UpdateDriveLetter(string driveLetter)
+        {
+            this.driveLetter = driveLetter;
+            this.rootPath = ReplaceDriveLetter(this.rootPath, this.driveLetter);
         }
 
         /// <summary>
