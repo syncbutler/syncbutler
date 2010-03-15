@@ -432,7 +432,7 @@ namespace SyncButler
 
         public override string EntityPath()
         {
-            return "file:\\\\" + this.relativePath;
+            return PREF_FILE + this.relativePath;
         }
 
         public override string ToString()
@@ -453,77 +453,108 @@ namespace SyncButler
         /// <exception cref="NotSupportedException">The current stream does not support reading. (Probably while generating the checksum)</exception>
         /// <exception cref="ObjectDisposedException">The current stream is closed. (Probably while generating the checksum)</exception>
         /// <returns>A list of conflicts (may be empty)</returns>
-        public override List<Conflict> Sync(ISyncable otherPair)
+        public override List<Conflict> Sync(ISyncable otherObj)
         {
-            WindowsFile partner;
+            System.Diagnostics.Debug.Assert(otherObj is WindowsFile, "Other ISyncable passed is not a WindowsFile object.");
 
-            // Temporary -- give basic functionality first.
-            if (statusMonitor != null) statusMonitor(new SyncableStatus(this.EntityPath(), 0, 0, SyncableStatus.ActionType.Sync));
+            WindowsFile partner = (WindowsFile)otherObj;
+            if (this.statusMonitor != null) statusMonitor(new SyncableStatus(this.EntityPath(), 0, 0, SyncableStatus.ActionType.Sync));
 
-            if (otherPair is WindowsFile)// && this.EntityPath().Equals(otherPair.EntityPath()))
-                partner = (WindowsFile)otherPair;
-            else
-                throw new InvalidPartnershipException();
-
-            // Update the drive letter.
-            // It is actually faster to update the drive letter than to check whether it needs updating.
-            // Unless we decide to store the drive letter, but then it's memory vs speed.
-            this.UpdateDriveLetter();
-            partner.UpdateDriveLetter();
+            // Update the drive letters if needed.
+            if (this.driveLetter == null)
+                this.UpdateDriveLetter();
+            if (partner.driveLetter == null)
+                partner.UpdateDriveLetter();
             
-            // Check if the files are in sync
-
-            checksumCacheFresh = false; // Make sure we're really comparing with the current file
+            checksumCacheFresh = false; // Invalidate checksum cache
 
             List<Conflict> conflictList = new List<Conflict>();
             Conflict.Action autoResolveAction = Conflict.Action.Unknown;
             Conflict.Action suggestedAction = Conflict.Action.Unknown;
-            
-            if (!(this.nativeFileObj.Exists || partner.nativeFileObj.Exists)) // Left and Right don't exist
+
+            // Left and right don't exist. Nothing to do.
+            if (!(this.nativeFileObj.Exists || partner.nativeFileObj.Exists))
+            {
                 return conflictList;
-            else if (!this.nativeFileObj.Exists) // Left does not exist
-                autoResolveAction = Conflict.Action.CopyToLeft;
-            else if (!partner.nativeFileObj.Exists) // Right does not exist
-                autoResolveAction = Conflict.Action.CopyToRight;
+            }
+            // Left or right exists, or both.
             else
             {
-                if (this.Length != partner.Length) // Lengths are different
-                {
-                    autoResolveAction = Conflict.Action.Unknown;
-                }
-                else if (this.LastWriteTime.Equals(partner.LastWriteTime) || 
-                    (this.Checksum() == partner.Checksum())) // Files checksums are the same
+                // Dates of two files are the same OR checksums are the same
+                if ((this.Exists() && partner.Exists()) && (this.LastWriteTime.Equals(partner.LastWriteTime) || (this.Checksum() == partner.Checksum())))
                 {
                     if (!parentPartnership.ChecksumExists(this))
                         this.UpdateStoredChecksum();
+
                     return conflictList;
                 }
-                
-                bool leftChanged, rightChanged;
-                leftChanged = this.HasChanged();
-                rightChanged = partner.HasChanged();
-
-                if (rightChanged ^ leftChanged) // Right OR Left changed (not both)
+                else
                 {
-                    if (rightChanged)
-                        autoResolveAction = Conflict.Action.CopyToLeft;
-                    else if (leftChanged)
-                        autoResolveAction = Conflict.Action.CopyToRight;
-                }
-                else // Left and Right are both different
-                {
-                    int timeDifference = this.LastWriteTime.CompareTo(partner.LastWriteTime);
+                    // Both files exist
+                    if (this.Exists() && partner.Exists())
+                    {
+                        bool leftChanged = this.HasChanged();
+                        bool rightChanged = partner.HasChanged();
 
-                    if (timeDifference < 0) // Left is earlier than right
-                        suggestedAction = Conflict.Action.CopyToLeft;
-                    else if (timeDifference > 0) // Left is later than right
-                        suggestedAction = Conflict.Action.CopyToRight;
-                    else // Left and right are the same
-                        suggestedAction = Conflict.Action.Unknown;
+                        // Right OR Left changed (but not both)
+                        if (rightChanged ^ leftChanged)
+                        {
+                            if (rightChanged)
+                                autoResolveAction = Conflict.Action.CopyToLeft;
+                            else if (leftChanged)
+                                autoResolveAction = Conflict.Action.CopyToRight;
+                        }
+                        // Left and Right are both different
+                        else
+                        {
+                            int timeDifference = this.LastWriteTime.CompareTo(partner.LastWriteTime);
+
+                            // Left is earlier than right
+                            if (timeDifference < 0)
+                                suggestedAction = Conflict.Action.CopyToLeft;
+                            // Left is later than right
+                            else if (timeDifference > 0)
+                                suggestedAction = Conflict.Action.CopyToRight;
+                            // Left and right are the same
+                            else
+                                suggestedAction = Conflict.Action.Unknown;
+                        }
+                    }
+                    // One file exists only
+                    else
+                    {
+                        // Left exists
+                        if (this.Exists())
+                        {
+                            // Checksum does not exist - file is new
+                            if (!this.parentPartnership.ChecksumExists(partner))
+                                autoResolveAction = Conflict.Action.CopyToRight;
+                            else
+                            {
+                                // File did not change - means a deletion was made on one side.
+                                if (this.Checksum() == this.parentPartnership.GetLastChecksum(this))
+                                    autoResolveAction = Conflict.Action.DeleteLeft;
+                            }
+                        }
+                        // Right exists
+                        else if (partner.Exists())
+                        {
+                            // Checksum does not exist - file is new
+                            if (!this.parentPartnership.ChecksumExists(this))
+                                autoResolveAction = Conflict.Action.CopyToLeft;
+                            else
+                            {
+                                // File did not change - means a deletion was made on one side.
+                                if (partner.Checksum() == this.parentPartnership.GetLastChecksum(partner))
+                                    autoResolveAction = Conflict.Action.DeleteRight;
+                            }
+                        }
+                    }
                 }
             }
 
-            conflictList.Add(new Conflict(this, partner, autoResolveAction, suggestedAction));
+            Conflict conflict = new Conflict(this, partner, autoResolveAction, suggestedAction);
+            conflictList.Add(conflict);
             return conflictList;
         }
 
