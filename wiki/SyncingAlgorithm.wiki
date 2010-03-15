@@ -22,7 +22,7 @@ This is done because we can compare the two states (folder 1 and folder 2) with 
 
 === Adding to the Checksum Dictionary ===
 
-Checksums for files will be added to the dictionary if the sync performed on that particular file is successful. We only keep one copy of the hash as the files synced will be exactly the same anyway.
+Checksums for files will be added to the dictionary if the sync performed on that particular file is successful or if two identical files are found during scanning. We only keep one copy of the hash as the files synced will be exactly the same anyway.
 
 Ignore lists for conflicted copies is being considered for future versions.
 
