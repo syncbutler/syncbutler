@@ -57,6 +57,7 @@
     <Compile Include="Exceptions\SyncableNotExistsException.cs" />
     <Compile Include="Exceptions\InvalidActionException.cs" />
     <Compile Include="Exceptions\InvalidPartnershipException.cs" />
+    <Compile Include="Exceptions\UnknownStorageFormatException.cs" />
     <Compile Include="Exceptions\UserInputException.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="MRU\MostRecentlyUsedFile.cs" />

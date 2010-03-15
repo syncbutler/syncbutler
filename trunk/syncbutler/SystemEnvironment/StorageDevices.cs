@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 using System.Management;
 
 namespace SyncButler.SystemEnvironment
@@ -10,6 +11,12 @@ namespace SyncButler.SystemEnvironment
     /// </summary>
     public class StorageDevices
     {
+        public enum Format
+        {
+            FAT32,
+            NTFS
+        }
+
         /// <summary>
         /// Gets the drive letter, in the form of X:, based on the PNPDeviceID
         /// </summary>
@@ -175,6 +182,46 @@ namespace SyncButler.SystemEnvironment
             }
 
             return id;
+        }
+
+        /// <summary>
+        /// Returns the available space of a drive.
+        /// </summary>
+        /// <param name="driveLetter">Drive letter in the form of 'C' or 'C:' or 'C:\'. Must never be null.</param>
+        /// <returns>The available space (taking into consideration the user context) in bytes.</returns>
+        /// <exception cref="ArgumentNullException">If null was passed.</exception>
+        /// <exception cref="ArgumentException">If the drive letter provided is not valid.</exception>
+        /// <exception cref="UnauthorizedAccessException">If the user is not allowed to access the drive.</exception>
+        /// <exception cref="IOException">An I/O error occurred (for example, a disk error or a drive was not ready).</exception>
+        public static long GetAvailableSpace(string driveLetter)
+        {
+            DriveInfo drive = new DriveInfo(driveLetter);
+            return drive.AvailableFreeSpace;
+        }
+
+        /// <summary>
+        /// Returns the drive format.
+        /// </summary>
+        /// <param name="driveLetter">Drive letter in the form of 'C' or 'C:' or 'C:\'. Must never be null.</param>
+        /// <returns>The format of the drive (i.e. Format.NTFS or Format.FAT32).</returns>
+        /// <exception cref="ArgumentNullException">If null was passed.</exception>
+        /// <exception cref="ArgumentException">If the drive letter provided is not valid.</exception>
+        /// <exception cref="UnauthorizedAccessException">If the user is not allowed to access the drive.</exception>
+        /// <exception cref="IOException">An I/O error occurred (for example, a disk error or a drive was not ready).</exception>
+        /// <exception cref="Exceptions.UnknownStorageFormatException">If the underlying system call returned something that was not recognised.</exception>
+        public static Format Get(string driveLetter)
+        {
+            DriveInfo drive = new DriveInfo(driveLetter);
+            Format driveFormat;
+
+            if (drive.DriveFormat.ToUpper().Equals("NTFS"))
+                driveFormat = Format.NTFS;
+            else if (drive.DriveFormat.ToUpper().Equals("FAT32"))
+                driveFormat = Format.FAT32;
+            else
+                throw new Exceptions.UnknownStorageFormatException();
+
+            return driveFormat;
         }
     }
 }
