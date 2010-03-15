@@ -301,6 +301,7 @@ namespace SyncButler
         /// <returns>A list of conflicts detected</returns>
         public override List<Conflict> Sync(ISyncable otherPair)
         {
+            
             WindowsFolder partner;
 
             System.Diagnostics.Debug.Assert(parentPartnership != null, "The parent partnership has not been set; cannot sync");
@@ -309,12 +310,23 @@ namespace SyncButler
                 partner = (WindowsFolder)otherPair;
             else
                 throw new InvalidPartnershipException();
+            // check if the folder is created or not, else create
 
             // Update the drive letter.
             // It is actually faster to update the drive letter than to check whether it needs updating.
             // Unless we decide to store the drive letter, but then it's memory vs speed.
             this.UpdateDriveLetter();
             partner.UpdateDriveLetter();
+
+            // check if the folder is created or not, else create
+            if (!this.Exists())
+            {
+                Directory.CreateDirectory(rootPath + relativePath);
+            }
+            if (!partner.Exists())
+            {
+                Directory.CreateDirectory(partner.rootPath + partner.relativePath);
+            }
 
             // Compare the files and folders under this directory
             List<Conflict> conflicts = new List<Conflict>();
