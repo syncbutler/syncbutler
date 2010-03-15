@@ -15,7 +15,6 @@ namespace SyncButler.MRU
     [XmlRoot("MRUList", IsNullable = false)]
     public class MRUList
     {
-
         [XmlElement(Type = typeof(string))]
         public string ComputerName { get; set; }
 
@@ -25,9 +24,11 @@ namespace SyncButler.MRU
             get
             {
                 SyncedMRU[] mrus = new SyncedMRU[MRUs.Count];
-                for (int i = 0; i < mrus.Length; i++)
+                int i = 0;
+                foreach(string mru in MRUs.Values)
                 {
-                    mrus[i] = new SyncedMRU(MRUs[i], SyncTo + Path.GetFileName(MRUs[i]));
+                    mrus[i] = new SyncedMRU(mru, SyncTo + Path.GetFileName(mru));
+                    i++;
                 }
                 return mrus;
             }
@@ -36,17 +37,19 @@ namespace SyncButler.MRU
                 if (value == null)
                     return;
                 SyncedMRU[] mru = (SyncedMRU[])value;
-                if (MRUs == null)
-                    MRUs = new List<string>();
-                MRUs.Clear();
+                List<string> mrus = new List<string>();
+                //if (MRUs == null)
+                //    MRUs = new SortedList<string,string>();
+                //MRUs.Clear();
                 foreach (SyncedMRU s in mru)
                 {
-                    MRUs.Add(s.OriginalPath);
+                    mrus.Add(s.OriginalPath);
                 }
+                MRUs = MostRecentlyUsedFile.ConvertToSortedList(mrus);
             }
         }
 
-        private List<string> MRUs;
+        private SortedList<string, string> MRUs;
 
         private string SyncTo;
 
@@ -55,15 +58,16 @@ namespace SyncButler.MRU
         /// </summary>
         public MRUList()
         {
-            MRUs = new List<string>();
-
-            //
+            MRUs = new SortedList<string,string>();
+            //Load();
         }
 
-        public void Load()
+        public void Load(SortedList<string,string> mrus)
         {
-            MRUs.AddRange(MostRecentlyUsedFile.Get().Values);
+            MRUs = mrus;
         }
+
+
         /// <summary>
         /// Sync the MRU to SyncButler folder. Syncs in a manner similar to
         /// the classic synchorinisation used for files and folders. It will
@@ -81,20 +85,21 @@ namespace SyncButler.MRU
             {
                 Directory.CreateDirectory(SyncTo);
             }
-            foreach (string mru in MRUs)
+            //foreach (string mru in MRUs)
+            foreach(string mru in MRUs.Keys)
             {
-                if (File.Exists(mru))
+                if (File.Exists(MRUs[mru]))
                 {
-                    string Filename = Path.GetFileName(mru);
+                    //string Filename = Path.GetFileName(mru);
 
-                    if (!File.Exists(SyncTo + Filename))
+                    if (!File.Exists(SyncTo + mru))
                     {
-                        File.Copy(mru, SyncTo + Filename);
+                        File.Copy(MRUs[mru], SyncTo + mru);
                     }
                     else
                     {
-                        WindowsFile MRUFile = new WindowsFile(mru);
-                        WindowsFile Target = new WindowsFile(SyncTo + Filename);
+                        WindowsFile MRUFile = new WindowsFile(MRUs[mru]);
+                        WindowsFile Target = new WindowsFile(SyncTo + mru);
                         if (MRUFile.Length != Target.Length)
                         {
                             Conflicts.Add(new Conflict(MRUFile, Target, Conflict.Action.CopyToRight));

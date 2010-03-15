@@ -24,6 +24,33 @@ namespace SyncButler.MRU
         private static extern void ILFree(
             IntPtr pidl);
 
+        public static List<string> GetAll()
+        {
+            int depth = 2;
+            int days = 5;
+            List<string> mergedList = (MostRecentlyUsedFile.Get());
+            DirectoryInfo di = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+            mergedList.AddRange(MostRecentlyUsedFile.Scan(di.Parent.FullName, depth, days));
+            return CleanUP(mergedList);
+        }
+
+        public static SortedList<string, string> ConvertToSortedList(List<string> MRUs)
+        {
+            SortedList<string, string> MRUSorted = new SortedList<string, string>();
+            foreach (string mru in MRUs)
+            {
+                string filename = Path.GetFileName(mru);
+                int count = 2;
+                while (MRUSorted.Keys.Contains(filename))
+                {
+                    filename = filename.Substring(0, filename.LastIndexOf('.')) + count + Path.GetExtension(filename);
+                    count++;
+                }
+                MRUSorted.Add(filename, mru);
+            }
+            return MRUSorted;
+        }
+
         /// <summary>
         /// Scan for recently used file
         /// </summary>
@@ -31,7 +58,7 @@ namespace SyncButler.MRU
         /// <param name="depth">To scan how deep</param>
         /// <param name="howRecent">How many day old and below</param>
         /// <returns>A list of recently use file</returns>
-        public List<string> Scan(string path, int depth, int howRecent)
+        public static List<string> Scan(string path, int depth, int howRecent)
         {
             List<string> files = new List<string>();
             DirectoryInfo di = new DirectoryInfo(path);
@@ -47,9 +74,16 @@ namespace SyncButler.MRU
                     {
                         foreach (FileInfo fi in di.GetFiles())
                         {
-                            if ((DateTime.Now - fi.LastWriteTime).TotalDays <= (howRecent))
+                            if (((fi.Attributes & FileAttributes.System) |
+                                (fi.Attributes & FileAttributes.Hidden) |
+                                (fi.Attributes & FileAttributes.Encrypted) |
+                                (fi.Attributes & FileAttributes.Offline) |
+                                (fi.Attributes & FileAttributes.Temporary)) == 0)
                             {
-                                files.Add(fi.FullName);
+                                if ((DateTime.Now - fi.LastWriteTime).TotalDays <= (howRecent))
+                                {
+                                    files.Add(fi.FullName);
+                                }
                             }
                         }
                     }
@@ -81,22 +115,20 @@ namespace SyncButler.MRU
         /// </summary>
         /// <param name="MRUs">the list of MRUs</param>
         /// <returns>the cleaned list of MRU</returns>
-        private static SortedList<string, string> CleanUP(SortedList<string, string> MRUs)
+        private static List<string> CleanUP(List<string> MRUs)
         {
-            List<string> keys = new List<string>();
-            foreach (string key in MRUs.Keys)
+            SortedList<string,int> filenames = new SortedList<string,int>();
+            foreach (string filename in MRUs)
             {
-                string filename = MRUs[key];
-                if (!File.Exists(filename))
+                if (File.Exists(filename))
                 {
-                    keys.Add(key);
+                    if(!filenames.Keys.Contains(filename))
+                        filenames.Add(filename,0);
                 }
             }
-            foreach (string key in keys)
-            {
-                MRUs.Remove(key);
-            }
-            return MRUs;
+            List<string> rtn = new List<string>();
+            rtn.AddRange(filenames.Keys);
+            return (rtn);
         }
 
         /// <summary>
@@ -124,7 +156,7 @@ namespace SyncButler.MRU
         /// <returns>return path of the file</returns>
         /// <exception cref="SystemException">Is thrown when incompatible version of windows is detected
         /// (i.e., too new (>6.2) or too old (<5.1)</exception>
-        public static SortedList<string, string> Get()
+        public static List<string> Get()
         {
             if (Environment.OSVersion.Version > new Version(6, 2) || Environment.OSVersion.Version < new Version(5, 1))
                 throw new NotSupportedException("Incompatible (Newer) Version of Windows Detected. Feature not supported");
@@ -141,9 +173,9 @@ namespace SyncButler.MRU
         /// <param name="key">Registry key of the MRU</param>
         /// <returns>A sorted list of the MRU</returns>
         /// <exception cref="System.NullReferenceException">The given registry key is not valid</exception>
-        private static SortedList<string, string> GetNonPidl(string key)
+        private static List<string> GetNonPidl(string key)
         {
-            SortedList<string, string> mrus = new SortedList<string, string>();
+            List<string> mrus = new List<string>();
             RegistryKey regKey = Registry.CurrentUser.OpenSubKey(key);
             if (regKey == null)
                 throw new NullReferenceException();
@@ -151,7 +183,7 @@ namespace SyncButler.MRU
             {
                 if (!index.Equals("MRUListEx"))
                 {
-                    mrus.Add(index, (string)regKey.GetValue(index));
+                    mrus.Add((string)regKey.GetValue(index));
                 }
             }
 
@@ -164,9 +196,9 @@ namespace SyncButler.MRU
         /// <param name="key">Registry key of the MRU</param>
         /// <returns>A sorted list of the MRU</returns>
         /// <exception cref="System.NullReferenceException">The given registry key is not valid</exception>
-        private static SortedList<string, string> GetPidl(string key)
+        private static List<string> GetPidl(string key)
         {
-            SortedList<string, string> mrus = new SortedList<string, string>();
+            List<string> mrus = new List<string>();
             RegistryKey regKey = Registry.CurrentUser.OpenSubKey(key);
             if (regKey == null)
                 throw new NullReferenceException();
@@ -174,7 +206,7 @@ namespace SyncButler.MRU
             {
                 if (!index.Equals("MRUListEx"))
                 {
-                    mrus.Add(index, GetPidl(index, key));
+                    mrus.Add(GetPidl(index, key));
                 }
             }
             return mrus;

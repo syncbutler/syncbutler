@@ -118,9 +118,9 @@ namespace TestUI
 
         private static void PrintMRU()
         {
-            foreach (KeyValuePair<String,String> kvp in controller.GetMonitoredFiles())
+            foreach(string filename in controller.GetMonitoredFiles().Values)
             {
-                Console.Out.WriteLine(kvp.Key + " : " + kvp.Value);
+                Console.Out.WriteLine(filename);
             }
         }
         
