@@ -142,10 +142,14 @@ namespace SyncButler
         /// Starts syncing a partnership.
         /// </summary>
         /// <param name="idx">Index of the partnership to be synced.</param>
-        /// <returns>A list of conflicts. Will be null if there are no conflicts.</returns>
-        public List<Conflict> SyncPartnership(String name) 
+        /// <returns>ObservableCollection conflict list with a list of conflicts. Will be null if there are no conflicts.</returns>
+        public ObservableCollection<ConflictList> SyncPartnership(String name) 
         {
-            return syncEnvironment.GetPartnershipsList()[name].Sync();
+		  	ObservableCollection<ConflictList> AllConflict = new ObservableCollection<ConflictList>();
+           
+			List<Conflict> conflict = syncEnvironment.GetPartnershipsList()[name].Sync();
+			AllConflict.Add(new ConflictList(conflict,name));
+			return AllConflict;
         }
 
         /// <summary>
@@ -157,7 +161,7 @@ namespace SyncButler
             ObservableCollection<ConflictList> AllConflict = new ObservableCollection<ConflictList>();
             foreach (string name in GetPartnershipList().Keys)
             {
-                List<Conflict> conflict = SyncPartnership(name);
+                List<Conflict> conflict = syncEnvironment.GetPartnershipsList()[name].Sync();
                 AllConflict.Add(new ConflictList(conflict, name));
             }
 

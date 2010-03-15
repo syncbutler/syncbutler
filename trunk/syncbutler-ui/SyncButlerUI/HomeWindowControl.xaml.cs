@@ -33,7 +33,7 @@ namespace SyncButlerUI
     /// Defines the size of a single increment of the progress bar.
     /// </summary>
     //private int progressBarIncrement = 5;
-		
+	public ObservableCollection<ConflictList> mergedList;		
     private object dummyNode = null;
     public string SelectedImagePath { get; set; }
 	public SyncButler.Controller Controller{get;set;}
@@ -340,7 +340,7 @@ namespace SyncButlerUI
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void syncPartnership_Click(object sender, RoutedEventArgs e)
+		private void SyncPartnership_Click(object sender, RoutedEventArgs e)
 		{
 			try{
 		  	if(partnershipList.SelectedIndex<0){
@@ -349,9 +349,10 @@ namespace SyncButlerUI
 			if (showMessageBox(CustomDialog.MessageType.Question,"Are you sure?")==true){
 				Partnership partnershipSelected=(Partnership)partnershipList.SelectedValue;
 				this.ConflictList.ItemsSource=this.Controller.SyncPartnership(partnershipSelected.Name);
-				VisualStateManager.GoToState(this,"ConflictState1",false);
 				this.ConflictList.Items.Refresh();
-			}
+				VisualStateManager.GoToState(this,"ConflictState1",false);
+		
+				}
             }
             catch (UserInputException uIException)
             {
@@ -414,8 +415,7 @@ namespace SyncButlerUI
 			return (bool)dialog.DialogResult;
 		}
 
-        public ObservableCollection<ConflictList> mergedList;
-		/// <summary>
+     	/// <summary>
 		/// Executes when SyncAll button is clicked.
 		/// </summary>
 		/// <param name="sender"></param>
@@ -455,9 +455,12 @@ namespace SyncButlerUI
 		private void SyncThisPartnership_Click(object sender, RoutedEventArgs e){
 			
 			if (showMessageBox(CustomDialog.MessageType.Question,"Are you sure?")){
-                this.ConflictList.ItemsSource = this.Controller.SyncPartnership(NewPartnershipName);
-				VisualStateManager.GoToState(this,"ConflictState1",false);
-
+                VisualStateManager.GoToState(this,"ConflictState1",false);
+				this.ConflictList.ItemsSource = this.Controller.SyncPartnership(NewPartnershipName);
+				this.ConflictList.Items.Refresh();
+				this.ConflictList.IsEnabled=true;
+				this.resolveButton.IsEnabled=true;
+				this.doneButton.IsEnabled=false;
 				this.ConflictList.Items.Refresh();
 			}
       
