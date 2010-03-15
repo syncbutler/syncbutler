@@ -335,12 +335,25 @@ namespace SyncButler
 
             IRollingHash hashAlgorithm = new Adler32();
             long bufferSize = SyncEnvironment.FileReadBufferSize;
+            double toPercent = 100.0 / nativeFileObj.Length;
+            int percentComplete;
+            long processed = 0;
+            string curObj = EntityPath();
 
             this.OpenFile();
 
             while (!this.ReadEOF)
             {
+                if (statusMonitor != null)
+                {
+                    percentComplete = (int)(processed * toPercent);
+                    if (percentComplete > 100) percentComplete = 100;
+                    statusMonitor(new SyncableStatus(curObj, 0,
+                        percentComplete, SyncableStatus.ActionType.Checksum));
+                }
+
                 hashAlgorithm.Update(this.GetBytes(bufferSize));
+                processed += bufferSize;
             }
 
             this.CloseFile();
