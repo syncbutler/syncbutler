@@ -13,6 +13,8 @@ namespace SyncButler
     /// </summary>
     class ContentFilters
     {
+
+        #region censoredword
         //Censorship
         private static string englishSexualConnotation =
             "breast|\\scum\\s|cunt|blowjob|blow job|anal|booty|pussy\\s|tits|titty|titties|wank|" +
@@ -33,10 +35,14 @@ namespace SyncButler
         private static string personal =
             "personal|private|sensitive|initimate|embarrassing";
 
+         
+
         private static string sensitiveContentPattern =
             englishSexualConnotation + "|" + japaneseSexualConnotation + "|" +
             vulgarities + "|" + confidentiality + "|" + personal;
+        #endregion
 
+        #region extension
         //Combined censorship filter
         private static Regex sensitivePattern = null;
                 
@@ -95,7 +101,8 @@ namespace SyncButler
             ".dwg|.dwf|.3ds|.max";
 
         private static string gameFormats =
-            ".sav";        
+            ".sav";
+        #endregion
 
         //This sorted list will be iterated to determine which level of interest
         //the file type is in.
@@ -126,6 +133,28 @@ namespace SyncButler
                 return true;
             
             return false;
+        }
+
+        public static SortedList<string, SortedList<string, string>> Spilt(SortedList<string, string> mrus)
+        {
+            SortedList<string, string> interesting = new SortedList<string, string>();
+            SortedList<string, string> sensitive = new SortedList<string, string>();
+            foreach (string filename in mrus.Keys)
+            {
+                if (isSensitive(filename))
+                {
+                    sensitive.Add(filename, mrus[filename]);
+                }
+                else if (isInteresting(filename) != 0)
+                {
+                    interesting.Add(filename, mrus[filename]);
+                }
+            }
+            SortedList<string, SortedList<string, string>> spilt = new SortedList<string, SortedList<string, string>>();
+            spilt.Add("interesting",interesting);
+            spilt.Add("sensitive",sensitive);
+            return spilt;
+               
         }
 
         /// <summary>

@@ -118,9 +118,13 @@ namespace TestUI
 
         private static void PrintMRU()
         {
-            foreach(string filename in controller.GetMonitoredFiles().Values)
+            SortedList<string,SortedList<string,string>> mrus = controller.GetMonitoredFiles();
+            foreach (string keys in mrus.Keys)
             {
-                Console.Out.WriteLine(filename);
+                foreach (string filename in mrus[keys].Values)
+                {
+                    Console.Out.WriteLine(filename);
+                }
             }
         }
         
