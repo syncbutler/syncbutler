@@ -34,7 +34,7 @@ Object-oriented Programming is utilized to separate the code into manageable and
     * SettingsSection.cs
   * SystemEnvironment
     * StorageDevices.cs
-|
+  * -
   * Conflict.cs
   * ConflictList.cs
   * ContentFilters.cs
