@@ -18,6 +18,11 @@ This is done because we can compare the two states (folder 1 and folder 2) with 
      * Based on this situation, there is no such thing as deletion
   # If there are two modified files for the same filename and path
      * A SuggestAction will be triggered (read below)
+  # If the files are exactly the same, their hash will be added to the dictionary
+
+=== Adding to the Hash Dictionary ===
+
+Hash for files will be added to the dictionary if the sync performed on that particular file is successful. We only keep one copy of the hash as the files synced will be exactly the same anyway.
 
 == SuggestAction ==
 
