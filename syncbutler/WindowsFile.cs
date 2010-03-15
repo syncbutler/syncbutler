@@ -239,6 +239,8 @@ namespace SyncButler
         {
             Debug.Assert(!item.GetType().Name.Equals("WindowsFiles"), "Different type, the given type is " + item.GetType().Name);
 
+            IRollingHash hashAlgorithm = new Adler32();
+
             WindowsFile destFile = (WindowsFile)item;
             int bufferSize = (int) SyncEnvironment.FileReadBufferSize;
 
@@ -256,7 +258,12 @@ namespace SyncButler
                 do
                 {
                     amountRead = inputStream.Read(buf, 0, bufferSize);
-                    if (amountRead > 0) outputStream.Write(buf, 0, amountRead);
+                    if (amountRead > 0)
+                    {
+                        outputStream.Write(buf, 0, amountRead);
+                        if (!checksumCacheFresh) hashAlgorithm.Update(buf, 0, amountRead);
+
+                    }
 
                     totalCopied += amountRead;
                     if (statusMonitor != null) statusMonitor(new SyncableStatus(EntityPath(), 0, (int) (totalCopied * toPercent), SyncableStatus.ActionType.Copy));
@@ -265,6 +272,15 @@ namespace SyncButler
 
                 inputStream.Close();
                 outputStream.Close();
+
+                if (!checksumCacheFresh)
+                {
+                    checksumCacheFresh = true;
+                    checksumCache = hashAlgorithm.Value;
+                }
+
+                destFile.checksumCacheFresh = checksumCacheFresh;
+                destFile.checksumCache = checksumCache;
 
                 return Error.NoError;
             }
