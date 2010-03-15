@@ -59,8 +59,9 @@ namespace SyncButler
         /// <summary>
         /// Not implemented. Performs a delete action.
         /// </summary>
+        /// <param name="recoverable">if the action performed allow the user to do a roll back</param>
         /// <returns>True if delete succeeded, false otherwise.</returns>
-        Error Delete();
+        Error Delete(bool recoverable);
 
         /// <summary>
         /// Not implemented. Performs a merge based on the item provided.

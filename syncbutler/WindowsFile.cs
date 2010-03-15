@@ -6,6 +6,7 @@ using System.Text;
 using SyncButler.Checksums;
 using SyncButler.Exceptions;
 using System.Xml;
+using Microsoft.VisualBasic.FileIO;
 
 namespace SyncButler
 {
@@ -290,11 +291,18 @@ namespace SyncButler
         /// Attempts to delete this file.
         /// </summary>
         /// <returns>Error.NoError on no error. Error.NoPermission if users does not have permission to delete this file. Error.InvalidPath if the path is not valid</returns>
-        public override Error Delete()
+        public override Error Delete(bool recoverable)
         {
             try
             {
-                nativeFileObj.Delete();
+                if (recoverable)
+                {
+                    FileSystem.DeleteFile(nativeFileObj.FullName, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+                }
+                else
+                {
+                    nativeFileObj.Delete();
+                }
             }
             catch (System.Security.SecurityException)
             {

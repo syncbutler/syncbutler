@@ -7,6 +7,7 @@ using SyncButler.Checksums;
 using System.Collections;
 using System.Diagnostics;
 using System.Xml;
+using Microsoft.VisualBasic.FileIO;
 
 namespace SyncButler
 {
@@ -182,11 +183,18 @@ namespace SyncButler
         /// Deletes this folder
         /// </summary>
         /// <returns></returns>
-        public override Error Delete()
+        public override Error Delete(bool recoverable)
         {
             try
             {
-                nativeDirObj.Delete(true);
+                if (recoverable)
+                {
+                    Microsoft.VisualBasic.FileIO.FileSystem.DeleteDirectory(nativeDirObj.FullName, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+                }
+                else
+                {
+                    nativeDirObj.Delete(true);
+                }
             }
             catch (IOException)
             {
