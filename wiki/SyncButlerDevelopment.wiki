@@ -1,4 +1,4 @@
-#summary Introduction/Home Screen
+#summary Overview of classes used in development of SyncButler
 
 = Introduction =
 
