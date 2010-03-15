@@ -22,17 +22,6 @@
 									<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
 									<SplineDoubleKeyFrame KeyTime="00:00:04" Value="360"/>
 								</DoubleAnimationUsingKeyFrames>
-								<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="GreenArrow" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-									<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-									<SplineDoubleKeyFrame KeyTime="00:00:00.5000000" Value="27"/>
-									<SplineDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
-									<SplineDoubleKeyFrame KeyTime="00:00:01.5000000" Value="27"/>
-									<SplineDoubleKeyFrame KeyTime="00:00:02" Value="0"/>
-									<SplineDoubleKeyFrame KeyTime="00:00:02.5000000" Value="27"/>
-									<SplineDoubleKeyFrame KeyTime="00:00:03" Value="0"/>
-									<SplineDoubleKeyFrame KeyTime="00:00:03.5000000" Value="27"/>
-									<SplineDoubleKeyFrame KeyTime="00:00:04" Value="0"/>
-								</DoubleAnimationUsingKeyFrames>
 							</Storyboard>
 							<Storyboard x:Key="ButtonHighlight">
 								<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="bigButton_Copy" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
@@ -70,16 +59,6 @@
 									</LinearGradientBrush>
 								</Rectangle.Fill>
 							</Rectangle>
-							<Image x:Name="GreenArrow" Cursor="Hand" HorizontalAlignment="Right" Margin="0,0,28.484,6.269" VerticalAlignment="Bottom" Width="97" Height="97" Opacity="0.6" RenderTransformOrigin="0.5,0.5" Source="Images\Arrow-Left.png" Stretch="Fill">
-								<Image.RenderTransform>
-									<TransformGroup>
-										<ScaleTransform/>
-										<SkewTransform/>
-										<RotateTransform/>
-										<TranslateTransform/>
-									</TransformGroup>
-								</Image.RenderTransform>
-							</Image>
 							<TextBlock Cursor="Hand" Margin="186.709,96,32.984,39.5" Opacity="0.7" FontFamily="Arial" FontSize="18.667" Foreground="White" TextWrapping="Wrap"><Run Text="Work anywhere, any place."/><LineBreak/><Run Text="Start Sy"/><Run Text="nchronizing your files."/></TextBlock>
 							<ContentPresenter Margin="186.5,49.5,-9.625,0" VerticalAlignment="Top" Height="61.5" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Content="Start Syncing" RecognizesAccessKey="True"/>
 						</Grid>
@@ -306,8 +285,8 @@
 			<Setter Property="Template">
 				<Setter.Value>
 					<ControlTemplate TargetType="{x:Type Button}">
-						<Grid>
-							<Rectangle x:Name="bigButton_Copy3" Stroke="Black" Cursor="Hand" VerticalAlignment="Top" Height="184.174">
+						<Grid Margin="0,0,0,-3.175">
+							<Rectangle x:Name="bigButton_Copy3" Stroke="Black" Cursor="Hand" VerticalAlignment="Top" Height="185.762" Margin="-0.952,0,0,0" HorizontalAlignment="Left" Width="170.202">
 								<Rectangle.Fill>
 									<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" MappingMode="RelativeToBoundingBox">
 										<GradientStop Color="#00000000" Offset="1"/>
@@ -318,7 +297,7 @@
 							</Rectangle>
 							<TextBlock Margin="0,11.948,23.043,0" VerticalAlignment="Top" Height="72" Opacity="0.6" FontFamily="Arial" FontSize="21.333" Foreground="White" TextAlignment="Center" TextWrapping="Wrap" Cursor="Hand" HorizontalAlignment="Right" Width="128.723"><Run Text="Explore "/><Run FontStyle="Italic" Text="Features"/></TextBlock>
 							<TextBlock Margin="-21.974,130.948,13.917,0" VerticalAlignment="Top" Height="75.052" Opacity="0.5" FontFamily="Arial" FontSize="16" Foreground="White" TextWrapping="Wrap" TextAlignment="Right" Cursor="Hand"><Run Text="Discover"/><LineBreak/><Run Text="The easy way of life"/></TextBlock>
-							<Image Cursor="Hand" Margin="19.856,79.062,80.724,34.269" Opacity="0.6" Source="Images\Broken.png" Stretch="Fill"/>
+							<Image Cursor="Hand" Margin="0,0,81.934,36.808" Opacity="0.6" Source="Images\Broken.png" Stretch="Fill" VerticalAlignment="Bottom" Height="66.25" HorizontalAlignment="Right" Width="66.25"/>
 						</Grid>
 						<ControlTemplate.Triggers>
 							<Trigger Property="IsFocused" Value="True"/>
@@ -430,10 +409,7 @@
 				</Setter.Value>
 			</Setter>
 		</Style>
-		
-	
-
-		
+				
 	</UserControl.Resources>
 	<UserControl.RenderTransform>
 		<TransformGroup>
@@ -828,7 +804,7 @@
 				</Rectangle.Fill>
 			</Rectangle>
 			<Button x:Name="ViewPartnerships" HorizontalAlignment="Right" Margin="0,258.731,168,-20.5" Style="{DynamicResource ViewPartnershipButton}" Width="167" Content="" Click="GoToViewPartnerships_Click" Cursor="Hand"/>
-			<Button x:Name="ExploreFeaturesButton" HorizontalAlignment="Right" Margin="0,0,-0.5,2.334" Style="{DynamicResource ExploreFeaturesButton}" VerticalAlignment="Bottom" Width="169.25" Height="182.269" Content="Button" d:LayoutOverrides="VerticalAlignment" Click="GoToExploreFeatures_Click"/>
+			<Button x:Name="ExploreFeaturesButton" HorizontalAlignment="Right" Margin="0,0,-0.5,3.334" Style="{DynamicResource ExploreFeaturesButton}" VerticalAlignment="Bottom" Width="169.25" Height="182.269" Content="Button" d:LayoutOverrides="VerticalAlignment" Click="GoToExploreFeatures_Click"/>
 			<Button x:Name="CreatePartnershipButton" HorizontalAlignment="Left" Margin="7,0,0,2" Style="{DynamicResource CreatePartnersButton}" VerticalAlignment="Bottom" Width="164.483" Height="183.269" Content="" Cursor="Hand" Click="GoToCreatePartnership_Click"/>
 			<Button x:Name="SyncButton" Margin="-0.175,1,4.388,184.27" Style="{DynamicResource SyncButton}" Content="" Cursor="Hand" Click="Sync"/>
 		</Grid>
@@ -1145,7 +1121,7 @@
 			<TextBlock x:Name="ConflictsLabel" Margin="38.032,42.333,0,0" FontSize="16" FontWeight="Bold" Text="Conflicts" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Width="177.618" Height="28.571"/>
 			<Custom:DataGrid x:Name="ConflictList" Margin="39.1,93.429,27.091,187.714" RowDetailsVisibilityMode="VisibleWhenSelected"  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True" CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False" GridLinesVisibility="Vertical" Width="437.143" Height="162.857" HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" ItemsSource="{Binding StaticResource, Mode=TwoWay}" Custom:SelectiveScrollingGrid.SelectiveScrollingOrientation="Horizontal" CanUserResizeRows="False" HeadersVisibility="Column">
 				<Custom:DataGrid.Columns>
-					<Custom:DataGridTextColumn x:Name="conflictlistPartnershipName" Width="437.143" MinWidth="430" Header="Partnerships" Binding="{Binding PartnerShipName}" CanUserSort="False" CanUserResize="False" CanUserReorder="False" IsReadOnly="True"  />
+					<Custom:DataGridTextColumn x:Name="conflictlistPartnershipName" Width="437.143" MinWidth="430" Header="Partnerships" Binding="{Binding PartnerShipName}" CanUserSort="False" CanUserResize="False" CanUserReorder="False" IsReadOnly="True" />
 				</Custom:DataGrid.Columns>
 			    <Custom:DataGrid.RowDetailsTemplate>
                     <DataTemplate>
@@ -1160,7 +1136,7 @@
                 </Custom:DataGrid.RowDetailsTemplate>
 
 			</Custom:DataGrid>
-			<Button x:Name="doneButton" HorizontalAlignment="Right" Margin="0,0,21.853,79.143" VerticalAlignment="Bottom" Width="70.476" Height="24.762" Content="Done" IsEnabled="False"/>
+			<Button x:Name="doneButton" HorizontalAlignment="Right" Margin="0,0,21.853,79.143" VerticalAlignment="Bottom" Width="70.476" Height="24.762" Content="Done" IsEnabled="False" Click="GoHome"/>
 			<TextBlock x:Name="CurrentSyncingFile_Copy" Margin="39.032,67.643,0.493,0" TextWrapping="Wrap" Text="Please choose the file that you want to sync." VerticalAlignment="Top" Height="24.761"/>
 			<Button x:Name="resolveButton" HorizontalAlignment="Right" Margin="0,0,22.853,138.19" VerticalAlignment="Bottom" Width="75.238" Height="25.715" Content="Resolve" Click="ResolvePartnership_Click"/>
 		</Grid>

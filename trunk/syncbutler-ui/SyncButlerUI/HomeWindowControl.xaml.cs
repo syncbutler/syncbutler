@@ -443,15 +443,18 @@ namespace SyncButlerUI
                 //worker.WorkerSupportsCancellation=true;
     				
 		        mergedList = this.Controller.SyncAll();
-                
-                this.ConflictList.ItemsSource = mergedList;
-                this.ConflictList.Items.Refresh();
+             	this.ConflictList.ItemsSource = mergedList;
+				this.ConflictList.Items.Refresh();
+				this.ConflictList.IsEnabled=true;
+				this.resolveButton.IsEnabled=true;
+				this.doneButton.IsEnabled=false;
+
                 
 		    }
 		}
 		private void SyncThisPartnership_Click(object sender, RoutedEventArgs e){
 			
-			if (showMessageBox(CustomDialog.MessageType.Question,"Are you sure?")==true){
+			if (showMessageBox(CustomDialog.MessageType.Question,"Are you sure?")){
                 this.ConflictList.ItemsSource = this.Controller.SyncPartnership(NewPartnershipName);
 				VisualStateManager.GoToState(this,"ConflictState1",false);
 
