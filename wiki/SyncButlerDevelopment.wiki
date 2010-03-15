@@ -9,7 +9,7 @@ Simple and Fuss-free
 == Design Decisions ==
 Object-oriented Programming is utilized to separate the code into manageable and logical portions.
 
-  * Checksums
+  * [Checksums]
     * Adler32.cs
     * IRollingHash.cs
   * Exceptions
