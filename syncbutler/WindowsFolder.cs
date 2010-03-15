@@ -60,6 +60,27 @@ namespace SyncButler
         }
 
         /// <summary>
+        /// Constructor that takes in three parameters, a root path, the full path,
+        /// and the parent folder.
+        /// </summary>
+        /// <param name="rootPath">Path of the root directory</param>
+        /// <param name="fullPath">Full path to this file</param>
+        /// <param name="parent">Parent Folder</param>
+        public WindowsFolder(string rootPath, string fullPath, WindowsFolder parent)
+        {
+            if (!rootPath.EndsWith("\\")) rootPath += "\\";
+            if (!fullPath.EndsWith("\\")) fullPath += "\\";
+
+            this.nativeDirObj = new DirectoryInfo(fullPath);
+            this.relativePath = StripPrefix(rootPath, fullPath);
+            this.nativeFileSystemObj = this.nativeDirObj;
+            this.rootPath = rootPath;
+            this.IsPortableStorage = parent.IsPortableStorage;
+            this.DriveID = parent.DriveID;
+            this.PartitionIndex = parent.PartitionIndex;
+        }
+
+        /// <summary>
         /// Constructor that takes in two parameters, a root path and the full path.
         /// </summary>
         /// <param name="rootPath">Path of the root directory</param>
@@ -85,18 +106,23 @@ namespace SyncButler
         /// <param name="rootPath">Path of the root directory</param>
         /// <param name="fullPath">Full path to this file</param>
         public WindowsFolder(string rootPath, string fullPath, Partnership parentPartnership)
+            : this(rootPath, fullPath)
         {
-            if (!rootPath.EndsWith("\\")) rootPath += "\\";
-            if (!fullPath.EndsWith("\\")) fullPath += "\\";
-
-            this.nativeDirObj = new DirectoryInfo(fullPath);
-            this.relativePath = StripPrefix(rootPath, fullPath);
-            this.nativeFileSystemObj = this.nativeDirObj;
-            this.rootPath = rootPath;
             this.parentPartnership = parentPartnership;
-            this.IsPortableStorage = SystemEnvironment.StorageDevices.IsUSBDrive(GetDriveLetter(fullPath));
-            this.DriveID = SystemEnvironment.StorageDevices.GetDriveID(GetDriveLetter(fullPath));
-            this.PartitionIndex = SystemEnvironment.StorageDevices.GetDrivePartitionIndex(GetDriveLetter(fullPath));
+        }
+
+        /// <summary>
+        /// Constructor that takes in four parameters, a root path, the full path,
+        /// the parent partnership, and the parent folder
+        /// </summary>
+        /// <param name="rootPath">Path of the root directory</param>
+        /// <param name="fullPath">Full path to this file</param>
+        /// <param name="parent">Parent folder</param>
+        /// <param name="parentPartnership">The containing partnership</param>
+        public WindowsFolder(string rootPath, string fullPath, WindowsFolder parent, Partnership parentPartnership)
+            : this(rootPath, fullPath, parent)
+        {
+            this.parentPartnership = parentPartnership;
         }
 
         /// <summary>
@@ -378,8 +404,8 @@ namespace SyncButler
                         else
                             autoResolveAction = Conflict.Action.CopyToRight;
 
-                        WindowsFolder leftObj = new WindowsFolder(leftPath, leftFolder, this.parentPartnership);
-                        WindowsFolder rightObj = new WindowsFolder(rightPath, rightPath + leftFolderName, this.parentPartnership);
+                        WindowsFolder leftObj = new WindowsFolder(leftPath, leftFolder, this, this.parentPartnership);
+                        WindowsFolder rightObj = new WindowsFolder(rightPath, rightPath + leftFolderName, this, this.parentPartnership);
                         Conflict conflict = new Conflict(leftObj, rightObj, autoResolveAction);
 
                         // Set the drive letters to what we updated at the start, to save on WMI calls.
@@ -414,8 +440,8 @@ namespace SyncButler
                         else
                             autoResolveAction = Conflict.Action.CopyToRight;
 
-                        WindowsFolder leftObj = new WindowsFolder(leftPath, leftPath + rightFolderName, this.parentPartnership);
-                        WindowsFolder rightObj = new WindowsFolder(rightPath, rightFolder, this.parentPartnership);
+                        WindowsFolder leftObj = new WindowsFolder(leftPath, leftPath + rightFolderName, this, this.parentPartnership);
+                        WindowsFolder rightObj = new WindowsFolder(rightPath, rightFolder, this, this.parentPartnership);
                         Conflict conflict = new Conflict(leftObj, rightObj, autoResolveAction);
 
                         // Set the drive letters to what we updated at the start, to save on WMI calls.
@@ -437,11 +463,14 @@ namespace SyncButler
                 {
                     string relativePath = path.Substring(this.rootPath.Length);
                     relativeFilePaths.Add(relativePath, relativePath);
-                    WindowsFile leftFileObj = new WindowsFile(this.rootPath, path, this.parentPartnership);
-                    WindowsFile rightFileObj = new WindowsFile(partner.rootPath, partner.rootPath + relativePath, this.parentPartnership);
+                    WindowsFile leftFileObj = new WindowsFile(this.rootPath, path, this, this.parentPartnership);
+                    WindowsFile rightFileObj = new WindowsFile(partner.rootPath, partner.rootPath + relativePath, this, this.parentPartnership);
 
                     leftFileObj.UpdateDriveLetter(this.driveLetter);
                     rightFileObj.UpdateDriveLetter(partner.driveLetter);
+                    leftFileObj.SetStatusMonitor(statusMonitor);
+                    rightFileObj.SetStatusMonitor(statusMonitor);
+
                     conflictList.AddRange(leftFileObj.Sync(rightFileObj));
                 }
 
@@ -455,8 +484,8 @@ namespace SyncButler
                     {
                         relativeFilePaths.Add(relativePath, relativePath);
 
-                        WindowsFile leftFileObj = new WindowsFile(this.rootPath, this.rootPath + relativePath, this.parentPartnership);
-                        WindowsFile rightFileObj = new WindowsFile(partner.rootPath, path, this.parentPartnership);
+                        WindowsFile leftFileObj = new WindowsFile(this.rootPath, this.rootPath + relativePath, this, this.parentPartnership);
+                        WindowsFile rightFileObj = new WindowsFile(partner.rootPath, path, this, this.parentPartnership);
 
                         leftFileObj.UpdateDriveLetter(this.driveLetter);
                         rightFileObj.UpdateDriveLetter(partner.driveLetter);

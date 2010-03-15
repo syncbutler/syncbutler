@@ -81,6 +81,23 @@ namespace SyncButler
         }
 
         /// <summary>
+        /// Constructor that takes in three parameters, a root path, the full path
+        /// and the parent folder
+        /// </summary>
+        /// <param name="rootPath">Path of the root directory</param>
+        /// <param name="fullPath">Full path to this file</param>
+        public WindowsFile(string rootPath, string fullPath, WindowsFolder parent)
+        {
+            this.nativeFileObj = new FileInfo(fullPath);
+            this.relativePath = StripPrefix(rootPath, fullPath);
+            this.nativeFileSystemObj = this.nativeFileObj;
+            this.rootPath = rootPath;
+            this.IsPortableStorage = parent.IsPortableStorage;
+            this.DriveID = parent.DriveID;
+            this.PartitionIndex = parent.PartitionIndex;
+        }
+
+        /// <summary>
         /// Constructor that takes in one parameter, only the full path to the file.
         /// Calls the constructor that takes in two parameters and passes the full path.
         /// Useful when creating a file partnership.
@@ -98,15 +115,21 @@ namespace SyncButler
         /// <param name="rootPath">Path of the root directory</param>
         /// <param name="fullPath">Full path to this file</param>
         public WindowsFile(string rootPath, string fullPath, Partnership parentPartnership)
+            : this(rootPath, fullPath)
         {
-            this.nativeFileObj = new FileInfo(fullPath);
-            this.relativePath = StripPrefix(rootPath, fullPath);
-            this.nativeFileSystemObj = this.nativeFileObj;
-            this.rootPath = rootPath;
             this.parentPartnership = parentPartnership;
-            this.IsPortableStorage = SystemEnvironment.StorageDevices.IsUSBDrive(GetDriveLetter(fullPath));
-            this.DriveID = SystemEnvironment.StorageDevices.GetDriveID(GetDriveLetter(fullPath));
-            this.PartitionIndex = SystemEnvironment.StorageDevices.GetDrivePartitionIndex(GetDriveLetter(fullPath));
+        }
+
+        /// <summary>
+        /// Constructor that takes in four parameters, a root path, the full path,
+        /// the parent partnership, and the parent folder
+        /// </summary>
+        /// <param name="rootPath">Path of the root directory</param>
+        /// <param name="fullPath">Full path to this file</param>
+        public WindowsFile(string rootPath, string fullPath, WindowsFolder parent, Partnership parentPartnership)
+            : this(rootPath, fullPath, parent)
+        {
+            this.parentPartnership = parentPartnership;
         }
 
         public WindowsFile(string fullPath, Partnership parentPartnership)
