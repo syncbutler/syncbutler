@@ -5,7 +5,7 @@
 
 Sync Butler automates many of the syncing decision on behalf user. There are 2 major concepts in syncing - AutoSync and SuggestAction
 
-= AutoSync =
+== AutoSync ==
 Sync Butler keeps hash dictionary of all the files in the partnership, it maintains the state of the last successful sync. Using that, AutoSync will be able to resolve 3 types of issue automatically :
 
   1. New file on one side (assumes the other side no change)
@@ -19,7 +19,7 @@ This is done because we can compare the two states (folder 1 and folder 2) with 
   # If there are two modified files for the same filename and path
      * A SuggestAction will be triggered (read below)
 
-= SuggestAction =
+== SuggestAction ==
 
 This state is involved when no automated decision can be made. It will suggest a default action and display this suggestion to the user during conflict resolution. This is based on the following matrix:
   # If it is time modified later and larger, it is suggested as the correct action
