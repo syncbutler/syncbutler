@@ -1,0 +1,10 @@
+#summary Related to retrieval of information from the system.
+
+= Introduction =
+
+Related to retrieval of information from the system.
+
+
+= Details =
+
+    * [Logger.cs]
