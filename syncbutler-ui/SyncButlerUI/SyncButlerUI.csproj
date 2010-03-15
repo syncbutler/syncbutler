@@ -68,6 +68,9 @@
     <Compile Include="CustomDialog.xaml.cs">
       <DependentUpon>CustomDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FirstTimeStartupScreen.xaml.cs">
+      <DependentUpon>FirstTimeStartupScreen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HomeWindowControl.xaml.cs">
       <DependentUpon>HomeWindowControl.xaml</DependentUpon>
     </Compile>
@@ -79,6 +82,10 @@
     </Compile>
     <Compile Include="SampleConflict.cs" />
     <Page Include="CustomDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="FirstTimeStartupScreen.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
