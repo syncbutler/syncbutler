@@ -12,13 +12,13 @@ Object-oriented Programming is utilized to separate the code into manageable and
   * [Checksums]
     * [Adler32.cs]
     * [IRollingHash.cs]
-  * Exceptions
-    * InvalidActionException.cs
-    * InvalidPartnershipException.cs
-    * InvalidPathException.cs
-    * SyncableNotExistsException.cs
-    * UnknownStorageFormatException.cs
-    * UserInputException.cs
+  * [Exceptions]
+    * [InvalidActionException.cs]
+    * [InvalidPartnershipException.cs]
+    * [InvalidPathException.cs]
+    * [SyncableNotExistsException.cs]
+    * [UnknownStorageFormatException.cs]
+    * [UserInputException.cs]
   * Logging
     * Logger.cs
   * MRU
