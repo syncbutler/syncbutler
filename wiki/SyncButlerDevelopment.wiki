@@ -10,8 +10,8 @@ Simple and Fuss-free
 Object-oriented Programming is utilized to separate the code into manageable and logical portions.
 
   * [Checksums]
-    * Adler32.cs
-    * IRollingHash.cs
+    * [Adler32.cs]
+    * [IRollingHash.cs]
   * Exceptions
     * InvalidActionException.cs
     * InvalidPartnershipException.cs
