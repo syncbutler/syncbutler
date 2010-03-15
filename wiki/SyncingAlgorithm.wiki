@@ -12,7 +12,7 @@ Sync Butler keeps hash dictionary of all the files in the partnership, it mainta
   #. File deleted on one side (assumes the other side no change)
   #. File changed one side (assumes the other side no change)
 
-This is done because we can compare the two states (folder 1 and folder 2) with the last known successful sync. It should be noted that if the sync is happening for the same time, there are no has dictionary to speak off. In this case, its default behavior is:
+This is done because we can compare the two states (folder 1 and folder 2) with the last known successful sync. It should be noted that if the sync is happening for the *first* time, there are no has dictionary to speak off. In this case, its default behavior is:
 
   # Propagate new files to both side
      * Based on this situation, there is no such thing as deletion
