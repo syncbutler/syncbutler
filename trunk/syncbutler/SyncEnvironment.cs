@@ -14,12 +14,11 @@ namespace SyncButler
     /// </summary>
     public struct ChecksumKey
     {
-        public string entityPath, relativePath, partnershipName;
+        public string entityPath, relativePath;
         public ChecksumKey(string ep, string rp, string pn)
         {
             entityPath = ep;
             relativePath = rp;
-            partnershipName = pn;
         }
     }
 
@@ -555,15 +554,10 @@ namespace SyncButler
         /// <exception cref="ArguementExcpetion">The key provided was not a valid Checksum Dictionary key</exception>
         public static ChecksumKey DecodeChecksumKey(string key)
         {
-            int pos = key.IndexOf(':');
-
-            // Possible corruption of the dictionary
-            if (pos < 0) throw new ArgumentException("Malformed Key for Partnership Record");
-
+            int pos;
             ChecksumKey returnValue;
 
-            returnValue.partnershipName = key.Substring(0, pos);
-            returnValue.entityPath = key.Substring(pos + 1);
+            returnValue.entityPath = key;
 
             pos = returnValue.entityPath.IndexOf(":\\\\");
             if (pos < 0) throw new ArgumentException("Malformed Key for Partnership Record");

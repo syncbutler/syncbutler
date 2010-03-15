@@ -16,7 +16,7 @@ namespace SyncButler
             Sync
         };
 
-        protected string _curObject;
+        protected string _entityPath;
         protected int _percentComplete;
         protected int _curTaskPercentComplete;
         protected ActionType _actionType;
@@ -24,26 +24,27 @@ namespace SyncButler
         /// <summary>
         /// Creates the SyncableStatus with the required information
         /// </summary>
-        /// <param name="curObject">The object/node currently being worked on</param>
+        /// <param name="entityPath">The object/node currently being worked on</param>
         /// <param name="percentComplete">The overall percentage of the task which is complete</param>
         /// <param name="curTaskPercentComplete">The percentage of the current task which is complete</param>
         /// <param name="actionType">The current action being performed</param>
-        public SyncableStatus(string curObject, int percentComplete, int curTaskPercentComplete, ActionType actionType)
+        public SyncableStatus(string entityPath, int percentComplete, int curTaskPercentComplete, ActionType actionType)
         {
-            this._curObject = curObject;
+            this._entityPath = entityPath;
             this._percentComplete = percentComplete;
             this._curTaskPercentComplete = curTaskPercentComplete;
+            this._actionType = actionType;
         }
 
         /// <summary>
         /// A string that represents the object currently being processed
         /// (ie. relative path file/folder)
         /// </summary>
-        public string curObject
+        public string EntityPath
         {
             get
             {
-                return _curObject;
+                return _entityPath;
             }
         }
 

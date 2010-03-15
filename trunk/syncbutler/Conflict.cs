@@ -116,6 +116,12 @@ namespace SyncButler
             }
         }
 
+        public void SetStatusMonitor(SyncableStatusMonitor monitor)
+        {
+            left.SetStatusMonitor(monitor);
+            right.SetStatusMonitor(monitor);
+        }
+
         /// <summary>
         /// Gets/Sets the action to be performed when this conflict can be resolved automatically.
         /// It will return unknown if the system could not find a solution automatically.

@@ -177,7 +177,7 @@ namespace SyncButler
         /// <exception cref="SyncableNotExistsException">The dictionary does not have the last checksum of this Syncable</exception>
         public long GetLastChecksum(ISyncable syncable)
         {
-            string key = this.name + ":" + syncable.EntityPath();
+            string key = syncable.EntityPath();
             if (!hashDictionary.ContainsKey(key)) throw new Exceptions.SyncableNotExistsException();
 
             return hashDictionary[key];
@@ -191,10 +191,9 @@ namespace SyncButler
         /// <exception cref="SyncableNotExistsException">The dictionary does not have the last checksum of this Syncable</exception>
         public long GetLastChecksum(string entityPath)
         {
-            string key = this.name + ":" + entityPath;
-            if (!hashDictionary.ContainsKey(key)) throw new Exceptions.SyncableNotExistsException();
+            if (!hashDictionary.ContainsKey(entityPath)) throw new Exceptions.SyncableNotExistsException();
 
-            return hashDictionary[key];
+            return hashDictionary[entityPath];
         }
 
         /// <summary>
@@ -204,7 +203,7 @@ namespace SyncButler
         /// <returns>True if found, False otherwise</returns>
         public bool ChecksumExists(ISyncable syncable)
         {
-            return hashDictionary.ContainsKey(this.name + ":" + syncable.EntityPath());
+            return hashDictionary.ContainsKey(syncable.EntityPath());
         }
 
         /// <summary>
@@ -215,7 +214,7 @@ namespace SyncButler
         /// <returns>True if found, False otherwise</returns>
         public bool ChecksumExists(string entityPath)
         {
-            return hashDictionary.ContainsKey(this.name + ":" + entityPath);
+            return hashDictionary.ContainsKey(entityPath);
         }
 
         /// <summary>
@@ -224,7 +223,7 @@ namespace SyncButler
         /// <param name="syncable">ISyncable object that needs to update if its record (hash) is in the dictionary</param>
         public void UpdateLastChecksum(ISyncable syncable)
         {
-            string key = this.name + ":" + syncable.EntityPath();
+            string key = syncable.EntityPath();
 
             if (hashDictionary.ContainsKey(key)) hashDictionary[key] = syncable.Checksum();
             else hashDictionary.Add(key, syncable.Checksum());
@@ -237,7 +236,7 @@ namespace SyncButler
         /// <param name="syncable">The ISyncable object that gave raise to this checksum in the first place</param>
         public void RemoveChecksum(ISyncable syncable)
         {
-            hashDictionary.Remove(this.name + ":" + syncable.EntityPath());
+            hashDictionary.Remove(syncable.EntityPath());
         }
 
         /// <summary>
@@ -259,16 +258,12 @@ namespace SyncButler
         /// </summary>
         public void CleanOrphanedChecksums()
         {
-            ChecksumKey key;
             List<string> toDelete = new List<string>();
 
             foreach (string skey in hashDictionary.Keys)
             {
-                key = SyncEnvironment.DecodeChecksumKey(skey);
-                if (key.partnershipName != this.name) continue;
-
-                ISyncable leftChild = left.CreateChild(key.entityPath);
-                ISyncable rightChild = right.CreateChild(key.entityPath);
+                ISyncable leftChild = left.CreateChild(skey);
+                ISyncable rightChild = right.CreateChild(skey);
 
                 if (!(leftChild.Exists() || rightChild.Exists())) toDelete.Add(skey);
             }

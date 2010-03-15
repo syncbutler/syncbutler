@@ -7,6 +7,7 @@ using SyncButler.MRU;
 using System.Xml;
 using ISyncButler;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace SyncButler
 {
@@ -143,25 +144,49 @@ namespace SyncButler
         /// </summary>
         /// <param name="idx">Index of the partnership to be synced.</param>
         /// <returns>ObservableCollection conflict list with a list of conflicts. Will be null if there are no conflicts.</returns>
-        public ObservableCollection<ConflictList> SyncPartnership(String name) 
+        public ObservableCollection<ConflictList> SyncPartnership(String name, SyncableStatusMonitor monitor) 
         {
 		  	ObservableCollection<ConflictList> AllConflict = new ObservableCollection<ConflictList>();
-           
-			List<Conflict> conflict = syncEnvironment.GetPartnershipsList()[name].Sync();
+            Partnership curPartnership = syncEnvironment.GetPartnershipsList()[name];
+
+            curPartnership.statusMonitor = monitor;
+			List<Conflict> conflict = curPartnership.Sync();
+            curPartnership.statusMonitor = null;
+
 			AllConflict.Add(new ConflictList(conflict,name));
 			return AllConflict;
+        }
+
+        public void ResolveConflicts(ObservableCollection<ConflictList> mergedList, SyncableStatusMonitor OnProgressUpdate, BackgroundWorker workerObj)
+        {
+            foreach (ConflictList cl in mergedList)
+            {
+                workerObj.ReportProgress(0, cl.PartnerShipName);
+                foreach (Conflict c in cl.conflicts)
+                {
+                        c.SetStatusMonitor(OnProgressUpdate);
+                        c.Resolve();
+                        c.SetStatusMonitor(null);
+                }
+            }
         }
 
         /// <summary>
         /// Synchronizes all partnerships.
         /// </summary>
-        public ObservableCollection<ConflictList> SyncAll()
+        public ObservableCollection<ConflictList> SyncAll(SyncableStatusMonitor OnProgressUpdate, BackgroundWorker workerObj)
         {
 
             ObservableCollection<ConflictList> AllConflict = new ObservableCollection<ConflictList>();
             foreach (string name in GetPartnershipList().Keys)
             {
-                List<Conflict> conflict = syncEnvironment.GetPartnershipsList()[name].Sync();
+                workerObj.ReportProgress(0, name);
+                Partnership curPartnership = syncEnvironment.GetPartnershipsList()[name];
+                
+                curPartnership.statusMonitor = OnProgressUpdate;
+                List<Conflict> conflict = curPartnership.Sync();
+                curPartnership.statusMonitor = null;
+
                 AllConflict.Add(new ConflictList(conflict, name));
             }
 

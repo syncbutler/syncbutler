@@ -48,7 +48,83 @@ namespace SyncButlerUI
             //controller = new Controller();
             //partnershipList.ItemsSource = controller.GetPartnershipList();
 		}
+
         private string NewPartnershipName = "";
+
+        protected void DisplayProgress(Object workerObj, ProgressChangedEventArgs args) 
+        {
+            if (args.UserState is String)
+            {
+                PartnershipName.Text = (String)args.UserState;
+                return;
+            }
+            
+            SyncableStatus status = (SyncableStatus)args.UserState;
+            string verb = "";
+
+            switch (status.actionType)
+            {
+                case SyncableStatus.ActionType.Checksum:
+                case SyncableStatus.ActionType.Sync: 
+                    verb = "Scanning: "; 
+                    break;
+
+                case SyncableStatus.ActionType.Copy: verb = "Copying: "; break;
+                case SyncableStatus.ActionType.Delete: verb = "Deleting: "; break;
+            }
+
+            CurrentSyncingFile.Text = verb + status.EntityPath;
+            SubProgressBar.Value = status.curTaskPercentComplete;
+            TotalProgressBar.Value = status.percentComplete;
+        }
+
+        /// <summary>
+        /// Prepares a BackgroundWorker object for a Syncing (ie. Scan);
+        /// </summary>
+        /// <param name="scanWorker">The worker to use for background syncing</param>
+        private void AsyncStartSync(DoWorkEventHandler DoSyncEventHandler)
+        {
+            VisualStateManager.GoToState(this, "ConflictState1", false);
+
+            // Instantiates background worker 
+            BackgroundWorker scanWorker = new BackgroundWorker();
+            scanWorker.WorkerReportsProgress = true;
+            scanWorker.WorkerSupportsCancellation = true;
+
+            SubProgressBar.Maximum = 100;
+            SubProgressBar.Minimum = 0;
+            TotalProgressBar.Maximum = 100;
+            TotalProgressBar.Minimum = 0;
+
+            // For now...
+            TotalProgressBar.Visibility = Visibility.Hidden;
+
+            ConflictList.ItemsSource = new ObservableCollection<ConflictList>();
+            ConflictList.Items.Refresh();
+            resolveButton.IsEnabled = false;
+            CurrentSyncingFile.Text = "Initializing scan...";
+            PartnershipName.Text = "";
+
+            scanWorker.ProgressChanged += new ProgressChangedEventHandler(DisplayProgress);
+
+            scanWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(delegate(Object workerObj, RunWorkerCompletedEventArgs args)
+            {
+                CurrentSyncingFile.Text = "Scan complete. Please look at the list of conflicts.";
+                ConflictList.ItemsSource = mergedList;
+                ConflictList.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
+                ConflictList.Items.Refresh();
+                ConflictList.IsEnabled = true;
+                resolveButton.IsEnabled = true;
+                doneButton.IsEnabled = false;
+                TotalProgressBar.Value = 0;
+                SubProgressBar.Value = 0;
+            });
+
+            scanWorker.DoWork += DoSyncEventHandler;
+
+            scanWorker.RunWorkerAsync(); 
+        }
+
 	#region UIcode
 	/// <summary>
     /// Interaction logic for Creating Partnership
@@ -335,59 +411,52 @@ namespace SyncButlerUI
 			}
 		}
 		
-				/// <summary>
-		/// Checks for the index selected and syncs the partnership by name
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void SyncPartnership_Click(object sender, RoutedEventArgs e)
-		{
-			try{
-		  	if(partnershipList.SelectedIndex<0){
-				throw new UserInputException("Please select a partnership to sync.");
-			}
-			if (showMessageBox(CustomDialog.MessageType.Question,"Are you sure?")==true){
-				Partnership partnershipSelected=(Partnership)partnershipList.SelectedValue;
-				this.ConflictList.ItemsSource=this.Controller.SyncPartnership(partnershipSelected.Name);
-				this.ConflictList.Items.Refresh();
-				VisualStateManager.GoToState(this,"ConflictState1",false);
-		
-				}
-            }
-            catch (UserInputException uIException)
-            {
-					showMessageBox(CustomDialog.MessageType.Error,uIException.message);
-			}
-            
-		}
-		
-		
 		/// <summary>
 		/// Executes upon clicking resolve partnership
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		private void ResolvePartnership_Click(object sender, RoutedEventArgs e){
-			// resolve it here?
-            //List<SamplePartnershipConflict> conflictList=(List<SamplePartnershipConflict>)this.ConflictList.ItemsSource;
-            try
+            // Instantiates background worker 
+            BackgroundWorker resolveWorker = new BackgroundWorker();
+            resolveWorker.WorkerReportsProgress = true;
+            resolveWorker.WorkerSupportsCancellation = true;
+
+            CurrentSyncingFile.Text = "Getting ready to resolve conflicts...";
+            PartnershipName.Text = "";
+
+            resolveWorker.DoWork += new DoWorkEventHandler(delegate(Object workerObj, DoWorkEventArgs args)
             {
-                foreach (ConflictList cl in mergedList)
-                {
-                    foreach (Conflict c in cl.conflicts)
+                BackgroundWorker worker = (BackgroundWorker)workerObj;
+
+                this.Controller.ResolveConflicts(mergedList, delegate(SyncableStatus status)
                     {
-                        c.Resolve();
-                    }
-                }
-            	this.ConflictList.IsEnabled=false;
-				this.resolveButton.IsEnabled=false;
-				showMessageBox(CustomDialog.MessageType.Message, "Done! yay");
-            	this.doneButton.IsEnabled=true;
-			}
-            catch (InvalidActionException)
+                        worker.ReportProgress(status.percentComplete, status);
+
+                        return true;
+                    }, worker);
+            });
+
+            resolveWorker.ProgressChanged += new ProgressChangedEventHandler(DisplayProgress);
+
+            resolveWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(delegate(Object workerObj, RunWorkerCompletedEventArgs args)
             {
-                showMessageBox(CustomDialog.MessageType.Error, "Invalid Action Occurred-Unable to resolve Conflict");
-            }
+                if (args.Error is InvalidActionException)
+                {
+                    showMessageBox(CustomDialog.MessageType.Error, "Invalid Action Occurred - Unable to resolve Conflict");
+                }
+                else
+                {
+                    this.ConflictList.IsEnabled = false;
+                    this.resolveButton.IsEnabled = false;
+                    this.doneButton.IsEnabled = true;
+                }
+
+                TotalProgressBar.Value = 0;
+                SubProgressBar.Value = 0;
+            });
+
+            resolveWorker.RunWorkerAsync();
 		}
 		
 		/// <summary>
@@ -422,50 +491,83 @@ namespace SyncButlerUI
 		/// <param name="e"></param>
 		private void Sync(object sender, RoutedEventArgs e)
 		{
-		    if(this.Controller.GetPartnershipList().Count<1 )
+		    if(this.Controller.GetPartnershipList().Count < 1)
             {
-             if(showMessageBox(CustomDialog.MessageType.Question,"Sync Butler has detected that there are no partnerships created yet would you like to create one now?")==true){
-				   clearTreeView();
-		 	  VisualStateManager.GoToState(this,"CreatePartnershipState1",false);
-		 
-			}	
-			else{
-					return;
-		    }
-			}else if (showMessageBox(CustomDialog.MessageType.Question,"Are you sure?")==true)
-            {
-		        VisualStateManager.GoToState(this,"ConflictState1",false);
-    			
-    				
-                ////Instantiates background worker 
-                //BackgroundWorker worker = new BackgroundWorker();
-                //worker.WorkerReportsProgress=true;
-                //worker.WorkerSupportsCancellation=true;
-    				
-		        mergedList = this.Controller.SyncAll();
-             	this.ConflictList.ItemsSource = mergedList;
-				this.ConflictList.Items.Refresh();
-				this.ConflictList.IsEnabled=true;
-				this.resolveButton.IsEnabled=true;
-				this.doneButton.IsEnabled=false;
+                if (showMessageBox(CustomDialog.MessageType.Question, "Sync Butler has detected that there are no partnerships created yet would you like to create one now?") == true)
+                {
+                    clearTreeView();
+                    VisualStateManager.GoToState(this, "CreatePartnershipState1", false);
 
-                
+                }
+                else return;
+			}
+            else if (showMessageBox(CustomDialog.MessageType.Question,"Are you sure you want to sync all partnerships?") == true)
+            {
+                AsyncStartSync(new DoWorkEventHandler(delegate(Object workerObj, DoWorkEventArgs args)
+                {
+                    mergedList = this.Controller.SyncAll(delegate(SyncableStatus status)
+                    {
+                        ((BackgroundWorker)workerObj).ReportProgress(status.percentComplete, status);
+                        return true;
+                    }, (BackgroundWorker)workerObj);
+                }));
 		    }
 		}
-		private void SyncThisPartnership_Click(object sender, RoutedEventArgs e){
-			
-			if (showMessageBox(CustomDialog.MessageType.Question,"Are you sure?")){
-                VisualStateManager.GoToState(this,"ConflictState1",false);
-				this.ConflictList.ItemsSource = this.Controller.SyncPartnership(NewPartnershipName);
-				this.ConflictList.Items.Refresh();
-				this.ConflictList.IsEnabled=true;
-				this.resolveButton.IsEnabled=true;
-				this.doneButton.IsEnabled=false;
-				this.ConflictList.Items.Refresh();
+
+        /// <summary>
+        /// When the user clicks Sync in the Partnership List view.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SyncPartnership_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (partnershipList.SelectedIndex < 0)
+                {
+                    throw new UserInputException("Please select a partnership to sync.");
+                }
+
+                if (showMessageBox(CustomDialog.MessageType.Question, "Are you sure you want to sync this partnership?") == true)
+                {
+                    Partnership partnershipSelected = (Partnership)partnershipList.SelectedValue;
+                    AsyncStartSync(new DoWorkEventHandler(delegate(Object workerObj, DoWorkEventArgs args)
+                    {
+                        mergedList = this.Controller.SyncPartnership(partnershipSelected.Name, delegate(SyncableStatus status)
+                        {
+                            ((BackgroundWorker)workerObj).ReportProgress(status.percentComplete, status);
+                            return true;
+                        });
+                    }));
+                }
+            }
+            catch (UserInputException uIException)
+            {
+                showMessageBox(CustomDialog.MessageType.Error, uIException.message);
+            }
+
+        }
+        
+        /// <summary>
+        /// Syncing after creation of a partnership
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SyncThisPartnership_Click(object sender, RoutedEventArgs e){
+            if (showMessageBox(CustomDialog.MessageType.Question,"Are you sure you want to sync now?")) {
+                AsyncStartSync(new DoWorkEventHandler(delegate(Object workerObj, DoWorkEventArgs args)
+                {
+                    mergedList = this.Controller.SyncPartnership(NewPartnershipName, delegate(SyncableStatus status)
+                    {
+                        ((BackgroundWorker)workerObj).ReportProgress(status.percentComplete, status);
+                        return true;
+                    });
+                }));
 			}
       
 		}
-		private void SavePartnership_Click(object sender, RoutedEventArgs e)
+		
+        private void SavePartnership_Click(object sender, RoutedEventArgs e)
         {
 			try
             {
