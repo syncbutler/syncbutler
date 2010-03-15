@@ -218,7 +218,7 @@ namespace SyncButler
 
         public abstract Error CopyTo(ISyncable item);
 
-        public abstract Error Delete();
+        //public abstract Error Delete();
 
         public abstract Error Merge(ISyncable item);
 
@@ -272,5 +272,13 @@ namespace SyncButler
             int stopIndex = somePath.IndexOf(':');
             return (driveLetter + somePath.Substring(stopIndex + 1));
         }
+
+        #region ISyncable Members
+
+
+        public abstract Error Delete(bool recoverable);
+        
+
+        #endregion
     }
 }

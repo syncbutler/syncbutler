@@ -143,7 +143,7 @@ namespace SyncButler
             {
                 if (!left.Exists())
                 {
-                    right.Delete();
+                    right.Delete(true);
                     return Error.NoError;
                 }
                 else
@@ -157,7 +157,7 @@ namespace SyncButler
             {
                 if (!right.Exists())
                 {
-                    left.Delete();
+                    left.Delete(true);
                     return Error.NoError;
                 }
                 else
@@ -187,7 +187,7 @@ namespace SyncButler
                     }
                 case Action.DeleteLeft : 
                     {
-                        ret = left.Delete();
+                        ret = left.Delete(true);
                         if (ret == Error.NoError) left.RemoveStoredChecksum();
                         break;
                     }
@@ -205,7 +205,7 @@ namespace SyncButler
                     }
                 case Action.DeleteRight:
                     {
-                        ret = right.Delete();
+                        ret = right.Delete(true);
                         if (ret == Error.NoError) right.RemoveStoredChecksum();
                         break;
                     }
