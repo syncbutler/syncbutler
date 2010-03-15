@@ -642,15 +642,15 @@ namespace SyncButlerUI
             }
             if (tempfolder2Name.Equals(tempfolder1Name))
             {
-                throw new UserInputException("Same Folders selected: Please pick another Folder");
+                throw new UserInputException("Same Folders selected : Please pick another Folder");
             }
             else if (tempfolder1Name.IndexOf(tempfolder2Name) == 0)
             {
-                throw new UserInputException("Error- 1st Folder is under the 2nd Folder  ");
+                throw new UserInputException("Error - 1st Folder is under the 2nd Folder  ");
             }
             else if (tempfolder2Name.IndexOf(tempfolder1Name) == 0)
             {
-                throw new UserInputException("Error- 2nd Folder is under the 1st Folder  ");
+                throw new UserInputException("Error - 2nd Folder is under the 1st Folder  ");
             }
         }
 		

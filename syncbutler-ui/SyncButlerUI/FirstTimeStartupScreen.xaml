@@ -3,8 +3,11 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	x:Class="SyncButlerUI.FirstTimeStartupScreen"
 	x:Name="Window"
-	Title="FirstTimeStartupScreen"
-	Width="640" Height="480" WindowStyle="None" AllowsTransparency="True" Background="{x:Null}">
+	Width="640" Height="480" WindowStyle="None" AllowsTransparency="True" Background="{x:Null}" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
 
-	<Grid x:Name="LayoutRoot" Margin="0,0,-87,-60" HorizontalAlignment="Right" Width="800" VerticalAlignment="Bottom" Height="600"/>
+	<Grid x:Name="LayoutRoot">
+		<Image Margin="122.592,9.349,121.88,74" Source="Images/logowTransparency.png" Stretch="Fill"/>
+		<Button HorizontalAlignment="Right" Margin="0,0,23.5,12" VerticalAlignment="Bottom" Width="154.5" Height="42" Content="Name It!" FontSize="16" Click="NameIt_Click"/>
+		<TextBox Margin="42,0,197.5,12" VerticalAlignment="Bottom" Height="42" TextWrapping="Wrap" FontSize="18.667"/>
+	</Grid>
 </Window>
