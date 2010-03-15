@@ -44,6 +44,8 @@ namespace SyncButlerUI
                     delegate()
                     {
                         this.Activate();
+                        this.Topmost = true; //to bring to front
+                        this.Topmost = false; //to remove always on top
                     }
                     ));
             
