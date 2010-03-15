@@ -28,7 +28,4 @@ As each immediate folder is scanned, if it exists in both left and right paths, 
 
 = Algorithm (Files) =
   # *Update the drive letters of left and right.* This is necessary to ensure that paths to removable devices are not broken by the removable drive being assigned a different drive letter.
-  # If the right file does not exist, suggest to copy the one from the left and vice-versa.
-  # If the length and (file modified time or checksums) are the same, report no conflicts and return.
-  # Check which file has not changed (using the checksums) and suggest to update it with the one which changed.
-  # If both has changed, cautiously suggest to update with the one having the later file modified time.
+  # Resolve the sync using the algorithms described in [SyncingAlgorithm Syncing Algorithms]
