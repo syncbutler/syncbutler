@@ -23,5 +23,10 @@ namespace SyncButlerUI
 			
 			// Insert code required on object creation below this point.
 		}
+		
+		public void NameIt_Click(object sender,RoutedEventArgs e){
+		
+			this.DialogResult=true;
+		}
 	}
 }

@@ -21,7 +21,11 @@ namespace SyncButlerUI
         {
             if (Controller.TestSingleInstance(e.Args))
             {
-                new MainWindow().ShowDialog();
+				Controller thisController= Controller.GetInstance();
+               // if((thisController.IsProgramRanBefore())){
+				//	FirstTimeStartup();
+				//}
+				new MainWindow().ShowDialog();
             }
             else
             {
@@ -29,5 +33,11 @@ namespace SyncButlerUI
             }
             base.OnStartup(e);
         }
+		
+			private bool FirstTimeStartup(){
+			FirstTimeStartupScreen dialog=new FirstTimeStartupScreen();
+			dialog.ShowDialog();
+			return (bool)dialog.DialogResult;
+		}
 	}
 }

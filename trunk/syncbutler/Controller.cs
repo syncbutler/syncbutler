@@ -218,7 +218,7 @@ namespace SyncButler
         /// This checks in with sync environment to check if the program has ran before.
         /// </summary>
         /// <returns>True if has ran before, false otherwise</returns>
-        public bool ProgramRanBefore()
+        public bool IsProgramRanBefore()
         {
             return SyncEnvironment.FirstRunComplete;
         }
