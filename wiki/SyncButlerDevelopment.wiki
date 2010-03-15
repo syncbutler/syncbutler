@@ -9,45 +9,45 @@ Simple and Fuss-free
 == Design Decisions ==
 Object-oriented Programming is utilized to separate the code into manageable and logical portions.
 
-* Checksums
-  * Adler32.cs
-  * IRollingHash.cs
-* Exceptions
-  * InvalidActionException.cs
-  * InvalidPartnershipException.cs
-  * InvalidPathException.cs
-  * SyncableNotExistsException.cs
-  * UnknownStorageFormatException.cs
-  * UserInputException.cs
-* Logging
-  * Logger.cs
-* MRU
-  * MostRecentlyUsedFile.cs
-  * MRUList.cs
-  * SyncedFile.xslt
-  * SyncedMRU.cs
-* ProgramEnvironment
-  * PartnershipCollection.cs
-  * PartnershipElement.cs
-  * PartnershipSection.cs
-  * SettingsConfigElement.cs
-  * SettingsSection.cs
-* SystemEnvironment
-  * StorageDevices.cs
+  * Checksums
+    * Adler32.cs
+    * IRollingHash.cs
+  * Exceptions
+    * InvalidActionException.cs
+    * InvalidPartnershipException.cs
+    * InvalidPathException.cs
+    * SyncableNotExistsException.cs
+    * UnknownStorageFormatException.cs
+    * UserInputException.cs
+  * Logging
+    * Logger.cs
+  * MRU
+    * MostRecentlyUsedFile.cs
+    * MRUList.cs
+    * SyncedFile.xslt
+    * SyncedMRU.cs
+  * ProgramEnvironment
+    * PartnershipCollection.cs
+    * PartnershipElement.cs
+    * PartnershipSection.cs
+    * SettingsConfigElement.cs
+    * SettingsSection.cs
+  * SystemEnvironment
+    * StorageDevices.cs
 |
-* Conflict.cs
-* ConflictList.cs
-* ContentFilters.cs
-* Controller.cs
-* ISyncable.cs
-* logstyle.css
-* Partnership.cs
-* SingleInstance.cs
-* SyncableStatus.cs
-* SyncEnvironment.cs
-* WindowsFile.cs
-* WindowsFileSystem.cs
-* WindowsFolder.cs
+  * Conflict.cs
+  * ConflictList.cs
+  * ContentFilters.cs
+  * Controller.cs
+  * ISyncable.cs
+  * logstyle.css
+  * Partnership.cs
+  * SingleInstance.cs
+  * SyncableStatus.cs
+  * SyncEnvironment.cs
+  * WindowsFile.cs
+  * WindowsFileSystem.cs
+  * WindowsFolder.cs
 
 SyncButlerUI
 |
