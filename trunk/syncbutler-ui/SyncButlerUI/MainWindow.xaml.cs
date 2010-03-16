@@ -80,6 +80,12 @@ namespace SyncButlerUI
 		private void GoToSetting(object sender, RoutedEventArgs e)
 		{
 			VisualStateManager.GoToState(homeWindow1, "Settings1",false);
+            List<string> DriveLetters = this.controller.GetDriveLetters();
+            this.homeWindow1.SBSSettingComboBox.Items.Clear();
+            foreach(string s in DriveLetters)
+            {
+                this.homeWindow1.SBSSettingComboBox.Items.Add(s);
+            }
 		}
 
 		private void cleanUp(object sender,  System.ComponentModel.CancelEventArgs e)
