@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ISyncButler
+namespace SyncButler
 {
     public interface IGUI
     {

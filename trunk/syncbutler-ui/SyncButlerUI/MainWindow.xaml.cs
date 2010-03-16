@@ -12,7 +12,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WPF_Explorer_Tree;
 using SyncButler;
-using ISyncButler;
 
 namespace SyncButlerUI
 {

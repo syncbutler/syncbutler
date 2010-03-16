@@ -5,7 +5,6 @@ using SyncButler.Exceptions;
 using System.Windows.Forms;
 using SyncButler.MRU;
 using System.Xml;
-using ISyncButler;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
@@ -14,7 +13,7 @@ namespace SyncButler
     public class Controller
     {
         SyncEnvironment syncEnvironment;
-        IGUI mainWindow;
+        SyncButler.IGUI mainWindow;
         private static Controller controller;
 
         /// <summary>
