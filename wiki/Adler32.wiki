@@ -1,0 +1,12 @@
+#summary Adler32: A rolling hash
+
+= Introduction =
+
+Adler32 is an implementation of a rolling hash which is used to calculate the checksum of the files synced.
+
+= Details =
+
+http://code.google.com/p/syncbutler/source/browse/wiki/Checksums/Adler32.png
+
+= Implements =
+    * [IRollingHash.cs]
