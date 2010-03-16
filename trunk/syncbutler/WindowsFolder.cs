@@ -444,13 +444,8 @@ namespace SyncButler
                     Conflict.Action autoResolveAction = Conflict.Action.Unknown;
                     string rightFolderName = rightFolder.Substring(rightPath.Length) + @"\";
 
-                    // The folder exists on both sides
-                    if (Directory.Exists(leftPath + rightFolderName))
-                    {
-                        workList.Enqueue(rightFolderName);
-                    }
                     // The folder exists on the right but not on the left
-                    else
+                    if (!Directory.Exists(leftPath + rightFolderName))
                     {
                         // If the checksum existed, then we infer that the folder was deleted from the left.
                         if (this.parentPartnership.ChecksumExists(PREF_FOLDER + rightFolderName))
