@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyncButler", "syncbutler\Sy
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyncButlerUI", "syncbutler-ui\SyncButlerUI\SyncButlerUI.csproj", "{14E59299-D03C-44C8-9C0C-E2B4CC5C2BDB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestUI", "TestUI\TestUI.csproj", "{D16F8146-3A1C-4F77-A9B8-3340353EF11B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyncButlerTest", "syncbutler-test\SyncButlerTest.csproj", "{27D4D7A9-61AA-42E7-A367-EA1BAC89B8C3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyncButlerConsole", "syncbutler-console\SyncButlerConsole.csproj", "{CD271A2A-1A70-43A5-BB6B-ED171A11A222}"
@@ -33,10 +31,6 @@ Global
 		{14E59299-D03C-44C8-9C0C-E2B4CC5C2BDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14E59299-D03C-44C8-9C0C-E2B4CC5C2BDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14E59299-D03C-44C8-9C0C-E2B4CC5C2BDB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D16F8146-3A1C-4F77-A9B8-3340353EF11B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D16F8146-3A1C-4F77-A9B8-3340353EF11B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D16F8146-3A1C-4F77-A9B8-3340353EF11B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D16F8146-3A1C-4F77-A9B8-3340353EF11B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{27D4D7A9-61AA-42E7-A367-EA1BAC89B8C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{27D4D7A9-61AA-42E7-A367-EA1BAC89B8C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27D4D7A9-61AA-42E7-A367-EA1BAC89B8C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
