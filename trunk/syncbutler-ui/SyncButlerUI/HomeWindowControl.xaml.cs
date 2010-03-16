@@ -208,6 +208,7 @@ namespace SyncButlerUI
                     GoHome();
 
                     scanWorker = null;
+                    CancelButton.IsEnabled = false;
 
                     return;
                 }
@@ -232,7 +233,7 @@ namespace SyncButlerUI
                 ThreadSafeAddResolve(autoResolveConflicts);
 
                 scanWorker = null;
-
+                CancelButton.IsEnabled = false;
                 AsyncStartResolve();
             });
 
@@ -241,6 +242,8 @@ namespace SyncButlerUI
                 foreach (string friendlyName in partnershipNames)
                 {
                     BackgroundWorker worker = (BackgroundWorker)workerObj;
+
+                    worker.ReportProgress(0, friendlyName);
 
                     try
                     {
@@ -288,6 +291,7 @@ namespace SyncButlerUI
             PartnershipName.Text = "";
 
             TotalProgressBar.Visibility = Visibility.Visible;
+            CancelButton.IsEnabled = true;
 
             resolveWorker.DoWork += new DoWorkEventHandler(delegate(Object workerObj, DoWorkEventArgs args)
             {
@@ -303,8 +307,15 @@ namespace SyncButlerUI
 
                 try
                 {
+                    string partnershipName = "";
                     while (curConflict != null)
                     {
+                        if (partnershipName != curConflict.GetPartnership().Name)
+                        {
+                            partnershipName = curConflict.GetPartnership().Name;
+                            worker.ReportProgress(0, partnershipName);
+                        }
+
                         this.Controller.ResolveConflict(curConflict, reporter, worker);
                         curConflict = ThreadSafeGetNewResolve();
                     }
@@ -325,6 +336,7 @@ namespace SyncButlerUI
                     showMessageBox(CustomDialog.MessageType.Message, "Sync cancelled by user");
                     resolveButton.IsEnabled = true;
                     resolveWorker = null;
+                    CancelButton.IsEnabled = false;
                     return;
                 }
 
@@ -348,6 +360,7 @@ namespace SyncButlerUI
 
                 resolveWorker = null;
 
+                CancelButton.IsEnabled = false;
                 if (newConflicts.Count > 0) AsyncStartResolve();
 
             });

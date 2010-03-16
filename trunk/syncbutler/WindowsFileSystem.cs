@@ -228,6 +228,12 @@ namespace SyncButler
             return output.ToString();
         }
 
+        public void PrepareSync()
+        {
+            // Force drive letter to be rechecked
+            driveLetter = null;
+        }
+
         public abstract long Checksum();
 
         public abstract void SetStatusMonitor(SyncableStatusMonitor monitor);
