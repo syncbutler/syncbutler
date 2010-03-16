@@ -162,26 +162,18 @@ namespace SyncButler
         /// <returns></returns>
         public override Error CopyTo(ISyncable dest)
         {
-            WindowsFolder destFolder;
-
-            if (dest is WindowsFolder)// && this.EntityPath().Equals(dest.EntityPath()))
-            {
-                destFolder = (WindowsFolder)dest;
-            }
-            else
-            {
-                throw new InvalidPartnershipException();
-            }
+            System.Diagnostics.Debug.Assert(dest is WindowsFolder, "dest is not a WindowsFolder");
+            
+            WindowsFolder destFolder = (WindowsFolder) dest;
 
             string srcPath, destPath;
             Queue<string> workingList = new Queue<string>(128);
 
             srcPath = this.rootPath + this.relativePath;
             destPath = destFolder.rootPath + destFolder.RelativePath;
-            //srcPath = this.nativeDirObj.FullName; //--> RED FLAG
-            //destPath = destFolder.nativeDirObj.FullName; //--> RED FLAG
 
-            if (destFolder.nativeDirObj.Exists) destFolder.nativeDirObj.Delete(true);
+            if (destFolder.nativeDirObj.Exists)
+                destFolder.nativeDirObj.Delete(true);
 
             workingList.Enqueue(srcPath);
 
@@ -191,19 +183,43 @@ namespace SyncButler
                 curDir = workingList.Dequeue();
 
                 foreach (string subFolder in Directory.GetDirectories(curDir))
-                {
                     workingList.Enqueue(subFolder);
-                }
 
                 Directory.CreateDirectory(destPath + curDir.Substring(srcPath.Length));
 
                 foreach (string file in Directory.GetFiles(curDir))
-                {
                     File.Copy(file, destPath + file.Substring(srcPath.Length));
-                }
             }
 
             return Error.NoError;
+        }
+
+        /// <summary>
+        /// Gets the size of all the files in this folder and its subfolders.
+        /// </summary>
+        public long Length
+        {
+            get
+            {
+                Queue<string> workList = new Queue<string>();
+                workList.Enqueue(this.rootPath + this.relativePath);
+
+                string currDir;
+                long totalSize = 0;
+
+                while (workList.Count > 0)
+                {
+                    currDir = workList.Dequeue();
+
+                    foreach (string dir in Directory.GetDirectories(currDir))
+                        workList.Enqueue(dir);
+
+                    foreach (string file in Directory.GetFiles(currDir))
+                        totalSize += (new FileInfo(file)).Length;
+                }
+
+                return totalSize;
+            }
         }
 
         /// <summary>
