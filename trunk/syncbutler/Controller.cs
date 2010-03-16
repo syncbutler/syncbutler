@@ -111,6 +111,15 @@ namespace SyncButler
         }
 
         /// <summary>
+        /// Delete a partnership from the list of partnerships based on the friendly name.
+        /// </summary>
+        /// <param name="name">The name of the partnership to be deleted.</param>
+        public void DeletePartnership(string name)
+        {
+            syncEnvironment.RemovePartnership(name);
+        }
+
+        /// <summary>
         /// Updates the details of an existing partnership in the partnership list
         /// </summary>
         /// <param name="oldName">Old friendly name of a partnership</param>

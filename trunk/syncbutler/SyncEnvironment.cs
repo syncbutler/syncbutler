@@ -128,6 +128,16 @@ namespace SyncButler
         }
 
         /// <summary>
+        /// Removes specified partnership in the partnership list
+        /// </summary>
+        /// <param name="name">Name of the partnership to remove.</param>
+        public void RemovePartnership(string name)
+        {
+            partnershipList.Remove(name);
+            StoreEnv();
+        }
+
+        /// <summary>
         /// When there is a change in any Partnership, this method is called
         /// and supplied with the name of the Partnership object in the
         /// List of Partnerships.
