@@ -363,7 +363,10 @@ namespace SyncButler
                 currDir = workList.Dequeue();
 
                 if (this.statusMonitor != null)
-                    this.statusMonitor(new SyncableStatus(PREF_FOLDER + currDir, 0, 0, SyncableStatus.ActionType.Sync));
+                {
+                    if (!this.statusMonitor(new SyncableStatus(PREF_FOLDER + currDir, 0, 0, SyncableStatus.ActionType.Sync)))
+                        throw new UserCancelledException();
+                }
 
                 // Get sub-directories from the left folder
                 List<string> leftFolders = new List<string>();
@@ -500,9 +503,9 @@ namespace SyncButler
         public override ISyncable CreateChild(string entityPath)
         {
             if (entityPath.StartsWith(@"file:\\"))
-                return new WindowsFile(this.rootPath, this.rootPath + entityPath.Substring(7), this.parentPartnership);
+                return new WindowsFile(this.rootPath, this.rootPath + entityPath.Substring(7), this, this.parentPartnership);
             else if (entityPath.StartsWith(@"folder:\\"))
-                return new WindowsFolder(this.rootPath, this.rootPath + entityPath.Substring(9), this.parentPartnership);
+                return new WindowsFolder(this.rootPath, this.rootPath + entityPath.Substring(9), this, this.parentPartnership);
             else
                 throw new ArgumentException();
         }
