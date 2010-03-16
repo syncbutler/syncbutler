@@ -14,7 +14,7 @@ namespace SyncButler
     class ContentFilters
     {
 
-        #region censoredword
+        #region Censoredword
         //Censorship
         private static string englishSexualConnotation =
             "(breast)|(\\scum\\s)|(cunt)|(blowjob)|(blow job)|(anal)|(booty)|(pussy\\s)|(tits)|(titty)|(titties)|(wank)|" +
@@ -29,8 +29,8 @@ namespace SyncButler
             "(fuck)|(asshole)|(arse)|(bastard)|(bitch)|(faggot)|(fagg)|(slut)|(turd)|(effin)|(motherfucker)|(jackasss)";
 
         private static string confidentiality =
-            "(top sercret)|(secret)|(confidential)|(restricted)|(classified)|(authorized)|(authorised)|(" +
-            "need to know)|(official use)|(encrypt)|(eyes only)";
+            "(top secret)|(secret)|(confidential)|(restricted)|(classified)|(authorized)|(authorised)|" +
+            "(need to know)|(official use)|(encrypt)|(eyes only)";
 
         private static string personal =
             "(personal)|(private)|(sensitive)|(initimate)|(embarrassing)";
