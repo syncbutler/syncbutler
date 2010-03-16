@@ -6,7 +6,7 @@ Adler32 is an implementation of a rolling hash which is used to calculate the ch
 
 = Details =
 
-http://code.google.com/p/syncbutler/source/browse/wiki/Checksums/Adler32.png
+
 
 = Implements =
     * [IRollingHash.cs]
