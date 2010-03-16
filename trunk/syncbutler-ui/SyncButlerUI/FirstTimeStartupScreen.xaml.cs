@@ -9,7 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using SyncButler;
 namespace SyncButlerUI
 {
 	/// <summary>
@@ -22,11 +22,22 @@ namespace SyncButlerUI
 			this.InitializeComponent();
 			
 			// Insert code required on object creation below this point.
+
+			
 		}
+        public Controller controller;
 		
-		public void NameIt_Click(object sender,RoutedEventArgs e){
-		
-			this.DialogResult=true;
+		public void NameIt_Click(object sender,RoutedEventArgs e)
+        {
+
+            if (FirstTimeComputerNameText.Text.Length != 0)
+            {
+                if (controller == null)
+                    controller = Controller.GetInstance();
+                controller.SetComputerName(FirstTimeComputerNameText.Text);
+                new MainWindow().ShowDialog();
+                this.DialogResult = true;
+            }
 		}
 	}
 }
