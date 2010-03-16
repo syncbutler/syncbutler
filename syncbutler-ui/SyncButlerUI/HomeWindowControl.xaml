@@ -598,6 +598,9 @@
 						<Int32AnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="SBSSettingComboBox" Storyboard.TargetProperty="(Selector.SelectedIndex)">
 							<SplineInt32KeyFrame KeyTime="00:00:00" Value="1"/>
 						</Int32AnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="image1_Copy3" Storyboard.TargetProperty="(UIElement.Opacity)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+						</DoubleAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
 				<VisualState x:Name="EditPartnershipState1">
@@ -1082,7 +1085,7 @@
 			<TextBlock Margin="0,25,36.447,0" FontFamily="Arial" FontSize="26.667" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="68.405" HorizontalAlignment="Right" Width="202.72" FontStyle="Italic"><Run Text="Sync Butler,"/><LineBreak/><Run Text=" Sync!"/></TextBlock>
 			<TextBlock Margin="0,117.476,13.947,0" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="225.22" d:LayoutOverrides="HorizontalAlignment" VerticalAlignment="Top" Height="148.381"><Run Text="These are the list of files that were detected to be your favorite documents."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="You can click enable feature to allow Sync Butler to automatically "/><LineBreak/><Run Text="update these files on your storage device"/></TextBlock>
 			<TextBlock Margin="0,0,17.947,86.691" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="221.22" d:LayoutOverrides="HorizontalAlignment" VerticalAlignment="Bottom" Height="73" Text="This feature is useful when  you forget to copy an important file and you need to refer it somewhere else"/>
-			<Button x:Name="Enable_Feature" HorizontalAlignment="Right" Margin="0,0,108.447,19" VerticalAlignment="Bottom" Width="103.5" Height="23" Content="Enable Feature" RenderTransformOrigin="0.79,1.043" Cursor="Hand" Click="MRUSync"/>
+			<Button x:Name="Enable_Feature" HorizontalAlignment="Right" Margin="0,0,108.447,19" VerticalAlignment="Bottom" Width="103.5" Height="23" Content="Sync" RenderTransformOrigin="0.79,1.043" Cursor="Hand" Click="MRUSync"/>
 			<Button x:Name="Cancel" HorizontalAlignment="Right" Margin="0,0,25.947,19" VerticalAlignment="Bottom" Width="69" Height="23" Content="Cancel" RenderTransformOrigin="0.79,1.043" Click="GoHome" Cursor="Hand" />
 			<Button x:Name="Edit_Selector" Margin="41.08,0,0,19" VerticalAlignment="Bottom" Height="23" Content="Edit Selector" RenderTransformOrigin="0.79,1.043" HorizontalAlignment="Left" Width="93" Cursor="Hand" />
 			<ListBox x:Name="Favourites_List" HorizontalAlignment="Left" Margin="40.5,58.5,0,0" VerticalAlignment="Top" Width="204" Height="136.5"/>
@@ -1156,6 +1159,7 @@
 					<TranslateTransform/>
 				</TransformGroup>
 			</Grid.RenderTransform>
+			<Image x:Name="image1_Copy3" Margin="184.36,116.094,-0.027,8" Source="Images\logo.png" Stretch="Fill" Opacity="0"/>
 			<Rectangle x:Name="background_Copy5" RadiusX="1" RadiusY="2" Margin="0,0,-1.5,0" VerticalAlignment="Top" Height="448" Cursor="Arrow" RenderTransformOrigin="0.5,0.5">
 				<Rectangle.RenderTransform>
 					<TransformGroup>
@@ -1175,7 +1179,6 @@
 					</RadialGradientBrush>
 				</Rectangle.Fill>
 			</Rectangle>
-			<Image x:Name="image1_Copy3" Margin="184.36,116.094,-0.027,8" Source="Images\logo.png" Stretch="Fill" Opacity="0.04"/>
 			<TextBlock x:Name="ConflictsLabel1" Margin="38.032,42.333,0,0" FontSize="16" FontWeight="Bold" Text="Settings" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Width="177.618" Height="28.571"/>
 			<Label HorizontalAlignment="Left" Margin="38.032,96.079,0,0" VerticalAlignment="Top" Content="This computer's name&#xa;" Height="25.73"/>
 			<Label HorizontalAlignment="Left" Margin="38.032,129.809,0,0" VerticalAlignment="Top" Content="SBS Settings:"/>
