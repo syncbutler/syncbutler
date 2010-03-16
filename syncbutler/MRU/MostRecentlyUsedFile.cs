@@ -29,8 +29,15 @@ namespace SyncButler.MRU
             int depth = 2;
             int days = 5;
             List<string> mergedList = (MostRecentlyUsedFile.Get());
-            DirectoryInfo di = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
-            mergedList.AddRange(MostRecentlyUsedFile.Scan(di.Parent.FullName, depth, days));
+            //DirectoryInfo di = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+            //mergedList.AddRange(MostRecentlyUsedFile.Scan(di.Parent.FullName, depth, days));
+            mergedList.AddRange(MostRecentlyUsedFile.Scan(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), depth, days));
+            mergedList.AddRange(MostRecentlyUsedFile.Scan(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), depth, days));
+            mergedList.AddRange(MostRecentlyUsedFile.Scan(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), depth, days));
+            mergedList.AddRange(MostRecentlyUsedFile.Scan(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), depth, days));
+            mergedList.AddRange(MostRecentlyUsedFile.Scan(Environment.GetFolderPath(Environment.SpecialFolder.Personal), depth, days));
+            mergedList.AddRange(MostRecentlyUsedFile.Scan(Environment.GetFolderPath(Environment.SpecialFolder.MyMusic), depth, days));
+            //mergedList.AddRange(MostRecentlyUsedFile.Scan(Environment.GetFolderPath(Environment.SpecialFolder.), depth, days));
             return CleanUP(mergedList);
         }
 
@@ -102,6 +109,7 @@ namespace SyncButler.MRU
                     catch (UnauthorizedAccessException)
                     {
                         /// do nothing
+                        /// 
                     }
                 }
                 upperDirectory.Clear();
