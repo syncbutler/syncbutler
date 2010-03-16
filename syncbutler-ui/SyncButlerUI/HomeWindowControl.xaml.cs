@@ -150,11 +150,11 @@ namespace SyncButlerUI
         /// </summary>
         /// <param name="partnershipName">The name of the partnerhsip to scan</param>
         /// <returns></returns>
-        private BackgroundWorker AsyncStartSync(string partnershipName)
+        private void AsyncStartSync(string partnershipName)
         {
             List<string> singletonList = new List<string>();
             singletonList.Add(partnershipName);
-            return AsyncStartSync(singletonList);
+            AsyncStartSync(singletonList);
         }
 
         /// <summary>
@@ -162,11 +162,18 @@ namespace SyncButlerUI
         /// </summary>
         /// <param name="partnershipNames">A collection of partnerships to scan</param>
         /// <returns></returns>
-        private BackgroundWorker AsyncStartSync(IEnumerable<string> partnershipNames)
+        private void AsyncStartSync(IEnumerable<string> partnershipNames)
         {
+
             VisualStateManager.GoToState(this, "ConflictState1", false);
 
-            if (scanWorker != null) throw new Exception("Unexpected Error: Attempted to start a scan while one is already running");
+            if (scanWorker != null)
+            {
+                showMessageBox(CustomDialog.MessageType.Error, "There is already a scan " +
+                    "in progress. Please stop the current scan before starting another.");
+                
+                return;
+            }
 
             operationCancelled = false;
             conflictsProcessed = 0;
@@ -199,7 +206,9 @@ namespace SyncButlerUI
                 {
                     showMessageBox(CustomDialog.MessageType.Message, "Scan cancelled by user");
                     GoHome();
+
                     scanWorker = null;
+
                     return;
                 }
 
@@ -248,7 +257,6 @@ namespace SyncButlerUI
                     catch (UserCancelledException)
                     {
                         operationCancelled = true;
-                        return;
                     }
                 }
             });
@@ -256,7 +264,7 @@ namespace SyncButlerUI
             scanWorker.RunWorkerAsync();
             CurrentAction = CurrentActionEnum.Scanning;
 
-            return scanWorker;
+            return;
         }
 
         /// <summary>
@@ -683,8 +691,11 @@ namespace SyncButlerUI
         /// <param name="e"></param>
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            if (scanWorker != null) scanWorker.CancelAsync();
-            if (resolveWorker != null) resolveWorker.CancelAsync();
+            if (showMessageBox(CustomDialog.MessageType.Question, "Are you sure you want to stop this scan?"))
+            {
+                if (scanWorker != null) scanWorker.CancelAsync();
+                if (resolveWorker != null) resolveWorker.CancelAsync();
+            }
         }
 
      	/// <summary>
