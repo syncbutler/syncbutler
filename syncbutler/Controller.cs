@@ -48,7 +48,10 @@ namespace SyncButler
 
             return controller;
         }
-
+		public List<string> GetDriveLetters()
+		{
+			return SyncButler.SystemEnvironment.StorageDevices.GetUSBDriveLetters();
+		}
         /// <summary>
         /// Tests for the existence of another instance and sets up single instance listener if this is the first instance
         /// </summary>
