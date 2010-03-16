@@ -1,0 +1,10 @@
+#summary Checksums to efficiently check for changes
+
+= Introduction =
+
+Checksums allow the program to keep a record of files which existed on the last sync and allow for checking of changes in subsequent syncs.
+
+= Details =
+
+    * [Adler32.cs]
+    * [IRollingHash.cs]
