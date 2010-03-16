@@ -38,7 +38,13 @@ namespace SyncButlerUI
     public string SelectedImagePath { get; set; }
 	public SyncButler.Controller Controller{get;set;}
 	#endregion
-		
+
+        private string NewPartnershipName = "";
+
+        int conflictsProcessed = 0;
+        BackgroundWorker resolveWorker = null;
+        private Semaphore resolveLock = new Semaphore(1, 1);
+        private Queue<Conflict> newConflicts = new Queue<Conflict>();
 		
 		//Controller controller;
 		public HomeWindowControl()
@@ -49,7 +55,34 @@ namespace SyncButlerUI
             //partnershipList.ItemsSource = controller.GetPartnershipList();
 		}
 
-        private string NewPartnershipName = "";
+        protected internal void ThreadSafeAddResolve(IEnumerable<Conflict> newConflicts)
+        {
+            resolveLock.WaitOne();
+            foreach (Conflict newConflict in newConflicts) this.newConflicts.Enqueue(newConflict);
+            resolveLock.Release();
+        }
+
+        protected internal void ThreadSafeAddResolve(Conflict newConflict)
+        {
+            resolveLock.WaitOne();
+            newConflicts.Enqueue(newConflict);
+            resolveLock.Release();
+        }
+
+        protected internal Conflict ThreadSafeGetNewResolve()
+        {
+            resolveLock.WaitOne();
+            if (newConflicts.Count == 0)
+            {
+                resolveLock.Release();
+                return null;
+            }
+            Conflict toReturn = newConflicts.Dequeue();
+            conflictsProcessed++;
+            resolveLock.Release();
+
+            return toReturn;
+        }
 
         /// <summary>
         /// Delegate to report progress of a Sync operation to the user
@@ -87,9 +120,12 @@ namespace SyncButlerUI
         /// Starts a BackgroundWorker object for a Syncing (ie. Scan);
         /// </summary>
         /// <param name="scanWorker">The worker to use for background syncing</param>
-        private void AsyncStartSync(DoWorkEventHandler DoSyncEventHandler)
+        /// <returns>The BackgroundWorker used to run the Syncing</returns>
+        private BackgroundWorker AsyncStartSync(DoWorkEventHandler DoSyncEventHandler)
         {
             VisualStateManager.GoToState(this, "ConflictState1", false);
+
+            conflictsProcessed = 0;
 
             // Instantiates background worker 
             BackgroundWorker scanWorker = new BackgroundWorker();
@@ -115,19 +151,93 @@ namespace SyncButlerUI
             scanWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(delegate(Object workerObj, RunWorkerCompletedEventArgs args)
             {
                 CurrentSyncingFile.Text = "Scan complete. Please look at the list of conflicts.";
-                ConflictList.ItemsSource = mergedList;
+                List<Conflict> autoResolveConflicts = new List<Conflict>();
+
+                foreach (ConflictList cl in mergedList)
+                {
+                    autoResolveConflicts.AddRange(this.Controller.RemoveAutoResolvableConflicts(cl));
+                }
+
                 ConflictList.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
+                ConflictList.ItemsSource = mergedList;
                 ConflictList.Items.Refresh();
                 ConflictList.IsEnabled = true;
                 resolveButton.IsEnabled = true;
-                doneButton.IsEnabled = false;
+                doneButton.IsEnabled = true;
                 TotalProgressBar.Value = 0;
                 SubProgressBar.Value = 0;
+
+                ThreadSafeAddResolve(autoResolveConflicts);
+                AsyncStartResolve();
             });
 
             scanWorker.DoWork += DoSyncEventHandler;
 
-            scanWorker.RunWorkerAsync(); 
+            scanWorker.RunWorkerAsync();
+
+            return scanWorker;
+        }
+
+        /// <summary>
+        /// Starts an asynchronous resolve operation, if it hasn't already been started.
+        /// Conflicts to be resolved should be stored by calling ThreadSafeAddResolve()
+        /// prior to calling this method.
+        /// </summary>
+        /// <returns>The BackgroundWorker used to run the resolutions</returns>
+        private void AsyncStartResolve()
+        {
+            if (resolveWorker != null) return;
+
+            // Instantiates background worker 
+            resolveWorker = new BackgroundWorker();
+            resolveWorker.WorkerReportsProgress = true;
+            resolveWorker.WorkerSupportsCancellation = true;
+            
+            CurrentSyncingFile.Text = "Getting ready to resolve conflicts...";
+            PartnershipName.Text = "";
+
+            resolveWorker.DoWork += new DoWorkEventHandler(delegate(Object workerObj, DoWorkEventArgs args)
+            {
+                BackgroundWorker worker = (BackgroundWorker)workerObj;
+
+                SyncableStatusMonitor reporter = delegate(SyncableStatus status)
+                {
+                    worker.ReportProgress(status.percentComplete, status);
+                    return true;
+                };
+
+                Conflict curConflict = ThreadSafeGetNewResolve();
+
+                while (curConflict != null)
+                {
+                    this.Controller.ResolveConflict(curConflict, reporter, worker);
+                    curConflict = ThreadSafeGetNewResolve();
+                }
+            });
+
+            resolveWorker.ProgressChanged += new ProgressChangedEventHandler(DisplayProgress);
+
+            resolveWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(delegate(Object workerObj, RunWorkerCompletedEventArgs args)
+            {
+                if (args.Error is InvalidActionException)
+                {
+                    showMessageBox(CustomDialog.MessageType.Error, "Invalid Action Occurred - Unable to resolve Conflict");
+                }
+                else
+                {
+                    /* this.ConflictList.IsEnabled = false;
+                    this.resolveButton.IsEnabled = false;
+                    this.doneButton.IsEnabled = true; */
+                }
+
+                CurrentSyncingFile.Text = "Conflicts processed: " + conflictsProcessed;
+                TotalProgressBar.Value = 0;
+                SubProgressBar.Value = 0;
+
+                resolveWorker = null;
+            });
+
+            resolveWorker.RunWorkerAsync();
         }
 
 	#region UIcode
@@ -422,54 +532,18 @@ namespace SyncButlerUI
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		private void ResolvePartnership_Click(object sender, RoutedEventArgs e){
-            // Instantiates background worker 
-            BackgroundWorker resolveWorker = new BackgroundWorker();
-            resolveWorker.WorkerReportsProgress = true;
-            resolveWorker.WorkerSupportsCancellation = true;
-
-            CurrentSyncingFile.Text = "Getting ready to resolve conflicts...";
-            PartnershipName.Text = "";
-
-            resolveWorker.DoWork += new DoWorkEventHandler(delegate(Object workerObj, DoWorkEventArgs args)
-            {
-                BackgroundWorker worker = (BackgroundWorker)workerObj;
-
-                this.Controller.ResolveConflicts(mergedList, delegate(SyncableStatus status)
-                    {
-                        worker.ReportProgress(status.percentComplete, status);
-
-                        return true;
-                    }, worker);
-            });
-
-            resolveWorker.ProgressChanged += new ProgressChangedEventHandler(DisplayProgress);
-
-            resolveWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(delegate(Object workerObj, RunWorkerCompletedEventArgs args)
-            {
-                if (args.Error is InvalidActionException)
-                {
-                    showMessageBox(CustomDialog.MessageType.Error, "Invalid Action Occurred - Unable to resolve Conflict");
-                }
-                else
-                {
-                    this.ConflictList.IsEnabled = false;
-                    this.resolveButton.IsEnabled = false;
-                    this.doneButton.IsEnabled = true;
-                }
-
-                TotalProgressBar.Value = 0;
-                SubProgressBar.Value = 0;
-            });
-
-            resolveWorker.RunWorkerAsync();
+            foreach(ConflictList cl in mergedList) ThreadSafeAddResolve(cl.conflicts);
+            ConflictList.IsEnabled = false;
+            resolveButton.IsEnabled = false;
+            AsyncStartResolve();
 		}
-		
-		/// <summary>
-		/// Executes when clicking on the explore features button
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void GoToExploreFeatures_Click(object sender, RoutedEventArgs e)
+
+        /// <summary>
+        /// Executes when clicking on the explore features button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void GoToExploreFeatures_Click(object sender, RoutedEventArgs e)
 		{
 			showMessageBox(CustomDialog.MessageType.Message,"Exploring New Features is still under construction!");
 		}
@@ -510,11 +584,14 @@ namespace SyncButlerUI
             {
                 AsyncStartSync(new DoWorkEventHandler(delegate(Object workerObj, DoWorkEventArgs args)
                 {
-                    mergedList = this.Controller.SyncAll(delegate(SyncableStatus status)
+                    foreach (string friendlyName in this.Controller.GetPartnershipList().Keys)
                     {
-                        ((BackgroundWorker)workerObj).ReportProgress(status.percentComplete, status);
-                        return true;
-                    }, (BackgroundWorker)workerObj);
+                        mergedList = this.Controller.SyncPartnership(friendlyName, delegate(SyncableStatus status)
+                        {
+                            ((BackgroundWorker)workerObj).ReportProgress(status.percentComplete, status);
+                            return true;
+                        });
+                    }
                 }));
 		    }
 		}

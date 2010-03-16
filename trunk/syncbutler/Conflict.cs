@@ -116,6 +116,15 @@ namespace SyncButler
             }
         }
 
+        public Partnership GetPartnership()
+        {
+            return left.GetParentPartnership();
+        }
+
+        /// <summary>
+        /// Sets the status monitor on the syncables
+        /// </summary>
+        /// <param name="monitor"></param>
         public void SetStatusMonitor(SyncableStatusMonitor monitor)
         {
             left.SetStatusMonitor(monitor);
