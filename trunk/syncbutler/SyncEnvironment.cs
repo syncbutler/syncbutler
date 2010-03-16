@@ -38,7 +38,8 @@ namespace SyncButler
         private static bool firstRunComplete;
         private static bool enableShellContext = false; //Defaults to false
         private static long fileReadBufferSize = 2048000; //2MB, How much of the data file is read each cycle. Editable.
-        private static string computerName = "computer1";
+        private static string computerName;
+        private static char _SBSDriveLetter;
 
         //List of runtime variables
         private static System.Configuration.Configuration config;
@@ -211,7 +212,8 @@ namespace SyncButler
             storedSettings.SystemSettings.FileReadBufferSize = fileReadBufferSize;
             storedSettings.SystemSettings.EnableShellContext = enableShellContext;
             storedSettings.SystemSettings.ComputerName = computerName;
-
+            storedSettings.SystemSettings.SBSDriveLetter = SBSDriveLetter;
+            
             // Write to file
             config.Save(ConfigurationSaveMode.Modified);
         }
@@ -229,6 +231,7 @@ namespace SyncButler
             storedSettings.SystemSettings.FileReadBufferSize = fileReadBufferSize;
             storedSettings.SystemSettings.EnableShellContext = enableShellContext;
             storedSettings.SystemSettings.ComputerName = computerName;
+            storedSettings.SystemSettings.SBSDriveLetter = SBSDriveLetter;
 
             // Write to file
             config.Save(ConfigurationSaveMode.Modified);
@@ -257,6 +260,9 @@ namespace SyncButler
 
             //Gets the last stored friendly name of the computer
             computerName = storedSettings.SystemSettings.ComputerName;
+
+            //Get the sbs drive letter
+            SBSDriveLetter = storedSettings.SystemSettings.SBSDriveLetter;
         }
 
         /// <summary>
@@ -275,7 +281,8 @@ namespace SyncButler
             storedSettings.SystemSettings.FirstRunComplete = true;
             storedSettings.SystemSettings.EnableShellContext = enableShellContext;
             storedSettings.SystemSettings.FileReadBufferSize = fileReadBufferSize;
-            storedSettings.SystemSettings.ComputerName = computerName;
+            storedSettings.SystemSettings.ComputerName = "computer1";
+            storedSettings.SystemSettings.SBSDriveLetter = 'c';
             ConvertPartnershipList2XML();
 
             // Add the custom sections to the config
@@ -301,6 +308,9 @@ namespace SyncButler
         {
             // This will detect if settings are already stored
             bool createSettings = true;
+
+            _SBSDriveLetter = 'c';
+            computerName = "Computer1";
 
             // The config file will be the name of our app, less the extension
             // It might not be so if the user has changed the filename for some reason
@@ -767,6 +777,18 @@ namespace SyncButler
             set
             {
                 computerName = value;
+            }
+        }
+
+        public static char SBSDriveLetter
+        {
+            get
+            {
+                return _SBSDriveLetter;
+            }
+            set
+            {
+                _SBSDriveLetter = value;
             }
         }
 

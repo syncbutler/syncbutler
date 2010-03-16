@@ -76,7 +76,7 @@ namespace SyncButler.MRU
         /// <param name="ComputerName">Name of the computer</param>
         /// <param name="LetterDrive">Letter drive of the device to the target folder</param>
         /// <returns>The list of conflics</returns>
-        public List<Conflict> Sync(string ComputerName, string LetterDrive)
+        public List<Conflict> Sync(string ComputerName, char LetterDrive)
         {
             SyncTo = LetterDrive + ":\\SyncButler\\" + ComputerName + "\\";
             this.ComputerName = ComputerName;

@@ -50,6 +50,7 @@ namespace SyncButler
         }
 		public List<string> GetDriveLetters()
 		{
+            
 			return SyncButler.SystemEnvironment.StorageDevices.GetUSBDriveLetters();
 		}
         /// <summary>
@@ -72,6 +73,8 @@ namespace SyncButler
                 return false;
             }
         }
+
+        
 
         /// <summary>
         /// Handles incoming data from other instances.
@@ -233,10 +236,12 @@ namespace SyncButler
         /// Sync the mrus that are listed. Please read MRUList to understand how file is actually saved.
         /// </summary>
         /// <param name="driveLetter"></param>
-        public void SyncMRUs(String driveLetter)
+        public void SyncMRUs()
         {
+            char driveLetter = SyncEnvironment.SBSDriveLetter;
             string syncTo = driveLetter + ":\\SyncButler\\" + SyncEnvironment.ComputerName + "\\";
             MRUList mruList = new MRUList();
+            
             mruList.Load(GetMonitoredFiles()["interesting"]);
             mruList.Sync(SyncEnvironment.ComputerName, driveLetter);
             MRUList.SaveInfoTo(syncTo + "logs.xml", mruList);
@@ -265,14 +270,12 @@ namespace SyncButler
 		/// 
 		/// </summary>
 		/// <param name="ComputerName">Computer name of the user</param>
-		/// <param name="EnableSBS">If the user wants sbs to be enabled</param>
+		/// <param name="EnableSBS">[Not in use]If the user wants sbs to be enabled</param>
 		/// <param name="SBSDrive">The working drive letter</param>
 		public void SaveSetting(string ComputerName, bool EnableSBS, char SBSDrive)
 		{
-			// do nothing?
-
             SyncEnvironment.ComputerName = ComputerName;
-
+            SyncEnvironment.SBSDriveLetter = SBSDrive;
             SyncEnvironment.GetInstance().StoreSettings();
 		}
 
@@ -293,6 +296,20 @@ namespace SyncButler
         public void SetComputerName(string name)
         {
             SyncEnvironment.ComputerName = name;
+        }
+
+        /// <summary>
+        /// Get the sbs drive letter
+        /// </summary>
+        /// <returns>sbs drive letter</returns>
+        public char GetSBSDriveLetter()
+        {
+            return SyncEnvironment.SBSDriveLetter;
+        }
+
+        public void SetSBSDriveLetter(char driveLetter)
+        {
+            SyncEnvironment.SBSDriveLetter = driveLetter;
         }
 
         /// <summary>

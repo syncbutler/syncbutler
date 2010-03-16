@@ -82,6 +82,18 @@ namespace SyncButler.ProgramEnvironment
             }
         }
 
+        [ConfigurationProperty("SBSDriveLetter")]
+        public char SBSDriveLetter
+        {
+            get
+            {
+                return (char) this["SBSDriveLetter"];
+            }
+            set
+            {
+                this["SBSDriveLetter"] = value;
+            }
+        }
         /// <summary>
         /// Determines if the shell integration menu should be kept on or off
         /// </summary>
