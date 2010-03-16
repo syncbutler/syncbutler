@@ -145,34 +145,17 @@ namespace SyncButler
         public Error Resolve()
         {
             if (leftOverwriteRight && rightOverwriteLeft)
-                throw new NotSupportedException("Merging not support currently");
+                throw new NotSupportedException("Merging not supported currently");
 
             if (leftOverwriteRight)
             {
-                if (!left.Exists())
-                {
-                    right.Delete(true);
-                    return Error.NoError;
-                }
-                else
-                {
-                    left.CopyTo(right);
-                    return Error.NoError;
-                }
-
+                if (!left.Exists()) return Resolve(Action.DeleteRight);
+                else return Resolve(Action.CopyToRight);
             }
             else if (rightOverwriteLeft)
             {
-                if (!right.Exists())
-                {
-                    left.Delete(true);
-                    return Error.NoError;
-                }
-                else
-                {
-                    right.CopyTo(left);
-                    return Error.NoError;
-                }
+                if (!right.Exists()) return Resolve(Action.DeleteLeft);
+                else return Resolve(Action.CopyToLeft);
             }
 
             throw new InvalidActionException();

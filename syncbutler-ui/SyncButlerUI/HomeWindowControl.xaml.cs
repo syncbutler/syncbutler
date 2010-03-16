@@ -51,6 +51,11 @@ namespace SyncButlerUI
 
         private string NewPartnershipName = "";
 
+        /// <summary>
+        /// Delegate to report progress of a Sync operation to the user
+        /// </summary>
+        /// <param name="workerObj"></param>
+        /// <param name="args"></param>
         protected void DisplayProgress(Object workerObj, ProgressChangedEventArgs args) 
         {
             if (args.UserState is String)
@@ -79,7 +84,7 @@ namespace SyncButlerUI
         }
 
         /// <summary>
-        /// Prepares a BackgroundWorker object for a Syncing (ie. Scan);
+        /// Starts a BackgroundWorker object for a Syncing (ie. Scan);
         /// </summary>
         /// <param name="scanWorker">The worker to use for background syncing</param>
         private void AsyncStartSync(DoWorkEventHandler DoSyncEventHandler)
