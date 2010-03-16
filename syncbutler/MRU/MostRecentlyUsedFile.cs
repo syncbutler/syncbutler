@@ -124,7 +124,11 @@ namespace SyncButler.MRU
                 {
                     if (File.Exists(filename))
                     {
-                        filenames.Add(filename);
+                        FileInfo fi = new FileInfo(filename);
+                        if(fi.Length != 0)
+                        {
+                            filenames.Add(filename);
+                        }
                     }
                 }
             }
