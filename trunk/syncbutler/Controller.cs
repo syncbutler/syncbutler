@@ -172,6 +172,11 @@ namespace SyncButler
 			return AllConflict;
         }
 
+        public void CleanUpOrphans(String partnershipName)
+        {
+            syncEnvironment.GetPartnershipsList()[partnershipName].CleanOrphanedChecksums();
+        }
+
         public List<Conflict> RemoveAutoResolvableConflicts(ConflictList cl)
         {
             List<Conflict> resolvableConflicts = new List<Conflict>();

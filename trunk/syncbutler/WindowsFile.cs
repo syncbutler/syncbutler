@@ -289,7 +289,12 @@ namespace SyncButler
                     }
 
                     totalCopied += amountRead;
-                    if (statusMonitor != null) statusMonitor(new SyncableStatus(EntityPath(), 0, (int) (totalCopied * toPercent), SyncableStatus.ActionType.Copy));
+
+                    if (statusMonitor != null)
+                    {
+                        if (!statusMonitor(new SyncableStatus(EntityPath(), 0, (int)(totalCopied * toPercent), SyncableStatus.ActionType.Copy)))
+                            throw new UserCancelledException();
+                    }
 
                 } while (amountRead > 0);
 
@@ -325,8 +330,7 @@ namespace SyncButler
             catch (PathTooLongException)
             {
                 return Error.PathTooLong;
-            }
-                  
+            }     
         }
 
         /// <summary>
@@ -398,8 +402,11 @@ namespace SyncButler
                 {
                     percentComplete = (int)(processed * toPercent);
                     if (percentComplete > 100) percentComplete = 100;
-                    statusMonitor(new SyncableStatus(curObj, 0,
-                        percentComplete, SyncableStatus.ActionType.Checksum));
+
+
+                    if (!statusMonitor(new SyncableStatus(curObj, 0,
+                        percentComplete, SyncableStatus.ActionType.Checksum)))
+                            throw new UserCancelledException();
                 }
 
                 hashAlgorithm.Update(this.GetBytes(bufferSize));
@@ -484,7 +491,11 @@ namespace SyncButler
             System.Diagnostics.Debug.Assert(otherObj is WindowsFile, "Other ISyncable passed is not a WindowsFile object.");
 
             WindowsFile partner = (WindowsFile)otherObj;
-            if (this.statusMonitor != null) statusMonitor(new SyncableStatus(this.EntityPath(), 0, 0, SyncableStatus.ActionType.Sync));
+            if (this.statusMonitor != null)
+            {
+                if (!statusMonitor(new SyncableStatus(this.EntityPath(), 0, 0, SyncableStatus.ActionType.Sync)))
+                    throw new UserCancelledException();
+            }
 
             // Update the drive letters if needed.
             if (this.driveLetter == null)
