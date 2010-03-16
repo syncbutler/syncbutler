@@ -43,6 +43,12 @@ namespace SyncButler
         Partnership GetParentPartnership();
 
         /// <summary>
+        /// This method is called on the root ISyncables just
+        /// before left.Sync(right) is invoked.
+        /// </summary>
+        void PrepareSync();
+
+        /// <summary>
         /// Checks if it's in Sync with the other pair
         /// </summary>
         /// <param name="otherPair"></param>

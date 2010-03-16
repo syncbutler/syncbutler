@@ -249,6 +249,9 @@ namespace SyncButler
             right.SetParentPartnership(this);
             left.SetStatusMonitor(statusMonitor);
             right.SetStatusMonitor(statusMonitor);
+
+            left.PrepareSync();
+            right.PrepareSync();
             return left.Sync(right);
         }
 
