@@ -25,7 +25,14 @@ namespace SyncButlerUI
                // if((thisController.IsProgramRanBefore())){
 				//	FirstTimeStartup();
 				//}
-				new MainWindow().ShowDialog();
+				if(thisController.IsProgramRanBefore())
+				{
+					new MainWindow().ShowDialog();
+				}
+				else
+				{
+					new FirstTimeStartupScreen().ShowDialog();
+				}
             }
             else
             {
