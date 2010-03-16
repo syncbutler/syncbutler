@@ -20,7 +20,7 @@ This page describes in detail the steps taken while scanning Files and Folders. 
     # For each file in this current folder on the left, see if the corresponding file exists on the right. If it exists, execute the file scanning algorithm described in the next section. Otherwise:
       * If a checksum exists in the dictionary, report that the file was deleted from the right and suggest to delete the one on the left.
       * Otherwise report it as a new file and suggest to copy it to the right.
-    # For each file in this current folder on the right, see if the corresponding file exists on the right. If it does not exist:
+    # For each file in this current folder on the right, see if the corresponding file exists on the left. If it does not exist:
       * If a checksum exists in the dictionary, report that the file was deleted from the left and suggest to delete the one on the right.
       * Otherwise report it as a new file and suggest to copy it to the left.
 == Iteration Process ==
