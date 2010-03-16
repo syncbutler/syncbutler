@@ -694,6 +694,7 @@ namespace SyncButlerUI
         private void MRUSync(object sender, RoutedEventArgs e)
         {
             this.Controller.SyncMRUs("c");
+            showMessageBox(CustomDialog.MessageType.Success, "Synced and logged!");
         }
 		
 		private void SaveSetting(object sender, RoutedEventArgs e)
