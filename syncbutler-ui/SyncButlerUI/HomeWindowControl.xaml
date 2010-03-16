@@ -1125,8 +1125,8 @@
 			<TextBlock x:Name="CurrentSyncingFile" Margin="32.032,0,7.493,48.596" VerticalAlignment="Bottom" Height="24.761" TextWrapping="Wrap" Text="Currently Syncing: C:/doc/xml.xml"/>
 			<ProgressBar x:Name="SubProgressBar" Margin="38.623,0,28.52,34.69" VerticalAlignment="Bottom" Height="14.286"/>
 			<ProgressBar x:Name="TotalProgressBar" Margin="38.623,0,28.52,15.69" VerticalAlignment="Bottom" Height="14.286"/>
-			<TextBlock x:Name="ConflictsLabel" Margin="38.032,42.333,0,0" FontSize="16" FontWeight="Bold" Text="Conflicts" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Width="177.618" Height="28.571"/>
-			<Custom:DataGrid x:Name="ConflictList" Margin="39.1,93.429,27.091,187.714" RowDetailsVisibilityMode="VisibleWhenSelected"  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True" CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False" GridLinesVisibility="Vertical" Width="437.143" Height="162.857" HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" ItemsSource="{Binding StaticResource, Mode=TwoWay}" Custom:SelectiveScrollingGrid.SelectiveScrollingOrientation="Horizontal" CanUserResizeRows="False" HeadersVisibility="Column">
+			<TextBlock x:Name="ConflictsLabel" Margin="29.032,39.072,0,0" FontSize="16" FontWeight="Bold" Text="Conflicts" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Width="177.618" Height="28.571"/>
+			<Custom:DataGrid x:Name="ConflictList" Margin="29.032,123.429,8,157.714" RowDetailsVisibilityMode="VisibleWhenSelected"  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True" CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False" GridLinesVisibility="Vertical" Height="162.857" HorizontalScrollBarVisibility="Hidden" SelectionMode="Single" ItemsSource="{Binding StaticResource, Mode=TwoWay}" Custom:SelectiveScrollingGrid.SelectiveScrollingOrientation="Horizontal" CanUserResizeRows="False" HeadersVisibility="Column">
 				<Custom:DataGrid.Columns>
 					<Custom:DataGridTextColumn x:Name="conflictlistPartnershipName" Width="437.143" MinWidth="430" Header="Partnerships" Binding="{Binding PartnerShipName}" CanUserSort="False" CanUserResize="False" CanUserReorder="False" IsReadOnly="True" />
 				</Custom:DataGrid.Columns>
@@ -1143,9 +1143,9 @@
                 </Custom:DataGrid.RowDetailsTemplate>
 
 			</Custom:DataGrid>
-			<Button x:Name="doneButton" HorizontalAlignment="Right" Margin="0,0,21.853,79.143" VerticalAlignment="Bottom" Width="70.476" Height="24.762" Content="Done" IsEnabled="False" Click="GoHome"/>
-			<TextBlock x:Name="CurrentSyncingFile_Copy" Margin="39.032,67.643,0.493,0" TextWrapping="Wrap" Text="Please choose the file that you want to sync." VerticalAlignment="Top" Height="24.761"/>
-			<Button x:Name="resolveButton" HorizontalAlignment="Right" Margin="0,0,22.853,138.19" VerticalAlignment="Bottom" Width="75.238" Height="25.715" Content="Resolve" Click="ResolvePartnership_Click"/>
+			<Button x:Name="doneButton" HorizontalAlignment="Right" Margin="0,0,8,84.489" VerticalAlignment="Bottom" Width="76.238" Height="24.762" Content="Done" IsEnabled="False" Click="GoHome"/>
+			<TextBlock x:Name="CurrentSyncingFile_Copy" Margin="29.032,67.643,0.493,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="51.786"><Run Text="Files which can be synced safely will be synced immediately. Files which cannot be automatically synced will be listed below."/><LineBreak/><Run Text="Please select which files to keep and then click Resolve."/></TextBlock>
+			<Button x:Name="resolveButton" HorizontalAlignment="Right" Margin="0,0,7.493,127.999" VerticalAlignment="Bottom" Width="76.745" Height="25.715" Content="Resolve" Click="ResolvePartnership_Click"/>
 		</Grid>
 		<Grid x:Name="Settings" Margin="0.027,0,-0.027,0" VerticalAlignment="Bottom" Height="444" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
 			<Grid.RenderTransform>

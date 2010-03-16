@@ -296,6 +296,9 @@ namespace SyncButler
                 inputStream.Close();
                 outputStream.Close();
 
+                destFile.nativeFileSystemObj.LastWriteTime = nativeFileSystemObj.LastWriteTime;
+                destFile.nativeFileSystemObj.CreationTime = nativeFileSystemObj.CreationTime;
+
                 if (!checksumCacheFresh)
                 {
                     checksumCacheFresh = true;

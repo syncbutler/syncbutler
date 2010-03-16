@@ -172,40 +172,28 @@ namespace SyncButler
 			return AllConflict;
         }
 
-        public void ResolveConflicts(ObservableCollection<ConflictList> mergedList, SyncableStatusMonitor OnProgressUpdate, BackgroundWorker workerObj)
+        public List<Conflict> RemoveAutoResolvableConflicts(ConflictList cl)
         {
-            foreach (ConflictList cl in mergedList)
+            List<Conflict> resolvableConflicts = new List<Conflict>();
+            for (int i = cl.conflicts.Count - 1; i >= 0; i--)
             {
-                workerObj.ReportProgress(0, cl.PartnerShipName);
-                foreach (Conflict c in cl.conflicts)
+                Conflict c = cl.conflicts[i];
+                if (c.AutoResolveAction != Conflict.Action.Unknown)
                 {
-                        c.SetStatusMonitor(OnProgressUpdate);
-                        c.Resolve();
-                        c.SetStatusMonitor(null);
+                    resolvableConflicts.Add(c);
+                    cl.conflicts.RemoveAt(i);
                 }
             }
+
+            return resolvableConflicts;
         }
 
-        /// <summary>
-        /// Synchronizes all partnerships.
-        /// </summary>
-        public ObservableCollection<ConflictList> SyncAll(SyncableStatusMonitor OnProgressUpdate, BackgroundWorker workerObj)
+        public void ResolveConflict(Conflict toResolve, SyncableStatusMonitor OnProgressUpdate, BackgroundWorker workerObj)
         {
-
-            ObservableCollection<ConflictList> AllConflict = new ObservableCollection<ConflictList>();
-            foreach (string name in GetPartnershipList().Keys)
-            {
-                workerObj.ReportProgress(0, name);
-                Partnership curPartnership = syncEnvironment.GetPartnershipsList()[name];
-                
-                curPartnership.statusMonitor = OnProgressUpdate;
-                List<Conflict> conflict = curPartnership.Sync();
-                curPartnership.statusMonitor = null;
-
-                AllConflict.Add(new ConflictList(conflict, name));
-            }
-
-            return AllConflict;
+            workerObj.ReportProgress(0, toResolve.GetPartnership().Name);
+            toResolve.SetStatusMonitor(OnProgressUpdate);
+            toResolve.Resolve();
+            toResolve.SetStatusMonitor(null);
         }
 
         /// <summary>
