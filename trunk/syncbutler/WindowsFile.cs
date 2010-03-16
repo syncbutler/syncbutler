@@ -254,7 +254,9 @@ namespace SyncButler
         }
 
         /// <summary>
-        /// Attempt to overwrite its content to another file
+        /// Attempt to overwrite its content to another file. It will not immedietly overwrite the destination
+        /// file, but will copy the data to a temporary file first. Once that is completed, it will delete the
+        /// old file and rename the temporary file to take its place.
         /// </summary>
         /// <param name="item">The target file to be overwrite</param>
         /// <returns>Error.NoError if there is no error. Error.InvalidPath if the path is not valid. Error.NoPermission if the user has no permission to overwrite this file. Error.PathTooLong if the path given is too long for this system to handle</returns>
@@ -270,8 +272,18 @@ namespace SyncButler
             try
             {
                 FileStream inputStream = nativeFileObj.OpenRead();
-                if (destFile.nativeFileObj.Exists) destFile.nativeFileObj.Delete();
-                FileStream outputStream = destFile.nativeFileObj.OpenWrite();
+                FileStream outputStream = null;
+
+                string tempName = null;
+                for (int i = 0; i < 10000; i++)
+                {
+                    tempName = destFile.nativeFileObj.FullName + "." + i + ".syncbutler_safecopy";
+                    if (File.Exists(tempName)) continue;
+                    outputStream = new FileStream(tempName, FileMode.CreateNew, FileAccess.Write, FileShare.None);
+                    break;
+                }
+
+                if (outputStream == null) throw new IOException("Could not create a temporary file to be used for safe copying");
 
                 byte [] buf = new byte[bufferSize];
                 long totalCopied = 0;
@@ -293,13 +305,21 @@ namespace SyncButler
                     if (statusMonitor != null)
                     {
                         if (!statusMonitor(new SyncableStatus(EntityPath(), 0, (int)(totalCopied * toPercent), SyncableStatus.ActionType.Copy)))
+                        {
+                            inputStream.Close();
+                            outputStream.Close();
+                            File.Delete(tempName);
                             throw new UserCancelledException();
+                        }
                     }
 
                 } while (amountRead > 0);
 
                 inputStream.Close();
                 outputStream.Close();
+
+                if (destFile.nativeFileObj.Exists) destFile.nativeFileObj.Delete();
+                File.Move(tempName, destFile.nativeFileObj.FullName);
 
                 destFile.nativeFileSystemObj.LastWriteTime = nativeFileSystemObj.LastWriteTime;
                 destFile.nativeFileSystemObj.CreationTime = nativeFileSystemObj.CreationTime;

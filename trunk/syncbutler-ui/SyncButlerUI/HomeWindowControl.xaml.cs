@@ -236,6 +236,8 @@ namespace SyncButlerUI
 
                     scanWorker = null;
                     CancelButton.IsEnabled = false;
+                    TotalProgressBar.Value = 0;
+                    SubProgressBar.Value = 0;
 
                     return;
                 }
@@ -344,6 +346,7 @@ namespace SyncButlerUI
 
             TotalProgressBar.Visibility = Visibility.Visible;
             CancelButton.IsEnabled = true;
+            doneButton.IsEnabled = false;
 
             resolveWorker.DoWork += new DoWorkEventHandler(delegate(Object workerObj, DoWorkEventArgs args)
             {
@@ -352,6 +355,7 @@ namespace SyncButlerUI
                 SyncableStatusMonitor reporter = delegate(SyncableStatus status)
                 {
                     worker.ReportProgress(status.percentComplete, status);
+                    if (worker.CancellationPending) return false;
                     return true;
                 };
 
@@ -387,6 +391,10 @@ namespace SyncButlerUI
                     {
                         exp = new Exception("A permissions error was encountered while processing " + partnershipName + ": " + e.Message);
                     }
+                    catch (InvalidActionException e)
+                    {
+                        exp = new Exception("An invalid action occurred while processing " + partnershipName + ": " + e.Message);
+                    }
 
                     if (exp != null)
                     {
@@ -403,36 +411,27 @@ namespace SyncButlerUI
 
             resolveWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(delegate(Object workerObj, RunWorkerCompletedEventArgs args)
             {
+                CurrentSyncingFile.Text = "Scan complete. Conflicts processed so far: " + conflictsProcessed;
+                partnershipNameTextBox.Text = "";
+
                 if (operationCancelled)
                 {
                     showMessageBox(CustomDialog.MessageType.Message, "Sync cancelled by user");
                     resolveButton.IsEnabled = true;
                     resolveWorker = null;
                     CancelButton.IsEnabled = false;
+                    TotalProgressBar.Value = 0;
+                    SubProgressBar.Value = 0;
                     return;
                 }
 
-                if (args.Error is InvalidActionException)
-                {
-                    showMessageBox(CustomDialog.MessageType.Error, "Invalid Action Occurred - Unable to resolve Conflict");
-                    resolveButton.IsEnabled = true;
-                }
-                else
-                {
-                    /* this.ConflictList.IsEnabled = false;
-                    this.resolveButton.IsEnabled = false;
-                    this.doneButton.IsEnabled = true; */
-                }
-
-
-
-                CurrentSyncingFile.Text = "Scan complete. Conflicts processed so far: " + conflictsProcessed;
                 TotalProgressBar.Value = 0;
                 SubProgressBar.Value = 0;
 
                 resolveWorker = null;
 
                 CancelButton.IsEnabled = false;
+                doneButton.IsEnabled = true;
                 if (newConflicts.Count > 0) AsyncStartResolve();
 
             });
