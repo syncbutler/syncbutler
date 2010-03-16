@@ -49,6 +49,7 @@ namespace SyncButlerUI
         BackgroundWorker scanWorker = null;
         bool operationCancelled = false;
         private Semaphore resolveLock = new Semaphore(1, 1);
+        private Semaphore waitForErrorResponse = new Semaphore(0, 1);
         private Queue<Conflict> newConflicts = new Queue<Conflict>();
 		
 		public HomeWindowControl()
@@ -101,6 +102,20 @@ namespace SyncButlerUI
         }
 
         /// <summary>
+        /// Reports an error from Background Workers which use DisplayProgress
+        /// to report progress.
+        /// </summary>
+        /// <param name="worker">The BackgroundWorker which represents this thread</param>
+        /// <param name="exp">The exception to report</param>
+        /// <returns>Returns false if the thread should attempt to continue, true if it should cancel operations</returns>
+        private bool ReportError(BackgroundWorker worker, Exception exp)
+        {
+            worker.ReportProgress(0, exp);
+            waitForErrorResponse.WaitOne();
+            return worker.CancellationPending;
+        }
+
+        /// <summary>
         /// Delegate to report progress of a Sync operation to the user
         /// </summary>
         /// <param name="workerObj"></param>
@@ -110,6 +125,18 @@ namespace SyncButlerUI
             if (args.UserState is String)
             {
                 PartnershipName.Text = (String)args.UserState;
+                return;
+            }
+
+            if (args.UserState is Exception)
+            {
+                if (!showMessageBox(CustomDialog.MessageType.Question,
+                    ((Exception)args.UserState).Message + "\n\nWould you like to try and continue anyway?"))
+                {
+                    ((BackgroundWorker)workerObj).CancelAsync();
+                }
+
+                waitForErrorResponse.Release();
                 return;
             }
 
@@ -213,7 +240,6 @@ namespace SyncButlerUI
                     return;
                 }
 
-                CurrentSyncingFile.Text = "Scan complete. Please look at the list of conflicts.";
                 List<Conflict> autoResolveConflicts = new List<Conflict>();
 
                 foreach (ConflictList cl in mergedList)
@@ -230,6 +256,8 @@ namespace SyncButlerUI
                 TotalProgressBar.Value = 0;
                 SubProgressBar.Value = 0;
 
+                CurrentSyncingFile.Text = "Scan complete. Please look at the list of conflicts.";
+
                 ThreadSafeAddResolve(autoResolveConflicts);
 
                 scanWorker = null;
@@ -239,15 +267,19 @@ namespace SyncButlerUI
 
             scanWorker.DoWork += new DoWorkEventHandler(delegate(Object workerObj, DoWorkEventArgs args)
             {
+                mergedList = new ObservableCollection<ConflictList>();
+                BackgroundWorker worker = (BackgroundWorker)workerObj;
+                Exception exp;
+
                 foreach (string friendlyName in partnershipNames)
                 {
-                    BackgroundWorker worker = (BackgroundWorker)workerObj;
-
                     worker.ReportProgress(0, friendlyName);
+
+                    exp = null;
 
                     try
                     {
-                        mergedList = this.Controller.SyncPartnership(friendlyName, delegate(SyncableStatus status)
+                        ConflictList cl = this.Controller.SyncPartnership(friendlyName, delegate(SyncableStatus status)
                         {
                             worker.ReportProgress(status.percentComplete, status);
                             if (worker.CancellationPending) return false;
@@ -255,12 +287,32 @@ namespace SyncButlerUI
                         });
 
                         worker.ReportProgress(100, null);
+                        mergedList.Add(cl);
                         this.Controller.CleanUpOrphans(friendlyName);
                     }
                     catch (UserCancelledException)
                     {
                         operationCancelled = true;
+                        break;
                     }
+                    catch (IOException e)
+                    {
+                        exp = new Exception("An I/O error was encountered while processing " + friendlyName + ": " + e.Message);
+                    }
+                    catch (UnauthorizedAccessException e)
+                    {
+                        exp = new Exception("A permissions error was encountered while processing " + friendlyName + ": " + e.Message);
+                    }
+
+                    if (exp != null)
+                    {
+                        if (ReportError(worker, exp))
+                        {
+                            operationCancelled = true;
+                            break;
+                        }
+                    }
+
                 }
             });
 
@@ -304,12 +356,15 @@ namespace SyncButlerUI
                 };
 
                 Conflict curConflict = ThreadSafeGetNewResolve();
+                Exception exp;
 
-                try
+                
+                string partnershipName = "";
+                while (curConflict != null)
                 {
-                    string partnershipName = "";
-                    while (curConflict != null)
+                    try
                     {
+                        exp = null;
                         if (partnershipName != curConflict.GetPartnership().Name)
                         {
                             partnershipName = curConflict.GetPartnership().Name;
@@ -319,11 +374,28 @@ namespace SyncButlerUI
                         this.Controller.ResolveConflict(curConflict, reporter, worker);
                         curConflict = ThreadSafeGetNewResolve();
                     }
-                }
-                catch (UserCancelledException)
-                {
-                    operationCancelled = true;
-                    return;
+                    catch (UserCancelledException)
+                    {
+                        operationCancelled = true;
+                        return;
+                    }
+                    catch (IOException e)
+                    {
+                        exp = new Exception("An I/O error was encountered while processing " + partnershipName + ": " + e.Message);
+                    }
+                    catch (UnauthorizedAccessException e)
+                    {
+                        exp = new Exception("A permissions error was encountered while processing " + partnershipName + ": " + e.Message);
+                    }
+
+                    if (exp != null)
+                    {
+                        if (ReportError(worker, exp))
+                        {
+                            operationCancelled = true;
+                            return;
+                        }
+                    }
                 }
             });
 

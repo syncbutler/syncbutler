@@ -158,17 +158,15 @@ namespace SyncButler
         /// </summary>
         /// <param name="idx">Index of the partnership to be synced.</param>
         /// <returns>ObservableCollection conflict list with a list of conflicts. Will be null if there are no conflicts.</returns>
-        public ObservableCollection<ConflictList> SyncPartnership(String name, SyncableStatusMonitor monitor) 
+        public ConflictList SyncPartnership(String name, SyncableStatusMonitor monitor) 
         {
-		  	ObservableCollection<ConflictList> AllConflict = new ObservableCollection<ConflictList>();
             Partnership curPartnership = syncEnvironment.GetPartnershipsList()[name];
 
             curPartnership.statusMonitor = monitor;
 			List<Conflict> conflict = curPartnership.Sync();
             curPartnership.statusMonitor = null;
 
-			AllConflict.Add(new ConflictList(conflict,name));
-			return AllConflict;
+            return new ConflictList(conflict, name);
         }
 
         public void CleanUpOrphans(String partnershipName)
