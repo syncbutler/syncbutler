@@ -76,7 +76,7 @@ namespace SyncButlerUI
         /// <param name="msgBoxStyle">The template to use</param>
         /// <param name="dialogClose">The value to return if the dialog is simply closed.</param>
         /// <param name="msg">The message to display</param>
-        /// <returns>The result based on the button pressed. If the dialog was simple closed.</returns>
+        /// <returns>The result based on the button pressed. If the dialog was simply closed.</returns>
         public static MessageResponse Show(DependencyObject parent, MessageTemplate msgBoxStyle, MessageResponse dialogClose, string msg)
         {
             MessageType msgType;
@@ -108,7 +108,7 @@ namespace SyncButlerUI
         /// <param name="msgType">The type of message box this should be. Affects the title and icon.</param>
         /// <param name="dialogClose">The value to return if the dialog is simply closed.</param>
         /// <param name="msg">The message to display</param>
-        /// <returns>The result based on the button pressed. If the dialog was simple closed.</returns>
+        /// <returns>The result based on the button pressed. If the dialog was simply closed.</returns>
         public static MessageResponse Show(DependencyObject parent, MessageTemplate msgBoxStyle, MessageType msgType, MessageResponse dialogClose, string msg)
         {
             MessageResponse btn1 = MessageResponse.NotUsed, btn2 = MessageResponse.NotUsed, btn3 = MessageResponse.NotUsed;
@@ -143,12 +143,12 @@ namespace SyncButlerUI
         /// </summary>
         /// <param name="parent">The window which owns this message box</param>
         /// <param name="msgType">The icon and title to display</param>
-        /// <param name="button1">The value of button 1</param>
+        /// <param name="button1">The value of button 1. Set to NotUsed if not needed.</param>
         /// <param name="button2">The value of button 2. Set to NotUsed if not needed.</param>
         /// <param name="button3">The value of button 3. Set to NotUsed if not needed.</param>
         /// <param name="dialogClose">The value to return if the dialog is simply closed.</param>
         /// <param name="msg">The message to display</param>
-        /// <returns>The result based on the button pressed. If the dialog was simple closed.</returns>
+        /// <returns>The result based on the button pressed. If the dialog was simply closed.</returns>
         public static MessageResponse Show(DependencyObject parent, MessageType msgType, MessageResponse button1, MessageResponse button2, MessageResponse button3, MessageResponse dialogClose, string msg)
         {
             CustomDialog instance = new CustomDialog();

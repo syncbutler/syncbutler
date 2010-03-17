@@ -130,10 +130,15 @@ namespace SyncButlerUI
 
             if (args.UserState is Exception)
             {
-                if (!showMessageBox(CustomDialog.MessageType.Question,
+                switch (CustomDialog.Show(this, CustomDialog.MessageTemplate.SkipRetryCancel, CustomDialog.MessageType.Error, CustomDialog.MessageResponse.Retry,
                     ((Exception)args.UserState).Message + "\n\nWould you like to try and continue anyway?"))
                 {
-                    ((BackgroundWorker)workerObj).CancelAsync();
+                    case CustomDialog.MessageResponse.Cancel:
+                        ((BackgroundWorker)workerObj).CancelAsync();
+                        break;
+                    case CustomDialog.MessageResponse.Retry:
+                        throw new NotImplementedException();
+                        break;
                 }
 
                 waitForErrorResponse.Release();
