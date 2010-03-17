@@ -23,7 +23,7 @@
 	</Window.Triggers>
 
 	<Grid x:Name="LayoutRoot">
-		<Image x:Name="image" Margin="56,0,90,-14" Stretch="Fill" Source="Images/SunBurst.png" RenderTransformOrigin="0.5,0.5" Opacity="0.365">
+		<Image x:Name="image" Margin="-5,-48,15,-102" Stretch="Fill" Source="Images/SunBurst.png" RenderTransformOrigin="0.5,0.5" Opacity="0.365">
 			<Image.RenderTransform>
 				<TransformGroup>
 					<ScaleTransform/>
@@ -35,20 +35,9 @@
 		</Image>
 		<Image Margin="96,24,139,51" Source="Images/butler-glow.png" Stretch="Fill"/>
 		<Image Margin="125.592,0,147.808,75.4" Source="Images/logowTransparency.png" Stretch="Fill" VerticalAlignment="Center" Height="366.6"/>
-		<Button HorizontalAlignment="Right" Margin="0,0,23.5,12" VerticalAlignment="Bottom" Width="154.5" Height="42" Content="Name It!" FontSize="16" Click="NameIt_Click"/>
-		<TextBox x:Name="FirstTimeComputerNameText" Margin="42,0,197.5,12" VerticalAlignment="Bottom" Height="42" TextWrapping="Wrap" FontSize="18.667" src:Placeholder.Text="Please Enter A Friendly Name for This Computer"/>
-		<TextBlock Margin="115.5,0,144.5,66.5" VerticalAlignment="Bottom" Height="32" Text="Welcome to Sync Butler" TextWrapping="Wrap" TextAlignment="Center" FontWeight="Bold" FontSize="26.667">
-			<TextBlock.Effect>
-				<DropShadowEffect/>
-			</TextBlock.Effect>
-			<TextBlock.Foreground>
-				<LinearGradientBrush MappingMode="RelativeToBoundingBox" EndPoint="0.5,1" StartPoint="0.5,0">
-					<GradientStop Color="#FF0C81B6"/>
-					<GradientStop Color="Black" Offset="1"/>
-					<GradientStop Color="#FF00100D" Offset="1"/>
-					<GradientStop Color="#FF00110E" Offset="0.891"/>
-				</LinearGradientBrush>
-			</TextBlock.Foreground>
-		</TextBlock>
+		<Button HorizontalAlignment="Right" Margin="0,0,23.5,12" VerticalAlignment="Bottom" Width="154.5" Height="42" Content="Name It! " FontSize="16" Click="NameIt_Click"/>
+		<TextBox x:Name="FirstTimeComputerNameText" Margin="42,0,197.5,12" VerticalAlignment="Bottom" Height="42" TextWrapping="Wrap" FontSize="18.667" src:Placeholder.Text="Please enter a name for this computer"/>
+		<TextBlock Margin="115.5,0,144.5,66.5" VerticalAlignment="Bottom" Height="32" Text="Welcome to Sync Butler" TextWrapping="Wrap" TextAlignment="Center" FontWeight="Bold" FontSize="26.667"/>
+
 	</Grid>
 </Window>

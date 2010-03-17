@@ -103,7 +103,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <BlendEmbeddedFont Include="Fonts\segoeui.ttf">
+    <BlendEmbeddedFont Include="Fonts\segoeuiz.ttf">
       <IsSystemFont>True</IsSystemFont>
       <All>True</All>
       <AutoFill>True</AutoFill>
@@ -114,11 +114,6 @@
       <AutoFill>True</AutoFill>
     </BlendEmbeddedFont>
     <BlendEmbeddedFont Include="Fonts\segoeuii.ttf">
-      <IsSystemFont>True</IsSystemFont>
-      <All>True</All>
-      <AutoFill>True</AutoFill>
-    </BlendEmbeddedFont>
-    <BlendEmbeddedFont Include="Fonts\segoeuiz.ttf">
       <IsSystemFont>True</IsSystemFont>
       <All>True</All>
       <AutoFill>True</AutoFill>
