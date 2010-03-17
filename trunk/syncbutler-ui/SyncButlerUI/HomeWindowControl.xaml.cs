@@ -151,15 +151,29 @@ namespace SyncButlerUI
                 ErrorReportingMessage msg = (ErrorReportingMessage)args.UserState;
                 CustomDialog.MessageTemplate msgTemplate;
 
+                string message;
+
                 if (msg.source == ErrorReportingSource.Resolver)
                 {
+                    message = msg.exceptionThrown.Message + "\n\nWhat would you like me to do?";
                     msgTemplate = CustomDialog.MessageTemplate.SkipRetryCancel;
                     conflictsProcessed--;
                 }
-                else msgTemplate = CustomDialog.MessageTemplate.SkipCancel;
+                else if (msg.source == ErrorReportingSource.Scanner)
+                {
+                    // Triage for Issue #83
+                    message = msg.exceptionThrown.Message + "\n\nSyncButler is unable to continue";
+                    msgTemplate = CustomDialog.MessageTemplate.OkOnly;
+
+                    CustomDialog.Show(this, msgTemplate, CustomDialog.MessageType.Error, CustomDialog.MessageResponse.Cancel, message);
+
+                    ((BackgroundWorker)workerObj).CancelAsync();
+                    waitForErrorResponse.Release();
+                    return;
+                }
+                else throw new NotImplementedException();
                 
-                switch (CustomDialog.Show(this, msgTemplate, CustomDialog.MessageType.Error, CustomDialog.MessageResponse.Cancel,
-                    msg.exceptionThrown.Message + "\n\nWhat would you like me to do?"))
+                switch (CustomDialog.Show(this, msgTemplate, CustomDialog.MessageType.Error, CustomDialog.MessageResponse.Cancel, message))
                 {
                     case CustomDialog.MessageResponse.Cancel:
                         ((BackgroundWorker)workerObj).CancelAsync();
@@ -265,7 +279,7 @@ namespace SyncButlerUI
             {
                 if (operationCancelled)
                 {
-                    showMessageBox(CustomDialog.MessageType.Message, "Scan cancelled by user");
+                    showMessageBox(CustomDialog.MessageType.Message, "Scan cancelled");
                     GoHome();
 
                     scanWorker = null;
@@ -476,7 +490,7 @@ namespace SyncButlerUI
 
                 if (operationCancelled)
                 {
-                    showMessageBox(CustomDialog.MessageType.Message, "Sync cancelled by user");
+                    showMessageBox(CustomDialog.MessageType.Message, "Sync cancelled");
                     resolveButton.IsEnabled = true;
                     resolveWorker = null;
                     CancelButton.IsEnabled = false;
