@@ -259,7 +259,6 @@ namespace SyncButler
         /// old file and rename the temporary file to take its place.
         /// </summary>
         /// <param name="item">The target file to be overwrite</param>
-        /// <returns>Error.NoError if there is no error. Error.InvalidPath if the path is not valid. Error.NoPermission if the user has no permission to overwrite this file. Error.PathTooLong if the path given is too long for this system to handle</returns>
         public override void CopyTo(ISyncable item)
         {
             Debug.Assert(!item.GetType().Name.Equals("WindowsFiles"), "Different type, the given type is " + item.GetType().Name);
@@ -267,6 +266,11 @@ namespace SyncButler
             IRollingHash hashAlgorithm = new Adler32();
 
             WindowsFile destFile = (WindowsFile)item;
+
+            // Make sure there's enough free space.
+            if ((nativeFileObj.Length + 4096) > SystemEnvironment.StorageDevices.GetAvailableSpace(this.driveLetter))
+                throw new IOException("There is insufficient space to copy the file to " + destFile.nativeFileObj.FullName);
+
             int bufferSize = (int) SyncEnvironment.FileReadBufferSize;
 
             FileStream inputStream = nativeFileObj.OpenRead();
@@ -336,7 +340,6 @@ namespace SyncButler
         /// <summary>
         /// Attempts to delete this file.
         /// </summary>
-        /// <returns>Error.NoError on no error. Error.NoPermission if users does not have permission to delete this file. Error.InvalidPath if the path is not valid</returns>
         /// <exception cref="SecurityException">There was a permission error or the operation encountered an error and was cancelled by the user.</exception>
         /// <exception cref="IOException">The target file is open or memory-mapped on a computer running Microsoft Windows NT.</exception>
         public override void Delete(bool recoverable)
