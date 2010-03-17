@@ -60,21 +60,21 @@ namespace SyncButler
         /// </summary>
         /// <param name="item">The other ISyncable item in question.</param>
         /// <returns>True if copy succeeded, false otherwise.</returns>
-        Error CopyTo(ISyncable item);
+        void CopyTo(ISyncable item);
 
         /// <summary>
         /// Not implemented. Performs a delete action.
         /// </summary>
         /// <param name="recoverable">if the action performed allow the user to do a roll back</param>
         /// <returns>True if delete succeeded, false otherwise.</returns>
-        Error Delete(bool recoverable);
+        void Delete(bool recoverable);
 
         /// <summary>
         /// Not implemented. Performs a merge based on the item provided.
         /// </summary>
         /// <param name="item">The other ISyncable item in question.</param>
         /// <returns>True if merge succeeded, false otherwise.</returns>
-        Error Merge(ISyncable item);
+        void Merge(ISyncable item);
 
         /// <summary>
         /// Determines if the two ISyncables has changed

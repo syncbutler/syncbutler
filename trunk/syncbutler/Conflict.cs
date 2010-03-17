@@ -151,20 +151,36 @@ namespace SyncButler
         /// Attempts to rsolve a conflict based on th recommended action.
         /// </summary>
         /// <returns></returns>
-        public Error Resolve()
+        public void Resolve()
         {
             if (leftOverwriteRight && rightOverwriteLeft)
                 throw new NotSupportedException("Merging not supported currently");
 
             if (leftOverwriteRight)
             {
-                if (!left.Exists()) return Resolve(Action.DeleteRight);
-                else return Resolve(Action.CopyToRight);
+                if (!left.Exists())
+                {
+                    Resolve(Action.DeleteRight);
+                    return;
+                }
+                else
+                {
+                    Resolve(Action.CopyToRight);
+                    return;
+                }
             }
             else if (rightOverwriteLeft)
             {
-                if (!right.Exists()) return Resolve(Action.DeleteLeft);
-                else return Resolve(Action.CopyToLeft);
+                if (!right.Exists())
+                {
+                    Resolve(Action.DeleteLeft);
+                    return;
+                }
+                else
+                {
+                    Resolve(Action.CopyToLeft);
+                    return;
+                }
             }
 
             throw new InvalidActionException();
@@ -175,50 +191,45 @@ namespace SyncButler
         /// </summary>
         /// <returns>true if the conflict was successfully resolved, false otherwise.</returns>
         /// <exception cref="ArgumentException">This exception is generated when an invalid user action is passed into the method.</exception>
-        public Error Resolve(Action user)
+        public void Resolve(Action user)
         {
-            Error ret;
-
             switch (user) {
                 case Action.CopyToLeft : 
                     {
-                        ret = right.CopyTo(left);
-                        if (ret == Error.NoError) right.UpdateStoredChecksum();
+                        right.CopyTo(left);
+                        right.UpdateStoredChecksum();
                         break;
                     }
                 case Action.DeleteLeft : 
                     {
-                        ret = left.Delete(true);
-                        if (ret == Error.NoError) left.RemoveStoredChecksum();
+                        left.Delete(true);
+                        left.RemoveStoredChecksum();
                         break;
                     }
                 case Action.Merge:
                     {
-                        ret = left.Merge(right);
-                        if (ret == Error.NoError) left.UpdateStoredChecksum();
+                        left.Merge(right);
+                        left.UpdateStoredChecksum();
                         break;
                     }
                 case Action.CopyToRight:
                     {
-                        ret = left.CopyTo(right);
-                        if (ret == Error.NoError) left.UpdateStoredChecksum();
+                        left.CopyTo(right);
+                        left.UpdateStoredChecksum();
                         break;
                     }
                 case Action.DeleteRight:
                     {
-                        ret = right.Delete(true);
-                        if (ret == Error.NoError) right.RemoveStoredChecksum();
+                        right.Delete(true);
+                        right.RemoveStoredChecksum();
                         break;
                     }
                 default:
                     {
                         throw new System.ArgumentException("Invalid User Action");
-                        //return false;
                     }
 
             }
-
-            return ret;
         }
 
         public override String ToString()
