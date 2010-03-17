@@ -604,6 +604,8 @@ namespace SyncButlerUI
 		   clearTreeView();
            new PartnershipTempData();
 		   VisualStateManager.GoToState(this,"CreatePartnershipState1",false);
+           this.sourceTextBox.Clear();
+            
 		}
 		
 		/// <summary>
