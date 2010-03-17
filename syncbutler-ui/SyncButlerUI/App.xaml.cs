@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Windows;
 using SyncButler;
+using SyncButler.Exceptions;
 
 namespace SyncButlerUI
 {
@@ -21,18 +22,14 @@ namespace SyncButlerUI
         {
             if (Controller.TestSingleInstance(e.Args))
             {
-				Controller thisController= Controller.GetInstance();
-               // if((thisController.IsProgramRanBefore())){
-				//	FirstTimeStartup();
-				//}
-				if(thisController.IsProgramRanBefore())
-				{
-					new MainWindow().ShowDialog();
-				}
-				else
-				{
-					new FirstTimeStartupScreen().ShowDialog();
-				}
+                try
+                {
+                    new MainWindow().ShowDialog();
+                }
+                catch (UserCancelledException)
+                {
+					base.Shutdown(0);
+                }
             }
             else
             {
@@ -40,11 +37,5 @@ namespace SyncButlerUI
             }
             base.OnStartup(e);
         }
-		
-			private bool FirstTimeStartup(){
-			FirstTimeStartupScreen dialog=new FirstTimeStartupScreen();
-			dialog.ShowDialog();
-			return (bool)dialog.DialogResult;
-		}
 	}
 }

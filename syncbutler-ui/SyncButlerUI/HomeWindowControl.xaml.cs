@@ -564,8 +564,7 @@ namespace SyncButlerUI
             //show user selected path
 			//destinationTextBox.Text=SelectedImagePath;
           	sourceTextBox.Text=SelectedImagePath;
-			//  MessageBox.Show(SelectedImagePath);
-        }
+       }
 		#endregion
 
         private void GoHome()
@@ -760,7 +759,7 @@ namespace SyncButlerUI
 		/// </summary>
 		/// <param name="messagetype">MessageType Enumerator, to tell what kind of message it is: Error, Question, Warning, Message</param>
 		/// <param name="msg">String msg to tell what message the error is</param>
-		private bool showMessageBox(CustomDialog.MessageType messagetype,string msg){
+		public bool showMessageBox(CustomDialog.MessageType messagetype,string msg){
 			CustomDialog dialog=new CustomDialog(messagetype,msg);
 			var parent = Window.GetWindow(this);
 			if(parent!=null){
