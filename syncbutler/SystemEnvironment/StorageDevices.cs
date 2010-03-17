@@ -18,6 +18,11 @@ namespace SyncButler.SystemEnvironment
         }
 
         /// <summary>
+        /// Maximum file size for FAT32 filesystem.
+        /// </summary>
+        public static long MAX_SIZE_FAT32 = 4294967296;
+
+        /// <summary>
         /// Gets the drive letter, in the form of X:, based on the PNPDeviceID
         /// </summary>
         /// <param name="driveID">The PNPDeviceID</param>
