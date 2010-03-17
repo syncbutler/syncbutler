@@ -578,6 +578,12 @@
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="sbs" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
 						</ObjectAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="NoUSBWarningTextBlock" Storyboard.TargetProperty="(UIElement.Opacity)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+						</DoubleAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock8" Storyboard.TargetProperty="(UIElement.Opacity)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+						</DoubleAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
 				<VisualState x:Name="ConflictState1">
@@ -801,6 +807,14 @@
 				</VisualState>
 			</VisualStateGroup>
 		</VisualStateManager.VisualStateGroups>
+		<TextBlock x:Name="NoUSBWarningTextBlock" HorizontalAlignment="Left" Margin="-233.73,204.857,0,104.857" Width="410" Opacity="0" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap"><TextBlock.RenderTransform>
+				<TransformGroup>
+					<ScaleTransform/>
+					<SkewTransform/>
+					<RotateTransform/>
+					<TranslateTransform/>
+				</TransformGroup>
+			</TextBlock.RenderTransform><Run Text="Note:"/><LineBreak/><Run Text="No USB drive is detected to be plugged in."/><LineBreak/><Run Text="For the best overall experience for SBS, please plug in a USB drive."/></TextBlock>
 		<Grid x:Name="HomeWindow" VerticalAlignment="Bottom" Height="444">
 			<Rectangle x:Name="background" RadiusX="1" RadiusY="2" Margin="0,0,-1.5,0" VerticalAlignment="Top" Height="448" Cursor="Arrow">
 				<Rectangle.Fill>
@@ -1107,9 +1121,9 @@
 			<Button x:Name="Cancel" HorizontalAlignment="Right" Margin="0,0,25.947,19" VerticalAlignment="Bottom" Width="69" Height="23" Content="Cancel" RenderTransformOrigin="0.79,1.043" Click="GoHome" Cursor="Hand" />
 			<Button x:Name="Edit_Selector" Visibility="Hidden" Margin="41.08,0,0,19" VerticalAlignment="Bottom" Height="23" Content="Edit Selector" RenderTransformOrigin="0.79,1.043" HorizontalAlignment="Left" Width="93" Cursor="Hand" />
 			<ListBox x:Name="Favourites_List" HorizontalAlignment="Left" Margin="40.5,58.5,0,0" VerticalAlignment="Top" Width="204" Height="136.5"/>
+			<TextBlock x:Name="textBlock8" Margin="0,213,267.447,155.5" FontSize="16" TextWrapping="Wrap" HorizontalAlignment="Right" Width="207.22" FontWeight="Bold" FontStyle="Italic" Text="Other files that maybe copied as well" Opacity="0"/>
 			<ListBox x:Name="WeirdFile_List" HorizontalAlignment="Left" Margin="39,0,0,70.5" VerticalAlignment="Bottom" Width="204" Height="98.143" Style="{DynamicResource weirdFilesListItemsStyle}"/>
 			<TextBlock Margin="42.36,25,0,0" FontFamily="Arial" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="26.5" HorizontalAlignment="Left" Width="202.72" Text="Favourites"/>
-			<TextBlock Margin="0,213,267.447,155.5" FontSize="16" TextWrapping="Wrap" HorizontalAlignment="Right" Width="207.22" FontWeight="Bold" FontStyle="Italic" Text="Other files that maybe copied as well"/>
 			<TextBlock x:Name="textBlock_Copy" Margin="42.208,0,0,109.812" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Left" Width="196.885" Text="Mouse over to see" FontStyle="Italic" VerticalAlignment="Bottom" Height="19.162" TextAlignment="Center"/>
 		</Grid>
 		<Grid x:Name="Conflict" Margin="0.027,0,-0.027,0" VerticalAlignment="Bottom" Height="444" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
@@ -1153,7 +1167,7 @@
 				</Custom:DataGrid.Columns>
 			    <Custom:DataGrid.RowDetailsTemplate>
                     <DataTemplate>
-                        <Custom:DataGrid x:Name="conflictListInnerGrid" SelectionUnit="FullRow" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" ItemsSource="{Binding Path=conflicts}" CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False" >
+                        <Custom:DataGrid x:Name="conflictListInnerGrid" SelectionUnit="FullRow" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" ItemsSource="{Binding conflicts}" CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False" >
 					    <Custom:DataGrid.Columns>
 					    <Custom:DataGridTextColumn x:Name="File_Name"  IsReadOnly="True" Width="310" MinWidth="310" Header="File Name" Binding="{Binding OffendingPath}" />
 					    <Custom:DataGridCheckBoxColumn x:Name="FolderOneBox" Width="60" IsReadOnly="False" MinWidth="40" Header="Folder 1" Binding="{Binding LeftOverwriteRight}"/>
@@ -1218,13 +1232,5 @@
 				</ComboBox.RenderTransform>
 			</ComboBox>
 		</Grid>
-		<TextBlock x:Name="NoUSBWarningTextBlock" HorizontalAlignment="Left" Margin="-233.73,204.857,0,104.857" Width="410" Opacity="0" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap"><TextBlock.RenderTransform>
-				<TransformGroup>
-					<ScaleTransform/>
-					<SkewTransform/>
-					<RotateTransform/>
-					<TranslateTransform/>
-				</TransformGroup>
-			</TextBlock.RenderTransform><Run Text="Note:"/><LineBreak/><Run Text="No USB drive is detected to be plugged in."/><LineBreak/><Run Text="For the best overall experience for SBS, please plug in a USB drive."/></TextBlock>
 	</Grid>
 </UserControl>

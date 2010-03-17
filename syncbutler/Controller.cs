@@ -308,7 +308,7 @@ namespace SyncButler
         /// <returns></returns>
         public string GetSBSEnable()
         {
-            return SyncEnvironment.SBSEnable == null ? SyncEnvironment.SBSEnable : "Disable";
+            return SyncEnvironment.SBSEnable == null ? "Disable" : SyncEnvironment.SBSEnable;
         }
 
         /// <summary>
