@@ -74,17 +74,29 @@ namespace SyncButlerUI
 		private void GoToSetting(object sender, RoutedEventArgs e)
 		{
 			VisualStateManager.GoToState(homeWindow1, "Settings1",false);
-            List<string> DriveLetters = this.controller.GetDriveLetters();
-            this.homeWindow1.ComputerNameTextBox.Text = this.controller.GetComputerName();
             
+            this.homeWindow1.ComputerNameTextBox.Text = this.controller.GetComputerName();
+            this.homeWindow1.NoUSBWarningTextBlock.Visibility=Visibility.Hidden;
             this.homeWindow1.SBSWorkingDriveComboBox.Items.Clear();
+            List<string> DriveLetters = this.controller.GetUSBDriveLetters();
+            // if there is no usb drive, let user to select some local hard disk, warn the user as well.
+            if (DriveLetters.Count == 0)
+            {
+                DriveLetters = this.controller.GetNonUSBDriveLetters();
+                this.homeWindow1.NoUSBWarningTextBlock.Visibility = Visibility.Visible;
+            }
             foreach(string s in DriveLetters)
             {
                 this.homeWindow1.SBSWorkingDriveComboBox.Items.Add(s[0]);
             }
+
             if (this.homeWindow1.SBSWorkingDriveComboBox.Items.Contains(this.controller.GetSBSDriveLetter()))
             {
                 this.homeWindow1.SBSWorkingDriveComboBox.SelectedItem = this.controller.GetSBSDriveLetter();
+            }
+            else if(this.homeWindow1.SBSWorkingDriveComboBox.Items.Count != 0)
+            {
+                this.homeWindow1.SBSWorkingDriveComboBox.SelectedIndex = 0;
             }
 			this.homeWindow1.SBSWorkingDriveComboBox.IsEnabled = true;
 		}
