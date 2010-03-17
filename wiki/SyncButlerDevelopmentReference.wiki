@@ -2,9 +2,9 @@
 #sidebar SyncButlerDevelopmentReferenceSidebar
 
 = Introduction =
-
-The development guide which can be found at http://code.google.com/p/syncbutler/downloads/list
+This page contains some links to supplementary materials for the developer's guide which can be found at http://code.google.com/p/syncbutler/downloads/list
 
 = API =
-
 http://syncbutler.googlecode.com/files/SyncButler%20Generated%20API%20r295.zip
+
+= Diagrams =
