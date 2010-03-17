@@ -34,8 +34,12 @@ namespace SyncButlerUI
             if (FirstTimeComputerNameText.Text.Length != 0)
             {
                 controller = Controller.GetInstance();
-                controller.SetFirstComputerName(FirstTimeComputerNameText.Text); 
+                controller.SetFirstComputerName(FirstTimeComputerNameText.Text);
                 this.DialogResult = true;
+            }
+            else
+            {
+                CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Please enter a computer name");
             }
 		}
 		
