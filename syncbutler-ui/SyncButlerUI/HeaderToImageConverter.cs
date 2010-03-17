@@ -7,7 +7,9 @@ using System.Windows.Media.Imaging;
 namespace WPF_Explorer_Tree
 {
     #region HeaderToImageConverter
-
+    /// <summary>
+    /// Required component for the file browser in the GUI
+    /// </summary>
     [ValueConversion(typeof(string), typeof(bool))]
     public class HeaderToImageConverter : IValueConverter
     {
@@ -38,6 +40,4 @@ namespace WPF_Explorer_Tree
     }
 
     #endregion // DoubleToIntegerConverter
-
-
 }

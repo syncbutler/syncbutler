@@ -5,6 +5,9 @@ using System.Text;
 
 namespace SyncButler.Exceptions
 {
+    /// <summary>
+    /// This is a custom SyncButler exception. It is thrown when the user provides an invalid input.
+    /// </summary>
     public class UserInputException:Exception
     {
         public string message { get; set; }

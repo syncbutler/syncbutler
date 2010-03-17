@@ -27,15 +27,10 @@ using System.Windows.Media;
 namespace TetonWhitewaterKayak.WinUI
 
 {
-
     /// <summary>
-
     ///   Represents an adorner that adds placeholder text to a <see cref="T:System.Windows.Controls.TextBox"/>,
-
     ///   <see cref="T:System.Windows.Controls.RichTextBox"/> or <see cref="T:System.Windows.Controls.PasswordBox"/>.
-
     /// </summary>
-
     public class Placeholder : Adorner
 
     {

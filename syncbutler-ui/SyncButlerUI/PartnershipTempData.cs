@@ -12,6 +12,9 @@ using System.Windows.Shapes;
 using SyncButler;
 namespace SyncButlerUI
 {
+    /// <summary>
+    /// Stores the data input from the user when creating or editing Partnerships
+    /// </summary>
 	public class PartnershipTempData
 	{
 		///Instantiate variables with empty strings to prevent null reference as Texbox will refer to it

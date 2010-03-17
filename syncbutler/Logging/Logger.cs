@@ -6,6 +6,9 @@ using System.IO;
 
 namespace SyncButler.Logging
 {
+    /// <summary>
+    /// This is in charge of carrying out logging operations
+    /// </summary>
     public sealed class Logger
     {
         private static LogLevel LOGLEVEL_DEFAULT = LogLevel.DEBUG;
