@@ -1,9 +1,0 @@
-#summary Related to logging of various messages for debugging and tracking issues.
-
-= Introduction =
-
-Related to logging of various messages for debugging and tracking issues.
-
-= Details =
-
-    * [Logger.cs]
