@@ -10,6 +10,9 @@ using System.ComponentModel;
 
 namespace SyncButler
 {
+    /// <summary>
+    /// This class is responsible for coordinating communications from and to the user interface as well as between internal logic classes
+    /// </summary>
     public class Controller
     {
         SyncEnvironment syncEnvironment;
