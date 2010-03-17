@@ -314,7 +314,7 @@
 									<SolidColorBrush Color="White"/>
 								</Image.OpacityMask>
 							</Image>
-							<TextBlock Margin="53,13.5,-8.999,-22" Text="Sync Butler, Sync!" TextWrapping="Wrap" FontSize="16"/>
+							<TextBlock Margin="53,13.5,-8.999,-22" TextWrapping="Wrap" FontSize="16"><Run Text="Sync Butler, "/><Run FontStyle="Italic" Text="Sync"/><Run Text="!"/></TextBlock>
 						</Grid>
 						<ControlTemplate.Triggers>
 							<Trigger Property="IsFocused" Value="True"/>
@@ -370,6 +370,6 @@
 		</Rectangle>
 		<Button x:Name="HomeButton" Margin="-6,-1.5,0,0" Style="{DynamicResource HomeButton}" VerticalAlignment="Top" Height="62" Content="Home" HorizontalAlignment="Left" Width="141.666" Click="goHome" Cursor="Hand" FontSize="18.667"/>
 		<Button x:Name="SettingsButton" Margin="-6,50.5,0,0" Style="{DynamicResource SettingsButton}" VerticalAlignment="Top" Height="62" Content="Home" HorizontalAlignment="Left" Width="141.666" Cursor="Hand" Click="GoToSetting"/>
-		<Button x:Name="SyncButlerSyncButton" Margin="-6,109,0,0" Style="{DynamicResource SyncButtonTemplate}" VerticalAlignment="Top" Height="62" Content="Home" HorizontalAlignment="Left" Width="141.666" Cursor="Hand" Click="goToSyncButlerSync"/>
+		<Button x:Name="SyncButlerSyncButton" Margin="-6,109,0,0" Style="{DynamicResource SyncButtonTemplate}" VerticalAlignment="Top" Height="62" Content="Sync Butler,Sync" HorizontalAlignment="Left" Width="141.666" Cursor="Hand" Click="goToSyncButlerSync"/>
 	</Grid>
 </Window>
