@@ -34,7 +34,7 @@ namespace SyncButlerUI
             if (FirstTimeComputerNameText.Text.Length != 0)
             {
                 controller = Controller.GetInstance();
-                controller.SetComputerName(FirstTimeComputerNameText.Text);
+                controller.SetFirstComputerName(FirstTimeComputerNameText.Text); 
                 this.DialogResult = true;
             }
 		}

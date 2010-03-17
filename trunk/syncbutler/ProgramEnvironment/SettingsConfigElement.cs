@@ -82,6 +82,22 @@ namespace SyncButler.ProgramEnvironment
             }
         }
 
+        /// <summary>
+        /// The serilised version of the friendly name of the computer
+        /// </summary>
+        [ConfigurationProperty("computerNamed")]
+        public bool ComputerNamed
+        {
+            get
+            {
+                return (bool)this["computerNamed"];
+            }
+            set
+            {
+                this["computerNamed"] = value;
+            }
+        }
+
         [ConfigurationProperty("SBSDriveLetter")]
         public char SBSDriveLetter
         {
