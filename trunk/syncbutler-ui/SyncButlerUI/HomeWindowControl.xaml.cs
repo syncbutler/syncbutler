@@ -887,10 +887,11 @@ namespace SyncButlerUI
 		 	new PartnershipTempData((Partnership)this.partnershipList.SelectedItem);
 			 PartnershipTempData.oldPartnershipName= PartnershipTempData.partnershipName;
 			sourceTextBox.Text=PartnershipTempData.sourcePath;
+			 VisualStateManager.GoToState(this,"EditPartnershipState1",false);
 			}catch(UserInputException uIException){
 					showMessageBox(CustomDialog.MessageType.Error,uIException.message);
 			}
-		   VisualStateManager.GoToState(this,"EditPartnershipState1",false);
+		  
 		}
 		/// <summary>
 		/// go to 2nd page of edit partnership

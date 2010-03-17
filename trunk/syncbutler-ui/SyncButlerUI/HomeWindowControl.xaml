@@ -669,6 +669,9 @@
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="EditNextButton2" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
 						</ObjectAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="image1" Storyboard.TargetProperty="(UIElement.Opacity)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+						</DoubleAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
 				<VisualState x:Name="EditPartnershipState3">
@@ -817,6 +820,7 @@
 					<TranslateTransform/>
 				</TransformGroup>
 			</Grid.RenderTransform>
+			<Image x:Name="image1" Margin="184.36,116.094,50.666,8" Source="Images\logo.png" Stretch="Fill" Opacity="0"/>
 			<Rectangle x:Name="background_Copy1" RadiusX="1" RadiusY="2" Margin="-65.714,0,37,0" VerticalAlignment="Top" Height="448" Cursor="Arrow">
 				<Rectangle.Fill>
 					<RadialGradientBrush GradientOrigin="0.265,0.184" RadiusX="1.237" RadiusY="1.237">
@@ -828,7 +832,6 @@
 					</RadialGradientBrush>
 				</Rectangle.Fill>
 			</Rectangle>
-			<Image x:Name="image1" Margin="184.36,116.094,50.666,8" Source="Images\logo.png" Stretch="Fill" Opacity="0.04"/>
 			<Grid x:Name="CreatePartnership" Margin="0,0,38.5,0" VerticalAlignment="Bottom" Height="444" d:LayoutOverrides="GridBox">
 				<TextBlock x:Name="textBlock3" Margin="0,25,36.447,0" FontFamily="Arial" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" Text="Creating a Sync Partnership" VerticalAlignment="Top" Height="83.5" HorizontalAlignment="Right" Width="202.72"/>
 				<TextBlock Margin="0,109.5,55.947,0" FontSize="16" TextWrapping="Wrap" Text="Please select a folder on this computer" HorizontalAlignment="Right" Width="183.22" d:LayoutOverrides="HorizontalAlignment" VerticalAlignment="Top" Height="63.5" FontWeight="Bold" FontStyle="Italic"/>
@@ -954,7 +957,7 @@
 				<TextBlock x:Name="sourceFolderPath" Margin="30.499,0,0,108.429" FontSize="13.333" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="66.571" HorizontalAlignment="Left" Width="222.08"/>
 				<TextBlock x:Name="destinationFolderPath" Margin="30.499,0,0,24.429" FontSize="13.333" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="66.571" HorizontalAlignment="Left" Width="222.08"/>
 				<TextBlock x:Name="partnerShipName" Margin="30.499,191,0,196.429" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Left" Width="222.08"/>
-				<Button x:Name="button1" HorizontalAlignment="Right" Margin="0,0,38.5,103.643" VerticalAlignment="Bottom" Width="127.667" Height="47" Content="   Sync this&#xd;&#xa; Partnership" RenderTransformOrigin="0.79,1.043" Click="SyncThisPartnership_Click"/>
+				<Button x:Name="button1" HorizontalAlignment="Right" Margin="0,0,38.5,103.643" VerticalAlignment="Bottom" Width="127.667" Height="47" Content="   Sync this&#xa; Partnership" RenderTransformOrigin="0.79,1.043" Click="SyncThisPartnership_Click"/>
 			</Grid>
 			<TextBox x:Name="sourceTextBox" Margin="72.5,352.04,106.447,0" VerticalAlignment="Top" TextWrapping="Wrap" MaxLength="266" Width="375.08" d:LayoutOverrides="GridBox"/>
 			<TreeView Margin="55.5,48,0,149.5" x:Name="foldersItem" SelectedItemChanged="foldersItem_SelectedItemChanged" Background="#FFFFFFFF" BorderBrush="#FF7C7C7C" Foreground="#FFFFFFFF" HorizontalAlignment="Left" Width="189.58" RenderTransformOrigin="0.5,0.5">
@@ -994,7 +997,7 @@
 						</TransformGroup>
 					</TextBlock.RenderTransform>
 				</TextBlock>
-				<Button x:Name="goToviewPartnershipsButton" HorizontalAlignment="Right" Margin="0,0,38.5,49.643" VerticalAlignment="Bottom" Width="127.667" Height="47" Content="     Go Back to &#xd;&#xa;View Partnerships" RenderTransformOrigin="0.79,1.043" Click="GoToViewPartnerships_Click" Opacity="0">
+				<Button x:Name="goToviewPartnershipsButton" HorizontalAlignment="Right" Margin="0,0,38.5,49.643" VerticalAlignment="Bottom" Width="127.667" Height="47" Content="     Go Back to &#xa;View Partnerships" RenderTransformOrigin="0.79,1.043" Click="GoToViewPartnerships_Click" Opacity="0">
 					<Button.RenderTransform>
 						<TransformGroup>
 							<ScaleTransform/>
