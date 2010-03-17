@@ -42,7 +42,8 @@ namespace SyncButlerUI
             OkOnly,
             YesNo,
             SkipRetryCancel,
-            RetryCancel
+            RetryCancel,
+            SkipCancel
         }
 
         protected MessageResponse userResponse;
@@ -88,6 +89,7 @@ namespace SyncButlerUI
                     break;
                 case MessageTemplate.SkipRetryCancel:
                 case MessageTemplate.RetryCancel:
+                case MessageTemplate.SkipCancel:
                     msgType = MessageType.Error;
                     break;
                 case MessageTemplate.YesNo:
@@ -126,6 +128,10 @@ namespace SyncButlerUI
                 case MessageTemplate.RetryCancel:
                     btn3 = MessageResponse.Cancel;
                     btn2 = MessageResponse.Retry;
+                    break;
+                case MessageTemplate.SkipCancel:
+                    btn3 = MessageResponse.Cancel;
+                    btn2 = MessageResponse.Skip;
                     break;
                 case MessageTemplate.YesNo:
                     btn3 = MessageResponse.No;
