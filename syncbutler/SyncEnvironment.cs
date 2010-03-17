@@ -217,9 +217,18 @@ namespace SyncButler
             storedSettings.SystemSettings.SBSDriveLetter = SBSDriveLetter;
             storedSettings.SystemSettings.SBSEnable = SBSEnable;
 
-            
+            // todo: edit from here
             // Write to file
-            config.Save(ConfigurationSaveMode.Modified);
+            if (SearchForSettingsFile() == null)
+            {
+                ReIntialEnv();
+                //config.Save(ConfigurationSaveMode.Modified);
+                StoreEnv();
+            }
+            else
+            {
+                config.Save(ConfigurationSaveMode.Modified);
+            }
         }
 
         /// <summary>
@@ -239,7 +248,15 @@ namespace SyncButler
             storedSettings.SystemSettings.SBSEnable = SBSEnable;
 
             // Write to file
-            config.Save(ConfigurationSaveMode.Modified);
+            if (SearchForSettingsFile() == null)
+            {
+                ReIntialEnv();
+                StoreSettings();
+            }
+            else
+            {
+                config.Save(ConfigurationSaveMode.Modified);
+            }
         }
 
         /// <summary>
@@ -322,6 +339,67 @@ namespace SyncButler
             ConvertPartnershipList2XML();
             storedSettings.SystemSettings.ComputerNamed = computerNamed;
             config.Save(ConfigurationSaveMode.Modified);
+
+        }
+
+        /// <summary>
+        /// Used to restore deleted config file during run time
+        /// </summary>
+        public void ReIntialEnv()
+        {
+            if (config != null)
+            {
+                config.Sections.Clear();
+            }
+            
+            // The config file will be the name of our app, less the extension
+            // It might not be so if the user has changed the filename for some reason
+            // Attempt to locate the settings file (null if not found)
+            string configFilename = SearchForSettingsFile(); ;
+            if (configFilename == null)
+                configFilename = GetSettingsFileName();
+
+            // Map the new configuration file
+            ExeConfigurationFileMap configFileMap = new ExeConfigurationFileMap();
+            configFileMap.ExeConfigFilename = configFilename;
+
+            // Create out own configuration file
+            config = ConfigurationManager.OpenMappedExeConfiguration(
+                configFileMap, ConfigurationUserLevel.None);
+            
+            // Prepare to read the custom sections (Pre declared needed for valid settings
+            // file check. (Hint, the first run complete is hidden in the xml file)
+            if (config != null)
+            {
+                //Console.WriteLine(
+                //    "A Settings file was found, checking its validity");
+
+                storedSettings =
+                    (SettingsSection)config.GetSection(settingName);
+
+                
+                if (storedSettings == null)
+                {
+                    //Console.WriteLine(
+                    //    "A invalid settings file was found, recreating one");
+                    storedSettings = new SettingsSection();
+                    storedSettings.SystemSettings.FirstRunComplete = true;
+                    storedSettings.SystemSettings.ComputerNamed = true;
+                }
+
+            }
+            ConvertPartnershipList2XML();
+
+            // Add the custom sections to the config
+            config.Sections.Add(settingName, storedSettings);
+            config.Sections.Add(partnershipName, storedPartnerships);
+            
+            // Write to file
+            config.Save(ConfigurationSaveMode.Modified);
+
+            // Just to reload the configuration
+            ConfigurationManager.RefreshSection(settingName);
+            ConfigurationManager.RefreshSection(partnershipName);
 
         }
         /// <summary>
