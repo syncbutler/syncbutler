@@ -412,7 +412,7 @@ namespace SyncButler
                     {
                         // If the checksum existed, then we infer that the folder was deleted from the right.
                         if (this.parentPartnership.ChecksumExists(PREF_FOLDER + leftFolderName))
-                            autoResolveAction = Conflict.Action.DeleteRight;
+                            autoResolveAction = Conflict.Action.DeleteLeft;
                         // Otherwise, we infer that the folder is newly created.
                         else
                             autoResolveAction = Conflict.Action.CopyToRight;
@@ -443,7 +443,7 @@ namespace SyncButler
                     {
                         // If the checksum existed, then we infer that the folder was deleted from the left.
                         if (this.parentPartnership.ChecksumExists(PREF_FOLDER + rightFolderName))
-                            autoResolveAction = Conflict.Action.DeleteLeft;
+                            autoResolveAction = Conflict.Action.DeleteRight;
                         // Otherwise, we infer that the folder is newly created.
                         else
                             autoResolveAction = Conflict.Action.CopyToLeft;
