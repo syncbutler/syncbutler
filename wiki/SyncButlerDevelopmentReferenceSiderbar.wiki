@@ -1,0 +1,7 @@
+#summary Sidebar for the reference
+
+= Contents =
+
+[SyncButlerDevelopmentReference Main Page]
+
+[http://syncbutler.googlecode.com/files/SyncButler%20Generated%20API%20r295.zip API]

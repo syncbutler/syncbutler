@@ -1,0 +1,10 @@
+#summary Related to logging of various messages for debugging and tracking issues.
+#sidebar SyncButlerDevelopmentReferenceSidebar
+
+= Introduction =
+
+The development guide which can be found at http://code.google.com/p/syncbutler/downloads/list
+
+= API =
+
+http://syncbutler.googlecode.com/files/SyncButler%20Generated%20API%20r295.zip
