@@ -1,4 +1,4 @@
-#summary Related to logging of various messages for debugging and tracking issues.
+#summary Supplementary materials for the developer's guide
 #sidebar SyncButlerDevelopmentReferenceSidebar
 
 = Introduction =
