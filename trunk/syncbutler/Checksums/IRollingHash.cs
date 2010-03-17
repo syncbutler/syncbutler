@@ -4,6 +4,9 @@ using System.Text;
 
 namespace SyncButler.Checksums
 {
+    /// <summary>
+    /// Interface which hides the implementation of the rolling hash from the application. This allows for ease of switching to a more robust or faster implementation.
+    /// </summary>
     public interface IRollingHash
     {
         /// <summary>

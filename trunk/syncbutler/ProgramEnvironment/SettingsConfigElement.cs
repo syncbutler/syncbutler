@@ -5,6 +5,9 @@ using System.Configuration;
 
 namespace SyncButler.ProgramEnvironment
 {
+    /// <summary>
+    /// XML descriptor for storing individual settings in the settings section
+    /// </summary>
     public class SettingsConfigElement : ConfigurationElement
     {
         /// <summary>

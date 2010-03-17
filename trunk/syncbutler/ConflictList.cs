@@ -5,6 +5,9 @@ using System.Text;
 
 namespace SyncButler
 {
+    /// <summary>
+    /// Represents a list of conflicts
+    /// </summary>
     public class ConflictList
     {
         public List<Conflict> conflicts { get; set; }
