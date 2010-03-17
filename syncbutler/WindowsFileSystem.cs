@@ -177,86 +177,6 @@ namespace SyncButler
         }
 
         /// <summary>
-        /// Checks and returns whether the file or folder exists.
-        /// Calls Refresh() on the underlying native file system object before attempting the check.
-        /// </summary>
-        /// <returns>True if the file system object (File or Folder) exists. False otherwise.</returns>
-        public bool Exists()
-        {
-            this.nativeFileSystemObj.Refresh();
-            return nativeFileSystemObj.Exists;
-        }
-
-        public void SetParentPartnership(Partnership parentPartnership)
-        {
-            this.parentPartnership = parentPartnership;
-        }
-
-        public Partnership GetParentPartnership()
-        {
-            return this.parentPartnership;
-        }
-
-        public long GetStoredChecksum()
-        {
-            return parentPartnership.GetLastChecksum(this);
-        }
-
-        public void UpdateStoredChecksum()
-        {
-            parentPartnership.UpdateLastChecksum(this);
-        }
-
-        public void RemoveStoredChecksum()
-        {
-            parentPartnership.RemoveChecksum(this);
-        }
-
-        public string Serialize()
-        {
-            StringWriter output = new StringWriter();
-            XmlWriterSettings xmlSettings = new XmlWriterSettings();
-            xmlSettings.OmitXmlDeclaration = true;
-            xmlSettings.Indent = true;
-            XmlWriter xmlData = XmlWriter.Create(output, xmlSettings); 
-
-            xmlData.WriteStartDocument();
-            SerializeXML(xmlData);
-            xmlData.WriteEndDocument();
-            xmlData.Close();
-
-            return output.ToString();
-        }
-
-        public void PrepareSync()
-        {
-            // Force drive letter to be rechecked
-            driveLetter = null;
-        }
-
-        public abstract long Checksum();
-
-        public abstract void SetStatusMonitor(SyncableStatusMonitor monitor);
-
-        public abstract List<Conflict> Sync(ISyncable otherPair);
-
-        public abstract Error CopyTo(ISyncable item);
-
-        //public abstract Error Delete();
-
-        public abstract Error Merge(ISyncable item);
-
-        public abstract bool HasChanged();
-
-        public abstract bool Equals(ISyncable item);
-
-        public abstract string EntityPath();
-
-        public abstract ISyncable CreateChild(string entityPath);
-
-        public abstract void SerializeXML(XmlWriter xmlData);
-
-        /// <summary>
         /// Method that is used internally to update the drive letter of the root path, based on the current drive ID.
         /// </summary>
         public void UpdateDriveLetter()
@@ -311,9 +231,85 @@ namespace SyncButler
 
         #region ISyncable Members
 
+        /// <summary>
+        /// Checks and returns whether the file or folder exists.
+        /// Calls Refresh() on the underlying native file system object before attempting the check.
+        /// </summary>
+        /// <returns>True if the file system object (File or Folder) exists. False otherwise.</returns>
+        public bool Exists()
+        {
+            this.nativeFileSystemObj.Refresh();
+            return nativeFileSystemObj.Exists;
+        }
 
-        public abstract Error Delete(bool recoverable);
-        
+        public void SetParentPartnership(Partnership parentPartnership)
+        {
+            this.parentPartnership = parentPartnership;
+        }
+
+        public Partnership GetParentPartnership()
+        {
+            return this.parentPartnership;
+        }
+
+        public long GetStoredChecksum()
+        {
+            return parentPartnership.GetLastChecksum(this);
+        }
+
+        public void UpdateStoredChecksum()
+        {
+            parentPartnership.UpdateLastChecksum(this);
+        }
+
+        public void RemoveStoredChecksum()
+        {
+            parentPartnership.RemoveChecksum(this);
+        }
+
+        public abstract void SerializeXML(XmlWriter xmlData);
+
+        public string Serialize()
+        {
+            StringWriter output = new StringWriter();
+            XmlWriterSettings xmlSettings = new XmlWriterSettings();
+            xmlSettings.OmitXmlDeclaration = true;
+            xmlSettings.Indent = true;
+            XmlWriter xmlData = XmlWriter.Create(output, xmlSettings);
+
+            xmlData.WriteStartDocument();
+            SerializeXML(xmlData);
+            xmlData.WriteEndDocument();
+            xmlData.Close();
+
+            return output.ToString();
+        }
+
+        public void PrepareSync()
+        {
+            // Force drive letter to be rechecked
+            driveLetter = null;
+        }
+
+        public abstract long Checksum();
+
+        public abstract void SetStatusMonitor(SyncableStatusMonitor monitor);
+
+        public abstract List<Conflict> Sync(ISyncable otherPair);
+
+        public abstract void CopyTo(ISyncable item);
+
+        public abstract void Merge(ISyncable item);
+
+        public abstract void Delete(bool recoverable);
+
+        public abstract bool HasChanged();
+
+        public abstract bool Equals(ISyncable item);
+
+        public abstract string EntityPath();
+
+        public abstract ISyncable CreateChild(string entityPath);
 
         #endregion
     }

@@ -151,11 +151,15 @@ namespace SyncButlerUI
                 ErrorReportingMessage msg = (ErrorReportingMessage)args.UserState;
                 CustomDialog.MessageTemplate msgTemplate;
 
-                if (msg.source == ErrorReportingSource.Resolver) msgTemplate = CustomDialog.MessageTemplate.SkipRetryCancel;
+                if (msg.source == ErrorReportingSource.Resolver)
+                {
+                    msgTemplate = CustomDialog.MessageTemplate.SkipRetryCancel;
+                    conflictsProcessed--;
+                }
                 else msgTemplate = CustomDialog.MessageTemplate.SkipCancel;
                 
                 switch (CustomDialog.Show(this, msgTemplate, CustomDialog.MessageType.Error, CustomDialog.MessageResponse.Cancel,
-                    msg.exceptionThrown.Message + "\n\nWould you like to try and continue anyway?"))
+                    msg.exceptionThrown.Message + "\n\nWhat would you like me to do?"))
                 {
                     case CustomDialog.MessageResponse.Cancel:
                         ((BackgroundWorker)workerObj).CancelAsync();
@@ -325,7 +329,7 @@ namespace SyncButlerUI
                     catch (UserCancelledException)
                     {
                         operationCancelled = true;
-                        break;
+                        return;
                     }
                     catch (IOException e)
                     {
@@ -334,6 +338,18 @@ namespace SyncButlerUI
                     catch (UnauthorizedAccessException e)
                     {
                         exp = new Exception("A permissions error was encountered while processing " + friendlyName + ": " + e.Message);
+                    }
+                    catch (System.Security.SecurityException e)
+                    {
+                        exp = new Exception("A permissions error was encountered while processing " + friendlyName + ": " + e.Message);
+                    }
+                    catch (InvalidActionException e)
+                    {
+                        exp = new Exception("An invalid action occurred while processing " + friendlyName + ": " + e.Message);
+                    }
+                    catch (Exception e)
+                    {
+                        exp = new Exception("An error occurred while processing " + friendlyName + ": " + e.Message);
                     }
 
                     if (exp != null)
@@ -408,7 +424,6 @@ namespace SyncButlerUI
                         }
 
                         this.Controller.ResolveConflict(curConflict, reporter, worker);
-                        curConflict = ThreadSafeGetNewResolve();
                     }
                     catch (UserCancelledException)
                     {
@@ -423,9 +438,17 @@ namespace SyncButlerUI
                     {
                         exp = new Exception("A permissions error was encountered while processing " + partnershipName + ": " + e.Message);
                     }
+                    catch (System.Security.SecurityException e)
+                    {
+                        exp = new Exception("A permissions error was encountered while processing " + partnershipName + ": " + e.Message);
+                    }
                     catch (InvalidActionException e)
                     {
                         exp = new Exception("An invalid action occurred while processing " + partnershipName + ": " + e.Message);
+                    }
+                    catch (Exception e)
+                    {
+                        exp = new Exception("An error occurred while processing " + partnershipName + ": " + e.Message);
                     }
 
                     if (exp != null)
@@ -439,6 +462,8 @@ namespace SyncButlerUI
                             return;
                         }
                     }
+
+                    curConflict = ThreadSafeGetNewResolve();
                 }
             });
 

@@ -260,7 +260,7 @@ namespace SyncButler
         /// </summary>
         /// <param name="item">The target file to be overwrite</param>
         /// <returns>Error.NoError if there is no error. Error.InvalidPath if the path is not valid. Error.NoPermission if the user has no permission to overwrite this file. Error.PathTooLong if the path given is too long for this system to handle</returns>
-        public override Error CopyTo(ISyncable item)
+        public override void CopyTo(ISyncable item)
         {
             Debug.Assert(!item.GetType().Name.Equals("WindowsFiles"), "Different type, the given type is " + item.GetType().Name);
 
@@ -269,95 +269,77 @@ namespace SyncButler
             WindowsFile destFile = (WindowsFile)item;
             int bufferSize = (int) SyncEnvironment.FileReadBufferSize;
 
-            try
-            {
-                FileStream inputStream = nativeFileObj.OpenRead();
-                FileStream outputStream = null;
+            FileStream inputStream = nativeFileObj.OpenRead();
+            FileStream outputStream = null;
 
-                string tempName = null;
-                for (int i = 0; i < 10000; i++)
+            string tempName = null;
+            for (int i = 0; i < 10000; i++)
+            {
+                tempName = destFile.nativeFileObj.FullName + "." + i + ".syncbutler_safecopy";
+                if (File.Exists(tempName)) continue;
+                outputStream = new FileStream(tempName, FileMode.CreateNew, FileAccess.Write, FileShare.None);
+                break;
+            }
+
+            if (outputStream == null) throw new IOException("Could not create a temporary file to be used for safe copying");
+
+            byte [] buf = new byte[bufferSize];
+            long totalCopied = 0;
+            int amountRead;
+            float toPercent = 100f / nativeFileObj.Length;
+
+            do
+            {
+                amountRead = inputStream.Read(buf, 0, bufferSize);
+                if (amountRead > 0)
                 {
-                    tempName = destFile.nativeFileObj.FullName + "." + i + ".syncbutler_safecopy";
-                    if (File.Exists(tempName)) continue;
-                    outputStream = new FileStream(tempName, FileMode.CreateNew, FileAccess.Write, FileShare.None);
-                    break;
+                    outputStream.Write(buf, 0, amountRead);
+                    if (!checksumCacheFresh) hashAlgorithm.Update(buf, 0, amountRead);
+
                 }
 
-                if (outputStream == null) throw new IOException("Could not create a temporary file to be used for safe copying");
+                totalCopied += amountRead;
 
-                byte [] buf = new byte[bufferSize];
-                long totalCopied = 0;
-                int amountRead;
-                float toPercent = 100f / nativeFileObj.Length;
-
-                do
+                if (statusMonitor != null)
                 {
-                    amountRead = inputStream.Read(buf, 0, bufferSize);
-                    if (amountRead > 0)
+                    if (!statusMonitor(new SyncableStatus(EntityPath(), 0, (int)(totalCopied * toPercent), SyncableStatus.ActionType.Copy)))
                     {
-                        outputStream.Write(buf, 0, amountRead);
-                        if (!checksumCacheFresh) hashAlgorithm.Update(buf, 0, amountRead);
-
+                        inputStream.Close();
+                        outputStream.Close();
+                        File.Delete(tempName);
+                        throw new UserCancelledException();
                     }
-
-                    totalCopied += amountRead;
-
-                    if (statusMonitor != null)
-                    {
-                        if (!statusMonitor(new SyncableStatus(EntityPath(), 0, (int)(totalCopied * toPercent), SyncableStatus.ActionType.Copy)))
-                        {
-                            inputStream.Close();
-                            outputStream.Close();
-                            File.Delete(tempName);
-                            throw new UserCancelledException();
-                        }
-                    }
-
-                } while (amountRead > 0);
-
-                inputStream.Close();
-                outputStream.Close();
-
-                if (destFile.nativeFileObj.Exists) destFile.nativeFileObj.Delete();
-                File.Move(tempName, destFile.nativeFileObj.FullName);
-
-                destFile.nativeFileSystemObj.LastWriteTime = nativeFileSystemObj.LastWriteTime;
-                destFile.nativeFileSystemObj.CreationTime = nativeFileSystemObj.CreationTime;
-
-                if (!checksumCacheFresh)
-                {
-                    checksumCacheFresh = true;
-                    checksumCache = hashAlgorithm.Value;
                 }
 
-                destFile.checksumCacheFresh = checksumCacheFresh;
-                destFile.checksumCache = checksumCache;
+            } while (amountRead > 0);
 
-                return Error.NoError;
-            }
-            catch (ArgumentException)
+            inputStream.Close();
+            outputStream.Close();
+
+            if (destFile.nativeFileObj.Exists) destFile.nativeFileObj.Delete();
+            File.Move(tempName, destFile.nativeFileObj.FullName);
+
+            destFile.nativeFileSystemObj.LastWriteTime = nativeFileSystemObj.LastWriteTime;
+            destFile.nativeFileSystemObj.CreationTime = nativeFileSystemObj.CreationTime;
+
+            if (!checksumCacheFresh)
             {
-                return Error.InvalidPath;
+                checksumCacheFresh = true;
+                checksumCache = hashAlgorithm.Value;
             }
-            catch (NotSupportedException)
-            {
-                return Error.InvalidPath;
-            }
-            catch (UnauthorizedAccessException)
-            {
-                return Error.NoPermission;
-            }
-            catch (PathTooLongException)
-            {
-                return Error.PathTooLong;
-            }     
+
+            destFile.checksumCacheFresh = checksumCacheFresh;
+            destFile.checksumCache = checksumCache;
+            
         }
 
         /// <summary>
         /// Attempts to delete this file.
         /// </summary>
         /// <returns>Error.NoError on no error. Error.NoPermission if users does not have permission to delete this file. Error.InvalidPath if the path is not valid</returns>
-        public override Error Delete(bool recoverable)
+        /// <exception cref="SecurityException">There was a permission error or the operation encountered an error and was cancelled by the user.</exception>
+        /// <exception cref="IOException">The target file is open or memory-mapped on a computer running Microsoft Windows NT.</exception>
+        public override void Delete(bool recoverable)
         {
             try
             {
@@ -372,33 +354,25 @@ namespace SyncButler
             }
             catch (OperationCanceledException)
             {
-                throw new UnauthorizedAccessException("There was no permission to delete this file");
+                throw new System.Security.SecurityException("There was no permission to delete this file");
             }
-            catch (System.Security.SecurityException)
+            catch (Exception e)
             {
-                return Error.NoPermission;
+                throw e;
             }
-            catch (System.UnauthorizedAccessException)
-            {
-                return Error.InvalidPath;
-            }
-            return Error.NoError;
         }
 
-        public override Error Merge(ISyncable item)
+        public override void Merge(ISyncable item)
         {
-            return Error.NotImplemented;
+            throw new NotImplementedException();
         }
 
         /// <summary>
         /// Calculates and returns the checksum of this file, based on a comparison of its contents.
         /// </summary>
         /// <remarks>
-        /// A size of 2,048,000 bytes (approx. 2MB) is used.
+        /// The block size used is determined by the program settings
         /// Adler32 is the preferred algorithm for calculating the checksum, as it has been proven to be fast, with an acceptable level of collision.
-        /// 
-        /// Future TODO: Cache the result so that checksum calculations do not need to be
-        /// repeated.
         /// </remarks>
         /// <returns>A long of the checksum.</returns>
         /// <exception cref="FileNotFoundException">If the file is not found.</exception>

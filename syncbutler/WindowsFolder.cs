@@ -160,7 +160,7 @@ namespace SyncButler
         /// <exception cref="DirectoryNotFoundException">Possibly the file/folder structure changed while the operation was in progress</exception>
         /// <exception cref="FileNotFoundException">Possibly the file/folder structure changed while the operation was in progress</exception>
         /// <returns></returns>
-        public override Error CopyTo(ISyncable dest)
+        public override void CopyTo(ISyncable dest)
         {
             System.Diagnostics.Debug.Assert(dest is WindowsFolder, "dest is not a WindowsFolder");
             
@@ -190,8 +190,6 @@ namespace SyncButler
                 foreach (string file in Directory.GetFiles(curDir))
                     File.Copy(file, destPath + file.Substring(srcPath.Length));
             }
-
-            return Error.NoError;
         }
 
         /// <summary>
@@ -226,32 +224,19 @@ namespace SyncButler
         /// Deletes this folder
         /// </summary>
         /// <returns></returns>
-        public override Error Delete(bool recoverable)
+        public override void Delete(bool recoverable)
         {
-            try
+            if (recoverable)
             {
-                if (recoverable)
-                {
-                    Microsoft.VisualBasic.FileIO.FileSystem.DeleteDirectory(nativeDirObj.FullName, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
-                }
-                else
-                {
-                    nativeDirObj.Delete(true);
-                }
+                FileSystem.DeleteDirectory(nativeDirObj.FullName, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
             }
-            catch (IOException)
+            else
             {
-                return Error.IsWorkingFolder;
+                nativeDirObj.Delete(true);
             }
-            catch (System.Security.SecurityException)
-            {
-                return Error.NoPermission;
-            }
-            return Error.NoError;
-
         }
 
-        public override Error Merge(ISyncable item)
+        public override void Merge(ISyncable item)
         {
 
             throw new NotImplementedException();

@@ -118,7 +118,7 @@ namespace SyncButlerUI
             switch (msgBoxStyle)
             {
                 case MessageTemplate.OkOnly:
-                    btn1 = MessageResponse.Ok;
+                    btn3 = MessageResponse.Ok;
                     break;
                 case MessageTemplate.SkipRetryCancel:
                     btn3 = MessageResponse.Cancel;
