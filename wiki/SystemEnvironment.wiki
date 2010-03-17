@@ -7,4 +7,4 @@ Related to retrieval of information from the system.
 
 = Details =
 
-    * [Logger.cs]
+    * [StorageDevices.cs]
