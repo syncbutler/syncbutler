@@ -24,25 +24,30 @@ namespace SyncButlerUI
 		private SyncButler.Controller controller;
 		public MainWindow()
 		{
-			try{
-			this.InitializeComponent();
-            controller = Controller.GetInstance();
-			if(!(controller.IsProgramRanBefore())){
-            FirstTimeStartupScreen dialog = new FirstTimeStartupScreen();
-					
-				if((bool)dialog.ShowDialog()){
-           			 controller.SetWindow(this);
-					this.homeWindow1.Controller = this.controller;
-				}else{
-                    throw new UserCancelledException();
-				}
+			try
+            {
+			    this.InitializeComponent();
+                controller = Controller.GetInstance();
+                if (!(controller.IsProgramRanBefore()))
+                {
+                    FirstTimeStartupScreen dialog = new FirstTimeStartupScreen();
+
+                    if (!((bool)dialog.ShowDialog()))
+                    {
+                        throw new UserCancelledException();
+                    }
+                }
 			}
-			}catch (UserCancelledException)
+            catch (UserCancelledException)
             {
                 throw new UserCancelledException();
 			}
+
 			// Insert code required on object creation below this point.
+            controller.SetWindow(this);
+            this.homeWindow1.Controller = this.controller;
 		}
+
         public void GrabFocus()
         {
             this.Dispatcher.Invoke(
