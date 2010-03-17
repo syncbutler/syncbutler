@@ -1,3 +1,4 @@
+// Adapted from http://www.codeproject.com/KB/threads/SingletonApp.aspx
 using System;
 using System.Threading;
 using System.IO;
@@ -6,6 +7,9 @@ using System.Xml.Serialization;
 
 namespace SyncButler
 {
+    /// <summary>
+    /// Provides methods to set up a single instance and check for existing instances
+    /// </summary>
     public class SingleInstance
     {
         // Fields required for named pipes
