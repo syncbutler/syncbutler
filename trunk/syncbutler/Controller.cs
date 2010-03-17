@@ -47,11 +47,24 @@ namespace SyncButler
 
             return controller;
         }
-		public List<string> GetDriveLetters()
+        /// <summary>
+        /// get a list of usb drive letters
+        /// </summary>
+        /// <returns>a list of usb drive letters</returns>
+		public List<string> GetUSBDriveLetters()
 		{
             
 			return SyncButler.SystemEnvironment.StorageDevices.GetUSBDriveLetters();
 		}
+
+        /// <summary>
+        /// Get a list of non usb drives letters
+        /// </summary>
+        /// <returns>a ist of non usb drive letters</returns>
+        public List<string> GetNonUSBDriveLetters()
+        {
+            return SyncButler.SystemEnvironment.StorageDevices.GetNonUSBDriveLetters();
+        }
         /// <summary>
         /// Tests for the existence of another instance and sets up single instance listener if this is the first instance
         /// </summary>

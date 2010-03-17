@@ -158,6 +158,29 @@ namespace SyncButler.SystemEnvironment
 
             return list;
         }
+        /// <summary>
+        /// Returns a List of drive letters of Non USB storage devices attached to the computer.
+        /// Drive letter format is of the format X:
+        /// </summary>
+        /// <returns>List of non USB Drive letters</returns>
+        public static List<string> GetNonUSBDriveLetters()
+        {
+            List<string> list = new List<string>();
+            ManagementObjectSearcher DDMgmtObjSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive WHERE InterfaceType<>'USB'");
+
+            foreach (ManagementObject DDObj in DDMgmtObjSearcher.Get())
+            {
+                foreach (ManagementObject DPObj in DDObj.GetRelated("Win32_DiskPartition"))
+                {
+                    foreach (ManagementObject LDObj in DPObj.GetRelated("Win32_LogicalDisk"))
+                    {
+                        list.Add(LDObj["DeviceID"].ToString());
+                    }
+                }
+            }
+
+            return list;
+        }
 
         /// <summary>
         /// Gets the unique PNPDeviceID based on a drive letter.

@@ -601,6 +601,15 @@
 						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="image1_Copy3" Storyboard.TargetProperty="(UIElement.Opacity)">
 							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
 						</DoubleAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="NoUSBWarningTextBlock" Storyboard.TargetProperty="(UIElement.Opacity)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+						</DoubleAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="NoUSBWarningTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="278.571"/>
+						</DoubleAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="NoUSBWarningTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.429"/>
+						</DoubleAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
 				<VisualState x:Name="EditPartnershipState1">
@@ -1197,5 +1206,13 @@
 			<Button x:Name="CancelSettingButton" Margin="214.917,0,213.417,47.659" VerticalAlignment="Bottom" Content="Cancel" Click="GoHome" />
 			<Button x:Name="DefaultSettingButton" HorizontalAlignment="Right" Margin="0,0,74.472,47.659" VerticalAlignment="Bottom" Width="75" Content="Default"  Click="DefaultSetting"/>
 		</Grid>
+		<TextBlock x:Name="NoUSBWarningTextBlock" HorizontalAlignment="Left" Margin="-233.73,204.857,0,104.857" Width="410" Opacity="0" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap"><TextBlock.RenderTransform>
+				<TransformGroup>
+					<ScaleTransform/>
+					<SkewTransform/>
+					<RotateTransform/>
+					<TranslateTransform/>
+				</TransformGroup>
+			</TextBlock.RenderTransform><Run Text="Note:"/><LineBreak/><Run Text="No USB drive is detected to be plugged in."/><LineBreak/><Run Text="For the best overall experience for SBS, please plug in a USB drive."/></TextBlock>
 	</Grid>
 </UserControl>
