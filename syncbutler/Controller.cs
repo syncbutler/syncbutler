@@ -266,7 +266,7 @@ namespace SyncButler
         /// <returns>True if has ran before, false otherwise</returns>
         public bool IsProgramRanBefore()
         {
-            return (SyncEnvironment.FirstRunComplete && !SyncEnvironment.ComputerName.Equals("Computer1"));
+            return (SyncEnvironment.FirstRunComplete && SyncEnvironment.ComputerNamed);
         }
 		
 		/// <summary>
@@ -299,6 +299,18 @@ namespace SyncButler
         public void SetComputerName(string name)
         {
             SyncEnvironment.ComputerName = name;
+        }
+
+        /// <summary>
+        /// Used to set the initial computer name for the first time
+        /// </summary>
+        /// <param name="name">The computer name (new)</param>
+        public void SetFirstComputerName(string name)
+        {
+            SetComputerName(name);
+            SyncEnvironment.ComputerNamed = true;
+            SyncEnvironment.GetInstance().updateComputerNamed();
+
         }
 
         /// <summary>

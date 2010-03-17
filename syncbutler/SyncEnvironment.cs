@@ -36,6 +36,7 @@ namespace SyncButler
         private SortedList<String,Partnership> partnershipList;
         private static bool allowAutoSyncForConflictFreeTasks;
         private static bool firstRunComplete;
+        private static bool computerNamed =false;
         private static bool enableShellContext = false; //Defaults to false
         private static long fileReadBufferSize = 2048000; //2MB, How much of the data file is read each cycle. Editable.
         private static string computerName;
@@ -213,6 +214,7 @@ namespace SyncButler
             storedSettings.SystemSettings.EnableShellContext = enableShellContext;
             storedSettings.SystemSettings.ComputerName = computerName;
             storedSettings.SystemSettings.SBSDriveLetter = SBSDriveLetter;
+
             
             // Write to file
             config.Save(ConfigurationSaveMode.Modified);
@@ -261,6 +263,9 @@ namespace SyncButler
             //Gets the last stored friendly name of the computer
             computerName = storedSettings.SystemSettings.ComputerName;
 
+            //Gets last stored status of namedComputer
+           computerNamed = storedSettings.SystemSettings.ComputerNamed;
+
             //Get the sbs drive letter
             SBSDriveLetter = storedSettings.SystemSettings.SBSDriveLetter;
         }
@@ -282,6 +287,7 @@ namespace SyncButler
             storedSettings.SystemSettings.EnableShellContext = enableShellContext;
             storedSettings.SystemSettings.FileReadBufferSize = fileReadBufferSize;
             storedSettings.SystemSettings.ComputerName = "computer1";
+            storedSettings.SystemSettings.ComputerNamed = false;
             storedSettings.SystemSettings.SBSDriveLetter = 'c';
             ConvertPartnershipList2XML();
 
@@ -299,6 +305,19 @@ namespace SyncButler
 
         /// <summary>
         /// When the program is used for the first time, this method
+        /// is to update if the computer is named
+        /// </summary>
+
+        public void updateComputerNamed()
+        {
+
+            ConvertPartnershipList2XML();
+            storedSettings.SystemSettings.ComputerNamed = computerNamed;
+            config.Save(ConfigurationSaveMode.Modified);
+
+        }
+        /// <summary>
+        /// When the program is used for the first time, this method
         /// is called to setup the program config file is expectedly,
         /// stored with the program.
         /// </summary>
@@ -311,7 +330,7 @@ namespace SyncButler
 
             _SBSDriveLetter = 'c';
             computerName = "Computer1";
-
+            computerNamed = false;
             // The config file will be the name of our app, less the extension
             // It might not be so if the user has changed the filename for some reason
             // Attempt to locate the settings file (null if not found)
@@ -740,6 +759,21 @@ namespace SyncButler
             tr.Close();
 
             return content;
+        }
+
+        /// <summary>
+        /// Gets whether the computer name is for the first time or otherwise 
+        /// </summary>
+        public static bool ComputerNamed
+        {
+            get
+            {
+                return computerNamed;
+            }
+            set
+            {
+                computerNamed = value;
+            }
         }
 
         /// <summary>
