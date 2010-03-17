@@ -883,7 +883,7 @@
 			<Grid x:Name="CreatePartnership2" Margin="0,0,38.5,0" VerticalAlignment="Bottom" Height="444" d:LayoutOverrides="GridBox" >
 				<TextBlock x:Name="textBlock4" Margin="58.86,25,253.947,0" FontFamily="Arial" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" Text="Creating a Sync Partnership" VerticalAlignment="Top" Height="83.5"/>
 				<TextBlock Margin="0,93,273.447,0" FontSize="16" TextWrapping="Wrap" Text="Please select another folder on this computer" HorizontalAlignment="Right" Width="183.22" VerticalAlignment="Top" Height="63.5" FontWeight="Bold" FontStyle="Italic"/>
-				<TextBlock Margin="0,148.5,266.114,113.357" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="190.553" TextAlignment="Justify"><Run Text="This folder will be 1 of 2  folders in a syncing partnership."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="Any updates will be reflected on the other folder in the partnership."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="This folder is usually found on a portable storage so it maybe carried around."/><LineBreak/><Run Text=""/></TextBlock>
+				<TextBlock Margin="0,148.5,266.114,113.357" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="190.553" TextAlignment="Justify"><Run Text="This folder will be 1 of 2 folders in a syncing partnership."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="Any updates will be reflected on the other folder in the partnership."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="This folder is usually found on a portable storage so it may be carried around."/><LineBreak/><Run Text=""/></TextBlock>
 				<Image HorizontalAlignment="Left" Margin="25.5,0,0,50.5" VerticalAlignment="Bottom" Width="44" Height="44" Source="Images\Folder.png" Stretch="Fill"/>
 				<TextBlock x:Name="textBlock11" Margin="0,347.595,397.273,74.579" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="44.754" Text="Path:" RenderTransformOrigin="0.5,0.5">
 					<TextBlock.RenderTransform>
@@ -1238,7 +1238,7 @@
 						<RotateTransform/>
 						<TranslateTransform/>
 					</TransformGroup>
-				</TextBlock.RenderTransform><Run Text="Note:"/><LineBreak/><Run Text="No portable storage device detected. Please plug in a portable storage device if you wish to use it with Sync Butler, "/><Run FontStyle="Italic" Text="Sync"/><Run Text="!"/><LineBreak/><Run Text=""/></TextBlock>
+				</TextBlock.RenderTransform><Run Text="Note:"/><LineBreak/><Run Text="No portable storage device was detected. Please plug in a portable storage device if you wish to use it with Sync Butler, "/><Run FontStyle="Italic" Text="Sync"/><Run Text="!"/><LineBreak/><Run Text=""/></TextBlock>
 			<Label HorizontalAlignment="Left" Margin="38.032,96.079,0,0" VerticalAlignment="Top" Content="This computer's name&#xa;" Height="25.73"/>
 			<TextBlock x:Name="textBlock9_Copy" HorizontalAlignment="Left" Margin="42.936,129.937,0,0" VerticalAlignment="Top" Width="151.905" Height="22.539" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap"><TextBlock.RenderTransform>
 					<TransformGroup>
