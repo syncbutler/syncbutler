@@ -595,9 +595,6 @@
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="Settings" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
 						</ObjectAnimationUsingKeyFrames>
-						<Int32AnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="SBSSettingComboBox" Storyboard.TargetProperty="(Selector.SelectedIndex)">
-							<SplineInt32KeyFrame KeyTime="00:00:00" Value="1"/>
-						</Int32AnimationUsingKeyFrames>
 						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="image1_Copy3" Storyboard.TargetProperty="(UIElement.Opacity)">
 							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
 						</DoubleAnimationUsingKeyFrames>
@@ -609,6 +606,15 @@
 						</DoubleAnimationUsingKeyFrames>
 						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="NoUSBWarningTextBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
 							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.429"/>
+						</DoubleAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="SBSSettingComboBox" Storyboard.TargetProperty="(UIElement.Opacity)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+						</DoubleAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="SBSSettingComboBox" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.952"/>
+						</DoubleAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="SBSSettingComboBox" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-29.524"/>
 						</DoubleAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
@@ -1197,14 +1203,20 @@
 			<Label HorizontalAlignment="Left" Margin="38.032,129.809,0,0" VerticalAlignment="Top" Content="SBS Settings:"/>
 			<Label HorizontalAlignment="Left" Margin="38.032,159.769,0,0" VerticalAlignment="Top" Content="SBS Working Drive:"/>
 			<TextBox x:Name="ComputerNameTextBox" Margin="225.29,99.849,126.49,0" VerticalAlignment="Top" TextWrapping="Wrap"/>
-			<ComboBox x:Name="SBSSettingComboBox" Margin="225.29,129.809,126.49,0" VerticalAlignment="Top" SelectionChanged="SBSSettingChanged">
-				<System:String>Enable</System:String>
-				<System:String>Disable</System:String>
-			</ComboBox>
 			<ComboBox x:Name="SBSWorkingDriveComboBox" Margin="225.29,159.769,126.49,0" VerticalAlignment="Top"/>
 			<Button x:Name="SaveSettingButton" HorizontalAlignment="Left" Margin="74.489,0,0,47.659" VerticalAlignment="Bottom" Width="75" Content="Save" Click="SaveSetting"/>
 			<Button x:Name="CancelSettingButton" Margin="214.917,0,213.417,47.659" VerticalAlignment="Bottom" Content="Cancel" Click="GoHome" />
 			<Button x:Name="DefaultSettingButton" HorizontalAlignment="Right" Margin="0,0,74.472,47.659" VerticalAlignment="Bottom" Width="75" Content="Default"  Click="DefaultSetting"/>
+			<ComboBox x:Name="SBSSettingComboBox" Margin="225.29,159.769,126.49,0" VerticalAlignment="Top" Opacity="0" RenderTransformOrigin="0.5,0.5" SelectionChanged="SBSSettingChanged">
+				<ComboBox.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</ComboBox.RenderTransform>
+			</ComboBox>
 		</Grid>
 		<TextBlock x:Name="NoUSBWarningTextBlock" HorizontalAlignment="Left" Margin="-233.73,204.857,0,104.857" Width="410" Opacity="0" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap"><TextBlock.RenderTransform>
 				<TransformGroup>
