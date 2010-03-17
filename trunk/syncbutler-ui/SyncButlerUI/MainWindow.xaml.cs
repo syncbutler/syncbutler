@@ -89,7 +89,7 @@ namespace SyncButlerUI
             }
             else
             {
-                CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "SBS is not enabled\nPlease enable it via the SBS settings");
+                CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Sync Butler, Sync! is not enabled.\nPlease enable the feature in the Settings screen");
             }
 		}
 		private void GoToSetting(object sender, RoutedEventArgs e)
