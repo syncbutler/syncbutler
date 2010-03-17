@@ -755,18 +755,22 @@ namespace SyncButlerUI
 		}
 		
 		/// <summary>
-		/// Display Custom Dialog Box. 
+        /// DEPRECEATED. Left behind to not break existing code. Start using CustomDialog.Show() instead.
 		/// </summary>
 		/// <param name="messagetype">MessageType Enumerator, to tell what kind of message it is: Error, Question, Warning, Message</param>
 		/// <param name="msg">String msg to tell what message the error is</param>
-		public bool showMessageBox(CustomDialog.MessageType messagetype,string msg){
-			CustomDialog dialog=new CustomDialog(messagetype,msg);
-			var parent = Window.GetWindow(this);
-			if(parent!=null){
-				dialog.Owner=parent;
-			}
-			dialog.ShowDialog();
-			return (bool)dialog.DialogResult;
+		private bool showMessageBox(CustomDialog.MessageType messageType, string msg){
+            CustomDialog.MessageResponse def = CustomDialog.MessageResponse.Ok;
+            CustomDialog.MessageTemplate template = CustomDialog.MessageTemplate.OkOnly;
+
+            if (messageType == CustomDialog.MessageType.Question)
+            {
+                template = CustomDialog.MessageTemplate.YesNo;
+                def = CustomDialog.MessageResponse.Yes;
+            }
+
+            CustomDialog.MessageResponse ret = CustomDialog.Show(this, template, messageType, def, msg);
+            return (ret == CustomDialog.MessageResponse.Yes) || (ret == CustomDialog.MessageResponse.Ok);
 		}
 
         /// <summary>
