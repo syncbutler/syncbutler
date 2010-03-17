@@ -1057,7 +1057,7 @@ namespace SyncButlerUI
         private void MRUSync(object sender, RoutedEventArgs e)
         {
             this.Controller.SyncMRUs();
-            showMessageBox(CustomDialog.MessageType.Success, "Files were successfuly keep and logged!");
+            showMessageBox(CustomDialog.MessageType.Success, "Files were successfuly synced and logged!");
         }
 		
 		private void SaveSetting(object sender, RoutedEventArgs e)
