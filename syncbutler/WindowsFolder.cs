@@ -358,6 +358,7 @@ namespace SyncButler
 
             workList.Enqueue("");
 
+            string curLeftDir, curRightDir;
             // Work while the work queue has stuff.
             while (workList.Count > 0)
             {
@@ -369,21 +370,29 @@ namespace SyncButler
                         throw new UserCancelledException();
                 }
 
+                curLeftDir = leftPath + currDir;
+                curRightDir = rightPath + currDir;
+
+                // Protect our home base!
+                if (curLeftDir.StartsWith(SyncEnvironment.AppPath) ||
+                    curRightDir.StartsWith(SyncEnvironment.AppPath))
+                    continue;
+
                 // Get sub-directories from the left folder
                 List<string> leftFolders = new List<string>();
-                leftFolders.AddRange(Directory.GetDirectories(leftPath + currDir));
+                leftFolders.AddRange(Directory.GetDirectories(curLeftDir));
 
                 // Get sub-directories from the right folder
                 List<string> rightFolders = new List<string>();
-                rightFolders.AddRange(Directory.GetDirectories(rightPath + currDir));
+                rightFolders.AddRange(Directory.GetDirectories(curRightDir));
 
                 // Get files from left folder
                 List<string> leftFiles = new List<string>();
-                leftFiles.AddRange(Directory.GetFiles(leftPath + currDir));
+                leftFiles.AddRange(Directory.GetFiles(curLeftDir));
 
                 // Get files from right folder
                 List<string> rightFiles = new List<string>();
-                rightFiles.AddRange(Directory.GetFiles(rightPath + currDir));
+                rightFiles.AddRange(Directory.GetFiles(curRightDir));
 
                 //---------------------------------------------------------------------------------
                 // Check right folders against left

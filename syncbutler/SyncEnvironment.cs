@@ -51,6 +51,7 @@ namespace SyncButler
         private static PartnershipSection storedPartnerships;
         private static SyncEnvironment syncEnv;
         private static Assembly syncButlerAssembly = null;
+        private static string _appPath = null;
         
         /// <summary>
         /// This constructor will automatically restore a previous sessions or create new ones if one is not found.
@@ -60,6 +61,7 @@ namespace SyncButler
         {
             firstRunComplete = false;
             IntialEnv();
+            _appPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
         }
 
         /// <summary>
@@ -943,6 +945,18 @@ namespace SyncButler
             set
             {
                 enableShellContext = value;
+            }
+        }
+
+        /// <summary>
+        /// Path to this application
+        /// </summary>
+        public static string AppPath
+        {
+            get
+            {
+                Debug.Assert(_appPath != null, "Cannot provide app path before constructor of SyncEnviroment is run");
+                return _appPath;
             }
         }
     }

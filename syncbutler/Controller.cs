@@ -113,6 +113,12 @@ namespace SyncButler
         /// <param name="rightPath">Full Path to the right of a partnership</param>
         public void AddPartnership(String name, String leftPath, String rightPath) 
         {
+            string appPath = SyncEnvironment.AppPath;
+
+            if ((leftPath.StartsWith(appPath) && leftPath.Length <= (appPath.Length + 1)) ||
+                    (rightPath.StartsWith(appPath) && rightPath.Length <= (appPath.Length + 1)))
+                throw new UserInputException("Cannot create a partnership on the running SyncButler directory!");
+
             syncEnvironment.AddPartnership(name, leftPath, rightPath);
         }
         
@@ -143,6 +149,12 @@ namespace SyncButler
         /// <param name="rightPath">Full Path to the right of a partnership</param>
         public void UpdatePartnership(string oldName, String newName, String leftPath, String rightPath)
         {
+            string appPath = SyncEnvironment.AppPath;
+
+            if ((leftPath.StartsWith(appPath) && leftPath.Length <= (appPath.Length + 1)) ||
+                    (rightPath.StartsWith(appPath) && rightPath.Length <= (appPath.Length + 1)))
+                throw new UserInputException("Cannot create a partnership on the running SyncButler directory!");
+
             syncEnvironment.UpdatePartnership(oldName, newName, leftPath, rightPath);
         }
 
