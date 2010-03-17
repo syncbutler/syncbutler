@@ -36,7 +36,7 @@ namespace SyncButler
             this.right = right;
             this.autoResolveAction = autoResolveAction;
             this.suggestedAction = Action.Unknown;
-            leftOverwriteRight = (this.autoResolveAction == Conflict.Action.CopyToRight || this.autoResolveAction == Conflict.Action.DeleteRight);
+            leftOverwriteRight = (this.autoResolveAction == Conflict.Action.CopyToRight || this.autoResolveAction == Conflict.Action.DeleteLeft);
             rightOverwriteLeft = !leftOverwriteRight;
         }
 
