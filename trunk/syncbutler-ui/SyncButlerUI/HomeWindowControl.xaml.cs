@@ -27,6 +27,24 @@ namespace SyncButlerUI
 	/// </summary>
 	public partial class HomeWindowControl : UserControl
 	{
+        protected enum ErrorReportingSource { Scanner, Resolver }
+
+        protected struct ErrorReportingMessage
+        {
+            public Exception exceptionThrown;
+            public ErrorReportingSource source;
+            public string partnershipName;
+            public Object failedObject;
+
+            public ErrorReportingMessage(Exception exceptionThrown, ErrorReportingSource source,
+                string partnershipName, Object failedObject)
+            {
+                this.exceptionThrown = exceptionThrown;
+                this.source = source;
+                this.partnershipName = partnershipName;
+                this.failedObject = failedObject;
+            }
+        }
     
 	#region fields&Attributes 
     /// <summary>
@@ -108,9 +126,9 @@ namespace SyncButlerUI
         /// <param name="worker">The BackgroundWorker which represents this thread</param>
         /// <param name="exp">The exception to report</param>
         /// <returns>Returns false if the thread should attempt to continue, true if it should cancel operations</returns>
-        private bool ReportError(BackgroundWorker worker, Exception exp)
+        private bool ReportError(BackgroundWorker worker, ErrorReportingMessage msg)
         {
-            worker.ReportProgress(0, exp);
+            worker.ReportProgress(0, msg);
             waitForErrorResponse.WaitOne();
             return worker.CancellationPending;
         }
@@ -128,16 +146,23 @@ namespace SyncButlerUI
                 return;
             }
 
-            if (args.UserState is Exception)
+            if (args.UserState is ErrorReportingMessage)
             {
-                switch (CustomDialog.Show(this, CustomDialog.MessageTemplate.SkipRetryCancel, CustomDialog.MessageType.Error, CustomDialog.MessageResponse.Retry,
-                    ((Exception)args.UserState).Message + "\n\nWould you like to try and continue anyway?"))
+                ErrorReportingMessage msg = (ErrorReportingMessage)args.UserState;
+                CustomDialog.MessageTemplate msgTemplate;
+
+                if (msg.source == ErrorReportingSource.Resolver) msgTemplate = CustomDialog.MessageTemplate.SkipRetryCancel;
+                else msgTemplate = CustomDialog.MessageTemplate.SkipCancel;
+                
+                switch (CustomDialog.Show(this, msgTemplate, CustomDialog.MessageType.Error, CustomDialog.MessageResponse.Cancel,
+                    msg.exceptionThrown.Message + "\n\nWould you like to try and continue anyway?"))
                 {
                     case CustomDialog.MessageResponse.Cancel:
                         ((BackgroundWorker)workerObj).CancelAsync();
                         break;
                     case CustomDialog.MessageResponse.Retry:
-                        throw new NotImplementedException();
+                        System.Diagnostics.Debug.Assert(msg.source == ErrorReportingSource.Resolver, "Cannot Retry errors nor generated during conflict resolution");
+                        ThreadSafeAddResolve((Conflict)msg.failedObject);
                         break;
                 }
 
@@ -313,7 +338,9 @@ namespace SyncButlerUI
 
                     if (exp != null)
                     {
-                        if (ReportError(worker, exp))
+                        ErrorReportingMessage msg = new ErrorReportingMessage(exp, ErrorReportingSource.Scanner, friendlyName, null);
+
+                        if (ReportError(worker, msg))
                         {
                             operationCancelled = true;
                             break;
@@ -403,7 +430,10 @@ namespace SyncButlerUI
 
                     if (exp != null)
                     {
-                        if (ReportError(worker, exp))
+                        ErrorReportingMessage msg = new ErrorReportingMessage(exp, ErrorReportingSource.Resolver,
+                            partnershipName, curConflict);
+
+                        if (ReportError(worker, msg))
                         {
                             operationCancelled = true;
                             return;

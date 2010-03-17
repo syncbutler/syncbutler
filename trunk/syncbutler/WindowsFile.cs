@@ -370,6 +370,10 @@ namespace SyncButler
                     nativeFileObj.Delete();
                 }
             }
+            catch (OperationCanceledException)
+            {
+                throw new UnauthorizedAccessException("There was no permission to delete this file");
+            }
             catch (System.Security.SecurityException)
             {
                 return Error.NoPermission;
