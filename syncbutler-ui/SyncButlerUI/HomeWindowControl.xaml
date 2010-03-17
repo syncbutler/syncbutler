@@ -1185,8 +1185,8 @@
 				</Custom:DataGrid.Columns>
 			    <Custom:DataGrid.RowDetailsTemplate>
                     <DataTemplate>
-                        <Custom:DataGrid x:Name="conflictListInnerGrid" SelectionUnit="FullRow" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" ItemsSource="{Binding conflicts}" CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False" >
-					    <Custom:DataGrid.Columns>
+                        <Custom:DataGrid x:Name="conflictListInnerGrid" Height="100" SelectionUnit="FullRow" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" ItemsSource="{Binding conflicts}" CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False" >
+					    <Custom:DataGrid.Columns > 
 					    <Custom:DataGridTextColumn x:Name="File_Name"  IsReadOnly="True" Width="300" MinWidth="310" Header="File Name" Binding="{Binding OffendingPath}" />
 					    <Custom:DataGridCheckBoxColumn x:Name="FolderOneBox" Width="60" IsReadOnly="False" MinWidth="40" Header="Folder 1" Binding="{Binding LeftOverwriteRight}"/>
 					    <Custom:DataGridCheckBoxColumn x:Name="FolderTwoBox" Width="60" IsReadOnly="False" MinWidth="40" Header="Folder 2" Binding="{Binding RightOverwriteLeft}" />
