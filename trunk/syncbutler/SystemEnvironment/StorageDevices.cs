@@ -11,10 +11,52 @@ namespace SyncButler.SystemEnvironment
     /// </summary>
     public class StorageDevices
     {
+        /// <summary>
+        /// Possible formats of file systems.
+        /// </summary>
         public enum Format
         {
             FAT32,
             NTFS
+        }
+
+        /// <summary>
+        /// Device types that are supported by SyncButler.
+        /// </summary>
+        public enum DeviceType
+        {
+            FixedStorage,
+            RemovableStorage,
+            NetworkDrive,
+            CDRom,
+            Unknown
+        }
+
+        /// <summary>
+        /// Gets the type of the device given the drive letter.
+        /// </summary>
+        /// <param name="driveLetter">Drive letter in the form of C: or C:\</param>
+        /// <returns>The type of the device, or unknown if not known.</returns>
+        /// <exception cref="ArgumentNullException">driveLetter was null</exception>
+        /// <exception cref="ArgumentException">The first letter of driveLetter is not an uppercase or lowercase letter from 'a' to 'z' or driveLetter does not refer to a valid drive.</exception>
+        public static DeviceType GetDeviceType(string driveLetter)
+        {
+            DriveInfo d = new DriveInfo(driveLetter);
+            DeviceType type = DeviceType.Unknown;
+
+            switch (d.DriveType)
+            {
+                case DriveType.CDRom:
+                    type = DeviceType.CDRom; break;
+                case DriveType.Fixed:
+                    type = DeviceType.FixedStorage; break;
+                case DriveType.Network:
+                    type = DeviceType.NetworkDrive; break;
+                case DriveType.Removable:
+                    type = DeviceType.RemovableStorage; break;
+            }
+
+            return type;
         }
 
         /// <summary>
@@ -136,6 +178,7 @@ namespace SyncButler.SystemEnvironment
         /// <returns>True if drive letter belongs to a USB storage device. False otherwise.</returns>
         public static bool IsUSBDrive(string driveLetter)
         {
+            driveLetter = driveLetter.TrimEnd('\\');
             List<string> usbDriveList = GetUSBDriveLetters();
             return (usbDriveList.Contains(driveLetter));
         }
