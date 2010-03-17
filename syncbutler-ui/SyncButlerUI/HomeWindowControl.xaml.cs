@@ -873,7 +873,7 @@ namespace SyncButlerUI
 		{
 		    if(this.Controller.GetPartnershipList().Count < 1)
             {
-                if (showMessageBox(CustomDialog.MessageType.Question, "Sync Butler has detected that there are no partnerships created yet would you like to create one now?") == true)
+                if (showMessageBox(CustomDialog.MessageType.Question, "There are no partnerships for me to sync. Would you like to create one now?") == true)
                 {
                     clearTreeView();
                     VisualStateManager.GoToState(this, "CreatePartnershipState1", false);
@@ -1057,7 +1057,7 @@ namespace SyncButlerUI
         private void MRUSync(object sender, RoutedEventArgs e)
         {
             this.Controller.SyncMRUs();
-            showMessageBox(CustomDialog.MessageType.Success, "Synced and logged!");
+            showMessageBox(CustomDialog.MessageType.Success, "Files were successfuly keep and logged!");
         }
 		
 		private void SaveSetting(object sender, RoutedEventArgs e)
