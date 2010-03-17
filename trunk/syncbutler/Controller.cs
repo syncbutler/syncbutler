@@ -266,7 +266,7 @@ namespace SyncButler
         /// <returns>True if has ran before, false otherwise</returns>
         public bool IsProgramRanBefore()
         {
-            return SyncEnvironment.FirstRunComplete;
+            return (SyncEnvironment.FirstRunComplete && !SyncEnvironment.ComputerName.Equals("Computer1"));
         }
 		
 		/// <summary>

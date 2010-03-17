@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.ComponentModel;
 using SyncButler;
 namespace SyncButlerUI
 {
@@ -32,12 +33,13 @@ namespace SyncButlerUI
 
             if (FirstTimeComputerNameText.Text.Length != 0)
             {
-                if (controller == null)
-                    controller = Controller.GetInstance();
+                controller = Controller.GetInstance();
                 controller.SetComputerName(FirstTimeComputerNameText.Text);
-                new MainWindow().ShowDialog();
                 this.DialogResult = true;
             }
 		}
+		
+		
+
 	}
 }

@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WPF_Explorer_Tree;
 using SyncButler;
+using SyncButler.Exceptions;
 
 namespace SyncButlerUI
 {
@@ -26,11 +27,19 @@ namespace SyncButlerUI
 			try{
 			this.InitializeComponent();
             controller = Controller.GetInstance();
-            controller.SetWindow(this);
-			this.homeWindow1.Controller = this.controller;
-			}catch(Exception uIException){
-				
-			Console.WriteLine(uIException.Message);	
+			if(!(controller.IsProgramRanBefore())){
+            FirstTimeStartupScreen dialog = new FirstTimeStartupScreen();
+					
+				if((bool)dialog.ShowDialog()){
+           			 controller.SetWindow(this);
+					this.homeWindow1.Controller = this.controller;
+				}else{
+                    throw new UserCancelledException();
+				}
+			}
+			}catch (UserCancelledException)
+            {
+                throw new UserCancelledException();
 			}
 			// Insert code required on object creation below this point.
 		}

@@ -65,6 +65,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Placeholder.cs" />
     <Compile Include="CustomDialog.xaml.cs">
       <DependentUpon>CustomDialog.xaml</DependentUpon>
     </Compile>
@@ -103,10 +104,31 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <BlendEmbeddedFont Include="Fonts\segoeui.ttf">
+      <IsSystemFont>True</IsSystemFont>
+      <All>True</All>
+      <AutoFill>True</AutoFill>
+    </BlendEmbeddedFont>
+    <BlendEmbeddedFont Include="Fonts\segoeuib.ttf">
+      <IsSystemFont>True</IsSystemFont>
+      <All>True</All>
+      <AutoFill>True</AutoFill>
+    </BlendEmbeddedFont>
+    <BlendEmbeddedFont Include="Fonts\segoeuii.ttf">
+      <IsSystemFont>True</IsSystemFont>
+      <All>True</All>
+      <AutoFill>True</AutoFill>
+    </BlendEmbeddedFont>
+    <BlendEmbeddedFont Include="Fonts\segoeuiz.ttf">
+      <IsSystemFont>True</IsSystemFont>
+      <All>True</All>
+      <AutoFill>True</AutoFill>
+    </BlendEmbeddedFont>
     <Resource Include="Images\Arrow-Left.png" />
     <Resource Include="Images\Broken.png" />
     <Resource Include="Images\bullet_arrow_down.png" />
     <Resource Include="Images\bullet_arrow_up.png" />
+    <Resource Include="Images\butler-glow.png" />
     <Resource Include="Images\Computer.png" />
     <Resource Include="Images\diskdrive.png" />
     <Resource Include="Images\Doc.png" />
@@ -121,6 +143,7 @@
     <Resource Include="Images\Refresh.png" />
     <Resource Include="Images\Search.png" />
     <Resource Include="Images\Settings.png" />
+    <Resource Include="Images\SunBurst.png" />
     <Resource Include="Images\Symbol-Check.png" />
     <Resource Include="Images\Synchonize.png" />
     <Resource Include="Images\treefolder.png" />
@@ -140,4 +163,5 @@
 	<Target Name="AfterBuild">
 	</Target>
 	-->
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Expression\Blend\3.0\WPF\Microsoft.Expression.Blend.WPF.targets" />
 </Project>
