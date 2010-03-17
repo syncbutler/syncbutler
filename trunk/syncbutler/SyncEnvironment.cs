@@ -41,6 +41,7 @@ namespace SyncButler
         private static long fileReadBufferSize = 2048000; //2MB, How much of the data file is read each cycle. Editable.
         private static string computerName;
         private static char _SBSDriveLetter;
+        private static string sbsEnable;
 
         //List of runtime variables
         private static System.Configuration.Configuration config;
@@ -214,6 +215,7 @@ namespace SyncButler
             storedSettings.SystemSettings.EnableShellContext = enableShellContext;
             storedSettings.SystemSettings.ComputerName = computerName;
             storedSettings.SystemSettings.SBSDriveLetter = SBSDriveLetter;
+            storedSettings.SystemSettings.SBSEnable = SBSEnable;
 
             
             // Write to file
@@ -234,6 +236,7 @@ namespace SyncButler
             storedSettings.SystemSettings.EnableShellContext = enableShellContext;
             storedSettings.SystemSettings.ComputerName = computerName;
             storedSettings.SystemSettings.SBSDriveLetter = SBSDriveLetter;
+            storedSettings.SystemSettings.SBSEnable = SBSEnable;
 
             // Write to file
             config.Save(ConfigurationSaveMode.Modified);
@@ -268,6 +271,9 @@ namespace SyncButler
 
             //Get the sbs drive letter
             SBSDriveLetter = storedSettings.SystemSettings.SBSDriveLetter;
+
+            //Get the status of sbs
+            SBSEnable = storedSettings.SystemSettings.SBSEnable;
         }
 
         /// <summary>
@@ -289,6 +295,8 @@ namespace SyncButler
             storedSettings.SystemSettings.ComputerName = "computer1";
             storedSettings.SystemSettings.ComputerNamed = false;
             storedSettings.SystemSettings.SBSDriveLetter = 'c';
+            storedSettings.SystemSettings.SBSEnable = "Disable";
+
             ConvertPartnershipList2XML();
 
             // Add the custom sections to the config
@@ -331,6 +339,7 @@ namespace SyncButler
             _SBSDriveLetter = 'c';
             computerName = "Computer1";
             computerNamed = false;
+            sbsEnable = "Disable";
             // The config file will be the name of our app, less the extension
             // It might not be so if the user has changed the filename for some reason
             // Attempt to locate the settings file (null if not found)
@@ -799,7 +808,7 @@ namespace SyncButler
         }
 
         /// <summary>
-        /// Not implemented
+        /// the current computer name
         /// </summary>
         /// <returns></returns>
         public static string ComputerName
@@ -813,7 +822,25 @@ namespace SyncButler
                 computerName = value;
             }
         }
+        /// <summary>
+        /// The current status of sbs
+        /// </summary>
+        public static string SBSEnable
+        {
+            get
+            {
+                return sbsEnable;
+            }
+            set
+            {
+                sbsEnable = value;
+            }
+        }
 
+
+        /// <summary>
+        /// SBS working drive
+        /// </summary>
         public static char SBSDriveLetter
         {
             get

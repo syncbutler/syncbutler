@@ -275,10 +275,11 @@ namespace SyncButler
 		/// <param name="ComputerName">Computer name of the user</param>
 		/// <param name="EnableSBS">[Not in use]If the user wants sbs to be enabled</param>
 		/// <param name="SBSDrive">The working drive letter</param>
-		public void SaveSetting(string ComputerName, bool EnableSBS, char SBSDrive)
+		public void SaveSetting(string ComputerName, string EnableSBS, char SBSDrive)
 		{
             SyncEnvironment.ComputerName = ComputerName;
             SyncEnvironment.SBSDriveLetter = SBSDrive;
+            SyncEnvironment.SBSEnable = EnableSBS;
             SyncEnvironment.GetInstance().StoreSettings();
 		}
 
@@ -299,6 +300,24 @@ namespace SyncButler
         public void SetComputerName(string name)
         {
             SyncEnvironment.ComputerName = name;
+        }
+
+        /// <summary>
+        /// get the status of sbs
+        /// </summary>
+        /// <returns></returns>
+        public string GetSBSEnable()
+        {
+            return SyncEnvironment.SBSEnable == null ? SyncEnvironment.SBSEnable : "Disable";
+        }
+
+        /// <summary>
+        /// set the status of sbs
+        /// </summary>
+        /// <param name="SBSEnable">the new sbs status</param>
+        public void SetSBSEnable(string SBSEnable)
+        {
+            SyncEnvironment.SBSEnable = SBSEnable;
         }
 
         /// <summary>

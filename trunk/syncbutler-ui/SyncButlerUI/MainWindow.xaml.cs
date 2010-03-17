@@ -72,21 +72,29 @@ namespace SyncButlerUI
 
 		private void goToSyncButlerSync(object sender, RoutedEventArgs e)
 		{
-			this.homeWindow1.Favourites_List.Items.Clear();
-			VisualStateManager.GoToState(homeWindow1,"SbsState1",false);
-            MRUs = controller.GetMonitoredFiles();
-            foreach (string filenames in MRUs["interesting"].Keys)
-			{
-                this.homeWindow1.Favourites_List.Items.Add(filenames);
-			}
-            this.homeWindow1.WeirdFile_List.Items.Clear();
-            foreach (string filenames in MRUs["sensitive"].Keys)
+            if (Controller.GetInstance().GetSBSEnable().Equals("Enable"))
             {
-                this.homeWindow1.WeirdFile_List.Items.Add(filenames);
+                this.homeWindow1.Favourites_List.Items.Clear();
+                VisualStateManager.GoToState(homeWindow1, "SbsState1", false);
+                MRUs = controller.GetMonitoredFiles();
+                foreach (string filenames in MRUs["interesting"].Keys)
+                {
+                    this.homeWindow1.Favourites_List.Items.Add(filenames);
+                }
+                this.homeWindow1.WeirdFile_List.Items.Clear();
+                foreach (string filenames in MRUs["sensitive"].Keys)
+                {
+                    this.homeWindow1.WeirdFile_List.Items.Add(filenames);
+                }
+            }
+            else
+            {
+                CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "SBS is not enabled\nPlease enable it via the SBS settings");
             }
 		}
 		private void GoToSetting(object sender, RoutedEventArgs e)
 		{
+  
 			VisualStateManager.GoToState(homeWindow1, "Settings1",false);
             
             this.homeWindow1.ComputerNameTextBox.Text = this.controller.GetComputerName();
@@ -113,6 +121,13 @@ namespace SyncButlerUI
                 this.homeWindow1.SBSWorkingDriveComboBox.SelectedIndex = 0;
             }
 			this.homeWindow1.SBSWorkingDriveComboBox.IsEnabled = true;
+            this.homeWindow1.SBSSettingComboBox.Items.Clear();
+            this.homeWindow1.SBSSettingComboBox.Items.Add("Enable");
+            this.homeWindow1.SBSSettingComboBox.Items.Add("Disable");
+            this.homeWindow1.SBSSettingComboBox.SelectedItem = this.controller.GetSBSEnable() ;
+            
+            
+
 		}
 
 		private void cleanUp(object sender,  System.ComponentModel.CancelEventArgs e)

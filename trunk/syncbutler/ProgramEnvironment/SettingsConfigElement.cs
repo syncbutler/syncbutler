@@ -110,6 +110,21 @@ namespace SyncButler.ProgramEnvironment
                 this["SBSDriveLetter"] = value;
             }
         }
+
+        [ConfigurationProperty("SBSEnable")]
+        public string SBSEnable
+        {
+            get
+            {
+                return (string)this["SBSEnable"];
+            }
+            set
+            {
+                this["SBSEnable"] = value;
+            }
+        }
+
+
         /// <summary>
         /// Determines if the shell integration menu should be kept on or off
         /// </summary>

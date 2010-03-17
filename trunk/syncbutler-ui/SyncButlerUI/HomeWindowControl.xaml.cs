@@ -1018,11 +1018,14 @@ namespace SyncButlerUI
 		
 		private void SaveSetting(object sender, RoutedEventArgs e)
 		{
-			string ComputerName = this.ComputerNameTextBox.Text;
-			bool SBSEnable = this.SBSSettingComboBox.SelectedItem.Equals("Enable");
-			char DriveLetter = (char)this.SBSWorkingDriveComboBox.SelectedItem;
+            
+            string ComputerName = this.ComputerNameTextBox.Text;
+            string SBSEnable = (string)this.SBSSettingComboBox.SelectedItem;
+            char DriveLetter = (char)this.SBSWorkingDriveComboBox.SelectedItem;
 			
-			this.Controller.SaveSetting(ComputerName,SBSEnable,DriveLetter);
+            Controller.GetInstance().SaveSetting(ComputerName,SBSEnable,DriveLetter);
+
+            showMessageBox(CustomDialog.MessageType.Success, "The Setting has been changed");
 		}
 		
 		private void SBSSettingChanged(object sender, RoutedEventArgs e)
@@ -1033,7 +1036,9 @@ namespace SyncButlerUI
 		
 		private void DefaultSetting(object sender, RoutedEventArgs e)
 		{
-			
+            this.ComputerNameTextBox.Text = "Computer1";
+            this.SBSSettingComboBox.SelectedItem = "Disable";
+            this.SBSWorkingDriveComboBox.SelectedIndex = -1;
 		}
 		/// <summary>
 		/// Checks the sourceTextbox for values if its empty or if the directory exists
