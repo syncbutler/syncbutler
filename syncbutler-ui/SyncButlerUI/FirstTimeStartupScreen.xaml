@@ -23,7 +23,7 @@
 	</Window.Triggers>
 
 	<Grid x:Name="LayoutRoot">
-		<Image x:Name="image" Margin="56,0,90,-14" Stretch="Fill" Source="Images/SunBurst.png" RenderTransformOrigin="0.5,0.5" Opacity="0.405">
+		<Image x:Name="image" Margin="56,0,90,-14" Stretch="Fill" Source="Images/SunBurst.png" RenderTransformOrigin="0.5,0.5" Opacity="0.3">
 			<Image.RenderTransform>
 				<TransformGroup>
 					<ScaleTransform/>
