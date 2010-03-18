@@ -11,7 +11,7 @@ This page contains some links to supplementary materials for the developer's gui
 
 == Testing for existing instances on startup and pass arguments if there is an existing instance ==
 
-http://syncbutler.googlecode.com/files/image_Single%20Instance%20Checking.png
+http://syncbutler.googlecode.com/files/image_Single%20Instance%20Checkingfix.png
 
 == Example of a call to log (with instantiation of the Logger) ==
 
