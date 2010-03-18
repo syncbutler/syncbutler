@@ -1088,21 +1088,28 @@ namespace SyncButlerUI
 		/// Checks the sourceTextbox for values if its empty or if the directory exists
 		/// </summary>
 		private void checkInput(){
-			if(sourceTextBox.Text.Length>266){
+            if (sourceTextBox.Text.Length > 266)
+            {
                 throw new UserInputException("Folder Path is too long");
-			}else if(sourceTextBox.Text.Equals("")){
+            }
+            else if (sourceTextBox.Text.Equals(""))
+            {
                 throw new UserInputException("Please select a Folder");
             }
             else if (!Directory.Exists(sourceTextBox.Text))
             {
                 throw new UserInputException("No Such Folder");
             }
-            else
+            else if (sourceTextBox.Text[0] != '\\') 
             {
                 DriveInfo di = new DriveInfo(""+sourceTextBox.Text[0]);
                 if (di.DriveType == DriveType.CDRom)
                 {
                     throw new UserInputException("CD rom is not supported in this version");
+                }
+                else if (di.DriveType == DriveType.Network)
+                {
+                    throw new UserInputException("Network drive is not supported in this version");
                 }
             }
            
