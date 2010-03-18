@@ -30,8 +30,7 @@ namespace SyncButler.MRU
             int depth = 2;
             int days = 5;
             List<string> mergedList = (MostRecentlyUsedFile.Get());
-            //DirectoryInfo di = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
-            //mergedList.AddRange(MostRecentlyUsedFile.Scan(di.Parent.FullName, depth, days));
+
             mergedList.AddRange(MostRecentlyUsedFile.Scan(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), depth, days));
             mergedList.AddRange(MostRecentlyUsedFile.Scan(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), depth, days));
             mergedList.AddRange(MostRecentlyUsedFile.Scan(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), depth, days));
@@ -40,11 +39,13 @@ namespace SyncButler.MRU
             mergedList.AddRange(MostRecentlyUsedFile.Scan(Environment.GetFolderPath(Environment.SpecialFolder.MyMusic), depth, days));
             List<string> drives = SystemEnvironment.StorageDevices.GetNonUSBDriveLetters();
             drives.AddRange(SystemEnvironment.StorageDevices.GetUSBDriveLetters());
+            drives.AddRange(SystemEnvironment.StorageDevices.GetUSBDriveLetters());
+
             foreach (string drive in drives)
             {
                 mergedList.AddRange(MostRecentlyUsedFile.Scan(drive, depth, days));
             }
-            //mergedList.AddRange(MostRecentlyUsedFile.Scan(Environment.GetFolderPath(Environment.SpecialFolder.), depth, days));
+            
             return CleanUP(mergedList);
         }
 
