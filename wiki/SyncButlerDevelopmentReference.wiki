@@ -8,3 +8,8 @@ This page contains some links to supplementary materials for the developer's gui
 [http://syncbutler.googlecode.com/files/SyncButler%20Generated%20API%20r295.zip Download]
 
 = Diagrams =
+
+Testing for existing instances on startup and pass arguments if there is an existing instance
+
+http://syncbutler.googlecode.com/files/image_Single%20Instance%20Checking.png
+
