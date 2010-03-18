@@ -4,6 +4,7 @@ using System.Text;
 using System.Runtime.InteropServices;
 using Microsoft.Win32;
 using System.IO;
+using System.Reflection;
 
 namespace SyncButler.MRU
 {
@@ -37,6 +38,12 @@ namespace SyncButler.MRU
             mergedList.AddRange(MostRecentlyUsedFile.Scan(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), depth, days));
             mergedList.AddRange(MostRecentlyUsedFile.Scan(Environment.GetFolderPath(Environment.SpecialFolder.Personal), depth, days));
             mergedList.AddRange(MostRecentlyUsedFile.Scan(Environment.GetFolderPath(Environment.SpecialFolder.MyMusic), depth, days));
+            List<string> drives = SystemEnvironment.StorageDevices.GetNonUSBDriveLetters();
+            drives.AddRange(SystemEnvironment.StorageDevices.GetUSBDriveLetters());
+            foreach (string drive in drives)
+            {
+                mergedList.AddRange(MostRecentlyUsedFile.Scan(drive, depth, days));
+            }
             //mergedList.AddRange(MostRecentlyUsedFile.Scan(Environment.GetFolderPath(Environment.SpecialFolder.), depth, days));
             return CleanUP(mergedList);
         }
@@ -126,16 +133,23 @@ namespace SyncButler.MRU
         private static List<string> CleanUP(List<string> MRUs)
         {
             List<string> filenames = new List<string>();
+            DirectoryInfo di = new DirectoryInfo(Path.GetDirectoryName(Assembly.GetAssembly(typeof(MostRecentlyUsedFile)).Location));
+
             foreach (string filename in MRUs)
             {
                 if (!filenames.Contains(filename))
                 {
                     if (File.Exists(filename))
                     {
-                        FileInfo fi = new FileInfo(filename);
-                        if(fi.Length != 0)
+                        
+                        if (!di.FullName.Equals(Path.GetDirectoryName(filename)))
                         {
-                            filenames.Add(filename);
+
+                            FileInfo fi = new FileInfo(filename);
+                            if (fi.Length != 0)
+                            {
+                                filenames.Add(filename);
+                            }
                         }
                     }
                 }
