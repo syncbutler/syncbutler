@@ -9,11 +9,10 @@ This page contains some links to supplementary materials for the developer's gui
 
 = Diagrams =
 
-Testing for existing instances on startup and pass arguments if there is an existing instance
+== Testing for existing instances on startup and pass arguments if there is an existing instance ==
 
 http://syncbutler.googlecode.com/files/image_Single%20Instance%20Checking.png
 
-
-Example of a call to log (with instantiation of the Logger)
+== Example of a call to log (with instantiation of the Logger) ==
 
 http://syncbutler.googlecode.com/files/image_Logger%20Instantiation%20and%20Writing.png
