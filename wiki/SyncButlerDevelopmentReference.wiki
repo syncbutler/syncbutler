@@ -13,3 +13,7 @@ Testing for existing instances on startup and pass arguments if there is an exis
 
 http://syncbutler.googlecode.com/files/image_Single%20Instance%20Checking.png
 
+
+Example of a call to log (with instantiation of the Logger)
+
+http://syncbutler.googlecode.com/files/image_Logger%20Instantiation%20and%20Writing.png
