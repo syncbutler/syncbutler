@@ -1092,10 +1092,19 @@ namespace SyncButlerUI
                 throw new UserInputException("Folder Path is too long");
 			}else if(sourceTextBox.Text.Equals("")){
                 throw new UserInputException("Please select a Folder");
-			}else if(!Directory.Exists(sourceTextBox.Text)){
-				throw new UserInputException("No Such Folder");
-		
-			}
+            }
+            else if (!Directory.Exists(sourceTextBox.Text))
+            {
+                throw new UserInputException("No Such Folder");
+            }
+            else
+            {
+                DriveInfo di = new DriveInfo(""+sourceTextBox.Text[0]);
+                if (di.DriveType == DriveType.CDRom)
+                {
+                    throw new UserInputException("CD rom is not supported in this version");
+                }
+            }
            
 		}
         private void ValidateFoldersHierachy()
