@@ -2,6 +2,10 @@
 
 * [SyncButlerDevelopmentReference Main Page]
 
-* [SyncButlerDevelopment Development]
-
 * [http://syncbutler.googlecode.com/files/SyncButler%20Generated%20API%20r295.zip API]
+
+* [SyncingAlgorithm How the file syncing works]
+
+* [Scanning_Algorithm Logic behind the parsing]
+
+* [Glossary]
