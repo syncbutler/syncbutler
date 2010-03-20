@@ -12,8 +12,9 @@ namespace SyncButler.Logging
     public sealed class Logger
     {
         private static LogLevel LOGLEVEL_DEFAULT = LogLevel.DEBUG;
-        private static string LOG_FILE = @"log.xml";
-        private static string LOG_STYLE = @"logstyle.css";
+        private static string LOG_PREF = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        private static string LOG_FILE = LOG_PREF + @"\log.xml";
+        private static string LOG_STYLE = LOG_PREF + @"\logstyle.css";
         private static Logger logger = null;
 
         private LogLevel logLevel;
