@@ -48,6 +48,9 @@ namespace SyncButlerUI
             this.homeWindow1.Controller = this.controller;
 		}
 
+        /// <summary>
+        /// Calling this will use the dispatcher to bring this window to the top.
+        /// </summary>
         public void GrabFocus()
         {
             this.Dispatcher.Invoke(
@@ -63,6 +66,7 @@ namespace SyncButlerUI
                     ));
             
         }
+
 		private void goHome(object sender, RoutedEventArgs e)
 		{
 			//homeWindow1.goHome(sender,e);
