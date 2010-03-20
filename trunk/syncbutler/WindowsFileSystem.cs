@@ -36,7 +36,7 @@ namespace SyncButler
         }
         
         /// <summary>
-        /// Gets/Sets the drive letter. This value is null by default.
+        /// Gets/Sets the drive letter. This value is null by default and will be set when UpdateDriveLetter is called.
         /// </summary>
         public string DriveLetter
         {
@@ -66,7 +66,8 @@ namespace SyncButler
         }
 
         /// <summary>
-        /// Gets/Sets the drive ID that uniquely identifies the drive. Used in conjunction with IsPortableStorage.
+        /// Gets/Sets the drive ID that uniquely identifies the drive. Used in conjunction with IsPortableStorage
+        /// to update the drive letters of portable storage devices.
         /// </summary>
         public string DriveID
         {
@@ -178,6 +179,7 @@ namespace SyncButler
 
         /// <summary>
         /// Method that is used internally to update the drive letter of the root path, based on the current drive ID.
+        /// Useful for correcting the drive letters of portable devices.
         /// </summary>
         public void UpdateDriveLetter()
         {
@@ -242,33 +244,60 @@ namespace SyncButler
             return nativeFileSystemObj.Exists;
         }
 
+        /// <summary>
+        /// Set a reference back to the containing partnership
+        /// </summary>
+        /// <param name="parentPartnership">The containing partnership</param>
         public void SetParentPartnership(Partnership parentPartnership)
         {
             this.parentPartnership = parentPartnership;
         }
 
+        /// <summary>
+        /// Returns a reference to the containing partnership
+        /// </summary>
+        /// <returns>The containing partnership</returns>
         public Partnership GetParentPartnership()
         {
             return this.parentPartnership;
         }
 
+        /// <summary>
+        /// Gets the checksum stored from a previous scan. Returns null if the checksum does 
+        /// not exist.
+        /// </summary>
+        /// <returns></returns>
         public long GetStoredChecksum()
         {
             return parentPartnership.GetLastChecksum(this);
         }
 
+        /// <summary>
+        /// Updates the sotred checksum with the file/folder's current checksum.
+        /// </summary>
         public void UpdateStoredChecksum()
         {
             parentPartnership.UpdateLastChecksum(this);
         }
 
+        /// <summary>
+        /// Removes the stored checksum for this file/folder form the checksum dictinary.
+        /// </summary>
         public void RemoveStoredChecksum()
         {
             parentPartnership.RemoveChecksum(this);
         }
 
+        /// <summary>
+        /// Serializes this object into XML
+        /// </summary>
+        /// <param name="xmlData"></param>
         public abstract void SerializeXML(XmlWriter xmlData);
 
+        /// <summary>
+        /// Serializes this object into a string
+        /// </summary>
+        /// <returns></returns>
         public string Serialize()
         {
             StringWriter output = new StringWriter();
@@ -285,30 +314,79 @@ namespace SyncButler
             return output.ToString();
         }
 
+        /// <summary>
+        /// Prepares for a sync. Sets the driveLetter to null so that it will be rechecked.
+        /// </summary>
         public void PrepareSync()
         {
             // Force drive letter to be rechecked
             driveLetter = null;
         }
 
+
+        /// <summary>
+        /// Returns the checksum for this file/folder
+        /// </summary>
+        /// <returns></returns>
         public abstract long Checksum();
 
+        /// <summary>
+        /// Sets the delegate used to report progress on a syncing operation
+        /// </summary>
+        /// <param name="monitor"></param>
         public abstract void SetStatusMonitor(SyncableStatusMonitor monitor);
 
+        /// <summary>
+        /// Scans the File/Folders and reports a list of conflicts
+        /// </summary>
+        /// <param name="otherPair"></param>
+        /// <returns></returns>
         public abstract List<Conflict> Sync(ISyncable otherPair);
 
+        /// <summary>
+        /// Copies this file/folder onto another file/folder
+        /// </summary>
+        /// <param name="item"></param>
         public abstract void CopyTo(ISyncable item);
 
+        /// <summary>
+        /// Merges two files. NOT IMPLEMENTED.
+        /// </summary>
+        /// <param name="item"></param>
         public abstract void Merge(ISyncable item);
 
+        /// <summary>
+        /// Delete this file/folder
+        /// </summary>
+        /// <param name="recoverable"></param>
         public abstract void Delete(bool recoverable);
 
+        /// <summary>
+        /// Indicates whether this file/folder has changed since the last scan.
+        /// </summary>
+        /// <returns></returns>
         public abstract bool HasChanged();
 
+        /// <summary>
+        /// Indicates whether the two file/folders are identical.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public abstract bool Equals(ISyncable item);
 
+        /// <summary>
+        /// Returns a string that represents this file/folder in the context of the
+        /// containing partnership
+        /// </summary>
+        /// <returns></returns>
         public abstract string EntityPath();
 
+        /// <summary>
+        /// Creates the file/folder based onthe entity path given and the 
+        /// containing partnership.
+        /// </summary>
+        /// <param name="entityPath"></param>
+        /// <returns></returns>
         public abstract ISyncable CreateChild(string entityPath);
 
         #endregion
