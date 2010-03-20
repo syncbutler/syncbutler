@@ -24,16 +24,21 @@
 								</DoubleAnimationUsingKeyFrames>
 							</Storyboard>
 							<Storyboard x:Key="ButtonHighlight">
-								<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="bigButton_Copy" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
+								<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="bigButton_Copy" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
 									<SplineColorKeyFrame KeyTime="00:00:00" Value="#FF00945C"/>
+									<SplineColorKeyFrame KeyTime="00:00:04" Value="#FF00945C"/>
 								</ColorAnimationUsingKeyFrames>
+								<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="bigButton_Copy" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Offset)">
+									<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.545"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:04" Value="0.76"/>
+								</DoubleAnimationUsingKeyFrames>
 							</Storyboard>
 						</ControlTemplate.Resources>
 						<Grid x:Name="Sync_Button" Margin="0.318,0,0,0">
 							<Rectangle x:Name="bigButton_Copy" Margin="-2.19,0,-5.069,0.269" VerticalAlignment="Bottom" Height="259.731" Cursor="Hand">
 								<Rectangle.Fill>
 									<RadialGradientBrush RadiusX="1.264" RadiusY="1.006">
-										<GradientStop Color="#00000000" Offset="0.978"/>
+										<GradientStop Color="#00000000" Offset="0.545"/>
 										<GradientStop Color="#FF007994"/>
 									</RadialGradientBrush>
 								</Rectangle.Fill>
@@ -59,7 +64,7 @@
 									</LinearGradientBrush>
 								</Rectangle.Fill>
 							</Rectangle>
-							<TextBlock Cursor="Hand" Margin="186.709,96,32.984,39.5" Opacity="0.7" FontFamily="Arial" FontSize="18.667" Foreground="White" TextWrapping="Wrap"><Run Text="Work anywhere."/><LineBreak/><Run Text="Start Sy"/><Run Text="nchronizing your files!"/></TextBlock>
+							<TextBlock Cursor="Hand" Margin="186.709,96,32.984,39.5" Opacity="0.7" FontFamily="Arial" FontSize="18.667" Foreground="White" TextWrapping="Wrap"><Run Text="Work anywhere."/><LineBreak/><Run Text="Start sy"/><Run Text="nchronizing your files!"/></TextBlock>
 							<ContentPresenter Margin="186.5,49.5,-9.625,0" VerticalAlignment="Top" Height="61.5" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Content="Start Syncing" RecognizesAccessKey="True"/>
 						</Grid>
 						<ControlTemplate.Triggers>
@@ -93,24 +98,85 @@
 			<Setter Property="Template">
 				<Setter.Value>
 					<ControlTemplate TargetType="{x:Type Button}">
+						<ControlTemplate.Resources>
+							<Storyboard x:Key="ViewPartnershipAnimation">
+								<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="bigButton_Copy">
+									<SplineColorKeyFrame KeyTime="00:00:00" Value="#FF005F74"/>
+									<SplineColorKeyFrame KeyTime="00:00:02" Value="#FF00945C"/>
+								</ColorAnimationUsingKeyFrames>
+								<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Offset)" Storyboard.TargetName="bigButton_Copy">
+									<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.564"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:02" Value="0.668"/>
+								</DoubleAnimationUsingKeyFrames>
+								<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="image" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+									<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:00.5000000" Value="4.524"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:01" Value="5.237"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:01.5000000" Value="0.716"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:02" Value="-4.761"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:02.5000000" Value="-9.048"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:03" Value="-9.285"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:03.5000000" Value="-5"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:04" Value="0"/>
+								</DoubleAnimationUsingKeyFrames>
+								<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="image" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+									<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:00.5000000" Value="-4.762"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:01" Value="-12.856"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:01.5000000" Value="-15.793"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:02" Value="-13.97"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:02.5000000" Value="-9.127"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:03" Value="-4.285"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:03.5000000" Value="-0.714"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:04" Value="0"/>
+								</DoubleAnimationUsingKeyFrames>
+							</Storyboard>
+						</ControlTemplate.Resources>
 						<Grid>
-							<Rectangle x:Name="bigButton_Copy1" Margin="0,0,-0.483,0" VerticalAlignment="Top" Height="185.269" Stroke="Black" Cursor="Hand">
+							<Rectangle x:Name="bigButton_Copy" Margin="-1.334,0,0,19.5" VerticalAlignment="Bottom" Height="185.269" Cursor="Hand" HorizontalAlignment="Left" Width="174.483">
 								<Rectangle.Fill>
-									<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" MappingMode="RelativeToBoundingBox">
-										<GradientStop Color="#00000000" Offset="1"/>
-										<GradientStop Color="#FF005F74" Offset="0.429"/>
-										<GradientStop Color="#8F003541" Offset="1"/>
-									</LinearGradientBrush>
+									<RadialGradientBrush RadiusX="1.901" RadiusY="0.853">
+										<GradientStop Color="#00000000" Offset="0.564"/>
+										<GradientStop Color="#FF005F74"/>
+									</RadialGradientBrush>
 								</Rectangle.Fill>
 							</Rectangle>
 							<TextBlock Margin="9.666,112.217,0,0" Opacity="0.5" FontFamily="Arial" FontSize="16" Foreground="White" TextWrapping="Wrap" Cursor="Hand" TextAlignment="Right" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150.307" Height="75.052"><Run Text="View and "/><LineBreak/><Run Text="manage "/><LineBreak/><Run Text="your partnerships"/></TextBlock>
-							<Image Cursor="Hand" HorizontalAlignment="Left" Margin="23.166,83.769,0,56" Width="66" Opacity="0.6" Source="Images\Search.png" Stretch="Fill"/>
+							<Image x:Name="image" Cursor="Hand" HorizontalAlignment="Left" Margin="23.166,83.769,0,56" Width="66" Opacity="0.6" Source="Images\Search.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
+								<Image.RenderTransform>
+									<TransformGroup>
+										<ScaleTransform/>
+										<SkewTransform/>
+										<RotateTransform/>
+										<TranslateTransform/>
+									</TransformGroup>
+								</Image.RenderTransform>
+							</Image>
 							<TextBlock Margin="23.832,12.769,33.168,0" VerticalAlignment="Top" Height="49" TextWrapping="Wrap" TextAlignment="Center" Opacity="0.7"><Run FontStyle="Normal" Text="View "/><Run Text="Partnerships"/></TextBlock>
+							<Rectangle x:Name="Reflection_Copy" Opacity="0.045" Margin="4.032,6.588,3.596,0" RadiusX="7" RadiusY="6" VerticalAlignment="Top" Height="88.217" Cursor="Hand">
+								<Rectangle.Effect>
+									<BlurEffect/>
+								</Rectangle.Effect>
+								<Rectangle.Fill>
+									<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+										<GradientStop Color="Black"/>
+										<GradientStop Color="White" Offset="1"/>
+									</LinearGradientBrush>
+								</Rectangle.Fill>
+							</Rectangle>
 						</Grid>
 						<ControlTemplate.Triggers>
+							<EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
 							<Trigger Property="IsFocused" Value="True"/>
 							<Trigger Property="IsDefaulted" Value="True"/>
-							<Trigger Property="IsMouseOver" Value="True"/>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Trigger.ExitActions>
+									<StopStoryboard BeginStoryboardName="ViewPartnershipAnimation_BeginStoryboard"/>
+								</Trigger.ExitActions>
+								<Trigger.EnterActions>
+									<BeginStoryboard x:Name="ViewPartnershipAnimation_BeginStoryboard" Storyboard="{StaticResource ViewPartnershipAnimation}"/>
+								</Trigger.EnterActions>
+							</Trigger>
 							<Trigger Property="IsPressed" Value="True"/>
 							<Trigger Property="IsEnabled" Value="False"/>
 						</ControlTemplate.Triggers>
@@ -126,26 +192,92 @@
 			<Setter Property="Template">
 				<Setter.Value>
 					<ControlTemplate TargetType="{x:Type Button}">
+						<ControlTemplate.Resources>
+							<Storyboard x:Key="CreatePartnershipAnimation">
+								<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="image" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+									<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:02" Value="10.953"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:04" Value="0"/>
+								</DoubleAnimationUsingKeyFrames>
+								<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="image" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+									<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:02" Value="-12.857"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:04" Value="0"/>
+								</DoubleAnimationUsingKeyFrames>
+								<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="image1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+									<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:02" Value="-14.761"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:04" Value="0"/>
+								</DoubleAnimationUsingKeyFrames>
+								<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="image1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+									<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:02" Value="8.572"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:04" Value="0"/>
+								</DoubleAnimationUsingKeyFrames>
+								<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="bigButton_Copy">
+									<SplineColorKeyFrame KeyTime="00:00:02" Value="#FF00945C"/>
+								</ColorAnimationUsingKeyFrames>
+								<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Offset)" Storyboard.TargetName="bigButton_Copy">
+									<SplineDoubleKeyFrame KeyTime="00:00:02" Value="0.668"/>
+								</DoubleAnimationUsingKeyFrames>
+							</Storyboard>
+						</ControlTemplate.Resources>
 						<Grid x:Name="CreatePartners" Margin="-8,-1,-6,-24">
-							<Rectangle x:Name="bigButton_Copy" Margin="-1.334,0,0,22" VerticalAlignment="Bottom" Height="185.269" Stroke="Black" Cursor="Hand" HorizontalAlignment="Left" Width="174.483">
+							<Rectangle x:Name="bigButton_Copy" Margin="-1.334,0,0,22" VerticalAlignment="Bottom" Height="185.269" Cursor="Hand" HorizontalAlignment="Left" Width="174.483">
 								<Rectangle.Fill>
-									<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" MappingMode="RelativeToBoundingBox">
-										<GradientStop Color="#00000000" Offset="1"/>
-										<GradientStop Color="#FF005F74" Offset="0.429"/>
-										<GradientStop Color="#8F003541" Offset="1"/>
+									<RadialGradientBrush RadiusX="1.901" RadiusY="0.853">
+										<GradientStop Color="#00000000" Offset="0.564"/>
+										<GradientStop Color="#FF005F74"/>
+									</RadialGradientBrush>
+								</Rectangle.Fill>
+							</Rectangle>
+							<TextBlock Margin="12.666,132.217,15.51,0" VerticalAlignment="Top" Height="49.052" Opacity="0.5" FontFamily="Arial" FontSize="16" Foreground="White" TextWrapping="Wrap" Cursor="Hand" TextAlignment="Right"><Run Text="Select what "/><LineBreak/><Run Text="you want to sync"/></TextBlock>
+							<Image x:Name="image" Margin="21.864,86.105,0,61.56" Source="Images\Folder.png" Stretch="Fill" Opacity="0.595" HorizontalAlignment="Left" Width="60.604" RenderTransformOrigin="0.5,0.5">
+								<Image.RenderTransform>
+									<TransformGroup>
+										<ScaleTransform/>
+										<SkewTransform/>
+										<RotateTransform/>
+										<TranslateTransform/>
+									</TransformGroup>
+								</Image.RenderTransform>
+							</Image>
+							<ContentPresenter HorizontalAlignment="Right" Margin="0,15.217,17.51,0" VerticalAlignment="Top" Width="136" Height="72" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True"/>
+							<TextBlock Margin="25.834,15.769,30.649,0" VerticalAlignment="Top" Height="48" TextAlignment="Center" TextWrapping="Wrap" Opacity="0.68"><Run FontStyle="Normal" Text="Create"/><Run Text=" Partnership"/></TextBlock>
+							<Image x:Name="image1" Margin="27.864,78.105,0,69.56" Source="Images\Folder.png" Stretch="Fill" HorizontalAlignment="Left" Width="60.604" Opacity="0.595" RenderTransformOrigin="0.5,0.5">
+								<Image.RenderTransform>
+									<TransformGroup>
+										<ScaleTransform/>
+										<SkewTransform/>
+										<RotateTransform/>
+										<TranslateTransform/>
+									</TransformGroup>
+								</Image.RenderTransform>
+							</Image>
+							<Rectangle x:Name="Reflection_Copy" Opacity="0.045" Margin="4.032,6.588,15.079,0" RadiusX="7" RadiusY="6" VerticalAlignment="Top" Height="88.217" Cursor="Hand">
+								<Rectangle.Effect>
+									<BlurEffect/>
+								</Rectangle.Effect>
+								<Rectangle.Fill>
+									<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+										<GradientStop Color="Black"/>
+										<GradientStop Color="White" Offset="1"/>
 									</LinearGradientBrush>
 								</Rectangle.Fill>
 							</Rectangle>
-							<TextBlock Margin="12.666,132.217,15.51,0" VerticalAlignment="Top" Height="49.052" Opacity="0.5" FontFamily="Arial" FontSize="16" Foreground="White" TextWrapping="Wrap" Cursor="Hand" TextAlignment="Right"><Run Text="Select what "/><LineBreak/><Run Text="you want to Sync"/></TextBlock>
-							<Image Margin="21.864,86.105,0,61.56" Source="Images\Folder.png" Stretch="Fill" Opacity="0.595" HorizontalAlignment="Left" Width="60.604"/>
-							<ContentPresenter HorizontalAlignment="Right" Margin="0,15.217,17.51,0" VerticalAlignment="Top" Width="136" Height="72" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True"/>
-							<TextBlock Margin="25.834,15.769,30.649,0" VerticalAlignment="Top" Height="48" TextAlignment="Center" TextWrapping="Wrap" Opacity="0.68"><Run FontStyle="Normal" Text="Create"/><Run Text=" Partnership"/></TextBlock>
-							<Image Margin="27.864,78.105,0,69.56" Source="Images\Folder.png" Stretch="Fill" HorizontalAlignment="Left" Width="60.604" Opacity="0.595"/>
 						</Grid>
 						<ControlTemplate.Triggers>
+							<EventTrigger RoutedEvent="FrameworkElement.Loaded" SourceName="bigButton_Copy"/>
 							<Trigger Property="IsFocused" Value="True"/>
 							<Trigger Property="IsDefaulted" Value="True"/>
-							<Trigger Property="IsMouseOver" Value="True"/>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Trigger.ExitActions>
+									<StopStoryboard BeginStoryboardName="CreatePartnershipAnimation_BeginStoryboard"/>
+								</Trigger.ExitActions>
+								<Trigger.EnterActions>
+									<BeginStoryboard x:Name="CreatePartnershipAnimation_BeginStoryboard" Storyboard="{StaticResource CreatePartnershipAnimation}"/>
+								</Trigger.EnterActions>
+							</Trigger>
 							<Trigger Property="IsPressed" Value="True"/>
 							<Trigger Property="IsEnabled" Value="False"/>
 						</ControlTemplate.Triggers>
@@ -286,18 +418,28 @@
 				<Setter.Value>
 					<ControlTemplate TargetType="{x:Type Button}">
 						<Grid Margin="0,0,0,-3.175">
-							<Rectangle x:Name="bigButton_Copy3" Stroke="Black" Cursor="Hand" VerticalAlignment="Top" Height="185.762" Margin="-0.952,0,0,0" HorizontalAlignment="Left" Width="170.202">
+							<Rectangle x:Name="bigButton_Copy" Margin="-1.334,0,0,-0.825" VerticalAlignment="Bottom" Height="185.269" Cursor="Hand" HorizontalAlignment="Left" Width="174.483">
 								<Rectangle.Fill>
-									<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" MappingMode="RelativeToBoundingBox">
-										<GradientStop Color="#00000000" Offset="1"/>
-										<GradientStop Color="#FF005F74" Offset="0.433"/>
-										<GradientStop Color="#8F004A5B" Offset="1"/>
-									</LinearGradientBrush>
+									<RadialGradientBrush RadiusX="1.901" RadiusY="0.853">
+										<GradientStop Color="#00000000" Offset="0.564"/>
+										<GradientStop Color="#FF005F74"/>
+									</RadialGradientBrush>
 								</Rectangle.Fill>
 							</Rectangle>
 							<TextBlock Margin="0,11.948,23.043,0" VerticalAlignment="Top" Height="72" Opacity="0.6" FontFamily="Arial" FontSize="21.333" Foreground="White" TextAlignment="Center" TextWrapping="Wrap" Cursor="Hand" HorizontalAlignment="Right" Width="128.723"><Run Text="Explore "/><Run FontStyle="Italic" Text="Features"/></TextBlock>
-							<TextBlock Margin="-15.974,130.948,7.917,0" VerticalAlignment="Top" Height="75.052" Opacity="0.5" FontFamily="Arial" FontSize="16" Foreground="White" TextWrapping="Wrap" TextAlignment="Right" Cursor="Hand"><Run Text="Discover"/><LineBreak/><Run Text="a new way of Syncing"/></TextBlock>
+							<TextBlock Margin="-15.974,130.948,7.917,0" VerticalAlignment="Top" Height="75.052" Opacity="0.5" FontFamily="Arial" FontSize="16" Foreground="White" TextWrapping="Wrap" TextAlignment="Right" Cursor="Hand"><Run Text="Discover"/><LineBreak/><Run Text="a new way of syncing"/></TextBlock>
 							<Image Cursor="Hand" Margin="0,0,81.934,36.808" Opacity="0.6" Source="Images\Broken.png" Stretch="Fill" VerticalAlignment="Bottom" Height="66.25" HorizontalAlignment="Right" Width="66.25"/>
+							<Rectangle x:Name="Reflection_Copy" Opacity="0.045" Margin="4.032,6.588,5.846,90.639" RadiusX="7" RadiusY="6" VerticalAlignment="Stretch" Height="Auto" Cursor="Hand">
+								<Rectangle.Effect>
+									<BlurEffect/>
+								</Rectangle.Effect>
+								<Rectangle.Fill>
+									<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+										<GradientStop Color="Black"/>
+										<GradientStop Color="White" Offset="1"/>
+									</LinearGradientBrush>
+								</Rectangle.Fill>
+							</Rectangle>
 						</Grid>
 						<ControlTemplate.Triggers>
 							<Trigger Property="IsFocused" Value="True"/>
@@ -813,17 +955,6 @@
 					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.504,0.026">
 						<GradientStop Color="Black" Offset="1"/>
 						<GradientStop Color="Black"/>
-					</LinearGradientBrush>
-				</Rectangle.Fill>
-			</Rectangle>
-			<Rectangle x:Name="Reflection_Copy" Opacity="0.045" Margin="1.176,0,-1.5,92.052" RadiusX="7" RadiusY="6" VerticalAlignment="Bottom" Height="88.217" Cursor="Hand">
-				<Rectangle.Effect>
-					<BlurEffect/>
-				</Rectangle.Effect>
-				<Rectangle.Fill>
-					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-						<GradientStop Color="Black"/>
-						<GradientStop Color="White" Offset="1"/>
 					</LinearGradientBrush>
 				</Rectangle.Fill>
 			</Rectangle>

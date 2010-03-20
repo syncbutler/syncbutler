@@ -549,6 +549,11 @@ namespace SyncButlerUI
             catch (Exception) { }
 
         }
+
+        private void editPartnershipTreeView()
+        {
+
+        }
 	
 		/// <summary>
 		/// remove subItems of the list and repopulate when collasped
