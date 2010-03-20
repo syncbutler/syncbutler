@@ -490,6 +490,16 @@ namespace SyncButler
         }
 
         /// <summary>
+        /// Returns a string that represents this file in the context of the partnership
+        /// </summary>
+        /// <param name="extraAttributes">Additional attributes to tag on</param>
+        /// <returns></returns>
+        public override string EntityPath(string extraAttributes)
+        {
+            return extraAttributes + "," + PREF_FILE + this.relativePath;
+        }
+
+        /// <summary>
         /// Returns the full path to this file.
         /// </summary>
         /// <returns></returns>
@@ -533,6 +543,13 @@ namespace SyncButler
             List<Conflict> conflictList = new List<Conflict>();
             Conflict.Action autoResolveAction = Conflict.Action.Unknown;
             Conflict.Action suggestedAction = Conflict.Action.Unknown;
+
+            // Are we supposed to ignore this?
+            if (Ignored())
+            {
+                conflictList.Add(new Conflict(this, partner, Conflict.Action.Unknown, Conflict.Action.Ignore));
+                return conflictList;
+            }
 
             // Left and right don't exist. Nothing to do.
             if (!(this.nativeFileObj.Exists || partner.nativeFileObj.Exists))
