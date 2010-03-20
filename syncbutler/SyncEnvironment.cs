@@ -358,9 +358,11 @@ namespace SyncButler
             // The config file will be the name of our app, less the extension
             // It might not be so if the user has changed the filename for some reason
             // Attempt to locate the settings file (null if not found)
-            string configFilename = SearchForSettingsFile(); ;
+            string configFilename = SearchForSettingsFile();
             if (configFilename == null)
                 configFilename = GetSettingsFileName();
+            else
+                configFilename = _appPath + @"\" + configFilename;
 
             // Map the new configuration file
             ExeConfigurationFileMap configFileMap = new ExeConfigurationFileMap();
@@ -427,6 +429,8 @@ namespace SyncButler
             string configFilename = SearchForSettingsFile();;
             if (configFilename == null)
                 configFilename = GetSettingsFileName();
+            else
+                configFilename = _appPath + @"\" + configFilename;
             
             // Map the new configuration file
             ExeConfigurationFileMap configFileMap = new ExeConfigurationFileMap();
@@ -756,9 +760,10 @@ namespace SyncButler
         private string GetSettingsFileName()
         {
             string appName = Environment.GetCommandLineArgs()[0];
+            //string appName = System.Reflection.Assembly.GetExecutingAssembly().
+            appName = appName.Substring(appName.LastIndexOf('\\')+1);
             int extensionPoint = appName.LastIndexOf('.');
-            string configFilename = string.Concat(appName.Substring(0, extensionPoint),
-                                        SYNCBUTLER_SETTINGS_EXTENSION);
+            string configFilename = _appPath + @"\" + string.Concat(appName.Substring(0, extensionPoint), SYNCBUTLER_SETTINGS_EXTENSION);
             return configFilename;
         }
 
@@ -773,7 +778,6 @@ namespace SyncButler
             //int parentDirectory = appName.LastIndexOf('\\');
             //string programDirectory = appName.Substring(0, parentDirectory);
             DirectoryInfo programPath = new DirectoryInfo(_appPath);
-            
             if (programPath.Exists)
             {
                 FileInfo[] fileList = programPath.GetFiles();
@@ -783,7 +787,7 @@ namespace SyncButler
                     if (file.Extension.ToLower().Equals(SYNCBUTLER_SETTINGS_EXTENSION))
                     {
                         //parentDirectory index position can be reused cause it is in the same directory
-                        return file.FullName.Substring(_appPath.LastIndexOf('\\') + 1);
+                        return file.FullName.Substring(file.FullName.LastIndexOf('\\') + 1);
                     }
                 }
             }
