@@ -23,6 +23,7 @@
 	</Window.Triggers>
 
 	<Grid x:Name="LayoutRoot">
+		<Rectangle Fill="#FFA7A7A7" Stroke="Black" Margin="-1,-1,-2,-2" Opacity="0.095" RadiusX="20" RadiusY="20"/>
 		<Image x:Name="image" Margin="-5,-48,15,-102" Stretch="Fill" Source="Images/SunBurst.png" RenderTransformOrigin="0.5,0.5" Opacity="0.365">
 			<Image.RenderTransform>
 				<TransformGroup>

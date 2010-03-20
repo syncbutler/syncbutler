@@ -10,7 +10,7 @@
 	x:Name="Window"
 	Title="SyncButler" 
 	Width="662" Height="480"
-	Closing = "cleanUp" Cursor="Arrow" WindowStyle="ThreeDBorderWindow" ResizeMode="CanMinimize" Icon="Images/Icons/SyncButler.ico" WindowStartupLocation="CenterScreen"
+	Closing = "cleanUp" Cursor="Arrow" WindowStyle="ThreeDBorderWindow" ResizeMode="CanMinimize" Icon="Images/logowTransparency.png" WindowStartupLocation="CenterScreen"
 	>
 
 	<Window.Resources>
@@ -230,8 +230,18 @@
 			<Setter Property="Template">
 				<Setter.Value>
 					<ControlTemplate TargetType="{x:Type Button}">
+						<ControlTemplate.Resources>
+							<Storyboard x:Key="HomeAnimate">
+								<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="rectangle">
+									<SplineColorKeyFrame KeyTime="00:00:01" Value="#00FFDD00"/>
+								</ColorAnimationUsingKeyFrames>
+								<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="rectangle">
+									<SplineDoubleKeyFrame KeyTime="00:00:01" Value="0.255"/>
+								</DoubleAnimationUsingKeyFrames>
+							</Storyboard>
+						</ControlTemplate.Resources>
 						<Grid x:Name="HomeButton" Margin="-5,0,-19,0">
-							<Rectangle Cursor="Hand" VerticalAlignment="Top" Height="57.667" Width="Auto" RadiusX="5" RadiusY="5" Margin="12.333,1,19.667,0" Opacity="0.08">
+							<Rectangle x:Name="rectangle" Cursor="Hand" VerticalAlignment="Top" Height="57.667" Width="Auto" RadiusX="5" RadiusY="5" Margin="12.333,1,19.667,0" Opacity="0.08">
 								<Rectangle.Fill>
 									<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
 										<GradientStop Color="White" Offset="0"/>
@@ -239,13 +249,38 @@
 									</LinearGradientBrush>
 								</Rectangle.Fill>
 							</Rectangle>
-							<ContentPresenter Margin="59.496,24.5,41.837,1.5" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True"/>
-							<Image HorizontalAlignment="Left" Margin="13.333,12.168,0,10.499" VerticalAlignment="Stretch" Width="39.333" Height="Auto" Opacity="0.58" Source="Images\Computer.png" Stretch="Fill"/>
+							<ContentPresenter x:Name="contentPresenter" Margin="59.496,21.5,41.837,4.5" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True" RenderTransformOrigin="0.5,0.5">
+								<ContentPresenter.RenderTransform>
+									<TransformGroup>
+										<ScaleTransform/>
+										<SkewTransform/>
+										<RotateTransform/>
+										<TranslateTransform/>
+									</TransformGroup>
+								</ContentPresenter.RenderTransform>
+							</ContentPresenter>
+							<Image x:Name="image" HorizontalAlignment="Left" Margin="13.333,9.168,0,13.499" VerticalAlignment="Stretch" Width="39.333" Height="Auto" Opacity="0.58" Source="Images\Computer.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
+								<Image.RenderTransform>
+									<TransformGroup>
+										<ScaleTransform/>
+										<SkewTransform/>
+										<RotateTransform/>
+										<TranslateTransform/>
+									</TransformGroup>
+								</Image.RenderTransform>
+							</Image>
 						</Grid>
 						<ControlTemplate.Triggers>
 							<Trigger Property="IsFocused" Value="True"/>
 							<Trigger Property="IsDefaulted" Value="True"/>
-							<Trigger Property="IsMouseOver" Value="True"/>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Trigger.ExitActions>
+									<StopStoryboard BeginStoryboardName="HomeAnimate_BeginStoryboard"/>
+								</Trigger.ExitActions>
+								<Trigger.EnterActions>
+									<BeginStoryboard x:Name="HomeAnimate_BeginStoryboard" Storyboard="{StaticResource HomeAnimate}"/>
+								</Trigger.EnterActions>
+							</Trigger>
 							<Trigger Property="IsPressed" Value="True"/>
 							<Trigger Property="IsEnabled" Value="False"/>
 						</ControlTemplate.Triggers>
@@ -260,8 +295,18 @@
 			<Setter Property="Template">
 				<Setter.Value>
 					<ControlTemplate TargetType="{x:Type Button}">
+						<ControlTemplate.Resources>
+							<Storyboard x:Key="Settings Animate">
+								<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="rectangle">
+									<SplineColorKeyFrame KeyTime="00:00:01" Value="#00FFDD00"/>
+								</ColorAnimationUsingKeyFrames>
+								<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="rectangle">
+									<SplineDoubleKeyFrame KeyTime="00:00:01" Value="0.255"/>
+								</DoubleAnimationUsingKeyFrames>
+							</Storyboard>
+						</ControlTemplate.Resources>
 						<Grid x:Name="SettingsButton">
-							<Rectangle Cursor="Hand" VerticalAlignment="Top" Height="58.667" Width="Auto" RadiusX="5" RadiusY="5" Margin="7.333,0,0.667,0" Opacity="0.08">
+							<Rectangle x:Name="rectangle" Cursor="Hand" VerticalAlignment="Top" Height="58.667" Width="Auto" RadiusX="5" RadiusY="5" Margin="7.333,0,0.667,0" Opacity="0.08">
 								<Rectangle.Fill>
 									<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
 										<GradientStop Color="White" Offset="0"/>
@@ -273,9 +318,17 @@
 							<Image HorizontalAlignment="Left" Margin="10.834,12.168,0,10.499" VerticalAlignment="Stretch" Width="39.333" Height="Auto" Opacity="0.58" Source="Images/Settings.png" Stretch="Fill"/>
 						</Grid>
 						<ControlTemplate.Triggers>
+							<EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
 							<Trigger Property="IsFocused" Value="True"/>
 							<Trigger Property="IsDefaulted" Value="True"/>
-							<Trigger Property="IsMouseOver" Value="True"/>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Trigger.ExitActions>
+									<StopStoryboard BeginStoryboardName="Settings_Animate_BeginStoryboard"/>
+								</Trigger.ExitActions>
+								<Trigger.EnterActions>
+									<BeginStoryboard x:Name="Settings_Animate_BeginStoryboard" Storyboard="{StaticResource Settings Animate}"/>
+								</Trigger.EnterActions>
+							</Trigger>
 							<Trigger Property="IsPressed" Value="True"/>
 							<Trigger Property="IsEnabled" Value="False"/>
 						</ControlTemplate.Triggers>
@@ -290,8 +343,20 @@
 			<Setter Property="Template">
 				<Setter.Value>
 					<ControlTemplate TargetType="{x:Type Button}">
+						<ControlTemplate.Resources>
+							<Storyboard x:Key="SBS animate">
+								<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="rectangle" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
+									<SplineColorKeyFrame KeyTime="00:00:00" Value="Transparent"/>
+									<SplineColorKeyFrame KeyTime="00:00:01" Value="#00FFDD00"/>
+								</ColorAnimationUsingKeyFrames>
+								<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="rectangle" Storyboard.TargetProperty="(UIElement.Opacity)">
+									<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.08"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:01" Value="0.255"/>
+								</DoubleAnimationUsingKeyFrames>
+							</Storyboard>
+						</ControlTemplate.Resources>
 						<Grid x:Name="SettingsButton" Margin="0,0,-2.333,0">
-							<Rectangle Cursor="Hand" VerticalAlignment="Top" Height="58.667" Width="Auto" RadiusX="5" RadiusY="5" Margin="7.333,0,3,0" Opacity="0.08">
+							<Rectangle x:Name="rectangle" Cursor="Hand" VerticalAlignment="Top" Height="58.667" Width="Auto" RadiusX="5" RadiusY="5" Margin="7.333,0,3,0" Opacity="0.08">
 								<Rectangle.Fill>
 									<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
 										<GradientStop Color="White" Offset="0"/>
@@ -308,9 +373,17 @@
 							<TextBlock Margin="53.667,13.5,-7.333,-22" TextWrapping="Wrap" FontSize="16"><Run Text="Sync Butler, "/><Run FontStyle="Italic" Text="Sync"/><Run Text="!"/></TextBlock>
 						</Grid>
 						<ControlTemplate.Triggers>
+							<EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
 							<Trigger Property="IsFocused" Value="True"/>
 							<Trigger Property="IsDefaulted" Value="True"/>
-							<Trigger Property="IsMouseOver" Value="True"/>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Trigger.ExitActions>
+									<StopStoryboard BeginStoryboardName="SBS_animate_BeginStoryboard"/>
+								</Trigger.ExitActions>
+								<Trigger.EnterActions>
+									<BeginStoryboard x:Name="SBS_animate_BeginStoryboard" Storyboard="{StaticResource SBS animate}"/>
+								</Trigger.EnterActions>
+							</Trigger>
 							<Trigger Property="IsPressed" Value="True"/>
 							<Trigger Property="IsEnabled" Value="False"/>
 						</ControlTemplate.Triggers>
@@ -352,7 +425,7 @@
 				</TransformGroup>
 			</Rectangle.RenderTransform>
 			<Rectangle.Fill>
-				<RadialGradientBrush RadiusX="0.98" RadiusY="0.925">
+				<RadialGradientBrush RadiusX="0.98" RadiusY="0.925" GradientOrigin="0.032,0.995">
 					<GradientStop Color="#00000000" Offset="0.629"/>
 					<GradientStop Color="#FF002C35"/>
 				</RadialGradientBrush>
