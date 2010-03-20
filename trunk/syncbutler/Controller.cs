@@ -89,8 +89,6 @@ namespace SyncButler
             }
         }
 
-        
-
         /// <summary>
         /// Handles incoming data from other instances.
         /// </summary>
@@ -99,10 +97,12 @@ namespace SyncButler
         {
             Controller.GetInstance().GrabFocus(); // grab focus
             string path="";
+            int i = 0;
             foreach (string str in args) 
             {
-                path = path + " " + str;
+                Logging.Logger.GetInstance().DEBUG(i++ + " " + str + " received");
             }
+
             
             // TODO: Process the arguements received
         }

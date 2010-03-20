@@ -60,8 +60,9 @@ namespace SyncButler
         private SyncEnvironment()
         {
             firstRunComplete = false;
-            IntialEnv();
             _appPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            IntialEnv();
+            
         }
 
         /// <summary>
@@ -768,11 +769,11 @@ namespace SyncButler
         /// <returns>The filename of the settings file</returns>
         private string SearchForSettingsFile()
         {
-            string appName = Environment.GetCommandLineArgs()[0];
-            int parentDirectory = appName.LastIndexOf('\\');
-            string programDirectory = appName.Substring(0, parentDirectory);
-            DirectoryInfo programPath = new DirectoryInfo(programDirectory);
-
+            //string appName = Environment.GetCommandLineArgs()[0];
+            //int parentDirectory = appName.LastIndexOf('\\');
+            //string programDirectory = appName.Substring(0, parentDirectory);
+            DirectoryInfo programPath = new DirectoryInfo(_appPath);
+            
             if (programPath.Exists)
             {
                 FileInfo[] fileList = programPath.GetFiles();
@@ -782,7 +783,7 @@ namespace SyncButler
                     if (file.Extension.ToLower().Equals(SYNCBUTLER_SETTINGS_EXTENSION))
                     {
                         //parentDirectory index position can be reused cause it is in the same directory
-                        return file.FullName.Substring(parentDirectory + 1);
+                        return file.FullName.Substring(_appPath.LastIndexOf('\\') + 1);
                     }
                 }
             }
