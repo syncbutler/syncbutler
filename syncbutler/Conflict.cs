@@ -22,7 +22,7 @@ namespace SyncButler
         /// <summary>
         /// Possible actions for conflict resolution
         /// </summary>
-        public enum Action { CopyToLeft, DeleteLeft, Merge, CopyToRight, DeleteRight, Unknown };
+        public enum Action { CopyToLeft, DeleteLeft, Merge, CopyToRight, DeleteRight, Ignore, Unknown };
 
         /// <summary>
         /// Constructor used to instantiate a Conflict object.
@@ -195,39 +195,29 @@ namespace SyncButler
         {
             switch (user) {
                 case Action.CopyToLeft : 
-                    {
-                        right.CopyTo(left);
-                        right.UpdateStoredChecksum();
-                        break;
-                    }
+                    right.CopyTo(left);
+                    right.UpdateStoredChecksum();
+                    break;
                 case Action.DeleteLeft : 
-                    {
-                        left.Delete(true);
-                        left.RemoveStoredChecksum();
-                        break;
-                    }
+                    left.Delete(true);
+                    left.RemoveStoredChecksum();
+                    break;
                 case Action.Merge:
-                    {
-                        left.Merge(right);
-                        left.UpdateStoredChecksum();
-                        break;
-                    }
+                    left.Merge(right);
+                    left.UpdateStoredChecksum();
+                    break;
                 case Action.CopyToRight:
-                    {
-                        left.CopyTo(right);
-                        left.UpdateStoredChecksum();
-                        break;
-                    }
+                    left.CopyTo(right);
+                    left.UpdateStoredChecksum();
+                    break;
                 case Action.DeleteRight:
-                    {
-                        right.Delete(true);
-                        right.RemoveStoredChecksum();
-                        break;
-                    }
+                    right.Delete(true);
+                    right.RemoveStoredChecksum();
+                    break;
+                case Action.Ignore:
+                    break;
                 default:
-                    {
-                        throw new System.ArgumentException("Invalid User Action");
-                    }
+                    throw new System.ArgumentException("Invalid User Action");
 
             }
         }

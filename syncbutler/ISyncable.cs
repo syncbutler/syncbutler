@@ -6,12 +6,6 @@ using System.Xml;
 namespace SyncButler
 {
     /// <summary>
-    /// Types of errors (non hard errors) that maybe encountered in ISyncable
-    /// </summary>
-    public enum Error { NoError, NoPermission, PathTooLong, DirectoryDoesNotExist,
-                        InvalidPath, NotImplemented, IsWorkingFolder };
-
-    /// <summary>
     /// A callback to monitor the progress of the Syncing.
     /// </summary>
     /// <param name="status">Status of the current Sync operation</param>
@@ -119,10 +113,30 @@ namespace SyncButler
         string EntityPath();
 
         /// <summary>
+        /// Returns a string that represents this file/folder in the context of the
+        /// containing partnership.
+        /// </summary>
+        /// <param name="addAttributes">Additional attributes to add to the string</param>
+        /// <returns></returns>
+        string EntityPath(string addAttributes);
+
+        /// <summary>
         /// Does this Suncable actually exist on the storage device/disk?
         /// </summary>
         /// <returns></returns>
         bool Exists();
+
+        /// <summary>
+        /// Indicates whether this ISyncable should be ignored
+        /// </summary>
+        /// <returns></returns>
+        bool Ignored();
+
+        /// <summary>
+        /// Sets whether this ISyncable should be ignored
+        /// </summary>
+        /// <param name="value"></param>
+        void Ignored(bool value);
 
         /// <summary>
         /// Creates a child from an EntityPath. (ie. provides the absolute path then creates the ISyncable)

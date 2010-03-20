@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml;
+using System.Diagnostics;
 
 namespace SyncButler
 {
@@ -273,10 +274,38 @@ namespace SyncButler
         }
 
         /// <summary>
+        /// Indicates whether this file/folder is ignored
+        /// </summary>
+        /// <returns></returns>
+        public bool Ignored()
+        {
+            Debug.Assert(parentPartnership != null, "Cannot check Ignored until parent partnership is set");
+            return parentPartnership.hashDictionary.ContainsKey(EntityPath("ignored"));
+        }
+
+        /// <summary>
+        /// Sets whether this file/folder should be ignored
+        /// </summary>
+        /// <param name="value"></param>
+        public void Ignored(bool value)
+        {
+            if (value)
+            {
+                RemoveStoredChecksum();
+                parentPartnership.hashDictionary.Add(EntityPath("ignored"), 0);
+            }
+            else
+            {
+                parentPartnership.hashDictionary.Remove(EntityPath("ignored"));
+            }
+        }
+
+        /// <summary>
         /// Updates the sotred checksum with the file/folder's current checksum.
         /// </summary>
         public void UpdateStoredChecksum()
         {
+            Debug.Assert(!Ignored(), "Updating checksum on an ignored FileSystem object");
             parentPartnership.UpdateLastChecksum(this);
         }
 
@@ -380,6 +409,14 @@ namespace SyncButler
         /// </summary>
         /// <returns></returns>
         public abstract string EntityPath();
+
+        /// <summary>
+        /// Returns a string that represents this file/folder in the context of the
+        /// containing partnership
+        /// </summary>
+        /// <param name="extraAttributes">Additional attributes to add to the EntityPath</param>
+        /// <returns></returns>
+        public abstract string EntityPath(string extraAttributes);
 
         /// <summary>
         /// Creates the file/folder based onthe entity path given and the 

@@ -324,6 +324,16 @@ namespace SyncButler
         }
 
         /// <summary>
+        /// Returns a string that represents this file in the context of the partnership
+        /// </summary>
+        /// <param name="extraAttributes">Additional attributes to tag on</param>
+        /// <returns></returns>
+        public override string EntityPath(string extraAttributes)
+        {
+            return extraAttributes + "," + PREF_FOLDER + this.relativePath;
+        }
+
+        /// <summary>
         /// Returns the full path to this folder.
         /// </summary>
         /// <returns></returns>
