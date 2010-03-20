@@ -93,9 +93,15 @@ namespace SyncButlerUI
             }
             else
             {
-                CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Sync Butler, Sync! is not enabled.\nPlease enable the feature in the Settings screen");
+                if (CustomDialog.Show(this, CustomDialog.MessageTemplate.YesNo, CustomDialog.MessageResponse.Yes,
+                    "Sync Butler, Sync! is not enabled. Please enable this feature in the Settings screen\n\n" +
+                    "Would you like to go to the settings screen?") == CustomDialog.MessageResponse.Yes)
+                {
+                    this.GoToSetting(null, null);
+                }
             }
 		}
+
 		private void GoToSetting(object sender, RoutedEventArgs e)
 		{
   

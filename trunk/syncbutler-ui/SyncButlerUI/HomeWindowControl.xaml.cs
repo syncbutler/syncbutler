@@ -801,15 +801,24 @@ namespace SyncButlerUI
 		/// <param name="e"></param>
 		private void DeletePartnership_Click(object sender, RoutedEventArgs e)
 		{
-			try{
-		  	if(partnershipList.SelectedIndex<0){
-                throw new UserInputException("Please select a partnership to delete.");
+			try
+            {
+		  	    if(partnershipList.SelectedIndex<0)
+                {
+                    throw new UserInputException("Please select a partnership to delete.");
+			    }
+
+			    if (showMessageBox(CustomDialog.MessageType.Question,
+                    "Are you sure you want to delete the \"" + 
+                    partnershipList.Items[partnershipList.SelectedIndex] + 
+                    "\" partnership?") == true)
+                {
+				    this.Controller.DeletePartnership(partnershipList.SelectedIndex);
+				    partnershipList.Items.Refresh();
+			    }
 			}
-			if (showMessageBox(CustomDialog.MessageType.Question,"Are you sure?")==true){
-				this.Controller.DeletePartnership(partnershipList.SelectedIndex);
-				partnershipList.Items.Refresh();
-			}
-			}catch(UserInputException uIException){
+            catch(UserInputException uIException)
+            {
 					showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
 			}
 		}

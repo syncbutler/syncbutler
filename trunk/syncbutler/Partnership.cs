@@ -275,12 +275,12 @@ namespace SyncButler
         }
         
         /// <summary>
-        /// Calls the toString method of the left and right ISyncables
+        /// Returns the name of this partnership
         /// </summary>
-        /// <returns>Gives a string representation of the left and right ISyncables</returns>
+        /// <returns></returns>
         public override String ToString()
         {
-            return left.ToString() + " <-> " + right.ToString();
+            return Name;
         }
 
         /// <summary>
