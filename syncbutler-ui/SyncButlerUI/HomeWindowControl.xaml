@@ -947,6 +947,22 @@
 						</ObjectAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
+				<VisualState x:Name="Conflict_Revamp">
+					<Storyboard>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="Conflict_Copy" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="HomeWindow" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="ConflictList1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.98"/>
+						</DoubleAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="ConflictList1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-4.762"/>
+						</DoubleAnimationUsingKeyFrames>
+					</Storyboard>
+				</VisualState>
 			</VisualStateGroup>
 		</VisualStateManager.VisualStateGroups>
 		<Grid x:Name="HomeWindow" VerticalAlignment="Bottom" Height="444">
@@ -1402,6 +1418,72 @@
 					</TransformGroup>
 				</ComboBox.RenderTransform>
 			</ComboBox>
+		</Grid>
+		<Grid x:Name="Conflict_Copy" Margin="0.027,0,-0.027,0" VerticalAlignment="Bottom" Height="444" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
+			<Grid.RenderTransform>
+				<TransformGroup>
+					<ScaleTransform/>
+					<SkewTransform/>
+					<RotateTransform/>
+					<TranslateTransform/>
+				</TransformGroup>
+			</Grid.RenderTransform>
+			<Rectangle x:Name="background_Copy4" RadiusX="1" RadiusY="2" Margin="0,0,-1.5,0" VerticalAlignment="Top" Height="448" Cursor="Arrow" RenderTransformOrigin="0.5,0.5">
+				<Rectangle.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Rectangle.RenderTransform>
+				<Rectangle.Fill>
+					<RadialGradientBrush GradientOrigin="0.265,0.184" RadiusX="1.237" RadiusY="1.237">
+						<GradientStop Color="Black" Offset="1"/>
+						<GradientStop Color="White"/>
+						<GradientStop Color="#FFA3A3A3" Offset="1"/>
+						<GradientStop Color="#FFA1A1A1" Offset="1"/>
+						<GradientStop Color="White" Offset="0.378"/>
+					</RadialGradientBrush>
+				</Rectangle.Fill>
+			</Rectangle>
+			<Image x:Name="image1_Copy4" Margin="184.36,116.094,-0.027,8" Source="Images\logo.png" Stretch="Fill" Opacity="0.04"/>
+			<Rectangle Stroke="Black" RadiusX="5" RadiusY="2" Margin="0.58,0,-0.579,-0.857" VerticalAlignment="Bottom" Height="120.952"/>
+			<TextBlock x:Name="PartnershipName1" Margin="41.025,0,88.238,84.489" VerticalAlignment="Bottom" Height="28.571" FontSize="16" FontWeight="Bold" Text="Partnership Name" TextWrapping="Wrap"/>
+			<TextBlock x:Name="CurrentSyncingFile1" Margin="41.025,0,28.52,52.976" VerticalAlignment="Bottom" Height="31.406" TextWrapping="Wrap" Text="Currently Syncing: C:/doc/xml.xml"/>
+			<ProgressBar x:Name="SubProgressBar1" Margin="38.623,0,28.52,34.69" VerticalAlignment="Bottom" Height="14.286"/>
+			<ProgressBar x:Name="TotalProgressBar1" Margin="38.623,0,28.52,15.69" VerticalAlignment="Bottom" Height="14.286"/>
+			<TextBlock x:Name="ConflictsLabel2" Margin="29.032,39.072,0,0" FontSize="24" FontWeight="Bold" Text="Conflicts" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Width="177.618" Height="28.571"/>
+			<Custom:DataGrid x:Name="ConflictList1" Margin="29.032,123.429,8,157.714" RowDetailsVisibilityMode="VisibleWhenSelected"  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True" CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False" GridLinesVisibility="Vertical" Height="162.857" HorizontalScrollBarVisibility="Disabled" SelectionMode="Single" ItemsSource="{Binding StaticResource, Mode=TwoWay}" Custom:SelectiveScrollingGrid.SelectiveScrollingOrientation="Horizontal" CanUserResizeRows="False" HeadersVisibility="Column" VerticalScrollBarVisibility="Visible" RenderTransformOrigin="0.5,0.5">
+				<Custom:DataGrid.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Custom:DataGrid.RenderTransform>
+				<Custom:DataGrid.Columns>
+					<Custom:DataGridTextColumn x:Name="conflictlistPartnershipName1" Width="466
+					" MinWidth="430" Header="Partnerships" Binding="{Binding PartnerShipName}" CanUserSort="False" CanUserResize="False" CanUserReorder="False" IsReadOnly="True" />
+				</Custom:DataGrid.Columns>
+				<Custom:DataGrid.RowDetailsTemplate>
+					<DataTemplate>
+						<Custom:DataGrid x:Name="conflictListInnerGrid" Height="100" SelectionUnit="FullRow" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" ItemsSource="{Binding conflicts}" CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False" >
+							<Custom:DataGrid.Columns > 
+								<Custom:DataGridTextColumn x:Name="File_Name"  IsReadOnly="True" Width="300" MinWidth="310" Header="File Name" Binding="{Binding OffendingPath}" />
+								<Custom:DataGridCheckBoxColumn x:Name="FolderOneBox" Width="60" IsReadOnly="False" MinWidth="40" Header="Folder 1" Binding="{Binding LeftOverwriteRight}"/>
+								<Custom:DataGridCheckBoxColumn x:Name="FolderTwoBox" Width="60" IsReadOnly="False" MinWidth="40" Header="Folder 2" Binding="{Binding RightOverwriteLeft}" />
+							</Custom:DataGrid.Columns>
+						</Custom:DataGrid>
+					</DataTemplate>
+				</Custom:DataGrid.RowDetailsTemplate>
+
+			</Custom:DataGrid>
+			<Button x:Name="doneButton1" HorizontalAlignment="Right" Margin="0,0,8,88.382" VerticalAlignment="Bottom" Width="76.238" Height="24.762" Content="Done" IsEnabled="False" Click="GoHome"/>
+			<TextBlock x:Name="CurrentSyncingFile_Copy1" Margin="30.532,70.643,12.326,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="51.786"><Span><Run Text="If you wish to resolve a conflict, tick in the checkbox of the Folder you want to take the file revision from. If the file was a deleted in that Folder, it will be deleted on in the other folder as well."/></Span></TextBlock>
+			<Button x:Name="resolveButton1" HorizontalAlignment="Right" Margin="0,0,7.493,127.999" VerticalAlignment="Bottom" Width="76.745" Height="25.715" Content="Resolve" Click="ResolvePartnership_Click"/>
+			<Button x:Name="CancelButton1" HorizontalAlignment="Right" Margin="0,0,88.238,127.999" VerticalAlignment="Bottom" Width="80" Height="25.715" Content="Cancel" Click="CancelButton_Click"/>
 		</Grid>
 	</Grid>
 </UserControl>
