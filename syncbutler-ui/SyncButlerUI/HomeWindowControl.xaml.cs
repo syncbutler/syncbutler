@@ -660,15 +660,15 @@ namespace SyncButlerUI
 		/// <param name="e"></param>
 		private void GoToPartnershipDest_Click(object sender, RoutedEventArgs e){
 		    try{
-			checkInput();
-			PartnershipTempData.sourcePath=sourceTextBox.Text;
-		    clearTreeView();	
-		    sourceTextBox.Text=PartnershipTempData.destinationPath;
-			VisualStateManager.GoToState(this,"CreatePartnershipState2",false);
+			    checkInput();
+			    PartnershipTempData.sourcePath=sourceTextBox.Text;
+		        clearTreeView();	
+		        sourceTextBox.Text=PartnershipTempData.destinationPath;
+			    VisualStateManager.GoToState(this,"CreatePartnershipState2",false);
             }
             catch (UserInputException uIException)
             {
-				showMessageBox(CustomDialog.MessageType.Error,uIException.message);
+				showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
 			}
 		}
 		
@@ -701,7 +701,7 @@ namespace SyncButlerUI
             }
             catch (UserInputException uIException)
             {
-				showMessageBox(CustomDialog.MessageType.Error,uIException.message);
+				showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
 			}
 		}
 		/// <summary>
@@ -721,7 +721,7 @@ namespace SyncButlerUI
             }
             catch (UserInputException uIException)
             {
-				showMessageBox(CustomDialog.MessageType.Error,uIException.message);
+				showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
 			}	
 		}
 		/// <summary>
@@ -766,7 +766,7 @@ namespace SyncButlerUI
             }
             catch (UserInputException uIException)
             {
-            showMessageBox(CustomDialog.MessageType.Error,uIException.message);
+            showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
             }
 		}
 		#endregion
@@ -810,7 +810,7 @@ namespace SyncButlerUI
 				partnershipList.Items.Refresh();
 			}
 			}catch(UserInputException uIException){
-					showMessageBox(CustomDialog.MessageType.Error,uIException.message);
+					showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
 			}
 		}
 		
@@ -915,7 +915,7 @@ namespace SyncButlerUI
             }
             catch (UserInputException uIException)
             {
-                showMessageBox(CustomDialog.MessageType.Error, uIException.message);
+                showMessageBox(CustomDialog.MessageType.Error, uIException.Message);
             }
 
         }
@@ -956,7 +956,7 @@ namespace SyncButlerUI
             }
             catch (UserInputException uIException)
             {
-				showMessageBox(CustomDialog.MessageType.Error,uIException.message);
+				showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
 			}	
         }
 
@@ -978,7 +978,7 @@ namespace SyncButlerUI
 			sourceTextBox.Text=PartnershipTempData.sourcePath;
 			 VisualStateManager.GoToState(this,"EditPartnershipState1",false);
 			}catch(UserInputException uIException){
-					showMessageBox(CustomDialog.MessageType.Error,uIException.message);
+					showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
 			}
 		  
 		}
@@ -997,7 +997,7 @@ namespace SyncButlerUI
             }
             catch (UserInputException uIException)
             {
-				showMessageBox(CustomDialog.MessageType.Error,uIException.message);
+				showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
 			}
 		}
 		
@@ -1017,7 +1017,7 @@ namespace SyncButlerUI
             }
             catch (UserInputException uIException)
             {
-				showMessageBox(CustomDialog.MessageType.Error,uIException.message);
+				showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
 			}
 		}
 		/// <summary>
@@ -1037,7 +1037,7 @@ namespace SyncButlerUI
             }
             catch (UserInputException uIException)
             {
-				showMessageBox(CustomDialog.MessageType.Error,uIException.message);
+				showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
 			}	
 		}
 		/// <summary>

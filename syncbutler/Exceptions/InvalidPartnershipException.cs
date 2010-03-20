@@ -4,9 +4,9 @@ using System.Collections.Generic;
 namespace SyncButler.Exceptions
 {
     /// <summary>
-    /// This is a custom SyncButler exception. It is thrown when the Partnership is malformed
+    /// This is a custom SyncButler exception. It is thrown when the Partnership is malformed.
     /// </summary>
-    class InvalidPartnershipException : Exception
+    public class InvalidPartnershipException : Exception
     {
     }
 }
