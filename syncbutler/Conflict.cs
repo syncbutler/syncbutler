@@ -75,6 +75,7 @@ namespace SyncButler
 
             }
         }
+
         public bool RightOverwriteLeft
         {
             get
@@ -85,6 +86,18 @@ namespace SyncButler
             {
                 rightOverwriteLeft = value;
                 leftOverwriteRight = !value;
+            }
+        }
+
+        public bool IgnoreConflict
+        {
+            get
+            {
+                return left.Ignored();
+            }
+            set
+            {
+                left.Ignored(value);
             }
         }
         /// <summary>
