@@ -145,6 +145,10 @@ namespace SyncButler
 
         }
 
+        /// <summary>
+        /// Sets the delegate which reports the progress of a sync
+        /// </summary>
+        /// <param name="statusMonitor"></param>
         public override void SetStatusMonitor(SyncableStatusMonitor statusMonitor)
         {
             this.statusMonitor = statusMonitor;
@@ -236,6 +240,10 @@ namespace SyncButler
             }
         }
 
+        /// <summary>
+        /// Attempts to merge the folder. Not Implemented.
+        /// </summary>
+        /// <param name="item"></param>
         public override void Merge(ISyncable item)
         {
 
@@ -306,17 +314,23 @@ namespace SyncButler
             return (subject.Checksum().Equals(Checksum()));
         }
 
+        /// <summary>
+        /// Returns a string which represents the folder in the context of the partnership
+        /// </summary>
+        /// <returns></returns>
         public override string EntityPath()
         {
             return PREF_FOLDER + this.relativePath; 
         }
 
+        /// <summary>
+        /// Returns the full path to this folder.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return this.rootPath + this.relativePath;
         }
-
-
 
         /// <summary>
         /// Synchronizes this folder with another.
@@ -505,6 +519,12 @@ namespace SyncButler
             return conflictList;
         }
 
+        /// <summary>
+        /// Creates a WindowsFile/Folder object given the entity path, assuming the entity path refers
+        /// to a filesystem object under this folder
+        /// </summary>
+        /// <param name="entityPath"></param>
+        /// <returns></returns>
         public override ISyncable CreateChild(string entityPath)
         {
             if (entityPath.StartsWith(@"file:\\"))
@@ -515,6 +535,10 @@ namespace SyncButler
                 throw new ArgumentException();
         }
 
+        /// <summary>
+        /// Serializes this object into XML
+        /// </summary>
+        /// <param name="xmlData"></param>
         public override void SerializeXML(XmlWriter xmlData)
         {
             xmlData.WriteStartElement("WindowsFolder");

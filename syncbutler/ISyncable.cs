@@ -112,10 +112,10 @@ namespace SyncButler
         void RemoveStoredChecksum();
 
         /// <summary>
-        /// Returns a "path" to the node. (eg. In the case of Files,
-        /// it's relative path + file name)
+        /// Returns a string that represents this file/folder in the context of the
+        /// containing partnership
         /// </summary>
-        /// <returns>Path to the data</returns>
+        /// <returns></returns>
         string EntityPath();
 
         /// <summary>

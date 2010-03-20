@@ -32,7 +32,7 @@ namespace SyncButler
         }
 
         /// <summary>
-        /// Constructor to unserialise XML string and create an instance of itself.
+        /// Constructor to unserialise XML string
         /// </summary>
         /// <param name="xmlData">The XMLReader object to read the XML from.</param>
         /// <exception cref="ArgumentNullException">If, when parsing the boolean, the argument is null.</exception>
@@ -132,12 +132,21 @@ namespace SyncButler
             this.parentPartnership = parentPartnership;
         }
 
+        /// <summary>
+        /// Constructor that takes in two parameters, the full path to the file, and the containing partnerhsip.
+        /// Useful when creating a file partnership.
+        /// </summary>
+        /// <param name="fullPath">Full path to this file</param>
+        /// <param name="parentPartnership">The containing partnership</param>
         public WindowsFile(string fullPath, Partnership parentPartnership)
             : this(fullPath, fullPath, parentPartnership)
         {
-
         }
 
+        /// <summary>
+        /// Sets the delegate which reports the status of the Sync
+        /// </summary>
+        /// <param name="statusMonitor"></param>
         public override void SetStatusMonitor(SyncableStatusMonitor statusMonitor)
         {
             this.statusMonitor = statusMonitor;
@@ -160,6 +169,9 @@ namespace SyncButler
             }
         }
 
+        /// <summary>
+        /// Indicates whether the file (read through GetBytes) has reached the end
+        /// </summary>
         public bool ReadEOF
         {
             get
@@ -189,7 +201,7 @@ namespace SyncButler
         }
 
         /// <summary>
-        /// Closes the file
+        /// Closes the file opened by OpenFile
         /// </summary>
         public void CloseFile()
         {
@@ -365,6 +377,10 @@ namespace SyncButler
             }
         }
 
+        /// <summary>
+        /// Not Implemented: attempts to merge this file with another
+        /// </summary>
+        /// <param name="item"></param>
         public override void Merge(ISyncable item)
         {
             throw new NotImplementedException();
@@ -464,11 +480,19 @@ namespace SyncButler
             return (subject.Checksum().Equals(Checksum()));
         }
 
+        /// <summary>
+        /// Returns a string that represents this file in the context of the partnership
+        /// </summary>
+        /// <returns></returns>
         public override string EntityPath()
         {
             return PREF_FILE + this.relativePath;
         }
 
+        /// <summary>
+        /// Returns the full path to this file.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return this.rootPath + this.relativePath;
@@ -596,6 +620,11 @@ namespace SyncButler
             return conflictList;
         }
 
+        /// <summary>
+        /// Does not makes sense in the context of a file - will always throw Arguement Exception
+        /// </summary>
+        /// <param name="entityPath"></param>
+        /// <returns></returns>
         public override ISyncable CreateChild(string entityPath)
         {
             throw new ArgumentException();
@@ -649,6 +678,10 @@ namespace SyncButler
             return true;
         }
 
+        /// <summary>
+        /// Serializes this file information
+        /// </summary>
+        /// <param name="xmlData"></param>
         public override void SerializeXML(XmlWriter xmlData)
         {
             xmlData.WriteStartElement("WindowsFile");
