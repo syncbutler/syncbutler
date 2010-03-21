@@ -385,7 +385,7 @@ namespace SyncButlerUI
 
             return;
         }
-
+        
         /// <summary>
         /// Starts an asynchronous resolve operation, if it hasn't already been started.
         /// Conflicts to be resolved should be stored by calling ThreadSafeAddResolve()
