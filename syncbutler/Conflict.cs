@@ -164,8 +164,9 @@ namespace SyncButler
         /// Attempts to rsolve a conflict based on th recommended action.
         /// </summary>
         /// <returns></returns>
-        public void Resolve()
+        public Resolved Resolve()
         {
+            
             if (leftOverwriteRight && rightOverwriteLeft)
                 throw new NotSupportedException("Merging not supported currently");
 
@@ -174,12 +175,12 @@ namespace SyncButler
                 if (!left.Exists())
                 {
                     Resolve(Action.DeleteRight);
-                    return;
+                    return new Resolved(left,right,Resolved.ActionDone.DeleteRight);
                 }
                 else
                 {
                     Resolve(Action.CopyToRight);
-                    return;
+                    return new Resolved(left,right,Resolved.ActionDone.CopyFromLeft);
                 }
             }
             else if (rightOverwriteLeft)
@@ -187,12 +188,12 @@ namespace SyncButler
                 if (!right.Exists())
                 {
                     Resolve(Action.DeleteLeft);
-                    return;
+                    return new Resolved(left, right, Resolved.ActionDone.DeleteLeft);
                 }
                 else
                 {
                     Resolve(Action.CopyToLeft);
-                    return;
+                    return new Resolved(left, right, Resolved.ActionDone.CopyFromRight);
                 }
             }
 

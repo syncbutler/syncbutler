@@ -70,6 +70,7 @@
     <Compile Include="ProgramEnvironment\PartnershipSection.cs" />
     <Compile Include="ProgramEnvironment\SettingsConfigElement.cs" />
     <Compile Include="ProgramEnvironment\SettingsSection.cs" />
+    <Compile Include="Resolved.cs" />
     <Compile Include="SingleInstance.cs" />
     <Compile Include="SyncableStatus.cs" />
     <Compile Include="SystemEnvironment\StorageDevices.cs" />
