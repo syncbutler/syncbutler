@@ -218,12 +218,12 @@ namespace SyncButler
             return resolvableConflicts;
         }
 
-        public void ResolveConflict(Conflict toResolve, SyncableStatusMonitor OnProgressUpdate, BackgroundWorker workerObj)
+        public Resolved ResolveConflict(Conflict toResolve, SyncableStatusMonitor OnProgressUpdate, BackgroundWorker workerObj)
         {
             workerObj.ReportProgress(0, toResolve.GetPartnership().Name);
             toResolve.SetStatusMonitor(OnProgressUpdate);
-            toResolve.Resolve();
             toResolve.SetStatusMonitor(null);
+            return toResolve.Resolve();
         }
 
         /// <summary>

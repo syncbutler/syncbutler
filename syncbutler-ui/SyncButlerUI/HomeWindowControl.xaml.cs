@@ -385,7 +385,7 @@ namespace SyncButlerUI
 
             return;
         }
-        
+        List<Resolved> ResolvedConflicts = new List<Resolved>();
         /// <summary>
         /// Starts an asynchronous resolve operation, if it hasn't already been started.
         /// Conflicts to be resolved should be stored by calling ThreadSafeAddResolve()
@@ -437,7 +437,7 @@ namespace SyncButlerUI
                             worker.ReportProgress(0, partnershipName);
                         }
 
-                        this.Controller.ResolveConflict(curConflict, reporter, worker);
+                        ResolvedConflicts.Add(this.Controller.ResolveConflict(curConflict, reporter, worker));
                     }
                     catch (UserCancelledException)
                     {
@@ -885,6 +885,7 @@ namespace SyncButlerUI
 		/// <param name="e"></param>
 		private void Sync(object sender, RoutedEventArgs e)
 		{
+            ResolvedConflicts = new List<Resolved>();
 		    if(this.Controller.GetPartnershipList().Count < 1)
             {
                 if (showMessageBox(CustomDialog.MessageType.Question, "There are no partnerships for me to sync. Would you like to create one now?") == true)
@@ -908,6 +909,7 @@ namespace SyncButlerUI
         /// <param name="e"></param>
         private void SyncPartnership_Click(object sender, RoutedEventArgs e)
         {
+            ResolvedConflicts = new List<Resolved>();
             try
             {
                 if (partnershipList.SelectedIndex < 0)
@@ -935,6 +937,7 @@ namespace SyncButlerUI
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void SyncThisPartnership_Click(object sender, RoutedEventArgs e){
+            ResolvedConflicts = new List<Resolved>();
             if (showMessageBox(CustomDialog.MessageType.Question,"Are you sure you want to sync now?")) {
                 AsyncStartSync(NewPartnershipName);
 			}
