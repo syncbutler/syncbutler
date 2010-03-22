@@ -1225,6 +1225,27 @@ namespace SyncButlerUI
                 throw new UserInputException("Error - 2nd Folder is under the 1st Folder  ");
             }
         }
+        private void FocusMe(object sender, EventArgs e)
+        {
+            if (Favourites_List.IsFocused)
+                WeirdFile_List.SelectedIndex = -1;
+            else
+                Favourites_List.SelectedIndex = -1;
+        }
+
+        private void SBSMoveToOther(object sender,EventArgs e )
+        {
+            // move from weird to fav
+            if (WeirdFile_List.SelectedIndex != -1)
+            {
+
+            }
+            // move from fav to weird
+            else if (Favourites_List.SelectedIndex != -1)
+            {
+
+            }
+        }
         private SortedList<string, SortedList<string, string>> MRUs;
         public void LoadMRUs()
         {

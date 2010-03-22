@@ -726,6 +726,9 @@
 						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock8" Storyboard.TargetProperty="(UIElement.Opacity)">
 							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
 						</DoubleAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="Edit_Selector" Storyboard.TargetProperty="(UIElement.Opacity)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+						</DoubleAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
 				<VisualState x:Name="ConflictState1">
@@ -1284,12 +1287,12 @@
 			<TextBlock Margin="0,117.476,39.661,0" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="199.506" d:LayoutOverrides="HorizontalAlignment" VerticalAlignment="Top" Height="231.238"><Span><Run Text="The Favourites box lists your recently used and newly created files. "/></Span><LineBreak/><Span><Run Text=""/></Span><LineBreak/><Span><Run Text="Click sync to copy these files to your portable storage. "/></Span><LineBreak/><Span><Run Text=""/></Span><LineBreak/><Run Text="This feature will make a quick copy of those files for easy reference later on."/><LineBreak/><Run Text=""/></TextBlock>
 			<Button x:Name="Enable_Feature" HorizontalAlignment="Right" Margin="0,0,108.447,19" VerticalAlignment="Bottom" Width="103.5" Height="23" Content="Sync" RenderTransformOrigin="0.79,1.043" Cursor="Hand" Click="MRUSync"/>
 			<Button x:Name="SBSDone" HorizontalAlignment="Right" Margin="0,0,25.947,19" VerticalAlignment="Bottom" Width="69" Height="23" Content="Done" RenderTransformOrigin="0.79,1.043" Click="GoHome" Cursor="Hand" IsEnabled="False" />
-			<Button x:Name="Edit_Selector" Margin="41.08,0,0,19" VerticalAlignment="Bottom" Height="23" Content="Edit Selector" RenderTransformOrigin="0.79,1.043" HorizontalAlignment="Left" Width="93" Cursor="Hand" />
-			<ListBox x:Name="Favourites_List" HorizontalAlignment="Left" Margin="40.5,58.5,0,0" VerticalAlignment="Top" Width="204" Height="136.5"/>
-			<TextBlock x:Name="textBlock8" Margin="0,213,267.447,155.5" FontSize="16" TextWrapping="Wrap" HorizontalAlignment="Right" Width="207.22" FontWeight="Bold" FontStyle="Italic" Text="Other files that maybe copied as well" Opacity="0"/>
-			<ListBox x:Name="WeirdFile_List" HorizontalAlignment="Left" Margin="39,0,0,70.5" VerticalAlignment="Bottom" Width="204" Height="98.143" Style="{DynamicResource weirdFilesListItemsStyle}"/>
-			<TextBlock Margin="42.36,25,0,0" FontFamily="Arial" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="26.5" HorizontalAlignment="Left" Width="202.72" Text="Favourites"/>
+			<ListBox x:Name="Favourites_List" HorizontalAlignment="Left" Margin="40.5,58.5,0,0" VerticalAlignment="Top" Width="204" Height="136.5" GotFocus="FocusMe"/>
+			<TextBlock x:Name="textBlock8" Margin="0,213,267.447,155.5" FontSize="16" TextWrapping="Wrap" HorizontalAlignment="Right" Width="207.22" FontWeight="Bold" FontStyle="Italic" Text="Other files that you may not want to sync" Opacity="0"/>
+			<ListBox x:Name="WeirdFile_List" HorizontalAlignment="Left" Margin="39,0,0,70.5" VerticalAlignment="Bottom" Width="204" Height="98.143" Style="{DynamicResource weirdFilesListItemsStyle}" GotFocus="FocusMe"/>
+			<TextBlock Margin="42.36,25,0,0" FontFamily="Arial" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="26.5" HorizontalAlignment="Left" Width="202.72" Text="Recent used file"/>
 			<TextBlock x:Name="textBlock_Copy" Margin="42.208,0,0,109.812" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Left" Width="196.885" Text="Mouse over to see" FontStyle="Italic" VerticalAlignment="Bottom" Height="19.162" TextAlignment="Center"/>
+			<Button x:Name="Edit_Selector" Margin="41.08,0,0,19" VerticalAlignment="Bottom" Height="23" Content="Move Selected To other side" RenderTransformOrigin="0.79,1.043" HorizontalAlignment="Left" Width="203.42" Cursor="Hand" Opacity="0" Click="SBSMoveToOther"/>
 		</Grid>
 		<Grid x:Name="Conflict" Margin="0.027,0,-0.027,0" VerticalAlignment="Bottom" Height="444" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
 			<Grid.RenderTransform>
