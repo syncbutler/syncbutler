@@ -1087,6 +1087,8 @@ namespace SyncButlerUI
             { // Code to run on completion
                 if (!cancelled) CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Files were successfully synced and logged");
                 progressWindow.TaskComplete();
+                Enable_Feature.IsEnabled = true;
+                SBSDone.IsEnabled = true;
             });
 
             mruWorker.DoWork += new DoWorkEventHandler(delegate(Object worker, DoWorkEventArgs args) 
@@ -1138,6 +1140,7 @@ namespace SyncButlerUI
                 });
             });
 
+            Enable_Feature.IsEnabled = false;
             // Start the whole process
             progressWindow.Start();
         }

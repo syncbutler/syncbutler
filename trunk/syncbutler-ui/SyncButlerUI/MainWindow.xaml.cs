@@ -80,6 +80,7 @@ namespace SyncButlerUI
             {
                 this.homeWindow1.Favourites_List.Items.Clear();
                 VisualStateManager.GoToState(homeWindow1, "SbsState1", false);
+                homeWindow1.SBSDone.IsEnabled = false;
                 MRUs = controller.GetMonitoredFiles();
                 foreach (string filenames in MRUs["interesting"].Keys)
                 {
