@@ -1225,7 +1225,22 @@ namespace SyncButlerUI
                 throw new UserInputException("Error - 2nd Folder is under the 1st Folder  ");
             }
         }
-		
+        private SortedList<string, SortedList<string, string>> MRUs;
+        public void LoadMRUs()
+        {
+            Favourites_List.Items.Clear();
+            SBSDone.IsEnabled = false;
+            MRUs = Controller.GetInstance().GetMonitoredFiles();
+            foreach (string filenames in MRUs["interesting"].Keys)
+            {
+                Favourites_List.Items.Add(filenames);
+            }
+            WeirdFile_List.Items.Clear();
+            foreach (string filenames in MRUs["sensitive"].Keys)
+            {
+                WeirdFile_List.Items.Add(filenames);
+            }
+        }
 
 	}
 }
