@@ -1073,8 +1073,73 @@ namespace SyncButlerUI
 		/// <param name="e"></param>
         private void MRUSync(object sender, RoutedEventArgs e)
         {
-            this.Controller.SyncMRUs();
-            showMessageBox(CustomDialog.MessageType.Success, "Files were successfuly synced and logged!");
+            // Background worker to do the actual work
+            BackgroundWorker mruWorker = new BackgroundWorker();
+            // Progress bar window
+            ProgressBar progressWindow = new ProgressBar(mruWorker, "SyncButler, Sync!");
+
+            bool cancelled = false;
+
+            // Not using the Total progress indicator, so hide it.
+            progressWindow.HideTotalProgress();
+
+            mruWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(delegate(Object worker, RunWorkerCompletedEventArgs args)
+            { // Code to run on completion
+                if (!cancelled) CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Files were successfully synced and logged");
+                progressWindow.TaskComplete();
+            });
+
+            mruWorker.DoWork += new DoWorkEventHandler(delegate(Object worker, DoWorkEventArgs args) 
+            { // Actual work gets done here
+                BackgroundWorker workerObj = (BackgroundWorker)worker;
+                ProgressBar.ProgressBarInfo pinfo;
+
+                // Show some initial information on the progress window
+                pinfo.SubTaskPercent = 0;
+                pinfo.TotalTaskPercent = 0;
+                pinfo.taskDescription = "Starting...";
+                workerObj.ReportProgress(0, pinfo);
+
+                this.Controller.SyncMRUs(delegate(SyncableStatus status)
+                { // Status reporting - triggers whenever SyncMRU has made progress
+
+                    pinfo.SubTaskPercent = status.curTaskPercentComplete;
+                    pinfo.TotalTaskPercent = 0;
+                    pinfo.taskDescription = status.EntityPath;
+                    // Report the progress back to the progress bar
+                    workerObj.ReportProgress(0, pinfo);
+
+                    // User requested for cancellation
+                    if (workerObj.CancellationPending)
+                    {
+                        cancelled = true;
+                        return false;
+                    }
+                    else return true;
+                },
+                delegate(Exception exp)
+                { // Error handler - triggers whenever an exception is raised anywhere in SyncMRU
+
+                    // Define the parameters of the message box to show the user
+                    CustomDialog.MessageBoxInfo info = new CustomDialog.MessageBoxInfo();
+                    info.message = "An error occured while syncing: " + exp.Message + "\n\nWhat would you like me to do?";
+                    info.messageType = CustomDialog.MessageType.Error;
+                    info.messageTemplate = CustomDialog.MessageTemplate.SkipCancel;
+                    info.parent = this;
+
+                    // Actually show the message box and respond to the even.
+                    // Note: You cannot call CustomDialog directly here, the UI runs in a different thread.
+                    if (progressWindow.RequestMessageDialog(workerObj, info) == CustomDialog.MessageResponse.Cancel)
+                    {
+                        cancelled = true;
+                        return false;
+                    }
+                    else return true;
+                });
+            });
+
+            // Start the whole process
+            progressWindow.Start();
         }
 		
 		private void SaveSetting(object sender, RoutedEventArgs e)

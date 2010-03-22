@@ -5,6 +5,7 @@ using System.Text;
 using System.Xml.Serialization;
 using System.Xml;
 using System.Reflection;
+using SyncButler.Exceptions;
 
 namespace SyncButler.MRU
 {
@@ -15,6 +16,10 @@ namespace SyncButler.MRU
     [XmlRoot("MRUList", IsNullable = false)]
     public class MRUList
     {
+        // The delegate to report progress to. Can be null
+        protected SyncableStatusMonitor statusMonitor = null;
+        protected SyncableErrorHandler errorHandler = null;
+
         [XmlElement(Type = typeof(string))]
         public string ComputerName { get; set; }
 
@@ -88,33 +93,107 @@ namespace SyncButler.MRU
             //foreach (string mru in MRUs)
             foreach(string mru in MRUs.Keys)
             {
-                if (File.Exists(MRUs[mru]))
+                try
                 {
-                    //string Filename = Path.GetFileName(mru);
-
-                    if (!File.Exists(SyncTo + mru))
+                    if (File.Exists(MRUs[mru]))
                     {
-                        File.Copy(MRUs[mru], SyncTo + mru);
-                    }
-                    else
-                    {
-                        WindowsFile MRUFile = new WindowsFile(MRUs[mru]);
-                        WindowsFile Target = new WindowsFile(SyncTo + mru);
-                        if (MRUFile.Length != Target.Length)
-                        {
-                            Conflicts.Add(new Conflict(MRUFile, Target, Conflict.Action.CopyToRight));
-                        }
-                        else if (!WindowsFile.HaveEqualChecksums(MRUFile, Target))
-                        {
-                            Conflicts.Add(new Conflict(MRUFile, Target, Conflict.Action.CopyToRight));
-                        }
-                    }
+                        //string Filename = Path.GetFileName(mru);
 
+                        if (!File.Exists(SyncTo + mru))
+                        {
+                            //File.Copy(MRUs[mru], SyncTo + mru);
+                            this.Copy(MRUs[mru], SyncTo + mru);
+                        }
+                        else
+                        {
+                            if (!statusMonitor(new SyncableStatus(MRUs[mru], 0, 0, SyncableStatus.ActionType.Sync)))
+                                return Conflicts;
+
+                            WindowsFile MRUFile = new WindowsFile(MRUs[mru]);
+                            WindowsFile Target = new WindowsFile(SyncTo + mru);
+                            if (MRUFile.Length != Target.Length)
+                            {
+                                Conflicts.Add(new Conflict(MRUFile, Target, Conflict.Action.CopyToRight));
+                            }
+                            else if (!WindowsFile.HaveEqualChecksums(MRUFile, Target))
+                            {
+                                Conflicts.Add(new Conflict(MRUFile, Target, Conflict.Action.CopyToRight));
+                            }
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    if (errorHandler != null)
+                    {
+                        if (errorHandler(e)) continue;
+                        else break;
+                    }
+                    else throw e;
                 }
             }
             return Conflicts;
         }
 
+        protected void Copy(string sourcePath, string destPath)
+        {
+            FileInfo sourceFile = new FileInfo(sourcePath);
+            FileInfo destFile = new FileInfo(destPath);
+
+            //// Make sure there's enough free space.
+            //if ((sourceFile.Length + 4096) > SystemEnvironment.StorageDevices.GetAvailableSpace(DRIVE LETTER GOES HERE))
+            //    throw new IOException("There is insufficient space to copy the file to " + destFile.nativeFileObj.FullName);
+
+            int bufferSize = (int)SyncEnvironment.FileReadBufferSize;
+
+            FileStream inputStream = sourceFile.OpenRead();
+            FileStream outputStream = null;
+
+            string tempName = null;
+            for (int i = 0; i < 10000; i++)
+            {
+                tempName = destFile.FullName + "." + i + ".syncbutler_safecopy";
+                if (File.Exists(tempName)) continue;
+                outputStream = new FileStream(tempName, FileMode.CreateNew, FileAccess.Write, FileShare.None);
+                break;
+            }
+
+            if (outputStream == null) throw new IOException("Could not create a temporary file to be used for safe copying");
+
+            byte[] buf = new byte[bufferSize];
+            long totalCopied = 0;
+            int amountRead;
+            float toPercent = 100f / sourceFile.Length;
+
+            do
+            {
+                amountRead = inputStream.Read(buf, 0, bufferSize);
+                if (amountRead > 0) outputStream.Write(buf, 0, amountRead);
+
+                totalCopied += amountRead;
+
+                if (statusMonitor != null)
+                {
+                    if (!statusMonitor(new SyncableStatus(sourceFile.FullName, 0, (int)(totalCopied * toPercent), SyncableStatus.ActionType.Copy)))
+                    {
+                        inputStream.Close();
+                        outputStream.Close();
+                        File.Delete(tempName);
+                        throw new UserCancelledException();
+                    }
+                }
+
+            } while (amountRead > 0);
+
+            inputStream.Close();
+            outputStream.Close();
+
+            if (destFile.Exists) destFile.Delete();
+            File.Move(tempName, destFile.FullName);
+
+            destFile.LastWriteTime = sourceFile.LastWriteTime;
+            destFile.CreationTime = sourceFile.CreationTime;
+        }
 
         /// <summary>
         /// Save information of a synced MRU into a xml format
@@ -164,6 +243,24 @@ namespace SyncButler.MRU
 
             xr.Close();
             return mrus;
+        }
+
+        /// <summary>
+        /// Sets a delegate to be used to report progress
+        /// </summary>
+        /// <param name="statusMonitor"></param>
+        public void SetStatusMonitor(SyncableStatusMonitor statusMonitor)
+        {
+            this.statusMonitor = statusMonitor;
+        }
+
+        /// <summary>
+        /// Sets a delagate to handle errors while syncing.
+        /// </summary>
+        /// <param name="errorHandler"></param>
+        public void SetErrorHandler(SyncableErrorHandler errorHandler)
+        {
+            this.errorHandler = errorHandler;
         }
     }
 }

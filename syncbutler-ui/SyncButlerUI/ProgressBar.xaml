@@ -1,0 +1,16 @@
+﻿<Window
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	x:Class="SyncButlerUI.ProgressBar"
+	x:Name="Window"
+	Title="ProgressBar"
+	Width="480" Height="160" WindowStyle="ToolWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+	Closing="WindowClosing">
+
+	<Grid x:Name="LayoutRoot">
+		<Button Margin="185,87,185,0" VerticalAlignment="Top" Height="27" Content="Cancel" Click="CancelBtn"/>
+		<Label x:Name="ProgressText" Margin="8,8,8,0" VerticalAlignment="Top" Height="29" Content="Label"/>
+		<ProgressBar x:Name="SubProgress" Margin="8,37,8,0" VerticalAlignment="Top" Height="15"/>
+		<ProgressBar x:Name="TotalProgress" Margin="8,56,8,51"/>
+	</Grid>
+</Window>

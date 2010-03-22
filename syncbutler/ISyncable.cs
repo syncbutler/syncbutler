@@ -13,6 +13,13 @@ namespace SyncButler
     public delegate bool SyncableStatusMonitor(SyncableStatus status);
 
     /// <summary>
+    /// A callback to handle an error which occured while Syncing
+    /// </summary>
+    /// <param name="exp"></param>
+    /// <returns>False to abort, true to continue with next</returns>
+    public delegate bool SyncableErrorHandler(Exception exp);
+
+    /// <summary>
     /// Interface containing the methods necessary for items to be syncable.
     /// All items that can be synchronised must implement this interface.
     /// </summary>
