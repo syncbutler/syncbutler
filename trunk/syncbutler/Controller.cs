@@ -254,12 +254,14 @@ namespace SyncButler
         /// Sync the mrus that are listed. Please read MRUList to understand how file is actually saved.
         /// </summary>
         /// <param name="driveLetter"></param>
-        public void SyncMRUs()
+        public void SyncMRUs(SyncableStatusMonitor statusMonitor, SyncableErrorHandler errorHandler)
         {
             char driveLetter = SyncEnvironment.SBSDriveLetter;
             string syncTo = driveLetter + ":\\SyncButler\\" + SyncEnvironment.ComputerName + "\\";
             MRUList mruList = new MRUList();
-            
+
+            mruList.SetStatusMonitor(statusMonitor);
+            mruList.SetErrorHandler(errorHandler);
             mruList.Load(GetMonitoredFiles()["interesting"]);
             mruList.Sync(SyncEnvironment.ComputerName, driveLetter);
             MRUList.SaveInfoTo(syncTo + "logs.xml", mruList);

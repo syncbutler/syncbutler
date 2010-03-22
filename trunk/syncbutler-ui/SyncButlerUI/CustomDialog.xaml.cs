@@ -46,6 +46,15 @@ namespace SyncButlerUI
             SkipCancel
         }
 
+        public struct MessageBoxInfo
+        {
+            public DependencyObject parent;
+            public MessageTemplate messageTemplate;
+            public MessageType messageType;
+            public MessageResponse defaultResponse;
+            public string message;
+        }
+
         protected MessageResponse userResponse;
         protected MessageResponse button1Response, button2Response, button3Response;
 
@@ -68,6 +77,11 @@ namespace SyncButlerUI
             }
 
             return "";
+        }
+
+        public static MessageResponse Show(MessageBoxInfo info)
+        {
+            return Show(info.parent, info.messageTemplate, info.messageType, info.defaultResponse, info.message);
         }
 
         /// <summary>
