@@ -1235,32 +1235,33 @@ namespace SyncButlerUI
 
         private void SBSMoveToOther(object sender,EventArgs e )
         {
+            SortedList<string, string> sensitive = MRUs["sensitive"];
+            SortedList<string, string> interesting = MRUs["interesting"];
             // move from weird to fav
             if (WeirdFile_List.SelectedIndex != -1)
             {
-
+                
+                interesting.Add((String)WeirdFile_List.SelectedItem, (String)sensitive[(String)WeirdFile_List.SelectedItem]);
+                sensitive.Remove((String)WeirdFile_List.SelectedItem);
             }
             // move from fav to weird
             else if (Favourites_List.SelectedIndex != -1)
             {
-
+                sensitive.Add((String)Favourites_List.SelectedItem, (String)interesting[(String)Favourites_List.SelectedItem]);
+                interesting.Remove((String)Favourites_List.SelectedItem);
             }
+
+            Favourites_List.Items.Refresh();
+            WeirdFile_List.Items.Refresh();
         }
         private SortedList<string, SortedList<string, string>> MRUs;
+
         public void LoadMRUs()
         {
-            Favourites_List.Items.Clear();
             SBSDone.IsEnabled = false;
             MRUs = Controller.GetInstance().GetMonitoredFiles();
-            foreach (string filenames in MRUs["interesting"].Keys)
-            {
-                Favourites_List.Items.Add(filenames);
-            }
-            WeirdFile_List.Items.Clear();
-            foreach (string filenames in MRUs["sensitive"].Keys)
-            {
-                WeirdFile_List.Items.Add(filenames);
-            }
+            Favourites_List.ItemsSource = MRUs["interesting"].Keys;
+            WeirdFile_List.ItemsSource = MRUs["sensitive"].Keys;
         }
 
 	}
