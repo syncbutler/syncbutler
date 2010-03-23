@@ -60,6 +60,11 @@ namespace SyncButler
         public SyncableStatusMonitor statusMonitor = null;
 
         /// <summary>
+        /// This allows the GUI to report errors and attempt to continue from there
+        /// </summary>
+        public SyncableErrorHandler errorHandler = null;
+
+        /// <summary>
         /// A dictionary of the hash values from the last sync.
         /// May be empty.
         /// </summary>
@@ -249,6 +254,8 @@ namespace SyncButler
             right.SetParentPartnership(this);
             left.SetStatusMonitor(statusMonitor);
             right.SetStatusMonitor(statusMonitor);
+            left.SetErrorHandler(errorHandler);
+            right.SetErrorHandler(errorHandler);
 
             left.PrepareSync();
             right.PrepareSync();

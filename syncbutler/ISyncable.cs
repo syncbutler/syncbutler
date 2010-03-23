@@ -32,6 +32,12 @@ namespace SyncButler
         void SetStatusMonitor(SyncableStatusMonitor monitor);
 
         /// <summary>
+        /// Used to define a callback which is used to report errors encountered while scanning.
+        /// </summary>
+        /// <param name="exp">true indicates the user wants the program to try and continue with the next file. false indicates the user wants to cancel.</param>
+        void SetErrorHandler(SyncableErrorHandler handler);
+
+        /// <summary>
         /// Sets a reference to the parent Partnership object.
         /// </summary>
         /// <param name="?">The containing Partnership object</param>
