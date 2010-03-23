@@ -26,8 +26,7 @@ namespace SyncButlerUI
 		{
 			try
             {
-			    this.InitializeComponent();
-                controller = Controller.GetInstance();
+			    controller = Controller.GetInstance();
                 if (!(controller.IsProgramRanBefore()))
                 {
                     FirstTimeStartupScreen dialog = new FirstTimeStartupScreen();
@@ -37,6 +36,8 @@ namespace SyncButlerUI
                         throw new UserCancelledException();
                     }
                 }
+				this.InitializeComponent();
+               
 			}
             catch (UserCancelledException)
             {
