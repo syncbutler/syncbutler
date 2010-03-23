@@ -23,6 +23,9 @@ namespace SyncButler
         protected FileSystemInfo nativeFileSystemObj;
         protected Partnership parentPartnership = null;
 
+        protected SyncableStatusMonitor statusMonitor = null;
+        protected SyncableErrorHandler errorHandler = null;
+
         /// <summary>
         /// Gets the name of the current folder/file. Additional info, such as the directory structure prior to this folder/file, is stripped away.
         /// </summary>
@@ -360,10 +363,22 @@ namespace SyncButler
         public abstract long Checksum();
 
         /// <summary>
-        /// Sets the delegate used to report progress on a syncing operation
+        /// Sets the delegate which reports the progress of a sync
         /// </summary>
-        /// <param name="monitor"></param>
-        public abstract void SetStatusMonitor(SyncableStatusMonitor monitor);
+        /// <param name="statusMonitor"></param>
+        public void SetStatusMonitor(SyncableStatusMonitor statusMonitor)
+        {
+            this.statusMonitor = statusMonitor;
+        }
+
+        /// <summary>
+        /// Sets the delegate used to report an error encountered while scanning
+        /// </summary>
+        /// <param name="handler"></param>
+        public void SetErrorHandler(SyncableErrorHandler handler)
+        {
+            this.errorHandler = handler;
+        }
 
         /// <summary>
         /// Scans the File/Folders and reports a list of conflicts

@@ -33,15 +33,12 @@ namespace SyncButlerUI
         {
             public Exception exceptionThrown;
             public ErrorReportingSource source;
-            public string partnershipName;
             public Object failedObject;
 
-            public ErrorReportingMessage(Exception exceptionThrown, ErrorReportingSource source,
-                string partnershipName, Object failedObject)
+            public ErrorReportingMessage(Exception exceptionThrown, ErrorReportingSource source, Object failedObject)
             {
                 this.exceptionThrown = exceptionThrown;
                 this.source = source;
-                this.partnershipName = partnershipName;
                 this.failedObject = failedObject;
             }
         }
@@ -161,15 +158,11 @@ namespace SyncButlerUI
                 }
                 else if (msg.source == ErrorReportingSource.Scanner)
                 {
-                    // Triage for Issue #83
-                    message = msg.exceptionThrown.Message + "\n\nSyncButler is unable to continue";
-                    msgTemplate = CustomDialog.MessageTemplate.OkOnly;
+                    //// Triage for Issue #83
+                    //message = msg.exceptionThrown.Message + "\n\nSyncButler is unable to continue";
 
-                    CustomDialog.Show(this, msgTemplate, CustomDialog.MessageType.Error, CustomDialog.MessageResponse.Cancel, message);
-
-                    ((BackgroundWorker)workerObj).CancelAsync();
-                    waitForErrorResponse.Release();
-                    return;
+                    message = msg.exceptionThrown.Message + "\n\nWhat would you like me to do?";
+                    msgTemplate = CustomDialog.MessageTemplate.SkipCancel;
                 }
                 else throw new NotImplementedException();
                 
@@ -319,13 +312,10 @@ namespace SyncButlerUI
             {
                 mergedList = new ObservableCollection<ConflictList>();
                 BackgroundWorker worker = (BackgroundWorker)workerObj;
-                Exception exp;
 
                 foreach (string friendlyName in partnershipNames)
                 {
                     worker.ReportProgress(0, friendlyName);
-
-                    exp = null;
 
                     try
                     {
@@ -334,6 +324,17 @@ namespace SyncButlerUI
                             worker.ReportProgress(status.percentComplete, status);
                             if (worker.CancellationPending) return false;
                             return true;
+                        },
+                        delegate(Exception exp)
+                        {
+                            ErrorReportingMessage msg = new ErrorReportingMessage(exp, ErrorReportingSource.Scanner, null);
+
+                            if (ReportError(worker, msg))
+                            {
+                                operationCancelled = true;
+                                return false;
+                            }
+                            else return true;
                         });
 
                         worker.ReportProgress(100, null);
@@ -344,37 +345,6 @@ namespace SyncButlerUI
                     {
                         operationCancelled = true;
                         return;
-                    }
-                    catch (IOException e)
-                    {
-                        exp = new Exception("An I/O error was encountered while processing " + friendlyName + ": " + e.Message);
-                    }
-                    catch (UnauthorizedAccessException e)
-                    {
-                        exp = new Exception("A permissions error was encountered while processing " + friendlyName + ": " + e.Message);
-                    }
-                    catch (System.Security.SecurityException e)
-                    {
-                        exp = new Exception("A permissions error was encountered while processing " + friendlyName + ": " + e.Message);
-                    }
-                    catch (InvalidActionException e)
-                    {
-                        exp = new Exception("An invalid action occurred while processing " + friendlyName + ": " + e.Message);
-                    }
-                    catch (Exception e)
-                    {
-                        exp = new Exception("An error occurred while processing " + friendlyName + ": " + e.Message);
-                    }
-
-                    if (exp != null)
-                    {
-                        ErrorReportingMessage msg = new ErrorReportingMessage(exp, ErrorReportingSource.Scanner, friendlyName, null);
-
-                        if (ReportError(worker, msg))
-                        {
-                            operationCancelled = true;
-                            break;
-                        }
                     }
 
                 }
@@ -467,8 +437,7 @@ namespace SyncButlerUI
 
                     if (exp != null)
                     {
-                        ErrorReportingMessage msg = new ErrorReportingMessage(exp, ErrorReportingSource.Resolver,
-                            partnershipName, curConflict);
+                        ErrorReportingMessage msg = new ErrorReportingMessage(exp, ErrorReportingSource.Resolver, curConflict);
 
                         if (ReportError(worker, msg))
                         {
@@ -1102,42 +1071,50 @@ namespace SyncButlerUI
                 pinfo.taskDescription = "Starting...";
                 workerObj.ReportProgress(0, pinfo);
 
-                this.Controller.SyncMRUs(delegate(SyncableStatus status)
-                { // Status reporting - triggers whenever SyncMRU has made progress
+                try
+                {
+                    this.Controller.SyncMRUs(delegate(SyncableStatus status)
+                    { // Status reporting - triggers whenever SyncMRU has made progress
 
-                    pinfo.SubTaskPercent = status.curTaskPercentComplete;
-                    pinfo.TotalTaskPercent = 0;
-                    pinfo.taskDescription = status.EntityPath;
-                    // Report the progress back to the progress bar
-                    workerObj.ReportProgress(0, pinfo);
+                        pinfo.SubTaskPercent = status.curTaskPercentComplete;
+                        pinfo.TotalTaskPercent = 0;
+                        pinfo.taskDescription = status.EntityPath;
+                        // Report the progress back to the progress bar
+                        workerObj.ReportProgress(0, pinfo);
 
-                    // User requested for cancellation
-                    if (workerObj.CancellationPending)
-                    {
-                        cancelled = true;
-                        return false;
-                    }
-                    else return true;
-                },
-                delegate(Exception exp)
-                { // Error handler - triggers whenever an exception is raised anywhere in SyncMRU
+                        // User requested for cancellation
+                        if (workerObj.CancellationPending)
+                        {
+                            cancelled = true;
+                            return false;
+                        }
+                        else return true;
+                    },
+                    delegate(Exception exp)
+                    { // Error handler - triggers whenever an exception is raised anywhere in SyncMRU
 
-                    // Define the parameters of the message box to show the user
-                    CustomDialog.MessageBoxInfo info = new CustomDialog.MessageBoxInfo();
-                    info.message = "An error occured while syncing: " + exp.Message + "\n\nWhat would you like me to do?";
-                    info.messageType = CustomDialog.MessageType.Error;
-                    info.messageTemplate = CustomDialog.MessageTemplate.SkipCancel;
-                    info.parent = this;
+                        // Define the parameters of the message box to show the user
+                        CustomDialog.MessageBoxInfo info = new CustomDialog.MessageBoxInfo();
+                        info.message = "An error occured while syncing: " + exp.Message + "\n\nWhat would you like me to do?";
+                        info.messageType = CustomDialog.MessageType.Error;
+                        info.messageTemplate = CustomDialog.MessageTemplate.SkipCancel;
+                        info.parent = this;
 
-                    // Actually show the message box and respond to the even.
-                    // Note: You cannot call CustomDialog directly here, the UI runs in a different thread.
-                    if (progressWindow.RequestMessageDialog(workerObj, info) == CustomDialog.MessageResponse.Cancel)
-                    {
-                        cancelled = true;
-                        return false;
-                    }
-                    else return true;
-                });
+                        // Actually show the message box and respond to the even.
+                        // Note: You cannot call CustomDialog directly here, the UI runs in a different thread.
+                        if (progressWindow.RequestMessageDialog(workerObj, info) == CustomDialog.MessageResponse.Cancel)
+                        {
+                            cancelled = true;
+                            return false;
+                        }
+                        else return true;
+                    });
+                }
+                catch (UserCancelledException)
+                {
+                    cancelled = true;
+                    return;
+                }
             });
 
             Enable_Feature.IsEnabled = false;

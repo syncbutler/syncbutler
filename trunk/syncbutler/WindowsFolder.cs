@@ -19,7 +19,6 @@ namespace SyncButler
     public class WindowsFolder : WindowsFileSystem
     {
         protected DirectoryInfo nativeDirObj;
-        protected SyncableStatusMonitor statusMonitor = null;
 
         protected long checksumCache;
         protected bool checksumCacheFresh = false;
@@ -143,15 +142,6 @@ namespace SyncButler
             : this(fullPath, fullPath, parentPartnership)
         {
 
-        }
-
-        /// <summary>
-        /// Sets the delegate which reports the progress of a sync
-        /// </summary>
-        /// <param name="statusMonitor"></param>
-        public override void SetStatusMonitor(SyncableStatusMonitor statusMonitor)
-        {
-            this.statusMonitor = statusMonitor;
         }
 
         /// <summary>
@@ -383,146 +373,184 @@ namespace SyncButler
             workList.Enqueue("");
 
             string curLeftDir, curRightDir;
+            Exception exp;
             // Work while the work queue has stuff.
             while (workList.Count > 0)
             {
-                currDir = workList.Dequeue();
-
-                if (this.statusMonitor != null)
+                exp = null;
+                try
                 {
-                    if (!this.statusMonitor(new SyncableStatus(PREF_FOLDER + currDir, 0, 0, SyncableStatus.ActionType.Sync)))
-                        throw new UserCancelledException();
-                }
+                    currDir = workList.Dequeue();
 
-                curLeftDir = leftPath + currDir;
-                curRightDir = rightPath + currDir;
-
-                // Protect our home base!
-                if (curLeftDir.StartsWith(SyncEnvironment.AppPath) ||
-                    curRightDir.StartsWith(SyncEnvironment.AppPath))
-                    continue;
-
-                // Get sub-directories from the left folder
-                List<string> leftFolders = new List<string>();
-                leftFolders.AddRange(Directory.GetDirectories(curLeftDir));
-
-                // Get sub-directories from the right folder
-                List<string> rightFolders = new List<string>();
-                rightFolders.AddRange(Directory.GetDirectories(curRightDir));
-
-                // Get files from left folder
-                List<string> leftFiles = new List<string>();
-                leftFiles.AddRange(Directory.GetFiles(curLeftDir));
-
-                // Get files from right folder
-                List<string> rightFiles = new List<string>();
-                rightFiles.AddRange(Directory.GetFiles(curRightDir));
-
-                //---------------------------------------------------------------------------------
-                // Check right folders against left
-                //---------------------------------------------------------------------------------
-                foreach (string leftFolder in leftFolders)
-                {
-                    Conflict.Action autoResolveAction = Conflict.Action.Unknown;
-                    string leftFolderName = leftFolder.Substring(leftPath.Length) + @"\";
-
-                    // The folder exists on both sides
-                    if (Directory.Exists(rightPath + leftFolderName))
+                    if (this.statusMonitor != null)
                     {
-                        workList.Enqueue(leftFolderName);
+                        if (!this.statusMonitor(new SyncableStatus(PREF_FOLDER + currDir, 0, 0, SyncableStatus.ActionType.Sync)))
+                            throw new UserCancelledException();
                     }
-                    // The folder exists on the left but not on the right
-                    else
+
+                    curLeftDir = leftPath + currDir;
+                    curRightDir = rightPath + currDir;
+
+                    // Protect our home base!
+                    if (curLeftDir.StartsWith(SyncEnvironment.AppPath) ||
+                        curRightDir.StartsWith(SyncEnvironment.AppPath))
+                        continue;
+
+                    // Get sub-directories from the left folder
+                    List<string> leftFolders = new List<string>();
+                    leftFolders.AddRange(Directory.GetDirectories(curLeftDir));
+
+                    // Get sub-directories from the right folder
+                    List<string> rightFolders = new List<string>();
+                    rightFolders.AddRange(Directory.GetDirectories(curRightDir));
+
+                    // Get files from left folder
+                    List<string> leftFiles = new List<string>();
+                    leftFiles.AddRange(Directory.GetFiles(curLeftDir));
+
+                    // Get files from right folder
+                    List<string> rightFiles = new List<string>();
+                    rightFiles.AddRange(Directory.GetFiles(curRightDir));
+
+                    //---------------------------------------------------------------------------------
+                    // Check right folders against left
+                    //---------------------------------------------------------------------------------
+                    foreach (string leftFolder in leftFolders)
                     {
-                        // If the checksum existed, then we infer that the folder was deleted from the right.
-                        if (this.parentPartnership.ChecksumExists(PREF_FOLDER + leftFolderName))
-                            autoResolveAction = Conflict.Action.DeleteLeft;
-                        // Otherwise, we infer that the folder is newly created.
+                        Conflict.Action autoResolveAction = Conflict.Action.Unknown;
+                        string leftFolderName = leftFolder.Substring(leftPath.Length) + @"\";
+
+                        // The folder exists on both sides
+                        if (Directory.Exists(rightPath + leftFolderName))
+                        {
+                            workList.Enqueue(leftFolderName);
+                        }
+                        // The folder exists on the left but not on the right
                         else
-                            autoResolveAction = Conflict.Action.CopyToRight;
+                        {
+                            // If the checksum existed, then we infer that the folder was deleted from the right.
+                            if (this.parentPartnership.ChecksumExists(PREF_FOLDER + leftFolderName))
+                                autoResolveAction = Conflict.Action.DeleteLeft;
+                            // Otherwise, we infer that the folder is newly created.
+                            else
+                                autoResolveAction = Conflict.Action.CopyToRight;
 
-                        WindowsFolder leftObj = new WindowsFolder(leftPath, leftFolder, this, this.parentPartnership);
-                        WindowsFolder rightObj = new WindowsFolder(rightPath, rightPath + leftFolderName, this, this.parentPartnership);
-                        Conflict conflict = new Conflict(leftObj, rightObj, autoResolveAction);
+                            WindowsFolder leftObj = new WindowsFolder(leftPath, leftFolder, this, this.parentPartnership);
+                            WindowsFolder rightObj = new WindowsFolder(rightPath, rightPath + leftFolderName, this, this.parentPartnership);
+                            Conflict conflict = new Conflict(leftObj, rightObj, autoResolveAction);
 
-                        // Set the drive letters to what we updated at the start, to save on WMI calls.
-                        leftObj.UpdateDriveLetter(this.driveLetter);
-                        rightObj.UpdateDriveLetter(partner.driveLetter);
+                            // Set the drive letters to what we updated at the start, to save on WMI calls.
+                            leftObj.UpdateDriveLetter(this.driveLetter);
+                            rightObj.UpdateDriveLetter(partner.driveLetter);
 
-                        conflictList.Add(conflict);
-                        System.Diagnostics.Debug.Assert(autoResolveAction != Conflict.Action.Unknown);
+                            conflictList.Add(conflict);
+                            System.Diagnostics.Debug.Assert(autoResolveAction != Conflict.Action.Unknown);
+                        }
                     }
-                }
 
-                //---------------------------------------------------------------------------------
-                // Check left folders against right
-                //---------------------------------------------------------------------------------
-                foreach (string rightFolder in rightFolders)
-                {
-                    Conflict.Action autoResolveAction = Conflict.Action.Unknown;
-                    string rightFolderName = rightFolder.Substring(rightPath.Length) + @"\";
-
-                    // The folder exists on the right but not on the left
-                    if (!Directory.Exists(leftPath + rightFolderName))
+                    //---------------------------------------------------------------------------------
+                    // Check left folders against right
+                    //---------------------------------------------------------------------------------
+                    foreach (string rightFolder in rightFolders)
                     {
-                        // If the checksum existed, then we infer that the folder was deleted from the left.
-                        if (this.parentPartnership.ChecksumExists(PREF_FOLDER + rightFolderName))
-                            autoResolveAction = Conflict.Action.DeleteRight;
-                        // Otherwise, we infer that the folder is newly created.
-                        else
-                            autoResolveAction = Conflict.Action.CopyToLeft;
+                        Conflict.Action autoResolveAction = Conflict.Action.Unknown;
+                        string rightFolderName = rightFolder.Substring(rightPath.Length) + @"\";
 
-                        WindowsFolder leftObj = new WindowsFolder(leftPath, leftPath + rightFolderName, this, this.parentPartnership);
-                        WindowsFolder rightObj = new WindowsFolder(rightPath, rightFolder, this, this.parentPartnership);
-                        Conflict conflict = new Conflict(leftObj, rightObj, autoResolveAction);
+                        // The folder exists on the right but not on the left
+                        if (!Directory.Exists(leftPath + rightFolderName))
+                        {
+                            // If the checksum existed, then we infer that the folder was deleted from the left.
+                            if (this.parentPartnership.ChecksumExists(PREF_FOLDER + rightFolderName))
+                                autoResolveAction = Conflict.Action.DeleteRight;
+                            // Otherwise, we infer that the folder is newly created.
+                            else
+                                autoResolveAction = Conflict.Action.CopyToLeft;
 
-                        // Set the drive letters to what we updated at the start, to save on WMI calls.
-                        leftObj.UpdateDriveLetter(this.driveLetter);
-                        rightObj.UpdateDriveLetter(partner.driveLetter);
+                            WindowsFolder leftObj = new WindowsFolder(leftPath, leftPath + rightFolderName, this, this.parentPartnership);
+                            WindowsFolder rightObj = new WindowsFolder(rightPath, rightFolder, this, this.parentPartnership);
+                            Conflict conflict = new Conflict(leftObj, rightObj, autoResolveAction);
 
-                        conflictList.Add(conflict);
-                        System.Diagnostics.Debug.Assert(autoResolveAction != Conflict.Action.Unknown);
+                            // Set the drive letters to what we updated at the start, to save on WMI calls.
+                            leftObj.UpdateDriveLetter(this.driveLetter);
+                            rightObj.UpdateDriveLetter(partner.driveLetter);
+
+                            conflictList.Add(conflict);
+                            System.Diagnostics.Debug.Assert(autoResolveAction != Conflict.Action.Unknown);
+                        }
                     }
-                }
 
-                //---------------------------------------------------------------------------------
-                // Check files
-                //---------------------------------------------------------------------------------
-                SortedList<string, string> relativeFilePaths = new SortedList<string, string>();
+                    //---------------------------------------------------------------------------------
+                    // Check files
+                    //---------------------------------------------------------------------------------
+                    SortedList<string, string> relativeFilePaths = new SortedList<string, string>();
 
-                // Check right against left
-                foreach (string path in leftFiles)
-                {
-                    string relativePath = path.Substring(this.rootPath.Length);
-                    relativeFilePaths.Add(relativePath, relativePath);
-                    WindowsFile leftFileObj = new WindowsFile(this.rootPath, path, this, this.parentPartnership);
-                    WindowsFile rightFileObj = new WindowsFile(partner.rootPath, partner.rootPath + relativePath, this, this.parentPartnership);
-
-                    leftFileObj.UpdateDriveLetter(this.driveLetter);
-                    rightFileObj.UpdateDriveLetter(partner.driveLetter);
-                    leftFileObj.SetStatusMonitor(statusMonitor);
-                    rightFileObj.SetStatusMonitor(statusMonitor);
-
-                    conflictList.AddRange(leftFileObj.Sync(rightFileObj));
-                }
-
-                // Check left against right
-                foreach (string path in rightFiles)
-                {
-                    string relativePath = path.Substring(partner.rootPath.Length);
-
-                    // Ignore those that were checked when checking right against left (above)
-                    if (!relativeFilePaths.ContainsKey(relativePath))
+                    // Check right against left
+                    foreach (string path in leftFiles)
                     {
+                        string relativePath = path.Substring(this.rootPath.Length);
                         relativeFilePaths.Add(relativePath, relativePath);
-
-                        WindowsFile leftFileObj = new WindowsFile(this.rootPath, this.rootPath + relativePath, this, this.parentPartnership);
-                        WindowsFile rightFileObj = new WindowsFile(partner.rootPath, path, this, this.parentPartnership);
+                        WindowsFile leftFileObj = new WindowsFile(this.rootPath, path, this, this.parentPartnership);
+                        WindowsFile rightFileObj = new WindowsFile(partner.rootPath, partner.rootPath + relativePath, this, this.parentPartnership);
 
                         leftFileObj.UpdateDriveLetter(this.driveLetter);
                         rightFileObj.UpdateDriveLetter(partner.driveLetter);
+                        leftFileObj.SetStatusMonitor(statusMonitor);
+                        rightFileObj.SetStatusMonitor(statusMonitor);
+                        leftFileObj.SetErrorHandler(errorHandler);
+                        rightFileObj.SetErrorHandler(errorHandler);
+
                         conflictList.AddRange(leftFileObj.Sync(rightFileObj));
                     }
+
+                    // Check left against right
+                    foreach (string path in rightFiles)
+                    {
+                        string relativePath = path.Substring(partner.rootPath.Length);
+
+                        // Ignore those that were checked when checking right against left (above)
+                        if (!relativeFilePaths.ContainsKey(relativePath))
+                        {
+                            relativeFilePaths.Add(relativePath, relativePath);
+
+                            WindowsFile leftFileObj = new WindowsFile(this.rootPath, this.rootPath + relativePath, this, this.parentPartnership);
+                            WindowsFile rightFileObj = new WindowsFile(partner.rootPath, path, this, this.parentPartnership);
+
+                            leftFileObj.UpdateDriveLetter(this.driveLetter);
+                            rightFileObj.UpdateDriveLetter(partner.driveLetter);
+                            conflictList.AddRange(leftFileObj.Sync(rightFileObj));
+                        }
+                    }
+                }
+                catch (UserCancelledException)
+                {
+                    throw new UserCancelledException();
+                }
+                catch (IOException e)
+                {
+                    exp = new Exception("An I/O error was encountered while processing " + parentPartnership.Name + ": " + e.Message);
+                }
+                catch (UnauthorizedAccessException e)
+                {
+                    exp = new Exception("A permissions error was encountered while processing " + parentPartnership.Name + ": " + e.Message);
+                }
+                catch (System.Security.SecurityException e)
+                {
+                    exp = new Exception("A permissions error was encountered while processing " + parentPartnership.Name + ": " + e.Message);
+                }
+                catch (InvalidActionException e)
+                {
+                    exp = new Exception("An invalid action occurred while processing " + parentPartnership.Name + ": " + e.Message);
+                }
+                catch (Exception e)
+                {
+                    exp = new Exception("An error occurred while processing " + parentPartnership.Name + ": " + e.Message);
+                }
+
+                if (errorHandler == null && exp != null) throw exp;
+                else if (exp != null)
+                {
+                    if (errorHandler(exp)) continue;
+                    else throw new UserCancelledException();
                 }
             }
 
