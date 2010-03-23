@@ -20,31 +20,16 @@ namespace SyncButlerUI
 	/// </summary>
 	public partial class FirstTimeStartupScreen : Window
 	{
+		
 		public FirstTimeStartupScreen()
 		{
 			this.InitializeComponent();
 			
-			// Insert code required on object creation below this point.
-
-			
-		}
-        public Controller controller;
-		
-		public void NameIt_Click(object sender,RoutedEventArgs e)
-        {
-
-            if (FirstTimeComputerNameText.Text.Length != 0)
-            {
-                controller = Controller.GetInstance();
-                controller.SetFirstComputerName(FirstTimeComputerNameText.Text);
-                this.DialogResult = true;
-            }
-            else
-            {
-                CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Please enter a computer name");
-            }
 		}
 		
+		
+<<<<<<< .mine
+=======
 		private void FirstTimeComputerNameText_Enter(object sender, System.Windows.Input.KeyEventArgs e)
 		{
             if (e.Key == Key.Return)
@@ -54,5 +39,6 @@ namespace SyncButlerUI
 		}
 		
 
+>>>>>>> .r352
 	}
 }
