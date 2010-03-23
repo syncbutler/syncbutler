@@ -1356,7 +1356,7 @@
                 </Custom:DataGrid.RowDetailsTemplate>
 
 			</Custom:DataGrid>
-			<Button x:Name="doneButton" HorizontalAlignment="Right" Margin="0,0,8,88.382" VerticalAlignment="Bottom" Width="76.238" Height="24.762" Content="Done" IsEnabled="False" Click="GoHome"/>
+			<Button x:Name="doneButton" HorizontalAlignment="Right" Margin="0,0,8,88.382" VerticalAlignment="Bottom" Width="76.238" Height="24.762" Content="Done" IsEnabled="False" Click="ShowResult"/>
 			<TextBlock x:Name="CurrentSyncingFile_Copy" Margin="30.532,70.643,12.326,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="51.786"><Span><Run Text="If you wish to resolve a conflict, tick in the checkbox of the Folder you want to take the file revision from. If the file was a deleted in that Folder, it will be deleted on in the other folder as well."/></Span></TextBlock>
 			<Button x:Name="resolveButton" HorizontalAlignment="Right" Margin="0,0,7.493,127.999" VerticalAlignment="Bottom" Width="76.745" Height="25.715" Content="Resolve" Click="ResolvePartnership_Click"/>
 			<Button x:Name="CancelButton" HorizontalAlignment="Right" Margin="0,0,88.238,127.999" VerticalAlignment="Bottom" Width="80" Height="25.715" Content="Cancel" Click="CancelButton_Click"/>
@@ -1528,8 +1528,16 @@
 			</Rectangle>
 			<Image x:Name="image1_Copy5" Margin="184.36,116.094,-0.027,8" Source="Images\logo.png" Stretch="Fill" Opacity="0.04"/>
 			<TextBlock x:Name="ConflictsLabel3" Margin="29.032,39.072,0,0" FontSize="24" FontWeight="Bold" Text="Result" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Width="177.618" Height="28.571"/>
-			<ListBox Margin="29.032,88.667,21.218,78.19"/>
-			<Button HorizontalAlignment="Right" Margin="0,0,21.218,20.991" VerticalAlignment="Bottom" Width="75" Content="Ok!"/>
+			<Custom:DataGrid x:Name="SyncResultListBox" Margin="29.032,88.667,21.218,78.19" SelectionUnit="FullRow" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"  CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False" > 
+				<Custom:DataGrid.Columns>
+					<Custom:DataGridTextColumn Header="Folder 1" MinWidth="180"  Binding="{Binding Left}"/>
+					<Custom:DataGridTextColumn Header="Action" MinWidth="120"  Binding="{Binding Action}"/>
+					<Custom:DataGridTextColumn Header="Folder 2" MinWidth="180"  Binding="{Binding Right}"/>
+				</Custom:DataGrid.Columns>
+				
+				
+			</Custom:DataGrid>
+			<Button HorizontalAlignment="Right" Margin="0,0,21.218,20.991" VerticalAlignment="Bottom" Width="75" Content="Ok!" Click="GoHome"/>
 		</Grid>
 	</Grid>
 </UserControl>

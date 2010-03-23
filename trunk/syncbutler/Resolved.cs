@@ -7,15 +7,69 @@ namespace SyncButler
 {
     public class Resolved
     {
-        private ISyncable Left;
-        private ISyncable Right;
-        private ActionDone Action;
+        private ISyncable left;
+        private ISyncable right;
+        private ActionDone action;
+
+        public String Left
+        {
+            get
+            {
+                if (action == ActionDone.DeleteRight)
+                    return "-";
+                return this.left.ToString();
+            }
+            set
+            {
+
+            }
+        }
+        public string Right
+        {
+            get
+            {
+                if (action == ActionDone.DeleteLeft)
+                    return "-";
+                return this.right.ToString();
+            }
+            set
+            {
+
+            }
+        }
+
+        public String Action
+        {
+            get
+            {
+                switch (action)
+                {
+                    case ActionDone.CopyFromLeft:
+                        return "copied to";
+                    case ActionDone.CopyFromRight:
+                        return "copied from";
+                    case ActionDone.DeleteBoth:
+                        return "deleted with";
+                    case ActionDone.DeleteLeft:
+                    case ActionDone.DeleteRight:
+                        return "deleted";
+                    case ActionDone.Merged:
+                        return "merged with";
+                }
+                return "no action done";
+
+            }
+            set
+            {
+
+            }
+        }
 
         public Resolved(ISyncable Left, ISyncable Right, ActionDone Action)
         {
-            this.Left = Left;
-            this.Right = Right;
-            this.Action = Action;
+            this.left = Left;
+            this.right = Right;
+            this.action = Action;
         }
 
         public enum ActionDone
@@ -23,7 +77,7 @@ namespace SyncButler
 
         public override string ToString()
         {
-            switch (Action)
+            switch (action)
             {
                 case ActionDone.CopyFromLeft:
                     return Left + " copied to " + Right;
