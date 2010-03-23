@@ -128,6 +128,7 @@
       <AutoFill>True</AutoFill>
     </BlendEmbeddedFont>
     <Resource Include="Images\Arrow-Left.png" />
+    <Resource Include="Images\arrow1.png" />
     <Resource Include="Images\Broken.png" />
     <Resource Include="Images\bullet_arrow_down.png" />
     <Resource Include="Images\bullet_arrow_up.png" />
@@ -138,6 +139,8 @@
     <Resource Include="Images\error.png" />
     <Resource Include="Images\Folder.png" />
     <Resource Include="Images\HD.png" />
+    <Resource Include="Images\HelpScreenFolder.png" />
+    <Resource Include="Images\HomeWindow.png" />
     <Resource Include="Images\Icons\SyncButler.ico" />
     <Resource Include="Images\logo.png" />
     <Resource Include="Images\logowTransparency.png" />
@@ -146,6 +149,7 @@
     <Resource Include="Images\Refresh.png" />
     <Resource Include="Images\Search.png" />
     <Resource Include="Images\Settings.png" />
+    <Resource Include="Images\StarBullet.png" />
     <Resource Include="Images\SunBurst.png" />
     <Resource Include="Images\Symbol-Check.png" />
     <Resource Include="Images\Synchonize.png" />
