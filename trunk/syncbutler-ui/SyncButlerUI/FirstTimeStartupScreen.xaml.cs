@@ -11,6 +11,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.ComponentModel;
 using SyncButler;
+using System.Windows.Forms;
+
 namespace SyncButlerUI
 {
 	/// <summary>
@@ -43,6 +45,13 @@ namespace SyncButlerUI
             }
 		}
 		
+		private void FirstTimeComputerNameText_Enter(object sender, System.Windows.Input.KeyEventArgs e)
+		{
+            if (e.Key == Key.Return)
+            {
+                NameIt_Click(sender, e);
+            }
+		}
 		
 
 	}
