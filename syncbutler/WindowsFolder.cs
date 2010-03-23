@@ -424,12 +424,18 @@ namespace SyncButler
                         if (Directory.Exists(rightPath + leftFolderName))
                         {
                             workList.Enqueue(leftFolderName);
+                            
+                            if (!parentPartnership.ChecksumExists(PREF_FOLDER + leftFolderName))
+                            {
+                                WindowsFolder leftObj = new WindowsFolder(leftPath, leftFolder, this, this.parentPartnership);
+                                parentPartnership.UpdateLastChecksum(leftObj);
+                            }
                         }
                         // The folder exists on the left but not on the right
                         else
                         {
                             // If the checksum existed, then we infer that the folder was deleted from the right.
-                            if (this.parentPartnership.ChecksumExists(PREF_FOLDER + leftFolderName))
+                            if (parentPartnership.ChecksumExists(PREF_FOLDER + leftFolderName))
                                 autoResolveAction = Conflict.Action.DeleteLeft;
                             // Otherwise, we infer that the folder is newly created.
                             else
