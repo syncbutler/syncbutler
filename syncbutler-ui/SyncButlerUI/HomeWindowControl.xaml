@@ -597,6 +597,12 @@
 						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="partnershipList" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
 							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-18"/>
 						</DoubleAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="CreatePartnershipButton" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-3.81"/>
+						</DoubleAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="CreatePartnershipButton" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-1.905"/>
+						</DoubleAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
 				<VisualState x:Name="CreatePartnershipState1">
@@ -995,7 +1001,16 @@
 			</Rectangle>
 			<Button x:Name="ViewPartnerships" HorizontalAlignment="Right" Margin="0,258.731,168,-20.5" Style="{DynamicResource ViewPartnershipButton}" Width="167" Content="" Click="GoToViewPartnerships_Click" Cursor="Hand" TabIndex="3"/>
 			<Button x:Name="ExploreFeaturesButton" HorizontalAlignment="Right" Margin="0,0,-0.5,3.334" Style="{DynamicResource ExploreFeaturesButton}" VerticalAlignment="Bottom" Width="169.25" Height="182.269" Content="Button" d:LayoutOverrides="VerticalAlignment" Click="GoToExploreFeatures_Click" TabIndex="3"/>
-			<Button x:Name="CreatePartnershipButton" HorizontalAlignment="Left" Margin="7,0,0,2" Style="{DynamicResource CreatePartnersButton}" VerticalAlignment="Bottom" Width="164.483" Height="183.269" Content="" Cursor="Hand" Click="GoToCreatePartnership_Click" TabIndex="2"/>
+			<Button x:Name="CreatePartnershipButton" HorizontalAlignment="Left" Margin="7,0,0,2" Style="{DynamicResource CreatePartnersButton}" VerticalAlignment="Bottom" Width="164.483" Height="183.269" Content="" Cursor="Hand" Click="GoToCreatePartnership_Click" TabIndex="2" RenderTransformOrigin="0.5,0.5">
+				<Button.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Button.RenderTransform>
+			</Button>
 			<Button x:Name="SyncButton" Margin="-0.175,1,4.388,184.27" Style="{DynamicResource SyncButton}" Content="" Cursor="Hand" Click="Sync" TabIndex="1"/>
 		</Grid>
 		<Grid x:Name="CreateEditPartnershipsGrid" Margin="9.5,0,-60.193,0" Visibility="Hidden" RenderTransformOrigin="0.5,0.5" >
@@ -1110,7 +1125,7 @@
 				<Button x:Name="button" Margin="233.58,0,188.947,18" VerticalAlignment="Bottom" Height="23" Content="Advanced..." IsEnabled="False"/>
 				<Button x:Name="button2" HorizontalAlignment="Right" Margin="0,0,31.947,18" VerticalAlignment="Bottom" Width="69" Height="23" Content="Create!" RenderTransformOrigin="0.79,1.043" Click="CreatePartnership_Click" TabIndex="2"/>
 				<TextBlock Margin="30,0,0,68.5" FontSize="14.667" FontWeight="Bold" Text="Partnership Name" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="28" HorizontalAlignment="Left" Width="222.08"/>
-				<TextBox x:Name="partnershipNameTextBox" Margin="30.5,0,0,52" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="25" HorizontalAlignment="Left" Width="166.58" TabIndex="1"/>
+				<TextBox x:Name="partnershipNameTextBox" Margin="30.5,0,0,52" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="25" HorizontalAlignment="Left" Width="166.58" TabIndex="1" KeyDown="PartnershipNameTextBox_Enter" />
 				<Button x:Name="button5" HorizontalAlignment="Right" Margin="0,0,111.027,18" VerticalAlignment="Bottom" Width="70.92" Height="23" Content="&lt;Back" Click="GoBackToCreatePartnershipDes_Click" TabIndex="3"/>
 				<TextBlock Margin="0,0,272.027,13" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="85.64" VerticalAlignment="Bottom" Height="25" Text="Step 3 of 3"/>
 				<TextBlock Margin="0,109.5,55.947,0" FontSize="16" TextWrapping="Wrap" Text="Please give the partnership a name and review your selection" HorizontalAlignment="Right" Width="183.22" VerticalAlignment="Top" Height="63.5" FontWeight="Bold" FontStyle="Italic" d:LayoutOverrides="HorizontalAlignment"/>
@@ -1173,7 +1188,7 @@
 				<TextBlock x:Name="partnerShipName" Margin="30.499,191,0,196.429" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Left" Width="222.08"/>
 				<Button x:Name="button1" HorizontalAlignment="Right" Margin="0,0,38.5,103.643" VerticalAlignment="Bottom" Width="127.667" Height="47" Content="   Sync this&#xa; Partnership" RenderTransformOrigin="0.79,1.043" Click="SyncThisPartnership_Click" TabIndex="2"/>
 			</Grid>
-			<TextBox x:Name="sourceTextBox" Margin="74,370.04,104.947,0" VerticalAlignment="Top" TextWrapping="Wrap" MaxLength="266" Width="375.08" d:LayoutOverrides="GridBox" TabIndex="2" RenderTransformOrigin="0.5,0.5">
+			<TextBox x:Name="sourceTextBox" Margin="74,370.04,104.947,0" VerticalAlignment="Top" TextWrapping="Wrap" MaxLength="266" Width="375.08" d:LayoutOverrides="GridBox" TabIndex="2" RenderTransformOrigin="0.5,0.5" KeyDown="SourceTextBox_Enter" >
 				<TextBox.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>

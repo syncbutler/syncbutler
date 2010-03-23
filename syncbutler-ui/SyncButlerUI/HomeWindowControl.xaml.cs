@@ -52,6 +52,9 @@ namespace SyncButlerUI
     private object dummyNode = null;
     public string SelectedImagePath { get; set; }
 	public SyncButler.Controller Controller{get;set;}
+	public enum State{Home,Page1OfCreate,Page2OfCreate,Page3OfCreate,Page4OfCreate,ViewPartnership,SBS,Conflict,Settings,Page1OfEdit,Page2OfEdit,Page3OfEdit,Page4OfEdit,Result};
+	
+	private State CurrentState;
 	#endregion
 
         public enum CurrentActionEnum { Scanning, Resolving, Idle }
@@ -234,7 +237,7 @@ namespace SyncButlerUI
         {
 
             VisualStateManager.GoToState(this, "ConflictState1", false);
-
+            CurrentState = State.Conflict;
             if (scanWorker != null)
             {
                 showMessageBox(CustomDialog.MessageType.Error, "There is already a scan " +
@@ -619,6 +622,7 @@ namespace SyncButlerUI
         private void GoHome()
         {
             VisualStateManager.GoToState(this, "Home", false);
+            CurrentState = State.Home;
         }
 
 		#region createPartnership
@@ -635,6 +639,7 @@ namespace SyncButlerUI
 		        clearTreeView();	
 		        sourceTextBox.Text=PartnershipTempData.destinationPath;
 			    VisualStateManager.GoToState(this,"CreatePartnershipState2",false);
+				CurrentState = State.Page2OfCreate;
             }
             catch (UserInputException uIException)
             {
@@ -652,6 +657,7 @@ namespace SyncButlerUI
 		   clearTreeView();
            new PartnershipTempData();
 		   VisualStateManager.GoToState(this,"CreatePartnershipState1",false);
+			CurrentState = State.Page1OfCreate;
            this.sourceTextBox.Clear();
             
 		}
@@ -688,6 +694,7 @@ namespace SyncButlerUI
 			destinationTextBox1.Text=PartnershipTempData.destinationPath;
 			partnershipNameTextBox.Text=PartnershipTempData.partnershipName;	
 			VisualStateManager.GoToState(this,"CreatePartnershipState3",false);
+			CurrentState = State.Page3OfCreate;
             }
             catch (UserInputException uIException)
             {
@@ -704,6 +711,7 @@ namespace SyncButlerUI
 		   destinationTextBox1.Text=PartnershipTempData.destinationPath;
 		   clearTreeView();	
 		   VisualStateManager.GoToState(this,"CreatePartnershipState2",false);
+			CurrentState = State.Page2OfCreate;
 		}
 		
 		
@@ -728,6 +736,7 @@ namespace SyncButlerUI
                 this.Controller.AddPartnership(partnerShipName.Text,sourceFolderPath.Text,destinationFolderPath.Text);
                 
                 VisualStateManager.GoToState(this,"CreatePartnershipDone1",false);
+				CurrentState = State.Page4OfCreate;
                 sourceTextBox1.Text="";
                 destinationTextBox1.Text="";
                 sourceTextBox.Text="";
@@ -757,6 +766,7 @@ namespace SyncButlerUI
         private void GoToViewPartnerships_Click(object sender, RoutedEventArgs e)
         {
 			VisualStateManager.GoToState(this,"ViewPartnership1",false);
+            CurrentState = State.ViewPartnership;
 			SortedList<string,Partnership> partnershiplist = this.Controller.GetPartnershipList();
 			this.partnershipList.ItemsSource = partnershiplist.Values;
             this.partnershipList.Items.Refresh();
@@ -862,6 +872,7 @@ namespace SyncButlerUI
                 {
                     clearTreeView();
                     VisualStateManager.GoToState(this, "CreatePartnershipState1", false);
+                    CurrentState = State.Page1OfCreate;
 
                 }
                 else return;
@@ -930,6 +941,7 @@ namespace SyncButlerUI
                 this.Controller.UpdatePartnership(PartnershipTempData.oldPartnershipName,partnerShipName.Text,sourceFolderPath.Text,destinationFolderPath.Text);
 			    
                 VisualStateManager.GoToState(this,"EditPartnershipDone1",false);
+                CurrentState = State.Page4OfEdit;
 			    sourceTextBox1.Text="";
 			    destinationTextBox1.Text="";
 			    sourceTextBox.Text="";
@@ -959,6 +971,7 @@ namespace SyncButlerUI
 			 PartnershipTempData.oldPartnershipName= PartnershipTempData.partnershipName;
 			sourceTextBox.Text=PartnershipTempData.sourcePath;
 			 VisualStateManager.GoToState(this,"EditPartnershipState1",false);
+             CurrentState = State.Page1OfEdit;
 			}catch(UserInputException uIException){
 					showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
 			}
@@ -976,6 +989,7 @@ namespace SyncButlerUI
 		    clearTreeView();	
 		    sourceTextBox.Text=PartnershipTempData.destinationPath;
 			VisualStateManager.GoToState(this,"EditPartnershipState2",false);
+            CurrentState = State.Page2OfEdit;
             }
             catch (UserInputException uIException)
             {
@@ -996,6 +1010,7 @@ namespace SyncButlerUI
 		    sourceTextBox.Text=PartnershipTempData.sourcePath;
 		    clearTreeView();	
 			VisualStateManager.GoToState(this,"EditPartnershipState1",false);
+            CurrentState = State.Page1OfEdit;
             }
             catch (UserInputException uIException)
             {
@@ -1016,6 +1031,7 @@ namespace SyncButlerUI
 			destinationTextBox1.Text=PartnershipTempData.destinationPath;
 			partnershipNameTextBox.Text=PartnershipTempData.partnershipName;	
 			VisualStateManager.GoToState(this,"EditPartnershipState3",false);
+            CurrentState = State.Page3OfEdit;
             }
             catch (UserInputException uIException)
             {
@@ -1032,6 +1048,7 @@ namespace SyncButlerUI
 		   destinationTextBox1.Text=PartnershipTempData.destinationPath;
 		   clearTreeView();	
 		   VisualStateManager.GoToState(this,"EditPartnershipState2",false);
+           CurrentState = State.Page2OfEdit;
 		}
 		
 		#endregion	
@@ -1247,7 +1264,46 @@ namespace SyncButlerUI
 
             //ShowResult();
             VisualStateManager.GoToState(this, "Result1", false);
+            CurrentState = State.Result;
             SyncResultListBox.ItemsSource = ResolvedConflicts;
         }
+
+        private void SourceTextBox_Enter(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+			if (e.Key == Key.Return)
+            {
+				switch(CurrentState)
+				{
+					case State.Page1OfCreate:
+						GoToPartnershipDest_Click(sender,e);
+						break;
+					case State.Page2OfCreate:
+						GoToCreatePartnershipName_Click(sender,e);
+						break;
+					case State.Page1OfEdit:
+						GoToEditPartnershipDest_Click(sender,e);
+						break;
+					case State.Page2OfEdit:
+						GoToEditPartnershipName_Click(sender,e);
+						break;
+					
+				}	
+			}
+        }
+		private void PartnershipNameTextBox_Enter(object sender, System.Windows.Input.KeyEventArgs e)
+		{
+			if(e.Key == Key.Return)
+			{
+				switch(CurrentState)
+				{
+					case State.Page3OfCreate:
+						CreatePartnership_Click(sender,e);
+						break;
+					case State.Page3OfEdit:
+						SavePartnership_Click(sender,e);
+						break;
+				}
+			}
+		}
 	}
 }
