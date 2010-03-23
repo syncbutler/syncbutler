@@ -966,6 +966,16 @@
 						</DoubleAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
+				<VisualState x:Name="Result1">
+					<Storyboard>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="HomeWindow" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="Result" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+					</Storyboard>
+				</VisualState>
 			</VisualStateGroup>
 		</VisualStateManager.VisualStateGroups>
 		<Grid x:Name="HomeWindow" VerticalAlignment="Bottom" Height="444">
@@ -1487,6 +1497,39 @@
 			<TextBlock x:Name="CurrentSyncingFile_Copy1" Margin="30.532,70.643,12.326,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="51.786"><Span><Run Text="If you wish to resolve a conflict, tick in the checkbox of the Folder you want to take the file revision from. If the file was a deleted in that Folder, it will be deleted on in the other folder as well."/></Span></TextBlock>
 			<Button x:Name="resolveButton1" HorizontalAlignment="Right" Margin="0,0,7.493,127.999" VerticalAlignment="Bottom" Width="76.745" Height="25.715" Content="Resolve" Click="ResolvePartnership_Click"/>
 			<Button x:Name="CancelButton1" HorizontalAlignment="Right" Margin="0,0,88.238,127.999" VerticalAlignment="Bottom" Width="80" Height="25.715" Content="Cancel" Click="CancelButton_Click"/>
+		</Grid>
+		<Grid x:Name="Result" Margin="0.027,0,-0.027,0" VerticalAlignment="Bottom" Height="444" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
+			<Grid.RenderTransform>
+				<TransformGroup>
+					<ScaleTransform/>
+					<SkewTransform/>
+					<RotateTransform/>
+					<TranslateTransform/>
+				</TransformGroup>
+			</Grid.RenderTransform>
+			<Rectangle x:Name="background_Copy6" RadiusX="1" RadiusY="2" Margin="0,0,-1.5,0" VerticalAlignment="Top" Height="448" Cursor="Arrow" RenderTransformOrigin="0.5,0.5">
+				<Rectangle.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Rectangle.RenderTransform>
+				<Rectangle.Fill>
+					<RadialGradientBrush GradientOrigin="0.265,0.184" RadiusX="1.237" RadiusY="1.237">
+						<GradientStop Color="Black" Offset="1"/>
+						<GradientStop Color="White"/>
+						<GradientStop Color="#FFA3A3A3" Offset="1"/>
+						<GradientStop Color="#FFA1A1A1" Offset="1"/>
+						<GradientStop Color="White" Offset="0.378"/>
+					</RadialGradientBrush>
+				</Rectangle.Fill>
+			</Rectangle>
+			<Image x:Name="image1_Copy5" Margin="184.36,116.094,-0.027,8" Source="Images\logo.png" Stretch="Fill" Opacity="0.04"/>
+			<TextBlock x:Name="ConflictsLabel3" Margin="29.032,39.072,0,0" FontSize="24" FontWeight="Bold" Text="Result" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Width="177.618" Height="28.571"/>
+			<ListBox Margin="29.032,88.667,21.218,78.19"/>
+			<Button HorizontalAlignment="Right" Margin="0,0,21.218,20.991" VerticalAlignment="Bottom" Width="75" Content="Ok!"/>
 		</Grid>
 	</Grid>
 </UserControl>
