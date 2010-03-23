@@ -481,6 +481,7 @@ namespace SyncButlerUI
 
             resolveWorker.RunWorkerAsync();
             CurrentAction = CurrentActionEnum.Resolving;
+
         }
 
 	#region UIcode
@@ -1241,5 +1242,12 @@ namespace SyncButlerUI
             WeirdFile_List.ItemsSource = MRUs["sensitive"].Keys;
         }
 
+        private void ShowResult(object sender, EventArgs e)
+        {
+
+            //ShowResult();
+            VisualStateManager.GoToState(this, "Result1", false);
+            SyncResultListBox.ItemsSource = ResolvedConflicts;
+        }
 	}
 }
