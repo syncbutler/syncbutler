@@ -553,7 +553,7 @@ namespace SyncButler
                 else
                 {
                     // Dates of two files are the same OR checksums are the same
-                    if ((this.Exists() && partner.Exists()) && ((this.Length == partner.Length) && this.LastWriteTime.Equals(partner.LastWriteTime) || (this.Checksum() == partner.Checksum())))
+                    if ((this.Exists() && partner.Exists()) && (this.Checksum() == partner.Checksum()))
                     {
                         if (!parentPartnership.ChecksumExists(this))
                             this.UpdateStoredChecksum();
