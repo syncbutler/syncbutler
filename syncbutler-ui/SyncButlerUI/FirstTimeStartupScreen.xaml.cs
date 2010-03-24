@@ -28,17 +28,9 @@ namespace SyncButlerUI
 		}
 		
 		
-<<<<<<< .mine
-=======
-		private void FirstTimeComputerNameText_Enter(object sender, System.Windows.Input.KeyEventArgs e)
-		{
-            if (e.Key == Key.Return)
-            {
-                NameIt_Click(sender, e);
-            }
-		}
+
+
 		
 
->>>>>>> .r352
 	}
 }
