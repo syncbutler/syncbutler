@@ -1421,7 +1421,7 @@
 			</Rectangle>
 			<Image x:Name="image1_Copy3" Margin="184.36,116.094,-0.027,8" Source="Images\logo.png" Stretch="Fill" Opacity="0.04"/>
 			<TextBlock x:Name="ConflictsLabel1" Margin="38.032,42.333,0,0" FontSize="16" FontWeight="Bold" Text="Settings" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Width="177.618" Height="28.571"/>
-			<TextBlock x:Name="NoUSBWarningTextBlock" Margin="43.77,204.857,73.85,104.857" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap"><TextBlock.RenderTransform>
+			<TextBlock x:Name="NoUSBWarningTextBlock" Margin="43.77,0,73.85,91.762" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="49.524"><TextBlock.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
 						<SkewTransform/>
@@ -1447,7 +1447,7 @@
 					</TransformGroup>
 				</TextBlock.RenderTransform><Run Text="Sync Butler, "/><Run FontStyle="Italic" Text="Sync"/><Run Text="! Drive:"/><LineBreak/><Run Text=""/></TextBlock>
 			<TextBox x:Name="ComputerNameTextBox" TabIndex="1" Margin="225.29,99.849,126.49,0" VerticalAlignment="Top" TextWrapping="Wrap"/>
-			<ComboBox x:Name="SBSWorkingDriveComboBox" TabIndex="3" Margin="225.29,159.769,126.49,0" VerticalAlignment="Top"/>
+			<ComboBox x:Name="SBSWorkingDriveComboBox" TabIndex="3" Margin="225.29,159.769,126.49,0" VerticalAlignment="Top" SelectionChanged="SBSUpdateSpaceDetails"/>
 			<Button x:Name="SaveSettingButton" TabIndex="4" HorizontalAlignment="Left" Margin="74.489,0,0,47.659" VerticalAlignment="Bottom" Width="75" Content="Save" Click="SaveSetting"/>
 			<Button x:Name="CancelSettingButton" TabIndex="5" Margin="214.917,0,213.417,47.659" VerticalAlignment="Bottom" Content="Cancel" Click="GoHome" />
 			<Button x:Name="DefaultSettingButton" TabIndex="6" HorizontalAlignment="Right" Margin="0,0,74.472,47.659" VerticalAlignment="Bottom" Width="75" Content="Default"  Click="DefaultSetting"/>
@@ -1461,6 +1461,18 @@
 					</TransformGroup>
 				</ComboBox.RenderTransform>
 			</ComboBox>
+			<TextBlock x:Name="textBlock9_Copy1" HorizontalAlignment="Left" Margin="42.936,195.287,0,0" VerticalAlignment="Top" Width="151.905" Height="22.539" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap" Text="Space to use:"><TextBlock.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</TextBlock.RenderTransform></TextBlock>
+			<Slider x:Name="SpaceToUseSlide" Margin="42.433,0,99.948,169.286" VerticalAlignment="Bottom" Height="25.524" ValueChanged="SpaceToUseSlided"/>
+			<Label HorizontalAlignment="Left" Margin="38.146,0,0,146.326" VerticalAlignment="Bottom" Content="0%"/>
+			<TextBox x:Name="SpaceToUseTextbox" Margin="227.195,195.576,126.49,0" VerticalAlignment="Top" TextWrapping="Wrap"/>
+			<Label x:Name="resolutionLabel" HorizontalAlignment="Right" Margin="0,191.866,64.811,0" Content="KB" VerticalAlignment="Top" Width="47.517"/>
 		</Grid>
 		<Grid x:Name="Conflict_Copy" Margin="0.027,0,-0.027,0" VerticalAlignment="Bottom" Height="444" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
 			<Grid.RenderTransform>
@@ -1569,5 +1581,6 @@
 			</Custom:DataGrid>
 			<Button HorizontalAlignment="Right" TabIndex="1" Margin="0,0,21.218,20.991" VerticalAlignment="Bottom" Width="75" Content="Ok!" Click="GoHome"/>
 		</Grid>
+		<Label Margin="0,0,86.718,146.326" VerticalAlignment="Bottom" Content="100%" HorizontalAlignment="Right"/>
 	</Grid>
 </UserControl>

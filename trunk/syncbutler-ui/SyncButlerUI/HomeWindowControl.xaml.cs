@@ -1157,7 +1157,28 @@ namespace SyncButlerUI
             if (this.SBSSettingComboBox.SelectedItem != null)
 			    this.SBSWorkingDriveComboBox.IsEnabled = this.SBSSettingComboBox.SelectedItem.Equals("Enable");
 		}
-		
+        private void SBSUpdateSpaceDetails(object sender, RoutedEventArgs e)
+        {
+            if (SBSWorkingDriveComboBox.SelectedIndex != -1)
+            {
+                DriveInfo di = new DriveInfo(""+(char)SBSWorkingDriveComboBox.SelectedItem);
+                long freespace = di.AvailableFreeSpace;
+                //double freespace_res = 0;
+                long GB = 1024 * 1024 * 1024;
+                if (freespace / GB > 50)
+                {
+                    resolutionLabel.Content = "GB";
+                    SpaceToUseSlide.Maximum = freespace / (1024 * 1024 * 1024);
+
+                }
+
+            }
+        }
+        private void SpaceToUseSlided(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
+        {
+            double value = e.NewValue;
+            SpaceToUseTextbox.Text = "" + value;
+        }
 		private void DefaultSetting(object sender, RoutedEventArgs e)
 		{
             this.ComputerNameTextBox.Text = "Computer1";
