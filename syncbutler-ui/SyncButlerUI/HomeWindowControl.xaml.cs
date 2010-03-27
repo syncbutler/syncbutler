@@ -1162,7 +1162,7 @@ namespace SyncButlerUI
 		{
             this.ComputerNameTextBox.Text = "Computer1";
             this.SBSSettingComboBox.SelectedItem = "Disable";
-            this.SBSWorkingDriveComboBox.SelectedIndex = -1;
+            this.SBSWorkingDriveComboBox.SelectedIndex = 0;
 		}
 		/// <summary>
 		/// Checks the sourceTextbox for values if its empty or if the directory exists
