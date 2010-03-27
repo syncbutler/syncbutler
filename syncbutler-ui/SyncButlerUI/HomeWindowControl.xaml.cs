@@ -184,6 +184,12 @@ namespace SyncButlerUI
                 return;
             }
 
+            if (TotalProgressBar.IsIndeterminate)
+            {
+                TotalProgressBar.IsIndeterminate = false;
+                SubProgressBar.IsIndeterminate = false;
+            }
+
             if (args.UserState == null && args.ProgressPercentage == 100)
             {
                 CurrentSyncingFile.Text = "Finalising...";
@@ -375,7 +381,9 @@ namespace SyncButlerUI
             resolveWorker = new BackgroundWorker();
             resolveWorker.WorkerReportsProgress = true;
             resolveWorker.WorkerSupportsCancellation = true;
-            
+
+            TotalProgressBar.IsIndeterminate = true;
+            SubProgressBar.IsIndeterminate = true;
             CurrentSyncingFile.Text = "Getting ready to resolve conflicts...";
             PartnershipName.Text = "";
 
