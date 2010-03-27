@@ -1457,8 +1457,8 @@
 						</TransformGroup>
 					</Image.RenderTransform>
 				</Image>
-				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="121.991,248.762,143.833,0" VerticalAlignment="Top" Height="45.943"/>
-				<TextBlock Margin="131.076,0,149.663,162.095" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="28.343" FontSize="10.667" Text="This tells SyncButler how much space it is allowed to use in the drive you selected above."/>
+				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="61.991,248.762,203.833,0" VerticalAlignment="Top" Height="45.943"/>
+				<TextBlock Margin="71.076,0,209.663,162.095" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="28.343" FontSize="10.667" Text="This tells SyncButler how much space it is allowed to use in the drive you selected above."/>
 				<Image Margin="197.041,209.093,0,206.889" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" HorizontalAlignment="Left" Width="53.362">
 					<Image.RenderTransform>
 						<TransformGroup>
@@ -1521,18 +1521,18 @@
 					</TransformGroup>
 				</ComboBox.RenderTransform>
 			</ComboBox>
-			<TextBlock x:Name="textBlock9_Copy1" HorizontalAlignment="Left" Margin="42.936,195.287,0,0" VerticalAlignment="Top" Width="151.905" Height="22.539" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap" Text="Space to use:"><TextBlock.RenderTransform>
+			<TextBlock x:Name="textBlock9_Copy1" Margin="42.936,195.287,238.017,0" VerticalAlignment="Top" Height="22.539" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap"><TextBlock.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
 						<SkewTransform/>
 						<RotateTransform/>
 						<TranslateTransform/>
 					</TransformGroup>
-				</TextBlock.RenderTransform></TextBlock>
-			<Slider x:Name="SpaceToUseSlide" Margin="42.433,0,99.948,195.286" ValueChanged="SpaceToUseSlided" VerticalAlignment="Bottom" Height="25.524"/>
+				</TextBlock.RenderTransform><Run Text="Space "/><Run Text="for Sync Butler, Sync"/><Run Text=" used by:"/></TextBlock>
+			<Slider x:Name="SpaceToUseSlide" Margin="42.433,0,166.614,195.286" ValueChanged="SpaceToUseSlided" VerticalAlignment="Bottom" Height="25.524"/>
 			<Label HorizontalAlignment="Left" Margin="38.146,0,0,172.326" VerticalAlignment="Bottom" Content="0%"/>
-			<TextBox x:Name="SpaceToUseTextbox" Margin="227.195,195.576,126.49,0" VerticalAlignment="Top" TextWrapping="Wrap"/>
-			<Label x:Name="resolutionLabel" HorizontalAlignment="Right" Margin="0,191.866,64.811,0" Content="KB" VerticalAlignment="Top" Width="47.517"/>
+			<TextBox x:Name="SpaceToUseTextbox" Margin="0,0,74.472,198.85" VerticalAlignment="Bottom" TextWrapping="Wrap" HorizontalAlignment="Right" Width="62.722" KeyUp="SpaceToUseChanged"/>
+			<Label x:Name="resolutionLabel" HorizontalAlignment="Right" Margin="0,0,22.955,195.286" Content="KB" VerticalAlignment="Bottom" Width="47.517"/>
 		</Grid>
 		<Grid x:Name="Conflict_Copy" Margin="0.027,0,-0.027,0" VerticalAlignment="Bottom" Height="444" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
 			<Grid.RenderTransform>
@@ -1641,6 +1641,6 @@
 			</Custom:DataGrid>
 			<Button HorizontalAlignment="Right" TabIndex="1" Margin="0,0,21.218,20.991" VerticalAlignment="Bottom" Width="75" Content="Ok!" Click="GoHome"/>
 		</Grid>
-		<Label Margin="0,0,86.718,172.326" VerticalAlignment="Bottom" Content="100%" HorizontalAlignment="Right"/>
+		<Label Margin="0,0,159.718,172.326" VerticalAlignment="Bottom" Content="100%" HorizontalAlignment="Right"/>
 	</Grid>
 </UserControl>
