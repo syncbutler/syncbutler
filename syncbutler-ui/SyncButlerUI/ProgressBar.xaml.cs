@@ -32,6 +32,33 @@ namespace SyncButlerUI
         protected CustomDialog.MessageResponse messageResponse;
         protected bool isClosing = false;
 
+        public bool IsInderteminate
+        {
+            set
+            {
+                if (TotalProgress.Visibility == Visibility.Hidden)
+                {
+                    SubProgress.IsIndeterminate = value;
+                }
+                else
+                {
+                    TotalProgress.IsIndeterminate = value;
+                }
+            }
+
+            get
+            {
+                if (TotalProgress.Visibility == Visibility.Hidden)
+                {
+                    return SubProgress.IsIndeterminate;
+                }
+                else
+                {
+                    return TotalProgress.IsIndeterminate;
+                }
+            }
+        }
+
         /// <summary>
         /// Constructor to set up all the basics. Made protected because it
         /// should only be called by other constructors.
@@ -67,6 +94,12 @@ namespace SyncButlerUI
             taskWorker.WorkerReportsProgress = true;
             if (!taskWorker.WorkerSupportsCancellation) HideCancelButton();
             taskWorker.ProgressChanged += ProgressListener;
+        }
+
+        public ProgressBar(BackgroundWorker worker, string title, string description)
+            : this(worker, title)
+        {
+            ProgressText.Content = description;
         }
 
         /// <summary>
