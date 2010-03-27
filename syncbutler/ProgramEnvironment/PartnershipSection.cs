@@ -25,5 +25,22 @@ namespace SyncButler.ProgramEnvironment
                 this["partnershipList"] = value;
             }
         }
+
+        /// <summary>
+        /// This sectional attributes contains all the states related to Mini
+        /// Partnerships (particularly holding on to a list of them)
+        /// </summary>
+        [ConfigurationProperty("miniPartnershipList")]
+        public PartnershipCollection MiniPartnershipList
+        {
+            get
+            {
+                return ((PartnershipCollection)this["miniPartnershipList"]);
+            }
+            set
+            {
+                this["miniPartnershipList"] = value;
+            }
+        }
     }
 }

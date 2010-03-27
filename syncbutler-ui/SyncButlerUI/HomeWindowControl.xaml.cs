@@ -745,7 +745,11 @@ namespace SyncButlerUI
             }
             catch (UserInputException uIException)
             {
-            showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
+                showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
+            }
+            catch (ArgumentException argEx) 
+            {
+                showMessageBox(CustomDialog.MessageType.Error, argEx.Message);
             }
 		}
 		#endregion
