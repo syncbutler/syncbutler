@@ -257,8 +257,9 @@ namespace SyncButler
         {
             workerObj.ReportProgress(0, toResolve.GetPartnership().Name);
             toResolve.SetStatusMonitor(OnProgressUpdate);
+            Resolved ret = toResolve.Resolve();
             toResolve.SetStatusMonitor(null);
-            return toResolve.Resolve();
+            return ret;
         }
 
         /// <summary>
