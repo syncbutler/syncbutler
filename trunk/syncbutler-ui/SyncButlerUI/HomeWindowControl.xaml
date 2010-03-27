@@ -1420,32 +1420,92 @@
 				</Rectangle.Fill>
 			</Rectangle>
 			<Image x:Name="image1_Copy3" Margin="184.36,116.094,-0.027,8" Source="Images\logo.png" Stretch="Fill" Opacity="0.04"/>
+			<Grid Margin="0,0,-1.5,-4">
+				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="211.134,44.762,123.262,0" VerticalAlignment="Top" Height="45.943" d:LayoutOverrides="VerticalAlignment"/>
+				<TextBlock Margin="221.743,53.562,129.853,0" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top" Height="28.343" FontSize="10.667" Text="This name is used to help us identify the computers you use."/>
+				<Image Margin="237.072,103.705,230.238,0" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Top" Height="22.515">
+					<Image.RenderTransform>
+						<TransformGroup>
+							<ScaleTransform/>
+							<SkewTransform/>
+							<RotateTransform Angle="66.464"/>
+							<TranslateTransform X="1.93" Y="-11.382"/>
+						</TransformGroup>
+					</Image.RenderTransform>
+				</Image>
+				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="0,80.191,3.785,0" VerticalAlignment="Top" Height="48.228" HorizontalAlignment="Right" Width="123.962" d:LayoutOverrides="VerticalAlignment"/>
+				<TextBlock Margin="0,86.705,15.71,0" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top" Height="34.438" FontSize="10.667" HorizontalAlignment="Right" Width="101.428"><Run Text="Enable or disable "/><Run FontFamily="Walkway Black" FontSize="12" FontWeight="Bold" Text="SyncButler"/><Run FontWeight="Bold" Text=", "/><Run FontStyle="Italic" FontWeight="Bold" Text="Sync!"/></TextBlock>
+				<Image Margin="0,125.038,139.571,0" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Top" Height="22.515" HorizontalAlignment="Right" Width="37.524">
+					<Image.RenderTransform>
+						<TransformGroup>
+							<ScaleTransform/>
+							<SkewTransform/>
+							<RotateTransform Angle="130.645"/>
+							<TranslateTransform X="1.93" Y="-11.382"/>
+						</TransformGroup>
+					</Image.RenderTransform>
+				</Image>
+				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="0,123.953,3.499,0" VerticalAlignment="Top" Height="72.609" HorizontalAlignment="Right" Width="123.962" d:LayoutOverrides="VerticalAlignment"/>
+				<TextBlock Margin="0,130.467,10.9,0" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top" Height="56.533" FontSize="10.667" HorizontalAlignment="Right" Width="102.952"><Run Text="The drive which "/><Run FontFamily="Walkway Black" FontSize="12" FontWeight="Bold" Text="SyncButler"/><Run FontWeight="Bold" Text=", "/><Run FontStyle="Italic" FontWeight="Bold" Text="Sync!"/><Run Text="should use"/><Run Text=" to store the files."/></TextBlock>
+				<Image Margin="0,158.562,138.047,0" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Top" Height="22.515" HorizontalAlignment="Right" Width="37.524">
+					<Image.RenderTransform>
+						<TransformGroup>
+							<ScaleTransform/>
+							<SkewTransform/>
+							<RotateTransform Angle="180"/>
+							<TranslateTransform X="1.93" Y="-11.382"/>
+						</TransformGroup>
+					</Image.RenderTransform>
+				</Image>
+				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="121.991,248.762,143.833,0" VerticalAlignment="Top" Height="45.943"/>
+				<TextBlock Margin="131.076,0,149.663,162.095" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="28.343" FontSize="10.667" Text="This tells SyncButler how much space it is allowed to use in the drive you selected above."/>
+				<Image Margin="197.041,209.093,0,206.889" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" HorizontalAlignment="Left" Width="53.362">
+					<Image.RenderTransform>
+						<TransformGroup>
+							<ScaleTransform/>
+							<SkewTransform/>
+							<RotateTransform Angle="-70.052"/>
+							<TranslateTransform X="1.93" Y="-11.382"/>
+						</TransformGroup>
+					</Image.RenderTransform>
+				</Image>
+				<Image Margin="126.08,0,0,199.823" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="36.492" Height="21.895">
+					<Image.RenderTransform>
+						<TransformGroup>
+							<ScaleTransform/>
+							<SkewTransform/>
+							<RotateTransform Angle="-122.526"/>
+							<TranslateTransform X="1.93" Y="-11.382"/>
+						</TransformGroup>
+					</Image.RenderTransform>
+				</Image>
+			</Grid>
 			<TextBlock x:Name="ConflictsLabel1" Margin="38.032,42.333,0,0" FontSize="16" FontWeight="Bold" Text="Settings" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Width="177.618" Height="28.571"/>
-			<TextBlock x:Name="NoUSBWarningTextBlock" Margin="43.77,0,73.85,91.762" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="49.524"><TextBlock.RenderTransform>
+			<TextBlock x:Name="NoUSBWarningTextBlock" Margin="43.77,0,73.85,94.191" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="54.095"><TextBlock.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
 						<SkewTransform/>
 						<RotateTransform/>
 						<TranslateTransform/>
 					</TransformGroup>
-				</TextBlock.RenderTransform><Run Text="Note:"/><LineBreak/><Run Text="No portable storage device was detected. Please plug in a portable storage device if you wish to use it with Sync Butler, "/><Run FontStyle="Italic" Text="Sync"/><Run Text="!"/><LineBreak/><Run Text=""/></TextBlock>
+				</TextBlock.RenderTransform><Run Text="Note:"/><LineBreak/><Run Text="No portable storage device was detected. Please plug in a portable storage device if you wish to use it with "/><Run FontFamily="Walkway Black" FontSize="14.667" FontWeight="Bold" Text="Sync Butler"/><Run FontSize="13.333" FontWeight="Bold" Text=", "/><Run FontSize="13.333" FontStyle="Italic" FontWeight="Bold" Text="Sync"/><Run FontSize="13.333" FontWeight="Bold" Text="!"/><LineBreak/><Run Text=""/></TextBlock>
 			<Label HorizontalAlignment="Left" Margin="38.032,96.079,0,0" VerticalAlignment="Top" Content="This computer's name&#xa;" Height="25.73"/>
-			<TextBlock x:Name="textBlock9_Copy" HorizontalAlignment="Left" Margin="42.936,129.937,0,0" VerticalAlignment="Top" Width="151.905" Height="22.539" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap"><TextBlock.RenderTransform>
+			<TextBlock x:Name="textBlock9_Copy" HorizontalAlignment="Left" Margin="43.698,129.937,0,0" VerticalAlignment="Top" Width="166.381" Height="22.539" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap"><TextBlock.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
 						<SkewTransform/>
 						<RotateTransform/>
 						<TranslateTransform/>
 					</TransformGroup>
-				</TextBlock.RenderTransform><Run Text="Sync Butler, "/><Run FontStyle="Italic" Text="Sync"/><Run Text="! Settings:"/><LineBreak/><Run Text=""/></TextBlock>
-			<TextBlock x:Name="textBlock9" HorizontalAlignment="Left" Margin="42.936,163.287,0,0" VerticalAlignment="Top" Width="151.905" Height="22.539" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap"><TextBlock.RenderTransform>
+				</TextBlock.RenderTransform><Run FontFamily="Walkway Black" FontSize="14.667" FontWeight="Bold" Text="Sync Butler"/><Run FontSize="13.333" FontWeight="Bold" Text=", "/><Run FontSize="13.333" FontStyle="Italic" FontWeight="Bold" Text="Sync"/><Run FontSize="13.333" FontWeight="Bold" Text="!"/><Run FontSize="13.333" Text=" "/><Run Text="Settings:"/><LineBreak/><Run Text=""/></TextBlock>
+			<TextBlock x:Name="textBlock9" HorizontalAlignment="Left" Margin="42.936,160.239,0,0" VerticalAlignment="Top" Width="151.905" Height="22.539" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap"><TextBlock.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
 						<SkewTransform/>
 						<RotateTransform/>
 						<TranslateTransform/>
 					</TransformGroup>
-				</TextBlock.RenderTransform><Run Text="Sync Butler, "/><Run FontStyle="Italic" Text="Sync"/><Run Text="! Drive:"/><LineBreak/><Run Text=""/></TextBlock>
+				</TextBlock.RenderTransform><Run FontFamily="Walkway Black" FontSize="14.667" FontWeight="Bold" Text="Sync Butler"/><Run FontSize="13.333" FontWeight="Bold" Text=", "/><Run FontSize="13.333" FontStyle="Italic" FontWeight="Bold" Text="Sync"/><Run FontSize="13.333" FontWeight="Bold" Text="! "/><Run Text="Drive:"/><LineBreak/><Run Text=""/></TextBlock>
 			<TextBox x:Name="ComputerNameTextBox" TabIndex="1" Margin="225.29,99.849,126.49,0" VerticalAlignment="Top" TextWrapping="Wrap"/>
 			<ComboBox x:Name="SBSWorkingDriveComboBox" TabIndex="3" Margin="225.29,159.769,126.49,0" VerticalAlignment="Top" SelectionChanged="SBSUpdateSpaceDetails"/>
 			<Button x:Name="SaveSettingButton" TabIndex="4" HorizontalAlignment="Left" Margin="74.489,0,0,47.659" VerticalAlignment="Bottom" Width="75" Content="Save" Click="SaveSetting"/>
@@ -1469,8 +1529,8 @@
 						<TranslateTransform/>
 					</TransformGroup>
 				</TextBlock.RenderTransform></TextBlock>
-			<Slider x:Name="SpaceToUseSlide" Margin="42.433,0,99.948,169.286" VerticalAlignment="Bottom" Height="25.524" ValueChanged="SpaceToUseSlided"/>
-			<Label HorizontalAlignment="Left" Margin="38.146,0,0,146.326" VerticalAlignment="Bottom" Content="0%"/>
+			<Slider x:Name="SpaceToUseSlide" Margin="42.433,0,99.948,195.286" ValueChanged="SpaceToUseSlided" VerticalAlignment="Bottom" Height="25.524"/>
+			<Label HorizontalAlignment="Left" Margin="38.146,0,0,172.326" VerticalAlignment="Bottom" Content="0%"/>
 			<TextBox x:Name="SpaceToUseTextbox" Margin="227.195,195.576,126.49,0" VerticalAlignment="Top" TextWrapping="Wrap"/>
 			<Label x:Name="resolutionLabel" HorizontalAlignment="Right" Margin="0,191.866,64.811,0" Content="KB" VerticalAlignment="Top" Width="47.517"/>
 		</Grid>
@@ -1581,6 +1641,6 @@
 			</Custom:DataGrid>
 			<Button HorizontalAlignment="Right" TabIndex="1" Margin="0,0,21.218,20.991" VerticalAlignment="Bottom" Width="75" Content="Ok!" Click="GoHome"/>
 		</Grid>
-		<Label Margin="0,0,86.718,146.326" VerticalAlignment="Bottom" Content="100%" HorizontalAlignment="Right"/>
+		<Label Margin="0,0,86.718,172.326" VerticalAlignment="Bottom" Content="100%" HorizontalAlignment="Right"/>
 	</Grid>
 </UserControl>
