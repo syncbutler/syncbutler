@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 using WPF_Explorer_Tree;
 using SyncButler;
 using SyncButler.Exceptions;
+using System.ComponentModel;
 
 namespace SyncButlerUI
 {
@@ -95,41 +96,78 @@ namespace SyncButlerUI
 
 		private void GoToSetting(object sender, RoutedEventArgs e)
 		{
-  
 			VisualStateManager.GoToState(homeWindow1, "Settings1",false);
-            
-            this.homeWindow1.ComputerNameTextBox.Text = this.controller.GetComputerName();
-            this.homeWindow1.NoUSBWarningTextBlock.Visibility=Visibility.Hidden;
-            this.homeWindow1.SBSWorkingDriveComboBox.Items.Clear();
-            List<string> DriveLetters = this.controller.GetUSBDriveLetters();
-            // if there is no usb drive, let user to select some local hard disk, warn the user as well.
-            if (DriveLetters.Count == 0)
-            {
-                DriveLetters = this.controller.GetNonUSBDriveLetters();
-                this.homeWindow1.NoUSBWarningTextBlock.Visibility = Visibility.Visible;
-            }
-            foreach(string s in DriveLetters)
-            {
-                this.homeWindow1.SBSWorkingDriveComboBox.Items.Add(s[0]);
-            }
 
-            if (this.homeWindow1.SBSWorkingDriveComboBox.Items.Contains(this.controller.GetSBSDriveLetter()))
-            {
-                this.homeWindow1.SBSWorkingDriveComboBox.SelectedItem = this.controller.GetSBSDriveLetter();
-            }
-            else if(this.homeWindow1.SBSWorkingDriveComboBox.Items.Count != 0)
-            {
-                this.homeWindow1.SBSWorkingDriveComboBox.SelectedIndex = 0;
-            }
-			this.homeWindow1.SBSWorkingDriveComboBox.IsEnabled = true;
-            this.homeWindow1.SBSSettingComboBox.Items.Clear();
-            this.homeWindow1.SBSSettingComboBox.Items.Add("Enable");
-            this.homeWindow1.SBSSettingComboBox.Items.Add("Disable");
-            this.homeWindow1.SBSSettingComboBox.SelectedItem = this.controller.GetSBSEnable() ;
+            BackgroundWorker storageScanWorker = new BackgroundWorker();
+            ProgressBar progressWindow = new ProgressBar(storageScanWorker, "Loading Settings Page");
+            progressWindow.HideTotalProgress();
 
-            this.homeWindow1.SpaceToUseSlide.IsEnabled = false;
-            this.homeWindow1.SpaceToUseTextbox.IsEnabled = false;
+            List<string> DriveLetters = null;
+            bool noUSBDrives = false;
 
+            storageScanWorker.DoWork += new DoWorkEventHandler(delegate(Object worker, DoWorkEventArgs args)
+            {
+                BackgroundWorker workerObj = (BackgroundWorker)worker;
+                ProgressBar.ProgressBarInfo pinfo;
+
+                pinfo.SubTaskPercent = 10;
+                pinfo.taskDescription = "Searching for portable drives";
+                pinfo.TotalTaskPercent = 0;
+                workerObj.ReportProgress(0, pinfo);
+
+                DriveLetters = this.controller.GetUSBDriveLetters();
+
+                // if there is no usb drive, let user to select some local hard disk, warn the user as well.
+                if (DriveLetters.Count == 0)
+                {
+                    pinfo.TotalTaskPercent = 50;
+                    pinfo.taskDescription = "Searching for local drives";
+                    DriveLetters = this.controller.GetNonUSBDriveLetters();
+                    noUSBDrives = true;
+                }
+
+                pinfo.SubTaskPercent = 100;
+                pinfo.taskDescription = "Finishing...";
+                workerObj.ReportProgress(0, pinfo);
+            });
+
+            storageScanWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(delegate(Object worker, RunWorkerCompletedEventArgs args)
+            {
+                
+
+                this.homeWindow1.ComputerNameTextBox.Text = this.controller.GetComputerName();
+                this.homeWindow1.NoUSBWarningTextBlock.Visibility = Visibility.Hidden;
+                this.homeWindow1.SBSWorkingDriveComboBox.Items.Clear();
+
+                if (noUSBDrives) this.homeWindow1.NoUSBWarningTextBlock.Visibility = Visibility.Visible;
+
+                foreach (string s in DriveLetters)
+                {
+                    this.homeWindow1.SBSWorkingDriveComboBox.Items.Add(s[0]);
+                }
+
+                if (this.homeWindow1.SBSWorkingDriveComboBox.Items.Contains(this.controller.GetSBSDriveLetter()))
+                {
+                    this.homeWindow1.SBSWorkingDriveComboBox.SelectedItem = this.controller.GetSBSDriveLetter();
+                }
+                else if (this.homeWindow1.SBSWorkingDriveComboBox.Items.Count != 0)
+                {
+                    this.homeWindow1.SBSWorkingDriveComboBox.SelectedIndex = 0;
+                }
+
+                this.homeWindow1.SBSWorkingDriveComboBox.IsEnabled = true;
+                this.homeWindow1.SBSSettingComboBox.Items.Clear();
+                this.homeWindow1.SBSSettingComboBox.Items.Add("Enable");
+                this.homeWindow1.SBSSettingComboBox.Items.Add("Disable");
+                this.homeWindow1.SBSSettingComboBox.SelectedItem = this.controller.GetSBSEnable();
+
+                this.homeWindow1.SpaceToUseSlide.IsEnabled = false;
+                this.homeWindow1.SpaceToUseTextbox.IsEnabled = false;
+
+                progressWindow.TaskComplete();
+            });
+
+            progressWindow.Start();
 		}
 
 		private void cleanUp(object sender,  System.ComponentModel.CancelEventArgs e)
