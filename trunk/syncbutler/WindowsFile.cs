@@ -734,5 +734,25 @@ namespace SyncButler
             xmlData.WriteAttributeString("PartitionIndex", partitionIndex.ToString());
             xmlData.WriteEndElement();
         }
+
+        /// <summary>
+        /// Return total file size of a given list of files
+        /// </summary>
+        /// <param name="files">the list of files</param>
+        /// <returns>total file size</returns>
+        public static long SizeOf(List<String> files)
+        {
+            long totalSize = 0;
+            foreach(String file in files)
+            {
+                if (File.Exists(file))
+                {
+                    FileInfo fi = new FileInfo(file);
+                    
+                    totalSize += fi.Length;
+                }
+            }
+            return totalSize;
+        }
     }
 }
