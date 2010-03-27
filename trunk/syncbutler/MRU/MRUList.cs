@@ -43,9 +43,6 @@ namespace SyncButler.MRU
                     return;
                 SyncedMRU[] mru = (SyncedMRU[])value;
                 List<string> mrus = new List<string>();
-                //if (MRUs == null)
-                //    MRUs = new SortedList<string,string>();
-                //MRUs.Clear();
                 foreach (SyncedMRU s in mru)
                 {
                     mrus.Add(s.OriginalPath);
@@ -64,7 +61,6 @@ namespace SyncButler.MRU
         public MRUList()
         {
             MRUs = new SortedList<string,string>();
-            //Load();
         }
 
         public void Load(SortedList<string,string> mrus)
@@ -72,7 +68,7 @@ namespace SyncButler.MRU
             MRUs = mrus;
         }
 
-
+        
         /// <summary>
         /// Sync the MRU to SyncButler folder. Syncs in a manner similar to
         /// the classic synchorinisation used for files and folders. It will
@@ -90,18 +86,15 @@ namespace SyncButler.MRU
             {
                 Directory.CreateDirectory(SyncTo);
             }
-            //foreach (string mru in MRUs)
             foreach(string mru in MRUs.Keys)
             {
                 try
                 {
                     if (File.Exists(MRUs[mru]))
                     {
-                        //string Filename = Path.GetFileName(mru);
 
                         if (!File.Exists(SyncTo + mru))
                         {
-                            //File.Copy(MRUs[mru], SyncTo + mru);
                             this.Copy(MRUs[mru], SyncTo + mru);
                         }
                         else
