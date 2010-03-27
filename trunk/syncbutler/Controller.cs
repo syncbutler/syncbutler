@@ -96,7 +96,6 @@ namespace SyncButler
         private static void ReceiveAction(string[] args)
         {
             Controller.GetInstance().GrabFocus(); // grab focus
-            string path="";
             int i = 0;
             foreach (string str in args) 
             {
@@ -118,11 +117,37 @@ namespace SyncButler
         {
             string appPath = SyncEnvironment.AppPath;
 
-            if ((leftPath.StartsWith(appPath) && leftPath.Length <= (appPath.Length + 1)) ||
-                    (rightPath.StartsWith(appPath) && rightPath.Length <= (appPath.Length + 1)))
-                throw new UserInputException("Cannot create a partnership on the running SyncButler directory!");
+            ContainsAppDirectory(leftPath, rightPath, appPath);
 
             syncEnvironment.AddPartnership(name, leftPath, rightPath);
+        }
+
+        /// <summary>
+        /// Checks a path and throws an exception if it contains the application directory.
+        /// </summary>
+        /// <param name="leftPath">Full Path to the left of a partnership</param>
+        /// <param name="rightPath">Full Path to the right of a partnership</param>
+        /// <param name="appPath">Path to the application</param>
+        /// <exception cref="UserInputException">Cannot create a partnership which contains the SyncButler directory</exception>
+        private static void ContainsAppDirectory(String leftPath, String rightPath, string appPath)
+        {
+            char[] standard = {'\\',' '};
+            //Path standardised
+            string standardisedLeft = leftPath.TrimEnd(standard).ToLower() + "\\";
+            string standardisedRight = rightPath.TrimEnd(standard).ToLower() + "\\";
+            string standardisedApp = appPath.TrimEnd(standard).ToLower() + "\\";
+
+            if (standardisedApp.Equals(standardisedLeft) || standardisedApp.Equals(standardisedRight))
+                throw new UserInputException("Cannot create a partnership on the running SyncButler directory!");
+        }
+
+        /// <summary>
+        /// Adds a minipartnership
+        /// </summary>
+        /// <param name="source">Full path to the source</param>
+        public void AddMiniPartnership(string source)
+        {
+            syncEnvironment.AddMiniPartnership(source);
         }
         
         /// <summary>
@@ -168,6 +193,15 @@ namespace SyncButler
         public SortedList<String,Partnership> GetPartnershipList()
         {
             return syncEnvironment.GetPartnershipsList();
+        }
+
+        /// <summary>
+        /// Retrieves the list of mini partnerships from the sync environment. Allows for the user interface to display the list.
+        /// </summary>
+        /// <returns>The list of all mini partnerships</returns>
+        public SortedList<String, Partnership> GetMiniPartnershipList()
+        {
+            return syncEnvironment.GetMiniPartnershipsList();
         }
 
         /// <summary>

@@ -34,9 +34,10 @@ namespace SyncButler
         
         ///List of persistence attributes
         private SortedList<String,Partnership> partnershipList;
+        private SortedList<String, Partnership> miniPartnershipList;
         private static bool allowAutoSyncForConflictFreeTasks;
         private static bool firstRunComplete;
-        private static bool computerNamed =false;
+        private static bool computerNamed = false;
         private static bool enableShellContext = false; //Defaults to false
         private static long fileReadBufferSize = 2048000; //2MB, How much of the data file is read each cycle. Editable.
         private static string computerName;
@@ -54,7 +55,18 @@ namespace SyncButler
         private static SyncEnvironment syncEnv;
         private static Assembly syncButlerAssembly = null;
         private static string _appPath = null;
-        
+
+        /// <summary>
+        /// Path to thumbdrive for mini partnerships
+        /// </summary>
+        private string miniSyncPath 
+        {
+            get
+            {
+                return _SBSDriveLetter + @":\" + DEFAULT_SBS_RELATIVE_PATH;
+            }
+        }
+
         /// <summary>
         /// This constructor will automatically restore a previous sessions or create new ones if one is not found.
         /// This constructor should never be invoked directly. Use GetInstance() to obtain an instance of SyncEnvironment.
@@ -90,6 +102,11 @@ namespace SyncButler
             return partnershipList;
         }
 
+        public SortedList<String, Partnership> GetMiniPartnershipsList()
+        {
+            return miniPartnershipList;
+        }
+
         /// <summary>
         /// Returns the partnership with unique key (the friendly name)
         /// </summary>
@@ -113,15 +130,38 @@ namespace SyncButler
             System.Diagnostics.Debug.Assert((name != null) && (name.Length > 0));
             Partnership element = CreatePartnership(name, leftPath, rightPath);
 
-            if(!IsUniquePartnershipName(name))
+            if(!IsUniquePartnershipName(name, partnershipList))
+                throw new ArgumentException("The name is already in use. Please input another name.");
+
+            //Usually CheckIsUniquePartnership will check for IsUniquePartnershipName too
+            //since we checked it already, the exception caught will be more specified
+            if (!IsUniquePartnershipPath(name, leftPath, rightPath, partnershipList))
+                throw new ArgumentException("This partnership already exists.");
+
+            partnershipList.Add(name, element);
+            StoreEnv(); //Save the partnership to disk immediately
+        }
+        
+        /// <summary>
+        /// Adds a Mini Partnership to the list of mini partnerships
+        /// </summary>
+        /// <param name="source">full path to the source</param>
+        public void AddMiniPartnership(string source)
+        {
+            string name = source; //possible solution is to use the full path as the name for mini partnerships or just null
+            
+            System.Diagnostics.Debug.Assert((name != null) && (name.Length > 0));
+            Partnership element = CreatePartnership(name, source, miniSyncPath);
+
+            if (!IsUniquePartnershipName(name, miniPartnershipList))
                 throw new ArgumentException("Friendly name already in used");
 
             //Usually CheckIsUniquePartnership will check for IsUniquePartnershipName too
             //since we checked it already, the exception caught will be more specified
-            if (!IsUniquePartnershipPath(name, leftPath, rightPath))
+            if (!IsUniquePartnershipPath(name, source, miniSyncPath, miniPartnershipList))
                 throw new ArgumentException("Such file/folder partnership already exist");
 
-            partnershipList.Add(name, element);
+            miniPartnershipList.Add(name, element);
             StoreEnv(); //Save the partnership to disk immediately
         }
 
@@ -132,6 +172,16 @@ namespace SyncButler
         public void RemovePartnership(int idx)
         {
             partnershipList.RemoveAt(idx);
+            StoreEnv(); //Save the partnership to disk immediately
+        }
+
+        /// <summary>
+        /// Removes specified mini partnership in the mini partnership list
+        /// </summary>
+        /// <param name="idx">Removes the mini partnership at that particular index</param>
+        public void RemoveMiniPartnership(int idx)
+        {
+            miniPartnershipList.RemoveAt(idx);
             StoreEnv(); //Save the partnership to disk immediately
         }
 
@@ -166,14 +216,14 @@ namespace SyncButler
             bool pathUnchanged = false;
 
             //See if the friendly name is already in used (even after it is removed)
-            if (!IsUniquePartnershipName(newname))
+            if (!IsUniquePartnershipName(newname, partnershipList))
             {
                 nameUnchanged = true;
                 //throw new ArgumentException("Friendly name already in used. Update failure. Previous Partnership record kept");
             }
 
             //Checks if the user try to update the partnership with existing partnerships
-            if (!IsUniquePartnershipPath(updated.Name, updated.LeftFullPath, updated.RightFullPath))
+            if (!IsUniquePartnershipPath(updated.Name, updated.LeftFullPath, updated.RightFullPath, partnershipList))
             {
                 pathUnchanged = true;
             }
@@ -310,6 +360,7 @@ namespace SyncButler
         {
             //Create the list of partnerships
             partnershipList = new SortedList<String,Partnership>();
+            miniPartnershipList = new SortedList<String, Partnership>();
             
             // Add in default settings to XML file
             storedSettings.SystemSettings.AllowAutoSyncForConflictFreeTasks = true;
@@ -358,24 +409,9 @@ namespace SyncButler
             {
                 config.Sections.Clear();
             }
-            
-            // The config file will be the name of our app, less the extension
-            // It might not be so if the user has changed the filename for some reason
-            // Attempt to locate the settings file (null if not found)
-            string configFilename = SearchForSettingsFile();
-            if (configFilename == null)
-                configFilename = GetSettingsFileName();
-            else
-                configFilename = _appPath + @"\" + configFilename;
 
-            // Map the new configuration file
-            ExeConfigurationFileMap configFileMap = new ExeConfigurationFileMap();
-            configFileMap.ExeConfigFilename = configFilename;
+            ConfigurationSetup();
 
-            // Create out own configuration file
-            config = ConfigurationManager.OpenMappedExeConfiguration(
-                configFileMap, ConfigurationUserLevel.None);
-            
             // Prepare to read the custom sections (Pre declared needed for valid settings
             // file check. (Hint, the first run complete is hidden in the xml file)
             if (config != null)
@@ -425,22 +461,7 @@ namespace SyncButler
             freeSpaceToUse = 0;
             resolution = "KB";
 
-            // The config file will be the name of our app, less the extension
-            // It might not be so if the user has changed the filename for some reason
-            // Attempt to locate the settings file (null if not found)
-            string configFilename = SearchForSettingsFile();;
-            if (configFilename == null)
-                configFilename = GetSettingsFileName();
-            else
-                configFilename = _appPath + @"\" + configFilename;
-            
-            // Map the new configuration file
-            ExeConfigurationFileMap configFileMap = new ExeConfigurationFileMap();
-            configFileMap.ExeConfigFilename = configFilename;
-
-            // Create out own configuration file
-            config = ConfigurationManager.OpenMappedExeConfiguration(
-                configFileMap, ConfigurationUserLevel.None);
+            ConfigurationSetup();
 
             // Prepare to read the custom sections (Pre declared needed for valid settings
             // file check. (Hint, the first run complete is hidden in the xml file)
@@ -477,6 +498,25 @@ namespace SyncButler
             else
                 RestoreEnv();
         }
+        private void ConfigurationSetup()
+        {
+            // The config file will be the name of our app, less the extension
+            // It might not be so if the user has changed the filename for some reason
+            // Attempt to locate the settings file (null if not found)
+            string configFilename = SearchForSettingsFile();
+            if (configFilename == null)
+                configFilename = GetSettingsFileName();
+            else
+                configFilename = _appPath + @"\" + configFilename;
+
+            // Map the new configuration file
+            ExeConfigurationFileMap configFileMap = new ExeConfigurationFileMap();
+            configFileMap.ExeConfigFilename = configFilename;
+
+            // Create out own configuration file
+            config = ConfigurationManager.OpenMappedExeConfiguration(
+                configFileMap, ConfigurationUserLevel.None);
+        }
 
         /// <summary>
         /// Rewrap the list of partnership in XML friendly format. The list is guaranted to
@@ -486,11 +526,16 @@ namespace SyncButler
         {
             //Clean up the database first
             storedPartnerships.PartnershipList.Clear();
+            storedPartnerships.MiniPartnershipList.Clear();
 
             //Convert to store in XML format
             foreach(Partnership element in partnershipList.Values)
             {
                 storedPartnerships.PartnershipList.Add(element);
+            }
+            foreach (Partnership element in miniPartnershipList.Values)
+            {
+                storedPartnerships.MiniPartnershipList.Add(element);
             }
         }
 
@@ -501,14 +546,19 @@ namespace SyncButler
         private void ConvertXML2PartnershipList()
         {
             //Prepare the partnership list
-            partnershipList = new SortedList<String,Partnership>();
-
+            partnershipList = new SortedList<string,Partnership>();
+            miniPartnershipList = new SortedList<string, Partnership>();
             //Convert to store in XML format
             foreach (PartnershipElement element in storedPartnerships.PartnershipList)
             {
                 Partnership newElement = element.obj;
                 partnershipList.Add(element.friendlyName, newElement);
-            } 
+            }
+            foreach (PartnershipElement element in storedPartnerships.MiniPartnershipList)
+            {
+                Partnership newElement = element.obj;
+                miniPartnershipList.Add(element.friendlyName, newElement);
+            }
         }
 
         /// <summary>
@@ -635,33 +685,24 @@ namespace SyncButler
         /// <param name="leftPath">Full path to the incoming left folder or file</param>
         /// <param name="rightPath">Full path to the incoming right folder or file</param>
         /// <returns>True if it is a pair of unique partnership path, false otherwise</returns>
-        private bool IsUniquePartnershipPath(string name, string leftPath, string rightPath)
+        private bool IsUniquePartnershipPath(string name, string leftPath, string rightPath, SortedList<string,Partnership> partnerList)
         {
-            bool pathAlreadyExist1 = false; //Checks left with left, right with right
-            bool pathAlreadyExist2 = false; //Checks left with right, right with left
-
-            foreach (Partnership storedElement in partnershipList.Values)
+            foreach (Partnership storedElement in partnerList.Values)
             {
-                pathAlreadyExist1 = false;
-                pathAlreadyExist2 = false;
-
                 //For (Incoming Left != Left in List && Incoming Right != Right in List)
-                if (storedElement.LeftFullPath.ToLower().Equals(leftPath.ToLower()))
-                    pathAlreadyExist1 = true;
-                //Don't throw exception first, left and right must already exist
+                string storedLeft = storedElement.LeftFullPath.ToLower().TrimEnd('\\');
+                string storedRight = storedElement.RightFullPath.ToLower().TrimEnd('\\');
+                string checkLeft = leftPath.ToLower().TrimEnd('\\');
+                string checkRight = rightPath.ToLower().TrimEnd('\\');
 
-                if (pathAlreadyExist1 && storedElement.RightFullPath.ToLower().Equals(rightPath.ToLower()))
+                //check left path with left of stored partnerships and right with right
+                if (storedLeft.Equals(checkLeft) && storedRight.Equals(checkRight))
                     return false;
 
                 //For (Incoming Left != Right in List && Incoming Right != Left in List)
-                if (storedElement.LeftFullPath.ToLower().Equals(rightPath.ToLower()))
-                    pathAlreadyExist2 = true;
-                //Don't throw exception first, left and right must already exist
-
-                if (pathAlreadyExist2 && storedElement.RightFullPath.ToLower().Equals(leftPath.ToLower()))
+                if (storedLeft.Equals(checkRight) && storedRight.Equals(checkLeft))
                     return false;
             }
-
             return true;
         }
 
@@ -669,15 +710,15 @@ namespace SyncButler
         /// Checks if the desired friendly name is already in used
         /// </summary>
         /// <param name="name">Desired friendly name of the partnership</param>
+        /// <param name="isMini">true if checking the mini partnership list; else checks the main partnership list</param>
         /// <returns>True if it is unique, false otherwise</returns>
-        private bool IsUniquePartnershipName(string name)
+        private bool IsUniquePartnershipName(string name, SortedList<string,Partnership> partnerList)
         {
-            foreach (Partnership storedElement in partnershipList.Values)
+            foreach (Partnership storedElement in partnerList.Values)
             {
-                if (storedElement.Name.ToLower().Equals(name.ToLower()))
+                if (storedElement.Name.Trim().ToLower().Equals(name.Trim().ToLower()))
                     return false;
             }
-
             return true;
         }
 
