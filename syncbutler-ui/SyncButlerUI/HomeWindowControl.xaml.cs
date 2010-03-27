@@ -419,7 +419,7 @@ namespace SyncButlerUI
                     }
                     catch (IOException e)
                     {
-                        exp = new Exception("An I/O error was encountered while processing " + partnershipName + ": " + e.Message);
+                        exp = new Exception("There was a problem accessing a file while processing " + partnershipName + ": " + e.Message);
                     }
                     catch (UnauthorizedAccessException e)
                     {
@@ -435,7 +435,7 @@ namespace SyncButlerUI
                     }
                     catch (Exception e)
                     {
-                        exp = new Exception("An error occurred while processing " + partnershipName + ": " + e.Message);
+                        exp = new Exception("An problem was encountered while processing " + partnershipName + ": " + e.Message);
                     }
 
                     if (exp != null)
@@ -1062,6 +1062,8 @@ namespace SyncButlerUI
         {
             // Background worker to do the actual work
             BackgroundWorker mruWorker = new BackgroundWorker();
+            mruWorker.WorkerSupportsCancellation = true;
+
             // Progress bar window
             ProgressBar progressWindow = new ProgressBar(mruWorker, "SyncButler, Sync!");
 
@@ -1333,9 +1335,39 @@ namespace SyncButlerUI
         public void LoadMRUs()
         {
             SBSDone.IsEnabled = false;
-            MRUs = Controller.GetInstance().GetMonitoredFiles();
-            Favourites_List.ItemsSource = MRUs["interesting"].Keys;
-            WeirdFile_List.ItemsSource = MRUs["sensitive"].Keys;
+
+            BackgroundWorker sbsScanWorker = new BackgroundWorker();
+            ProgressBar progressWindow = new ProgressBar(sbsScanWorker, "Loading SyncButler, Sync!");
+            progressWindow.HideTotalProgress();
+
+            sbsScanWorker.DoWork += new DoWorkEventHandler(delegate(Object worker, DoWorkEventArgs args)
+            {
+                ProgressBar.ProgressBarInfo pinfo;
+                pinfo.SubTaskPercent = 0;
+                pinfo.taskDescription = "Searching for files...";
+                pinfo.TotalTaskPercent = 0;
+                ((BackgroundWorker)worker).ReportProgress(0, pinfo);
+
+                MRUs = Controller.GetInstance().GetMonitoredFiles(delegate(SyncableStatus status)
+                {
+                    pinfo.SubTaskPercent = status.curTaskPercentComplete;
+                    ((BackgroundWorker)worker).ReportProgress(0, pinfo);
+                    return true;
+                });
+
+                pinfo.SubTaskPercent = 100;
+                pinfo.taskDescription = "Finishing...";
+                ((BackgroundWorker)worker).ReportProgress(0, pinfo);
+            });
+
+            sbsScanWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(delegate(Object worker, RunWorkerCompletedEventArgs args)
+            {
+                Favourites_List.ItemsSource = MRUs["interesting"].Keys;
+                WeirdFile_List.ItemsSource = MRUs["sensitive"].Keys;
+                progressWindow.TaskComplete();
+            });
+
+            progressWindow.Start();
         }
 
         private void ShowResult(object sender, EventArgs e)

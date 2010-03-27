@@ -101,63 +101,64 @@ namespace SyncButler
         /// </summary>
         /// <param name="result"></param>
         private static void NewConnection(IAsyncResult result)
-        {            
-            MemoryStream mbuf = new MemoryStream();
-
-            try
+        {
+            using (MemoryStream mbuf = new MemoryStream())
             {
-                // This may happen if the pipe is closing
-                if (pipeServer == null) return;
-                
-                pipeServer.EndWaitForConnection(result);
-
-                // Read one message off the pipe
-                byte[] buf = new byte[256];
-                do mbuf.Write(buf, 0, pipeServer.Read(buf, 0, buf.Length));
-                while (!pipeServer.IsMessageComplete);
-
-                if (mbuf.Length == 0)
+                try
                 {
-                    Logging.Logger.GetInstance().WARNING("Attempted to read from pipe, but the pipe was empty");
-                    throw new IOException();
+                    // This may happen if the pipe is closing
+                    if (pipeServer == null) return;
+
+                    pipeServer.EndWaitForConnection(result);
+
+                    // Read one message off the pipe
+                    byte[] buf = new byte[256];
+                    do mbuf.Write(buf, 0, pipeServer.Read(buf, 0, buf.Length));
+                    while (!pipeServer.IsMessageComplete);
+
+                    if (mbuf.Length == 0)
+                    {
+                        Logging.Logger.GetInstance().WARNING("Attempted to read from pipe, but the pipe was empty");
+                        throw new IOException();
+                    }
+                    // Reset the position so that we can reuse this stream for reading
+                    mbuf.Position = 0;
                 }
-                // Reset the position so that we can reuse this stream for reading
-                mbuf.Position = 0;
-            }
-            catch (IOException)
-            {
-                // The pipe was broken
-                Logging.Logger.GetInstance().WARNING("Attempted to read from pipe, but the pipe was broken");
+                catch (IOException)
+                {
+                    // The pipe was broken
+                    Logging.Logger.GetInstance().WARNING("Attempted to read from pipe, but the pipe was broken");
+                    CreateInstanceChannel();
+                    return;
+                }
+                catch (ObjectDisposedException)
+                {
+                    // The pipe was closed
+                    Logging.Logger.GetInstance().WARNING("Attempted to read from pipe, but the pipe was closed");
+                    CreateInstanceChannel();
+                    return;
+                }
+
                 CreateInstanceChannel();
-                return;
-            }
-            catch (ObjectDisposedException)
-            {
-                // The pipe was closed
-                Logging.Logger.GetInstance().WARNING("Attempted to read from pipe, but the pipe was closed");
-                CreateInstanceChannel();
-                return;
-            }
 
-            CreateInstanceChannel();
+                // Now it's time to unserialize...
+                XmlSerializer serializer = new XmlSerializer(typeof(string[]));
+                string[] data;
 
-            // Now it's time to unserialize...
-            XmlSerializer serializer = new XmlSerializer(typeof(string[]));
-            string[] data;
+                try
+                {
+                    data = (string[])serializer.Deserialize(mbuf);
+                }
+                catch (Exception e)
+                {
+                    Logging.Logger.GetInstance().FATAL("Message received over named pipe, but deserialization failed: " + e.Message);
+                    return;
+                }
 
-            try
-            {
-                data = (string[]) serializer.Deserialize(mbuf);
-            }
-            catch (Exception e)
-            {
-                Logging.Logger.GetInstance().FATAL("Message received over named pipe, but deserialization failed: " + e.Message);
-                return;
-            }
-
-            if (m_Receive != null)
-            {
-                m_Receive(data);
+                if (m_Receive != null)
+                {
+                    m_Receive(data);
+                }
             }
         }
 

@@ -52,7 +52,7 @@ namespace SyncButlerUI
             waitForMessageResponse = new Semaphore(0, 1);
             messageResponse = CustomDialog.MessageResponse.NotUsed;
 
-            //this.ControlBox
+            Topmost = true;
 		}
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace SyncButlerUI
             this.Title = title;
             taskWorker = worker;
             taskWorker.WorkerReportsProgress = true;
-            taskWorker.WorkerSupportsCancellation = true;
+            if (!taskWorker.WorkerSupportsCancellation) HideCancelButton();
             taskWorker.ProgressChanged += ProgressListener;
         }
 
@@ -79,12 +79,20 @@ namespace SyncButlerUI
         }
 
         /// <summary>
+        /// Hides the cancel button
+        /// </summary>
+        public void HideCancelButton()
+        {
+            CancelButton.Visibility = Visibility.Hidden;
+        }
+
+        /// <summary>
         /// Shows the progress window and starts the background worker
         /// </summary>
         public void Start()
         {
-            this.Show();
             taskWorker.RunWorkerAsync();
+            this.ShowDialog();
         }
 
         /// <summary>

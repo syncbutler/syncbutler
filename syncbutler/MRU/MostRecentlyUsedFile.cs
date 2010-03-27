@@ -25,25 +25,49 @@ namespace SyncButler.MRU
         private static extern void ILFree(
             IntPtr pidl);
 
+        public static SyncableStatusMonitor statusMonitor = null;
+
         public static List<string> GetAll()
         {
             int depth = 2;
             int days = 5;
+
+            if (statusMonitor != null) statusMonitor(new SyncableStatus("", 0, 7, SyncableStatus.ActionType.Sync));
             List<string> mergedList = (MostRecentlyUsedFile.Get());
 
+            if (statusMonitor != null) statusMonitor(new SyncableStatus("", 0, 14, SyncableStatus.ActionType.Sync));
             mergedList.AddRange(MostRecentlyUsedFile.Scan(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), depth, days));
+
+            if (statusMonitor != null) statusMonitor(new SyncableStatus("", 0, 21, SyncableStatus.ActionType.Sync));
             mergedList.AddRange(MostRecentlyUsedFile.Scan(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), depth, days));
+            
+            if (statusMonitor != null) statusMonitor(new SyncableStatus("", 0, 28, SyncableStatus.ActionType.Sync));
             mergedList.AddRange(MostRecentlyUsedFile.Scan(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), depth, days));
+            
+            if (statusMonitor != null) statusMonitor(new SyncableStatus("", 0, 35, SyncableStatus.ActionType.Sync));
             mergedList.AddRange(MostRecentlyUsedFile.Scan(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), depth, days));
+            
+            if (statusMonitor != null) statusMonitor(new SyncableStatus("", 0, 42, SyncableStatus.ActionType.Sync));
             mergedList.AddRange(MostRecentlyUsedFile.Scan(Environment.GetFolderPath(Environment.SpecialFolder.Personal), depth, days));
+            
+            if (statusMonitor != null) statusMonitor(new SyncableStatus("", 0, 49, SyncableStatus.ActionType.Sync));
             mergedList.AddRange(MostRecentlyUsedFile.Scan(Environment.GetFolderPath(Environment.SpecialFolder.MyMusic), depth, days));
+            
+            if (statusMonitor != null) statusMonitor(new SyncableStatus("", 0, 56, SyncableStatus.ActionType.Sync));
             List<string> drives = SystemEnvironment.StorageDevices.GetNonUSBDriveLetters();
+            
             drives.AddRange(SystemEnvironment.StorageDevices.GetUSBDriveLetters());
             drives.AddRange(SystemEnvironment.StorageDevices.GetUSBDriveLetters());
+
+            int done = 1;
+            double toPercent = 0; 
+            if (drives.Count > 0) toPercent = (100 - 56) / drives.Count;
 
             foreach (string drive in drives)
             {
+                if (statusMonitor != null) statusMonitor(new SyncableStatus("", 0, ((int)(done * toPercent)) + 56, SyncableStatus.ActionType.Sync));
                 mergedList.AddRange(MostRecentlyUsedFile.Scan(drive, depth, days));
+                done++;
             }
             
             return CleanUP(mergedList);

@@ -236,7 +236,8 @@ namespace SyncButlerUI
                 var parentWindow = Window.GetWindow(parent);
                 if (parentWindow != null) instance.Owner = parentWindow;
             }
-            
+
+            instance.Topmost = true;
             instance.ShowDialog();
 
             return instance.userResponse;

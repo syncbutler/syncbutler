@@ -246,9 +246,18 @@ namespace SyncButler
         /// <summary>
         /// Returns a list of most recently used files.
         /// </summary>
-        public SortedList<string,SortedList<string,string>> GetMonitoredFiles()
+        public SortedList<string,SortedList<string,string>> GetMonitoredFiles(SyncableStatusMonitor statusMonitor)
         {
-            return ContentFilters.Spilt(MostRecentlyUsedFile.ConvertToSortedList(MostRecentlyUsedFile.GetAll()));
+            MostRecentlyUsedFile.statusMonitor = statusMonitor;
+            SortedList<string,SortedList<string,string>> ret = ContentFilters.Spilt(MostRecentlyUsedFile.ConvertToSortedList(MostRecentlyUsedFile.GetAll()));
+            MostRecentlyUsedFile.statusMonitor = null;
+            return ret;
+        }
+
+        public SortedList<string, SortedList<string, string>> GetMonitoredFiles()
+        {
+            SortedList<string, SortedList<string, string>> ret = ContentFilters.Spilt(MostRecentlyUsedFile.ConvertToSortedList(MostRecentlyUsedFile.GetAll()));
+            return ret;
         }
         
         /// <summary>

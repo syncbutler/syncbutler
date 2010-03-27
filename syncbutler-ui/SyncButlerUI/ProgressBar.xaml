@@ -8,9 +8,9 @@
 	Closing="WindowClosing">
 
 	<Grid x:Name="LayoutRoot">
-		<Button Margin="185,87,185,0" VerticalAlignment="Top" Height="27" Content="Cancel" Click="CancelBtn"/>
+		<Button x:Name="CancelButton" Margin="185,87,185,0" VerticalAlignment="Top" Height="27" Content="Cancel" Click="CancelBtn"/>
 		<Label x:Name="ProgressText" Margin="8,8,8,0" VerticalAlignment="Top" Height="29" Content="Label"/>
 		<ProgressBar x:Name="SubProgress" Margin="8,37,8,0" VerticalAlignment="Top" Height="15"/>
-		<ProgressBar x:Name="TotalProgress" Margin="8,56,8,51"/>
+		<ProgressBar x:Name="TotalProgress" Margin="8,56,8,66"/>
 	</Grid>
 </Window>
