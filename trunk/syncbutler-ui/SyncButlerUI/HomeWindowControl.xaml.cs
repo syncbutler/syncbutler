@@ -1155,38 +1155,51 @@ namespace SyncButlerUI
 		private void SBSSettingChanged(object sender, RoutedEventArgs e)
 		{
             if (this.SBSSettingComboBox.SelectedItem != null)
-			    this.SBSWorkingDriveComboBox.IsEnabled = this.SBSSettingComboBox.SelectedItem.Equals("Enable");
+            {
+                this.SBSWorkingDriveComboBox.IsEnabled = this.SBSSettingComboBox.SelectedItem.Equals("Enable");
+                if (this.SBSSettingComboBox.SelectedItem.Equals("Enable"))
+                {
+                    this.SpaceToUseSlide.IsEnabled = true;
+                    this.SpaceToUseTextbox.IsEnabled = true;
+					SBSUpdateSpaceDetails(null,null);
+                }
+            }
 		}
 
         private void SBSUpdateSpaceDetails(object sender, RoutedEventArgs e)
         {
-            if (SBSWorkingDriveComboBox.SelectedIndex != -1)
+            if (this.SBSSettingComboBox.SelectedIndex != -1 &&
+                this.SBSSettingComboBox.SelectedItem.Equals("Enable"))
             {
-                DriveInfo di = new DriveInfo(""+(char)SBSWorkingDriveComboBox.SelectedItem);
-                long freespace = di.AvailableFreeSpace;
-                long GB = 1024 * 1024 * 1024;
-                long MB = 1024 * 1024;
-                long KB = 1024;
-                if (freespace / GB > 10)
+                if (SBSWorkingDriveComboBox.SelectedIndex != -1)
                 {
-                    resolutionLabel.Content = "GB";
-                    SpaceToUseSlide.Maximum = freespace / GB;
+                    SpaceToUseSlide.Value = 0;
+                    DriveInfo di = new DriveInfo("" + (char)SBSWorkingDriveComboBox.SelectedItem);
+                    long freespace = di.AvailableFreeSpace;
+                    long GB = 1024 * 1024 * 1024;
+                    long MB = 1024 * 1024;
+                    long KB = 1024;
+                    if (freespace / GB > 10)
+                    {
+                        resolutionLabel.Content = "GB";
+                        SpaceToUseSlide.Maximum = freespace / GB;
 
-                }
-                else if (freespace / MB > 500)
-                {
-                    resolutionLabel.Content = "MB";
-                    SpaceToUseSlide.Maximum = freespace / MB;
-                }
-                else if (freespace / MB > 2)
-                {
-                    resolutionLabel.Content = "KB";
-                    SpaceToUseSlide.Maximum = freespace / KB;
-                }
-                else
-                {
-                    resolutionLabel.Content = "Bytes";
-                    SpaceToUseSlide.Maximum = freespace;
+                    }
+                    else if (freespace / MB > 500)
+                    {
+                        resolutionLabel.Content = "MB";
+                        SpaceToUseSlide.Maximum = freespace / MB;
+                    }
+                    else if (freespace / MB > 2)
+                    {
+                        resolutionLabel.Content = "KB";
+                        SpaceToUseSlide.Maximum = freespace / KB;
+                    }
+                    else
+                    {
+                        resolutionLabel.Content = "Bytes";
+                        SpaceToUseSlide.Maximum = freespace;
+                    }
                 }
             }
         }

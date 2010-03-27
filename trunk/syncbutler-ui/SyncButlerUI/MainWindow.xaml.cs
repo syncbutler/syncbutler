@@ -126,8 +126,9 @@ namespace SyncButlerUI
             this.homeWindow1.SBSSettingComboBox.Items.Add("Enable");
             this.homeWindow1.SBSSettingComboBox.Items.Add("Disable");
             this.homeWindow1.SBSSettingComboBox.SelectedItem = this.controller.GetSBSEnable() ;
-            
-            
+
+            this.homeWindow1.SpaceToUseSlide.IsEnabled = false;
+            this.homeWindow1.SpaceToUseTextbox.IsEnabled = false;
 
 		}
 
