@@ -42,6 +42,8 @@ namespace SyncButler
         private static string computerName;
         private static char _SBSDriveLetter;
         private static string sbsEnable;
+        private static string resolution;
+        private static double freeSpaceToUse;
 
         //List of runtime variables
         private static System.Configuration.Configuration config;
@@ -249,6 +251,8 @@ namespace SyncButler
             storedSettings.SystemSettings.ComputerName = computerName;
             storedSettings.SystemSettings.SBSDriveLetter = SBSDriveLetter;
             storedSettings.SystemSettings.SBSEnable = SBSEnable;
+            storedSettings.SystemSettings.FreeSpaceToUse = FreeSpaceToUse;
+            storedSettings.SystemSettings.Resolution = Resolution;
 
             // Write to file
             if (SearchForSettingsFile() == null)
@@ -376,17 +380,12 @@ namespace SyncButler
             // file check. (Hint, the first run complete is hidden in the xml file)
             if (config != null)
             {
-                //Console.WriteLine(
-                //    "A Settings file was found, checking its validity");
-
                 storedSettings =
                     (SettingsSection)config.GetSection(settingName);
 
                 
                 if (storedSettings == null)
                 {
-                    //Console.WriteLine(
-                    //    "A invalid settings file was found, recreating one");
                     storedSettings = new SettingsSection();
                     storedSettings.SystemSettings.FirstRunComplete = true;
                     storedSettings.SystemSettings.ComputerNamed = true;
@@ -423,6 +422,9 @@ namespace SyncButler
             computerName = "Computer1";
             computerNamed = false;
             sbsEnable = "Disable";
+            freeSpaceToUse = 0;
+            resolution = "KB";
+
             // The config file will be the name of our app, less the extension
             // It might not be so if the user has changed the filename for some reason
             // Attempt to locate the settings file (null if not found)
@@ -919,6 +921,35 @@ namespace SyncButler
             set
             {
                 sbsEnable = value;
+            }
+        }
+
+        /// <summary>
+        /// The resolution of the free space
+        /// </summary>
+        public static string Resolution
+        {
+            get
+            {
+                return resolution;
+            }
+            set
+            {
+                resolution = value;
+            }
+        }
+        /// <summary>
+        /// Free space that the user allow sbs to use
+        /// </summary>
+        public static double FreeSpaceToUse
+        {
+            get
+            {
+                return freeSpaceToUse;
+            }
+            set
+            {
+                freeSpaceToUse = value;
             }
         }
 

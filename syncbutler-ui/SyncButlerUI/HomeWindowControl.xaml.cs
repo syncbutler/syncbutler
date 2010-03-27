@@ -55,6 +55,9 @@ namespace SyncButlerUI
 	public enum State{Home,Page1OfCreate,Page2OfCreate,Page3OfCreate,Page4OfCreate,ViewPartnership,SBS,Conflict,Settings,Page1OfEdit,Page2OfEdit,Page3OfEdit,Page4OfEdit,Result};
     private double LastWorkingFreeSpace = 0.0;
 	private State CurrentState;
+    private const long GIGA_BYTE = 1024 * 1024 * 1024;
+    private const long MEGA_BYTE = 1024 * 1024;
+    private const long KILO_BYTE = 1024;
 	#endregion
 
         public enum CurrentActionEnum { Scanning, Resolving, Idle }
@@ -73,9 +76,6 @@ namespace SyncButlerUI
 		public HomeWindowControl()
 		{
 			this.InitializeComponent();
-			//Temporary testing link to Controller
-            //controller = new Controller();
-            //partnershipList.ItemsSource = controller.GetPartnershipList();
 		}
 
         /// <summary>
@@ -1148,8 +1148,10 @@ namespace SyncButlerUI
             string ComputerName = this.ComputerNameTextBox.Text;
             string SBSEnable = (string)this.SBSSettingComboBox.SelectedItem;
             char DriveLetter = (char)this.SBSWorkingDriveComboBox.SelectedItem;
-			
-            Controller.GetInstance().SaveSetting(ComputerName,SBSEnable,DriveLetter);
+            double FreeSpaceToUse = this.LastWorkingFreeSpace;
+            string Resolution = this.resolutionLabel.Content.ToString();
+
+            Controller.GetInstance().SaveSetting(ComputerName, SBSEnable, DriveLetter, FreeSpaceToUse, Resolution);
 
             showMessageBox(CustomDialog.MessageType.Success, "The Setting has been changed");
 		}
@@ -1163,11 +1165,20 @@ namespace SyncButlerUI
                 {
                     this.SpaceToUseSlide.IsEnabled = true;
                     this.SpaceToUseTextbox.IsEnabled = true;
-					SBSUpdateSpaceDetails(null,null);
-                    
+                    SBSUpdateSpaceDetails(null, null);
+
                 }
+                else
+                {
+                    this.SpaceToUseSlide.Value = 0;
+                    this.resolutionLabel.Content = "KB";
+                    this.SpaceToUseSlide.IsEnabled = false;
+                    this.SpaceToUseTextbox.IsEnabled = false;
+                }
+
             }
 		}
+
 
         private void SBSUpdateSpaceDetails(object sender, RoutedEventArgs e)
         {
@@ -1179,24 +1190,22 @@ namespace SyncButlerUI
                     SpaceToUseSlide.Value = 0;
                     DriveInfo di = new DriveInfo("" + (char)SBSWorkingDriveComboBox.SelectedItem);
                     long freespace = di.AvailableFreeSpace;
-                    long GB = 1024 * 1024 * 1024;
-                    long MB = 1024 * 1024;
-                    long KB = 1024;
-                    if (freespace / GB > 10)
+       
+                    if (freespace / GIGA_BYTE > 10)
                     {
                         resolutionLabel.Content = "GB";
-                        SpaceToUseSlide.Maximum = freespace / GB;
+                        SpaceToUseSlide.Maximum = freespace / GIGA_BYTE;
 
                     }
-                    else if (freespace / MB > 500)
+                    else if (freespace / MEGA_BYTE > 500)
                     {
                         resolutionLabel.Content = "MB";
-                        SpaceToUseSlide.Maximum = freespace / MB;
+                        SpaceToUseSlide.Maximum = freespace / MEGA_BYTE;
                     }
-                    else if (freespace / MB > 2)
+                    else if (freespace / MEGA_BYTE > 2)
                     {
                         resolutionLabel.Content = "KB";
-                        SpaceToUseSlide.Maximum = freespace / KB;
+                        SpaceToUseSlide.Maximum = freespace / KILO_BYTE;
                     }
                     else
                     {
@@ -1244,6 +1253,11 @@ namespace SyncButlerUI
             this.ComputerNameTextBox.Text = "Computer1";
             this.SBSSettingComboBox.SelectedItem = "Disable";
             this.SBSWorkingDriveComboBox.SelectedIndex = 0;
+            this.SpaceToUseSlide.Value = 0;
+            this.SpaceToUseSlide.IsEnabled = false;
+            this.resolutionLabel.Content = "KB";
+            this.SpaceToUseTextbox.IsEnabled = false;
+
 		}
 		/// <summary>
 		/// Checks the sourceTextbox for values if its empty or if the directory exists

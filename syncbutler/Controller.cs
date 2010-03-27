@@ -302,11 +302,13 @@ namespace SyncButler
 		/// <param name="ComputerName">Computer name of the user</param>
 		/// <param name="EnableSBS">[Not in use]If the user wants sbs to be enabled</param>
 		/// <param name="SBSDrive">The working drive letter</param>
-		public void SaveSetting(string ComputerName, string EnableSBS, char SBSDrive)
+        public void SaveSetting(string ComputerName, string EnableSBS, char SBSDrive, Double FreeSpaceToUse, String Resolution)
 		{
             SyncEnvironment.ComputerName = ComputerName;
             SyncEnvironment.SBSDriveLetter = SBSDrive;
             SyncEnvironment.SBSEnable = EnableSBS;
+            SyncEnvironment.FreeSpaceToUse = FreeSpaceToUse;
+            SyncEnvironment.Resolution = Resolution;
             SyncEnvironment.GetInstance().StoreSettings();
 		}
 
@@ -373,6 +375,33 @@ namespace SyncButler
             SyncEnvironment.SBSDriveLetter = driveLetter;
         }
 
+        /// <summary>
+        /// Get the amount of free space to use that the user allow
+        /// </summary>
+        /// <returns>the amount of free space allowed</returns>
+        public double GetFreeSpaceToUse()
+        {
+            return SyncEnvironment.FreeSpaceToUse;
+        }
+
+        /// <summary>
+        /// Set the amount of free space to use that the user allow
+        /// </summary>
+        /// <param name="FreeSpaceToUse">the amount of free space allowed</param>
+        public void SetFreeSpaceToUse(double FreeSpaceToUse)
+        {
+            SyncEnvironment.FreeSpaceToUse = FreeSpaceToUse;
+        }
+
+        public String GetResolution()
+        {
+            return SyncEnvironment.Resolution;
+        }
+
+        public void SetResolution(String Resolution)
+        {
+            SyncEnvironment.Resolution = Resolution;
+        }
         /// <summary>
         /// Remove the shell integration context menu from the registry
         /// and disable the settings

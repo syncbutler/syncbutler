@@ -127,6 +127,33 @@ namespace SyncButler.ProgramEnvironment
             }
         }
 
+        [ConfigurationProperty("Resolution")]
+        public string Resolution
+        {
+            get
+            {
+                return (string)this["Resolution"];
+            }
+            set
+            {
+                this["Resolution"] = value;
+            }
+        }
+
+
+        [ConfigurationProperty("FreeSpaceToUse")]
+        public double FreeSpaceToUse
+        {
+            get
+            {
+                return (double)this["FreeSpaceToUse"];
+            }
+            set
+            {
+                this["FreeSpaceToUse"] = value;
+            }
+        }
+
 
         /// <summary>
         /// Determines if the shell integration menu should be kept on or off

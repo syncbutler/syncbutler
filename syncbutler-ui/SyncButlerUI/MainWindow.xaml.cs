@@ -134,6 +134,7 @@ namespace SyncButlerUI
             storageScanWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(delegate(Object worker, RunWorkerCompletedEventArgs args)
             {
                 
+            
 
                 this.homeWindow1.ComputerNameTextBox.Text = this.controller.GetComputerName();
                 this.homeWindow1.NoUSBWarningTextBlock.Visibility = Visibility.Hidden;
@@ -161,8 +162,18 @@ namespace SyncButlerUI
                 this.homeWindow1.SBSSettingComboBox.Items.Add("Disable");
                 this.homeWindow1.SBSSettingComboBox.SelectedItem = this.controller.GetSBSEnable();
 
-                this.homeWindow1.SpaceToUseSlide.IsEnabled = false;
-                this.homeWindow1.SpaceToUseTextbox.IsEnabled = false;
+                if (this.controller.GetSBSEnable().Equals("Enable"))
+                {
+                    this.homeWindow1.SpaceToUseSlide.Value = this.controller.GetFreeSpaceToUse();
+                    this.homeWindow1.resolutionLabel.Content = this.controller.GetResolution();
+                }
+                else
+                {
+                    this.homeWindow1.SpaceToUseSlide.Value = 0;
+                    this.homeWindow1.resolutionLabel.Content = "KB";
+                    this.homeWindow1.SpaceToUseSlide.IsEnabled = false;
+                    this.homeWindow1.SpaceToUseTextbox.IsEnabled = false;
+                }
 
                 progressWindow.TaskComplete();
             });
