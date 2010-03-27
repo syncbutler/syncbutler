@@ -53,7 +53,7 @@ namespace SyncButlerUI
     public string SelectedImagePath { get; set; }
 	public SyncButler.Controller Controller{get;set;}
 	public enum State{Home,Page1OfCreate,Page2OfCreate,Page3OfCreate,Page4OfCreate,ViewPartnership,SBS,Conflict,Settings,Page1OfEdit,Page2OfEdit,Page3OfEdit,Page4OfEdit,Result};
-	
+    private double LastWorkingFreeSpace = 0.0;
 	private State CurrentState;
 	#endregion
 
@@ -1162,6 +1162,7 @@ namespace SyncButlerUI
                     this.SpaceToUseSlide.IsEnabled = true;
                     this.SpaceToUseTextbox.IsEnabled = true;
 					SBSUpdateSpaceDetails(null,null);
+                    
                 }
             }
 		}
@@ -1203,7 +1204,7 @@ namespace SyncButlerUI
                 }
             }
         }
-
+        
         private void SpaceToUseChanged(Object sender, KeyEventArgs e)
         {
             if (SpaceToUseTextbox.Text.Trim().Length != 0)
@@ -1219,11 +1220,13 @@ namespace SyncButlerUI
                         SpaceToUseTextbox.Text = ""+ Math.Floor(SpaceToUseSlide.Maximum);
                         SpaceToUseSlide.Value = SpaceToUseSlide.Maximum;
                     }
+                    LastWorkingFreeSpace = double.Parse(SpaceToUseTextbox.Text);
 
                 }
                 catch (FormatException)
                 {
-                    // do nothing for now
+                    // fall back to old value
+                    SpaceToUseTextbox.Text = "" + Math.Floor(LastWorkingFreeSpace);
                 }
             }
         }
@@ -1231,6 +1234,7 @@ namespace SyncButlerUI
         {
             double value = e.NewValue;
             SpaceToUseTextbox.Text = "" + Math.Floor(value);
+            LastWorkingFreeSpace = double.Parse(SpaceToUseTextbox.Text);
 
         }
 		private void DefaultSetting(object sender, RoutedEventArgs e)
