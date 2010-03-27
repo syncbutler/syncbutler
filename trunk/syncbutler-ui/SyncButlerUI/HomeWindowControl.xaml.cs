@@ -1157,27 +1157,68 @@ namespace SyncButlerUI
             if (this.SBSSettingComboBox.SelectedItem != null)
 			    this.SBSWorkingDriveComboBox.IsEnabled = this.SBSSettingComboBox.SelectedItem.Equals("Enable");
 		}
+
         private void SBSUpdateSpaceDetails(object sender, RoutedEventArgs e)
         {
             if (SBSWorkingDriveComboBox.SelectedIndex != -1)
             {
                 DriveInfo di = new DriveInfo(""+(char)SBSWorkingDriveComboBox.SelectedItem);
                 long freespace = di.AvailableFreeSpace;
-                //double freespace_res = 0;
                 long GB = 1024 * 1024 * 1024;
-                if (freespace / GB > 50)
+                long MB = 1024 * 1024;
+                long KB = 1024;
+                if (freespace / GB > 10)
                 {
                     resolutionLabel.Content = "GB";
-                    SpaceToUseSlide.Maximum = freespace / (1024 * 1024 * 1024);
+                    SpaceToUseSlide.Maximum = freespace / GB;
 
                 }
+                else if (freespace / MB > 500)
+                {
+                    resolutionLabel.Content = "MB";
+                    SpaceToUseSlide.Maximum = freespace / MB;
+                }
+                else if (freespace / MB > 2)
+                {
+                    resolutionLabel.Content = "KB";
+                    SpaceToUseSlide.Maximum = freespace / KB;
+                }
+                else
+                {
+                    resolutionLabel.Content = "Bytes";
+                    SpaceToUseSlide.Maximum = freespace;
+                }
+            }
+        }
 
+        private void SpaceToUseChanged(Object sender, KeyEventArgs e)
+        {
+            if (SpaceToUseTextbox.Text.Trim().Length != 0)
+            {
+                try
+                {
+                    if (double.Parse(SpaceToUseTextbox.Text) <= SpaceToUseSlide.Maximum)
+                    {
+                        SpaceToUseSlide.Value = Math.Floor(double.Parse(SpaceToUseTextbox.Text));
+                    }
+                    else if (double.Parse(SpaceToUseTextbox.Text) > SpaceToUseSlide.Maximum)
+                    {
+                        SpaceToUseTextbox.Text = ""+ Math.Floor(SpaceToUseSlide.Maximum);
+                        SpaceToUseSlide.Value = SpaceToUseSlide.Maximum;
+                    }
+
+                }
+                catch (FormatException)
+                {
+                    // do nothing for now
+                }
             }
         }
         private void SpaceToUseSlided(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
         {
             double value = e.NewValue;
-            SpaceToUseTextbox.Text = "" + value;
+            SpaceToUseTextbox.Text = "" + Math.Floor(value);
+
         }
 		private void DefaultSetting(object sender, RoutedEventArgs e)
 		{
