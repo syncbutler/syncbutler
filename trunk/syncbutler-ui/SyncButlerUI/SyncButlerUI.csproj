@@ -155,6 +155,7 @@
     <Resource Include="Images\Mac-Display.png" />
     <Resource Include="Images\Misc.png" />
     <Resource Include="Images\Refresh.png" />
+    <Resource Include="Images\SBSWindow.png" />
     <Resource Include="Images\Search.png" />
     <Resource Include="Images\Settings.png" />
     <Resource Include="Images\StarBullet.png" />

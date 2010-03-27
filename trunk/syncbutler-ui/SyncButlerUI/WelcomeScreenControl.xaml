@@ -113,6 +113,16 @@
 						</ObjectAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
+				<VisualState x:Name="HelpScreen3">
+					<Storyboard>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="WelcomeScreen1" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="HelpPage3" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+					</Storyboard>
+				</VisualState>
 			</VisualStateGroup>
 		</VisualStateManager.VisualStateGroups>
 		<Grid x:Name="WelcomeScreen1">
@@ -280,6 +290,69 @@
 				<Image HorizontalAlignment="Left" Margin="18.6,54.733,0,49.267" Width="14.4" Source="Images\StarBullet.png" Stretch="Fill"/>
 				<Image HorizontalAlignment="Left" Margin="18.6,0,0,33.299" VerticalAlignment="Bottom" Width="14.4" Height="14.4" Source="Images\StarBullet.png" Stretch="Fill"/>
 			</Grid>
+
+		</Grid>
+		<Grid x:Name="HelpPage3" Visibility="Hidden">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="0.758*"/>
+				<ColumnDefinition Width="0.242*"/>
+			</Grid.ColumnDefinitions>
+			<VisualStateManager.CustomVisualStateManager>
+				<ic:ExtendedVisualStateManager/>
+			</VisualStateManager.CustomVisualStateManager>
+			<Rectangle Fill="#FFA7A7A7" Stroke="Black" Margin="-0.8,-1,-2.2,-2" Opacity="0.095" RadiusX="20" RadiusY="20" Grid.ColumnSpan="2"/>
+			<Button Margin="67.08,0,4.6,5.8" VerticalAlignment="Bottom" Height="39.2" Content="CLOSE" Grid.Column="1" FontWeight="Bold" FontSize="18.667" Click="GoToHelpScreen2_Click"/>
+			<Image Margin="170,86.6,3.905,123" Source="Images/SBSWindow.png" Stretch="Fill"/>
+			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="13.8,104,0,0" VerticalAlignment="Top" Height="116.8" HorizontalAlignment="Left" Width="139.2" d:LayoutOverrides="VerticalAlignment"/>
+			<TextBlock Margin="21.6,112.8,0,0" Foreground="White" TextWrapping="Wrap" FontWeight="Bold" HorizontalAlignment="Left" Width="122" VerticalAlignment="Top" Height="99.2"><Run Text="New or recently used files appear here. "/><Run FontFamily="Walkway Black" FontSize="14.667" Text="SyncButler "/><Run Text="will make a duplicate and store it on your "/><Run Text="USB storage device."/></TextBlock>
+			<Image HorizontalAlignment="Left" Margin="133.6,138.4,0,0" Width="52" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Top" Height="31.2">
+				<Image.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform Angle="-12.959"/>
+						<TranslateTransform X="1.93" Y="-11.382"/>
+					</TransformGroup>
+				</Image.RenderTransform>
+			</Image>
+			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="107.4,12,-53.48,0" VerticalAlignment="Top" Height="65.6" d:LayoutOverrides="VerticalAlignment"/>
+			<TextBlock Margin="120.6,17.364,-42.147,0" Foreground="White" TextWrapping="Wrap" FontWeight="Bold" VerticalAlignment="Top" Height="56.461"><Run FontFamily="Walkway Black" FontSize="14.667" Text="SyncButler"/><Run FontFamily="Fonts/#Segoe UI" FontSize="14.667" FontStyle="Italic" Text=", Sync!"/><Run FontFamily="Fonts/#Segoe UI" Text=" "/><Run FontFamily="Fonts/#Segoe UI" Text="is a special feature of "/><Run FontFamily="Walkway Black" FontSize="14.667" Text="SyncButler "/><Run FontFamily="Fonts/#Segoe UI" Text="that will attempt to identify files which you may need, and sync them automatically so that you will always have your most recent work with you."/></TextBlock>
+			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="13.8,238.4,0,0" VerticalAlignment="Top" Height="164" HorizontalAlignment="Left" Width="139.2"/>
+			<TextBlock Margin="21.6,0,0,85.6" Foreground="White" TextWrapping="Wrap" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="122" Height="148"><Run Text="Files which "/><Run FontFamily="Walkway Black" FontSize="14.667" Text="SyncButler"/><Run FontFamily="Fonts/#Segoe UI" Text=" feels are sensitive in nature will not be displayed in the list above. Instead, they will be shown here only when your mouse goes over this box."/></TextBlock>
+			<Image HorizontalAlignment="Left" Margin="133.6,0,0,161.6" Width="52" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="31.2">
+				<Image.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform Angle="0.321"/>
+						<TranslateTransform X="1.93" Y="-11.382"/>
+					</TransformGroup>
+				</Image.RenderTransform>
+			</Image>
+			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="165.8,389.6,36.12,0" VerticalAlignment="Top" Height="67.2"/>
+			<TextBlock Margin="175.972,0,42.964,30.389" Foreground="White" TextWrapping="Wrap" FontWeight="Bold" VerticalAlignment="Bottom" Height="50.97" Text="This button will mark a selected file in the recent used file list as sensitive or clear a selected file in the sensitive list as safe to sync."/>
+			<Image Margin="195.2,0,237.92,101.6" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="31.2">
+				<Image.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform Angle="-90"/>
+						<TranslateTransform X="1.93" Y="-11.382"/>
+					</TransformGroup>
+				</Image.RenderTransform>
+			</Image>
+			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="-43.32,280,3.8,0" VerticalAlignment="Top" Height="49.6" Grid.Column="1"/>
+			<TextBlock Margin="-36.52,0,7,153.6" Foreground="White" TextWrapping="Wrap" FontWeight="Bold" Grid.Column="1" Text="Click this button to start syncing your new or recently used files." VerticalAlignment="Bottom" Height="37.6"/>
+			<Image HorizontalAlignment="Right" Margin="0,0,68.312,128.637" Width="58.026" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="34.816">
+				<Image.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform Angle="131.382"/>
+						<TranslateTransform X="1.93" Y="-11.382"/>
+					</TransformGroup>
+				</Image.RenderTransform>
+			</Image>
 
 		</Grid>
 	</Grid>
