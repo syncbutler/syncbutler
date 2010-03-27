@@ -1529,10 +1529,10 @@
 						<TranslateTransform/>
 					</TransformGroup>
 				</TextBlock.RenderTransform><Run Text="Space "/><Run Text="for Sync Butler, Sync"/><Run Text=" used by:"/></TextBlock>
-			<Slider x:Name="SpaceToUseSlide" Margin="42.433,0,166.614,195.286" ValueChanged="SpaceToUseSlided" VerticalAlignment="Bottom" Height="25.524"/>
 			<Label HorizontalAlignment="Left" Margin="38.146,0,0,172.326" VerticalAlignment="Bottom" Content="0%"/>
-			<TextBox x:Name="SpaceToUseTextbox" Margin="0,0,74.472,198.85" VerticalAlignment="Bottom" TextWrapping="Wrap" HorizontalAlignment="Right" Width="62.722" KeyUp="SpaceToUseChanged"/>
 			<Label x:Name="resolutionLabel" HorizontalAlignment="Right" Margin="0,0,22.955,195.286" Content="KB" VerticalAlignment="Bottom" Width="47.517"/>
+			<Slider x:Name="SpaceToUseSlide" Margin="43.386,0,166.49,195.286" VerticalAlignment="Bottom" Height="21" ValueChanged="SpaceToUseSlided"/>
+			<TextBox x:Name="SpaceToUseTextbox" HorizontalAlignment="Right" Margin="0,0,74.472,194.326" VerticalAlignment="Bottom" TextWrapping="Wrap" Width="75" KeyUp="SpaceToUseChanged"/>
 		</Grid>
 		<Grid x:Name="Conflict_Copy" Margin="0.027,0,-0.027,0" VerticalAlignment="Bottom" Height="444" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
 			<Grid.RenderTransform>
