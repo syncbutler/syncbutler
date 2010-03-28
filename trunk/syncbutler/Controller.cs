@@ -448,6 +448,7 @@ namespace SyncButler
             SyncEnvironment.ComputerName = name;
         }
 
+
         /// <summary>
         /// get the status of sbs
         /// </summary>
@@ -476,6 +477,24 @@ namespace SyncButler
             SyncEnvironment.ComputerNamed = true;
             SyncEnvironment.GetInstance().updateComputerNamed();
 
+        }
+
+        /// <summary>
+        /// Used to set the initial computer name or to replace an exisiting
+        /// computer name
+        /// </summary>
+        public void SetFirstSBSRun()
+        {
+            SyncEnvironment.FirstSBSRun = false;
+            SyncEnvironment.GetInstance().updateFirstSBSRun();
+        }
+        /// <summary>
+        /// Used to get if SBS has runned before
+        /// </summary>
+        /// <returns></returns>
+        public bool IsFirstSBSRun()
+        {
+            return SyncEnvironment.FirstSBSRun;
         }
 
         /// <summary>
