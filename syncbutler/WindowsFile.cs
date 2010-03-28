@@ -740,7 +740,7 @@ namespace SyncButler
         /// </summary>
         /// <param name="files">the list of files</param>
         /// <returns>total file size</returns>
-        public static long SizeOf(List<String> files)
+        public static long SizeOf(IList<String> files)
         {
             long totalSize = 0;
             foreach(String file in files)

@@ -134,24 +134,61 @@ namespace SyncButler
             
             return false;
         }
-
+        private static int ConvertEnumToInt(ValueLevel d)
+        {
+            return (int)Enum.Parse(typeof(ValueLevel), Enum.GetName(typeof(ValueLevel), d));
+        }
         public static SortedList<string, SortedList<string, string>> Spilt(SortedList<string, string> mrus)
         {
-            SortedList<string, string> interesting = new SortedList<string, string>();
+            SortedList<string, string> interestingUltraLow = new SortedList<string, string>();
+            SortedList<string, string> interestingLow = new SortedList<string, string>();
+            SortedList<string, string> interestingLowMed = new SortedList<string, string>();
+            SortedList<string, string> interestingMed = new SortedList<string, string>();
+            SortedList<string, string> interestingMedHigh = new SortedList<string, string>();
+            SortedList<string, string> interestingHigh = new SortedList<string, string>();
+
             SortedList<string, string> sensitive = new SortedList<string, string>();
+            int InterestingLevel = 0;
             foreach (string filename in mrus.Keys)
             {
+                InterestingLevel = ConvertEnumToInt(isInteresting(filename));
                 if (isSensitive(filename))
                 {
                     sensitive.Add(filename, mrus[filename]);
                 }
-                else if (isInteresting(filename) != 0)
+                else if (InterestingLevel != 0)
                 {
-                    interesting.Add(filename, mrus[filename]);
+                    switch (InterestingLevel)
+                    {
+                        case 2:
+                            interestingUltraLow.Add(filename, mrus[filename]);
+                            break;
+                        case 3:
+                            interestingLow.Add(filename, mrus[filename]);
+                            break;
+                        case 5:
+                            interestingLowMed.Add(filename, mrus[filename]);
+                            break;
+                        case 8:
+                            interestingMed.Add(filename, mrus[filename]);
+                            break;
+                        case 10:
+                            interestingMedHigh.Add(filename, mrus[filename]);
+                            break;
+                        case 15:
+                            interestingHigh.Add(filename, mrus[filename]);
+                            break;
+                        
+                    }
                 }
             }
             SortedList<string, SortedList<string, string>> spilt = new SortedList<string, SortedList<string, string>>();
-            spilt.Add("interesting",interesting);
+            spilt.Add("interestingUltraLow", interestingUltraLow);
+            spilt.Add("interestingLow", interestingLow);
+            spilt.Add("interestingLowMed", interestingLowMed);
+            spilt.Add("interestingMed", interestingMed);
+            spilt.Add("interestingMedHigh", interestingMedHigh);
+            spilt.Add("interestingHigh", interestingHigh);
             spilt.Add("sensitive",sensitive);
             return spilt;
                

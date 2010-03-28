@@ -18,6 +18,10 @@ namespace SyncButler
         SyncEnvironment syncEnvironment;
         SyncButler.IGUI mainWindow;
         private static Controller controller;
+        /// <summary>
+        /// Used by check and merged to see the total size of the files to be sync so far.
+        /// </summary>
+        private long totalSizeSoFar = 0;
 
         /// <summary>
         /// This constructor should never be invoked directly. Use GetInstance() to obtain an instance of Controller.
@@ -279,14 +283,92 @@ namespace SyncButler
         }
 
         /// <summary>
+        /// To check if size existing file list the given file list will within the limit given 
+        /// by the users. Used by GetMonitoredFiles(..);
+        /// </summary>
+        /// <param name="ToMerge">The existing file list</param>
+        /// <param name="FileListToCheck"> the file list that is new and required check</param>
+        /// <param name="limit">the limit imposed by the user</param>
+        /// <returns>if the new file list is merged with the existing file list</returns>
+        private bool CheckAndMerge(SortedList<string, string> ToMerge, 
+            SortedList<string, string> FileListToCheck, long limit)
+        {
+            long ListSize = WindowsFile.SizeOf(FileListToCheck.Values);
+            if (ListSize + totalSizeSoFar <= limit)
+            {
+                totalSizeSoFar += ListSize;
+                foreach (String key in FileListToCheck.Keys)
+                {
+                    ToMerge.Add(key, FileListToCheck[key]);
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        private const long GIGABYTE = 1024 * 1024 * 1024;
+        private const long MEGABYTE = 1024 * 1024;
+        private const long KILOBYTE = 1024;
+        private long GetUserLimit()
+        {
+            String Resolution = this.GetResolution();
+            long FreeSpaceTouse = (long)this.GetFreeSpaceToUse();
+            if (Resolution.Equals("GB"))
+            {
+                return FreeSpaceTouse * GIGABYTE;
+            }
+            else if (Resolution.Equals("MB"))
+            {
+                return FreeSpaceTouse * MEGABYTE;
+            }
+            else if (Resolution.Equals("KB"))
+            {
+                return FreeSpaceTouse * KILOBYTE;
+            }
+            else if (Resolution.Equals("Bytes"))
+            {
+                return FreeSpaceTouse;
+            }
+            else
+            {
+                throw new NotSupportedException();
+            }
+        }
+
+        /// <summary>
         /// Returns a list of most recently used files.
         /// </summary>
         public SortedList<string,SortedList<string,string>> GetMonitoredFiles(SyncableStatusMonitor statusMonitor)
         {
+            long limit = GetUserLimit();
+            SortedList<string, SortedList<string, string>> rtn = new SortedList<string, SortedList<string, string>>();
+            SortedList<string, string> interesting = new SortedList<string, string>();
             MostRecentlyUsedFile.statusMonitor = statusMonitor;
-            SortedList<string,SortedList<string,string>> ret = ContentFilters.Spilt(MostRecentlyUsedFile.ConvertToSortedList(MostRecentlyUsedFile.GetAll()));
+            SortedList<string,SortedList<string,string>> splited = ContentFilters.Spilt(MostRecentlyUsedFile.ConvertToSortedList(MostRecentlyUsedFile.GetAll()));
+            if (CheckAndMerge(interesting, splited["interestingHigh"], limit))
+            {
+                if (CheckAndMerge(interesting, splited["interestingMedHigh"], limit))
+                {
+                    if (CheckAndMerge(interesting, splited["interestingMed"], limit))
+                    {
+                        if (CheckAndMerge(interesting, splited["interestingLowMed"], limit))
+                        {
+                            if (CheckAndMerge(interesting, splited["interestingLow"], limit))
+                            {
+                                CheckAndMerge(interesting, splited["interestingUltraLow"], limit);
+                            }
+                        }
+                    }
+                 
+                }
+            }
+            SortedList<string, string> sensitive = splited["sensitive"];
+            rtn.Add("sensitive", sensitive);
+            rtn.Add("interesting", interesting);
             MostRecentlyUsedFile.statusMonitor = null;
-            return ret;
+            return rtn;
         }
 
         public SortedList<string, SortedList<string, string>> GetMonitoredFiles()
