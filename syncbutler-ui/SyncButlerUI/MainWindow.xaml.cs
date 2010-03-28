@@ -10,10 +10,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.ComponentModel;
 using WPF_Explorer_Tree;
 using SyncButler;
 using SyncButler.Exceptions;
-using System.ComponentModel;
 
 namespace SyncButlerUI
 {
@@ -80,24 +80,53 @@ namespace SyncButlerUI
 		{
             if (Controller.GetInstance().GetSBSEnable().Equals("Enable"))
             {
-                VisualStateManager.GoToState(homeWindow1, "SbsState1", false);
-                homeWindow1.LoadMRUs();
+				if(controller.IsFirstSBSRun()){
+					 FirstTimeStartupScreen dialog = new FirstTimeStartupScreen();
+					VisualStateManager.GoToState(dialog.WelcomeScreenControl,"HelpScreen3",false);
+					controller.SetFirstSBSRun();
+					dialog.ShowDialog();
+				}		
+					VisualStateManager.GoToState(homeWindow1, "SbsState1", false);
+					homeWindow1.LoadMRUs();
+				
             }
             else
             {
-                if (CustomDialog.Show(this, CustomDialog.MessageTemplate.YesNo, CustomDialog.MessageResponse.Yes,
-                    "Sync Butler, Sync! is not enabled. Please enable this feature in the Settings screen\n\n" +
-                    "Would you like to go to the settings screen?") == CustomDialog.MessageResponse.Yes)
+                if (controller.IsFirstSBSRun())
                 {
-                    this.GoToSetting(null, null);
+                    if (CustomDialog.Show(this, CustomDialog.MessageTemplate.YesNo, CustomDialog.MessageResponse.Yes,
+                       "Sync Butler has detected this is your first time using \"Sync Butler, Sync!\" and it is not enabled.\n\n"+
+                       "Would you like to go to the settings screen with tips? ") == CustomDialog.MessageResponse.Yes)
+                    {
+                         this.GoToSetting("FirstSBSRun", null);
+                    }
+
+                }
+                else
+                {
+                    if (CustomDialog.Show(this, CustomDialog.MessageTemplate.YesNo, CustomDialog.MessageResponse.Yes,
+                        "Sync Butler, Sync! is not enabled. Please enable this feature in the Settings screen\n\n" +
+                        "Would you like to go to the settings screen?") == CustomDialog.MessageResponse.Yes)
+                    {
+                        this.GoToSetting(null, null);
+                    }
                 }
             }
 		}
 
 		private void GoToSetting(object sender, RoutedEventArgs e)
 		{
-			VisualStateManager.GoToState(homeWindow1, "Settings1",false);
-
+            if (sender!=null && sender.GetType() == typeof(String) && sender.Equals("FirstSBSRun"))
+            {
+                homeWindow1.FirstTimeHelp.Visibility = System.Windows.Visibility.Visible;
+			}
+            else
+            {
+                homeWindow1.FirstTimeHelp.Visibility = System.Windows.Visibility.Hidden;
+            }
+			
+			VisualStateManager.GoToState(homeWindow1, "Settings1", false);
+            
             BackgroundWorker storageScanWorker = new BackgroundWorker();
             ProgressBar progressWindow = new ProgressBar(storageScanWorker, "Loading Settings Page", "Searching for removable storage devices");
             progressWindow.HideTotalProgress();
@@ -120,8 +149,6 @@ namespace SyncButlerUI
 
             storageScanWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(delegate(Object worker, RunWorkerCompletedEventArgs args)
             {
-                
-            
 
                 this.homeWindow1.ComputerNameTextBox.Text = this.controller.GetComputerName();
                 this.homeWindow1.NoUSBWarningTextBlock.Visibility = Visibility.Hidden;

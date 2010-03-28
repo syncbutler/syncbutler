@@ -26,6 +26,11 @@ namespace SyncButlerUI
 			this.InitializeComponent();
 		}
 		
+		/// <summary>
+		/// Button for Naming the Computer the first time
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		public void NameIt_Click(object sender,RoutedEventArgs e)
         {
             if (Array.IndexOf(reserved, FirstTimeComputerNameText.Text.Trim()) != -1)
@@ -45,6 +50,11 @@ namespace SyncButlerUI
             }
 		}		
 		
+		/// <summary>
+		/// Goes to the 2nd Screen of Help
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		public void GoToHelpScreen2_Click(object sender,RoutedEventArgs e)
         {
         		VisualStateManager.GoToState(this,"HelpScreen2",false);

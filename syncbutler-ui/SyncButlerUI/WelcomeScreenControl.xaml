@@ -49,9 +49,6 @@
 				<SplinePointKeyFrame KeyTime="00:00:04.4000000" Value="0.5,0.5"/>
 				<SplinePointKeyFrame KeyTime="00:00:04.9000000" Value="0.5,0.5"/>
 			</PointAnimationUsingKeyFrames>
-			<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-				<SplineDoubleKeyFrame KeyTime="00:00:00" Value="10"/>
-			</DoubleAnimationUsingKeyFrames>
 			<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="image3" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
 				<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
 				<SplineDoubleKeyFrame KeyTime="00:00:01" Value="1.25"/>
@@ -101,6 +98,9 @@
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="WelcomeScreen1" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
 						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle1" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
 				<VisualState x:Name="HelpScreen2">
@@ -109,6 +109,9 @@
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
 						</ObjectAnimationUsingKeyFrames>
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="HelpPage2" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle1" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
 						</ObjectAnimationUsingKeyFrames>
 					</Storyboard>
@@ -121,12 +124,23 @@
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="HelpPage3" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
 						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle1" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
 			</VisualStateGroup>
 		</VisualStateManager.VisualStateGroups>
 		<Grid x:Name="WelcomeScreen1">
-			<Rectangle Fill="#FF434343" Stroke="Black" Margin="-1,-1,-2,-2" Opacity="0.6" RadiusX="20" RadiusY="20"/>
+			<Rectangle Stroke="Black" Margin="-1,-1,-2,-2" RadiusX="20" RadiusY="20">
+				<Rectangle.Fill>
+					<RadialGradientBrush>
+						<GradientStop Color="Black" Offset="0.276"/>
+						<GradientStop Color="#00000000" Offset="1"/>
+						<GradientStop Color="#B1000000" Offset="0.581"/>
+					</RadialGradientBrush>
+				</Rectangle.Fill>
+			</Rectangle>
 			<Image x:Name="image" Margin="-5,-48,15,-102" Stretch="Fill" Source="Images\SunBurst.png" RenderTransformOrigin="0.5,0.5" Opacity="0.365">
 				<Image.RenderTransform>
 					<TransformGroup>
@@ -145,6 +159,7 @@
 
 
 		</Grid>
+		<Rectangle x:Name="rectangle1" Fill="#FF575757" Stroke="Black" Margin="-0.8,-1,-2.2,-2" RadiusX="20" RadiusY="20" Visibility="Hidden" Opacity="0.8"/>
 		<Grid x:Name="HelpPage1" Visibility="Hidden">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="0.758*"/>
@@ -153,7 +168,6 @@
 			<VisualStateManager.CustomVisualStateManager>
 				<ic:ExtendedVisualStateManager/>
 			</VisualStateManager.CustomVisualStateManager>
-			<Rectangle Fill="#FFA7A7A7" Stroke="Black" Margin="-0.8,-1,-2.2,-2" Opacity="0.095" RadiusX="20" RadiusY="20" Grid.ColumnSpan="2"/>
 			<Image Margin="123.6,92,-36.562,112.8" Source="Images\HomeWindow.png" Stretch="Fill"/>
 			<Grid HorizontalAlignment="Left" Margin="8,131.6,0,0" VerticalAlignment="Top" Width="92.8" Height="70.4">
 				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="6.6,0.8,3.8,0" VerticalAlignment="Top" Height="66.4"/>
@@ -255,16 +269,6 @@
 			<VisualStateManager.CustomVisualStateManager>
 				<ic:ExtendedVisualStateManager/>
 			</VisualStateManager.CustomVisualStateManager>
-			<Rectangle x:Name="rectangle1" Fill="#FFA7A7A7" Stroke="Black" Margin="-0.8,-1,-2.2,-2" Opacity="0.095" RadiusX="20" RadiusY="20" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5">
-				<Rectangle.RenderTransform>
-					<TransformGroup>
-						<ScaleTransform/>
-						<SkewTransform/>
-						<RotateTransform/>
-						<TranslateTransform/>
-					</TransformGroup>
-				</Rectangle.RenderTransform>
-			</Rectangle>
 
 			<Button Margin="67.08,0,4.6,5.8" VerticalAlignment="Bottom" Height="39.2" Content="FINISH" FontSize="18.667" FontWeight="Bold" Grid.Column="1" Click="ExitTutorial_Click"/>
 			<Image x:Name="image3" Margin="204.3,148.5,239.22,0" Source="Images\StarBullet.png" Stretch="Fill" VerticalAlignment="Top" Height="41.6" RenderTransformOrigin="0.5,0.5">
@@ -300,8 +304,7 @@
 			<VisualStateManager.CustomVisualStateManager>
 				<ic:ExtendedVisualStateManager/>
 			</VisualStateManager.CustomVisualStateManager>
-			<Rectangle Fill="#FFA7A7A7" Stroke="Black" Margin="-0.8,-1,-2.2,-2" Opacity="0.095" RadiusX="20" RadiusY="20" Grid.ColumnSpan="2"/>
-			<Button Margin="67.08,0,4.6,5.8" VerticalAlignment="Bottom" Height="39.2" Content="CLOSE" Grid.Column="1" FontWeight="Bold" FontSize="18.667" Click="GoToHelpScreen2_Click"/>
+			<Button Margin="67.08,0,4.6,5.8" VerticalAlignment="Bottom" Height="39.2" Content="CLOSE" Grid.Column="1" FontWeight="Bold" FontSize="18.667" Click="ExitTutorial_Click"/>
 			<Image Margin="170,86.6,3.905,123" Source="Images/SBSWindow.png" Stretch="Fill"/>
 			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="13.8,104,0,0" VerticalAlignment="Top" Height="116.8" HorizontalAlignment="Left" Width="139.2" d:LayoutOverrides="VerticalAlignment"/>
 			<TextBlock Margin="21.6,112.8,0,0" Foreground="White" TextWrapping="Wrap" FontWeight="Bold" HorizontalAlignment="Left" Width="122" VerticalAlignment="Top" Height="99.2"><Run Text="New or recently used files appear here. "/><Run FontFamily="Walkway Black" FontSize="14.667" Text="SyncButler "/><Run Text="will make a duplicate and store it on your "/><Run Text="USB storage device."/></TextBlock>

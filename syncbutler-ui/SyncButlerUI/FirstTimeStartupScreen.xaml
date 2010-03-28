@@ -20,6 +20,6 @@
 	</Window.Triggers>
 
 	<Grid x:Name="WelcomeScreen">
-		<local:WelcomeScreenControl/>
+		<local:WelcomeScreenControl x:Name="WelcomeScreenControl"/>
 	</Grid>
 </Window>

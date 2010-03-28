@@ -53,6 +53,22 @@ namespace SyncButler.ProgramEnvironment
         }
 
         /// <summary>
+        /// When this flag is turned on, user will not see the help items in settings
+        /// </summary>
+        [ConfigurationProperty("firstSBSRun")]
+        public bool FirstSBSRun
+        {
+            get
+            {
+                return (bool)this["firstSBSRun"];
+            }
+            set
+            {
+                this["firstSBSRun"] = value;
+            }
+        }
+
+        /// <summary>
         /// The size of the buffer when reading from files.
         /// This should grow/shrink in proportion to the memory available.
         /// </summary>

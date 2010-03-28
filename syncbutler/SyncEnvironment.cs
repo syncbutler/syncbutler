@@ -45,6 +45,7 @@ namespace SyncButler
         private static string sbsEnable;
         private static string resolution;
         private static double freeSpaceToUse;
+        private static bool firstSBSRun;
 
         //List of runtime variables
         private static System.Configuration.Configuration config;
@@ -342,7 +343,10 @@ namespace SyncButler
             computerName = storedSettings.SystemSettings.ComputerName;
 
             //Gets last stored status of namedComputer
-           computerNamed = storedSettings.SystemSettings.ComputerNamed;
+            computerNamed = storedSettings.SystemSettings.ComputerNamed;
+
+            //Gets the last stored status of whether SBS has runned before
+            firstSBSRun = storedSettings.SystemSettings.FirstSBSRun;
 
             //Get the sbs drive letter
             SBSDriveLetter = storedSettings.SystemSettings.SBSDriveLetter;
@@ -376,6 +380,7 @@ namespace SyncButler
             storedSettings.SystemSettings.FileReadBufferSize = fileReadBufferSize;
             storedSettings.SystemSettings.ComputerName = "computer1";
             storedSettings.SystemSettings.ComputerNamed = false;
+            storedSettings.SystemSettings.FirstSBSRun = true;
             storedSettings.SystemSettings.SBSDriveLetter = 'c';
             storedSettings.SystemSettings.SBSEnable = "Disable";
             storedSettings.SystemSettings.Resolution = "KB";
@@ -406,6 +411,18 @@ namespace SyncButler
             storedSettings.SystemSettings.ComputerNamed = computerNamed;
             config.Save(ConfigurationSaveMode.Modified);
 
+        }
+
+
+        /// <summary>
+        /// when SBS is used for the first time,this method is to update if
+        /// that it ran before
+        /// </summary>
+        public void updateFirstSBSRun()
+        {
+            ConvertPartnershipList2XML();
+            storedSettings.SystemSettings.FirstSBSRun = firstSBSRun;
+            config.Save(ConfigurationSaveMode.Modified);
         }
 
         /// <summary>
@@ -468,7 +485,7 @@ namespace SyncButler
             sbsEnable = "Disable";
             freeSpaceToUse = 0;
             resolution = "KB";
-
+            firstSBSRun = true;
             ConfigurationSetup();
 
             // Prepare to read the custom sections (Pre declared needed for valid settings
@@ -921,6 +938,20 @@ namespace SyncButler
             }
         }
 
+        /// <summary>
+        /// Gets whether the SBS is runed for the first time or otherwise 
+        /// </summary>
+        public static bool FirstSBSRun
+        {
+            get
+            {
+                return firstSBSRun;
+            }
+            set
+            {
+                firstSBSRun = value;
+            }
+        }
         /// <summary>
         /// Gets whether the program is being executed for the first time or otherwise
         /// </summary>
