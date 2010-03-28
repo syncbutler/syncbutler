@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Checksums\Adler32.cs" />
     <Compile Include="Checksums\IRollingHash.cs" />
+    <Compile Include="ComputerNameChecker.cs" />
     <Compile Include="ConflictList.cs" />
     <Compile Include="ContentFilters.cs" />
     <Compile Include="Controller.cs" />
