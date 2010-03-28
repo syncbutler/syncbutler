@@ -19,6 +19,7 @@ using WPF_Explorer_Tree;
 using SyncButler;
 using SyncButler.Exceptions;
 using System.Collections.ObjectModel;
+using System.Globalization;
 
 namespace SyncButlerUI
 {
@@ -53,7 +54,7 @@ namespace SyncButlerUI
     public string SelectedImagePath { get; set; }
 	public SyncButler.Controller Controller{get;set;}
 	public enum State{Home,Page1OfCreate,Page2OfCreate,Page3OfCreate,Page4OfCreate,ViewPartnership,SBS,Conflict,Settings,Page1OfEdit,Page2OfEdit,Page3OfEdit,Page4OfEdit,Result};
-    private double LastWorkingFreeSpace = 0.0;
+    private string LastWorkingFreeSpace = "0.00";
 	private State CurrentState;
     private const long GIGA_BYTE = 1024 * 1024 * 1024;
     private const long MEGA_BYTE = 1024 * 1024;
@@ -1160,7 +1161,7 @@ namespace SyncButlerUI
             string ComputerName = this.ComputerNameTextBox.Text;
             string SBSEnable = (string)this.SBSSettingComboBox.SelectedItem;
             char DriveLetter = (char)this.SBSWorkingDriveComboBox.SelectedItem;
-            double FreeSpaceToUse = this.LastWorkingFreeSpace;
+            double FreeSpaceToUse = double.Parse(this.LastWorkingFreeSpace);
             string Resolution = this.resolutionLabel.Content.ToString();
 
             Controller.GetInstance().SaveSetting(ComputerName, SBSEnable, DriveLetter, FreeSpaceToUse, Resolution);
@@ -1230,34 +1231,37 @@ namespace SyncButlerUI
         
         private void SpaceToUseChanged(Object sender, KeyEventArgs e)
         {
+
             if (SpaceToUseTextbox.Text.Trim().Length != 0)
             {
                 try
                 {
-                    if (double.Parse(SpaceToUseTextbox.Text) <= SpaceToUseSlide.Maximum)
+                    if (double.Parse(SpaceToUseTextbox.Text, CultureInfo.InvariantCulture) <= SpaceToUseSlide.Maximum)
                     {
-                        SpaceToUseSlide.Value = Math.Floor(double.Parse(SpaceToUseTextbox.Text));
+                        SpaceToUseTextbox.Text = String.Format("{0:F2}", SpaceToUseTextbox.Text);
+                        SpaceToUseSlide.Value = double.Parse(SpaceToUseTextbox.Text, CultureInfo.InvariantCulture);
                     }
-                    else if (double.Parse(SpaceToUseTextbox.Text) > SpaceToUseSlide.Maximum)
+                    else if (double.Parse(SpaceToUseTextbox.Text, CultureInfo.InvariantCulture) > SpaceToUseSlide.Maximum)
                     {
-                        SpaceToUseTextbox.Text = ""+ Math.Floor(SpaceToUseSlide.Maximum);
+                        SpaceToUseTextbox.Text = String.Format("{0:F2}", SpaceToUseTextbox.Text);
+                        SpaceToUseTextbox.Text = String.Format("{0:F2}",SpaceToUseSlide.Maximum);
                         SpaceToUseSlide.Value = SpaceToUseSlide.Maximum;
                     }
-                    LastWorkingFreeSpace = double.Parse(SpaceToUseTextbox.Text);
+                    LastWorkingFreeSpace = String.Format("{0:F2}", double.Parse(SpaceToUseTextbox.Text, CultureInfo.InvariantCulture));
 
                 }
                 catch (FormatException)
                 {
-                    // fall back to old value
-                    SpaceToUseTextbox.Text = "" + Math.Floor(LastWorkingFreeSpace);
+                    // fall back to the last working value
+                    SpaceToUseTextbox.Text = LastWorkingFreeSpace;
                 }
             }
         }
         private void SpaceToUseSlided(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
         {
             double value = e.NewValue;
-            SpaceToUseTextbox.Text = "" + Math.Floor(value);
-            LastWorkingFreeSpace = double.Parse(SpaceToUseTextbox.Text);
+            SpaceToUseTextbox.Text = String.Format("{0:F2}",value);
+            LastWorkingFreeSpace = SpaceToUseTextbox.Text;
 
         }
 		private void DefaultSetting(object sender, RoutedEventArgs e)
