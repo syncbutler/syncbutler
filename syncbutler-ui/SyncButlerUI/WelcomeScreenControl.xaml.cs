@@ -33,7 +33,7 @@ namespace SyncButlerUI
 		/// <param name="e"></param>
 		public void NameIt_Click(object sender,RoutedEventArgs e)
         {
-            if (Array.IndexOf(reserved, FirstTimeComputerNameText.Text.Trim()) != -1)
+            if (!ComputerNameChecker.IsComputerNameValid(FirstTimeComputerNameText.Text.Trim()))
             {
                 CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, FirstTimeComputerNameText.Text.Trim() + " is not a valid name");
             }

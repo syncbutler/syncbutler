@@ -1157,8 +1157,8 @@ namespace SyncButlerUI
 		
 		private void SaveSetting(object sender, RoutedEventArgs e)
 		{
-            
-            string ComputerName = this.ComputerNameTextBox.Text;
+
+            string ComputerName = this.ComputerNameTextBox.Text.Trim() ;
             string SBSEnable = (string)this.SBSSettingComboBox.SelectedItem;
             char DriveLetter = (char)this.SBSWorkingDriveComboBox.SelectedItem;
             double FreeSpaceToUse = double.Parse(this.LastWorkingFreeSpace);
@@ -1166,6 +1166,10 @@ namespace SyncButlerUI
             if (FreeSpaceToUse <= 0 && SBSEnable.Equals("Enable"))
             {
                 showMessageBox(CustomDialog.MessageType.Warning, "The free space catered for SBS is set to be too low, please check");
+            }
+            else if (!ComputerNameChecker.IsComputerNameValid(ComputerName))
+            {
+                CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, ComputerName + " is not a valid name");
             }
             else
             {
