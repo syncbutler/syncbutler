@@ -1225,6 +1225,7 @@ namespace SyncButlerUI
                         resolutionLabel.Content = "Bytes";
                         SpaceToUseSlide.Maximum = freespace;
                     }
+                    SpaceToUseSlide.Value = 0.1 * SpaceToUseSlide.Maximum;
                 }
             }
         }
