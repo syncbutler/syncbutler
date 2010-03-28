@@ -271,8 +271,9 @@ namespace SyncButler
             storedSettings.SystemSettings.ComputerName = computerName;
             storedSettings.SystemSettings.SBSDriveLetter = SBSDriveLetter;
             storedSettings.SystemSettings.SBSEnable = SBSEnable;
+            storedSettings.SystemSettings.FreeSpaceToUse = freeSpaceToUse;
+            storedSettings.SystemSettings.Resolution = resolution;
 
-            // todo: edit from here
             // Write to file
             if (SearchForSettingsFile() == null)
             {
@@ -348,6 +349,12 @@ namespace SyncButler
 
             //Get the status of sbs
             SBSEnable = storedSettings.SystemSettings.SBSEnable;
+
+            //Get the free space
+            freeSpaceToUse = storedSettings.SystemSettings.FreeSpaceToUse;
+
+            //Get the resolution
+            resolution = storedSettings.SystemSettings.Resolution;
         }
 
         /// <summary>
@@ -371,7 +378,8 @@ namespace SyncButler
             storedSettings.SystemSettings.ComputerNamed = false;
             storedSettings.SystemSettings.SBSDriveLetter = 'c';
             storedSettings.SystemSettings.SBSEnable = "Disable";
-
+            storedSettings.SystemSettings.Resolution = "KB";
+            storedSettings.SystemSettings.FreeSpaceToUse = 0;
             ConvertPartnershipList2XML();
 
             // Add the custom sections to the config
