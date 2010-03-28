@@ -1163,10 +1163,16 @@ namespace SyncButlerUI
             char DriveLetter = (char)this.SBSWorkingDriveComboBox.SelectedItem;
             double FreeSpaceToUse = double.Parse(this.LastWorkingFreeSpace);
             string Resolution = this.resolutionLabel.Content.ToString();
-
-            Controller.GetInstance().SaveSetting(ComputerName, SBSEnable, DriveLetter, FreeSpaceToUse, Resolution);
-
-            showMessageBox(CustomDialog.MessageType.Success, "The Setting has been changed");
+            if (FreeSpaceToUse <= 0 && SBSEnable.Equals("Enable"))
+            {
+                showMessageBox(CustomDialog.MessageType.Warning, "The free space catered for SBS is set to be too low, please check");
+            }
+            else
+            {
+                Controller.GetInstance().SaveSetting(ComputerName, SBSEnable, DriveLetter, FreeSpaceToUse, Resolution);
+                showMessageBox(CustomDialog.MessageType.Success, "The Setting has been changed");
+            }
+            
 		}
 		
 		private void SBSSettingChanged(object sender, RoutedEventArgs e)
