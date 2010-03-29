@@ -1073,6 +1073,7 @@ namespace SyncButlerUI
 		/// <param name="e"></param>
         private void MRUSync(object sender, RoutedEventArgs e)
         {
+            
             // Background worker to do the actual work
             BackgroundWorker mruWorker = new BackgroundWorker();
             mruWorker.WorkerSupportsCancellation = true;
@@ -1087,7 +1088,10 @@ namespace SyncButlerUI
 
             mruWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(delegate(Object worker, RunWorkerCompletedEventArgs args)
             { // Code to run on completion
-                if (!cancelled) CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Files were successfully synced and logged");
+                if (!cancelled)
+                {
+                    CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Files were successfully synced and logged");
+                }
                 progressWindow.TaskComplete();
                 Enable_Feature.IsEnabled = true;
                 SBSDone.IsEnabled = true;
@@ -1106,7 +1110,7 @@ namespace SyncButlerUI
 
                 try
                 {
-                    this.Controller.SyncMRUs(delegate(SyncableStatus status)
+                    this.Controller.SyncMRUs(MRUs["interesting"], delegate(SyncableStatus status)
                     { // Status reporting - triggers whenever SyncMRU has made progress
 
                         pinfo.SubTaskPercent = status.curTaskPercentComplete;
@@ -1126,21 +1130,35 @@ namespace SyncButlerUI
                     delegate(Exception exp)
                     { // Error handler - triggers whenever an exception is raised anywhere in SyncMRU
 
-                        // Define the parameters of the message box to show the user
                         CustomDialog.MessageBoxInfo info = new CustomDialog.MessageBoxInfo();
-                        info.message = "An error occured while syncing: " + exp.Message + "\n\nWhat would you like me to do?";
-                        info.messageType = CustomDialog.MessageType.Error;
-                        info.messageTemplate = CustomDialog.MessageTemplate.SkipCancel;
-                        info.parent = this;
-
-                        // Actually show the message box and respond to the even.
-                        // Note: You cannot call CustomDialog directly here, the UI runs in a different thread.
-                        if (progressWindow.RequestMessageDialog(workerObj, info) == CustomDialog.MessageResponse.Cancel)
+                        if (exp.Message.Contains("Device not detected"))
                         {
+                            info.message = exp.Message;
+                            info.messageType = CustomDialog.MessageType.Error;
+                            info.messageTemplate = CustomDialog.MessageTemplate.OkOnly;
+                            info.parent = this;
+                            progressWindow.RequestMessageDialog(workerObj, info);
                             cancelled = true;
                             return false;
                         }
-                        else return true;
+                        else
+                        {
+                            // Define the parameters of the message box to show the user
+
+                            info.message = "An error occured while syncing: " + exp.Message + "\n\nWhat would you like me to do?";
+                            info.messageType = CustomDialog.MessageType.Error;
+                            info.messageTemplate = CustomDialog.MessageTemplate.SkipCancel;
+                            info.parent = this;
+
+                            // Actually show the message box and respond to the even.
+                            // Note: You cannot call CustomDialog directly here, the UI runs in a different thread.
+                            if (progressWindow.RequestMessageDialog(workerObj, info) == CustomDialog.MessageResponse.Cancel)
+                            {
+                                cancelled = true;
+                                return false;
+                            }
+                            else return true;
+                        }
                     });
                 }
                 catch (UserCancelledException)
