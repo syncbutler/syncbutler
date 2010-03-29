@@ -161,7 +161,7 @@ namespace SyncButler
         }
 
         /// <summary>
-        /// Attempts to rsolve a conflict based on th recommended action.
+        /// Attempts to resolve a conflict based on the recommended action.
         /// </summary>
         /// <returns></returns>
         public Resolved Resolve()

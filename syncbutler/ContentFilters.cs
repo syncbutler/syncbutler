@@ -23,7 +23,7 @@ namespace SyncButler
 
         private static string japaneseSexualConnotation =
             "(hentai)|(変態)|(パイ刷り)|(パイずり)|(paizuri)|(淫具)|(ingu)|(レイプ)|(reipo)|(強淫)|(ごういん)|(gouin)|" +
-            "(陰道)|(いんどう)|(indou)|(打っ掛け)|(ぶっか)";
+            "(陰道)|(いんどう)|(indou)|(打っ掛け)|(ぶっか)|(18 禁)";
 
         private static string vulgarities =
             "(fuck)|(asshole)|(arse)|(bastard)|(bitch)|(faggot)|(fagg)|(slut)|(turd)|(effin)|(motherfucker)|(jackasss)";
