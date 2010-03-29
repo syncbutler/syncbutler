@@ -142,7 +142,18 @@ namespace SyncButler.ProgramEnvironment
                 this["SBSEnable"] = value;
             }
         }
-
+        [ConfigurationProperty("SBSDriveId")]
+        public string SBSDriveId
+        {
+            get
+            {
+                return (string)this["SBSDriveId"];
+            }
+            set
+            {
+                this["SBSDriveId"] = value;
+            }
+        }
         [ConfigurationProperty("Resolution")]
         public string Resolution
         {
