@@ -121,6 +121,7 @@ namespace SyncButler.MRU
                             {
                                 if ((DateTime.Now - fi.LastWriteTime).TotalDays <= (howRecent))
                                 {
+                                    
                                     files.Add(fi.FullName);
                                 }
                             }
@@ -162,24 +163,66 @@ namespace SyncButler.MRU
 
             foreach (string filename in MRUs)
             {
-                if (!filenames.Contains(filename))
+                if (!filenames.Contains(filename) )
                 {
                     if (File.Exists(filename))
                     {
-                        
+                        // not dir
                         if (!di.FullName.Equals(Path.GetDirectoryName(filename)))
                         {
-
+                            // see if is a shotcut
                             FileInfo fi = new FileInfo(filename);
+                            
                             if (fi.Length != 0)
                             {
-                                filenames.Add(filename);
+                                if (!IsShortcut(filename))
+                                {
+                                    filenames.Add(filename);
+                                }
                             }
                         }
                     }
                 }
             }
             return (filenames);
+        }
+        /// <summary>
+        /// check if the given file is a shortcut
+        /// </summary>
+        /// <param name="filename">file to check</param>
+        /// <returns>true if the file is a shortcut, false otherwise</returns>
+        private static bool IsShortcut(String filename)
+        {
+            BinaryReader fs = new BinaryReader(new FileStream(filename, FileMode.Open));
+            byte[] read_id = new byte[4];
+            byte[] read_guid = new byte[16];
+            read_id = fs.ReadBytes(4);
+            read_guid = fs.ReadBytes(16);
+            fs.Close();
+            return (isEqual(read_id, shortcutid) && isEqual(read_guid, shortcut_guid));
+        }
+        // format from: http://www.stdlib.com/art6-Shortcut-File-Format-lnk.html
+        private static byte[] shortcutid = { 0x4C, 0x00, 0x00, 0x00 };
+        private static byte[] shortcut_guid = 
+               {0x01, 0x14, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 
+                0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46};
+
+        /// <summary>
+        /// check if two set of byte array is the same
+        /// </summary>
+        /// <param name="x">first byte array</param>
+        /// <param name="y">second byte array</param>
+        /// <returns>true if the two array is same, false otherwise</returns>
+        private static bool isEqual(byte[] x, byte[] y)
+        {
+            if (x.Length != y.Length)
+                return false;
+            for (int i = 0; i < x.Length; i++)
+            {
+                if (x[i] != y[i])
+                    return false;
+            }
+            return true;
         }
 
         /// <summary>
