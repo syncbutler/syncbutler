@@ -44,6 +44,7 @@ namespace SyncButler
         private static char _SBSDriveLetter;
         private static string sbsEnable;
         private static string resolution;
+        private static string sbsDriveId;
         private static double freeSpaceToUse;
         private static bool firstSBSRun;
 
@@ -274,12 +275,12 @@ namespace SyncButler
             storedSettings.SystemSettings.SBSEnable = SBSEnable;
             storedSettings.SystemSettings.FreeSpaceToUse = freeSpaceToUse;
             storedSettings.SystemSettings.Resolution = resolution;
+            storedSettings.SystemSettings.SBSDriveId = sbsDriveId;
 
             // Write to file
             if (SearchForSettingsFile() == null)
             {
                 ReIntialEnv();
-                //config.Save(ConfigurationSaveMode.Modified);
                 StoreEnv();
             }
             else
@@ -305,6 +306,7 @@ namespace SyncButler
             storedSettings.SystemSettings.SBSEnable = SBSEnable;
             storedSettings.SystemSettings.FreeSpaceToUse = FreeSpaceToUse;
             storedSettings.SystemSettings.Resolution = Resolution;
+            storedSettings.SystemSettings.SBSDriveId = SBSDriveId;
 
             // Write to file
             if (SearchForSettingsFile() == null)
@@ -359,6 +361,9 @@ namespace SyncButler
 
             //Get the resolution
             resolution = storedSettings.SystemSettings.Resolution;
+
+            //Get sbs drive id
+            sbsDriveId = storedSettings.SystemSettings.SBSDriveId;
         }
 
         /// <summary>
@@ -385,6 +390,8 @@ namespace SyncButler
             storedSettings.SystemSettings.SBSEnable = "Disable";
             storedSettings.SystemSettings.Resolution = "KB";
             storedSettings.SystemSettings.FreeSpaceToUse = 0;
+            storedSettings.SystemSettings.SBSDriveId = "";
+
             ConvertPartnershipList2XML();
 
             // Add the custom sections to the config
@@ -1001,6 +1008,17 @@ namespace SyncButler
             set
             {
                 sbsEnable = value;
+            }
+        }
+        public static string SBSDriveId
+        {
+            get
+            {
+                return sbsDriveId;
+            }
+            set
+            {
+                sbsDriveId = value;
             }
         }
 

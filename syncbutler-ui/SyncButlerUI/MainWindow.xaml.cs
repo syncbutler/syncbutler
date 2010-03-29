@@ -161,6 +161,18 @@ namespace SyncButlerUI
                     this.homeWindow1.SBSWorkingDriveComboBox.Items.Add(s[0]);
                 }
 
+                if (this.controller.GetSBSEnable().Equals("Enable"))
+                {
+                    this.homeWindow1.SpaceToUseSlide.Value = this.controller.GetFreeSpaceToUse();
+                    this.homeWindow1.resolutionLabel.Content = this.controller.GetResolution();
+                }
+                else
+                {
+                    this.homeWindow1.SpaceToUseSlide.Value = 0;
+                    this.homeWindow1.resolutionLabel.Content = "KB";
+                    this.homeWindow1.SpaceToUseSlide.IsEnabled = false;
+                    this.homeWindow1.SpaceToUseTextbox.IsEnabled = false;
+                }
                 if (this.homeWindow1.SBSWorkingDriveComboBox.Items.Contains(this.controller.GetSBSDriveLetter()))
                 {
                     this.homeWindow1.SBSWorkingDriveComboBox.SelectedItem = this.controller.GetSBSDriveLetter();
@@ -176,18 +188,7 @@ namespace SyncButlerUI
                 this.homeWindow1.SBSSettingComboBox.Items.Add("Disable");
                 this.homeWindow1.SBSSettingComboBox.SelectedItem = this.controller.GetSBSEnable();
 
-                if (this.controller.GetSBSEnable().Equals("Enable"))
-                {
-                    this.homeWindow1.SpaceToUseSlide.Value = this.controller.GetFreeSpaceToUse();
-                    this.homeWindow1.resolutionLabel.Content = this.controller.GetResolution();
-                }
-                else
-                {
-                    this.homeWindow1.SpaceToUseSlide.Value = 0;
-                    this.homeWindow1.resolutionLabel.Content = "KB";
-                    this.homeWindow1.SpaceToUseSlide.IsEnabled = false;
-                    this.homeWindow1.SpaceToUseTextbox.IsEnabled = false;
-                }
+
 
                 progressWindow.TaskComplete();
             });
