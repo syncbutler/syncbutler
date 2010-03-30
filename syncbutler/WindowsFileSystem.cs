@@ -442,5 +442,17 @@ namespace SyncButler
         public abstract ISyncable CreateChild(string entityPath);
 
         #endregion
+
+        /// <summary>
+        /// Checks if 2 paths are similar by standardising then comparing.
+        /// </summary>
+        /// <param name="path1">1st path</param>
+        /// <param name="path2">2nd path</param>
+        /// <returns>true if they are equal</returns>
+        internal static bool PathsEqual(string path1, string path2)
+        {
+            char[] standard = { '\\', ' ' };
+            return path1.TrimEnd(standard).ToLower() == path2.TrimEnd(standard).ToLower();
+        }
     }
 }
