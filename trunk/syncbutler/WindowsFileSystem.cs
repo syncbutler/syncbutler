@@ -477,7 +477,7 @@ namespace SyncButler
         #endregion
 
         /// <summary>
-        /// Checks if 2 paths are similar by comparing using FileInfo.
+        /// Checks if 2 paths are similar by comparing using FileInfo after standardising.
         /// </summary>
         /// <param name="path1">1st path</param>
         /// <param name="path2">2nd path</param>
@@ -486,9 +486,8 @@ namespace SyncButler
         {
             FileSystemInfo fsi1 = new FileInfo(path1);
             FileSystemInfo fsi2 = new FileInfo(path2);
-            //char[] standard = { '\\', ' ' };
-            //return path1.TrimEnd(standard).ToLower() == path2.TrimEnd(standard).ToLower();
-            return (fsi1.FullName == fsi2.FullName);
+            char[] standard = { '\\', ' ' };
+            return fsi1.FullName.TrimEnd(standard).ToLower() == fsi2.FullName.TrimEnd(standard).ToLower();
         }
     }
 }

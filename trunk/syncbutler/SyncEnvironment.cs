@@ -134,13 +134,13 @@ namespace SyncButler
             Partnership element = CreatePartnership(name, leftPath, rightPath);
 
             if (!IsValidSystemObject(leftPath))
-                throw new ArgumentException("Folder 1 is a system folder which cannot be synced. \nPlease select another folder.");
+                throw new ArgumentException("Folder 1 is a system folder which cannot be synchronised.\n \nPlease select another folder.");
 
             if (!IsValidSystemObject(rightPath))
-                throw new ArgumentException("Folder 2 is a system folder which cannot be synced. \nPlease select another folder.");
+                throw new ArgumentException("Folder 2 is a system folder which cannot be synchronised.\n \nPlease select another folder.");
 
             if (!IsUniquePartnershipName(name, partnershipList))
-                throw new ArgumentException("The name is already in use. Please input another name.");
+                throw new ArgumentException("The name is already in use.\n \nPlease input another name.");
 
             //Usually CheckIsUniquePartnership will check for IsUniquePartnershipName too
             //since we checked it already, the exception caught will be more specified
@@ -241,30 +241,37 @@ namespace SyncButler
             //Conditions check
             bool nameUnchanged = newname.Trim().ToLower() == oldname.Trim().ToLower();
             bool pathUnchanged = false;
-
-            if (!IsValidSystemObject(leftPath))
-                throw new UserInputException("Folder 1 is a system folder which cannot be synced. \nPlease select another folder.");
-
-            if (!IsValidSystemObject(rightPath))
-                throw new UserInputException("Folder 2 is a system folder which cannot be synced. \nPlease select another folder.");
-
-            //Checks if the user try to update the partnership with paths which is similar to existing partnerships
-            if (!IsUniquePartnershipPath(updated.Name, updated.LeftFullPath, updated.RightFullPath, partnershipList))
+            try
             {
-                throw new UserInputException("Partnership already exists.\nUnable to update this partnership.");
-            }           
+                if (!IsValidSystemObject(leftPath))
+                    throw new UserInputException("Folder 1 is a system folder which cannot be synchronised.\n \nPlease select another folder.");
 
-            //See if the friendly name is already in used (even after it is removed)
-            if (!IsUniquePartnershipName(newname, partnershipList))
-            {
-                throw new UserInputException("The selected name is already in use.\n Please select another name.");
+                if (!IsValidSystemObject(rightPath))
+                    throw new UserInputException("Folder 2 is a system folder which cannot be synchronised.\n \nPlease select another folder.");
+
+                //Checks if the user try to update the partnership with paths which is similar to existing partnerships
+                if (!IsUniquePartnershipPath(updated.Name, updated.LeftFullPath, updated.RightFullPath, partnershipList))
+                {
+                    throw new UserInputException("Partnership already exists.\nUnable to update this partnership.");
+                }
+
+                //See if the friendly name is already in used (even after it is removed)
+                if (!IsUniquePartnershipName(newname, partnershipList))
+                {
+                    throw new UserInputException("The selected name is already in use.\n \nPlease select another name.");
+                }
+
+                if (WindowsFileSystem.PathsEqual(leftPath, backupElement.LeftFullPath)
+                    &&
+                    WindowsFileSystem.PathsEqual(rightPath, backupElement.RightFullPath))
+                    pathUnchanged = true;
             }
-
-            if (WindowsFileSystem.PathsEqual(leftPath, backupElement.LeftFullPath)
-                &&
-                WindowsFileSystem.PathsEqual(rightPath, backupElement.RightFullPath))
-                pathUnchanged = true;
-                        
+            catch (Exception e)
+            {
+                partnershipList.Add(oldname, backupElement);
+                throw e;
+            }
+            
             //Path is unchanged, only name is changed
             if (nameUnchanged == false && pathUnchanged == true)
             {
@@ -641,7 +648,7 @@ namespace SyncButler
                 }
                 else if (isFolderLeft || isFolderRight) //when one side is a folder and one is a file
                 {
-                    throw new ArgumentException("Folder cannot sync with a file");
+                    throw new ArgumentException("A folder cannot sync with a file");
                 }
                 else
                 {
