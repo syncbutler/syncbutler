@@ -193,14 +193,22 @@ namespace SyncButler.MRU
         /// <returns>true if the file is a shortcut, false otherwise</returns>
         private static bool IsShortcut(String filename)
         {
-            BinaryReader fs = new BinaryReader(new FileStream(filename, FileMode.Open));
-            byte[] read_id = new byte[4];
-            byte[] read_guid = new byte[16];
-            read_id = fs.ReadBytes(4);
-            read_guid = fs.ReadBytes(16);
-            fs.Close();
-            return (isEqual(read_id, shortcutid) && isEqual(read_guid, shortcut_guid));
+            try
+            {
+                BinaryReader fs = new BinaryReader(new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read));
+                byte[] read_id = new byte[4];
+                byte[] read_guid = new byte[16];
+                read_id = fs.ReadBytes(4);
+                read_guid = fs.ReadBytes(16);
+                fs.Close();
+                return (isEqual(read_id, shortcutid) && isEqual(read_guid, shortcut_guid));
+            }
+            catch (IOException ex)
+            {
+                return false;
+            }
         }
+
         // format from: http://www.stdlib.com/art6-Shortcut-File-Format-lnk.html
         private static byte[] shortcutid = { 0x4C, 0x00, 0x00, 0x00 };
         private static byte[] shortcut_guid = 
