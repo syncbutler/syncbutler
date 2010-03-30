@@ -212,52 +212,41 @@ namespace SyncButler
             //Prepare to write to Partnership list
             Partnership backupElement = partnershipList[oldname];
             Partnership updated = CreatePartnership(newname, leftpath, rightpath);
+            //remove the old partnership
+            partnershipList.Remove(oldname);
 
             //Conditions check
-            bool nameUnchanged = false;
+            bool nameUnchanged = newname.Trim().ToLower() == oldname.Trim().ToLower();
             bool pathUnchanged = false;
             
             //Checks if the user try to update the partnership with paths which is similar to existing partnerships
             if (!IsUniquePartnershipPath(updated.Name, updated.LeftFullPath, updated.RightFullPath, partnershipList))
             {
                 throw new UserInputException("Partnership already exists.\nUnable to update this partnership.");
-            }
-
-            //remove the old partnership
-            partnershipList.Remove(oldname);
+            }           
 
             //See if the friendly name is already in used (even after it is removed)
             if (!IsUniquePartnershipName(newname, partnershipList))
             {
-                nameUnchanged = true;
-                //throw new ArgumentException("Friendly name already in used. Update failure. Previous Partnership record kept");
+                throw new UserInputException("The selected name is already in use.\n Please select another name.");
             }
 
             if (WindowsFileSystem.PathsEqual(leftpath, backupElement.LeftFullPath)
                 &&
                 WindowsFileSystem.PathsEqual(rightpath, backupElement.RightFullPath))
                 pathUnchanged = true;
-
-            //Name is the same, only path is changed
-            if (nameUnchanged == true && pathUnchanged == false)
-            {
-                partnershipList.Add(newname, updated);
-            }
-
+                        
             //Path is unchanged, only name is changed
-            else if (nameUnchanged == false && pathUnchanged == true)
+            if (nameUnchanged == false && pathUnchanged == true)
             {
                 //Partnership checksum dictionary is retained
+                backupElement.Name = newname;
                 partnershipList.Add(newname, backupElement);
             }
-
-            //Deprecated. Should not be hit.
-            else if (nameUnchanged == true && pathUnchanged == true)
-            {
-                throw new ArgumentException("This file/folder partnership already exists. Previous Partnership record kept");
-            }
-
-            //Both changed, old element is removed and new one is added
+            // 3 cases:
+            // Nothing is changed.
+            // Name is the same, only path is changed.
+            // Both changed, old element is removed and new one is added.
             else
             {
                 partnershipList.Add(newname, updated);
