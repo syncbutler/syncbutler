@@ -40,7 +40,8 @@ namespace SyncButler
         }
         public void GrabFocus()
         {
-            mainWindow.GrabFocus();
+            if(mainWindow != null)
+                mainWindow.GrabFocus();
         }
 
         /// <summary>

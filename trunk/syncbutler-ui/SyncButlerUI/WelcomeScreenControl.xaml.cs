@@ -24,6 +24,7 @@ namespace SyncButlerUI
 		public WelcomeScreenControl()
 		{
 			this.InitializeComponent();
+            
 		}
 		
 		/// <summary>
