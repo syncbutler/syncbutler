@@ -66,6 +66,10 @@ namespace SyncButlerUI
 
         private string NewPartnershipName = "";
 
+        // Counters for the UI
+        private int autoResolveCount = 0;
+        private int manualResolveCount = 0;
+
         private int conflictsProcessed = 0;
         private BackgroundWorker resolveWorker = null;
         private BackgroundWorker scanWorker = null;
@@ -263,6 +267,8 @@ namespace SyncButlerUI
 
             operationCancelled = false;
             conflictsProcessed = 0;
+            autoResolveCount = 0;
+            manualResolveCount = 0;
 
             // Instantiates background worker 
             scanWorker = new BackgroundWorker();
@@ -293,7 +299,8 @@ namespace SyncButlerUI
 
                 if (operationCancelled)
                 {
-                    CurrentSyncingFile.Text = "Syncing Cancelled.";
+                    CurrentSyncingFile.Text = "Scan cancelled.\nConflicts automatically processed: " + autoResolveCount +
+                        "\nConflicts manually processed: " + manualResolveCount;
 
                     scanWorker = null;
                     CancelButton.IsEnabled = false;
@@ -427,6 +434,8 @@ namespace SyncButlerUI
                         }
 
                         ResolvedConflicts.Add(this.Controller.ResolveConflict(curConflict, reporter, worker));
+                        if (curConflict.AutoResolveAction == SyncButler.Conflict.Action.Unknown) manualResolveCount++;
+                        else autoResolveCount++;
                     }
                     catch (UserCancelledException)
                     {
@@ -473,7 +482,8 @@ namespace SyncButlerUI
 
             resolveWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(delegate(Object workerObj, RunWorkerCompletedEventArgs args)
             {
-                CurrentSyncingFile.Text = "Scan complete. Conflicts processed so far: " + conflictsProcessed;
+                CurrentSyncingFile.Text = "Scan complete.\nConflicts automatically processed: " + autoResolveCount +
+                    "\nConflicts manually processed: " + manualResolveCount;
                 partnershipNameTextBox.Text = "";
 
                 TotalProgressBar.Value = 0;
@@ -481,7 +491,8 @@ namespace SyncButlerUI
 
                 if (operationCancelled)
                 {
-                    CurrentSyncingFile.Text += "\nSyncing Cancelled.";
+                    CurrentSyncingFile.Text = "Scan cancelled.\nConflicts automatically processed: " + autoResolveCount +
+                    "\nConflicts manually processed: " + manualResolveCount;
                     resolveButton.IsEnabled = true;
                     resolveWorker = null;
                     CancelButton.IsEnabled = false;
