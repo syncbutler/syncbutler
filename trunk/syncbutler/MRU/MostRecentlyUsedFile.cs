@@ -205,6 +205,7 @@ namespace SyncButler.MRU
             }
             catch (IOException ex)
             {
+                Logging.Logger.GetInstance().WARNING("IOException in MostRecentlyUsedFile.cs: " + ex.Message);
                 return false;
             }
         }

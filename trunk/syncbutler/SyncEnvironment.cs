@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using SyncButler.ProgramEnvironment;
+using SyncButler.Exceptions;
 using System.Xml;
 using System.Reflection;
 using System.Diagnostics;
@@ -210,12 +211,20 @@ namespace SyncButler
         {
             //Prepare to write to Partnership list
             Partnership backupElement = partnershipList[oldname];
-            partnershipList.Remove(oldname);
             Partnership updated = CreatePartnership(newname, leftpath, rightpath);
 
             //Conditions check
             bool nameUnchanged = false;
             bool pathUnchanged = false;
+            
+            //Checks if the user try to update the partnership with paths which is similar to existing partnerships
+            if (!IsUniquePartnershipPath(updated.Name, updated.LeftFullPath, updated.RightFullPath, partnershipList))
+            {
+                throw new UserInputException("Partnership already exists.\nUnable to update this partnership.");
+            }
+
+            //remove the old partnership
+            partnershipList.Remove(oldname);
 
             //See if the friendly name is already in used (even after it is removed)
             if (!IsUniquePartnershipName(newname, partnershipList))
@@ -224,11 +233,10 @@ namespace SyncButler
                 //throw new ArgumentException("Friendly name already in used. Update failure. Previous Partnership record kept");
             }
 
-            //Checks if the user try to update the partnership with existing partnerships
-            if (!IsUniquePartnershipPath(updated.Name, updated.LeftFullPath, updated.RightFullPath, partnershipList))
-            {
+            if (WindowsFileSystem.PathsEqual(leftpath, backupElement.LeftFullPath)
+                &&
+                WindowsFileSystem.PathsEqual(rightpath, backupElement.RightFullPath))
                 pathUnchanged = true;
-            }
 
             //Name is the same, only path is changed
             if (nameUnchanged == true && pathUnchanged == false)
@@ -243,6 +251,7 @@ namespace SyncButler
                 partnershipList.Add(newname, backupElement);
             }
 
+            //Deprecated. Should not be hit.
             else if (nameUnchanged == true && pathUnchanged == true)
             {
                 throw new ArgumentException("This file/folder partnership already exists. Previous Partnership record kept");
@@ -722,17 +731,14 @@ namespace SyncButler
             foreach (Partnership storedElement in partnerList.Values)
             {
                 //For (Incoming Left != Left in List && Incoming Right != Right in List)
-                string storedLeft = storedElement.LeftFullPath.ToLower().TrimEnd('\\');
-                string storedRight = storedElement.RightFullPath.ToLower().TrimEnd('\\');
-                string checkLeft = leftPath.ToLower().TrimEnd('\\');
-                string checkRight = rightPath.ToLower().TrimEnd('\\');
+                bool leftLeft = WindowsFileSystem.PathsEqual(storedElement.LeftFullPath, leftPath);
+                bool leftRight = WindowsFileSystem.PathsEqual(storedElement.LeftFullPath, rightPath);
+                bool rightLeft = WindowsFileSystem.PathsEqual(storedElement.RightFullPath, leftPath);
+                bool rightRight = WindowsFileSystem.PathsEqual(storedElement.RightFullPath, rightPath);
 
                 //check left path with left of stored partnerships and right with right
-                if (storedLeft.Equals(checkLeft) && storedRight.Equals(checkRight))
-                    return false;
-
                 //For (Incoming Left != Right in List && Incoming Right != Left in List)
-                if (storedLeft.Equals(checkRight) && storedRight.Equals(checkLeft))
+                if ((leftLeft && rightRight) || (leftRight && rightLeft))
                     return false;
             }
             return true;

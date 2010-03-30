@@ -135,13 +135,7 @@ namespace SyncButler
         /// <exception cref="UserInputException">Cannot create a partnership which contains the SyncButler directory</exception>
         private static void ContainsAppDirectory(String leftPath, String rightPath, string appPath)
         {
-            char[] standard = {'\\',' '};
-            //Path standardised
-            string standardisedLeft = leftPath.TrimEnd(standard).ToLower() + "\\";
-            string standardisedRight = rightPath.TrimEnd(standard).ToLower() + "\\";
-            string standardisedApp = appPath.TrimEnd(standard).ToLower() + "\\";
-
-            if (standardisedApp.Equals(standardisedLeft) || standardisedApp.Equals(standardisedRight))
+            if (WindowsFileSystem.PathsEqual(leftPath, appPath) || WindowsFileSystem.PathsEqual(rightPath, appPath))
                 throw new UserInputException("Cannot create a partnership on the running SyncButler directory!");
         }
 
@@ -183,9 +177,7 @@ namespace SyncButler
         {
             string appPath = SyncEnvironment.AppPath;
 
-            if ((leftPath.StartsWith(appPath) && leftPath.Length <= (appPath.Length + 1)) ||
-                    (rightPath.StartsWith(appPath) && rightPath.Length <= (appPath.Length + 1)))
-                throw new UserInputException("Cannot create a partnership on the running SyncButler directory!");
+            ContainsAppDirectory(leftPath, rightPath, appPath);
 
             syncEnvironment.UpdatePartnership(oldName, newName, leftPath, rightPath);
         }
