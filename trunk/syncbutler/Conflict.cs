@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using SyncButler.Exceptions;
+using System.Collections.ObjectModel;
 
 namespace SyncButler
 {
@@ -10,12 +11,69 @@ namespace SyncButler
     /// </summary>
     public class Conflict
     {
+        /// <summary>
+        /// Represents an action to take an it's textual Description
+        /// </summary>
+        public class ResolveAction
+        {
+            public Action resolutionAction
+            {
+                get;
+                set;
+            }
+            public string description
+            {
+                get;
+                set;
+            }
+
+
+            public ResolveAction(Action resolutionAction, string description)
+            {
+                this.resolutionAction = resolutionAction;
+                this.description = description;
+            }
+        }
+
+        /// <summary>
+        /// Represents a list of actions that can be taken and the selected action to take
+        /// </summary>
+        public class ResolveActionSet : ObservableCollection<ResolveAction>
+        {
+            public ResolveAction selectedAction
+            {
+                get;
+                set;
+            }
+
+            public void AddAction(Action toAdd)
+            {
+                this.Add(new ResolveAction(toAdd, Conflict.ActionDescription(toAdd)));
+            }
+
+            public void SetSelectedAction(Action toSet)
+            {
+                selectedAction = null;
+                foreach (ResolveAction ra in this)
+                {
+                    if (ra.resolutionAction == toSet)
+                    {
+                        selectedAction = ra;
+                        break;
+                    }
+                }
+            }
+        }
+
         protected internal ISyncable left;
         protected internal ISyncable right;
         protected Action autoResolveAction;
         protected Action suggestedAction;
-        protected bool leftOverwriteRight;
-        protected bool rightOverwriteLeft;
+        public ResolveActionSet userActions
+        {
+            get;
+            set;
+        }
 
         //private enum StatusOptions {Resolved, Unresolved, Resolving}
 
@@ -23,6 +81,11 @@ namespace SyncButler
         /// Possible actions for conflict resolution
         /// </summary>
         public enum Action { CopyToLeft, DeleteLeft, Merge, CopyToRight, DeleteRight, Ignore, Unknown };
+
+        public static string ActionDescription(Action a)
+        {
+				return  a.ToString();
+        }
 
         /// <summary>
         /// Constructor used to instantiate a Conflict object.
@@ -36,8 +99,40 @@ namespace SyncButler
             this.right = right;
             this.autoResolveAction = autoResolveAction;
             this.suggestedAction = Action.Unknown;
-            leftOverwriteRight = (this.autoResolveAction == Conflict.Action.CopyToRight || this.autoResolveAction == Conflict.Action.DeleteRight);
-            rightOverwriteLeft = !leftOverwriteRight;
+
+            userActions = new ResolveActionSet();
+            if (!left.Exists())
+            {
+                userActions.AddAction(Action.CopyToLeft);
+                userActions.AddAction(Action.DeleteRight);
+            }
+            else if (!right.Exists())
+            {
+                userActions.AddAction(Action.CopyToRight);
+                userActions.AddAction(Action.DeleteLeft);
+            }
+            else
+            {
+                userActions.AddAction(Action.CopyToLeft);
+                userActions.AddAction(Action.CopyToRight);
+             }
+
+            userActions.AddAction(Action.Ignore);
+
+            userActions.SetSelectedAction(suggestedAction);
+        }
+
+        /// <summary>
+        /// Constructor used to instantiate a Conflict object.
+        /// </summary>
+        /// <param name="left">The left ISyncable</param>
+        /// <param name="right">The other (right) ISyncable</param>
+        /// <param name="autoResolveAction">The Action to be performed, or Unknown if this conflict cannot be automatically resolved.</param>
+        /// <param name="suggestedAction">If the conflict cannot be automatically resolved, then this should contain a suggested action.</param>
+        public Conflict(ISyncable left, ISyncable right, Action autoResolveAction, Action suggestedAction) : this(left, right, autoResolveAction)
+        {
+            this.suggestedAction = suggestedAction;
+            userActions.SetSelectedAction(suggestedAction);
         }
 
         public string OffendingPath
@@ -62,33 +157,6 @@ namespace SyncButler
             }
         }
 
-        public bool LeftOverwriteRight
-        {
-            get
-            {
-                return leftOverwriteRight;
-            }
-            set
-            {
-                leftOverwriteRight = value;
-                rightOverwriteLeft = !value;
-
-            }
-        }
-
-        public bool RightOverwriteLeft
-        {
-            get
-            {
-                return rightOverwriteLeft;
-            }
-            set
-            {
-                rightOverwriteLeft = value;
-                leftOverwriteRight = !value;
-            }
-        }
-
         public bool IgnoreConflict
         {
             get
@@ -99,17 +167,6 @@ namespace SyncButler
             {
                 left.Ignored(value);
             }
-        }
-        /// <summary>
-        /// Constructor used to instantiate a Conflict object.
-        /// </summary>
-        /// <param name="left">The left ISyncable</param>
-        /// <param name="right">The other (right) ISyncable</param>
-        /// <param name="autoResolveAction">The Action to be performed, or Unknown if this conflict cannot be automatically resolved.</param>
-        /// <param name="suggestedAction">If the conflict cannot be automatically resolved, then this should contain a suggested action.</param>
-        public Conflict(ISyncable left, ISyncable right, Action autoResolveAction, Action suggestedAction) : this(left, right, autoResolveAction)
-        {
-            this.suggestedAction = suggestedAction;
         }
 
         /// <summary>
@@ -166,38 +223,8 @@ namespace SyncButler
         /// <returns></returns>
         public Resolved Resolve()
         {
-            
-            if (leftOverwriteRight && rightOverwriteLeft)
-                throw new NotSupportedException("Merging not supported currently");
-
-            if (leftOverwriteRight)
-            {
-                if (!left.Exists())
-                {
-                    Resolve(Action.DeleteRight);
-                    return new Resolved(left,right,Resolved.ActionDone.DeleteRight);
-                }
-                else
-                {
-                    Resolve(Action.CopyToRight);
-                    return new Resolved(left,right,Resolved.ActionDone.CopyFromLeft);
-                }
-            }
-            else if (rightOverwriteLeft)
-            {
-                if (!right.Exists())
-                {
-                    Resolve(Action.DeleteLeft);
-                    return new Resolved(left, right, Resolved.ActionDone.DeleteLeft);
-                }
-                else
-                {
-                    Resolve(Action.CopyToLeft);
-                    return new Resolved(left, right, Resolved.ActionDone.CopyFromRight);
-                }
-            }
-
-            throw new InvalidActionException();
+            if (autoResolveAction == Action.Unknown) return Resolve(userActions.selectedAction.resolutionAction);
+            else return Resolve(autoResolveAction);
         }
 
         /// <summary>
@@ -205,31 +232,31 @@ namespace SyncButler
         /// </summary>
         /// <returns>true if the conflict was successfully resolved, false otherwise.</returns>
         /// <exception cref="ArgumentException">This exception is generated when an invalid user action is passed into the method.</exception>
-        public void Resolve(Action user)
+        public Resolved Resolve(Action user)
         {
             switch (user) {
                 case Action.CopyToLeft : 
                     right.CopyTo(left);
                     //right.UpdateStoredChecksum();
-                    break;
+                    return new Resolved(left, right, Resolved.ActionDone.CopyFromRight);
                 case Action.DeleteLeft : 
                     left.Delete(true);
                     //left.RemoveStoredChecksum();
-                    break;
+                    return new Resolved(left, right, Resolved.ActionDone.DeleteLeft);
                 case Action.Merge:
                     left.Merge(right);
                     //left.UpdateStoredChecksum();
-                    break;
+                    return new Resolved(left, right, Resolved.ActionDone.Merged);
                 case Action.CopyToRight:
                     left.CopyTo(right);
                     //left.UpdateStoredChecksum();
-                    break;
+                    return new Resolved(left, right, Resolved.ActionDone.CopyFromLeft);
                 case Action.DeleteRight:
                     right.Delete(true);
                     //right.RemoveStoredChecksum();
-                    break;
+                    return new Resolved(left, right, Resolved.ActionDone.DeleteRight);
                 case Action.Ignore:
-                    break;
+                    return new Resolved(left, right, Resolved.ActionDone.Ignored);
                 default:
                     throw new System.ArgumentException("Invalid User Action");
 
