@@ -271,7 +271,7 @@ namespace SyncButler
             WindowsFile destFile = (WindowsFile)item;
 
             // Make sure there's enough free space.
-            if ((nativeFileObj.Length + 4096) > SystemEnvironment.StorageDevices.GetAvailableSpace(this.driveLetter))
+            if ((nativeFileObj.Length + 4096) > SystemEnvironment.StorageDevices.GetAvailableSpace(destFile.driveLetter))
                 throw new IOException("There is insufficient space to copy the file to " + destFile.nativeFileObj.FullName);
 
             int bufferSize = (int) SyncEnvironment.FileReadBufferSize;
