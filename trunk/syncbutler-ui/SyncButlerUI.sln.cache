@@ -10,11 +10,7 @@
     <_SolutionProjectProjects Include="SyncButlerUI\SyncButlerUI.csproj" />
   </ItemGroup>
   <ItemGroup Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') ">
-    <BuildLevel2 Include="SyncButlerUI\SyncButlerUI.csproj">
-      <Configuration>Debug</Configuration>
-      <Platform>AnyCPU</Platform>
-    </BuildLevel2>
-    <BuildLevel1 Include="..\syncbutler\SyncButler.csproj">
+    <BuildLevel1 Include="SyncButlerUI\SyncButlerUI.csproj">
       <Configuration>Debug</Configuration>
       <Platform>AnyCPU</Platform>
     </BuildLevel1>
@@ -22,17 +18,21 @@
       <Configuration>Debug</Configuration>
       <Platform>AnyCPU</Platform>
     </BuildLevel0>
+    <BuildLevel0 Include="..\syncbutler\SyncButler.csproj">
+      <Configuration>Debug</Configuration>
+      <Platform>AnyCPU</Platform>
+    </BuildLevel0>
   </ItemGroup>
   <ItemGroup Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') ">
-    <BuildLevel2 Include="SyncButlerUI\SyncButlerUI.csproj">
-      <Configuration>Release</Configuration>
-      <Platform>AnyCPU</Platform>
-    </BuildLevel2>
-    <BuildLevel1 Include="..\syncbutler\SyncButler.csproj">
+    <BuildLevel1 Include="SyncButlerUI\SyncButlerUI.csproj">
       <Configuration>Release</Configuration>
       <Platform>AnyCPU</Platform>
     </BuildLevel1>
     <BuildLevel0 Include="..\syncbutler-console\SyncButlerConsole.csproj">
+      <Configuration>Release</Configuration>
+      <Platform>AnyCPU</Platform>
+    </BuildLevel0>
+    <BuildLevel0 Include="..\syncbutler\SyncButler.csproj">
       <Configuration>Release</Configuration>
       <Platform>AnyCPU</Platform>
     </BuildLevel0>
@@ -49,11 +49,11 @@
     <AspNetConfiguration>$(Configuration)</AspNetConfiguration>
   </PropertyGroup>
   <PropertyGroup>
-    <SolutionDir>C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\syncbutler-ui\</SolutionDir>
+    <SolutionDir>D:\Documents\CS3215\CS3215 Project Source\syncbutler-ui\</SolutionDir>
     <SolutionExt>.sln</SolutionExt>
     <SolutionFileName>SyncButlerUI.sln</SolutionFileName>
     <SolutionName>SyncButlerUI</SolutionName>
-    <SolutionPath>C:\Users\Rachel^_^\Documents\My Dropbox\SyncButler\syncbutler-ui\SyncButlerUI.sln</SolutionPath>
+    <SolutionPath>D:\Documents\CS3215\CS3215 Project Source\syncbutler-ui\SyncButlerUI.sln</SolutionPath>
   </PropertyGroup>
   <PropertyGroup>
     <TargetFrameworkVersion Condition="'$(TargetFrameworkVersion)' == '' and '$(MSBuildToolsVersion)' == '2.0'">v2.0</TargetFrameworkVersion>
@@ -109,7 +109,7 @@
     <MSBuild Projects="SyncButlerUI\SyncButlerUI.csproj" Targets="Publish" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') " />
     <MSBuild Projects="SyncButlerUI\SyncButlerUI.csproj" Targets="Publish" Properties="Configuration=Release; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') " />
   </Target>
-  <Target Name="SyncButler" DependsOnTargets="SyncButlerConsole" Condition="'$(CurrentSolutionConfigurationContents)' != ''" Outputs="@(SyncButlerBuildOutput)">
+  <Target Name="SyncButler" Condition="'$(CurrentSolutionConfigurationContents)' != ''" Outputs="@(SyncButlerBuildOutput)">
     <MSBuild Projects="..\syncbutler\SyncButler.csproj" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') ">
       <Output TaskParameter="TargetOutputs" ItemName="SyncButlerBuildOutput" />
     </MSBuild>
@@ -117,11 +117,11 @@
       <Output TaskParameter="TargetOutputs" ItemName="SyncButlerBuildOutput" />
     </MSBuild>
   </Target>
-  <Target Name="SyncButler:Clean" DependsOnTargets="SyncButlerConsole:Clean" Condition="'$(CurrentSolutionConfigurationContents)' != ''">
+  <Target Name="SyncButler:Clean" Condition="'$(CurrentSolutionConfigurationContents)' != ''">
     <MSBuild Projects="..\syncbutler\SyncButler.csproj" Targets="Clean" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') " />
     <MSBuild Projects="..\syncbutler\SyncButler.csproj" Targets="Clean" Properties="Configuration=Release; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') " />
   </Target>
-  <Target Name="SyncButler:Rebuild" DependsOnTargets="SyncButlerConsole:Rebuild" Condition="'$(CurrentSolutionConfigurationContents)' != ''" Outputs="@(SyncButlerBuildOutput)">
+  <Target Name="SyncButler:Rebuild" Condition="'$(CurrentSolutionConfigurationContents)' != ''" Outputs="@(SyncButlerBuildOutput)">
     <MSBuild Projects="..\syncbutler\SyncButler.csproj" Targets="Rebuild" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') ">
       <Output TaskParameter="TargetOutputs" ItemName="SyncButlerBuildOutput" />
     </MSBuild>
@@ -129,7 +129,7 @@
       <Output TaskParameter="TargetOutputs" ItemName="SyncButlerBuildOutput" />
     </MSBuild>
   </Target>
-  <Target Name="SyncButler:Publish" DependsOnTargets="SyncButlerConsole:Publish" Condition="'$(CurrentSolutionConfigurationContents)' != ''">
+  <Target Name="SyncButler:Publish" Condition="'$(CurrentSolutionConfigurationContents)' != ''">
     <MSBuild Projects="..\syncbutler\SyncButler.csproj" Targets="Publish" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') " />
     <MSBuild Projects="..\syncbutler\SyncButler.csproj" Targets="Publish" Properties="Configuration=Release; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') " />
   </Target>
@@ -168,11 +168,6 @@
     </MSBuild>
     <Message Text="The project &quot;%(SkipLevel1.Identity)&quot; is not selected for building in solution configuration &quot;$(Configuration)|$(Platform)&quot;." Condition="@(SkipLevel1) != ''" />
     <Warning Text="The project configuration for project &quot;%(MissingConfigLevel1.Identity)&quot; was not specified in the solution file for the solution configuration &quot;$(Configuration)|$(Platform)&quot;." Code="MSB4121" HelpKeyword="MSBuild.SolutionProjectConfigurationMissing" Condition="@(MissingConfigLevel1) != ''" />
-    <MSBuild Condition="@(BuildLevel2) != ''" Projects="@(BuildLevel2)" Properties="Configuration=%(Configuration); Platform=%(Platform); BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" BuildInParallel="true" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)">
-      <Output TaskParameter="TargetOutputs" ItemName="CollectedBuildOutput" />
-    </MSBuild>
-    <Message Text="The project &quot;%(SkipLevel2.Identity)&quot; is not selected for building in solution configuration &quot;$(Configuration)|$(Platform)&quot;." Condition="@(SkipLevel2) != ''" />
-    <Warning Text="The project configuration for project &quot;%(MissingConfigLevel2.Identity)&quot; was not specified in the solution file for the solution configuration &quot;$(Configuration)|$(Platform)&quot;." Code="MSB4121" HelpKeyword="MSBuild.SolutionProjectConfigurationMissing" Condition="@(MissingConfigLevel2) != ''" />
   </Target>
   <Target Name="Clean" Condition="'$(CurrentSolutionConfigurationContents)' != ''">
     <MSBuild Condition="@(BuildLevel0) != ''" Projects="@(BuildLevel0)" Properties="Configuration=%(Configuration); Platform=%(Platform); BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" Targets="Clean" ToolsVersion="$(ProjectToolsVersion)" BuildInParallel="true" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" />
@@ -181,9 +176,6 @@
     <MSBuild Condition="@(BuildLevel1) != ''" Projects="@(BuildLevel1)" Properties="Configuration=%(Configuration); Platform=%(Platform); BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" Targets="Clean" ToolsVersion="$(ProjectToolsVersion)" BuildInParallel="true" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" />
     <Message Text="The project &quot;%(SkipLevel1.Identity)&quot; is not selected for building in solution configuration &quot;$(Configuration)|$(Platform)&quot;." Condition="@(SkipLevel1) != ''" />
     <Warning Text="The project configuration for project &quot;%(MissingConfigLevel1.Identity)&quot; was not specified in the solution file for the solution configuration &quot;$(Configuration)|$(Platform)&quot;." Code="MSB4121" HelpKeyword="MSBuild.SolutionProjectConfigurationMissing" Condition="@(MissingConfigLevel1) != ''" />
-    <MSBuild Condition="@(BuildLevel2) != ''" Projects="@(BuildLevel2)" Properties="Configuration=%(Configuration); Platform=%(Platform); BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" Targets="Clean" ToolsVersion="$(ProjectToolsVersion)" BuildInParallel="true" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" />
-    <Message Text="The project &quot;%(SkipLevel2.Identity)&quot; is not selected for building in solution configuration &quot;$(Configuration)|$(Platform)&quot;." Condition="@(SkipLevel2) != ''" />
-    <Warning Text="The project configuration for project &quot;%(MissingConfigLevel2.Identity)&quot; was not specified in the solution file for the solution configuration &quot;$(Configuration)|$(Platform)&quot;." Code="MSB4121" HelpKeyword="MSBuild.SolutionProjectConfigurationMissing" Condition="@(MissingConfigLevel2) != ''" />
     <Delete Files="SyncButlerUI.sln.cache" />
   </Target>
   <Target Name="Rebuild" Condition="'$(CurrentSolutionConfigurationContents)' != ''" Outputs="@(CollectedBuildOutput)">
@@ -197,11 +189,6 @@
     </MSBuild>
     <Message Text="The project &quot;%(SkipLevel1.Identity)&quot; is not selected for building in solution configuration &quot;$(Configuration)|$(Platform)&quot;." Condition="@(SkipLevel1) != ''" />
     <Warning Text="The project configuration for project &quot;%(MissingConfigLevel1.Identity)&quot; was not specified in the solution file for the solution configuration &quot;$(Configuration)|$(Platform)&quot;." Code="MSB4121" HelpKeyword="MSBuild.SolutionProjectConfigurationMissing" Condition="@(MissingConfigLevel1) != ''" />
-    <MSBuild Condition="@(BuildLevel2) != ''" Projects="@(BuildLevel2)" Properties="Configuration=%(Configuration); Platform=%(Platform); BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" Targets="Rebuild" ToolsVersion="$(ProjectToolsVersion)" BuildInParallel="true" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)">
-      <Output TaskParameter="TargetOutputs" ItemName="CollectedBuildOutput" />
-    </MSBuild>
-    <Message Text="The project &quot;%(SkipLevel2.Identity)&quot; is not selected for building in solution configuration &quot;$(Configuration)|$(Platform)&quot;." Condition="@(SkipLevel2) != ''" />
-    <Warning Text="The project configuration for project &quot;%(MissingConfigLevel2.Identity)&quot; was not specified in the solution file for the solution configuration &quot;$(Configuration)|$(Platform)&quot;." Code="MSB4121" HelpKeyword="MSBuild.SolutionProjectConfigurationMissing" Condition="@(MissingConfigLevel2) != ''" />
   </Target>
   <Target Name="Publish" Condition="'$(CurrentSolutionConfigurationContents)' != ''">
     <MSBuild Condition="@(BuildLevel0) != ''" Projects="@(BuildLevel0)" Properties="Configuration=%(Configuration); Platform=%(Platform); BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" Targets="Publish" ToolsVersion="$(ProjectToolsVersion)" BuildInParallel="true" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" />
@@ -210,8 +197,5 @@
     <MSBuild Condition="@(BuildLevel1) != ''" Projects="@(BuildLevel1)" Properties="Configuration=%(Configuration); Platform=%(Platform); BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" Targets="Publish" ToolsVersion="$(ProjectToolsVersion)" BuildInParallel="true" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" />
     <Message Text="The project &quot;%(SkipLevel1.Identity)&quot; is not selected for building in solution configuration &quot;$(Configuration)|$(Platform)&quot;." Condition="@(SkipLevel1) != ''" />
     <Warning Text="The project configuration for project &quot;%(MissingConfigLevel1.Identity)&quot; was not specified in the solution file for the solution configuration &quot;$(Configuration)|$(Platform)&quot;." Code="MSB4121" HelpKeyword="MSBuild.SolutionProjectConfigurationMissing" Condition="@(MissingConfigLevel1) != ''" />
-    <MSBuild Condition="@(BuildLevel2) != ''" Projects="@(BuildLevel2)" Properties="Configuration=%(Configuration); Platform=%(Platform); BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" Targets="Publish" ToolsVersion="$(ProjectToolsVersion)" BuildInParallel="true" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" />
-    <Message Text="The project &quot;%(SkipLevel2.Identity)&quot; is not selected for building in solution configuration &quot;$(Configuration)|$(Platform)&quot;." Condition="@(SkipLevel2) != ''" />
-    <Warning Text="The project configuration for project &quot;%(MissingConfigLevel2.Identity)&quot; was not specified in the solution file for the solution configuration &quot;$(Configuration)|$(Platform)&quot;." Code="MSB4121" HelpKeyword="MSBuild.SolutionProjectConfigurationMissing" Condition="@(MissingConfigLevel2) != ''" />
   </Target>
 </Project>
