@@ -95,6 +95,7 @@ namespace SyncButlerUI
 
 		private void goHome(object sender, RoutedEventArgs e)
 		{
+            homeWindow1.FirstTimeHelp.Visibility = System.Windows.Visibility.Hidden;
             if (!StopExistingOperation()) return;
 			//homeWindow1.goHome(sender,e);
 			VisualStateManager.GoToState(homeWindow1,"Home",false);
@@ -103,6 +104,7 @@ namespace SyncButlerUI
 
 		private void goToSyncButlerSync(object sender, RoutedEventArgs e)
 		{
+            homeWindow1.FirstTimeHelp.Visibility = System.Windows.Visibility.Hidden;
             if (!StopExistingOperation()) return;
             if (Controller.GetInstance().GetSBSEnable().Equals("Enable"))
             {
@@ -143,9 +145,11 @@ namespace SyncButlerUI
 
 		private void GoToSetting(object sender, RoutedEventArgs e)
 		{
+            if (controller.IsFirstSBSRun())
+                sender = "FirstSBSRun";
             if (!StopExistingOperation()) return;
             homeWindow1.IsLoadingSBS = true;
-            if (sender!=null && sender.GetType() == typeof(String) && sender.Equals("FirstSBSRun"))
+            if (sender != null && sender.GetType() == typeof(String) && (sender.Equals("FirstSBSRun")))
             {
                 homeWindow1.FirstTimeHelp.Visibility = System.Windows.Visibility.Visible;
 			}

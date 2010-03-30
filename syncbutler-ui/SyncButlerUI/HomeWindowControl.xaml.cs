@@ -515,6 +515,7 @@ namespace SyncButlerUI
 
         private void GoHome()
         {
+            this.FirstTimeHelp.Visibility = System.Windows.Visibility.Hidden;
             VisualStateManager.GoToState(this, "Home", false);
             CurrentState = State.Home;
         }
