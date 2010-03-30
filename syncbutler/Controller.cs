@@ -388,10 +388,10 @@ namespace SyncButler
             if (SystemEnvironment.StorageDevices.GetDriveLetter(driveid).Length == 0)
             {
                 errorHandler.Invoke(new Exception("Device not detected\nPlease plug in the device configured for SBS."));
-                
             }
             else
             {
+                driveLetter = SystemEnvironment.StorageDevices.GetDriveLetter(driveid)[0];
                 string syncTo = driveLetter + ":\\SyncButler\\" + SyncEnvironment.ComputerName + "\\";
                 MRUList mruList = new MRUList();
 
