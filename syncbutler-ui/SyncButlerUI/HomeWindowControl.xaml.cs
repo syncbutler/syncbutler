@@ -513,6 +513,22 @@ namespace SyncButlerUI
     /// Interaction logic for Creating Partnership
     /// </summary>
 
+	private int lastClickedIndex=0;
+		private void weee(object sender, RoutedEventArgs e)
+		{   
+			if(lastClickedIndex==ConflictList.SelectedIndex)
+			{
+                    ConflictList.SelectedIndex = -1;
+					lastClickedIndex=-2;
+				//	Image image = sender as Image;
+				//	image.Source = new BitmapImage(new Uri("pack://application;/Images/bullet_toggle_plus.png", UriKind.Absolute));
+			}
+			else{
+					lastClickedIndex=ConflictList.SelectedIndex;
+				//	Image image = sender as Image;
+				//	image.Source = new BitmapImage(new Uri("pack://application;/Images/bullet_toggle_plus.png", UriKind.Absolute));
+			}
+		}
         private void GoHome()
         {
             this.FirstTimeHelp.Visibility = System.Windows.Visibility.Hidden;
@@ -536,6 +552,8 @@ namespace SyncButlerUI
                 dialog.ShowDialog();
             }
         }
+
+
 		#region createPartnership
 		
 		/// <summary>

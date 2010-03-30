@@ -73,7 +73,7 @@ namespace SyncButler
         }
 
         public enum ActionDone
-        { DeleteLeft, DeleteRight, DeleteBoth, CopyFromLeft, CopyFromRight, Merged }
+        { DeleteLeft, DeleteRight, DeleteBoth, CopyFromLeft, CopyFromRight, Merged, Ignored }
 
         public override string ToString()
         {

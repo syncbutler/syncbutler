@@ -138,6 +138,8 @@
     <Resource Include="Images\Arrow-Left.png" />
     <Resource Include="Images\arrow1.png" />
     <Resource Include="Images\Broken.png" />
+    <Resource Include="Images\bullet_toggle_minus.png" />
+    <Resource Include="Images\bullet_toggle_plus.png" />
     <Resource Include="Images\butler-glow.png" />
     <Resource Include="Images\Computer.png" />
     <Resource Include="Images\diskdrive.png" />

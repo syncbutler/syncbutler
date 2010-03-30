@@ -611,7 +611,66 @@
 				</Setter.Value>
 			</Setter>
 		</Style>
-				
+			<Style x:Key="ConflictDataGridCellStyle" TargetType="{x:Type Custom:DataGridCell}">
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="BorderBrush" Value="Transparent"/>
+			<Setter Property="BorderThickness" Value="1"/>
+			<Setter Property="Template">		
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type Custom:DataGridCell}">
+						<Border SnapsToDevicePixels="True" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Height="32">
+							<Grid Width="475" Height="33">
+								<ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" ContentTemplate="{TemplateBinding ContentTemplate}" HorizontalAlignment="Stretch" Margin="44.087,12.334,93.82,-0.834" VerticalAlignment="Stretch" Height="Auto"/>
+								<Image Margin="19.091,2.333,0,6.046" VerticalAlignment="Stretch" Height="Auto" Source="Images/Folder.png" Stretch="Fill" HorizontalAlignment="Left" Width="24.621" Opacity="0.445" />
+								<Image HorizontalAlignment="Left" Margin="15.576,3.214,0,5.165" VerticalAlignment="Stretch" Width="24.621" Height="Auto" Source="Images\Folder.png" Stretch="Fill" Opacity="0.41"/>
+								<TextBlock HorizontalAlignment="Left" Margin="45.087,-1.166,0,0" Width="113.5" Text="Partnership Name:" TextWrapping="Wrap" VerticalAlignment="Top" Height="17" FontWeight="Bold" />
+								<TextBlock x:Name="ConflictNo" HorizontalAlignment="Stretch" Margin="204.94,12.006,146.227,6.993" Width="Auto" TextWrapping="Wrap" Text="(No Actions Required)" VerticalAlignment="Stretch" Height="Auto">
+									<TextBlock.Style>
+										<Style TargetType="{x:Type TextBlock}">
+										<Setter Property="Visibility" Value="Collapsed"/>
+										<Style.Triggers>
+											<DataTrigger Binding="{Binding Path=conflicts.Count}" Value="0">
+											<Setter Property="Visibility" Value="Visible"/>
+											</DataTrigger>
+										</Style.Triggers>
+									</Style>
+								</TextBlock.Style>
+								</TextBlock>
+								<Button HorizontalAlignment="Left" Margin="3,10.833,0,12" Style="{DynamicResource ExpandButton}" Width="10.167" Content="Button" Click="weee" />						
+							</Grid>
+						</Border>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Style.Triggers>
+				<Trigger Property="IsSelected" Value="True">
+					<Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+					<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
+					<Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+				</Trigger>
+				<Trigger Property="IsKeyboardFocusWithin" Value="True">
+					<Setter Property="BorderBrush" Value="{DynamicResource {ComponentResourceKey ResourceId=FocusBorderBrushKey, TypeInTargetAssembly={x:Type Custom:DataGrid}}}"/>
+				</Trigger>
+			</Style.Triggers>
+		</Style>
+			<Style x:Key="ExpandButton" TargetType="{x:Type Button}">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type Button}">
+							<Grid>
+								<Image x:Name="ButtonImg" Source="Images/bullet_toggle_plus.png"/>
+							</Grid>
+							<ControlTemplate.Triggers>
+								<Trigger Property="IsFocused" Value="True"/>
+								<Trigger Property="IsDefaulted" Value="True"/>
+								<Trigger Property="IsMouseOver" Value="True"/>
+								<Trigger Property="IsPressed" Value="True"/>
+								<Trigger Property="IsEnabled" Value="False"/>
+							</ControlTemplate.Triggers>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Style>
 	</UserControl.Resources>
 	<UserControl.RenderTransform>
 		<TransformGroup>
@@ -1545,21 +1604,58 @@
 			<ProgressBar x:Name="SubProgressBar" Margin="30.532,0,8,25.286" VerticalAlignment="Bottom" Height="14.286"/>
 			<ProgressBar x:Name="TotalProgressBar" Margin="30.532,0,8,8" VerticalAlignment="Bottom" Height="14.286"/>
 			<TextBlock x:Name="ConflictsLabel" Margin="29.032,39.072,0,0" FontSize="24" FontWeight="Bold" Text="Conflicts" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Width="177.618" Height="28.571"/>
-			<Custom:DataGrid x:Name="ConflictList" TabIndex="2" Margin="29.032,123.429,8,157.714" RowDetailsVisibilityMode="VisibleWhenSelected"  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True" CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False" GridLinesVisibility="Vertical" Height="162.857" HorizontalScrollBarVisibility="Disabled" SelectionMode="Single" ItemsSource="{Binding StaticResource, Mode=TwoWay}" Custom:SelectiveScrollingGrid.SelectiveScrollingOrientation="Horizontal" CanUserResizeRows="False" HeadersVisibility="Column" VerticalScrollBarVisibility="Visible">
+			<Custom:DataGrid x:Name="ConflictList" TabIndex="2" Width="466.302" Margin="29.032,123.429,8,157.714" RowDetailsVisibilityMode="VisibleWhenSelected"  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True" CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False" GridLinesVisibility="Vertical" Height="162.857" HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding StaticResource, Mode=TwoWay}" Custom:SelectiveScrollingGrid.SelectiveScrollingOrientation="Horizontal" CanUserResizeRows="False" HeadersVisibility="Column" VerticalScrollBarVisibility="Visible" RenderTransformOrigin="0.5,0.5" EnableRowVirtualization="True" RowBackground="White" AlternatingRowBackground="WhiteSmoke" CellStyle="{DynamicResource ConflictDataGridCellStyle}" Focusable="False" Grid.IsSharedSizeScope="True" SelectedIndex="-1" SelectionMode="Single">
+				<Custom:DataGrid.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Custom:DataGrid.RenderTransform>
 				<Custom:DataGrid.Columns>
-					<Custom:DataGridTextColumn x:Name="conflictlistPartnershipName" Width="437.143" MinWidth="430" Header="Partnerships" Binding="{Binding PartnerShipName}" CanUserSort="False" CanUserResize="False" CanUserReorder="False" IsReadOnly="True" />
+					<Custom:DataGridTextColumn x:Name="conflictlistPartnershipName" Width="466
+					" MinWidth="430" Header="Partnerships" Binding="{Binding PartnerShipName}" CanUserSort="False" CanUserResize="False" CanUserReorder="False" IsReadOnly="True"/>
 				</Custom:DataGrid.Columns>
-			    <Custom:DataGrid.RowDetailsTemplate>
-                    <DataTemplate>
-                        <Custom:DataGrid x:Name="conflictListInnerGrid" Height="100" SelectionUnit="FullRow" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" ItemsSource="{Binding conflicts}" CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False" >
-					    <Custom:DataGrid.Columns > 
-					    <Custom:DataGridTextColumn x:Name="File_Name"  IsReadOnly="True" Width="300" MinWidth="310" Header="File Name" Binding="{Binding OffendingPath}" />
-					    <Custom:DataGridCheckBoxColumn x:Name="FolderOneBox" Width="60" IsReadOnly="False" MinWidth="40" Header="Folder 1" Binding="{Binding LeftOverwriteRight}"/>
-					    <Custom:DataGridCheckBoxColumn x:Name="FolderTwoBox" Width="60" IsReadOnly="False" MinWidth="40" Header="Folder 2" Binding="{Binding RightOverwriteLeft}" />
-					    </Custom:DataGrid.Columns>
-					    </Custom:DataGrid>
-                    </DataTemplate>
-                </Custom:DataGrid.RowDetailsTemplate>
+				<Custom:DataGrid.RowDetailsTemplate>
+					<DataTemplate>
+						<ListBox x:Name="conflictsListBox" Height="100" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding conflicts}" BorderThickness="1" BorderBrush="Black" Width="450.302">
+							<ListBox.Style>
+									<Style TargetType="{x:Type ListBox}">
+										<Setter Property="Visibility" Value="Visible"/>
+									<Style.Triggers>
+										<DataTrigger Binding="{Binding Path=conflicts.Count}" Value="0">
+										<Setter Property="Visibility" Value="Hidden"/>
+										</DataTrigger>
+										<DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
+                       AncestorType={x:Type ListBoxItem} }, Path=IsSelected}" Value="False">
+										<Setter Property="Visibility" Value="Collapsed"/>
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>	
+							</ListBox.Style>
+							<ListBox.ItemTemplate>
+								<DataTemplate>
+										<Grid Height="32.293" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="430.302" >
+										<TextBlock x:Name="Offending_Path" HorizontalAlignment="Stretch" Margin="38.191,3.502,170.431,1.457" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Text="{Binding OffendingPath}" TextWrapping="Wrap" d:LayoutOverrides="VerticalAlignment"/>
+										<ComboBox x:Name="Action_Taken"  ItemsSource="{Binding Path=userActions}" DisplayMemberPath="description" SelectedItem="{Binding userActions.selectedAction}" Margin="0,5.769,6.135,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="22" HorizontalAlignment="Right" Width="114.522" >
+											<ComboBox.RenderTransform>
+												<TransformGroup>
+													<ScaleTransform/>
+													<SkewTransform/>
+													<RotateTransform/>
+													<TranslateTransform/>
+												</TransformGroup>
+											</ComboBox.RenderTransform>
+										</ComboBox>
+										<Image Margin="1.924,3.435,0,1.037" Source="Images/error.png" Stretch="Fill" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="27.743" Height="Auto"/>
+										<TextBlock HorizontalAlignment="Right" Margin="0,8.638,121.302,6.655" Width="40" Text="Action:" TextWrapping="Wrap" VerticalAlignment="Stretch" Height="Auto"/>		
+									</Grid>
+								</DataTemplate>
+							</ListBox.ItemTemplate>
+						</ListBox>
+					</DataTemplate>
+				</Custom:DataGrid.RowDetailsTemplate>
 
 			</Custom:DataGrid>
 			<Button x:Name="doneButton" HorizontalAlignment="Right" TabIndex="4" Margin="0,0,8,90.382" VerticalAlignment="Bottom" Width="76.238" Height="24.762" Content="Done" IsEnabled="False" Click="ShowResult"/>
