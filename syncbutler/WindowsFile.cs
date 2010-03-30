@@ -93,6 +93,7 @@ namespace SyncButler
             this.rootPath = rootPath;
             this.IsPortableStorage = parent.IsPortableStorage;
             this.DriveID = parent.DriveID;
+            this.DriveLetter = parent.DriveLetter;
             this.PartitionIndex = parent.PartitionIndex;
         }
 
@@ -336,7 +337,7 @@ namespace SyncButler
 
             destFile.checksumCacheFresh = checksumCacheFresh;
             destFile.checksumCache = checksumCache;
-            
+            this.UpdateStoredChecksum();
         }
 
         /// <summary>
@@ -356,6 +357,8 @@ namespace SyncButler
                 {
                     nativeFileObj.Delete();
                 }
+
+                this.RemoveStoredChecksum();
             }
             catch (OperationCanceledException)
             {
@@ -552,7 +555,7 @@ namespace SyncButler
                 // Left or right exists, or both.
                 else
                 {
-                    // Dates of two files are the same OR checksums are the same
+                    // Both files exist and checksums are the same
                     if ((this.Exists() && partner.Exists()) && (this.Checksum() == partner.Checksum()))
                     {
                         if (!parentPartnership.ChecksumExists(this))
