@@ -1237,10 +1237,13 @@ namespace SyncButlerUI
                 {
                     throw new UserInputException("CD Drive syncing is not supported in this version");
                 }
+
+                /*
                 else if (di.DriveType == DriveType.Network)
                 {
                     throw new UserInputException("Network drive syncing is not supported in this version");
                 }
+                */
             }
            
 		}

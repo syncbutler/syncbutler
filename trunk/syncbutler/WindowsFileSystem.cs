@@ -12,8 +12,9 @@ namespace SyncButler
     /// </summary>
     public abstract class WindowsFileSystem : ISyncable
     {
-        protected static string PREF_FOLDER = @"folder:\\";
-        protected static string PREF_FILE = @"file:\\";
+        public static string DRIVEID_NETWORK = @"network-drive";
+        public static string PREF_FOLDER = @"folder:\\";
+        public static string PREF_FILE = @"file:\\";
         protected string driveLetter = null;
         protected string relativePath;
         protected string rootPath;
@@ -187,9 +188,16 @@ namespace SyncButler
         /// </summary>
         public void UpdateDriveLetter()
         {
-            string driveLetter = SystemEnvironment.StorageDevices.GetDriveLetter(this.DriveID, this.PartitionIndex);
-            this.driveLetter = driveLetter;
-            this.rootPath = ReplaceDriveLetter(this.rootPath, this.driveLetter);
+            if (this.DriveID != DRIVEID_NETWORK)
+            {
+                string driveLetter = SystemEnvironment.StorageDevices.GetDriveLetter(this.DriveID, this.PartitionIndex);
+                this.driveLetter = driveLetter;
+                this.rootPath = ReplaceDriveLetter(this.rootPath, this.driveLetter);
+            }
+            else
+            {
+                this.driveLetter = GetDriveLetter(this.rootPath);
+            }
         }
 
         /// <summary>
@@ -199,8 +207,15 @@ namespace SyncButler
         /// <param name="driveLetter">Drive letter in the format of C:</param>
         public void UpdateDriveLetter(string driveLetter)
         {
-            this.driveLetter = driveLetter;
-            this.rootPath = ReplaceDriveLetter(this.rootPath, this.driveLetter);
+            if (this.DriveID != DRIVEID_NETWORK)
+            {
+                this.driveLetter = driveLetter;
+                this.rootPath = ReplaceDriveLetter(this.rootPath, this.driveLetter);
+            }
+            else
+            {
+                this.driveLetter = GetDriveLetter(this.rootPath);
+            }
         }
 
         /// <summary>
@@ -349,10 +364,28 @@ namespace SyncButler
         /// <summary>
         /// Prepares for a sync. Sets the driveLetter to null so that it will be rechecked.
         /// </summary>
+        /// <exception cref="Exceptions.NetworkDriveException">Thrown when the original network drive cannot be found.</exception>
         public void PrepareSync()
         {
-            // Force drive letter to be rechecked
-            driveLetter = null;
+            if (this.DriveID == DRIVEID_NETWORK)
+            {
+                driveLetter = GetDriveLetter(this.rootPath);
+
+                if (!SystemEnvironment.StorageDevices.GetAllDrives().Contains(driveLetter + @"\"))
+                {
+                    throw new Exceptions.NetworkDriveException("The network drive could not be found.");
+                }
+                else if (SystemEnvironment.StorageDevices.GetDeviceType(driveLetter) != SyncButler.SystemEnvironment.StorageDevices.DeviceType.NetworkDrive)
+                {
+                    throw new Exceptions.NetworkDriveException("The original network drive could not be found.");
+                }
+            }
+            else
+            {
+                // Force drive letter to be rechecked
+                driveLetter = null;
+            }
+
         }
 
 

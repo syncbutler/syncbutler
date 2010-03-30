@@ -154,7 +154,7 @@ namespace SyncButler
         }
 
         /// <summary>
-        /// initialize the partership
+        /// initialize the partnership
         /// </summary>
         /// <param name="left">left side of the syncable</param>
         /// <param name="right">right side of the syncable</param>
@@ -164,6 +164,7 @@ namespace SyncButler
             this.name = name;
             this.left = left;
             this.right = right;
+
             if (hashDictionary == null)
             {
                 this.hashDictionary = new Dictionary<string, long>();
