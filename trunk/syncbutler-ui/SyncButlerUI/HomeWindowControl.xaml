@@ -497,7 +497,11 @@
 						<ControlTemplate.Triggers>
 							<Trigger Property="IsFocused" Value="True"/>
 							<Trigger Property="IsDefaulted" Value="True"/>
-							<Trigger Property="IsMouseOver" Value="True"/>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Trigger.EnterActions>
+									<BeginStoryboard Storyboard="{StaticResource ExploreFeaturesAnimation}"/>
+								</Trigger.EnterActions>
+							</Trigger>
 							<Trigger Property="IsPressed" Value="True"/>
 							<Trigger Property="IsEnabled" Value="False"/>
 						</ControlTemplate.Triggers>
