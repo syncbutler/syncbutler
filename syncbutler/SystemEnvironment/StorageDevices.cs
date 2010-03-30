@@ -280,7 +280,7 @@ namespace SyncButler.SystemEnvironment
         /// <exception cref="UnauthorizedAccessException">If the user is not allowed to access the drive.</exception>
         /// <exception cref="IOException">An I/O error occurred (for example, a disk error or a drive was not ready).</exception>
         /// <exception cref="Exceptions.UnknownStorageFormatException">If the underlying system call returned something that was not recognised.</exception>
-        public static Format Get(string driveLetter)
+        public static Format GetDriveFormat(string driveLetter)
         {
             DriveInfo drive = new DriveInfo(driveLetter);
             Format driveFormat;
@@ -293,6 +293,24 @@ namespace SyncButler.SystemEnvironment
                 throw new Exceptions.UnknownStorageFormatException();
 
             return driveFormat;
+        }
+
+        /// <summary>
+        /// Gets a string array containing all drive letters.
+        /// Drive letters are in the format C:\
+        /// </summary>
+        /// <returns>All drive letters currently detected on the computer.</returns>
+        public static List<string> GetAllDrives()
+        {
+            DriveInfo[] drives = DriveInfo.GetDrives();
+            List<string> driveList = new List<string>();
+
+            foreach (DriveInfo d in drives)
+            {
+                driveList.Add(d.Name);
+            }
+
+            return driveList;
         }
     }
 }

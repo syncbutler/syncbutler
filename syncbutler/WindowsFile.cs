@@ -75,8 +75,17 @@ namespace SyncButler
             this.nativeFileSystemObj = this.nativeFileObj;
             this.rootPath = rootPath;
             this.IsPortableStorage = SystemEnvironment.StorageDevices.IsUSBDrive(GetDriveLetter(fullPath));
-            this.DriveID = SystemEnvironment.StorageDevices.GetDriveID(GetDriveLetter(fullPath));
-            this.PartitionIndex = SystemEnvironment.StorageDevices.GetDrivePartitionIndex(GetDriveLetter(fullPath));
+
+            if (SystemEnvironment.StorageDevices.GetDeviceType(GetDriveLetter(fullPath)) == SyncButler.SystemEnvironment.StorageDevices.DeviceType.NetworkDrive)
+            {
+                this.DriveID = DRIVEID_NETWORK;
+                this.PartitionIndex = 0;
+            }
+            else
+            {
+                this.DriveID = SystemEnvironment.StorageDevices.GetDriveID(GetDriveLetter(fullPath));
+                this.PartitionIndex = SystemEnvironment.StorageDevices.GetDrivePartitionIndex(GetDriveLetter(fullPath));
+            }
         }
 
         /// <summary>
