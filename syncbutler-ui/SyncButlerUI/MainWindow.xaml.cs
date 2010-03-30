@@ -69,8 +69,33 @@ namespace SyncButlerUI
             
         }
 
+        /// <summary>
+        /// If there's a scan running in HomeWindowControl, ask the user
+        /// if he wants to cancel. 
+        /// </summary>
+        /// <returns>True if the operation is stopped or cancelled</returns>
+        private bool StopExistingOperation()
+        {
+            if (!homeWindow1.IsBusy()) return true;
+
+            CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok,
+                "There is currently an operation in progress. Please cancel the current operation before leaving this page.");
+            
+            // Without synchronization, cancelling the operation from here may be unpredictable
+            // ie. The operation has started to be cancelled, but hasn't really ended yet while the
+            // user has moved to a different page. For now, make the user cancel manually and wait until
+            // the op is really cancelled.
+            /* {
+                homeWindow1.CancelCurrentScan();
+                return true;
+            } */
+
+            return false;
+        }
+
 		private void goHome(object sender, RoutedEventArgs e)
 		{
+            if (!StopExistingOperation()) return;
 			//homeWindow1.goHome(sender,e);
 			VisualStateManager.GoToState(homeWindow1,"Home",false);
 		}
@@ -78,6 +103,7 @@ namespace SyncButlerUI
 
 		private void goToSyncButlerSync(object sender, RoutedEventArgs e)
 		{
+            if (!StopExistingOperation()) return;
             if (Controller.GetInstance().GetSBSEnable().Equals("Enable"))
             {
 				if(controller.IsFirstSBSRun()){
@@ -117,6 +143,7 @@ namespace SyncButlerUI
 
 		private void GoToSetting(object sender, RoutedEventArgs e)
 		{
+            if (!StopExistingOperation()) return;
             homeWindow1.IsLoadingSBS = true;
             if (sender!=null && sender.GetType() == typeof(String) && sender.Equals("FirstSBSRun"))
             {

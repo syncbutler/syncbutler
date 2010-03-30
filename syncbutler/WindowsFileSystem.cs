@@ -23,8 +23,8 @@ namespace SyncButler
         protected FileSystemInfo nativeFileSystemObj;
         protected Partnership parentPartnership = null;
 
-        protected SyncableStatusMonitor statusMonitor = null;
-        protected SyncableErrorHandler errorHandler = null;
+        protected internal SyncableStatusMonitor statusMonitor = null;
+        protected internal SyncableErrorHandler errorHandler = null;
 
         /// <summary>
         /// Gets the name of the current folder/file. Additional info, such as the directory structure prior to this folder/file, is stripped away.

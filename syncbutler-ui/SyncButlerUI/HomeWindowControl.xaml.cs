@@ -66,10 +66,10 @@ namespace SyncButlerUI
 
         private string NewPartnershipName = "";
 
-        int conflictsProcessed = 0;
-        BackgroundWorker resolveWorker = null;
-        BackgroundWorker scanWorker = null;
-        bool operationCancelled = false;
+        private int conflictsProcessed = 0;
+        private BackgroundWorker resolveWorker = null;
+        private BackgroundWorker scanWorker = null;
+        private bool operationCancelled = false;
         private Semaphore resolveLock = new Semaphore(1, 1);
         private Semaphore waitForErrorResponse = new Semaphore(0, 1);
         private Queue<Conflict> newConflicts = new Queue<Conflict>();
@@ -78,6 +78,17 @@ namespace SyncButlerUI
 		{
 			this.InitializeComponent();
 		}
+
+        /// <summary>
+        /// Indicates whether we're busy with a scan or resolve
+        /// </summary>
+        /// <returns></returns>
+        public bool IsBusy()
+        {
+            if (resolveWorker != null && resolveWorker.IsBusy) return true;
+            if (scanWorker != null && scanWorker.IsBusy) return true;
+            return false;
+        }
 
         /// <summary>
         /// Add a list of conflicts to the resolve queue
@@ -162,9 +173,6 @@ namespace SyncButlerUI
                 }
                 else if (msg.source == ErrorReportingSource.Scanner)
                 {
-                    //// Triage for Issue #83
-                    //message = msg.exceptionThrown.Message + "\n\nSyncButler is unable to continue";
-
                     message = msg.exceptionThrown.Message + "\n\nWhat would you like me to do?";
                     msgTemplate = CustomDialog.MessageTemplate.SkipCancel;
                 }
@@ -217,9 +225,9 @@ namespace SyncButlerUI
             if (CurrentAction == CurrentActionEnum.Resolving)
             {
                 int processed = (conflictsProcessed > 0) ? conflictsProcessed - 1 : conflictsProcessed;
+                int total = processed + newConflicts.Count + 1;
 
-                TotalProgressBar.Value = (int)(((processed * 100) + status.curTaskPercentComplete) 
-                    / (processed + newConflicts.Count + 1));
+                TotalProgressBar.Value = (int)((100 * processed / total));
             }
         }
 
@@ -280,15 +288,15 @@ namespace SyncButlerUI
 
             scanWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(delegate(Object workerObj, RunWorkerCompletedEventArgs args)
             {
+                TotalProgressBar.Value = 0;
+                SubProgressBar.Value = 0;
+
                 if (operationCancelled)
                 {
-                    showMessageBox(CustomDialog.MessageType.Message, "Scan cancelled");
-                    GoHome();
+                    CurrentSyncingFile.Text = "Syncing Cancelled.";
 
                     scanWorker = null;
                     CancelButton.IsEnabled = false;
-                    TotalProgressBar.Value = 0;
-                    SubProgressBar.Value = 0;
 
                     return;
                 }
@@ -306,8 +314,6 @@ namespace SyncButlerUI
                 ConflictList.IsEnabled = true;
                 resolveButton.IsEnabled = true;
                 doneButton.IsEnabled = true;
-                TotalProgressBar.Value = 0;
-                SubProgressBar.Value = 0;
 
                 CurrentSyncingFile.Text = "Scan complete. Please look at the list of conflicts.";
 
@@ -360,6 +366,7 @@ namespace SyncButlerUI
                 }
             });
 
+
             scanWorker.RunWorkerAsync();
             CurrentAction = CurrentActionEnum.Scanning;
 
@@ -383,8 +390,8 @@ namespace SyncButlerUI
             resolveWorker.WorkerReportsProgress = true;
             resolveWorker.WorkerSupportsCancellation = true;
 
-            TotalProgressBar.IsIndeterminate = true;
-            SubProgressBar.IsIndeterminate = true;
+            //TotalProgressBar.IsIndeterminate = true;
+            //SubProgressBar.IsIndeterminate = true;
             CurrentSyncingFile.Text = "Getting ready to resolve conflicts...";
             PartnershipName.Text = "";
 
@@ -444,7 +451,7 @@ namespace SyncButlerUI
                     }
                     catch (Exception e)
                     {
-                        exp = new Exception("An problem was encountered while processing " + partnershipName + ": " + e.Message);
+                        exp = new Exception("A problem was encountered while processing " + partnershipName + ": " + e.Message);
                     }
 
                     if (exp != null)
@@ -469,19 +476,17 @@ namespace SyncButlerUI
                 CurrentSyncingFile.Text = "Scan complete. Conflicts processed so far: " + conflictsProcessed;
                 partnershipNameTextBox.Text = "";
 
+                TotalProgressBar.Value = 0;
+                SubProgressBar.Value = 0;
+
                 if (operationCancelled)
                 {
-                    showMessageBox(CustomDialog.MessageType.Message, "Sync cancelled");
+                    CurrentSyncingFile.Text += "\nSyncing Cancelled.";
                     resolveButton.IsEnabled = true;
                     resolveWorker = null;
                     CancelButton.IsEnabled = false;
-                    TotalProgressBar.Value = 0;
-                    SubProgressBar.Value = 0;
                     return;
                 }
-
-                TotalProgressBar.Value = 0;
-                SubProgressBar.Value = 0;
 
                 resolveWorker = null;
 
@@ -858,6 +863,15 @@ namespace SyncButlerUI
 		}
 
         /// <summary>
+        /// Cancels the current scan or resolution
+        /// </summary>
+        public void CancelCurrentScan()
+        {
+            if (scanWorker != null) scanWorker.CancelAsync();
+            if (resolveWorker != null) resolveWorker.CancelAsync();
+        }
+
+        /// <summary>
         /// When the user clicks the Cancel button
         /// </summary>
         /// <param name="sender"></param>
@@ -865,10 +879,7 @@ namespace SyncButlerUI
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             if (showMessageBox(CustomDialog.MessageType.Question, "Are you sure you want to stop this scan?"))
-            {
-                if (scanWorker != null) scanWorker.CancelAsync();
-                if (resolveWorker != null) resolveWorker.CancelAsync();
-            }
+                CancelCurrentScan();
         }
 
      	/// <summary>
