@@ -26,13 +26,6 @@ namespace SyncButlerUI
 			this.InitializeComponent();
             Controller.GetInstance().SetWindow(this);
 		}
-
-
-
-
-
-
-
         #region IGUI Members
 
         public void GrabFocus()
