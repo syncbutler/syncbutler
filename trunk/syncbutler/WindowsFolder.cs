@@ -186,6 +186,11 @@ namespace SyncButler
                     WindowsFile srcObj = new WindowsFile(this.rootPath, file, this, this.parentPartnership);
                     WindowsFile destObj = new WindowsFile(destFolder.rootPath, destPath + file.Substring(srcPath.Length), destFolder, this.parentPartnership);
 
+                    srcObj.statusMonitor = statusMonitor;
+                    srcObj.errorHandler = errorHandler;
+                    destObj.statusMonitor = statusMonitor;
+                    destObj.errorHandler = errorHandler;
+
                     srcObj.CopyTo(destObj);
                     //File.Copy(file, destPath + file.Substring(srcPath.Length));
                 }
