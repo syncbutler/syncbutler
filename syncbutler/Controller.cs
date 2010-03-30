@@ -109,7 +109,26 @@ namespace SyncButler
             
             // TODO: Process the arguements received
         }
+        public bool IsSBSDriveEnough()
+        {
+            long required = GetUserLimit();
+            string driveLetter = SystemEnvironment.StorageDevices.GetDriveLetter(SyncEnvironment.SBSDriveId);
+            if (driveLetter.Length == 0)
+                return false;
+            long avabilableSpace = SystemEnvironment.StorageDevices.GetAvailableSpace(driveLetter);
+            return required <= avabilableSpace;
+        }
 
+        public long GetAvailableSpaceForDrive()
+        {
+            string driveLetter = SystemEnvironment.StorageDevices.GetDriveLetter(SyncEnvironment.SBSDriveId);
+            if (driveLetter.Length == 0)
+                return 0;
+            long AvailableSpace = SystemEnvironment.StorageDevices.GetAvailableSpace(driveLetter);
+            string res = SyncEnvironment.Resolution;
+
+            return GetSizeInResolution(res, AvailableSpace);
+        }
         /// <summary>
         /// Adds a partnership to the list of Partnerships based on 2 full paths
         /// (calls SyncEnvironment)
@@ -303,6 +322,30 @@ namespace SyncButler
         private const long GIGABYTE = 1024 * 1024 * 1024;
         private const long MEGABYTE = 1024 * 1024;
         private const long KILOBYTE = 1024;
+
+        private long GetSizeInResolution(String Resolution, long size)
+        {
+            if (Resolution.Equals("GB"))
+            {
+                return size / GIGABYTE;
+            }
+            else if (Resolution.Equals("MB"))
+            {
+                return size / MEGABYTE;
+            }
+            else if (Resolution.Equals("KB"))
+            {
+                return size / KILOBYTE;
+            }
+            else if (Resolution.Equals("Bytes"))
+            {
+                return size;
+            }
+            else
+            {
+                throw new NotSupportedException();
+            }
+        }
         private long GetUserLimit()
         {
             String Resolution = this.GetResolution();

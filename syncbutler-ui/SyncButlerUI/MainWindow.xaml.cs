@@ -85,7 +85,8 @@ namespace SyncButlerUI
 					VisualStateManager.GoToState(dialog.WelcomeScreenControl,"HelpScreen3",false);
 					controller.SetFirstSBSRun();
 					dialog.ShowDialog();
-				}		
+				}
+                    homeWindow1.CheckIfEnoughSpace();
 					VisualStateManager.GoToState(homeWindow1, "SbsState1", false);
 					homeWindow1.LoadMRUs();
 				
@@ -116,6 +117,7 @@ namespace SyncButlerUI
 
 		private void GoToSetting(object sender, RoutedEventArgs e)
 		{
+            homeWindow1.IsLoadingSBS = true;
             if (sender!=null && sender.GetType() == typeof(String) && sender.Equals("FirstSBSRun"))
             {
                 homeWindow1.FirstTimeHelp.Visibility = System.Windows.Visibility.Visible;
@@ -153,42 +155,54 @@ namespace SyncButlerUI
                 this.homeWindow1.ComputerNameTextBox.Text = this.controller.GetComputerName();
                 this.homeWindow1.NoUSBWarningTextBlock.Visibility = Visibility.Hidden;
                 this.homeWindow1.SBSWorkingDriveComboBox.Items.Clear();
-
+                bool devicePluggedIn = false;
                 if (noUSBDrives) this.homeWindow1.NoUSBWarningTextBlock.Visibility = Visibility.Visible;
 
                 foreach (string s in DriveLetters)
                 {
                     this.homeWindow1.SBSWorkingDriveComboBox.Items.Add(s[0]);
                 }
-
-                if (this.controller.GetSBSEnable().Equals("Enable"))
-                {
-                    this.homeWindow1.SpaceToUseSlide.Value = this.controller.GetFreeSpaceToUse();
-                    this.homeWindow1.resolutionLabel.Content = this.controller.GetResolution();
-                }
-                else
-                {
-                    this.homeWindow1.SpaceToUseSlide.Value = 0;
-                    this.homeWindow1.resolutionLabel.Content = "KB";
-                    this.homeWindow1.SpaceToUseSlide.IsEnabled = false;
-                    this.homeWindow1.SpaceToUseTextbox.IsEnabled = false;
-                }
                 if (this.homeWindow1.SBSWorkingDriveComboBox.Items.Contains(this.controller.GetSBSDriveLetter()))
                 {
                     this.homeWindow1.SBSWorkingDriveComboBox.SelectedItem = this.controller.GetSBSDriveLetter();
+                    devicePluggedIn = true;
                 }
                 else if (this.homeWindow1.SBSWorkingDriveComboBox.Items.Count != 0)
                 {
                     this.homeWindow1.SBSWorkingDriveComboBox.SelectedIndex = 0;
                 }
+                if (devicePluggedIn)
+                {
+                    if (this.controller.GetSBSEnable().Equals("Enable"))
+                    {
+                        this.homeWindow1.SpaceToUseSlide.Maximum = this.controller.GetAvailableSpaceForDrive();
+                        this.homeWindow1.SpaceToUseSlide.Value = this.controller.GetFreeSpaceToUse();
+                        this.homeWindow1.resolutionLabel.Content = this.controller.GetResolution();
+                    }
+                    else
+                    {
+                        this.homeWindow1.SpaceToUseSlide.Value = 0;
+                        this.homeWindow1.resolutionLabel.Content = "KB";
+                        this.homeWindow1.SpaceToUseSlide.IsEnabled = false;
+                        this.homeWindow1.SpaceToUseTextbox.IsEnabled = false;
+                    }
 
-                this.homeWindow1.SBSWorkingDriveComboBox.IsEnabled = true;
-                this.homeWindow1.SBSSettingComboBox.Items.Clear();
-                this.homeWindow1.SBSSettingComboBox.Items.Add("Enable");
-                this.homeWindow1.SBSSettingComboBox.Items.Add("Disable");
-                this.homeWindow1.SBSSettingComboBox.SelectedItem = this.controller.GetSBSEnable();
 
-
+                    this.homeWindow1.SBSWorkingDriveComboBox.IsEnabled = true;
+                    this.homeWindow1.SBSSettingComboBox.Items.Clear();
+                    this.homeWindow1.SBSSettingComboBox.Items.Add("Enable");
+                    this.homeWindow1.SBSSettingComboBox.Items.Add("Disable");
+                    this.homeWindow1.SBSSettingComboBox.SelectedItem = this.controller.GetSBSEnable();
+                }
+                else
+                {
+                    this.homeWindow1.SBSWorkingDriveComboBox.IsEnabled = false;
+                    this.homeWindow1.SBSSettingComboBox.Items.Clear();
+                    this.homeWindow1.SBSSettingComboBox.Items.Add("Enable");
+                    this.homeWindow1.SBSSettingComboBox.Items.Add("Disable");
+                    this.homeWindow1.SBSSettingComboBox.SelectedItem = "Disable";
+                }
+                homeWindow1.IsLoadingSBS = false;
 
                 progressWindow.TaskComplete();
             });

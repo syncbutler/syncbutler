@@ -1093,7 +1093,7 @@ namespace SyncButlerUI
                     CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Files were successfully synced and logged");
                 }
                 progressWindow.TaskComplete();
-                Enable_Feature.IsEnabled = true;
+                SBSSync.IsEnabled = true;
                 SBSDone.IsEnabled = true;
             });
 
@@ -1168,7 +1168,7 @@ namespace SyncButlerUI
                 }
             });
 
-            Enable_Feature.IsEnabled = false;
+            SBSSync.IsEnabled = false;
             // Start the whole process
             progressWindow.Start();
         }
@@ -1220,11 +1220,11 @@ namespace SyncButlerUI
             }
 		}
 
-
+        public bool IsLoadingSBS = true;
         private void SBSUpdateSpaceDetails(object sender, RoutedEventArgs e)
         {
             if (this.SBSSettingComboBox.SelectedIndex != -1 &&
-                this.SBSSettingComboBox.SelectedItem.Equals("Enable"))
+                this.SBSSettingComboBox.SelectedItem.Equals("Enable") && !IsLoadingSBS)
             {
                 if (SBSWorkingDriveComboBox.SelectedIndex != -1)
                 {
@@ -1257,7 +1257,14 @@ namespace SyncButlerUI
                 }
             }
         }
-        
+        public void CheckIfEnoughSpace()
+        {
+            if (!Controller.GetInstance().IsSBSDriveEnough())
+            {
+                
+                SBSSync.IsEnabled = false;
+            }
+        }
         private void SpaceToUseChanged(Object sender, KeyEventArgs e)
         {
 

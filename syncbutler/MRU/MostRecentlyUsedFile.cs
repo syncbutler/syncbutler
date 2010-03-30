@@ -121,7 +121,6 @@ namespace SyncButler.MRU
                             {
                                 if ((DateTime.Now - fi.LastWriteTime).TotalDays <= (howRecent))
                                 {
-                                    
                                     files.Add(fi.FullName);
                                 }
                             }
@@ -141,8 +140,7 @@ namespace SyncButler.MRU
                     }
                     catch (UnauthorizedAccessException)
                     {
-                        /// do nothing
-                        /// 
+                        // do nothing
                     }
                 }
                 upperDirectory.Clear();
@@ -152,7 +150,8 @@ namespace SyncButler.MRU
         }
 
         /// <summary>
-        /// Do a cleanup of the given list of MRUs, to remove non existance files.
+        /// Do a cleanup of the given list of MRUs, 
+        /// to remove non existance files as well to remove shortcuts
         /// </summary>
         /// <param name="MRUs">the list of MRUs</param>
         /// <returns>the cleaned list of MRU</returns>
