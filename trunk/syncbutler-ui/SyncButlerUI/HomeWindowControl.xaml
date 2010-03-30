@@ -417,6 +417,50 @@
 			<Setter Property="Template">
 				<Setter.Value>
 					<ControlTemplate TargetType="{x:Type Button}">
+						<ControlTemplate.Resources>
+							<Storyboard x:Key="ExploreFeaturesAnimation">
+								<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="bigButton_Copy" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
+									<SplineColorKeyFrame KeyTime="00:00:00" Value="#FF005F74"/>
+									<SplineColorKeyFrame KeyTime="00:00:02" Value="#FF00945C"/>
+								</ColorAnimationUsingKeyFrames>
+								<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="image" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+									<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1.3"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:01.5000000" Value="1.3"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:02" Value="1"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:02.5000000" Value="1.3"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:03" Value="1"/>
+								</DoubleAnimationUsingKeyFrames>
+								<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="image" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+									<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1.3"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:01.5000000" Value="1.3"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:02" Value="1"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:02.5000000" Value="1.3"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:03" Value="1"/>
+								</DoubleAnimationUsingKeyFrames>
+								<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="image" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+									<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:01.5000000" Value="1"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:02" Value="0"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:02.5000000" Value="1"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:03" Value="0"/>
+								</DoubleAnimationUsingKeyFrames>
+								<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="image" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+									<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:01.5000000" Value="1"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:02" Value="0"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:02.5000000" Value="1"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:03" Value="0"/>
+								</DoubleAnimationUsingKeyFrames>
+							</Storyboard>
+						</ControlTemplate.Resources>
 						<Grid Margin="0,0,0,-3.175">
 							<Rectangle x:Name="bigButton_Copy" Margin="-1.334,0,0,-0.825" VerticalAlignment="Bottom" Height="185.269" Cursor="Hand" HorizontalAlignment="Left" Width="174.483">
 								<Rectangle.Fill>
@@ -439,7 +483,16 @@
 									</LinearGradientBrush>
 								</Rectangle.Fill>
 							</Rectangle>
-							<Image Margin="8.067,65.698,71.278,29.841" Source="Images/star.png" Stretch="Fill" Opacity="0.6"/>
+							<Image x:Name="image" Margin="8.067,65.698,71.278,29.841" Source="Images/star.png" Stretch="Fill" Opacity="0.6" RenderTransformOrigin="0.5,0.5">
+								<Image.RenderTransform>
+									<TransformGroup>
+										<ScaleTransform/>
+										<SkewTransform/>
+										<RotateTransform/>
+										<TranslateTransform/>
+									</TransformGroup>
+								</Image.RenderTransform>
+							</Image>
 						</Grid>
 						<ControlTemplate.Triggers>
 							<Trigger Property="IsFocused" Value="True"/>
