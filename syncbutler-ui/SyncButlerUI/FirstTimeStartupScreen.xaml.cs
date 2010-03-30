@@ -24,6 +24,7 @@ namespace SyncButlerUI
 		public FirstTimeStartupScreen()
 		{
 			this.InitializeComponent();
+            this.ShowInTaskbar = true;
             Controller.GetInstance().SetWindow(this);
 		}
         #region IGUI Members
