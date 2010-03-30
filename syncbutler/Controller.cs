@@ -342,7 +342,9 @@ namespace SyncButler
         /// </summary>
         public SortedList<string,SortedList<string,string>> GetMonitoredFiles(SyncableStatusMonitor statusMonitor)
         {
+            totalSizeSoFar = 0;
             long limit = GetUserLimit();
+            
             SortedList<string, SortedList<string, string>> rtn = new SortedList<string, SortedList<string, string>>();
             SortedList<string, string> interesting = new SortedList<string, string>();
             MostRecentlyUsedFile.statusMonitor = statusMonitor;
