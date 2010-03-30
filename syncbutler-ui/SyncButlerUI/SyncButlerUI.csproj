@@ -157,6 +157,7 @@
     <Resource Include="Images\SBSWindow.png" />
     <Resource Include="Images\Search.png" />
     <Resource Include="Images\Settings.png" />
+    <Resource Include="Images\star.png" />
     <Resource Include="Images\StarBullet.png" />
     <Resource Include="Images\SunBurst.png" />
     <Resource Include="Images\Symbol-Check.png" />

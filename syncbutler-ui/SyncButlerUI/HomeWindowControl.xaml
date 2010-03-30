@@ -428,7 +428,6 @@
 							</Rectangle>
 							<TextBlock Margin="0,11.948,23.043,0" VerticalAlignment="Top" Height="72" Opacity="0.6" FontFamily="Arial" FontSize="21.333" Foreground="White" TextAlignment="Center" TextWrapping="Wrap" Cursor="Hand" HorizontalAlignment="Right" Width="128.723"><Run Text="Explore "/><Run FontStyle="Italic" Text="Features"/></TextBlock>
 							<TextBlock Margin="-15.974,130.948,7.917,0" VerticalAlignment="Top" Height="75.052" Opacity="0.5" FontFamily="Arial" FontSize="16" Foreground="White" TextWrapping="Wrap" TextAlignment="Right" Cursor="Hand"><Run Text="Discover"/><LineBreak/><Run Text="a new way of syncing"/></TextBlock>
-							<Image Cursor="Hand" Margin="0,0,81.934,36.808" Opacity="0.6" Source="Images\Broken.png" Stretch="Fill" VerticalAlignment="Bottom" Height="66.25" HorizontalAlignment="Right" Width="66.25"/>
 							<Rectangle x:Name="Reflection_Copy" Opacity="0.045" Margin="4.032,6.588,5.846,90.639" RadiusX="7" RadiusY="6" VerticalAlignment="Stretch" Height="Auto" Cursor="Hand">
 								<Rectangle.Effect>
 									<BlurEffect/>
@@ -440,6 +439,7 @@
 									</LinearGradientBrush>
 								</Rectangle.Fill>
 							</Rectangle>
+							<Image Margin="8.067,65.698,71.278,29.841" Source="Images/star.png" Stretch="Fill" Opacity="0.6"/>
 						</Grid>
 						<ControlTemplate.Triggers>
 							<Trigger Property="IsFocused" Value="True"/>
