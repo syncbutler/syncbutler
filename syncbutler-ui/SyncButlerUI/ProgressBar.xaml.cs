@@ -79,7 +79,6 @@ namespace SyncButlerUI
             waitForMessageResponse = new Semaphore(0, 1);
             messageResponse = CustomDialog.MessageResponse.NotUsed;
 
-            Topmost = true;
 		}
 
         /// <summary>
