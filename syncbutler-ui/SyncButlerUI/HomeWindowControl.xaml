@@ -1133,7 +1133,7 @@
 				<TextBlock x:Name="textBlock3" Margin="25.834,25,161.209,0" FontFamily="Arial" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" Text="Creating a Sync Partnership" VerticalAlignment="Top" Height="83.5"/>
 				<TextBlock Margin="0,55.214,110.283,0" FontSize="16" TextWrapping="Wrap" Text="Please select a folder on this computer" HorizontalAlignment="Right" Width="379.41" VerticalAlignment="Top" Height="63.5" FontWeight="Bold" FontStyle="Italic"/>
 				<TextBlock Margin="0,82.452,110.283,0" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="379.41" TextAlignment="Justify" VerticalAlignment="Top" Height="125"><Run Text="This folder will be 1 of 2  folders in a syncing partnership."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="Any updates will be reflected on the other "/><LineBreak/><Run Text="folder in the partnership"/></TextBlock>
-				<TextBlock x:Name="textBlock10" Margin="0,158.095,398.773,264.079" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="44.754" Text="Path:" RenderTransformOrigin="0.5,0.5">
+				<TextBlock x:Name="textBlock10" Margin="0,158.095,388.773,264.079" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="44.754" Text="Path:" RenderTransformOrigin="0.5,0.5">
 					<TextBlock.RenderTransform>
 						<TransformGroup>
 							<ScaleTransform/>
@@ -1170,7 +1170,7 @@
 						</TransformGroup>
 					</Image.RenderTransform>
 				</Image>
-				<TextBlock x:Name="textBlock11" Margin="0,347.595,397.273,74.579" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="44.754" Text="Path:" RenderTransformOrigin="0.5,0.5">
+				<TextBlock x:Name="textBlock11" Margin="0,347.595,387.273,74.579" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="44.754" Text="Path:" RenderTransformOrigin="0.5,0.5">
 					<TextBlock.RenderTransform>
 						<TransformGroup>
 							<ScaleTransform/>
@@ -1319,7 +1319,7 @@
 				<TextBlock x:Name="partnerShipName" Margin="30.499,191,0,196.429" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Left" Width="222.08"/>
 				<Button x:Name="button1" HorizontalAlignment="Right" Margin="0,0,38.5,103.643" VerticalAlignment="Bottom" Width="127.667" Height="47" Content="   Sync this&#xa; Partnership" RenderTransformOrigin="0.79,1.043" Click="SyncThisPartnership_Click" TabIndex="2"/>
 			</Grid>
-			<TextBox x:Name="sourceTextBox" Margin="74,200.04,104.947,0" VerticalAlignment="Top" TextWrapping="Wrap" MaxLength="266" Width="375.08" d:LayoutOverrides="VerticalAlignment, GridBox" TabIndex="2" RenderTransformOrigin="0.5,0.5" KeyDown="SourceTextBox_Enter" >
+			<TextBox x:Name="sourceTextBox" Margin="84,200.04,94.947,0" VerticalAlignment="Top" TextWrapping="Wrap" MaxLength="266" Width="375.08" d:LayoutOverrides="VerticalAlignment, GridBox" TabIndex="2" RenderTransformOrigin="0.5,0.5" KeyDown="SourceTextBox_Enter" >
 				<TextBox.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
@@ -1367,7 +1367,7 @@
 				<Button x:Name="button_Copy" Margin="233.58,0,188.947,18" VerticalAlignment="Bottom" Height="23" Content="Advanced..." IsEnabled="False" Visibility="Hidden"/>
 				<Button x:Name="BackButton2" HorizontalAlignment="Right" Margin="0,0,111.027,18" VerticalAlignment="Bottom" Width="70.92" Height="23" Content="&lt;Back" Click="GoBackToEditPartnershipDes_Click" Visibility="Hidden" TabIndex="3"/>
 			</Grid>
-			<Button x:Name="BrowseButton" Margin="0,174.08,104.947,0" VerticalAlignment="Top" Content="Browse" HorizontalAlignment="Right" Width="75" RenderTransformOrigin="0.5,0.5" Click="GetUserPath">
+			<Button x:Name="BrowseButton" Margin="0,174.08,94.947,0" VerticalAlignment="Top" Content="Browse" HorizontalAlignment="Right" Width="75" RenderTransformOrigin="0.5,0.5" Click="GetUserPath">
 				<Button.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
@@ -1448,6 +1448,7 @@
 			<TextBlock Margin="42.36,25,0,0" FontFamily="Arial" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="26.5" HorizontalAlignment="Left" Width="202.72" Text="Recent used file"/>
 			<TextBlock x:Name="textBlock_Copy" Margin="42.208,0,0,109.812" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Left" Width="196.885" Text="Mouse over to see" FontStyle="Italic" VerticalAlignment="Bottom" Height="19.162" TextAlignment="Center"/>
 			<Button x:Name="Edit_Selector" TabIndex="4" Margin="41.08,0,0,19" VerticalAlignment="Bottom" Height="23" Content="Move Selected To other side" RenderTransformOrigin="0.79,1.043" HorizontalAlignment="Left" Width="203.42" Cursor="Hand" Opacity="0" Click="SBSMoveToOther"/>
+			<Button HorizontalAlignment="Right" Margin="0,0,108.447,45.754" VerticalAlignment="Bottom" Width="103.5" Content="Help" Click="ShowHelp"/>
 		</Grid>
 		<Grid x:Name="Conflict" Margin="0.027,0,-0.027,0" VerticalAlignment="Bottom" Height="444" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
 			<Grid.RenderTransform>
@@ -1563,9 +1564,9 @@
 				</TextBlock.RenderTransform><Run FontFamily="Walkway Black" FontSize="14.667" FontWeight="Bold" Text="Sync Butler"/><Run FontSize="13.333" FontWeight="Bold" Text=", "/><Run FontSize="13.333" FontStyle="Italic" FontWeight="Bold" Text="Sync"/><Run FontSize="13.333" FontWeight="Bold" Text="! "/><Run Text="Drive:"/><LineBreak/><Run Text=""/></TextBlock>
 			<TextBox x:Name="ComputerNameTextBox" TabIndex="1" Margin="225.29,99.849,126.49,0" VerticalAlignment="Top" TextWrapping="Wrap"/>
 			<ComboBox x:Name="SBSWorkingDriveComboBox" TabIndex="3" Margin="225.29,159.769,126.49,0" VerticalAlignment="Top" SelectionChanged="SBSUpdateSpaceDetails"/>
-			<Button x:Name="SaveSettingButton" TabIndex="4" HorizontalAlignment="Left" Margin="74.489,0,0,47.659" VerticalAlignment="Bottom" Width="75" Content="Save" Click="SaveSetting"/>
-			<Button x:Name="CancelSettingButton" TabIndex="5" Margin="214.917,0,213.417,47.659" VerticalAlignment="Bottom" Content="Cancel" Click="GoHome" />
-			<Button x:Name="DefaultSettingButton" TabIndex="6" HorizontalAlignment="Right" Margin="0,0,74.472,47.659" VerticalAlignment="Bottom" Width="75" Content="Default"  Click="DefaultSetting"/>
+			<Button x:Name="SaveSettingButton" TabIndex="4" HorizontalAlignment="Left" Margin="43.77,0,0,45.754" VerticalAlignment="Bottom" Width="75" Content="Save" Click="SaveSetting"/>
+			<Button x:Name="CancelSettingButton" TabIndex="5" Margin="153.641,0,0,45.754" VerticalAlignment="Bottom" Content="Cancel" Click="GoHome" HorizontalAlignment="Left" Width="75" />
+			<Button x:Name="DefaultSettingButton" TabIndex="6" HorizontalAlignment="Right" Margin="0,0,159.718,45.754" VerticalAlignment="Bottom" Width="75" Content="Default"  Click="DefaultSetting"/>
 			<ComboBox x:Name="SBSSettingComboBox" TabIndex="2" Margin="225.29,159.769,126.49,0" VerticalAlignment="Top" Opacity="0" RenderTransformOrigin="0.5,0.5" SelectionChanged="SBSSettingChanged">
 				<ComboBox.RenderTransform>
 					<TransformGroup>
@@ -1589,6 +1590,7 @@
 			<Slider x:Name="SpaceToUseSlide" Margin="43.386,0,166.49,195.286" VerticalAlignment="Bottom" Height="21" ValueChanged="SpaceToUseSlided"/>
 			<TextBox x:Name="SpaceToUseTextbox" HorizontalAlignment="Right" Margin="0,0,74.472,194.326" VerticalAlignment="Bottom" TextWrapping="Wrap" Width="75" KeyUp="SpaceToUseChanged"/>
 			<Label x:Name="label" Margin="0,0,159.718,172.326" VerticalAlignment="Bottom" Content="100%" HorizontalAlignment="Right"/>
+			<Button Margin="0,0,44.828,45.754" VerticalAlignment="Bottom" Content="Help" HorizontalAlignment="Right" Width="75" Click="ShowHelp"/>
 		</Grid>
 		<Grid x:Name="FirstTimeHelp" Margin="0,0,-1.5,-4" Visibility="Hidden">
 			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="211.134,44.762,123.262,0" VerticalAlignment="Top" Height="45.943" d:LayoutOverrides="VerticalAlignment"/>

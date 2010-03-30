@@ -51,7 +51,7 @@ namespace SyncButlerUI
 	public SyncButler.Controller Controller{get;set;}
 	public enum State{Home,Page1OfCreate,Page2OfCreate,Page3OfCreate,Page4OfCreate,ViewPartnership,SBS,Conflict,Settings,Page1OfEdit,Page2OfEdit,Page3OfEdit,Page4OfEdit,Result};
     private string LastWorkingFreeSpace = "0.00";
-	private State CurrentState;
+	public State CurrentState;
     private const long GIGA_BYTE = 1024 * 1024 * 1024;
     private const long MEGA_BYTE = 1024 * 1024;
     private const long KILO_BYTE = 1024;
@@ -519,7 +519,23 @@ namespace SyncButlerUI
             VisualStateManager.GoToState(this, "Home", false);
             CurrentState = State.Home;
         }
-
+        private void ShowHelp(object sender, RoutedEventArgs e)
+        {
+            if (CurrentState == HomeWindowControl.State.Settings)
+            {
+                if (FirstTimeHelp.Visibility == Visibility.Visible)
+                    FirstTimeHelp.Visibility = Visibility.Hidden;
+                else
+                    FirstTimeHelp.Visibility = System.Windows.Visibility.Visible;
+            }
+            else if (CurrentState == HomeWindowControl.State.SBS)
+            {
+                FirstTimeStartupScreen dialog = new FirstTimeStartupScreen();
+                VisualStateManager.GoToState(dialog.WelcomeScreenControl, "HelpScreen3", false);
+                Controller.GetInstance().SetFirstSBSRun();
+                dialog.ShowDialog();
+            }
+        }
 		#region createPartnership
 		
 		/// <summary>

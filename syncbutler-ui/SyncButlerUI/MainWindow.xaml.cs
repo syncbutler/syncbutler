@@ -99,11 +99,13 @@ namespace SyncButlerUI
             if (!StopExistingOperation()) return;
 			//homeWindow1.goHome(sender,e);
 			VisualStateManager.GoToState(homeWindow1,"Home",false);
+            homeWindow1.CurrentState = HomeWindowControl.State.Home;
 		}
-        
+
 
 		private void goToSyncButlerSync(object sender, RoutedEventArgs e)
 		{
+            homeWindow1.CurrentState = HomeWindowControl.State.SBS;
             homeWindow1.FirstTimeHelp.Visibility = System.Windows.Visibility.Hidden;
             if (!StopExistingOperation()) return;
             if (Controller.GetInstance().GetSBSEnable().Equals("Enable"))
@@ -145,6 +147,7 @@ namespace SyncButlerUI
 
 		private void GoToSetting(object sender, RoutedEventArgs e)
 		{
+            homeWindow1.CurrentState = HomeWindowControl.State.Settings;
             if (controller.IsFirstSBSRun())
                 sender = "FirstSBSRun";
             if (!StopExistingOperation()) return;
