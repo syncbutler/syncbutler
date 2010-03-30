@@ -18,19 +18,38 @@ namespace SyncButlerUI
 	/// <summary>
 	/// Interaction logic for FirstTimeStartupScreen.xaml
 	/// </summary>
-	public partial class FirstTimeStartupScreen : Window
+    public partial class FirstTimeStartupScreen : Window, IGUI
 	{
 		
 		public FirstTimeStartupScreen()
 		{
 			this.InitializeComponent();
-			
+            Controller.GetInstance().SetWindow(this);
 		}
-		
-		
 
 
-		
 
-	}
+
+
+
+
+        #region IGUI Members
+
+        public void GrabFocus()
+        {
+            this.Dispatcher.Invoke(
+                System.Windows.Threading.DispatcherPriority.SystemIdle,
+                TimeSpan.FromSeconds(1),
+                new Action(
+                    delegate()
+                    {
+                        this.Activate();
+                        this.Topmost = true; //to bring to front
+                        this.Topmost = false; //to remove always on top
+                    }
+                    ));
+
+        }
+        #endregion
+    }
 }
