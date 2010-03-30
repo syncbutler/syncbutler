@@ -133,7 +133,13 @@ namespace SyncButler
             System.Diagnostics.Debug.Assert((name != null) && (name.Length > 0));
             Partnership element = CreatePartnership(name, leftPath, rightPath);
 
-            if(!IsUniquePartnershipName(name, partnershipList))
+            if (!IsValidSystemObject(leftPath))
+                throw new ArgumentException("Folder 1 is a system folder which cannot be synced. \nPlease select another folder.");
+
+            if (!IsValidSystemObject(rightPath))
+                throw new ArgumentException("Folder 2 is a system folder which cannot be synced. \nPlease select another folder.");
+
+            if (!IsUniquePartnershipName(name, partnershipList))
                 throw new ArgumentException("The name is already in use. Please input another name.");
 
             //Usually CheckIsUniquePartnership will check for IsUniquePartnershipName too
@@ -143,6 +149,23 @@ namespace SyncButler
 
             partnershipList.Add(name, element);
             StoreEnv(); //Save the partnership to disk immediately
+        }
+
+        private bool IsValidSystemObject(string path)
+        {
+            List<string> specialItems = new List<string>();
+            specialItems.Add(@":\$RECYCLE.BIN"); // Recycle Bins
+            specialItems.Add(@":\SYSTEM VOLUME INFORMATION"); // System Volume Information
+            specialItems.Add(@":\HIBERFIL.SYS"); // Hibernation file
+            specialItems.Add(@":\PAGEFILE.SYS"); // Page file
+            string comparatorPath = path.ToUpper();
+
+            foreach (string str in specialItems)
+            {
+                if (comparatorPath.Contains(str))
+                    return false;
+            }
+            return true;
         }
         
         /// <summary>
@@ -207,18 +230,24 @@ namespace SyncButler
         /// <param name="newName">New friendly name of a partnership</param>
         /// <param name="leftPath">Full Path to the left of a partnership</param>
         /// <param name="rightPath">Full Path to the right of a partnership</param>
-        public void UpdatePartnership(string oldname, string newname, string leftpath, string rightpath)
+        public void UpdatePartnership(string oldname, string newname, string leftPath, string rightPath)
         {
             //Prepare to write to Partnership list
             Partnership backupElement = partnershipList[oldname];
-            Partnership updated = CreatePartnership(newname, leftpath, rightpath);
+            Partnership updated = CreatePartnership(newname, leftPath, rightPath);
             //remove the old partnership
             partnershipList.Remove(oldname);
 
             //Conditions check
             bool nameUnchanged = newname.Trim().ToLower() == oldname.Trim().ToLower();
             bool pathUnchanged = false;
-            
+
+            if (!IsValidSystemObject(leftPath))
+                throw new UserInputException("Folder 1 is a system folder which cannot be synced. \nPlease select another folder.");
+
+            if (!IsValidSystemObject(rightPath))
+                throw new UserInputException("Folder 2 is a system folder which cannot be synced. \nPlease select another folder.");
+
             //Checks if the user try to update the partnership with paths which is similar to existing partnerships
             if (!IsUniquePartnershipPath(updated.Name, updated.LeftFullPath, updated.RightFullPath, partnershipList))
             {
@@ -231,9 +260,9 @@ namespace SyncButler
                 throw new UserInputException("The selected name is already in use.\n Please select another name.");
             }
 
-            if (WindowsFileSystem.PathsEqual(leftpath, backupElement.LeftFullPath)
+            if (WindowsFileSystem.PathsEqual(leftPath, backupElement.LeftFullPath)
                 &&
-                WindowsFileSystem.PathsEqual(rightpath, backupElement.RightFullPath))
+                WindowsFileSystem.PathsEqual(rightPath, backupElement.RightFullPath))
                 pathUnchanged = true;
                         
             //Path is unchanged, only name is changed
