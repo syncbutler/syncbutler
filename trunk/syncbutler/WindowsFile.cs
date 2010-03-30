@@ -282,6 +282,14 @@ namespace SyncButler
             // Make sure there's enough free space.
             if ((nativeFileObj.Length + 4096) > SystemEnvironment.StorageDevices.GetAvailableSpace(destFile.driveLetter))
                 throw new IOException("There is insufficient space to copy the file to " + destFile.nativeFileObj.FullName);
+            // If this is NTFS and the destination is FAT32. Then we need to check the file size.
+            else if ((SystemEnvironment.StorageDevices.GetDriveFormat(GetDriveLetter(destFile.nativeFileObj.FullName)) == SyncButler.SystemEnvironment.StorageDevices.Format.FAT32)
+                && (SystemEnvironment.StorageDevices.GetDriveFormat(GetDriveLetter(this.nativeFileObj.FullName)) == SyncButler.SystemEnvironment.StorageDevices.Format.NTFS))
+            {
+                if ((nativeFileObj.Length + 4096) > SystemEnvironment.StorageDevices.MAX_SIZE_FAT32) {
+                    throw new IOException("The file cannot be copied to " + destFile.nativeFileObj.FullName + " because its length is larger than what the destination drive could handle.");
+                }
+            }
 
             int bufferSize = (int) SyncEnvironment.FileReadBufferSize;
 
