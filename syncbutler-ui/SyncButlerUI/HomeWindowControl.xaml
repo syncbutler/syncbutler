@@ -641,12 +641,57 @@
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="CreatePartnership2" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
 						</ObjectAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="foldersItem" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="208.5"/>
-						</DoubleAnimationUsingKeyFrames>
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="label" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
 						</ObjectAnimationUsingKeyFrames>
+						<BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="sourceTextBox" Storyboard.TargetProperty="(UIElement.IsEnabled)">
+							<DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="True"/>
+						</BooleanAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="sourceTextBox" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="BrowseButton" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="image3" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-100"/>
+						</DoubleAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock11" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-100"/>
+						</DoubleAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock4" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-85.714"/>
+						</DoubleAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock4" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="3.809"/>
+						</DoubleAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock12" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-34.286"/>
+						</DoubleAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock12" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="2.858"/>
+						</DoubleAnimationUsingKeyFrames>
+						<ThicknessAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock4" Storyboard.TargetProperty="(FrameworkElement.Margin)">
+							<SplineThicknessKeyFrame KeyTime="00:00:00" Value="25.834,23.095,-8.219,0"/>
+						</ThicknessAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock4" Storyboard.TargetProperty="(FrameworkElement.Width)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="328.484"/>
+						</DoubleAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock13" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-29.524"/>
+						</DoubleAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock13" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-1.905"/>
+						</DoubleAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="sourceTextBox" Storyboard.TargetProperty="(UIElement.Opacity)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.95"/>
+						</DoubleAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="sourceTextBox" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="80"/>
+						</DoubleAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="BrowseButton" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="80"/>
+						</DoubleAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
 				<VisualState x:Name="CreatePartnershipState3">
@@ -663,9 +708,6 @@
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="sourceTextBox" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
 						</ObjectAnimationUsingKeyFrames>
-						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="foldersItem" Storyboard.TargetProperty="(UIElement.Visibility)">
-							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
-						</ObjectAnimationUsingKeyFrames>
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="CreatePartnership3" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
 						</ObjectAnimationUsingKeyFrames>
@@ -678,13 +720,13 @@
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="label" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
 						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="BrowseButton" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
 				<VisualState x:Name="CreatePartnershipDone1">
 					<Storyboard>
-						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="foldersItem" Storyboard.TargetProperty="(UIElement.Visibility)">
-							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
-						</ObjectAnimationUsingKeyFrames>
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="CreatePartnership" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
 						</ObjectAnimationUsingKeyFrames>
@@ -716,6 +758,9 @@
 							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="3"/>
 						</DoubleAnimationUsingKeyFrames>
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="label" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="BrowseButton" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
 						</ObjectAnimationUsingKeyFrames>
 					</Storyboard>
@@ -831,6 +876,9 @@
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock2_Copy" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
 						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="BrowseButton" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
 				<VisualState x:Name="EditPartnershipState2">
@@ -844,12 +892,6 @@
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="CreatePartnership" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
 						</ObjectAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="foldersItem" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="211.5"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="foldersItem" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-0.071"/>
-						</DoubleAnimationUsingKeyFrames>
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock4" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
 						</ObjectAnimationUsingKeyFrames>
@@ -857,7 +899,7 @@
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
 						</ObjectAnimationUsingKeyFrames>
 						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock5" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-217.5"/>
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="27.262"/>
 						</DoubleAnimationUsingKeyFrames>
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="button3" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
@@ -878,7 +920,7 @@
 							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-1.5"/>
 						</DoubleAnimationUsingKeyFrames>
 						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock11" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-1.5"/>
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-111.5"/>
 						</DoubleAnimationUsingKeyFrames>
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="label" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
@@ -889,6 +931,24 @@
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock2_Copy" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
 						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="BrowseButton" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock5" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.905"/>
+						</DoubleAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="sourceTextBox" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="59.857"/>
+						</DoubleAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="sourceTextBox" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="4.762"/>
+						</DoubleAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="image3" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-110"/>
+						</DoubleAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="BrowseButton" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="60"/>
+						</DoubleAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
 				<VisualState x:Name="EditPartnershipState3">
@@ -909,9 +969,6 @@
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
 						</ObjectAnimationUsingKeyFrames>
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock6" Storyboard.TargetProperty="(UIElement.Visibility)">
-							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
-						</ObjectAnimationUsingKeyFrames>
-						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="foldersItem" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
 						</ObjectAnimationUsingKeyFrames>
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="sourceTextBox" Storyboard.TargetProperty="(UIElement.Visibility)">
@@ -947,6 +1004,36 @@
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock2_Copy" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
 						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="BrowseButton" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock5" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-2.857"/>
+						</DoubleAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock5" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.905"/>
+						</DoubleAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="20"/>
+						</DoubleAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="sourceTextBox1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="20"/>
+						</DoubleAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="20"/>
+						</DoubleAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="destinationTextBox1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="20"/>
+						</DoubleAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="image4" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="11"/>
+						</DoubleAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock14" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="10"/>
+						</DoubleAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="partnershipNameTextBox" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="10"/>
+						</DoubleAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
 				<VisualState x:Name="EditPartnershipDone1">
@@ -967,9 +1054,6 @@
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
 						</ObjectAnimationUsingKeyFrames>
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="sourceTextBox" Storyboard.TargetProperty="(UIElement.Visibility)">
-							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
-						</ObjectAnimationUsingKeyFrames>
-						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="foldersItem" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
 						</ObjectAnimationUsingKeyFrames>
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="button1" Storyboard.TargetProperty="(UIElement.Visibility)">
@@ -1009,6 +1093,9 @@
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
 						</ObjectAnimationUsingKeyFrames>
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="label" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="BrowseButton" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
 						</ObjectAnimationUsingKeyFrames>
 					</Storyboard>
@@ -1073,10 +1160,10 @@
 				</Rectangle.Fill>
 			</Rectangle>
 			<Grid x:Name="CreatePartnership" Margin="0,0,38.5,0" VerticalAlignment="Bottom" Height="444" d:LayoutOverrides="GridBox">
-				<TextBlock x:Name="textBlock3" Margin="0,25,36.447,0" FontFamily="Arial" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" Text="Creating a Sync Partnership" VerticalAlignment="Top" Height="83.5" HorizontalAlignment="Right" Width="202.72"/>
-				<TextBlock Margin="0,109.5,55.947,0" FontSize="16" TextWrapping="Wrap" Text="Please select a folder on this computer" HorizontalAlignment="Right" Width="183.22" d:LayoutOverrides="HorizontalAlignment" VerticalAlignment="Top" Height="63.5" FontWeight="Bold" FontStyle="Italic"/>
-				<TextBlock Margin="0,181.5,92.899,137.5" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="146.268" d:LayoutOverrides="HorizontalAlignment" TextAlignment="Justify"><Run Text="This folder will be 1 of 2  folders in a syncing partnership."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="Any updates will be reflected on the other "/><LineBreak/><Run Text="folder in the partnership"/></TextBlock>
-				<TextBlock x:Name="textBlock10" Margin="0,328.095,398.773,94.079" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="44.754" Text="Path:" RenderTransformOrigin="0.5,0.5">
+				<TextBlock x:Name="textBlock3" Margin="25.834,25,161.209,0" FontFamily="Arial" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" Text="Creating a Sync Partnership" VerticalAlignment="Top" Height="83.5"/>
+				<TextBlock Margin="0,55.214,110.283,0" FontSize="16" TextWrapping="Wrap" Text="Please select a folder on this computer" HorizontalAlignment="Right" Width="379.41" VerticalAlignment="Top" Height="63.5" FontWeight="Bold" FontStyle="Italic"/>
+				<TextBlock Margin="0,82.452,110.283,0" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="379.41" TextAlignment="Justify" VerticalAlignment="Top" Height="125"><Run Text="This folder will be 1 of 2  folders in a syncing partnership."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="Any updates will be reflected on the other "/><LineBreak/><Run Text="folder in the partnership"/></TextBlock>
+				<TextBlock x:Name="textBlock10" Margin="0,158.095,398.773,264.079" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="44.754" Text="Path:" RenderTransformOrigin="0.5,0.5">
 					<TextBlock.RenderTransform>
 						<TransformGroup>
 							<ScaleTransform/>
@@ -1086,7 +1173,7 @@
 						</TransformGroup>
 					</TextBlock.RenderTransform>
 				</TextBlock>
-				<Image x:Name="image2" HorizontalAlignment="Left" Margin="25.834,0,0,69.833" Width="44" Height="44" Source="Images\Misc.png" Stretch="Fill" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5" >
+				<Image x:Name="image2" HorizontalAlignment="Left" Margin="25.834,160.167,0,0" Width="44" Source="Images\Misc.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" Height="44" >
 					<Image.RenderTransform>
 						<TransformGroup>
 							<ScaleTransform/>
@@ -1100,10 +1187,45 @@
 				<Button x:Name="toPartnershipDestButton" HorizontalAlignment="Right" Margin="0,0,31.947,19" VerticalAlignment="Bottom" Width="69" Height="23" Content="Next&gt;" RenderTransformOrigin="0.79,1.043" Click="GoToPartnershipDest_Click" TabIndex="3" />
 			</Grid>
 			<Grid x:Name="CreatePartnership2" Margin="0,0,38.5,0" VerticalAlignment="Bottom" Height="444" d:LayoutOverrides="GridBox" >
-				<TextBlock x:Name="textBlock4" Margin="58.86,25,253.947,0" FontFamily="Arial" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" Text="Creating a Sync Partnership" VerticalAlignment="Top" Height="83.5"/>
-				<TextBlock Margin="0,93,273.447,0" FontSize="16" TextWrapping="Wrap" Text="Please select another folder on this computer" HorizontalAlignment="Right" Width="183.22" VerticalAlignment="Top" Height="63.5" FontWeight="Bold" FontStyle="Italic"/>
-				<TextBlock Margin="0,148.5,266.114,113.357" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="190.553" TextAlignment="Justify"><Run Text="This folder will be 1 of 2 folders in a syncing partnership."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="Any updates will be reflected on the other folder in the partnership."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="This folder is usually found on a portable storage so it may be carried around."/><LineBreak/><Run Text=""/></TextBlock>
-				<Image HorizontalAlignment="Left" Margin="25.5,0,0,50.5" VerticalAlignment="Bottom" Width="44" Height="44" Source="Images\Folder.png" Stretch="Fill"/>
+				<TextBlock x:Name="textBlock4" Margin="70.5,23.095,-8.219,0" FontFamily="Arial" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" Text="Creating a Sync Partnership" VerticalAlignment="Top" Height="83.5" RenderTransformOrigin="0.5,0.5" Width="500">
+					<TextBlock.RenderTransform>
+						<TransformGroup>
+							<ScaleTransform/>
+							<SkewTransform/>
+							<RotateTransform/>
+							<TranslateTransform/>
+						</TransformGroup>
+					</TextBlock.RenderTransform>
+				</TextBlock>
+				<TextBlock x:Name="textBlock12" Margin="0,53,100.614,0" FontSize="16" TextWrapping="Wrap" Text="Please select another folder on this computer" HorizontalAlignment="Right" Width="356.053" VerticalAlignment="Top" Height="63.5" FontWeight="Bold" FontStyle="Italic" RenderTransformOrigin="0.5,0.5">
+					<TextBlock.RenderTransform>
+						<TransformGroup>
+							<ScaleTransform/>
+							<SkewTransform/>
+							<RotateTransform/>
+							<TranslateTransform/>
+						</TransformGroup>
+					</TextBlock.RenderTransform>
+				</TextBlock>
+				<TextBlock x:Name="textBlock13" Margin="0,88.5,100.614,173.357" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="356.053" TextAlignment="Justify" RenderTransformOrigin="0.5,0.5">
+					<TextBlock.RenderTransform>
+						<TransformGroup>
+							<ScaleTransform/>
+							<SkewTransform/>
+							<RotateTransform/>
+							<TranslateTransform/>
+						</TransformGroup>
+					</TextBlock.RenderTransform><Run Text="This folder will be 1 of 2 folders in a syncing partnership."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="Any updates will be reflected on the other folder in the partnership."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="This folder is usually found on a portable storage so it may be carried around."/><LineBreak/><Run Text=""/></TextBlock>
+				<Image x:Name="image3" HorizontalAlignment="Left" Margin="25.5,0,0,50.5" VerticalAlignment="Bottom" Width="44" Height="44" Source="Images\Folder.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
+					<Image.RenderTransform>
+						<TransformGroup>
+							<ScaleTransform/>
+							<SkewTransform/>
+							<RotateTransform/>
+							<TranslateTransform/>
+						</TransformGroup>
+					</Image.RenderTransform>
+				</Image>
 				<TextBlock x:Name="textBlock11" Margin="0,347.595,397.273,74.579" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="44.754" Text="Path:" RenderTransformOrigin="0.5,0.5">
 					<TextBlock.RenderTransform>
 						<TransformGroup>
@@ -1162,13 +1284,40 @@
 				</TextBox>
 				<Button x:Name="button" Margin="233.58,0,188.947,18" VerticalAlignment="Bottom" Height="23" Content="Advanced..." IsEnabled="False"/>
 				<Button x:Name="button2" HorizontalAlignment="Right" Margin="0,0,31.947,18" VerticalAlignment="Bottom" Width="69" Height="23" Content="Create!" RenderTransformOrigin="0.79,1.043" Click="CreatePartnership_Click" TabIndex="2"/>
-				<TextBlock Margin="30,0,0,68.5" FontSize="14.667" FontWeight="Bold" Text="Partnership Name" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="28" HorizontalAlignment="Left" Width="222.08"/>
-				<TextBox x:Name="partnershipNameTextBox" Margin="30.5,0,0,52" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="25" HorizontalAlignment="Left" Width="166.58" TabIndex="1" KeyDown="PartnershipNameTextBox_Enter" />
+				<TextBlock x:Name="textBlock14" Margin="30,0,0,68.5" FontSize="14.667" FontWeight="Bold" Text="Partnership Name" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="28" HorizontalAlignment="Left" Width="222.08" RenderTransformOrigin="0.5,0.5">
+					<TextBlock.RenderTransform>
+						<TransformGroup>
+							<ScaleTransform/>
+							<SkewTransform/>
+							<RotateTransform/>
+							<TranslateTransform/>
+						</TransformGroup>
+					</TextBlock.RenderTransform>
+				</TextBlock>
+				<TextBox x:Name="partnershipNameTextBox" Margin="30.5,0,0,52" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="25" HorizontalAlignment="Left" Width="166.58" TabIndex="1" KeyDown="PartnershipNameTextBox_Enter" RenderTransformOrigin="0.5,0.5" >
+					<TextBox.RenderTransform>
+						<TransformGroup>
+							<ScaleTransform/>
+							<SkewTransform/>
+							<RotateTransform/>
+							<TranslateTransform/>
+						</TransformGroup>
+					</TextBox.RenderTransform>
+				</TextBox>
 				<Button x:Name="button5" HorizontalAlignment="Right" Margin="0,0,111.027,18" VerticalAlignment="Bottom" Width="70.92" Height="23" Content="&lt;Back" Click="GoBackToCreatePartnershipDes_Click" TabIndex="3"/>
 				<TextBlock Margin="0,0,272.027,13" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="85.64" VerticalAlignment="Bottom" Height="25" Text="Step 3 of 3"/>
 				<TextBlock Margin="0,109.5,55.947,0" FontSize="16" TextWrapping="Wrap" Text="Please give the partnership a name and review your selection" HorizontalAlignment="Right" Width="183.22" VerticalAlignment="Top" Height="63.5" FontWeight="Bold" FontStyle="Italic" d:LayoutOverrides="HorizontalAlignment"/>
 				<TextBlock Margin="0,199.5,71.947,119.5" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Right" Width="167.22" d:LayoutOverrides="HorizontalAlignment" TextAlignment="Justify"><Run Text="The name will allow you to identify your partnerships with ease."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="Remember, any updates will be reflected on the other folder in partnership"/></TextBlock>
-				<Image HorizontalAlignment="Left" Margin="96.5,163.54,0,0" VerticalAlignment="Top" Width="56.5" Height="56.5" Source="Images\Refresh.png" Stretch="Fill"/>
+				<Image x:Name="image4" HorizontalAlignment="Left" Margin="96.5,163.54,0,0" VerticalAlignment="Top" Width="56.5" Height="56.5" Source="Images\Refresh.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
+					<Image.RenderTransform>
+						<TransformGroup>
+							<ScaleTransform/>
+							<SkewTransform/>
+							<RotateTransform/>
+							<TranslateTransform/>
+						</TransformGroup>
+					</Image.RenderTransform>
+				</Image>
 			</Grid>
 			<Grid x:Name="CreatePartnershipDone" Margin="0,0,38.5,0" VerticalAlignment="Bottom" Height="444" Visibility="Hidden" d:LayoutOverrides="GridBox" RenderTransformOrigin="0.5,0.5">
 				<Grid.RenderTransform>
@@ -1226,7 +1375,7 @@
 				<TextBlock x:Name="partnerShipName" Margin="30.499,191,0,196.429" FontSize="13.333" TextWrapping="Wrap" HorizontalAlignment="Left" Width="222.08"/>
 				<Button x:Name="button1" HorizontalAlignment="Right" Margin="0,0,38.5,103.643" VerticalAlignment="Bottom" Width="127.667" Height="47" Content="   Sync this&#xa; Partnership" RenderTransformOrigin="0.79,1.043" Click="SyncThisPartnership_Click" TabIndex="2"/>
 			</Grid>
-			<TextBox x:Name="sourceTextBox" Margin="74,370.04,104.947,0" VerticalAlignment="Top" TextWrapping="Wrap" MaxLength="266" Width="375.08" d:LayoutOverrides="GridBox" TabIndex="2" RenderTransformOrigin="0.5,0.5" KeyDown="SourceTextBox_Enter" >
+			<TextBox x:Name="sourceTextBox" Margin="74,200.04,104.947,0" VerticalAlignment="Top" TextWrapping="Wrap" MaxLength="266" Width="375.08" d:LayoutOverrides="VerticalAlignment, GridBox" TabIndex="2" RenderTransformOrigin="0.5,0.5" KeyDown="SourceTextBox_Enter" >
 				<TextBox.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
@@ -1236,34 +1385,8 @@
 					</TransformGroup>
 				</TextBox.RenderTransform>
 			</TextBox>
-			<TreeView Margin="55.5,48,0,149.5" x:Name="foldersItem" SelectedItemChanged="foldersItem_SelectedItemChanged" Background="#FFFFFFFF" BorderBrush="#FF7C7C7C" Foreground="#FFFFFFFF" HorizontalAlignment="Left" Width="189.58" RenderTransformOrigin="0.5,0.5" TabIndex="1">
-				<TreeView.Resources>
-					<Style TargetType="{x:Type TreeViewItem}">
-						<Setter Property="HeaderTemplate">
-							<Setter.Value>
-								<DataTemplate>
-									<StackPanel Orientation="Horizontal">
-										<Image x:Name="img"  Width="20" Height="20" Stretch="Fill" 
-											Source="{Binding Header, Converter={x:Static WPF_Explorer_Tree:HeaderToImageConverter.Instance}, RelativeSource={RelativeSource AncestorType={x:Type TreeViewItem}, Mode=FindAncestor}}"       
-                                       />
-										<TextBlock Text="{Binding}" Margin="5,0" />
-									</StackPanel>
-								</DataTemplate>
-							</Setter.Value>
-						</Setter>
-					</Style>
-				</TreeView.Resources>
-				<TreeView.RenderTransform>
-					<TransformGroup>
-						<ScaleTransform/>
-						<SkewTransform/>
-						<RotateTransform/>
-						<TranslateTransform/>
-					</TransformGroup>
-				</TreeView.RenderTransform>
-			</TreeView>
 			<Grid x:Name="EditPartnership" Margin="0,0,38.5,0" VerticalAlignment="Bottom" Height="444" d:LayoutOverrides="GridBox" Visibility="Hidden">
-				<TextBlock x:Name="textBlock5" Margin="0,25,36.447,0" FontFamily="Arial" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" Text="Edit Existing Sync Partnership" VerticalAlignment="Top" Height="83.5" HorizontalAlignment="Right" Width="202.72" RenderTransformOrigin="0.5,0.5">
+				<TextBlock x:Name="textBlock5" Margin="29.693,18.333,110.733,0" FontFamily="Arial" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" Text="Edit Existing Sync Partnership" VerticalAlignment="Top" Height="83.5" RenderTransformOrigin="0.5,0.5">
 					<TextBlock.RenderTransform>
 						<TransformGroup>
 							<ScaleTransform/>
@@ -1300,6 +1423,16 @@
 				<Button x:Name="button_Copy" Margin="233.58,0,188.947,18" VerticalAlignment="Bottom" Height="23" Content="Advanced..." IsEnabled="False" Visibility="Hidden"/>
 				<Button x:Name="BackButton2" HorizontalAlignment="Right" Margin="0,0,111.027,18" VerticalAlignment="Bottom" Width="70.92" Height="23" Content="&lt;Back" Click="GoBackToEditPartnershipDes_Click" Visibility="Hidden" TabIndex="3"/>
 			</Grid>
+			<Button x:Name="BrowseButton" Margin="0,174.08,104.947,0" VerticalAlignment="Top" Content="Browse" HorizontalAlignment="Right" Width="75" RenderTransformOrigin="0.5,0.5" Click="GetUserPath">
+				<Button.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Button.RenderTransform>
+			</Button>
 		</Grid>
 		<Grid x:Name="ViewPartnership" Margin="0.027,0,-0.027,0" VerticalAlignment="Bottom" Height="444" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
 			<Grid.RenderTransform>

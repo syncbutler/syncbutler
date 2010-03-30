@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+
 using System.IO;
 using System.Data;
 using System.Threading;
@@ -45,12 +46,7 @@ namespace SyncButlerUI
         }
     
 	#region fields&Attributes 
-    /// <summary>
-    /// Defines the size of a single increment of the progress bar.
-    /// </summary>
-    //private int progressBarIncrement = 5;
-	public ObservableCollection<ConflictList> mergedList;		
-    private object dummyNode = null;
+	public ObservableCollection<ConflictList> mergedList;
     public string SelectedImagePath { get; set; }
 	public SyncButler.Controller Controller{get;set;}
 	public enum State{Home,Page1OfCreate,Page2OfCreate,Page3OfCreate,Page4OfCreate,ViewPartnership,SBS,Conflict,Settings,Page1OfEdit,Page2OfEdit,Page3OfEdit,Page4OfEdit,Result};
@@ -516,133 +512,6 @@ namespace SyncButlerUI
 	/// <summary>
     /// Interaction logic for Creating Partnership
     /// </summary>
-		#region TreeView
-		/// <summary>
-		/// Populate the tree view with storage devices that are ready
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-        private void clearTreeView()
-        {
-            try{
-			    foldersItem.Items.Clear();
-                foreach (DriveInfo d in DriveInfo.GetDrives())
-                {
-                    if (d.IsReady)
-                    {
-                        string s = d.Name;
-                        TreeViewItem item = new TreeViewItem();
-                        item.Header = s;
-                        item.Tag = s;
-                        item.FontWeight = FontWeights.Normal;
-                        item.Items.Add(dummyNode);
-                        item.Expanded += new RoutedEventHandler(folder_Expanded);
-                        item.Collapsed += new RoutedEventHandler(folder_Collapsed);
-
-                        foldersItem.Items.Add(item);
-
-                    }
-                }
-            }
-            catch (Exception) { }
-
-        }
-
-        private void editPartnershipTreeView()
-        {
-
-        }
-	
-		/// <summary>
-		/// remove subItems of the list and repopulate when collasped
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void folder_Collapsed(object sender, RoutedEventArgs e)
-		{
-            try
-            {
-                TreeViewItem item = (TreeViewItem)sender;
-                item.Items.Clear();
-                foreach (string s in Directory.GetDirectories(item.Tag.ToString()))
-                {
-                    TreeViewItem subitem = new TreeViewItem();
-                    subitem.Header = s.Substring(s.LastIndexOf("\\") + 1);
-                    subitem.Tag = s;
-                    subitem.FontWeight = FontWeights.Normal;
-                    subitem.Items.Add(dummyNode);
-                    subitem.Expanded += new RoutedEventHandler(folder_Expanded);
-                    subitem.Collapsed += new RoutedEventHandler(folder_Collapsed);
-                    item.Items.Add(subitem);
-                }
-            }
-            catch (Exception) { }
-		}
-		/// <summary>
-		/// populate the list when folder is expanded
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-
-        private void folder_Expanded(object sender, RoutedEventArgs e)
-        {
-            TreeViewItem item = (TreeViewItem)sender;
-            if (item.Items.Count == 1 && item.Items[0] == dummyNode)
-            {
-                item.Items.Clear();
-                try
-                {
-                    foreach (string s in Directory.GetDirectories(item.Tag.ToString()))
-                    {
-                        TreeViewItem subitem = new TreeViewItem();
-                        subitem.Header = s.Substring(s.LastIndexOf("\\") + 1);
-                        subitem.Tag = s;
-                        subitem.FontWeight = FontWeights.Normal;
-                        subitem.Items.Add(dummyNode);
-                        subitem.Expanded += new RoutedEventHandler(folder_Expanded);
-						subitem.Collapsed += new RoutedEventHandler(folder_Collapsed);
-                        item.Items.Add(subitem);
-                    }
-                }
-                catch (Exception) { }
-            }
-        }
-		
-		/// <summary>
-		/// populate the textbox with current selected value when folder is expanded
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-        private void foldersItem_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
-        {
-            TreeView tree = (TreeView)sender;
-            TreeViewItem temp = ((TreeViewItem)tree.SelectedItem);
-
-            if (temp == null)
-                return;
-            SelectedImagePath = "";
-            string temp1 = "";
-            string temp2 = "";
-            while (true)
-            {
-                temp1 = temp.Header.ToString();
-                if (temp1.Contains(@"\"))
-                {
-                    temp2 = "";
-                }
-                SelectedImagePath = temp1 + temp2 + SelectedImagePath;
-                if (temp.Parent.GetType().Equals(typeof(TreeView)))
-                {
-                    break;
-                }
-                temp = ((TreeViewItem)temp.Parent);
-                temp2 = @"\";
-            }
-            //show user selected path
-			//destinationTextBox.Text=SelectedImagePath;
-          	sourceTextBox.Text=SelectedImagePath;
-       }
-		#endregion
 
         private void GoHome()
         {
@@ -661,7 +530,7 @@ namespace SyncButlerUI
 		    try{
 			    checkInput();
 			    PartnershipTempData.sourcePath=sourceTextBox.Text;
-		        clearTreeView();	
+		        
 		        sourceTextBox.Text=PartnershipTempData.destinationPath;
 			    VisualStateManager.GoToState(this,"CreatePartnershipState2",false);
 				CurrentState = State.Page2OfCreate;
@@ -679,14 +548,26 @@ namespace SyncButlerUI
 		/// <param name="e"></param>
 		
 		private void GoToCreatePartnership_Click(object sender, RoutedEventArgs e){
-		   clearTreeView();
            new PartnershipTempData();
 		   VisualStateManager.GoToState(this,"CreatePartnershipState1",false);
 			CurrentState = State.Page1OfCreate;
            this.sourceTextBox.Clear();
             
 		}
-		
+        private String GetPath(String Path)
+        {
+
+            System.Windows.Forms.FolderBrowserDialog fd = new System.Windows.Forms.FolderBrowserDialog();
+            if (Directory.Exists(Path))
+            {
+                fd.SelectedPath = Path;
+            }
+            if (fd.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
+                return null;
+            return fd.SelectedPath;
+            
+        }
+
 		/// <summary>
 		/// goes back to the 1st page from the 2nd page of create partnership
 		/// </summary>
@@ -697,7 +578,7 @@ namespace SyncButlerUI
 
 			PartnershipTempData.destinationPath=sourceTextBox.Text;
 		    sourceTextBox.Text=PartnershipTempData.sourcePath;
-		    clearTreeView();	
+		    
 			VisualStateManager.GoToState(this,"CreatePartnershipState1",false);
             }
             catch (UserInputException uIException)
@@ -734,7 +615,7 @@ namespace SyncButlerUI
 		private void GoBackToCreatePartnershipDes_Click(object sender, RoutedEventArgs e){
 		   PartnershipTempData.partnershipName=partnershipNameTextBox.Text;
 		   destinationTextBox1.Text=PartnershipTempData.destinationPath;
-		   clearTreeView();	
+		   
 		   VisualStateManager.GoToState(this,"CreatePartnershipState2",false);
 			CurrentState = State.Page2OfCreate;
 		}
@@ -905,7 +786,7 @@ namespace SyncButlerUI
             {
                 if (showMessageBox(CustomDialog.MessageType.Question, "There are no partnerships for me to sync. Would you like to create one now?") == true)
                 {
-                    clearTreeView();
+                    
                     VisualStateManager.GoToState(this, "CreatePartnershipState1", false);
                     CurrentState = State.Page1OfCreate;
 
@@ -997,7 +878,7 @@ namespace SyncButlerUI
 		/// <param name="e"></param>
 		
 		private void GoToEditPartnership_Click(object sender, RoutedEventArgs e){
-		   clearTreeView();
+		   
 			try{
 		  	if(partnershipList.SelectedIndex<0){
                 throw new UserInputException("Please select a partnership to edit.");
@@ -1021,7 +902,7 @@ namespace SyncButlerUI
 		    try{
 			checkInput();
 			PartnershipTempData.sourcePath=sourceTextBox.Text;
-		    clearTreeView();	
+		    
 		    sourceTextBox.Text=PartnershipTempData.destinationPath;
 			VisualStateManager.GoToState(this,"EditPartnershipState2",false);
             CurrentState = State.Page2OfEdit;
@@ -1043,7 +924,7 @@ namespace SyncButlerUI
 
 			PartnershipTempData.destinationPath=sourceTextBox.Text;
 		    sourceTextBox.Text=PartnershipTempData.sourcePath;
-		    clearTreeView();	
+		    
 			VisualStateManager.GoToState(this,"EditPartnershipState1",false);
             CurrentState = State.Page1OfEdit;
             }
@@ -1081,7 +962,7 @@ namespace SyncButlerUI
 		private void GoBackToEditPartnershipDes_Click(object sender, RoutedEventArgs e){
 		   PartnershipTempData.partnershipName=partnershipNameTextBox.Text;
 		   destinationTextBox1.Text=PartnershipTempData.destinationPath;
-		   clearTreeView();	
+		   
 		   VisualStateManager.GoToState(this,"EditPartnershipState2",false);
            CurrentState = State.Page2OfEdit;
 		}
@@ -1503,6 +1384,16 @@ namespace SyncButlerUI
 						break;
 				}
 			}
+		}
+		private void GetUserPath(object sender, RoutedEventArgs e)
+		{
+            String FolderPath;
+
+            FolderPath = GetPath(this.sourceTextBox.Text);
+            if (FolderPath != null)
+            {
+                this.sourceTextBox.Text = FolderPath;
+            }
 		}
 	}
 }
