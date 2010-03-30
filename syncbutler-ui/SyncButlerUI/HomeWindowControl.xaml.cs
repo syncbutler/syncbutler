@@ -1332,11 +1332,11 @@ namespace SyncButlerUI
                 DriveInfo di = new DriveInfo(""+sourceTextBox.Text[0]);
                 if (di.DriveType == DriveType.CDRom)
                 {
-                    throw new UserInputException("CD rom is not supported in this version");
+                    throw new UserInputException("CD Drive syncing is not supported in this version");
                 }
                 else if (di.DriveType == DriveType.Network)
                 {
-                    throw new UserInputException("Network drive is not supported in this version");
+                    throw new UserInputException("Network drive syncing is not supported in this version");
                 }
             }
            
