@@ -210,23 +210,23 @@ namespace SyncButler
             switch (user) {
                 case Action.CopyToLeft : 
                     right.CopyTo(left);
-                    right.UpdateStoredChecksum();
+                    //right.UpdateStoredChecksum();
                     break;
                 case Action.DeleteLeft : 
                     left.Delete(true);
-                    left.RemoveStoredChecksum();
+                    //left.RemoveStoredChecksum();
                     break;
                 case Action.Merge:
                     left.Merge(right);
-                    left.UpdateStoredChecksum();
+                    //left.UpdateStoredChecksum();
                     break;
                 case Action.CopyToRight:
                     left.CopyTo(right);
-                    left.UpdateStoredChecksum();
+                    //left.UpdateStoredChecksum();
                     break;
                 case Action.DeleteRight:
                     right.Delete(true);
-                    right.RemoveStoredChecksum();
+                    //right.RemoveStoredChecksum();
                     break;
                 case Action.Ignore:
                     break;

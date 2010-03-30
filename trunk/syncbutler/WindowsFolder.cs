@@ -182,8 +182,16 @@ namespace SyncButler
                 Directory.CreateDirectory(destPath + curDir.Substring(srcPath.Length));
 
                 foreach (string file in Directory.GetFiles(curDir))
-                    File.Copy(file, destPath + file.Substring(srcPath.Length));
+                {
+                    WindowsFile srcObj = new WindowsFile(this.rootPath, file, this, this.parentPartnership);
+                    WindowsFile destObj = new WindowsFile(destFolder.rootPath, destPath + file.Substring(srcPath.Length), destFolder, this.parentPartnership);
+
+                    srcObj.CopyTo(destObj);
+                    //File.Copy(file, destPath + file.Substring(srcPath.Length));
+                }
             }
+
+            this.UpdateStoredChecksum();
         }
 
         /// <summary>
@@ -228,6 +236,8 @@ namespace SyncButler
             {
                 nativeDirObj.Delete(true);
             }
+
+            this.RemoveStoredChecksum();
         }
 
         /// <summary>
