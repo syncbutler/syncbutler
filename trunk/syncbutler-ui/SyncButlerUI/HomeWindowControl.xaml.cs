@@ -269,7 +269,7 @@ namespace SyncButlerUI
         /// <returns></returns>
         private void AsyncStartSync(IEnumerable<string> partnershipNames)
         {
-
+			Controller.conflictCount=0;
             VisualStateManager.GoToState(this, "ConflictState1", false);
             CurrentState = State.Conflict;
             if (scanWorker != null)
@@ -302,6 +302,7 @@ namespace SyncButlerUI
             resolveButton.IsEnabled = false;
             doneButton.IsEnabled = false;
             CancelButton.IsEnabled = true;
+			goToResultPageButton.IsEnabled=false;
             CurrentSyncingFile.Text = "Initializing scan...";
             PartnershipName.Text = "";
 
@@ -334,9 +335,11 @@ namespace SyncButlerUI
                 ConflictList.ItemsSource = mergedList;
                 ConflictList.Items.Refresh();
                 ConflictList.IsEnabled = true;
-                resolveButton.IsEnabled = true;
+                if (Controller.conflictCount != 0)
+                {
+                    resolveButton.IsEnabled = true;
+                }
                 doneButton.IsEnabled = true;
-
                 CurrentSyncingFile.Text = "Scan complete. Please look at the list of conflicts.";
 
                 ThreadSafeAddResolve(autoResolveConflicts);
@@ -391,7 +394,6 @@ namespace SyncButlerUI
 
             scanWorker.RunWorkerAsync();
             CurrentAction = CurrentActionEnum.Scanning;
-
             return;
         }
         /// <summary>
@@ -519,6 +521,10 @@ namespace SyncButlerUI
 
                 CancelButton.IsEnabled = false;
                 doneButton.IsEnabled = true;
+				if(conflictsProcessed>0){
+				 goToResultPageButton.IsEnabled=true;	
+				}
+
                 if (newConflicts.Count > 0) AsyncStartResolve();
 
             });

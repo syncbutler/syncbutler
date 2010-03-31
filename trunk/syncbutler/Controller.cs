@@ -23,7 +23,8 @@ namespace SyncButler
         private IGUI mainWindow;
         private static Controller controller;
         private string sbsLogfile;
-
+		public static int conflictCount { get; set;}
+		
         /// <summary>
         /// Used by check and merged to see the total size of the files to be sync so far.
         /// </summary>
@@ -279,11 +280,12 @@ namespace SyncButler
         /// <returns>ObservableCollection conflict list with a list of conflicts. Will be null if there are no conflicts.</returns>
         public ConflictList SyncPartnership(String name, SyncableStatusMonitor monitor, SyncableErrorHandler errorhandler) 
         {
-            Partnership curPartnership = syncEnvironment.GetPartnershipsList()[name];
+			Partnership curPartnership = syncEnvironment.GetPartnershipsList()[name];
 
             curPartnership.statusMonitor = monitor;
             curPartnership.errorHandler = errorhandler;
 			List<Conflict> conflict = curPartnership.Sync();
+			conflictCount+= conflict.Count;
             curPartnership.statusMonitor = null;
 
             return new ConflictList(conflict, name);

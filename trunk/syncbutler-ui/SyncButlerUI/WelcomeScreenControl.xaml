@@ -132,7 +132,7 @@
 			</VisualStateGroup>
 		</VisualStateManager.VisualStateGroups>
 		<Grid x:Name="WelcomeScreen1">
-			<Rectangle Stroke="Black" Margin="-1,-1,-2,-2" RadiusX="20" RadiusY="20" Fill="#FF575757" Opacity="0.8"/>
+			<Rectangle Margin="-1,-1,-2,-2" RadiusX="20" RadiusY="20" Fill="#FF575757" Opacity="0.8"/>
 			<Image x:Name="image" Margin="-5,-48,15,-102" Stretch="Fill" Source="Images\SunBurst.png" RenderTransformOrigin="0.5,0.5" Opacity="0.365">
 				<Image.RenderTransform>
 					<TransformGroup>
@@ -151,7 +151,7 @@
 
 
 		</Grid>
-		<Rectangle x:Name="rectangle1" Fill="#FF575757" Stroke="Black" Margin="-0.8,-1,-2.2,-2" RadiusX="20" RadiusY="20" Visibility="Hidden" Opacity="0.8"/>
+		<Rectangle x:Name="rectangle1" Fill="#FF575757" Margin="-0.8,-1,-2.2,-2" RadiusX="20" RadiusY="20" Visibility="Hidden" Opacity="0.8"/>
 		<Grid x:Name="HelpPage1" Visibility="Hidden">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="0.758*"/>
