@@ -15,12 +15,10 @@ namespace SyncButler
     /// </summary>
     public class WindowsFile : WindowsFileSystem
     {
-        protected FileInfo nativeFileObj;
-
-        protected FileStream fileStream = null;
-
-        protected long checksumCache;
-        protected bool checksumCacheFresh = false;
+        private FileInfo nativeFileObj;
+        private FileStream fileStream = null;
+        private long checksumCache;
+        private bool checksumCacheFresh = false;
 
         /// <summary>
         /// Destructor. Makes sure fileStream is closed
