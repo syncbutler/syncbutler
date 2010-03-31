@@ -1722,7 +1722,7 @@
 			</Rectangle>
 			<Image x:Name="image1_Copy3" Margin="184.36,116.094,-0.027,8" Source="Images\logo.png" Stretch="Fill" Opacity="0.04"/>
 			<TextBlock x:Name="ConflictsLabel1" Margin="38.032,42.333,0,0" FontSize="16" FontWeight="Bold" Text="Settings" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Width="177.618" Height="28.571"/>
-			<TextBlock x:Name="NoUSBWarningTextBlock" Margin="43.77,0,73.85,94.191" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="54.095"><TextBlock.RenderTransform>
+			<TextBlock x:Name="NoUSBWarningTextBlock" Margin="43.77,0,73.85,73.191" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="54.095"><TextBlock.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
 						<SkewTransform/>
@@ -1749,9 +1749,9 @@
 				</TextBlock.RenderTransform><Run FontFamily="Walkway Black" FontSize="14.667" FontWeight="Bold" Text="Sync Butler"/><Run FontSize="13.333" FontWeight="Bold" Text=", "/><Run FontSize="13.333" FontStyle="Italic" FontWeight="Bold" Text="Sync"/><Run FontSize="13.333" FontWeight="Bold" Text="! "/><Run Text="Drive:"/><LineBreak/><Run Text=""/></TextBlock>
 			<TextBox x:Name="ComputerNameTextBox" TabIndex="1" Margin="225.29,99.849,126.49,0" VerticalAlignment="Top" TextWrapping="Wrap"/>
 			<ComboBox x:Name="SBSWorkingDriveComboBox" TabIndex="3" Margin="225.29,159.769,126.49,0" VerticalAlignment="Top" SelectionChanged="SBSUpdateSpaceDetails"/>
-			<Button x:Name="SaveSettingButton" TabIndex="4" HorizontalAlignment="Left" Margin="43.77,0,0,45.754" VerticalAlignment="Bottom" Width="75" Content="Save" Click="SaveSetting"/>
-			<Button x:Name="CancelSettingButton" TabIndex="5" Margin="153.641,0,0,45.754" VerticalAlignment="Bottom" Content="Cancel" Click="GoHome" HorizontalAlignment="Left" Width="75" />
-			<Button x:Name="DefaultSettingButton" TabIndex="6" HorizontalAlignment="Right" Margin="0,0,159.718,45.754" VerticalAlignment="Bottom" Width="75" Content="Default"  Click="DefaultSetting"/>
+			<Button x:Name="SaveSettingButton" TabIndex="4" HorizontalAlignment="Left" Margin="43.77,0,0,32.254" VerticalAlignment="Bottom" Width="75" Content="Save" Click="SaveSetting"/>
+			<Button x:Name="CancelSettingButton" TabIndex="5" Margin="153.641,0,0,32.254" VerticalAlignment="Bottom" Content="Cancel" Click="GoHome" HorizontalAlignment="Left" Width="75" />
+			<Button x:Name="DefaultSettingButton" TabIndex="6" HorizontalAlignment="Right" Margin="0,0,159.718,32.254" VerticalAlignment="Bottom" Width="75" Content="Default"  Click="DefaultSetting"/>
 			<ComboBox x:Name="SBSSettingComboBox" TabIndex="2" Margin="225.29,159.769,126.49,0" VerticalAlignment="Top" Opacity="0" RenderTransformOrigin="0.5,0.5" SelectionChanged="SBSSettingChanged">
 				<ComboBox.RenderTransform>
 					<TransformGroup>
@@ -1775,7 +1775,7 @@
 			<Slider x:Name="SpaceToUseSlide" Margin="43.386,0,166.49,195.286" VerticalAlignment="Bottom" Height="21" ValueChanged="SpaceToUseSlided"/>
 			<TextBox x:Name="SpaceToUseTextbox" HorizontalAlignment="Right" Margin="0,0,74.472,194.326" VerticalAlignment="Bottom" TextWrapping="Wrap" Width="75" KeyUp="SpaceToUseChanged"/>
 			<Label x:Name="label" Margin="0,0,159.718,172.326" VerticalAlignment="Bottom" Content="100%" HorizontalAlignment="Right"/>
-			<Button Margin="0,0,44.828,45.754" VerticalAlignment="Bottom" Content="Help" HorizontalAlignment="Right" Width="75" Click="ShowHelp"/>
+			<Button Margin="0,0,44.828,32.254" VerticalAlignment="Bottom" Content="Help" HorizontalAlignment="Right" Width="75" Click="ShowHelp"/>
 		</Grid>
 		<Grid x:Name="FirstTimeHelp" Margin="0,0,-1.5,-4" Visibility="Hidden">
 			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="211.134,44.762,123.262,0" VerticalAlignment="Top" Height="45.943" d:LayoutOverrides="VerticalAlignment"/>
@@ -1814,9 +1814,9 @@
 					</TransformGroup>
 				</Image.RenderTransform>
 			</Image>
-			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="61.991,248.762,203.833,0" VerticalAlignment="Top" Height="48.8"/>
-			<TextBlock Margin="71.076,0,209.663,159.238" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="31.2" FontSize="10.667" Text="This tells SyncButler how much space it is allowed to use in the drive you selected above."/>
-			<Image Margin="197.041,209.093,0,206.889" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" HorizontalAlignment="Left" Width="53.362" IsHitTestVisible="False">
+			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="214.848,285.905,50.976,0" VerticalAlignment="Top" Height="48.8"/>
+			<TextBlock Margin="223.933,0,56.806,126.595" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="31.2" FontSize="10.667" Text="This tells SyncButler how much space it is allowed to use in the drive you selected above."/>
+			<Image Margin="0,0,101.574,169.746" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" HorizontalAlignment="Right" Width="53.362" IsHitTestVisible="False" VerticalAlignment="Bottom" Height="32.018">
 				<Image.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
@@ -1826,7 +1826,7 @@
 					</TransformGroup>
 				</Image.RenderTransform>
 			</Image>
-			<Image Margin="126.08,0,0,199.823" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="36.492" Height="21.895" IsHitTestVisible="False">
+			<Image Margin="0,0,189.405,162.68" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="36.492" Height="21.895" IsHitTestVisible="False">
 				<Image.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
