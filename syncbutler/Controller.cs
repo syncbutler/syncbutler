@@ -500,6 +500,7 @@ namespace SyncButler
             SyncEnvironment.FreeSpaceToUse = FreeSpaceToUse;
             SyncEnvironment.Resolution = Resolution;
             SyncEnvironment.SBSDriveId = SystemEnvironment.StorageDevices.GetDriveID(SBSDrive + ":");
+            //SyncEnvironment.SBSDrivePartition = SystemEnvironment.StorageDevices.GetDrivePartitionIndex(SBSDrive + ":");
             SyncEnvironment.GetInstance().StoreSettings();
             
 		}
@@ -568,6 +569,8 @@ namespace SyncButler
         /// <returns>sbs drive letter</returns>
         public char GetSBSDriveLetter()
         {
+            if (SyncEnvironment.SBSDriveId == null || SyncEnvironment.SBSDriveId.Length == 0)
+                return SyncEnvironment.SBSDriveLetter;
             string driveletter = SystemEnvironment.StorageDevices.GetDriveLetter(SyncEnvironment.SBSDriveId);
             if(driveletter.Length == 0)
                 return SyncEnvironment.SBSDriveLetter;

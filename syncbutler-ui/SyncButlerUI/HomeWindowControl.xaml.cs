@@ -1166,8 +1166,15 @@ namespace SyncButlerUI
             }
             else
             {
-                Controller.GetInstance().SaveSetting(ComputerName, SBSEnable, DriveLetter, FreeSpaceToUse, Resolution);
-                showMessageBox(CustomDialog.MessageType.Success, "The Setting has been changed");
+                if (!Directory.Exists(DriveLetter + ":\\"))
+                {
+                    CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Please check your device\nSBS cannot find it");
+                }
+                else
+                {
+                    Controller.GetInstance().SaveSetting(ComputerName, SBSEnable, DriveLetter, FreeSpaceToUse, Resolution);
+                    showMessageBox(CustomDialog.MessageType.Success, "The Setting has been changed");
+                }
             }
             
 		}
