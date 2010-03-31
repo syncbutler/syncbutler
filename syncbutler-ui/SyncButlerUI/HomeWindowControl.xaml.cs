@@ -1067,7 +1067,7 @@ namespace SyncButlerUI
             { // Code to run on completion
                 if (!cancelled)
                 {
-                    CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Files were successfully synced and logged to " + Controller.GetInstance().SBSLogFile);
+                    CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Files were successfully synced and logged to,\n\n" + Controller.GetInstance().SBSLogFile);
                 }
                 progressWindow.TaskComplete();
                 SBSSync.IsEnabled = true;
@@ -1185,7 +1185,7 @@ namespace SyncButlerUI
                 else
                 {
                     Controller.GetInstance().SaveSetting(ComputerName, SBSEnable, DriveLetter, FreeSpaceToUse, Resolution);
-                    showMessageBox(CustomDialog.MessageType.Success, "The Setting has been changed");
+                    showMessageBox(CustomDialog.MessageType.Success, "The setting has been changed.");
                 }
             }
             
