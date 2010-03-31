@@ -1207,11 +1207,12 @@ namespace SyncButlerUI
         }
         private void SpaceToUseChanged(Object sender, KeyEventArgs e)
         {
-
             if (SpaceToUseTextbox.Text.Trim().Length != 0)
             {
+                int current = SpaceToUseTextbox.SelectionStart;
                 try
                 {
+                    SpaceToUseTextbox.Text = double.Parse(SpaceToUseTextbox.Text, CultureInfo.InvariantCulture).ToString() ;
                     if (double.Parse(SpaceToUseTextbox.Text, CultureInfo.InvariantCulture) <= SpaceToUseSlide.Maximum)
                     {
                         SpaceToUseTextbox.Text = String.Format("{0:F2}", SpaceToUseTextbox.Text);
@@ -1219,7 +1220,6 @@ namespace SyncButlerUI
                     }
                     else if (double.Parse(SpaceToUseTextbox.Text, CultureInfo.InvariantCulture) > SpaceToUseSlide.Maximum)
                     {
-                        SpaceToUseTextbox.Text = String.Format("{0:F2}", SpaceToUseTextbox.Text);
                         SpaceToUseTextbox.Text = String.Format("{0:F2}",SpaceToUseSlide.Maximum);
                         SpaceToUseSlide.Value = SpaceToUseSlide.Maximum;
                     }
@@ -1229,8 +1229,12 @@ namespace SyncButlerUI
                 catch (FormatException)
                 {
                     // fall back to the last working value
-                    SpaceToUseTextbox.Text = LastWorkingFreeSpace;
+                    SpaceToUseTextbox.Text = String.Format("{0:F2}", LastWorkingFreeSpace);
                 }
+
+                SpaceToUseTextbox.SelectionStart = current;
+                SpaceToUseTextbox.SelectionLength = 0;
+                SpaceToUseTextbox.Focus();
             }
         }
         private void SpaceToUseSlided(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
