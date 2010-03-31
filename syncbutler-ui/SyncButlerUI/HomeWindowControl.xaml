@@ -636,7 +636,7 @@
 									</Style>
 								</TextBlock.Style>
 								</TextBlock>
-								<Button HorizontalAlignment="Left" Margin="3,10.833,0,12" Style="{DynamicResource ExpandButton}" Width="10.167" Content="Button" Click="weee" />						
+								<Button HorizontalAlignment="Left" Margin="3,10.833,0,12" Style="{DynamicResource ExpandButton}" Width="10.167" Content="Button" Click="ExpandCollapseCoflicts" />						
 							</Grid>
 						</Border>
 					</ControlTemplate>
@@ -899,6 +899,9 @@
 						</ObjectAnimationUsingKeyFrames>
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="label" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="ConflictList" Storyboard.TargetProperty="(Custom:DataGrid.HeadersVisibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Custom:DataGridHeadersVisibility.None}"/>
 						</ObjectAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
@@ -1181,6 +1184,9 @@
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="BrowseButton" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
 						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="goToviewPartnershipsButton" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
 				<VisualState x:Name="Result1">
@@ -1453,7 +1459,7 @@
 						</TransformGroup>
 					</TextBlock.RenderTransform>
 				</TextBlock>
-				<Button x:Name="goToviewPartnershipsButton" HorizontalAlignment="Right" Margin="0,0,38.5,49.643" VerticalAlignment="Bottom" Width="127.667" Height="47" Content="     Go Back to &#xa;View Partnerships" RenderTransformOrigin="0.79,1.043" Click="GoToViewPartnerships_Click" Opacity="0" TabIndex="2">
+				<Button x:Name="goToviewPartnershipsButton" HorizontalAlignment="Right" Margin="0,0,38.5,49.643" VerticalAlignment="Bottom" Width="127.667" Height="47" Content="     Go Back to &#xa;View Partnerships" RenderTransformOrigin="0.79,1.043" Click="GoToViewPartnerships_Click" TabIndex="2" Visibility="Hidden">
 					<Button.RenderTransform>
 						<TransformGroup>
 							<ScaleTransform/>
@@ -1613,7 +1619,7 @@
 				</Custom:DataGrid.Columns>
 				<Custom:DataGrid.RowDetailsTemplate>
 					<DataTemplate>
-						<ListBox x:Name="conflictsListBox" Height="100" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding conflicts}" BorderThickness="1" BorderBrush="Black" Width="450.302">
+						<ListBox x:Name="conflictsListBox" MaxHeight="100" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding conflicts}" BorderThickness="1" BorderBrush="Black" Width="450.302">
 							<ListBox.Style>
 									<Style TargetType="{x:Type ListBox}">
 										<Setter Property="Visibility" Value="Visible"/>
@@ -1642,7 +1648,7 @@
 												</TransformGroup>
 											</ComboBox.RenderTransform>
 										</ComboBox>
-										<Image Margin="1.924,3.435,0,1.037" Source="Images/error.png" Stretch="Fill" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="27.743" Height="Auto"/>
+										<Image Margin="1.924,3.435,0,1.037" Source="Images/File.png" Stretch="Fill" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="27.743" Height="Auto"/>
 										<TextBlock HorizontalAlignment="Right" Margin="0,8.638,121.302,6.655" Width="40" Text="Action:" TextWrapping="Wrap" VerticalAlignment="Stretch" Height="Auto"/>		
 									</Grid>
 								</DataTemplate>

@@ -73,7 +73,8 @@ namespace SyncButlerUI
         private Semaphore resolveLock = new Semaphore(1, 1);
         private Semaphore waitForErrorResponse = new Semaphore(0, 1);
         private Queue<Conflict> newConflicts = new Queue<Conflict>();
-		
+		// Keeps track of last selected index of conflict list
+		private int lastClickedIndex=0;		
 		public HomeWindowControl()
 		{
 			this.InitializeComponent();
@@ -512,9 +513,13 @@ namespace SyncButlerUI
 	/// <summary>
     /// Interaction logic for Creating Partnership
     /// </summary>
-
-	private int lastClickedIndex=0;
-		private void weee(object sender, RoutedEventArgs e)
+	
+		/// <summary>
+		/// Expand and Collaspses the partnership conflicts.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void ExpandCollapseCoflicts(object sender, RoutedEventArgs e)
 		{   
 			if(lastClickedIndex==ConflictList.SelectedIndex)
 			{
