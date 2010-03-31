@@ -1242,8 +1242,11 @@ namespace SyncButlerUI
         {
             if (!Controller.GetInstance().IsSBSDriveEnough())
             {
-                
                 SBSSync.IsEnabled = false;
+            }
+            else
+            {
+                SBSSync.IsEnabled = true;
             }
         }
         private void SpaceToUseChanged(Object sender, KeyEventArgs e)

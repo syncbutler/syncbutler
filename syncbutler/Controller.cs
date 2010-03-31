@@ -113,22 +113,36 @@ namespace SyncButler
         public bool IsSBSDriveEnough()
         {
             long required = GetUserLimit();
-            string driveLetter = SystemEnvironment.StorageDevices.GetDriveLetter(SyncEnvironment.SBSDriveId);
-            if (driveLetter.Length == 0)
+            try
+            {
+                string driveLetter = SystemEnvironment.StorageDevices.GetDriveLetter(SyncEnvironment.SBSDriveId, SyncEnvironment.SBSDrivePartition);
+                if (driveLetter.Length == 0)
+                    return false;
+                long avabilableSpace = SystemEnvironment.StorageDevices.GetAvailableSpace(driveLetter);
+                return required <= avabilableSpace;
+            }
+            catch (Exceptions.DriveNotSupportedException)
+            {
                 return false;
-            long avabilableSpace = SystemEnvironment.StorageDevices.GetAvailableSpace(driveLetter);
-            return required <= avabilableSpace;
+            }
         }
 
         public long GetAvailableSpaceForDrive()
         {
-            string driveLetter = SystemEnvironment.StorageDevices.GetDriveLetter(SyncEnvironment.SBSDriveId);
-            if (driveLetter.Length == 0)
-                return 0;
-            long AvailableSpace = SystemEnvironment.StorageDevices.GetAvailableSpace(driveLetter);
-            string res = SyncEnvironment.Resolution;
+            try
+            {
+                string driveLetter = SystemEnvironment.StorageDevices.GetDriveLetter(SyncEnvironment.SBSDriveId,SyncEnvironment.SBSDrivePartition);
+                if (driveLetter.Length == 0)
+                    return 0;
+                long AvailableSpace = SystemEnvironment.StorageDevices.GetAvailableSpace(driveLetter);
+                string res = SyncEnvironment.Resolution;
 
-            return GetSizeInResolution(res, AvailableSpace);
+                return GetSizeInResolution(res, AvailableSpace);
+            }
+            catch (Exceptions.DriveNotSupportedException)
+            {
+                return 0;
+            }
         }
         /// <summary>
         /// Adds a partnership to the list of Partnerships based on 2 full paths
@@ -439,30 +453,38 @@ namespace SyncButler
         {
             char driveLetter = SyncEnvironment.SBSDriveLetter;
             string driveid = SyncEnvironment.SBSDriveId;
-            if (SystemEnvironment.StorageDevices.GetDriveLetter(driveid).Length == 0)
+            int drivePartition = SyncEnvironment.SBSDrivePartition;
+            try
             {
-                errorHandler.Invoke(new Exception("Device not detected\nPlease plug in the device configured for SBS."));
-            }
-            else
-            {
-                string syncTo = driveLetter + ":\\SyncButler\\" + SyncEnvironment.ComputerName + "\\";
-                if (!WindowsFolder.CheckIfUserHasRightsTo(syncTo, GetCurrentLogonUser()))
+                if (SystemEnvironment.StorageDevices.GetDriveLetter(driveid, drivePartition).Length == 0)
                 {
-                    errorHandler.Invoke(new Exception("Permisson denied\nPlease check if you have the rights to the folder for SBS at " + driveLetter + ":\\SyncButler\\"));
+                    errorHandler.Invoke(new Exception("Device not detected\nPlease plug in the device configured for SBS."));
                 }
                 else
                 {
-                    driveLetter = SystemEnvironment.StorageDevices.GetDriveLetter(driveid)[0];
+                    string syncTo = driveLetter + ":\\SyncButler\\" + SyncEnvironment.ComputerName + "\\";
+                    if (!WindowsFolder.CheckIfUserHasRightsTo(syncTo, GetCurrentLogonUser()))
+                    {
+                        errorHandler.Invoke(new Exception("Permisson denied\nPlease check if you have the rights to the folder for SBS at " + driveLetter + ":\\SyncButler\\"));
+                    }
+                    else
+                    {
+                        driveLetter = SystemEnvironment.StorageDevices.GetDriveLetter(driveid,drivePartition)[0];
 
-                    MRUList mruList = new MRUList();
+                        MRUList mruList = new MRUList();
 
-                    mruList.SetStatusMonitor(statusMonitor);
-                    mruList.SetErrorHandler(errorHandler);
-                    mruList.Load(toSync);
-                    mruList.Sync(SyncEnvironment.ComputerName, driveLetter);
-                    SBSLogFile = syncTo + "logs.xml";
-                    MRUList.SaveInfoTo(SBSLogFile, mruList);
+                        mruList.SetStatusMonitor(statusMonitor);
+                        mruList.SetErrorHandler(errorHandler);
+                        mruList.Load(toSync);
+                        mruList.Sync(SyncEnvironment.ComputerName, driveLetter);
+                        SBSLogFile = syncTo + "logs.xml";
+                        MRUList.SaveInfoTo(SBSLogFile, mruList);
+                    }
                 }
+            }
+            catch (Exceptions.DriveNotSupportedException)
+            {
+                errorHandler.Invoke(new Exception("Device not detected\nPlease plug in the device configured for SBS."));
             }
         }
         public string SBSLogFile;
@@ -500,9 +522,8 @@ namespace SyncButler
             SyncEnvironment.FreeSpaceToUse = FreeSpaceToUse;
             SyncEnvironment.Resolution = Resolution;
             SyncEnvironment.SBSDriveId = SystemEnvironment.StorageDevices.GetDriveID(SBSDrive + ":");
-            //SyncEnvironment.SBSDrivePartition = SystemEnvironment.StorageDevices.GetDrivePartitionIndex(SBSDrive + ":");
+            SyncEnvironment.SBSDrivePartition = SystemEnvironment.StorageDevices.GetDrivePartitionIndex(SBSDrive + ":");
             SyncEnvironment.GetInstance().StoreSettings();
-            
 		}
 
         /// <summary>
@@ -571,10 +592,17 @@ namespace SyncButler
         {
             if (SyncEnvironment.SBSDriveId == null || SyncEnvironment.SBSDriveId.Length == 0)
                 return SyncEnvironment.SBSDriveLetter;
-            string driveletter = SystemEnvironment.StorageDevices.GetDriveLetter(SyncEnvironment.SBSDriveId);
-            if(driveletter.Length == 0)
+            try
+            {
+                string driveletter = SystemEnvironment.StorageDevices.GetDriveLetter(SyncEnvironment.SBSDriveId, SyncEnvironment.SBSDrivePartition);
+                if (driveletter.Length == 0)
+                    return SyncEnvironment.SBSDriveLetter;
+                return driveletter[0];
+            }
+            catch (Exceptions.DriveNotSupportedException)
+            {
                 return SyncEnvironment.SBSDriveLetter;
-            return driveletter[0];
+            }
         }
 
         public void SetSBSDriveLetter(char driveLetter)
