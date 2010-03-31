@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -11,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.ComponentModel;
+using SyncButler.Logging;
 using WPF_Explorer_Tree;
 using SyncButler;
 using SyncButler.Exceptions;
@@ -143,6 +145,7 @@ namespace SyncButlerUI
                     }
                 }
             }
+
 		}
 
 		private void GoToSetting(object sender, RoutedEventArgs e)

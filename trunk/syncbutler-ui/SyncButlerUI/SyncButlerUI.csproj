@@ -141,6 +141,7 @@
     <Resource Include="Images\bullet_toggle_minus.png" />
     <Resource Include="Images\bullet_toggle_plus.png" />
     <Resource Include="Images\butler-glow.png" />
+    <Resource Include="Images\close.png" />
     <Resource Include="Images\Computer.png" />
     <Resource Include="Images\diskdrive.png" />
     <Resource Include="Images\Doc.png" />

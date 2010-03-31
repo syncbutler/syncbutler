@@ -7,7 +7,7 @@
 	xmlns:local="clr-namespace:SyncButlerUI"
 	x:Class="SyncButlerUI.FirstTimeStartupScreen"
 	x:Name="Window"
-	Width="640" Height="480" Background="{x:Null}" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Icon="Images/Icons/SyncButler.ico" Title="SyncButler" >
+	Width="640" Height="480" WindowStyle="None" AllowsTransparency="True" Background="{x:Null}" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" >
 	<Window.Resources>
 		<Storyboard x:Key="SpinningLight" AutoReverse="False" RepeatBehavior="Forever"/>
 		<Storyboard x:Key="AnimateFileSync" RepeatBehavior="Forever"/>
@@ -21,5 +21,6 @@
 
 	<Grid x:Name="WelcomeScreen">
 		<local:WelcomeScreenControl x:Name="WelcomeScreenControl"/>
+		<Button HorizontalAlignment="Right" Margin="0,13.5,15.5,0" Style="{DynamicResource CloseButton}" VerticalAlignment="Top" Width="31" Height="31" Click="CloseApp"/>
 	</Grid>
 </Window>
