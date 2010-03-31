@@ -30,7 +30,7 @@ namespace SyncButlerUI
 			try
             {
 			    controller = Controller.GetInstance();
-                if (!(controller.IsProgramRanBefore()))
+                if (!(controller.IsNotFirstRun()))
                 {
                     FirstTimeStartupScreen dialog = new FirstTimeStartupScreen();
 
