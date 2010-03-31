@@ -21,6 +21,9 @@ namespace SyncButler
             {
                 return this.selectedAction;
             }
+			set{
+				this.selectedAction = value;	
+			}
         }
 
         /// <summary>
