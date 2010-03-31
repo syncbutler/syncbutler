@@ -170,7 +170,7 @@
 				<TextBlock Margin="0,-102.6,-60.6,0" FontWeight="Bold" Foreground="White" TextWrapping="Wrap" HorizontalAlignment="Right" VerticalAlignment="Top" Width="63.6" Height="51.2"><Run Text=""/><LineBreak/><Run Text="Main Page"/></TextBlock>
 				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Margin="0,-97.6,-359.4,0" VerticalAlignment="Top" Height="35.2" Opacity="0.495" HorizontalAlignment="Right" Width="183.2" d:LayoutOverrides="VerticalAlignment"/>
 				<TextBlock Margin="0,-88.8,-344.144,0" FontWeight="Bold" Foreground="White" Text="Sync all your partnerships!" TextWrapping="Wrap" HorizontalAlignment="Right" VerticalAlignment="Top" Width="152.602" Height="16"/>
-				<Rectangle Fill="#FF073948" Stroke="#FF006C8D" StrokeThickness="3" RadiusX="5" RadiusY="5" Margin="0,-81.9,-528.8,0" VerticalAlignment="Top" Height="122.4" HorizontalAlignment="Right" Width="141.6"/>
+				<Rectangle Fill="#FF073948" Stroke="#FF006C8D" StrokeThickness="3" RadiusX="5" RadiusY="5" Margin="0,-81.9,-522.4,0" VerticalAlignment="Top" Height="122.4" HorizontalAlignment="Right" Width="135.2"/>
 				<TextBlock Margin="0,-75.9,-522.4,0" FontWeight="Bold" Foreground="#FF75CBDB" TextWrapping="Wrap" HorizontalAlignment="Right" VerticalAlignment="Top" Width="128.4" Height="42.4"><Run FontSize="13.333" Text=" "/><Run Text="What is a"/><Run Text="..."/><LineBreak/><Run FontSize="16" Text="  &quot;partnership&quot;?"/></TextBlock>
 				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="0,0,-132.8,-232.8" VerticalAlignment="Bottom" Height="47.2" HorizontalAlignment="Right" Width="144.8"/>
 				<TextBlock Margin="0,0,-126.8,-227.6" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="34.4" FontWeight="Bold" HorizontalAlignment="Right" Width="130"><Run Text="Tells "/><Run FontFamily="Walkway Black" FontSize="14.667" Text="SyncButler"/><Run Text=" which folders to sync."/></TextBlock>
@@ -219,7 +219,7 @@
 					</TransformGroup>
 				</Image.RenderTransform>
 			</Image>
-			<TextBlock Margin="11.08,100.3,18.2,0" VerticalAlignment="Top" Height="64.8" Grid.Column="1" TextWrapping="Wrap"><Run FontFamily="C:\Users\Bryan\Documents\Edu\BComp\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\Fonts\#Segoe UI" FontWeight="Normal" Foreground="White" Text="A partnership refers to the (two) folders that "/><Run FontFamily="Walkway Black" FontSize="14.667" FontWeight="Bold" Foreground="White" Text="SyncButler"/><Run FontFamily="C:\Users\Bryan\Documents\Edu\BComp\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\Fonts\#Segoe UI" FontWeight="Bold" Foreground="White" Text=" "/><Run FontFamily="C:\Users\Bryan\Documents\Edu\BComp\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\Fonts\#Segoe UI" FontWeight="Normal" Foreground="White" Text="should keep in sync."/></TextBlock>
+			<TextBlock Margin="11.08,100.3,25.2,0" VerticalAlignment="Top" Height="63.8" Grid.Column="1" TextWrapping="Wrap"><Run FontFamily="C:\Users\Bryan\Documents\Edu\BComp\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\Fonts\#Segoe UI" FontWeight="Normal" Foreground="White" Text="A partnership refers to the (two) folders that "/><Run FontFamily="Walkway Black" FontSize="14.667" FontWeight="Bold" Foreground="White" Text="SyncButler"/><Run FontFamily="C:\Users\Bryan\Documents\Edu\BComp\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\Fonts\#Segoe UI" FontWeight="Bold" Foreground="White" Text=" "/><Run FontFamily="C:\Users\Bryan\Documents\Edu\BComp\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\Fonts\#Segoe UI" FontWeight="Normal" Foreground="White" Text="should keep in sync."/></TextBlock>
 			<Image Margin="191.4,0,241.72,93.4" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="31.2">
 				<Image.RenderTransform>
 					<TransformGroup>
@@ -250,7 +250,17 @@
 					</TransformGroup>
 				</Image.RenderTransform>
 			</Image>
-			<Button Margin="67.08,0,4.6,5.8" VerticalAlignment="Bottom" Height="39.2" Content="NEXT" Grid.Column="1" FontWeight="Bold" FontSize="18.667" Click="GoToHelpScreen2_Click"/>
+			<Button Margin="67.08,0,4.6,5.8" VerticalAlignment="Bottom" Height="39.2" Content="Next" Grid.Column="1" FontWeight="Bold" FontSize="18.667" Click="GoToHelpScreen2_Click"/>
+			<Image Margin="0,0,-14.68,108" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="31.2" HorizontalAlignment="Right" Width="52">
+				<Image.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform Angle="-114.419"/>
+						<TranslateTransform X="1.93" Y="-11.382"/>
+					</TransformGroup>
+				</Image.RenderTransform>
+			</Image>
 
 		</Grid>
 		<Grid x:Name="HelpPage2" Visibility="Hidden">
@@ -281,7 +291,7 @@
 			<Grid x:Name="grid" Margin="87.8,0,-66.68,51.433" VerticalAlignment="Bottom" Height="118.4">
 				<Rectangle Fill="White" Stroke="Black" StrokeThickness="3" RadiusX="15" RadiusY="15" Margin="0,0,3.2,0"/>
 				<TextBlock Margin="11.2,16.2,0,0" VerticalAlignment="Top" Height="22.4" FontWeight="Bold" TextWrapping="Wrap"><Run Text="He "/><Run Text="scans the folders you chose and does the following automatically:"/></TextBlock>
-				<TextBlock Margin="36.8,37,11.2,11.8" FontWeight="Bold" TextWrapping="Wrap"><Run Text="If there are new files on one side, he copies these files to the other side."/><LineBreak/><Run Text="If you delete files on one side, he will remove them on the other side."/><LineBreak/><Run Text="If you modify a file on one side, he will copy this revised file to the other side."/></TextBlock>
+				<TextBlock Margin="36.8,37,11.2,11.8" FontWeight="Bold" TextWrapping="Wrap"><Run Text="If there are new files on one side, he copies these files to the other side."/><LineBreak/><Run Text="If you delete files on one side, he will remove them from the other side."/><LineBreak/><Run Text="If you modify a file on one side, he will copy this revised file to the other side."/></TextBlock>
 				<Image HorizontalAlignment="Left" Margin="18.6,38.634,0,0" VerticalAlignment="Top" Width="14.4" Height="14.4" Source="Images\StarBullet.png" Stretch="Fill"/>
 				<Image HorizontalAlignment="Left" Margin="18.6,54.733,0,49.267" Width="14.4" Source="Images\StarBullet.png" Stretch="Fill"/>
 				<Image HorizontalAlignment="Left" Margin="18.6,0,0,33.299" VerticalAlignment="Bottom" Width="14.4" Height="14.4" Source="Images\StarBullet.png" Stretch="Fill"/>

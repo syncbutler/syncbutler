@@ -127,7 +127,7 @@ namespace SyncButlerUI
             {
                     if (CustomDialog.Show(this, CustomDialog.MessageTemplate.YesNo, CustomDialog.MessageResponse.Yes,
                         "Sync Butler, Sync! is not enabled. Please enable this feature in the Settings screen\n\n" +
-                        "Would you like to go to the settings screen?") == CustomDialog.MessageResponse.Yes)
+                        "Would you like to go to the settings screen now?") == CustomDialog.MessageResponse.Yes)
                     {
                         this.GoToSetting(null, null);
                     }
@@ -182,7 +182,7 @@ namespace SyncButlerUI
                 {
                     this.homeWindow1.NoUSBWarningTextBlock.Visibility = Visibility.Visible;
                     CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok,
-                        "Please plug in a removable drive for SBS to work");
+                        "Please plug in a portable storage device if you wish to use it with\nSync Butler, Sync!");
                     this.homeWindow1.SBSWorkingDriveComboBox.IsEnabled = false;
                     this.homeWindow1.SpaceToUseSlide.IsEnabled = false;
                     this.homeWindow1.SpaceToUseTextbox.IsEnabled = false;
