@@ -523,23 +523,13 @@ namespace SyncButler
             SyncEnvironment.ComputerName = name;
         }
 
-
         /// <summary>
-        /// get the status of sbs
+        /// Gets or sets the status of the SBS feature.
         /// </summary>
-        /// <returns></returns>
-        public string GetSBSEnable()
+        public string SBSEnable
         {
-            return SyncEnvironment.SBSEnable == null ? "Disable" : SyncEnvironment.SBSEnable;
-        }
-
-        /// <summary>
-        /// set the status of sbs
-        /// </summary>
-        /// <param name="SBSEnable">the new sbs status</param>
-        public void SetSBSEnable(string SBSEnable)
-        {
-            SyncEnvironment.SBSEnable = SBSEnable;
+            get { return (SyncEnvironment.SBSEnable == null) ? "Disable" : SyncEnvironment.SBSEnable; }
+            set { SyncEnvironment.SBSEnable = value; }
         }
 
         /// <summary>

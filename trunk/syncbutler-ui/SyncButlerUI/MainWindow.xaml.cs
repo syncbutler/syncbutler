@@ -108,7 +108,7 @@ namespace SyncButlerUI
             homeWindow1.CurrentState = HomeWindowControl.State.SBS;
             homeWindow1.FirstTimeHelp.Visibility = System.Windows.Visibility.Hidden;
             if (!StopExistingOperation()) return;
-            if (Controller.GetInstance().GetSBSEnable().Equals("Enable"))
+            if (Controller.GetInstance().SBSEnable.Equals("Enable"))
             {
 				if(controller.IsFirstSBSRun()){
 					 FirstTimeStartupScreen dialog = new FirstTimeStartupScreen();
@@ -207,7 +207,7 @@ namespace SyncButlerUI
                 }
                 if (devicePluggedIn)
                 {
-                    if (this.controller.GetSBSEnable().Equals("Enable"))
+                    if (this.controller.SBSEnable.Equals("Enable"))
                     {
                         this.homeWindow1.SpaceToUseSlide.Maximum = this.controller.GetAvailableSpaceForDrive();
                         this.homeWindow1.SpaceToUseSlide.Value = this.controller.GetFreeSpaceToUse();
@@ -226,7 +226,7 @@ namespace SyncButlerUI
                     this.homeWindow1.SBSSettingComboBox.Items.Clear();
                     this.homeWindow1.SBSSettingComboBox.Items.Add("Enable");
                     this.homeWindow1.SBSSettingComboBox.Items.Add("Disable");
-                    this.homeWindow1.SBSSettingComboBox.SelectedItem = this.controller.GetSBSEnable();
+                    this.homeWindow1.SBSSettingComboBox.SelectedItem = this.controller.SBSEnable;
                 }
                 else
                 {
