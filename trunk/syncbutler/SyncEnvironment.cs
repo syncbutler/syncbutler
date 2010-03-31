@@ -32,6 +32,7 @@ namespace SyncButler
         private static bool firstSBSRun;
         private static string sbsEnable;
         private static string sbsDriveId;
+        private static int sbsDrivePartition;
         private static char sbsDriveLetter;
         private static string resolution;
         private static double freeSpaceToUse;
@@ -297,6 +298,7 @@ namespace SyncButler
             storedSettings.SystemSettings.FreeSpaceToUse = freeSpaceToUse;
             storedSettings.SystemSettings.Resolution = resolution;
             storedSettings.SystemSettings.SBSDriveId = sbsDriveId;
+            storedSettings.SystemSettings.SBSDrivePartition = sbsDrivePartition;
 
             // Write to file
             if (SearchForSettingsFile() == null)
@@ -328,6 +330,7 @@ namespace SyncButler
             storedSettings.SystemSettings.FreeSpaceToUse = FreeSpaceToUse;
             storedSettings.SystemSettings.Resolution = Resolution;
             storedSettings.SystemSettings.SBSDriveId = SBSDriveId;
+            storedSettings.SystemSettings.SBSDrivePartition = SBSDrivePartition;
 
             // Write to file
             if (SearchForSettingsFile() == null)
@@ -385,6 +388,9 @@ namespace SyncButler
 
             //Get sbs drive id
             sbsDriveId = storedSettings.SystemSettings.SBSDriveId;
+
+            //Get partition id
+            sbsDrivePartition = storedSettings.SystemSettings.SBSDrivePartition;
         }
 
         /// <summary>
@@ -395,7 +401,7 @@ namespace SyncButler
         /// is unable to write to disk</exception>
         public void CreateEnv()
         {
-            //Create the list of partnerships
+            //Create the list of partnerships 
             partnershipList = new SortedList<string,Partnership>();
             miniPartnershipList = new SortedList<string, Partnership>();
             
@@ -412,6 +418,7 @@ namespace SyncButler
             storedSettings.SystemSettings.Resolution = "KB";
             storedSettings.SystemSettings.FreeSpaceToUse = 0;
             storedSettings.SystemSettings.SBSDriveId = "";
+            storedSettings.SystemSettings.SBSDrivePartition = -1;
 
             ConvertPartnershipList2XML();
 
@@ -514,6 +521,7 @@ namespace SyncButler
             freeSpaceToUse = 0;
             resolution = "KB";
             firstSBSRun = true;
+            sbsDrivePartition = -1;
             ConfigurationSetup();
 
             // Prepare to read the custom sections (Pre declared needed for valid settings
@@ -1026,6 +1034,17 @@ namespace SyncButler
             set
             {
                 sbsEnable = value;
+            }
+        }
+        public static int SBSDrivePartition
+        {
+            get
+            {
+                return sbsDrivePartition;
+            }
+            set
+            {
+                sbsDrivePartition = value;
             }
         }
         public static string SBSDriveId

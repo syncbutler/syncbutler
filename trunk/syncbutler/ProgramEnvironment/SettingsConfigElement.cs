@@ -142,6 +142,18 @@ namespace SyncButler.ProgramEnvironment
                 this["SBSEnable"] = value;
             }
         }
+        [ConfigurationProperty("SBSDrivePartition")]
+        public int SBSDrivePartition
+        {
+            get
+            {
+                return (int)this["SBSDrivePartition"];
+            }
+            set
+            {
+                this["SBSDrivePartition"] = value;
+            }
+        }
         [ConfigurationProperty("SBSDriveId")]
         public string SBSDriveId
         {
