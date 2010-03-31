@@ -27,11 +27,30 @@ namespace SyncButler
         /// <summary>
         /// Gets or sets the list of Conflict objects.
         /// </summary>
-        public List<Conflict> Conflicts { get; set; }
+        public List<Conflict> Conflicts
+        {
+            get
+            {
+                return this.conflicts;
+            }
+            set
+            {
+                this.conflicts = value;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the name of the partnership which this conflict list refers to.
         /// </summary>
-        public string PartnershipName { get; set; }
+        public string PartnershipName {
+            get
+            {
+                return this.partnershipName;
+            }
+            set
+            {
+                this.partnershipName = value;
+            }
+        }
     }
 }

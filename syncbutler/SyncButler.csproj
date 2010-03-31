@@ -74,6 +74,8 @@
     <Compile Include="ProgramEnvironment\PartnershipSection.cs" />
     <Compile Include="ProgramEnvironment\SettingsConfigElement.cs" />
     <Compile Include="ProgramEnvironment\SettingsSection.cs" />
+    <Compile Include="ResolveAction.cs" />
+    <Compile Include="ResolveActionSet.cs" />
     <Compile Include="Resolved.cs" />
     <Compile Include="SingleInstance.cs" />
     <Compile Include="SyncableStatus.cs" />

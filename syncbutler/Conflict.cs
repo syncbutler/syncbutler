@@ -11,81 +11,16 @@ namespace SyncButler
     /// </summary>
     public class Conflict
     {
-        /// <summary>
-        /// Represents an action to take an it's textual Description
-        /// </summary>
-        public class ResolveAction
-        {
-            public Action resolutionAction
-            {
-                get;
-                set;
-            }
-            public string description
-            {
-                get;
-                set;
-            }
-
-
-            public ResolveAction(Action resolutionAction, string description)
-            {
-                this.resolutionAction = resolutionAction;
-                this.description = description;
-            }
-        }
-
-        /// <summary>
-        /// Represents a list of actions that can be taken and the selected action to take
-        /// </summary>
-        public class ResolveActionSet : ObservableCollection<ResolveAction>
-        {
-            public ResolveAction selectedAction
-            {
-                get;
-                set;
-            }
-
-            public void AddAction(Action toAdd)
-            {
-                this.Add(new ResolveAction(toAdd, Conflict.ActionDescription(toAdd)));
-            }
-
-            public void SetSelectedAction(Action toSet)
-            {
-                selectedAction = null;
-                foreach (ResolveAction ra in this)
-                {
-                    if (ra.resolutionAction == toSet)
-                    {
-                        selectedAction = ra;
-                        break;
-                    }
-                }
-            }
-        }
-
-        protected internal ISyncable left;
-        protected internal ISyncable right;
+        internal ISyncable left;
+        internal ISyncable right;
         protected Action autoResolveAction;
         protected Action suggestedAction;
-        public ResolveActionSet userActions
-        {
-            get;
-            set;
-        }
-
-        //private enum StatusOptions {Resolved, Unresolved, Resolving}
+        public ResolveActionSet userActions { get; set; }
 
         /// <summary>
-        /// Possible actions for conflict resolution
+        /// Possible actions for conflict resolution.
         /// </summary>
         public enum Action { CopyToLeft, DeleteLeft, Merge, CopyToRight, DeleteRight, Ignore, Unknown };
-
-        public static string ActionDescription(Action a)
-        {
-				return  a.ToString();
-        }
 
         /// <summary>
         /// Constructor used to instantiate a Conflict object.
@@ -220,10 +155,10 @@ namespace SyncButler
         /// <summary>
         /// Attempts to resolve a conflict based on the recommended action.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A Resolved object containing the details of the resolution.</returns>
         public Resolved Resolve()
         {
-            if (autoResolveAction == Action.Unknown) return Resolve(userActions.selectedAction.resolutionAction);
+            if (autoResolveAction == Action.Unknown) return Resolve(userActions.SelectedAction.ResolutionAction);
             else return Resolve(autoResolveAction);
         }
 
