@@ -98,19 +98,16 @@ namespace SyncButler
         /// <param name="args">Command line arguments</param>
         public static Boolean TestSingleInstance(String[] args)
         {
-            // test if this is the first instance and register receiver, if so.
-            if (SingleInstance.IsFirst(new SingleInstance.ReceiveDelegate(ReceiveAction)))
-            {
-                // This is the 1st instance.
-                return true;
-            }
-            else
+            // test if this is the first instance and does the initialisation for the single instancing
+            if (!SingleInstance.IsFirst(new SingleInstance.ReceiveDelegate(ReceiveAction)))
             {
                 // send command line args to running app, then terminate
                 SingleInstance.Send(args);
-                SingleInstance.Cleanup(); // Cleanup for if path to be run during shutdown
+                SingleInstance.Cleanup();
                 return false;
             }
+            // This is the 1st instance.
+            return true;
         }
 
         /// <summary>

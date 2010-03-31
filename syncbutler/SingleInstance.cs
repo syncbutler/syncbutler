@@ -13,13 +13,14 @@ namespace SyncButler
     public class SingleInstance
     {
         // Fields required for named pipes
-        private static string pipeName = "SynButlerIPC"; // Eventually load this from settings?
+        private static string uniqueIdentifier;
+        private static string pipeName = "SyncButlerIPC"; // Eventually load this from settings?
         private static NamedPipeServerStream pipeServer = null;
         private static IAsyncResult listeningSession = null;
         private static bool closingPipe = false;
 
         // Fields for mutexes -- used for instance detection
-        private static Mutex m_Mutex = null;
+        private static Mutex mutex = null;
         public delegate void ReceiveDelegate(string[] args); //acts as a storage for incoming data
 
         // Stores the delegate which will be called when data arrives from a new instance of SyncButler
@@ -61,13 +62,12 @@ namespace SyncButler
         /// <returns>A boolean value indication whether this is the first running instance of the program</returns>
         public static bool IsFirst()
         {
-            string m_UniqueIdentifier;
             string assemblyName = System.Reflection.Assembly.GetExecutingAssembly().GetName(false).CodeBase;
-            m_UniqueIdentifier = assemblyName.Replace("\\", "_");
+            uniqueIdentifier = assemblyName.Replace("/", "_");
             
-            m_Mutex = new Mutex(false, m_UniqueIdentifier);
+            mutex = new Mutex(false, uniqueIdentifier);
 
-            if (m_Mutex.WaitOne(1, true))
+            if (mutex.WaitOne(1, true))
             {
                 //Managed to lock. This is the first instance.
                 CreateInstanceChannel();
@@ -76,8 +76,8 @@ namespace SyncButler
             else
             {
                 //Not the first instance!!!
-                m_Mutex.Close();
-                m_Mutex = null;
+                mutex.Close();
+                mutex = null;
                 return false;
             }
         }
@@ -167,9 +167,9 @@ namespace SyncButler
         /// </summary>
         public static void Cleanup()
         {
-            if (m_Mutex != null)
+            if (mutex != null)
             {
-                m_Mutex.Close();
+                mutex.Close();
             }
 
             if (pipeServer != null) 
@@ -191,7 +191,7 @@ namespace SyncButler
             }
 
             pipeServer = null;
-            m_Mutex = null;
+            mutex = null;
         }
 
         /// <summary>
@@ -205,7 +205,7 @@ namespace SyncButler
             MemoryStream rawData = new MemoryStream();
             serializer.Serialize(rawData, s);
             byte[] buf = rawData.ToArray();
-            
+
             NamedPipeClientStream pipeClient = new NamedPipeClientStream(".", pipeName, PipeDirection.Out);
 
             try
@@ -217,13 +217,13 @@ namespace SyncButler
             {
                 Logging.Logger.GetInstance().FATAL("Timeout trying to connect to the named pipe!");
             }
-            catch (IOException)
+            catch (IOException e)
             {
-                // broken pipe?
+                Logging.Logger.GetInstance().FATAL("SingleInstance.Send() : " + e.Message);
             }
-            catch (ObjectDisposedException)
+            catch (ObjectDisposedException e)
             {
-                // object closed at other end?
+                Logging.Logger.GetInstance().FATAL("SingleInstance.Send() : " + e.Message);
             }
             finally
             {
