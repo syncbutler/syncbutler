@@ -453,10 +453,12 @@ namespace SyncButler
                     mruList.SetErrorHandler(errorHandler);
                     mruList.Load(toSync);
                     mruList.Sync(SyncEnvironment.ComputerName, driveLetter);
-                    MRUList.SaveInfoTo(syncTo + "logs.xml", mruList);
+                    SBSLogFile = syncTo + "logs.xml";
+                    MRUList.SaveInfoTo(SBSLogFile, mruList);
                 }
             }
         }
+        public string SBSLogFile;
 
         /// <summary>
         /// This method is required to be run when the program is closed. It
