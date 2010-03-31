@@ -10,13 +10,28 @@ namespace SyncButler
     /// </summary>
     public class ConflictList
     {
-        public List<Conflict> conflicts { get; set; }
-        public string PartnerShipName { get; set; }
+        private List<Conflict> conflicts;
+        private string partnershipName;
 
-        public ConflictList(List<Conflict> conflicts, string PartnerShipName)
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="conflicts">List of Conflict objects.</param>
+        /// <param name="partnershipName">The name of the partnership which this conflict list refers to.</param>
+        public ConflictList(List<Conflict> conflicts, string partnershipName)
         {
             this.conflicts = conflicts;
-            this.PartnerShipName = PartnerShipName;
+            this.partnershipName = partnershipName;
         }
+
+        /// <summary>
+        /// Gets or sets the list of Conflict objects.
+        /// </summary>
+        public List<Conflict> Conflicts { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name of the partnership which this conflict list refers to.
+        /// </summary>
+        public string PartnershipName { get; set; }
     }
 }
