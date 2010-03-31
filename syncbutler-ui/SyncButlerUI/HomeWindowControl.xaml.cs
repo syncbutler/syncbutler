@@ -584,9 +584,11 @@ namespace SyncButlerUI
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		private void GoToPartnershipDest_Click(object sender, RoutedEventArgs e){
-		    try{
-			    checkInput();
-			    PartnershipTempData.sourcePath=sourceTextBox.Text;
+		    try
+			{
+				string folderPath = sourceTextBox.Text.Trim();
+			    checkInput(folderPath);
+			    PartnershipTempData.sourcePath=folderPath;
 		        
 		        sourceTextBox.Text=PartnershipTempData.destinationPath;
 			    VisualStateManager.GoToState(this,"CreatePartnershipState2",false);
@@ -631,13 +633,14 @@ namespace SyncButlerUI
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		private void GoBackToCreatePartnershipSrc_Click(object sender, RoutedEventArgs e){
-		  	try{
+		  	try
+			{
 
-			PartnershipTempData.destinationPath=sourceTextBox.Text;
-		    sourceTextBox.Text=PartnershipTempData.sourcePath;
-		    
-			VisualStateManager.GoToState(this,"CreatePartnershipState1",false);
-            }
+				PartnershipTempData.destinationPath=sourceTextBox.Text;
+				sourceTextBox.Text=PartnershipTempData.sourcePath;
+				
+				VisualStateManager.GoToState(this,"CreatePartnershipState1",false);
+			}
             catch (UserInputException uIException)
             {
 				showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
@@ -650,14 +653,15 @@ namespace SyncButlerUI
 		/// <param name="e"></param>
 		private void GoToCreatePartnershipName_Click(object sender, RoutedEventArgs e){
 			try{
-			checkInput();
-			PartnershipTempData.destinationPath=sourceTextBox.Text;
-            ValidateFoldersHierachy();
-			sourceTextBox1.Text=PartnershipTempData.sourcePath;
-			destinationTextBox1.Text=PartnershipTempData.destinationPath;
-			partnershipNameTextBox.Text=PartnershipTempData.partnershipName;	
-			VisualStateManager.GoToState(this,"CreatePartnershipState3",false);
-			CurrentState = State.Page3OfCreate;
+				string folderPath = sourceTextBox.Text.Trim();
+				checkInput(folderPath);
+				PartnershipTempData.destinationPath=folderPath;
+				ValidateFoldersHierachy();
+				sourceTextBox1.Text=PartnershipTempData.sourcePath;
+				destinationTextBox1.Text=PartnershipTempData.destinationPath;
+				partnershipNameTextBox.Text=PartnershipTempData.partnershipName;	
+				VisualStateManager.GoToState(this,"CreatePartnershipState3",false);
+				CurrentState = State.Page3OfCreate;
             }
             catch (UserInputException uIException)
             {
@@ -687,7 +691,7 @@ namespace SyncButlerUI
         {
             try
             {
-                if(partnershipNameTextBox.Text.Equals(""))
+                if((partnershipNameTextBox.Text.Trim()).Equals(""))
                     throw new UserInputException("Please input a partnership name");	
 
                 PartnershipTempData.partnershipName=partnershipNameTextBox.Text;
@@ -904,7 +908,7 @@ namespace SyncButlerUI
         {
 			try
             {
-				if(partnershipNameTextBox.Text.Equals(""))
+				if((partnershipNameTextBox.Text.Trim()).Equals(""))
                 {
 			        throw new UserInputException("Please input a partnership name");	
 				}
@@ -959,12 +963,12 @@ namespace SyncButlerUI
 		/// <param name="e"></param>
 		private void GoToEditPartnershipDest_Click(object sender, RoutedEventArgs e){
 		    try{
-			checkInput();
-			PartnershipTempData.sourcePath=sourceTextBox.Text;
-		    
-		    sourceTextBox.Text=PartnershipTempData.destinationPath;
-			VisualStateManager.GoToState(this,"EditPartnershipState2",false);
-            CurrentState = State.Page2OfEdit;
+				string folderPath = sourceTextBox.Text.Trim();
+			    checkInput(folderPath);
+				PartnershipTempData.sourcePath=folderPath;
+				sourceTextBox.Text=PartnershipTempData.destinationPath;
+				VisualStateManager.GoToState(this,"EditPartnershipState2",false);
+				CurrentState = State.Page2OfEdit;
             }
             catch (UserInputException uIException)
             {
@@ -999,12 +1003,13 @@ namespace SyncButlerUI
 		/// <param name="e"></param>
 		private void GoToEditPartnershipName_Click(object sender, RoutedEventArgs e){
 			try{
-			checkInput();
-			PartnershipTempData.destinationPath=sourceTextBox.Text;
+			string folderPath = sourceTextBox.Text.Trim();
+			checkInput(folderPath);
+			PartnershipTempData.destinationPath=folderPath;
             ValidateFoldersHierachy();
 			sourceTextBox1.Text=PartnershipTempData.sourcePath;
 			destinationTextBox1.Text=PartnershipTempData.destinationPath;
-			partnershipNameTextBox.Text=PartnershipTempData.partnershipName;	
+			partnershipNameTextBox.Text=PartnershipTempData.partnershipName.Trim();	
 			VisualStateManager.GoToState(this,"EditPartnershipState3",false);
             CurrentState = State.Page3OfEdit;
             }
@@ -1289,22 +1294,22 @@ namespace SyncButlerUI
 		/// <summary>
 		/// Checks the sourceTextbox for values if its empty or if the directory exists
 		/// </summary>
-		private void checkInput(){
-            if (sourceTextBox.Text.Length > 266)
+		private void checkInput(string folderPath){
+            if (folderPath.Length > 266)
             {
                 throw new UserInputException("Folder Path is too long");
             }
-            else if (sourceTextBox.Text.Equals(""))
+            else if (folderPath.Equals(""))
             {
                 throw new UserInputException("Please select a Folder");
             }
-            else if (!Directory.Exists(sourceTextBox.Text))
+            else if (!Directory.Exists(folderPath))
             {
                 throw new UserInputException("No Such Folder");
             }
-            else if (sourceTextBox.Text[0] != '\\') 
+            else if ( folderPath[0] != '\\') 
             {
-                DriveInfo di = new DriveInfo(""+sourceTextBox.Text[0]);
+                DriveInfo di = new DriveInfo(""+folderPath[0]);
                 if (di.DriveType == DriveType.CDRom)
                 {
                     throw new UserInputException("CD Drive syncing is not supported in this version");
@@ -1463,7 +1468,7 @@ namespace SyncButlerUI
 		{
             String FolderPath;
 
-            FolderPath = GetPath(this.sourceTextBox.Text);
+            FolderPath = GetPath(this.sourceTextBox.Text.Trim());
             if (FolderPath != null)
             {
                 this.sourceTextBox.Text = FolderPath;
