@@ -201,16 +201,16 @@ namespace SyncButler.MRU
             settings.Indent = true;
             settings.NewLineChars = "\r\n";
             XmlWriter xtw = XmlWriter.Create(filename, settings);
-            xtw.WriteProcessingInstruction("xml-stylesheet", "type=\"text/xsl\" href=\"SyncedFile.xslt\"");
+            xtw.WriteProcessingInstruction("xml-stylesheet", "type=\"text/xsl\" href=\"Design.xslt\"");
             xmlS.Serialize(xtw, mrus);
             xtw.Close();
 
             // extract the xslt file
             Assembly assemby;
             assemby = Assembly.GetExecutingAssembly();
-            Stream s = assemby.GetManifestResourceStream("SyncButler.MRU.SyncedFile.xslt");
+            Stream s = assemby.GetManifestResourceStream("SyncButler.MRU.Design.xslt");
             StreamReader sr = new StreamReader(s);
-            string xsltFilename = Path.GetDirectoryName(filename) + "\\SyncedFile.xslt";
+            string xsltFilename = Path.GetDirectoryName(filename) + "\\Design.xslt";
             StreamWriter sw = new StreamWriter(xsltFilename);
             sw.Write(sr.ReadToEnd());
             sw.Close();

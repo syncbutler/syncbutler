@@ -92,10 +92,10 @@
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MRU\SyncedFile.xslt" />
+    <EmbeddedResource Include="logstyle.css" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="logstyle.css" />
+    <EmbeddedResource Include="MRU\Design.xslt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
