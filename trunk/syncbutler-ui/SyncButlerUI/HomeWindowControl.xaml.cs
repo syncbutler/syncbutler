@@ -578,6 +578,7 @@ namespace SyncButlerUI
             {
                 FirstTimeStartupScreen dialog = new FirstTimeStartupScreen();
                 VisualStateManager.GoToState(dialog.WelcomeScreenControl, "HelpScreen3", false);
+				
                 Controller.GetInstance().SetFirstSBSRun();
                 dialog.ShowDialog();
             }
