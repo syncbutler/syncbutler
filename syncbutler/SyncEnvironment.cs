@@ -21,20 +21,20 @@ namespace SyncButler
         private const string SYNCBUTLER_SETTINGS_EXTENSION = ".butler";
         
         ///List of persistence attributes
-        private SortedList<String,Partnership> partnershipList;
-        private SortedList<String, Partnership> miniPartnershipList;
+        private SortedList<string,Partnership> partnershipList;
+        private SortedList<string, Partnership> miniPartnershipList;
         private static bool allowAutoSyncForConflictFreeTasks;
         private static bool firstRunComplete;
         private static bool computerNamed = false;
         private static bool enableShellContext = false; //Defaults to false
         private static long fileReadBufferSize = 2048000; //2MB, How much of the data file is read each cycle. Default value.
         private static string computerName;
-        private static char _SBSDriveLetter;
-        private static string sbsEnable;
-        private static string resolution;
-        private static string sbsDriveId;
-        private static double freeSpaceToUse;
         private static bool firstSBSRun;
+        private static string sbsEnable;
+        private static string sbsDriveId;
+        private static char sbsDriveLetter;
+        private static string resolution;
+        private static double freeSpaceToUse;
 
         //List of runtime variables
         private static System.Configuration.Configuration config;
@@ -53,7 +53,7 @@ namespace SyncButler
         {
             get
             {
-                return _SBSDriveLetter + @":\" + DEFAULT_SBS_RELATIVE_PATH;
+                return sbsDriveLetter + @":\" + DEFAULT_SBS_RELATIVE_PATH;
             }
         }
 
@@ -87,12 +87,12 @@ namespace SyncButler
         /// needs to view what partnerships are there thus far.
         /// </summary>
         /// <returns>A List containing all existing Partnership</returns>
-        public SortedList<String, Partnership> GetPartnershipsList()
+        public SortedList<string, Partnership> GetPartnershipsList()
         {
             return partnershipList;
         }
 
-        public SortedList<String, Partnership> GetMiniPartnershipsList()
+        public SortedList<string, Partnership> GetMiniPartnershipsList()
         {
             return miniPartnershipList;
         }
@@ -396,8 +396,8 @@ namespace SyncButler
         public void CreateEnv()
         {
             //Create the list of partnerships
-            partnershipList = new SortedList<String,Partnership>();
-            miniPartnershipList = new SortedList<String, Partnership>();
+            partnershipList = new SortedList<string,Partnership>();
+            miniPartnershipList = new SortedList<string, Partnership>();
             
             // Add in default settings to XML file
             storedSettings.SystemSettings.AllowAutoSyncForConflictFreeTasks = true;
@@ -507,7 +507,7 @@ namespace SyncButler
             // This will detect if settings are already stored
             bool createSettings = true;
 
-            _SBSDriveLetter = 'c';
+            sbsDriveLetter = 'c';
             computerName = "Computer1";
             computerNamed = false;
             sbsEnable = "Disable";
@@ -1077,11 +1077,11 @@ namespace SyncButler
         {
             get
             {
-                return _SBSDriveLetter;
+                return sbsDriveLetter;
             }
             set
             {
-                _SBSDriveLetter = value;
+                sbsDriveLetter = value;
             }
         }
 
