@@ -767,7 +767,9 @@ namespace SyncButlerUI
         /// <param name="e"></param>
         private void GoToExploreFeatures_Click(object sender, RoutedEventArgs e)
 		{
-			showMessageBox(CustomDialog.MessageType.Message,"Exploring New Features is still under construction!");
+            FirstTimeStartupScreen dialog = new FirstTimeStartupScreen();
+            dialog.WelcomeScreenControl.GoToHelpScreen();
+            dialog.ShowDialog();
 		}
 		
 		/// <summary>

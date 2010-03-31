@@ -50,7 +50,11 @@ namespace SyncButlerUI
                 CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Please enter a computer name");
             }
 		}		
-		
+		public void GoToHelpScreen()
+		{
+			VisualStateManager.GoToState(this, "HelpScreen1", false);
+
+		}
 		/// <summary>
 		/// Goes to the 2nd Screen of Help
 		/// </summary>
