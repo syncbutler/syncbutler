@@ -141,7 +141,7 @@ namespace SyncButler
         {
             string appPath = SyncEnvironment.AppPath;
 
-            ContainsAppDirectory(leftPath, rightPath, appPath);
+            CheckValidPaths(leftPath, rightPath, appPath);
 
             syncEnvironment.AddPartnership(name, leftPath, rightPath);
         }
@@ -152,9 +152,16 @@ namespace SyncButler
         /// <param name="leftPath">Full Path to the left of a partnership</param>
         /// <param name="rightPath">Full Path to the right of a partnership</param>
         /// <param name="appPath">Path to the application</param>
+        /// <exception cref="UserInputException">Cannot create a partnership with the same directories</exception>
         /// <exception cref="UserInputException">Cannot create a partnership which contains the SyncButler directory</exception>
-        private static void ContainsAppDirectory(String leftPath, String rightPath, string appPath)
+        private static void CheckValidPaths(String leftPath, String rightPath, string appPath)
         {
+            if (WindowsFileSystem.PathsEqual(leftPath, rightPath))
+            {
+                Logging.Logger.GetInstance().WARNING("UserInputException reached in Controller.CheckValidPaths() which should have been caught in the UI.");
+                throw new UserInputException("Cannot create a partnership with the same directories.");
+            }
+
             if (WindowsFileSystem.PathsEqual(leftPath, appPath) || WindowsFileSystem.PathsEqual(rightPath, appPath))
                 throw new UserInputException("Cannot create a partnership on the running SyncButler directory!");
         }
@@ -197,7 +204,7 @@ namespace SyncButler
         {
             string appPath = SyncEnvironment.AppPath;
 
-            ContainsAppDirectory(leftPath, rightPath, appPath);
+            CheckValidPaths(leftPath, rightPath, appPath);
 
             syncEnvironment.UpdatePartnership(oldName, newName, leftPath, rightPath);
         }

@@ -607,15 +607,13 @@ namespace SyncButlerUI
 		/// <param name="e"></param>
 		
 		private void GoToCreatePartnership_Click(object sender, RoutedEventArgs e){
-           new PartnershipTempData();
-		   VisualStateManager.GoToState(this,"CreatePartnershipState1",false);
-			CurrentState = State.Page1OfCreate;
-           this.sourceTextBox.Clear();
-            
+            new PartnershipTempData();
+            VisualStateManager.GoToState(this,"CreatePartnershipState1",false);
+            CurrentState = State.Page1OfCreate;
+            this.sourceTextBox.Clear();
 		}
         private String GetPath(String Path)
         {
-
             System.Windows.Forms.FolderBrowserDialog fd = new System.Windows.Forms.FolderBrowserDialog();
             if (Directory.Exists(Path))
             {
@@ -624,7 +622,6 @@ namespace SyncButlerUI
             if (fd.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
                 return null;
             return fd.SelectedPath;
-            
         }
 
 		/// <summary>
@@ -1327,28 +1324,23 @@ namespace SyncButlerUI
 		}
         private void ValidateFoldersHierachy()
         {
-
-            string tempfolder1Name = PartnershipTempData.sourcePath;
-            string tempfolder2Name = PartnershipTempData.destinationPath;
-            if (!PartnershipTempData.sourcePath.EndsWith("\\"))
-            {
-                tempfolder1Name += "\\";
-            }
-            if (!PartnershipTempData.destinationPath.EndsWith("\\"))
-            {
-                tempfolder2Name += "\\";
-            }
+            FileInfo sourceFI = new FileInfo(PartnershipTempData.sourcePath);
+            FileInfo destFI = new FileInfo(PartnershipTempData.destinationPath);
+            char[] standard = { '\\', ' ' };
+            string tempfolder1Name = sourceFI.FullName.TrimEnd(standard).ToLower();
+            string tempfolder2Name = destFI.FullName.TrimEnd(standard).ToLower();
+           
             if (tempfolder2Name.Equals(tempfolder1Name))
             {
-                throw new UserInputException("Same Folders selected : Please pick another Folder");
+                throw new UserInputException("The same folders were selected. \n\nPlease pick another folder.");
             }
             else if (tempfolder1Name.IndexOf(tempfolder2Name) == 0)
             {
-                throw new UserInputException("Error - 1st Folder is under the 2nd Folder  ");
+                throw new UserInputException("The 1st folder is a subfolder of the 2nd folder. \n\nPlease select another folder.");
             }
             else if (tempfolder2Name.IndexOf(tempfolder1Name) == 0)
             {
-                throw new UserInputException("Error - 2nd Folder is under the 1st Folder  ");
+                throw new UserInputException("The 2nd folder is a subfolder of the 1st folder. \n\nPlease select another folder.");
             }
         }
         private void FocusMe(object sender, EventArgs e)
