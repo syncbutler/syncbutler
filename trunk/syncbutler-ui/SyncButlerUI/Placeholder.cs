@@ -389,8 +389,10 @@ namespace TetonWhitewaterKayak.WinUI
 
             }
 
- 
-
+ 			if(textBoxBase.Visibility==Visibility.Hidden)
+				 this.InvalidateVisual();	
+			
+			else
             if (!_isPlaceholderVisible && IsElementEmpty())
 
                 this.InvalidateVisual();
