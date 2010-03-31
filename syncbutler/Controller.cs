@@ -263,13 +263,13 @@ namespace SyncButler
         public List<Conflict> RemoveAutoResolvableConflicts(ConflictList cl)
         {
             List<Conflict> resolvableConflicts = new List<Conflict>();
-            for (int i = cl.conflicts.Count - 1; i >= 0; i--)
+            for (int i = cl.Conflicts.Count - 1; i >= 0; i--)
             {
-                Conflict c = cl.conflicts[i];
+                Conflict c = cl.Conflicts[i];
                 if (c.AutoResolveAction != Conflict.Action.Unknown)
                 {
                     resolvableConflicts.Add(c);
-                    cl.conflicts.RemoveAt(i);
+                    cl.Conflicts.RemoveAt(i);
                 }
             }
 

@@ -777,7 +777,7 @@ namespace SyncButlerUI
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		private void ResolvePartnership_Click(object sender, RoutedEventArgs e){
-            foreach(ConflictList cl in mergedList) ThreadSafeAddResolve(cl.conflicts);
+            foreach (ConflictList cl in mergedList) ThreadSafeAddResolve(cl.Conflicts);
             ConflictList.IsEnabled = false;
             resolveButton.IsEnabled = false;
             AsyncStartResolve();
