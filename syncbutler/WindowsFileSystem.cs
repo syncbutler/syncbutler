@@ -172,9 +172,16 @@ namespace SyncButler
         {
             if (this.DriveID != DRIVEID_NETWORK)
             {
-                string driveLetter = SystemEnvironment.StorageDevices.GetDriveLetter(this.DriveID, this.PartitionIndex);
-                this.driveLetter = driveLetter;
-                this.rootPath = ReplaceDriveLetter(this.rootPath, this.driveLetter);
+                try
+                {
+                    string driveLetter = SystemEnvironment.StorageDevices.GetDriveLetter(this.DriveID, this.PartitionIndex);
+                    this.driveLetter = driveLetter;
+                    this.rootPath = ReplaceDriveLetter(this.rootPath, this.driveLetter);
+                }
+                catch (Exceptions.DriveNotSupportedException)
+                {
+                    this.driveLetter = GetDriveLetter(this.rootPath);
+                }
             }
             else
             {

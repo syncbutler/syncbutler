@@ -78,8 +78,16 @@ namespace SyncButler
             }
             else
             {
-                this.DriveID = SystemEnvironment.StorageDevices.GetDriveID(GetDriveLetter(fullPath));
-                this.PartitionIndex = SystemEnvironment.StorageDevices.GetDrivePartitionIndex(GetDriveLetter(fullPath));
+                try
+                {
+                    this.DriveID = SystemEnvironment.StorageDevices.GetDriveID(GetDriveLetter(fullPath));
+                    this.PartitionIndex = SystemEnvironment.StorageDevices.GetDrivePartitionIndex(GetDriveLetter(fullPath));
+                }
+                catch (Exceptions.DriveNotSupportedException)
+                {
+                    this.DriveID = "";
+                    this.PartitionIndex = -1;
+                }
             }
         }
 

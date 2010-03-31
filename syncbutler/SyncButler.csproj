@@ -55,6 +55,7 @@
     <Compile Include="ConflictList.cs" />
     <Compile Include="ContentFilters.cs" />
     <Compile Include="Controller.cs" />
+    <Compile Include="Exceptions\DriveNotSupportedException.cs" />
     <Compile Include="Exceptions\NetworkDriveException.cs" />
     <Compile Include="Exceptions\InvalidPathException.cs" />
     <Compile Include="Exceptions\SyncableNotExistsException.cs" />
