@@ -522,8 +522,8 @@ namespace TetonWhitewaterKayak.WinUI
                 throw new InvalidOperationException();
 
  
-
             adornedElement.SetValue(TextProperty, placeholderText);
+			
 
         }
 
@@ -572,7 +572,7 @@ namespace TetonWhitewaterKayak.WinUI
             if (textBox != null)
 
             {
-
+				if(textBox.Visibility!=Visibility.Hidden)	
                 adornerLayer.Add(new Placeholder(textBox));
 
                 return;

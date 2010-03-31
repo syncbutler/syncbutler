@@ -132,15 +132,7 @@
 			</VisualStateGroup>
 		</VisualStateManager.VisualStateGroups>
 		<Grid x:Name="WelcomeScreen1">
-			<Rectangle Stroke="Black" Margin="-1,-1,-2,-2" RadiusX="20" RadiusY="20">
-				<Rectangle.Fill>
-					<RadialGradientBrush>
-						<GradientStop Color="Black" Offset="0.276"/>
-						<GradientStop Color="#00000000" Offset="1"/>
-						<GradientStop Color="#B1000000" Offset="0.581"/>
-					</RadialGradientBrush>
-				</Rectangle.Fill>
-			</Rectangle>
+			<Rectangle Stroke="Black" Margin="-1,-1,-2,-2" RadiusX="20" RadiusY="20" Fill="#FF575757" Opacity="0.8"/>
 			<Image x:Name="image" Margin="-5,-48,15,-102" Stretch="Fill" Source="Images\SunBurst.png" RenderTransformOrigin="0.5,0.5" Opacity="0.365">
 				<Image.RenderTransform>
 					<TransformGroup>
