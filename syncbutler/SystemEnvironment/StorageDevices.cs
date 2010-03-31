@@ -16,6 +16,7 @@ namespace SyncButler.SystemEnvironment
         /// </summary>
         public enum Format
         {
+            FAT16,
             FAT32,
             NTFS
         }
@@ -289,6 +290,8 @@ namespace SyncButler.SystemEnvironment
                 driveFormat = Format.NTFS;
             else if (drive.DriveFormat.ToUpper().Equals("FAT32"))
                 driveFormat = Format.FAT32;
+            else if (drive.DriveFormat.ToUpper().Equals("FAT"))
+                driveFormat = Format.FAT16;
             else
                 throw new Exceptions.UnknownStorageFormatException();
 
