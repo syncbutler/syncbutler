@@ -13,8 +13,9 @@ namespace SyncButler
     public abstract class WindowsFileSystem : ISyncable
     {
         public static string DRIVEID_NETWORK = @"network-drive";
-        public static string PREF_FOLDER = @"folder:\\";
-        public static string PREF_FILE = @"file:\\";
+        public static string PREF_SEPARATOR = @":\\";
+        public static string PREF_FOLDER = @"folder" + PREF_SEPARATOR;
+        public static string PREF_FILE = @"file" + PREF_SEPARATOR;
         protected string driveLetter = null;
         protected string relativePath;
         protected string rootPath;
@@ -23,9 +24,8 @@ namespace SyncButler
         protected bool isPortableStorage;
         protected FileSystemInfo nativeFileSystemObj;
         protected Partnership parentPartnership = null;
-
-        protected internal SyncableStatusMonitor statusMonitor = null;
-        protected internal SyncableErrorHandler errorHandler = null;
+        internal SyncableStatusMonitor statusMonitor = null;
+        internal SyncableErrorHandler errorHandler = null;
 
         /// <summary>
         /// Gets the name of the current folder/file. Additional info, such as the directory structure prior to this folder/file, is stripped away.
@@ -161,24 +161,6 @@ namespace SyncButler
             get
             {
                 return this.nativeFileSystemObj.LastWriteTime;
-            }
-        }
-
-        /// <summary>
-        /// Strips a prefix from a given string. Used mainly for obtaining a relative path from the full path.
-        /// </summary>
-        /// <param name="prefix">String prefix to remove.</param>
-        /// <param name="data">String to remove prefix from.</param>
-        /// <returns>String with the prefix removed.</returns>
-        public static string StripPrefix(string prefix, string data)
-        {
-            if (data.StartsWith(prefix))
-            {
-                return data.Substring(prefix.Length);
-            }
-            else
-            {
-                return data;
             }
         }
 
@@ -488,6 +470,24 @@ namespace SyncButler
             FileSystemInfo fsi2 = new FileInfo(path2);
             char[] standard = { '\\', ' ' };
             return fsi1.FullName.TrimEnd(standard).ToLower() == fsi2.FullName.TrimEnd(standard).ToLower();
+        }
+
+        /// <summary>
+        /// Strips a prefix from a given string. Used mainly for obtaining a relative path from the full path.
+        /// </summary>
+        /// <param name="prefix">String prefix to remove.</param>
+        /// <param name="data">String to remove prefix from.</param>
+        /// <returns>String with the prefix removed.</returns>
+        public static string StripPrefix(string prefix, string data)
+        {
+            if (data.StartsWith(prefix))
+            {
+                return data.Substring(prefix.Length);
+            }
+            else
+            {
+                return data;
+            }
         }
     }
 }

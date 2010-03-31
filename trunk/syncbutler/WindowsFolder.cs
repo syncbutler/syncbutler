@@ -18,10 +18,9 @@ namespace SyncButler
     /// </summary>
     public class WindowsFolder : WindowsFileSystem
     {
-        protected DirectoryInfo nativeDirObj;
-
-        protected long checksumCache;
-        protected bool checksumCacheFresh = false;
+        private DirectoryInfo nativeDirObj;
+        private long checksumCache;
+        private bool checksumCacheFresh = false;
 
         /// <summary>
         /// Constructor to unserialise XML string and create an instance of itself.
@@ -154,6 +153,34 @@ namespace SyncButler
         }
 
         /// <summary>
+        /// Gets the size of all the files in this folder and its subfolders.
+        /// </summary>
+        public long Length
+        {
+            get
+            {
+                Queue<string> workList = new Queue<string>();
+                workList.Enqueue(this.rootPath + this.relativePath);
+
+                string currDir;
+                long totalSize = 0;
+
+                while (workList.Count > 0)
+                {
+                    currDir = workList.Dequeue();
+
+                    foreach (string dir in Directory.GetDirectories(currDir))
+                        workList.Enqueue(dir);
+
+                    foreach (string file in Directory.GetFiles(currDir))
+                        totalSize += (new FileInfo(file)).Length;
+                }
+
+                return totalSize;
+            }
+        }
+
+        /// <summary>
         /// Copy the entire folder over
         /// </summary>
         /// <param name="item"></param>
@@ -206,34 +233,6 @@ namespace SyncButler
             }
 
             this.UpdateStoredChecksum();
-        }
-
-        /// <summary>
-        /// Gets the size of all the files in this folder and its subfolders.
-        /// </summary>
-        public long Length
-        {
-            get
-            {
-                Queue<string> workList = new Queue<string>();
-                workList.Enqueue(this.rootPath + this.relativePath);
-
-                string currDir;
-                long totalSize = 0;
-
-                while (workList.Count > 0)
-                {
-                    currDir = workList.Dequeue();
-
-                    foreach (string dir in Directory.GetDirectories(currDir))
-                        workList.Enqueue(dir);
-
-                    foreach (string file in Directory.GetFiles(currDir))
-                        totalSize += (new FileInfo(file)).Length;
-                }
-
-                return totalSize;
-            }
         }
 
         /// <summary>

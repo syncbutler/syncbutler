@@ -11,19 +11,6 @@ using System.Diagnostics;
 namespace SyncButler
 {
     /// <summary>
-    /// Represents a key used in the checksum dictionary
-    /// </summary>
-    public struct ChecksumKey
-    {
-        public string entityPath, relativePath;
-        public ChecksumKey(string ep, string rp, string pn)
-        {
-            entityPath = ep;
-            relativePath = rp;
-        }
-    }
-
-    /// <summary>
     /// Contains methods to load and store settings as well as handling access to any environmental attributes
     /// </summary>
     public class SyncEnvironment
@@ -40,7 +27,7 @@ namespace SyncButler
         private static bool firstRunComplete;
         private static bool computerNamed = false;
         private static bool enableShellContext = false; //Defaults to false
-        private static long fileReadBufferSize = 2048000; //2MB, How much of the data file is read each cycle. Editable.
+        private static long fileReadBufferSize = 2048000; //2MB, How much of the data file is read each cycle. Default value.
         private static string computerName;
         private static char _SBSDriveLetter;
         private static string sbsEnable;
@@ -730,8 +717,8 @@ namespace SyncButler
         private bool CheckFilePartnerAbility(string leftpath, string rightpath)
         {
             //Ensuring the left and right files are the same
-            int positionLeft = leftpath.LastIndexOf("\\");
-            int positionRight = rightpath.LastIndexOf("\\");
+            int positionLeft = leftpath.LastIndexOf(@"\");
+            int positionRight = rightpath.LastIndexOf(@"\");
             string filenameLeft = leftpath.Substring(positionLeft, leftpath.Length - positionLeft);
             string filenameRight = rightpath.Substring(positionRight, rightpath.Length - positionRight);
             filenameLeft = filenameLeft.ToLower();
@@ -794,14 +781,14 @@ namespace SyncButler
         public static ChecksumKey DecodeChecksumKey(string key)
         {
             int pos;
-            ChecksumKey returnValue;
+            ChecksumKey returnValue = new ChecksumKey();
 
-            returnValue.entityPath = key;
+            returnValue.EntityPath = key;
 
-            pos = returnValue.entityPath.IndexOf(":\\\\");
+            pos = returnValue.EntityPath.IndexOf(@":\\");
             if (pos < 0) throw new ArgumentException("Malformed Key for Partnership Record");
 
-            returnValue.relativePath = returnValue.entityPath.Substring(pos + 3);
+            returnValue.RelativePath = returnValue.EntityPath.Substring(pos + 3);
 
             return returnValue;
         }
@@ -950,7 +937,7 @@ namespace SyncButler
 
             // Create reader & open file
             TextReader tr = new StreamReader(drivePrefix + DEFAULT_SBS_RELATIVE_PATH +
-                                friendlyName + "\\" + friendlyName + DEFAULT_SBS_FILENAME_POSTFIX);
+                                friendlyName + @"\" + friendlyName + DEFAULT_SBS_FILENAME_POSTFIX);
 
             // Read all the text inside
             content = tr.ReadToEnd();
