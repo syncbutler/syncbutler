@@ -125,25 +125,12 @@ namespace SyncButlerUI
             }
             else
             {
-                if (controller.IsFirstSBSRun())
-                {
-                    if (CustomDialog.Show(this, CustomDialog.MessageTemplate.YesNo, CustomDialog.MessageResponse.Yes,
-                       "Sync Butler has detected this is your first time using \"Sync Butler, Sync!\" and it is not enabled.\n\n"+
-                       "Would you like to go to the settings screen with tips? ") == CustomDialog.MessageResponse.Yes)
-                    {
-                         this.GoToSetting("FirstSBSRun", null);
-                    }
-
-                }
-                else
-                {
                     if (CustomDialog.Show(this, CustomDialog.MessageTemplate.YesNo, CustomDialog.MessageResponse.Yes,
                         "Sync Butler, Sync! is not enabled. Please enable this feature in the Settings screen\n\n" +
                         "Would you like to go to the settings screen?") == CustomDialog.MessageResponse.Yes)
                     {
                         this.GoToSetting(null, null);
                     }
-                }
             }
 
 		}
@@ -151,8 +138,6 @@ namespace SyncButlerUI
 		private void GoToSetting(object sender, RoutedEventArgs e)
 		{
             homeWindow1.CurrentState = HomeWindowControl.State.Settings;
-            if (controller.IsFirstSBSRun())
-                sender = "FirstSBSRun";
             if (!StopExistingOperation()) return;
             homeWindow1.IsLoadingSBS = true;
             if (sender != null && sender.GetType() == typeof(String) && (sender.Equals("FirstSBSRun")))
