@@ -56,7 +56,7 @@ namespace SyncButler
 
             userActions.SetSelectedAction(suggestedAction);
         }
-
+		
         /// <summary>
         /// Constructor used to instantiate a Conflict object.
         /// </summary>
@@ -73,7 +73,7 @@ namespace SyncButler
         /// <summary>
         /// Internal method used to generate the offending path from the left or right object, depending on which is null.
         /// </summary>
-        private string GetOffendingPath()
+        public string GetOffendingPath()
         {
             if (left != null)
             {
@@ -107,7 +107,16 @@ namespace SyncButler
                 left.Ignored(value);
             }
         }
-
+		
+		/// <summary>
+		/// Gets the relative  for conflicts
+		/// </summary>
+		/// <returns></returns>
+		public string OffendingPath{
+			get{
+			 return GetOffendingPath();	
+			}
+		}
         /// <summary>
         /// Gets or sets the suggested action for this conflict.
         /// This property will contain a suggested action when the system fails to automatically resolve a conflict.
