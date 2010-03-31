@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Xml;
 using Microsoft.VisualBasic.FileIO;
+using System.Security.AccessControl;
 
 namespace SyncButler
 {
@@ -615,6 +616,41 @@ namespace SyncButler
             xmlData.WriteAttributeString("DriveID", driveId);
             xmlData.WriteAttributeString("PartitionIndex", partitionIndex.ToString());
             xmlData.WriteEndElement();
+        }
+
+        /// <summary>
+        /// Check if the specific user has the right to create files in the directory
+        /// </summary>
+        /// <param name="DirectoryPath">The directory to check</param>
+        /// <param name="User">The user</param>
+        /// <returns>True if the user has the rights, false otherwise</returns>
+        public static bool CheckIfUserHasRightsTo(String DirectoryPath, string User)
+        {
+            if (!Directory.Exists(DirectoryPath))
+            {
+                return CheckIfUserHasRightsTo(Path.GetDirectoryName(DirectoryPath), User);
+            }
+            try
+            {
+                DirectoryInfo di = new DirectoryInfo(DirectoryPath);
+                AuthorizationRuleCollection arc = di.GetAccessControl().GetAccessRules(true, false, typeof(System.Security.Principal.NTAccount));
+                foreach (FileSystemAccessRule rule in arc)
+                {
+                    if ((rule.IdentityReference.ToString().ToLower().Trim().Contains("everyone") ||
+                        rule.IdentityReference.ToString().ToLower().Trim().Contains(User)) &&
+                        rule.AccessControlType == AccessControlType.Deny &&
+                        rule.FileSystemRights.ToString().ToLower().Trim().Contains("write"))
+                    {
+                        return false;
+                    }
+                }
+            }
+            catch (UnauthorizedAccessException)
+            {
+                return false;
+            }
+            return true;
+
         }
     }
 }

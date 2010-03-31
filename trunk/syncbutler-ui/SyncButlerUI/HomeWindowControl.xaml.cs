@@ -1103,6 +1103,16 @@ namespace SyncButlerUI
                             cancelled = true;
                             return false;
                         }
+                        else if (exp.Message.Contains("Permisson denied"))
+                        {
+                            info.message = exp.Message;
+                            info.messageType = CustomDialog.MessageType.Error;
+                            info.messageTemplate = CustomDialog.MessageTemplate.OkOnly;
+                            info.parent = this;
+                            progressWindow.RequestMessageDialog(workerObj, info);
+                            cancelled = true;
+                            return false;
+                        }
                         else
                         {
                             // Define the parameters of the message box to show the user

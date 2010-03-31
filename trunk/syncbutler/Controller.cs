@@ -414,7 +414,16 @@ namespace SyncButler
             SortedList<string, SortedList<string, string>> ret = ContentFilters.Spilt(MostRecentlyUsedFile.ConvertToSortedList(MostRecentlyUsedFile.GetAll()));
             return ret;
         }
-        
+
+        /// <summary>
+        /// Get the username of the current logon user
+        /// </summary>
+        /// <returns>Return the user name</returns>
+        public static String GetCurrentLogonUser()
+        {
+            return System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+        }
+
         /// <summary>
         /// Sync the mrus that are listed. Please read MRUList to understand how file is actually saved.
         /// </summary>
@@ -429,15 +438,23 @@ namespace SyncButler
             }
             else
             {
-                driveLetter = SystemEnvironment.StorageDevices.GetDriveLetter(driveid)[0];
                 string syncTo = driveLetter + ":\\SyncButler\\" + SyncEnvironment.ComputerName + "\\";
-                MRUList mruList = new MRUList();
+                if (!WindowsFolder.CheckIfUserHasRightsTo(syncTo, GetCurrentLogonUser()))
+                {
+                    errorHandler.Invoke(new Exception("Permisson denied\nPlease check if you have the rights to the folder for SBS at " + driveLetter + ":\\SyncButler\\"));
+                }
+                else
+                {
+                    driveLetter = SystemEnvironment.StorageDevices.GetDriveLetter(driveid)[0];
 
-                mruList.SetStatusMonitor(statusMonitor);
-                mruList.SetErrorHandler(errorHandler);
-                mruList.Load(toSync);
-                mruList.Sync(SyncEnvironment.ComputerName, driveLetter);
-                MRUList.SaveInfoTo(syncTo + "logs.xml", mruList);
+                    MRUList mruList = new MRUList();
+
+                    mruList.SetStatusMonitor(statusMonitor);
+                    mruList.SetErrorHandler(errorHandler);
+                    mruList.Load(toSync);
+                    mruList.Sync(SyncEnvironment.ComputerName, driveLetter);
+                    MRUList.SaveInfoTo(syncTo + "logs.xml", mruList);
+                }
             }
         }
 
