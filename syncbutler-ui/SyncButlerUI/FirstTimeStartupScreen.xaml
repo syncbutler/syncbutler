@@ -7,7 +7,7 @@
 	xmlns:local="clr-namespace:SyncButlerUI"
 	x:Class="SyncButlerUI.FirstTimeStartupScreen"
 	x:Name="Window"
-	Width="640" Height="480" WindowStyle="None" AllowsTransparency="True" Background="{x:Null}" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" >
+	Width="640" Height="480" Background="{x:Null}" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Icon="Images/Icons/SyncButler.ico" Title="SyncButler" >
 	<Window.Resources>
 		<Storyboard x:Key="SpinningLight" AutoReverse="False" RepeatBehavior="Forever"/>
 		<Storyboard x:Key="AnimateFileSync" RepeatBehavior="Forever"/>

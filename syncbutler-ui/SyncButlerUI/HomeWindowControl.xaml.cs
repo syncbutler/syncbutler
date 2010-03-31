@@ -794,8 +794,9 @@ namespace SyncButlerUI
         private void GoToExploreFeatures_Click(object sender, RoutedEventArgs e)
 		{
             FirstTimeStartupScreen dialog = new FirstTimeStartupScreen();
-            dialog.WelcomeScreenControl.GoToHelpScreen();
-            dialog.ShowDialog();
+          	dialog.WelcomeScreenControl.GoToHelpScreen();
+			dialog.WelcomeScreenControl.FirstTimeComputerNameText.Visibility=Visibility.Hidden;
+			dialog.ShowDialog();
 		}
 		
 		/// <summary>
