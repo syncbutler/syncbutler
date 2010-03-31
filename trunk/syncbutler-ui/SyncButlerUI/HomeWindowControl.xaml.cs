@@ -589,7 +589,7 @@ namespace SyncButlerUI
 				string folderPath = sourceTextBox.Text.Trim();
 			    checkInput(folderPath);
 			    PartnershipTempData.sourcePath=folderPath;
-		        
+                PartnershipFolder1Label.Content = PartnershipTempData.sourcePath;
 		        sourceTextBox.Text=PartnershipTempData.destinationPath;
 			    VisualStateManager.GoToState(this,"CreatePartnershipState2",false);
 				CurrentState = State.Page2OfCreate;
@@ -673,7 +673,6 @@ namespace SyncButlerUI
 		private void GoBackToCreatePartnershipDes_Click(object sender, RoutedEventArgs e){
 		   PartnershipTempData.partnershipName=partnershipNameTextBox.Text;
 		   destinationTextBox1.Text=PartnershipTempData.destinationPath;
-		   
 		   VisualStateManager.GoToState(this,"CreatePartnershipState2",false);
 			CurrentState = State.Page2OfCreate;
 		}
@@ -941,15 +940,19 @@ namespace SyncButlerUI
 		private void GoToEditPartnership_Click(object sender, RoutedEventArgs e){
 		   
 			try{
-		  	if(partnershipList.SelectedIndex<0){
+		  	if(partnershipList.SelectedIndex<0)
+            {
                 throw new UserInputException("Please select a partnership to edit.");
 			}
 		 	new PartnershipTempData((Partnership)this.partnershipList.SelectedItem);
-			 PartnershipTempData.oldPartnershipName= PartnershipTempData.partnershipName;
-			sourceTextBox.Text=PartnershipTempData.sourcePath;
-			 VisualStateManager.GoToState(this,"EditPartnershipState1",false);
-             CurrentState = State.Page1OfEdit;
-			}catch(UserInputException uIException){
+                PartnershipTempData.oldPartnershipName= PartnershipTempData.partnershipName;
+                sourceTextBox.Text=PartnershipTempData.sourcePath;
+                PartnershipFolder1Label.Content = PartnershipTempData.sourcePath;
+                VisualStateManager.GoToState(this,"EditPartnershipState1",false);
+                CurrentState = State.Page1OfEdit;
+			}
+            catch(UserInputException uIException)
+            {
 					showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
 			}
 		  
@@ -965,6 +968,7 @@ namespace SyncButlerUI
 			    checkInput(folderPath);
 				PartnershipTempData.sourcePath=folderPath;
 				sourceTextBox.Text=PartnershipTempData.destinationPath;
+                PartnershipFolder1Label.Content = PartnershipTempData.sourcePath;
 				VisualStateManager.GoToState(this,"EditPartnershipState2",false);
 				CurrentState = State.Page2OfEdit;
             }
