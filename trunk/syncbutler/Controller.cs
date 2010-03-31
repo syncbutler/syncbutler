@@ -494,8 +494,8 @@ namespace SyncButler
                         mruList.SetErrorHandler(errorHandler);
                         mruList.Load(toSync);
                         mruList.Sync(SyncEnvironment.ComputerName, driveLetter);
-                        SBSLogFile = syncTo + "logs.xml";
-                        MRUList.SaveInfoTo(SBSLogFile, mruList);
+                        SBSLogFile = syncTo;
+                        MRUList.SaveInfoTo(syncTo + "logs.xml", mruList);
                     }
                 }
             }
