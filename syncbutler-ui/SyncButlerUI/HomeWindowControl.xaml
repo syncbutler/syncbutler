@@ -1699,7 +1699,7 @@
 						<RotateTransform/>
 						<TranslateTransform/>
 					</TransformGroup>
-				</TextBlock.RenderTransform><Run Text="Note:"/><LineBreak/><Run Text="A portable storage device was detected. Please plug in a portable storage device if you wish to use it with "/><Run FontFamily="Walkway Black" FontSize="14.667" FontWeight="Bold" Text="Sync Butler"/><Run FontSize="13.333" FontWeight="Bold" Text=", "/><Run FontSize="13.333" FontStyle="Italic" FontWeight="Bold" Text="Sync"/><Run FontSize="13.333" FontWeight="Bold" Text="!"/><LineBreak/><Run Text=""/></TextBlock>
+				</TextBlock.RenderTransform><Run Text="Note:"/><LineBreak/><Run Text="No"/><Run Text=" portable storage device was detected. Please plug in a portable storage device if you wish to use it with "/><Run FontFamily="Walkway Black" FontSize="14.667" FontWeight="Bold" Text="Sync Butler"/><Run FontSize="13.333" FontWeight="Bold" Text=", "/><Run FontSize="13.333" FontStyle="Italic" FontWeight="Bold" Text="Sync"/><Run FontSize="13.333" FontWeight="Bold" Text="!"/><LineBreak/><Run Text=""/></TextBlock>
 			<Label HorizontalAlignment="Left" Margin="38.032,95.079,0,0" VerticalAlignment="Top" Content="This computer's name:&#xa;" Height="25.73"/>
 			<TextBlock x:Name="textBlock9_Copy" HorizontalAlignment="Left" Margin="43.698,129.937,0,0" VerticalAlignment="Top" Width="166.381" Height="22.539" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap"><TextBlock.RenderTransform>
 					<TransformGroup>

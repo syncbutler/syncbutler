@@ -35,7 +35,11 @@ namespace SyncButlerUI
 		/// <param name="e"></param>
 		public void NameIt_Click(object sender,RoutedEventArgs e)
         {
-            if (!ComputerNameChecker.IsComputerNameValid(FirstTimeComputerNameText.Text.Trim()))
+			if(FirstTimeComputerNameText.Text.Trim().Length != 0)
+			{
+				CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Please enter a valid computer name.");
+			}
+            else if (!ComputerNameChecker.IsComputerNameValid(FirstTimeComputerNameText.Text.Trim()))
             {
                 CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, FirstTimeComputerNameText.Text.Trim() + " is not a valid name");
             }
@@ -48,7 +52,7 @@ namespace SyncButlerUI
             }
             else
             {
-                CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Please enter a computer name");
+                CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Please enter a valid computer name.");
             }
 		}		
 		public void GoToHelpScreen()
