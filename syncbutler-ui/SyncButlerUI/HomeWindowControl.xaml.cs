@@ -314,9 +314,9 @@ namespace SyncButlerUI
 
                 if (operationCancelled)
                 {
-                    CurrentSyncingFile.Text = "Scan cancelled.\nConflicts automatically processed: " + autoResolveCount +
-                        "\nConflicts manually processed: " + manualResolveCount;
-
+                    //CurrentSyncingFile.Text = "Scan cancelled.\nConflicts automatically processed: " + autoResolveCount +
+                    //    "\nConflicts manually processed: " + manualResolveCount;
+                    CurrentSyncingFile.Text = "Scan cancelled.";
                     scanWorker = null;
                     CancelButton.IsEnabled = false;
 
@@ -496,8 +496,9 @@ namespace SyncButlerUI
 
             resolveWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(delegate(Object workerObj, RunWorkerCompletedEventArgs args)
             {
-                CurrentSyncingFile.Text = "Scan complete.\nConflicts automatically processed: " + autoResolveCount +
-                    "\nConflicts manually processed: " + manualResolveCount;
+                //CurrentSyncingFile.Text = "Scan complete.\nConflicts automatically processed: " + autoResolveCount +
+                //    "\nConflicts manually processed: " + manualResolveCount;
+                CurrentSyncingFile.Text = "Scan complete.";
                 partnershipNameTextBox.Text = "";
 
                 TotalProgressBar.Value = 0;
@@ -505,8 +506,9 @@ namespace SyncButlerUI
 
                 if (operationCancelled)
                 {
-                    CurrentSyncingFile.Text = "Scan cancelled.\nConflicts automatically processed: " + autoResolveCount +
-                    "\nConflicts manually processed: " + manualResolveCount;
+                    //CurrentSyncingFile.Text = "Scan cancelled.\nConflicts automatically processed: " + autoResolveCount +
+                    //"\nConflicts manually processed: " + manualResolveCount;
+                    CurrentSyncingFile.Text = "Scan cancelled.";
                     resolveButton.IsEnabled = true;
                     resolveWorker = null;
                     CancelButton.IsEnabled = false;
