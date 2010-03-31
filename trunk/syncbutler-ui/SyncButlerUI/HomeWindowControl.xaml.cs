@@ -28,7 +28,9 @@ namespace SyncButlerUI
 	/// Interaction logic for HomeWindowControl.xaml
 	/// </summary>
 	public partial class HomeWindowControl : UserControl
-	{
+    {
+
+        #region ErrorReporting
         protected enum ErrorReportingSource { Scanner, Resolver }
 
         protected struct ErrorReportingMessage
@@ -44,38 +46,54 @@ namespace SyncButlerUI
                 this.failedObject = failedObject;
             }
         }
-    
-	#region fields&Attributes 
-	public ObservableCollection<ConflictList> mergedList;
-    public string SelectedImagePath { get; set; }
-	public SyncButler.Controller Controller{get;set;}
-	public enum State{Home,Page1OfCreate,Page2OfCreate,Page3OfCreate,Page4OfCreate,ViewPartnership,SBS,Conflict,Settings,Page1OfEdit,Page2OfEdit,Page3OfEdit,Page4OfEdit,Result};
-    private string LastWorkingFreeSpace = "0.00";
-	public State CurrentState;
-    private const long GIGA_BYTE = 1024 * 1024 * 1024;
-    private const long MEGA_BYTE = 1024 * 1024;
-    private const long KILO_BYTE = 1024;
-	#endregion
+        #endregion
 
-        public enum CurrentActionEnum { Scanning, Resolving, Idle }
-        CurrentActionEnum CurrentAction = CurrentActionEnum.Idle;
+        #region fields&Attributes
+        public ObservableCollection<ConflictList> mergedList;
+        List<Resolved> ResolvedConflicts = new List<Resolved>();
+        private SortedList<string, SortedList<string, string>> MRUs;
+	    public enum State{Home,Page1OfCreate,Page2OfCreate,Page3OfCreate,Page4OfCreate,ViewPartnership,SBS,Conflict,Settings,Page1OfEdit,Page2OfEdit,Page3OfEdit,Page4OfEdit,Result};
+	    public State CurrentState;
 
         private string NewPartnershipName = "";
-
-        // Counters for the UI
-        private int autoResolveCount = 0;
-        private int manualResolveCount = 0;
+        private string LastWorkingFreeSpace = "0.00";
 
         private int conflictsProcessed = 0;
+
         private BackgroundWorker resolveWorker = null;
         private BackgroundWorker scanWorker = null;
         private bool operationCancelled = false;
         private Semaphore resolveLock = new Semaphore(1, 1);
         private Semaphore waitForErrorResponse = new Semaphore(0, 1);
         private Queue<Conflict> newConflicts = new Queue<Conflict>();
-		// Keeps track of last selected index of conflict list
-		private int lastClickedIndex=0;		
-		public HomeWindowControl()
+        // Keeps track of last selected index of conflict list
+
+        #region constantAttributes
+        private const long GIGA_BYTE = 1024 * 1024 * 1024;
+        private const long MEGA_BYTE = 1024 * 1024;
+        private const long KILO_BYTE = 1024;
+        #endregion
+
+        #region getSetAttribute
+        public string SelectedImagePath { get; set; }
+        public SyncButler.Controller Controller { get; set; }
+	    #endregion
+
+        public enum CurrentActionEnum { Scanning, Resolving, Idle }
+        CurrentActionEnum CurrentAction = CurrentActionEnum.Idle;  
+
+        #region CountersForUI
+        private int autoResolveCount = 0;
+        private int manualResolveCount = 0;
+        #endregion
+
+        public bool IsLoadingSBS = true;
+		private int lastClickedIndex=0;
+
+        #endregion
+
+
+        public HomeWindowControl()
 		{
 			this.InitializeComponent();
 		}
@@ -376,7 +394,6 @@ namespace SyncButlerUI
 
             return;
         }
-        List<Resolved> ResolvedConflicts = new List<Resolved>();
         /// <summary>
         /// Starts an asynchronous resolve operation, if it hasn't already been started.
         /// Conflicts to be resolved should be stored by calling ThreadSafeAddResolve()
@@ -1165,7 +1182,6 @@ namespace SyncButlerUI
             }
 		}
 
-        public bool IsLoadingSBS = true;
         private void SBSUpdateSpaceDetails(object sender, RoutedEventArgs e)
         {
             if (this.SBSSettingComboBox.SelectedIndex != -1 &&
@@ -1348,7 +1364,6 @@ namespace SyncButlerUI
             Favourites_List.Items.Refresh();
             WeirdFile_List.Items.Refresh();
         }
-        private SortedList<string, SortedList<string, string>> MRUs;
 
         public void LoadMRUs()
         {
