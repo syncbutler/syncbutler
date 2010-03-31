@@ -15,9 +15,14 @@ namespace SyncButler
     /// </summary>
     public class Controller
     {
-        SyncEnvironment syncEnvironment;
-        SyncButler.IGUI mainWindow;
+        private const long KILOBYTE = 1024;
+        private const long MEGABYTE = KILOBYTE * 1024;
+        private const long GIGABYTE = MEGABYTE * 1024;
+
+        private SyncEnvironment syncEnvironment;
+        private IGUI mainWindow;
         private static Controller controller;
+        private string sbsLogfile;
 
         /// <summary>
         /// Used by check and merged to see the total size of the files to be sync so far.
@@ -35,14 +40,13 @@ namespace SyncButler
             Logging.Logger.GetInstance().DEBUG("Controller started up.");
         }
 
-        public void SetWindow(IGUI win)
+        /// <summary>
+        /// Gets or sets the SBS log file path.
+        /// </summary>
+        public string SBSLogFile
         {
-            mainWindow = win;
-        }
-        public void GrabFocus()
-        {
-            if(mainWindow != null)
-                mainWindow.GrabFocus();
+            get { return this.sbsLogfile; }
+            set { this.sbsLogfile = value; }
         }
 
         /// <summary>
@@ -56,6 +60,18 @@ namespace SyncButler
 
             return controller;
         }
+
+        public void SetWindow(IGUI win)
+        {
+            mainWindow = win;
+        }
+
+        public void GrabFocus()
+        {
+            if (mainWindow != null)
+                mainWindow.GrabFocus();
+        }
+
         /// <summary>
         /// get a list of usb drive letters
         /// </summary>
@@ -74,6 +90,7 @@ namespace SyncButler
         {
             return SyncButler.SystemEnvironment.StorageDevices.GetNonUSBDriveLetters();
         }
+
         /// <summary>
         /// Tests for the existence of another instance and sets up single instance listener if this is the first instance
         /// </summary>
@@ -111,6 +128,7 @@ namespace SyncButler
             
             // TODO: Process the arguements received
         }
+
         public bool IsSBSDriveEnough()
         {
             long required = GetUserLimit();
@@ -145,6 +163,7 @@ namespace SyncButler
                 return 0;
             }
         }
+
         /// <summary>
         /// Adds a partnership to the list of Partnerships based on 2 full paths
         /// (calls SyncEnvironment)
@@ -342,9 +361,6 @@ namespace SyncButler
                 return false;
             }
         }
-        private const long GIGABYTE = 1024 * 1024 * 1024;
-        private const long MEGABYTE = 1024 * 1024;
-        private const long KILOBYTE = 1024;
 
         private long GetSizeInResolution(String Resolution, long size)
         {
@@ -488,7 +504,6 @@ namespace SyncButler
                 errorHandler.Invoke(new Exception("Device not detected\nPlease plug in the device configured for SBS."));
             }
         }
-        public string SBSLogFile;
 
         /// <summary>
         /// This method is required to be run when the program is closed. It
