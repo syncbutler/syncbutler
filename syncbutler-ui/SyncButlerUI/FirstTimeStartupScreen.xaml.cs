@@ -45,5 +45,8 @@ namespace SyncButlerUI
 
         }
         #endregion
+		public void CloseApp(Object sender, RoutedEventArgs e){
+		 this.DialogResult=false;	
+		}
     }
 }
