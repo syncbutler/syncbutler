@@ -1057,7 +1057,7 @@ namespace SyncButlerUI
             { // Code to run on completion
                 if (!cancelled)
                 {
-                    CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Files were successfully synced and logged");
+                    CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Files were successfully synced and logged to " + Controller.GetInstance().SBSLogFile);
                 }
                 progressWindow.TaskComplete();
                 SBSSync.IsEnabled = true;
