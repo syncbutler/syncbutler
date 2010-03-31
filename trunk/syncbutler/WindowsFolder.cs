@@ -35,9 +35,7 @@ namespace SyncButler
             isPortableStorage = false;
 
             while ((xmlData.NodeType != XmlNodeType.Element) && (xmlData.Name != "WindowsFolder"))
-            {
                 if (!(xmlData.Read())) throw new InvalidDataException();
-            }
 
             relativePath = xmlData.GetAttribute("RelativePath").Trim();
             rootPath = xmlData.GetAttribute("RootPath").Trim();
@@ -46,9 +44,7 @@ namespace SyncButler
             partitionIndex = int.Parse(xmlData.GetAttribute("PartitionIndex").Trim());
 
             // Update the drive letter immediately after parsing the XML
-            if (isPortableStorage)
-                this.UpdateDriveLetter();
-
+            if (isPortableStorage) this.UpdateDriveLetter();
 
             if (relativePath == null || rootPath == null) throw new InvalidDataException("Missing path");
             if (!rootPath.EndsWith("\\")) rootPath += "\\";
@@ -113,8 +109,7 @@ namespace SyncButler
         /// </summary>
         /// <param name="rootPath">Path of the root directory</param>
         /// <param name="fullPath">Full path to this file</param>
-        public WindowsFolder(string rootPath, string fullPath, Partnership parentPartnership)
-            : this(rootPath, fullPath)
+        public WindowsFolder(string rootPath, string fullPath, Partnership parentPartnership) : this(rootPath, fullPath)
         {
             this.parentPartnership = parentPartnership;
         }
@@ -127,8 +122,7 @@ namespace SyncButler
         /// <param name="fullPath">Full path to this file</param>
         /// <param name="parent">Parent folder</param>
         /// <param name="parentPartnership">The containing partnership</param>
-        public WindowsFolder(string rootPath, string fullPath, WindowsFolder parent, Partnership parentPartnership)
-            : this(rootPath, fullPath, parent)
+        public WindowsFolder(string rootPath, string fullPath, WindowsFolder parent, Partnership parentPartnership) : this(rootPath, fullPath, parent)
         {
             this.parentPartnership = parentPartnership;
         }
@@ -137,21 +131,14 @@ namespace SyncButler
         /// Used to create an instance of the topmost left or right IScynable WindowsFolder
         /// </summary>
         /// <param name="fullPath"></param>
-        public WindowsFolder(string fullPath) : this(fullPath, fullPath)
-        {
-
-        }
+        public WindowsFolder(string fullPath) : this(fullPath, fullPath) { }
 
         /// <summary>
         /// Used to create an instance of the topmost left or right IScynable WindowsFolder
         /// </summary>
         /// <param name="fullPath"></param>
         /// <param name="parentPartnership"></param>
-        public WindowsFolder(string fullPath, Partnership parentPartnership)
-            : this(fullPath, fullPath, parentPartnership)
-        {
-
-        }
+        public WindowsFolder(string fullPath, Partnership parentPartnership) : this(fullPath, fullPath, parentPartnership) { }
 
         /// <summary>
         /// Gets the size of all the files in this folder and its subfolders.
@@ -160,25 +147,35 @@ namespace SyncButler
         {
             get
             {
-                Queue<string> workList = new Queue<string>();
-                workList.Enqueue(this.rootPath + this.relativePath);
-
-                string currDir;
-                long totalSize = 0;
-
-                while (workList.Count > 0)
-                {
-                    currDir = workList.Dequeue();
-
-                    foreach (string dir in Directory.GetDirectories(currDir))
-                        workList.Enqueue(dir);
-
-                    foreach (string file in Directory.GetFiles(currDir))
-                        totalSize += (new FileInfo(file)).Length;
-                }
-
-                return totalSize;
+                return CalculateFolderSize();
             }
+        }
+
+        /// <summary>
+        /// Method used internally and called when the property Length is accessed.
+        /// It traverses the file system tree and sums the length of all files in subdirectories.
+        /// </summary>
+        /// <returns></returns>
+        private long CalculateFolderSize()
+        {
+            Queue<string> workList = new Queue<string>();
+            workList.Enqueue(this.rootPath + this.relativePath);
+
+            string currDir;
+            long totalSize = 0;
+
+            while (workList.Count > 0)
+            {
+                currDir = workList.Dequeue();
+
+                foreach (string dir in Directory.GetDirectories(currDir))
+                    workList.Enqueue(dir);
+
+                foreach (string file in Directory.GetFiles(currDir))
+                    totalSize += (new FileInfo(file)).Length;
+            }
+
+            return totalSize;
         }
 
         /// <summary>
