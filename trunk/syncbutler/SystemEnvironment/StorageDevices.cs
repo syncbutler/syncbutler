@@ -70,8 +70,12 @@ namespace SyncButler.SystemEnvironment
         /// </summary>
         /// <param name="driveID">The PNPDeviceID</param>
         /// <returns>String of drive letter</returns>
+        /// <exception cref="Exceptions.DriveNotSupportedException">Thrown if the low-level details of the drive could not be accessed.</exception>
         public static string GetDriveLetter(string driveID)
         {
+            if (driveID.Length == 0)
+                throw new Exceptions.DriveNotSupportedException("The drive type could not be determined.");
+
             string letter = "";
             ManagementObjectSearcher DDMgmtObjSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
 
@@ -99,8 +103,12 @@ namespace SyncButler.SystemEnvironment
         /// <param name="driveID">The PNPDeviceID</param>
         /// <param name="partitionIndex">The partition index of the drive</param>
         /// <returns>A string with the drive letter in the form of C:</returns>
+        /// <exception cref="Exceptions.DriveNotSupportedException">Thrown if the low-level details of the drive could not be accessed.</exception>
         public static string GetDriveLetter(string driveID, int partitionIndex)
         {
+            if ((driveID.Length == 0) || (partitionIndex == -1))
+                throw new Exceptions.DriveNotSupportedException("The drive type could not be determined.");
+
             string letter = "";
             ManagementObjectSearcher DDMgmtObjSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
 
@@ -129,6 +137,7 @@ namespace SyncButler.SystemEnvironment
         /// </summary>
         /// <param name="driveLetter">Drive letter in the format of C:</param>
         /// <returns>An integer containing the partition index. Returns -1 if an error had occurred.</returns>
+        /// <exception cref="Exceptions.DriveNotSupportedException">Thrown if the low-level details of the drive could not be accessed.</exception>
         public static int GetDrivePartitionIndex(string driveLetter)
         {
             int id = -1;
@@ -142,6 +151,7 @@ namespace SyncButler.SystemEnvironment
                 }
             }
 
+            if (id == -1) throw new Exceptions.DriveNotSupportedException("The drive type of '" + driveLetter + "' is not supported.");
             return id;
         }
         
@@ -237,6 +247,7 @@ namespace SyncButler.SystemEnvironment
         /// </summary>
         /// <param name="driveLetter">The drive letter</param>
         /// <returns>String containing the unique PNPDeviceID</returns>
+        /// <exception cref="Exceptions.DriveNotSupportedException">Thrown if the low-level details of the drive could not be accessed.</exception>
         public static string GetDriveID(string driveLetter)
         {
             string id = "";
@@ -253,7 +264,8 @@ namespace SyncButler.SystemEnvironment
                 }
             }
 
-            return id;
+            if (id.Length == 0) throw new Exceptions.DriveNotSupportedException("The drive type of '" + driveLetter + "' is not supported.");
+            else return id;
         }
 
         /// <summary>
@@ -293,7 +305,7 @@ namespace SyncButler.SystemEnvironment
             else if (drive.DriveFormat.ToUpper().Equals("FAT"))
                 driveFormat = Format.FAT16;
             else
-                throw new Exceptions.UnknownStorageFormatException();
+                throw new Exceptions.UnknownStorageFormatException("The drive '" + driveLetter + "' has an unsupported format '" + drive.DriveFormat + "'.");
 
             return driveFormat;
         }

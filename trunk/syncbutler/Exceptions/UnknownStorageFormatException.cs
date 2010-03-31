@@ -10,5 +10,6 @@ namespace SyncButler.Exceptions
     /// </summary>
     public class UnknownStorageFormatException : Exception
     {
+        public UnknownStorageFormatException(string msg) : base(msg) { }
     }
 }
