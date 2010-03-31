@@ -40,9 +40,7 @@ namespace SyncButler
             isPortableStorage = false;
 
             while ((xmlData.NodeType != XmlNodeType.Element) && (xmlData.Name != "WindowsFile"))
-            {
                 if (!(xmlData.Read())) throw new InvalidDataException();
-            }
 
             relativePath = xmlData.GetAttribute("RelativePath").Trim();
             rootPath = xmlData.GetAttribute("RootPath").Trim();
@@ -51,8 +49,7 @@ namespace SyncButler
             partitionIndex = int.Parse(xmlData.GetAttribute("PartitionIndex").Trim());
             
             // Update the drive letter immediately after parsing the XML
-            if (isPortableStorage)
-                this.UpdateDriveLetter();
+            if (isPortableStorage) this.UpdateDriveLetter();
 
             if (relativePath == null || rootPath == null) throw new InvalidDataException("Missing path");
             if ((relativePath.Length > 0) && !rootPath.EndsWith("\\")) rootPath += "\\";
@@ -110,10 +107,7 @@ namespace SyncButler
         /// Useful when creating a file partnership.
         /// </summary>
         /// <param name="fullPath">Full path to this file</param>
-        public WindowsFile(string fullPath) : this(fullPath, fullPath)
-        {
-
-        }
+        public WindowsFile(string fullPath) : this(fullPath, fullPath) { }
 
         /// <summary>
         /// Constructor that takes in three parameters, a root path, the full path,
@@ -121,8 +115,7 @@ namespace SyncButler
         /// </summary>
         /// <param name="rootPath">Path of the root directory</param>
         /// <param name="fullPath">Full path to this file</param>
-        public WindowsFile(string rootPath, string fullPath, Partnership parentPartnership)
-            : this(rootPath, fullPath)
+        public WindowsFile(string rootPath, string fullPath, Partnership parentPartnership) : this(rootPath, fullPath)
         {
             this.parentPartnership = parentPartnership;
         }
@@ -133,8 +126,7 @@ namespace SyncButler
         /// </summary>
         /// <param name="rootPath">Path of the root directory</param>
         /// <param name="fullPath">Full path to this file</param>
-        public WindowsFile(string rootPath, string fullPath, WindowsFolder parent, Partnership parentPartnership)
-            : this(rootPath, fullPath, parent)
+        public WindowsFile(string rootPath, string fullPath, WindowsFolder parent, Partnership parentPartnership) : this(rootPath, fullPath, parent)
         {
             this.parentPartnership = parentPartnership;
         }
@@ -145,10 +137,7 @@ namespace SyncButler
         /// </summary>
         /// <param name="fullPath">Full path to this file</param>
         /// <param name="parentPartnership">The containing partnership</param>
-        public WindowsFile(string fullPath, Partnership parentPartnership)
-            : this(fullPath, fullPath, parentPartnership)
-        {
-        }
+        public WindowsFile(string fullPath, Partnership parentPartnership) : this(fullPath, fullPath, parentPartnership) { }
 
         /// <summary>
         /// Get the length of the file, in bytes.
@@ -190,10 +179,7 @@ namespace SyncButler
         {
             string fullPath = this.rootPath + this.relativePath;
 
-            if (!File.Exists(fullPath))
-            {
-                throw new FileNotFoundException("Could not find file.", fullPath);
-            }
+            if (!File.Exists(fullPath)) throw new FileNotFoundException("Could not find file.", fullPath);
 
             fileStream = this.nativeFileObj.OpenRead();
         }
@@ -248,10 +234,8 @@ namespace SyncButler
             long actualBufferSize;
             long start = fileStream.Position;
 
-            if ((this.Length - start) >= wantedBufferSize)
-                actualBufferSize = wantedBufferSize;
-            else
-                actualBufferSize = this.Length - start;
+            if ((this.Length - start) >= wantedBufferSize) actualBufferSize = wantedBufferSize;
+            else actualBufferSize = this.Length - start;
 
             if (actualBufferSize < 1) return null;
 
@@ -274,7 +258,6 @@ namespace SyncButler
             Debug.Assert(!item.GetType().Name.Equals("WindowsFiles"), "Different type, the given type is " + item.GetType().Name);
 
             IRollingHash hashAlgorithm = new Adler32();
-
             WindowsFile destFile = (WindowsFile)item;
 
             // Make sure there's enough free space.
@@ -284,9 +267,8 @@ namespace SyncButler
             else if ((SystemEnvironment.StorageDevices.GetDriveFormat(GetDriveLetter(destFile.nativeFileObj.FullName)) == SyncButler.SystemEnvironment.StorageDevices.Format.FAT32)
                 && (SystemEnvironment.StorageDevices.GetDriveFormat(GetDriveLetter(this.nativeFileObj.FullName)) == SyncButler.SystemEnvironment.StorageDevices.Format.NTFS))
             {
-                if ((nativeFileObj.Length + 4096) > SystemEnvironment.StorageDevices.MAX_SIZE_FAT32) {
+                if ((nativeFileObj.Length + 4096) > SystemEnvironment.StorageDevices.MAX_SIZE_FAT32)
                     throw new IOException("The file cannot be copied to " + destFile.nativeFileObj.FullName + " because its length is larger than what the destination drive could handle.");
-                }
             }
 
             int bufferSize = (int) SyncEnvironment.FileReadBufferSize;
@@ -317,7 +299,6 @@ namespace SyncButler
                 {
                     outputStream.Write(buf, 0, amountRead);
                     if (!checksumCacheFresh) hashAlgorithm.Update(buf, 0, amountRead);
-
                 }
 
                 totalCopied += amountRead;
@@ -365,13 +346,9 @@ namespace SyncButler
             try
             {
                 if (recoverable)
-                {
                     FileSystem.DeleteFile(nativeFileObj.FullName, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
-                }
                 else
-                {
                     nativeFileObj.Delete();
-                }
 
                 this.RemoveStoredChecksum();
             }
@@ -426,12 +403,11 @@ namespace SyncButler
                 if (statusMonitor != null)
                 {
                     percentComplete = (int)(processed * toPercent);
+
                     if (percentComplete > 100) percentComplete = 100;
 
-
-                    if (!statusMonitor(new SyncableStatus(curObj, 0,
-                        percentComplete, SyncableStatus.ActionType.Checksum)))
-                            throw new UserCancelledException();
+                    if (!statusMonitor(new SyncableStatus(curObj, 0, percentComplete, SyncableStatus.ActionType.Checksum)))
+                        throw new UserCancelledException();
                 }
 
                 hashAlgorithm.Update(this.GetBytes(bufferSize));
@@ -478,10 +454,7 @@ namespace SyncButler
         /// <returns>true if the file content is the same, false otherwise</returns>
         public override bool Equals(ISyncable item)
         {
-            if (!item.GetType().Name.Equals("WindowsFile"))
-            {
-                return false;
-            }
+            if (!item.GetType().Name.Equals("WindowsFile")) return false;
 
             WindowsFile subject = (WindowsFile)item;
             
@@ -534,6 +507,7 @@ namespace SyncButler
             System.Diagnostics.Debug.Assert(otherObj is WindowsFile, "Other ISyncable passed is not a WindowsFile object.");
 
             WindowsFile partner = (WindowsFile)otherObj;
+
             if (this.statusMonitor != null)
             {
                 if (!statusMonitor(new SyncableStatus(this.EntityPath(), 0, 0, SyncableStatus.ActionType.Sync)))
@@ -548,10 +522,8 @@ namespace SyncButler
             try
             {
                 // Update the drive letters if needed.
-                if (this.driveLetter == null)
-                    this.UpdateDriveLetter();
-                if (partner.driveLetter == null)
-                    partner.UpdateDriveLetter();
+                if (this.driveLetter == null) this.UpdateDriveLetter();
+                if (partner.driveLetter == null) partner.UpdateDriveLetter();
 
                 checksumCacheFresh = false; // Invalidate checksum cache
 
@@ -563,19 +535,15 @@ namespace SyncButler
                 }
 
                 // Left and right don't exist. Nothing to do.
-                if (!(this.nativeFileObj.Exists || partner.nativeFileObj.Exists))
-                {
-                    return conflictList;
-                }
+                if (!(this.nativeFileObj.Exists || partner.nativeFileObj.Exists)) return conflictList;
+
                 // Left or right exists, or both.
                 else
                 {
                     // Both files exist and checksums are the same
                     if ((this.Exists() && partner.Exists()) && (this.Checksum() == partner.Checksum()))
                     {
-                        if (!parentPartnership.ChecksumExists(this))
-                            this.UpdateStoredChecksum();
-
+                        if (!parentPartnership.ChecksumExists(this)) this.UpdateStoredChecksum();
                         return conflictList;
                     }
                     else
@@ -589,10 +557,8 @@ namespace SyncButler
                             // Right OR Left changed (but not both)
                             if (rightChanged ^ leftChanged)
                             {
-                                if (rightChanged)
-                                    autoResolveAction = Conflict.Action.CopyToLeft;
-                                else if (leftChanged)
-                                    autoResolveAction = Conflict.Action.CopyToRight;
+                                if (rightChanged) autoResolveAction = Conflict.Action.CopyToLeft;
+                                else if (leftChanged) autoResolveAction = Conflict.Action.CopyToRight;
                             }
                             // Left and Right are both different
                             else
@@ -600,14 +566,11 @@ namespace SyncButler
                                 int timeDifference = this.LastWriteTime.CompareTo(partner.LastWriteTime);
 
                                 // Left is earlier than right
-                                if (timeDifference < 0)
-                                    suggestedAction = Conflict.Action.CopyToLeft;
+                                if (timeDifference < 0) suggestedAction = Conflict.Action.CopyToLeft;
                                 // Left is later than right
-                                else if (timeDifference > 0)
-                                    suggestedAction = Conflict.Action.CopyToRight;
+                                else if (timeDifference > 0) suggestedAction = Conflict.Action.CopyToRight;
                                 // Left and right are the same
-                                else
-                                    suggestedAction = Conflict.Action.Unknown;
+                                else suggestedAction = Conflict.Action.Unknown;
                             }
                         }
                         // One file exists only
@@ -702,11 +665,9 @@ namespace SyncButler
         /// <returns>True if the checksums are equal (after the whole file has been computed. False otherwise.</returns>
         public static bool HaveEqualChecksums(WindowsFile left, WindowsFile right)
         {
-            if (left.Length != right.Length)
-                return false;
+            if (left.Length != right.Length) return false;
 
-            if (left.checksumCacheFresh && right.checksumCacheFresh)
-                return (left.checksumCache == right.checksumCache);
+            if (left.checksumCacheFresh && right.checksumCacheFresh) return (left.checksumCache == right.checksumCache);
 
             IRollingHash leftHash = new Adler32();
             IRollingHash rightHash = new Adler32();
@@ -764,11 +725,7 @@ namespace SyncButler
             foreach(String file in files)
             {
                 if (File.Exists(file))
-                {
-                    FileInfo fi = new FileInfo(file);
-                    
-                    totalSize += fi.Length;
-                }
+                    totalSize += (new FileInfo(file)).Length;
             }
             return totalSize;
         }
