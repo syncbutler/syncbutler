@@ -70,28 +70,32 @@ namespace SyncButler
             userActions.SetSelectedAction(suggestedAction);
         }
 
-        public string OffendingPath
+        /// <summary>
+        /// Internal method used to generate the offending path from the left or right object, depending on which is null.
+        /// </summary>
+        private string GetOffendingPath()
         {
-            get
+            if (left != null)
             {
-                if (left != null)
+                if (left.EntityPath().Length != 0)
                 {
-                    if (left.EntityPath().Length != 0)
-                    {
-                        return left.EntityPath();
-                    }
+                    return left.EntityPath();
                 }
-                else if (right != null)
-                {
-                    if (right.EntityPath().Length != 0)
-                    {
-                        return right.EntityPath();
-                    }
-                }
-                throw new NullReferenceException("Non Existance EntityPath");
             }
+            else if (right != null)
+            {
+                if (right.EntityPath().Length != 0)
+                {
+                    return right.EntityPath();
+                }
+            }
+
+            throw new NullReferenceException("A non-existent entity path was detected.");
         }
 
+        /// <summary>
+        /// Gets or sets whether this conflict should be ignored.
+        /// </summary>
         public bool IgnoreConflict
         {
             get
@@ -105,7 +109,7 @@ namespace SyncButler
         }
 
         /// <summary>
-        /// Gets/Sets the suggested action for this conflict.
+        /// Gets or sets the suggested action for this conflict.
         /// This property will contain a suggested action when the system fails to automatically resolve a conflict.
         /// It acts as a hint for the UI to prompt the user with a default action.
         /// </summary>
@@ -121,6 +125,10 @@ namespace SyncButler
             }
         }
 
+        /// <summary>
+        /// Gets the partnership that is associated with this conflict.
+        /// </summary>
+        /// <returns>A Partnership object that this conflict refers to.</returns>
         public Partnership GetPartnership()
         {
             return left.GetParentPartnership();
@@ -137,7 +145,7 @@ namespace SyncButler
         }
 
         /// <summary>
-        /// Gets/Sets the action to be performed when this conflict can be resolved automatically.
+        /// Gets or sets the action to be performed when this conflict can be resolved automatically.
         /// It will return unknown if the system could not find a solution automatically.
         /// </summary>
         public Action AutoResolveAction
@@ -172,23 +180,18 @@ namespace SyncButler
             switch (user) {
                 case Action.CopyToLeft : 
                     right.CopyTo(left);
-                    //right.UpdateStoredChecksum();
                     return new Resolved(left, right, Resolved.ActionDone.CopyFromRight);
                 case Action.DeleteLeft : 
                     left.Delete(true);
-                    //left.RemoveStoredChecksum();
                     return new Resolved(left, right, Resolved.ActionDone.DeleteLeft);
                 case Action.Merge:
                     left.Merge(right);
-                    //left.UpdateStoredChecksum();
                     return new Resolved(left, right, Resolved.ActionDone.Merged);
                 case Action.CopyToRight:
                     left.CopyTo(right);
-                    //left.UpdateStoredChecksum();
                     return new Resolved(left, right, Resolved.ActionDone.CopyFromLeft);
                 case Action.DeleteRight:
                     right.Delete(true);
-                    //right.RemoveStoredChecksum();
                     return new Resolved(left, right, Resolved.ActionDone.DeleteRight);
                 case Action.Ignore:
                     return new Resolved(left, right, Resolved.ActionDone.Ignored);
@@ -196,11 +199,6 @@ namespace SyncButler
                     throw new System.ArgumentException("Invalid User Action");
 
             }
-        }
-
-        public override String ToString()
-        {
-            return left.EntityPath() + "\n" + this.autoResolveAction + "";
         }
     }
 }

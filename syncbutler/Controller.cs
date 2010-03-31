@@ -18,6 +18,7 @@ namespace SyncButler
         SyncEnvironment syncEnvironment;
         SyncButler.IGUI mainWindow;
         private static Controller controller;
+
         /// <summary>
         /// Used by check and merged to see the total size of the files to be sync so far.
         /// </summary>
