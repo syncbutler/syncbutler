@@ -82,9 +82,20 @@ namespace SyncButler.MRU
             SyncTo = LetterDrive + ":\\SyncButler\\" + ComputerName + "\\";
             this.ComputerName = ComputerName;
             List<Conflict> Conflicts = new List<Conflict>();
-            if (!Directory.Exists(SyncTo))
+            if (WindowsFolder.CheckIfUserHasRightsTo(SyncTo, System.Security.Principal.WindowsIdentity.GetCurrent().Name))
             {
-                Directory.CreateDirectory(SyncTo);
+                if (!Directory.Exists(SyncTo))
+                {
+                    Directory.CreateDirectory(SyncTo);
+                }
+            }
+            else
+            {
+                if (errorHandler != null)
+                {
+                    if (!errorHandler(new Exception("Please Check if you have permission to SBS folder")))
+                        return Conflicts;
+                }
             }
             foreach(string mru in MRUs.Keys)
             {
