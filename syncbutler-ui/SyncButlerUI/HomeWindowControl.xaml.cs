@@ -831,7 +831,7 @@ namespace SyncButlerUI
             if (messageType == CustomDialog.MessageType.Question)
             {
                 template = CustomDialog.MessageTemplate.YesNo;
-                def = CustomDialog.MessageResponse.Yes;
+                def = CustomDialog.MessageResponse.No;
             }
 
             CustomDialog.MessageResponse ret = CustomDialog.Show(this, template, messageType, def, msg);
