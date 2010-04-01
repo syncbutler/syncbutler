@@ -15,7 +15,7 @@ namespace SyncButler
         internal ISyncable right;
         protected Action autoResolveAction;
         protected Action suggestedAction;
-        public ResolveActionSet userActions { get; set; }
+        public ResolveActionSet userActions {get; set;}
 
         /// <summary>
         /// Possible actions for conflict resolution.
@@ -53,7 +53,6 @@ namespace SyncButler
              }
 
             userActions.AddAction(Action.Ignore);
-
             userActions.SetSelectedAction(suggestedAction);
         }
 		
