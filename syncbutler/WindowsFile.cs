@@ -738,5 +738,10 @@ namespace SyncButler
             }
             return totalSize;
         }
+
+        public static long SizeOf(String filename)
+        {
+            return (new FileInfo(filename)).Length;
+        }
     }
 }
