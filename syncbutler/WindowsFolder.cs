@@ -679,7 +679,8 @@ namespace SyncButler
                     if ((rule.IdentityReference.ToString().ToLower().Trim().Contains("everyone") ||
                         rule.IdentityReference.ToString().ToLower().Trim().Contains(User)) &&
                         rule.AccessControlType == AccessControlType.Deny &&
-                        rule.FileSystemRights.ToString().ToLower().Trim().Contains("write"))
+                        (rule.FileSystemRights.ToString().ToLower().Trim().Contains("write")||
+                        rule.FileSystemRights.ToString().ToLower().Trim().Contains("read")))
                     {
                         return false;
                     }
