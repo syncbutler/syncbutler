@@ -1378,8 +1378,8 @@ namespace SyncButlerUI
             FileInfo sourceFI = new FileInfo(PartnershipTempData.sourcePath);
             FileInfo destFI = new FileInfo(PartnershipTempData.destinationPath);
             char[] standard = { '\\', ' ' };
-            string tempfolder1Name = sourceFI.FullName.TrimEnd(standard).ToLower();
-            string tempfolder2Name = destFI.FullName.TrimEnd(standard).ToLower();
+            string tempfolder1Name = sourceFI.FullName.TrimEnd(standard).ToLower() + "\\";
+            string tempfolder2Name = destFI.FullName.TrimEnd(standard).ToLower() + "\\";
            
             if (tempfolder2Name.Equals(tempfolder1Name))
             {
