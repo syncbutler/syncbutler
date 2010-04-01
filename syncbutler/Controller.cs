@@ -50,6 +50,10 @@ namespace SyncButler
             set { this.sbsLogfile = value; }
         }
 
+        public static bool IsOnCDRom()
+        {
+            return SystemEnvironment.StorageDevices.GetDeviceType(Environment.GetCommandLineArgs()[0][0] + ":").Equals(SystemEnvironment.StorageDevices.DeviceType.CDRom);
+        }
         /// <summary>
         /// Replaces the controller constructor with a method for other classes to retrieve the controller instead of creating one.
         /// </summary>
