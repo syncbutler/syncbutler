@@ -521,7 +521,10 @@ namespace SyncButlerUI
                     //CurrentSyncingFile.Text = "Scan cancelled.\nConflicts automatically processed: " + autoResolveCount +
                     //"\nConflicts manually processed: " + manualResolveCount;
                     CurrentSyncingFile.Text = "Scan cancelled.";
-                    resolveButton.IsEnabled = true;
+                    if (Controller.conflictCount != 0)
+                    {
+                        resolveButton.IsEnabled = true;
+                    }
                     resolveWorker = null;
                     CancelButton.IsEnabled = false;
                     return;
