@@ -7,6 +7,7 @@ Some users resort to manually copying files from one system to another using a p
 Thus, it is not hard to imagine why it takes quite a bit of effort to manually keep files in sync on users’ workstations. This is how file synchronisation software like Sync Butler is handy. We do the work for you!
 
 http://syncbutler.googlecode.com/files/SyncButlerSync.png
+
 _Ah... so that is what it is does_
 
 == What is File Synchronisation ==
