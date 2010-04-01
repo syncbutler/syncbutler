@@ -207,6 +207,11 @@ namespace SyncButler.MRU
                 Logging.Logger.GetInstance().WARNING("IOException in MostRecentlyUsedFile.cs: " + ex.Message);
                 return false;
             }
+            catch (UnauthorizedAccessException ex)
+            {
+                Logging.Logger.GetInstance().WARNING("IOException in MostRecentlyUsedFile.cs: " + ex.Message);
+                return false;
+            }
         }
 
         // format from: http://www.stdlib.com/art6-Shortcut-File-Format-lnk.html
