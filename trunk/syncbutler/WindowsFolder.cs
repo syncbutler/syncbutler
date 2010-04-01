@@ -44,14 +44,30 @@ namespace SyncButler
             partitionIndex = int.Parse(xmlData.GetAttribute("PartitionIndex").Trim());
 
             // Update the drive letter immediately after parsing the XML
-            if (isPortableStorage) this.UpdateDriveLetter();
+            try
+            {
+                if (isPortableStorage) this.UpdateDriveLetter();
+            }
+            catch (DriveNotFoundException)
+            {
+                this.driveLetter = "MISSING:";
+                this.rootPath = ReplaceDriveLetter(this.rootPath, this.driveLetter);
+            }
 
             if (relativePath == null || rootPath == null) throw new InvalidDataException("Missing path");
             if (!rootPath.EndsWith("\\")) rootPath += "\\";
             if (!(rootPath + relativePath).EndsWith("\\")) relativePath += "\\";
 
-            nativeDirObj = new DirectoryInfo(rootPath + relativePath);
-            nativeFileSystemObj = nativeDirObj;
+            if (this.driveLetter == "MISSING:")
+            {
+                nativeDirObj = new DirectoryInfo("Z" + rootPath.Substring(7) + relativePath);
+                nativeFileSystemObj = nativeDirObj;
+            }
+            else
+            {
+                nativeDirObj = new DirectoryInfo(rootPath + relativePath);
+                nativeFileSystemObj = nativeDirObj;
+            }
         }
 
         /// <summary>
@@ -387,13 +403,29 @@ namespace SyncButler
             List<Conflict> conflictList = new List<Conflict>();
             Queue<string> workList = new Queue<string>();
             string leftPath, rightPath, currDir;
+            Exception exp;
 
-            // Update the drive letters if there is a need to.
-            // Note: We do not store the driveLetter during serialisation because it is not useful to do so.
-            if (driveLetter == null)
-                this.UpdateDriveLetter();
-            if (partner.driveLetter == null)
-                partner.UpdateDriveLetter();
+            try
+            {
+                // Update the drive letters if there is a need to.
+                // Note: We do not store the driveLetter during serialisation because it is not useful to do so.
+                if (driveLetter == null)
+                    this.UpdateDriveLetter();
+
+                if (partner.driveLetter == null)
+                    partner.UpdateDriveLetter();
+            }
+            catch (DriveNotFoundException)
+            {
+                exp = new Exception("A storage device was not found. SyncButler cannot sync " + parentPartnership.Name);
+
+                if (errorHandler == null) throw exp;
+                else
+                {
+                    errorHandler(exp);
+                    return conflictList;
+                }
+            }
 
             leftPath = this.rootPath + this.relativePath;
             rightPath = partner.rootPath + partner.relativePath;
@@ -402,7 +434,6 @@ namespace SyncButler
             workList.Enqueue("");
 
             string curLeftDir, curRightDir;
-            Exception exp;
             // Work while the work queue has stuff.
             while (workList.Count > 0)
             {
@@ -614,9 +645,13 @@ namespace SyncButler
         /// <param name="xmlData"></param>
         public override void SerializeXML(XmlWriter xmlData)
         {
+            string cleanRootPath = rootPath;
+            if (cleanRootPath.StartsWith("MISSING:"))
+                cleanRootPath = "Z" + cleanRootPath.Substring(7);
+
             xmlData.WriteStartElement("WindowsFolder");
             xmlData.WriteAttributeString("RelativePath", relativePath);
-            xmlData.WriteAttributeString("RootPath", rootPath);
+            xmlData.WriteAttributeString("RootPath", cleanRootPath);
             xmlData.WriteAttributeString("IsPortableStorage", isPortableStorage.ToString());
             xmlData.WriteAttributeString("DriveID", driveId);
             xmlData.WriteAttributeString("PartitionIndex", partitionIndex.ToString());
