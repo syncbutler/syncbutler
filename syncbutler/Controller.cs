@@ -517,7 +517,7 @@ namespace SyncButler
                         mruList.Load(toSync);
                         mruList.Sync(SyncEnvironment.ComputerName, driveLetter);
                         SBSLogFile = syncTo;
-                        MRUList.SaveInfoTo(syncTo + "Open this Report in a Browser).xml", mruList);
+                        MRUList.SaveInfoTo(syncTo + "Open this Report in a Browser.xml", mruList);
                     }
                 }
             }
