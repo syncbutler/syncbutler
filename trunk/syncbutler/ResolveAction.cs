@@ -31,5 +31,20 @@ namespace SyncButler
             this.ResolutionAction = resolutionAction;
             this.Description = description;
         }
+
+        public static string ActionDescription(Conflict.Action a)
+        {
+            switch (a)
+            {
+                case Conflict.Action.CopyToLeft: return "Copy to the left";
+                case Conflict.Action.CopyToRight: return "Copy to the right";
+                case Conflict.Action.DeleteLeft: return "Delete the left";
+                case Conflict.Action.DeleteRight: return "Delete the right";
+                case Conflict.Action.Ignore: return "Ignore difference";
+                case Conflict.Action.Merge: return "Merge differences";
+                case Conflict.Action.Unknown: return "Unknown";
+                default: return "Bad Action?";
+            }
+        }
     }
 }

@@ -32,7 +32,7 @@ namespace SyncButler
         /// <param name="toAdd">The action to add.</param>
         public void AddAction(Conflict.Action toAdd)
         {
-            this.Add(new ResolveAction(toAdd, toAdd.ToString()));
+            this.Add(new ResolveAction(toAdd, ResolveAction.ActionDescription(toAdd)));
         }
 
         /// <summary>
