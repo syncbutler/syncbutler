@@ -307,7 +307,7 @@
 				<ic:ExtendedVisualStateManager/>
 			</VisualStateManager.CustomVisualStateManager>
 			<Button Margin="67.08,0,4.6,5.8" VerticalAlignment="Bottom" Height="39.2" Content="CLOSE" Grid.Column="1" FontWeight="Bold" FontSize="18.667" Click="ExitTutorial_Click"/>
-			<Image Margin="170,86.6,3.905,123" Source="Images/SBSWindow.png" Stretch="Fill"/>
+			<Image Margin="107,95.6,37.92,127" Source="Images/SBSWindow.png" Stretch="Fill"/>
 			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="13.8,104,0,0" VerticalAlignment="Top" Height="116.8" HorizontalAlignment="Left" Width="139.2" d:LayoutOverrides="VerticalAlignment"/>
 			<TextBlock Margin="21.6,112.8,0,0" Foreground="White" TextWrapping="Wrap" FontWeight="Bold" HorizontalAlignment="Left" Width="122" VerticalAlignment="Top" Height="99.2"><Run Text="New or recently used files appear here. "/><Run FontFamily="Walkway Black" FontSize="14.667" Text="SyncButler "/><Run Text="will make a duplicate and store it on your "/><Run Text="USB storage device."/></TextBlock>
 			<Image HorizontalAlignment="Left" Margin="133.6,138.4,0,0" Width="52" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Top" Height="31.2">
@@ -334,26 +334,68 @@
 					</TransformGroup>
 				</Image.RenderTransform>
 			</Image>
-			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="165.8,389.6,36.12,0" VerticalAlignment="Top" Height="67.2"/>
-			<TextBlock Margin="175.972,0,42.964,30.389" Foreground="White" TextWrapping="Wrap" FontWeight="Bold" VerticalAlignment="Bottom" Height="50.97" Text="This button will mark a selected file in the recent used file list as sensitive or clear a selected file in the sensitive list as safe to sync."/>
-			<Image Margin="195.2,0,237.92,101.6" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="31.2">
+			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="154.8,383.6,47.12,0" VerticalAlignment="Top" Height="67.2"/>
+			<TextBlock Margin="164.972,0,53.964,36.389" Foreground="White" TextWrapping="Wrap" FontWeight="Bold" VerticalAlignment="Bottom" Height="50.97" Text="This button will mark a selected file in the recent used file list as sensitive or clear a selected file in the sensitive list as safe to sync."/>
+			<Image Margin="0,0,155.92,113.6" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="26.2" HorizontalAlignment="Right" Width="52">
 				<Image.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
 						<SkewTransform/>
-						<RotateTransform Angle="-90"/>
+						<RotateTransform Angle="-90.401"/>
 						<TranslateTransform X="1.93" Y="-11.382"/>
 					</TransformGroup>
 				</Image.RenderTransform>
 			</Image>
-			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="-43.32,280,3.8,0" VerticalAlignment="Top" Height="49.6" Grid.Column="1"/>
-			<TextBlock Margin="-36.52,0,7,153.6" Foreground="White" TextWrapping="Wrap" FontWeight="Bold" Grid.Column="1" Text="Click this button to start syncing your new or recently used files." VerticalAlignment="Bottom" Height="37.6"/>
-			<Image HorizontalAlignment="Right" Margin="0,0,68.312,128.637" Width="58.026" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="34.816">
+			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="-49.32,334,9.8,0" VerticalAlignment="Top" Height="49.6" Grid.Column="1"/>
+			<TextBlock Margin="-42.52,0,13,99.6" Foreground="White" TextWrapping="Wrap" FontWeight="Bold" Grid.Column="1" Text="Click this button to start syncing your new or recently used files." VerticalAlignment="Bottom" Height="37.6"/>
+			<Image HorizontalAlignment="Right" Margin="0,0,75.312,122.637" Width="58.026" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="34.816">
 				<Image.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
 						<SkewTransform/>
-						<RotateTransform Angle="131.382"/>
+						<RotateTransform Angle="204.574"/>
+						<TranslateTransform X="1.93" Y="-11.382"/>
+					</TransformGroup>
+				</Image.RenderTransform>
+			</Image>
+			<Image Margin="0,222.7,167.088,231.1" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" HorizontalAlignment="Right" Width="52">
+				<Image.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform Angle="-110.377"/>
+						<TranslateTransform X="1.93" Y="-11.382"/>
+					</TransformGroup>
+				</Image.RenderTransform>
+			</Image>
+			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="-49.32,275,9.8,0" VerticalAlignment="Top" Height="49.6" Grid.Column="1"/>
+			<TextBlock Margin="-42.52,0,13,158.6" Foreground="White" TextWrapping="Wrap" FontWeight="Bold" Grid.Column="1" Text="Click this button to show and hide help." VerticalAlignment="Bottom" Height="37.6"/>
+			<Image HorizontalAlignment="Right" Margin="0,0,83.312,153.637" Width="58.026" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="34.816">
+				<Image.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform Angle="167.668"/>
+						<TranslateTransform X="1.93" Y="-11.382"/>
+					</TransformGroup>
+				</Image.RenderTransform>
+			</Image>
+			<Image Margin="0,0,155.92,151.432" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="26.2" HorizontalAlignment="Right" Width="52">
+				<Image.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform Angle="-90.401"/>
+						<TranslateTransform X="1.93" Y="-11.382"/>
+					</TransformGroup>
+				</Image.RenderTransform>
+			</Image>
+			<Image Margin="0,0,155.92,190.932" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="26.2" HorizontalAlignment="Right" Width="52">
+				<Image.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform Angle="-90.401"/>
 						<TranslateTransform X="1.93" Y="-11.382"/>
 					</TransformGroup>
 				</Image.RenderTransform>

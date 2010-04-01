@@ -587,8 +587,8 @@ namespace SyncButlerUI
             else if (CurrentState == HomeWindowControl.State.SBS)
             {
                 FirstTimeStartupScreen dialog = new FirstTimeStartupScreen();
+				dialog.WelcomeScreenControl.FirstTimeComputerNameText.Visibility = Visibility.Hidden;
                 VisualStateManager.GoToState(dialog.WelcomeScreenControl, "HelpScreen3", false);
-				
                 Controller.GetInstance().SetFirstSBSRun();
                 dialog.ShowDialog();
             }
