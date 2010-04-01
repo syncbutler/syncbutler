@@ -49,13 +49,29 @@ namespace SyncButler
             partitionIndex = int.Parse(xmlData.GetAttribute("PartitionIndex").Trim());
             
             // Update the drive letter immediately after parsing the XML
-            if (isPortableStorage) this.UpdateDriveLetter();
+            try
+            {
+                if (isPortableStorage) this.UpdateDriveLetter();
+            }
+            catch (DriveNotFoundException)
+            {
+                this.driveLetter = "MISSING:";
+                this.rootPath = ReplaceDriveLetter(this.rootPath, this.driveLetter);
+            }
 
             if (relativePath == null || rootPath == null) throw new InvalidDataException("Missing path");
             if ((relativePath.Length > 0) && !rootPath.EndsWith("\\")) rootPath += "\\";
 
-            nativeFileObj = new FileInfo(rootPath + relativePath);
-            nativeFileSystemObj = nativeFileObj;
+            if (this.driveLetter == "MISSING:")
+            {
+                nativeFileObj = new FileInfo("Z" + rootPath.Substring(7) + relativePath);
+                nativeFileSystemObj = nativeFileObj;
+            }
+            else
+            {
+                nativeFileObj = new FileInfo(rootPath + relativePath);
+                nativeFileSystemObj = nativeFileObj;
+            }
         }
 
         /// <summary>
@@ -533,7 +549,21 @@ namespace SyncButler
                 // Update the drive letters if needed.
                 if (this.driveLetter == null) this.UpdateDriveLetter();
                 if (partner.driveLetter == null) partner.UpdateDriveLetter();
+            }
+            catch (DriveNotFoundException)
+            {
+                exp = new Exception("A storage device was not found. SyncButler cannot sync " + parentPartnership.Name);
 
+                if (errorHandler == null) throw exp;
+                else
+                {
+                    errorHandler(exp);
+                    return conflictList;
+                }
+            }
+
+            try
+            {
                 checksumCacheFresh = false; // Invalidate checksum cache
 
                 // Are we supposed to ignore this?
@@ -714,9 +744,13 @@ namespace SyncButler
         /// <param name="xmlData"></param>
         public override void SerializeXML(XmlWriter xmlData)
         {
+            string cleanRootPath = rootPath;
+            if (cleanRootPath.StartsWith("MISSING:"))
+                cleanRootPath = "Z" + cleanRootPath.Substring(7);
+
             xmlData.WriteStartElement("WindowsFile");
             xmlData.WriteAttributeString("RelativePath", relativePath);
-            xmlData.WriteAttributeString("RootPath", rootPath);
+            xmlData.WriteAttributeString("RootPath", cleanRootPath);
             xmlData.WriteAttributeString("IsPortableStorage", isPortableStorage.ToString());
             xmlData.WriteAttributeString("DriveID", driveId);
             xmlData.WriteAttributeString("PartitionIndex", partitionIndex.ToString());

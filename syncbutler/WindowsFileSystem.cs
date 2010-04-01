@@ -168,6 +168,7 @@ namespace SyncButler
         /// Method that is used internally to update the drive letter of the root path, based on the current drive ID.
         /// Useful for correcting the drive letters of portable devices.
         /// </summary>
+        /// <exception cref="DriveNotFoundException">Thrown when the drive isn't found</exception>
         public void UpdateDriveLetter()
         {
             if (this.DriveID != DRIVEID_NETWORK)
@@ -175,6 +176,7 @@ namespace SyncButler
                 try
                 {
                     string driveLetter = SystemEnvironment.StorageDevices.GetDriveLetter(this.DriveID, this.PartitionIndex);
+                    if (driveLetter == "") throw new DriveNotFoundException();
                     this.driveLetter = driveLetter;
                     this.rootPath = ReplaceDriveLetter(this.rootPath, this.driveLetter);
                 }
