@@ -6,6 +6,13 @@ Modern day computer users work on several machines in one day (think work and ho
 Some users resort to manually copying files from one system to another using a portable storage device. This is repeated every time when there are changes. Add to that, the difficulty of keeping track of the latest version of the file. Finally, do that for all the files you have.
 Thus, it is not hard to imagine why it takes quite a bit of effort to manually keep files in sync on users’ workstations. This is how file synchronisation software like Sync Butler is handy. We do the work for you!
 
+http://syncbutler.googlecode.com/files/SyncButlerSync.png
+<br />
+_Ah... so that is what it is does_
+</div>
+<br />
+<br />
+
 == What is File Synchronisation ==
 As it was briefly described above, file synchronisation software automates the process of keeping your files the same on your systems. They just do it in slightly different manner.
 We at Sync Butler strive to make it really easy and painless for the user to sync their files. Sync Butler resolves most differences in the two folders without prompting you for a decision. For those file conflicts that Sync Butler cannot resolve, you simply have to tick the box you wish to take the copy from.
