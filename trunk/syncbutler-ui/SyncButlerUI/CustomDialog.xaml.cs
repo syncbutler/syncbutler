@@ -261,5 +261,9 @@ namespace SyncButlerUI
             Hide();
         }
 
+		private void KeyDownHandler(object sender, KeyEventArgs e)
+		{
+			if (e.Key == Key.Escape) Hide();
+		}
 	}
 }
