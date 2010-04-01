@@ -1221,10 +1221,16 @@ namespace SyncButlerUI
                 this.SBSWorkingDriveComboBox.IsEnabled = this.SBSSettingComboBox.SelectedItem.Equals("Enable");
                 if (this.SBSSettingComboBox.SelectedItem.Equals("Enable"))
                 {
-                    this.SpaceToUseSlide.IsEnabled = true;
-                    this.SpaceToUseTextbox.IsEnabled = true;
-                    SBSUpdateSpaceDetails(null, null);
-
+                    if (Directory.Exists((char)SBSWorkingDriveComboBox.SelectedItem + ":\\"))
+                    {
+                        this.SpaceToUseSlide.IsEnabled = true;
+                        this.SpaceToUseTextbox.IsEnabled = true;
+                        SBSUpdateSpaceDetails(null, null);
+                    }
+                    else
+                    {
+                        showMessageBox(CustomDialog.MessageType.Error, "Device not detected\nPlease check if the device is plugged in.");
+                    }
                 }
                 else
                 {
