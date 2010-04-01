@@ -368,14 +368,14 @@
 					</TransformGroup>
 				</Image.RenderTransform>
 			</Image>
-			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="-49.32,275,9.8,0" VerticalAlignment="Top" Height="49.6" Grid.Column="1"/>
-			<TextBlock Margin="-42.52,0,13,158.6" Foreground="White" TextWrapping="Wrap" FontWeight="Bold" Grid.Column="1" Text="Click this button to show and hide help." VerticalAlignment="Bottom" Height="37.6"/>
-			<Image HorizontalAlignment="Right" Margin="0,0,83.312,153.637" Width="58.026" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="34.816">
+			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="-49.32,239,9.8,0" VerticalAlignment="Top" Height="49.6" Grid.Column="1"/>
+			<TextBlock Margin="-42.52,0,13,194.6" Foreground="White" TextWrapping="Wrap" FontWeight="Bold" Grid.Column="1" Text="Click this button to show and hide help." VerticalAlignment="Bottom" Height="37.6"/>
+			<Image HorizontalAlignment="Right" Margin="0,0,42.812,150.637" Width="58.026" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="34.816">
 				<Image.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
 						<SkewTransform/>
-						<RotateTransform Angle="167.668"/>
+						<RotateTransform Angle="121.504"/>
 						<TranslateTransform X="1.93" Y="-11.382"/>
 					</TransformGroup>
 				</Image.RenderTransform>
