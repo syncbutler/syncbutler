@@ -35,7 +35,7 @@ namespace SyncButlerUI
 		/// <param name="e"></param>
 		public void NameIt_Click(object sender,RoutedEventArgs e)
         {
-			if(FirstTimeComputerNameText.Text.Trim().Length != 0)
+			if(FirstTimeComputerNameText.Text.Trim().Length == 0)
 			{
 				CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Please enter a valid computer name.");
 			}

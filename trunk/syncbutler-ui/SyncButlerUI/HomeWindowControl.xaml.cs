@@ -21,6 +21,7 @@ using SyncButler;
 using SyncButler.Exceptions;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.Windows.Threading;
 
 namespace SyncButlerUI
 {
@@ -97,6 +98,15 @@ namespace SyncButlerUI
 		{
 			this.InitializeComponent();
 		}
+        /// <summary>
+        /// a fix to focus control, when wpf give change focus to another control instead 
+        /// Source: http://stackoverflow.com/questions/1395887/wpf-cannot-set-focus/1401121#1401121
+        /// </summary>
+        /// <param name="a">the action "focus" of the textbox</param>
+        private void FocusControl(Action a)
+        {
+            this.Dispatcher.BeginInvoke(DispatcherPriority.Background, a);
+        }
 
         /// <summary>
         /// Indicates whether we're busy with a scan or resolve
@@ -602,6 +612,7 @@ namespace SyncButlerUI
 		        sourceTextBox.Text=PartnershipTempData.destinationPath;
 			    VisualStateManager.GoToState(this,"CreatePartnershipState2",false);
 				CurrentState = State.Page2OfCreate;
+                FocusControl(() => sourceTextBox.Focus());
             }
             catch (UserInputException uIException)
             {
@@ -620,6 +631,7 @@ namespace SyncButlerUI
             VisualStateManager.GoToState(this,"CreatePartnershipState1",false);
             CurrentState = State.Page1OfCreate;
             this.sourceTextBox.Clear();
+            FocusControl(() => sourceTextBox.Focus());
 		}
         private String GetPath(String Path)
         {
@@ -646,6 +658,7 @@ namespace SyncButlerUI
 				sourceTextBox.Text=PartnershipTempData.sourcePath;
 				
 				VisualStateManager.GoToState(this,"CreatePartnershipState1",false);
+                FocusControl(() => sourceTextBox.Focus());
 			}
             catch (UserInputException uIException)
             {
@@ -668,6 +681,7 @@ namespace SyncButlerUI
 				partnershipNameTextBox.Text=PartnershipTempData.partnershipName;	
 				VisualStateManager.GoToState(this,"CreatePartnershipState3",false);
 				CurrentState = State.Page3OfCreate;
+                FocusControl(() => partnershipNameTextBox.Focus());
             }
             catch (UserInputException uIException)
             {
@@ -684,6 +698,7 @@ namespace SyncButlerUI
 		   destinationTextBox1.Text=PartnershipTempData.destinationPath;
 		   VisualStateManager.GoToState(this,"CreatePartnershipState2",false);
 			CurrentState = State.Page2OfCreate;
+            FocusControl(() => sourceTextBox.Focus());
 		}
 		
 		
@@ -858,6 +873,7 @@ namespace SyncButlerUI
                     
                     VisualStateManager.GoToState(this, "CreatePartnershipState1", false);
                     CurrentState = State.Page1OfCreate;
+                    FocusControl(() => sourceTextBox.Focus());
 
                 }
                 else return;
@@ -959,6 +975,7 @@ namespace SyncButlerUI
                 PartnershipFolder1Label.Content = PartnershipTempData.sourcePath;
                 VisualStateManager.GoToState(this,"EditPartnershipState1",false);
                 CurrentState = State.Page1OfEdit;
+                FocusControl(() => sourceTextBox.Focus());
 			}
             catch(UserInputException uIException)
             {
@@ -980,6 +997,7 @@ namespace SyncButlerUI
                 PartnershipFolder1Label.Content = PartnershipTempData.sourcePath;
 				VisualStateManager.GoToState(this,"EditPartnershipState2",false);
 				CurrentState = State.Page2OfEdit;
+                FocusControl(() => sourceTextBox.Focus());
             }
             catch (UserInputException uIException)
             {
@@ -1000,6 +1018,7 @@ namespace SyncButlerUI
 		    sourceTextBox.Text=PartnershipTempData.sourcePath;
 		    
 			VisualStateManager.GoToState(this,"EditPartnershipState1",false);
+            FocusControl(() => sourceTextBox.Focus());
             CurrentState = State.Page1OfEdit;
             }
             catch (UserInputException uIException)
@@ -1022,6 +1041,7 @@ namespace SyncButlerUI
 			destinationTextBox1.Text=PartnershipTempData.destinationPath;
 			partnershipNameTextBox.Text=PartnershipTempData.partnershipName.Trim();	
 			VisualStateManager.GoToState(this,"EditPartnershipState3",false);
+            FocusControl(() => partnershipNameTextBox.Focus());
             CurrentState = State.Page3OfEdit;
             }
             catch (UserInputException uIException)
@@ -1038,7 +1058,9 @@ namespace SyncButlerUI
 		   PartnershipTempData.partnershipName=partnershipNameTextBox.Text;
 		   destinationTextBox1.Text=PartnershipTempData.destinationPath;
 		   
+
 		   VisualStateManager.GoToState(this,"EditPartnershipState2",false);
+           FocusControl(() => sourceTextBox.Focus());
            CurrentState = State.Page2OfEdit;
 		}
 		
