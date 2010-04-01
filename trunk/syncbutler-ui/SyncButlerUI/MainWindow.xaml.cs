@@ -109,11 +109,13 @@ namespace SyncButlerUI
 		{
             homeWindow1.CurrentState = HomeWindowControl.State.SBS;
             homeWindow1.FirstTimeHelp.Visibility = System.Windows.Visibility.Hidden;
+		
             if (!StopExistingOperation()) return;
             if (Controller.GetInstance().SBSEnable.Equals("Enable"))
             {
 				if(controller.IsFirstSBSRun()){
-					 FirstTimeStartupScreen dialog = new FirstTimeStartupScreen();
+					FirstTimeStartupScreen dialog = new FirstTimeStartupScreen();
+					dialog.WelcomeScreenControl.FirstTimeComputerNameText.Visibility=Visibility.Hidden;
 					VisualStateManager.GoToState(dialog.WelcomeScreenControl,"HelpScreen3",false);
 					controller.SetFirstSBSRun();
 					dialog.ShowDialog();

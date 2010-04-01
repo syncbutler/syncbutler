@@ -20,7 +20,7 @@
 	</Window.Triggers>
 
 	<Grid x:Name="WelcomeScreen">
-		<local:WelcomeScreenControl x:Name="WelcomeScreenControl"/>
+		<local:WelcomeScreenControl x:Name="WelcomeScreenControl" Width="640" Height="480"/>
 		<Button HorizontalAlignment="Right" Margin="0,13.5,15.5,0" Style="{DynamicResource CloseButton}" VerticalAlignment="Top" Width="31" Height="31" Click="CloseApp"/>
 	</Grid>
 </Window>
