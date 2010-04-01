@@ -341,7 +341,7 @@ namespace SyncButler
         /// <param name="ToMerge">The existing file list</param>
         /// <param name="FileListToCheck"> the file list that is new and required check</param>
         /// <param name="limit">the limit imposed by the user</param>
-        /// <returns>if the new file list is merged with the existing file list</returns>
+        /// <returns>true if all the file to check is merged, false if no or some of the files are merged</returns>
         private bool CheckAndMerge(SortedList<string, string> ToMerge, 
             SortedList<string, string> FileListToCheck, long limit)
         {
@@ -357,6 +357,16 @@ namespace SyncButler
             }
             else
             {
+                long CurrentFileSize;
+                foreach (string key in FileListToCheck.Keys)
+                {
+                    CurrentFileSize = WindowsFile.SizeOf(FileListToCheck[key]);
+                    if (totalSizeSoFar + CurrentFileSize <= limit)
+                    {
+                        ToMerge.Add(key, FileListToCheck[key]);
+                        return false;
+                    }
+                }
                 return false;
             }
         }
@@ -422,23 +432,32 @@ namespace SyncButler
             SortedList<string, string> interesting = new SortedList<string, string>();
             MostRecentlyUsedFile.statusMonitor = statusMonitor;
             SortedList<string,SortedList<string,string>> splited = ContentFilters.Spilt(MostRecentlyUsedFile.ConvertToSortedList(MostRecentlyUsedFile.GetAll()));
-            if (CheckAndMerge(interesting, splited["interestingHigh"], limit))
+            String[] mrulevels = { "interestingHigh", "interestingMedHigh", "interestingMed", "interestingLowMed", "interestingLow", "interestingUltraLow" };
+            bool done = false;
+            for (int i = 0; i < mrulevels.Length && !done; i++)
             {
-                if (CheckAndMerge(interesting, splited["interestingMedHigh"], limit))
+                if (!CheckAndMerge(interesting, splited[mrulevels[i]], limit))
                 {
-                    if (CheckAndMerge(interesting, splited["interestingMed"], limit))
-                    {
-                        if (CheckAndMerge(interesting, splited["interestingLowMed"], limit))
-                        {
-                            if (CheckAndMerge(interesting, splited["interestingLow"], limit))
-                            {
-                                CheckAndMerge(interesting, splited["interestingUltraLow"], limit);
-                            }
-                        }
-                    }
-                 
+                    done = true;
                 }
             }
+            //if (CheckAndMerge(interesting, splited["interestingHigh"], limit))
+            //{
+            //    if (CheckAndMerge(interesting, splited["interestingMedHigh"], limit))
+            //    {
+            //        if (CheckAndMerge(interesting, splited["interestingMed"], limit))
+            //        {
+            //            if (CheckAndMerge(interesting, splited["interestingLowMed"], limit))
+            //            {
+            //                if (CheckAndMerge(interesting, splited["interestingLow"], limit))
+            //                {
+            //                    CheckAndMerge(interesting, splited["interestingUltraLow"], limit);
+            //                }
+            //            }
+            //        }
+                 
+            //    }
+            //}
             SortedList<string, string> sensitive = splited["sensitive"];
             rtn.Add("sensitive", sensitive);
             rtn.Add("interesting", interesting);
