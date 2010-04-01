@@ -40,20 +40,23 @@ namespace SyncButler
             {
                 userActions.AddAction(Action.CopyToLeft);
                 userActions.AddAction(Action.DeleteRight);
+                if (suggestedAction == Action.Unknown) userActions.SetSelectedAction(Action.CopyToLeft);
             }
             else if (!right.Exists())
             {
                 userActions.AddAction(Action.CopyToRight);
                 userActions.AddAction(Action.DeleteLeft);
+                if (suggestedAction == Action.Unknown) userActions.SetSelectedAction(Action.CopyToRight);
             }
             else
             {
                 userActions.AddAction(Action.CopyToLeft);
                 userActions.AddAction(Action.CopyToRight);
+                if (suggestedAction == Action.Unknown) userActions.SetSelectedAction(Action.CopyToLeft);
              }
 
             userActions.AddAction(Action.Ignore);
-            userActions.SetSelectedAction(suggestedAction);
+            if (suggestedAction != Action.Unknown) userActions.SetSelectedAction(suggestedAction);
         }
 		
         /// <summary>
@@ -66,7 +69,7 @@ namespace SyncButler
         public Conflict(ISyncable left, ISyncable right, Action autoResolveAction, Action suggestedAction) : this(left, right, autoResolveAction)
         {
             this.suggestedAction = suggestedAction;
-            userActions.SetSelectedAction(suggestedAction);
+            if (suggestedAction != Action.Unknown) userActions.SetSelectedAction(suggestedAction);
         }
 
         /// <summary>
