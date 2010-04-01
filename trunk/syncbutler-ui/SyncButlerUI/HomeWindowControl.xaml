@@ -1656,7 +1656,7 @@
 			</Custom:DataGrid>
 			<Button x:Name="doneButton" HorizontalAlignment="Right" TabIndex="4" Margin="0,0,138.326,81.715" VerticalAlignment="Bottom" Width="76.238" Height="24.762" Content="Done" IsEnabled="False" Click="GoHome"/>
 			<TextBlock x:Name="CurrentSyncingFile_Copy" Margin="24.032,57.286,127.326,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="66.808"><Run Text="Sync Butler is syncing your files. If Sync Butler do not know what to do with a file, it will list it below. Please select the action you will like Sync Butler to take. When you are done, simply click on "/><Run FontWeight="Bold" Text="Resolve Conflicts"/><Run Text=" button."/></TextBlock>
-			<Button x:Name="resolveButton" TabIndex="1" HorizontalAlignment="Right" Margin="0,93.379,15.326,0" VerticalAlignment="Top" Width="106.718" Height="25.715" Content="Resolve Conflicts" Click="ResolvePartnership_Click"/>
+			<Button x:Name="resolveButton" TabIndex="1" HorizontalAlignment="Right" Margin="0,93.379,15.326,0" VerticalAlignment="Top" Width="106.718" Height="25.715" Content="Resolve Conflicts" Click="ResolvePartnership_Click" IsEnabled="False"/>
 			<Button x:Name="CancelButton" TabIndex="3" Margin="0,59.286,15.326,0" VerticalAlignment="Top" Height="25.716" Content="Cancel Sync" Click="CancelButton_Click" HorizontalAlignment="Right" Width="105.718"/>
 			<Label HorizontalAlignment="Left" Margin="25.032,0,0,21.619" VerticalAlignment="Bottom" Content="Current File Progress:" FontWeight="Bold"/>
 			<Label HorizontalAlignment="Left" Margin="24.532,0,0,3.333" VerticalAlignment="Bottom" Content="Overall Progress:" FontWeight="Bold"/>
