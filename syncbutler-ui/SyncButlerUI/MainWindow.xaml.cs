@@ -107,7 +107,7 @@ namespace SyncButlerUI
 
 		private void goToSyncButlerSync(object sender, RoutedEventArgs e)
 		{
-            homeWindow1.CurrentState = HomeWindowControl.State.SBS;
+            
             homeWindow1.FirstTimeHelp.Visibility = System.Windows.Visibility.Hidden;
 		
             if (!StopExistingOperation()) return;
@@ -121,8 +121,10 @@ namespace SyncButlerUI
 					dialog.ShowDialog();
 				}
                     homeWindow1.CheckIfEnoughSpace();
-					VisualStateManager.GoToState(homeWindow1, "SbsState1", false);
+                    homeWindow1.CurrentState = HomeWindowControl.State.SBS;
+                    VisualStateManager.GoToState(homeWindow1, "SbsState1", false);
 					homeWindow1.LoadMRUs();
+
 				
             }
             else
