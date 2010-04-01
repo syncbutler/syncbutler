@@ -1193,7 +1193,7 @@ namespace SyncButlerUI
             string Resolution = this.resolutionLabel.Content.ToString();
             if (FreeSpaceToUse <= 0 && SBSEnable.Equals("Enable"))
             {
-                showMessageBox(CustomDialog.MessageType.Warning, "The free space catered for SBS is set to be too low, please check");
+                showMessageBox(CustomDialog.MessageType.Warning, "The free space allocated too low. Please set it above 0 bytes.");
             }
             else if (!ComputerNameChecker.IsComputerNameValid(ComputerName))
             {
@@ -1229,7 +1229,7 @@ namespace SyncButlerUI
                     }
                     else
                     {
-                        showMessageBox(CustomDialog.MessageType.Error, "Device not detected\nPlease check if the device is plugged in.");
+                        showMessageBox(CustomDialog.MessageType.Error, "A Portable Storage was not found.\nPlease check if the device is plugged in.");
                     }
                 }
                 else
