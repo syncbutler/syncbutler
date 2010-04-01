@@ -1,4 +1,5 @@
 #summary Supplementary materials for the developer's guide
+#labels Featured
 #sidebar SyncButlerDevelopmentReferenceSidebar
 
 = Introduction =
