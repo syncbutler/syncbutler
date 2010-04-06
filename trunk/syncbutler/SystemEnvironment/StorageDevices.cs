@@ -190,19 +190,19 @@ namespace SyncButler.SystemEnvironment
         public static bool IsUSBDrive(string driveLetter)
         {
             driveLetter = driveLetter.TrimEnd('\\');
-            List<string> usbDriveList = GetUSBDriveLetters();
+            List<string> usbDriveList = GetRemovableDeviceDriveLetters();
             return (usbDriveList.Contains(driveLetter));
         }
 
         /// <summary>
-        /// Returns a List of drive letters of USB storage devices attached to the computer.
+        /// Returns a List of drive letters of all removable storage devices attached to the computer.
         /// Drive letter format is of the format X:
         /// </summary>
         /// <returns>List of USB Drive letters</returns>
-        public static List<string> GetUSBDriveLetters()
+        public static List<string> GetRemovableDeviceDriveLetters()
         {
             List<string> list = new List<string>();
-            ManagementObjectSearcher DDMgmtObjSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive WHERE InterfaceType='USB'");
+            ManagementObjectSearcher DDMgmtObjSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive WHERE MediaType='Removable Media' OR InterfaceType = 'USB'");
 
             foreach (ManagementObject DDObj in DDMgmtObjSearcher.Get())
             {

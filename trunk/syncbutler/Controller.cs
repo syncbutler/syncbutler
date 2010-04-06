@@ -89,7 +89,7 @@ namespace SyncButler
 		public List<string> GetUSBDriveLetters()
 		{
             
-			return SyncButler.SystemEnvironment.StorageDevices.GetUSBDriveLetters();
+			return SyncButler.SystemEnvironment.StorageDevices.GetRemovableDeviceDriveLetters();
 		}
 
         /// <summary>
