@@ -22,7 +22,7 @@ namespace SyncButler
         
         ///List of persistence attributes
         private SortedList<string,Partnership> partnershipList;
-        private SortedList<string, Partnership> miniPartnershipList;
+        private SortedList<string,Partnership> miniPartnershipList;
         private static bool allowAutoSyncForConflictFreeTasks;
         private static bool firstRunComplete;
         private static bool computerNamed = false;
@@ -93,6 +93,10 @@ namespace SyncButler
             return partnershipList;
         }
 
+        /// <summary>
+        /// Returns the mini partnership list.
+        /// </summary>
+        /// <returns>A sorted list of mini partnerships</returns>
         public SortedList<string, Partnership> GetMiniPartnershipsList()
         {
             return miniPartnershipList;
@@ -139,6 +143,11 @@ namespace SyncButler
             StoreEnv(); //Save the partnership to disk immediately
         }
 
+        /// <summary>
+        /// Checks if a given path to see if it can be synchronised.
+        /// </summary>
+        /// <param name="path">Path to be checked</param>
+        /// <returns>False if it belongs to a special system folder.</returns>
         private bool IsValidSystemObject(string path)
         {
             List<string> specialItems = new List<string>();
@@ -162,18 +171,35 @@ namespace SyncButler
         /// <param name="source">full path to the source</param>
         public void AddMiniPartnership(string source)
         {
-            string name = source; //possible solution is to use the full path as the name for mini partnerships or just null
+            string name = source;
+            bool fileExist = File.Exists(source);
+            bool directoryExist = Directory.Exists(source);
+            //Check that the path exists.
+            if (!(fileExist || directoryExist))
+                throw new ArgumentException("This path does not exist.");
             
             System.Diagnostics.Debug.Assert((name != null) && (name.Length > 0));
-            Partnership element = CreatePartnership(name, source, miniSyncPath);
+            Partnership element;
 
+            if (fileExist)
+            {
+                FileInfo fi = new FileInfo(source);
+                element = CreatePartnership(name, source, miniSyncPath + fi.Name);            
+            }
+            else //(directoryExist)
+            {
+                DirectoryInfo di = new DirectoryInfo(source);
+                element = CreatePartnership(name, source, miniSyncPath + di.Name);
+            }
+           
+            //The name is the path.
             if (!IsUniquePartnershipName(name, miniPartnershipList))
-                throw new ArgumentException("Friendly name already in used");
+                throw new ArgumentException("This path is already in use.");
 
             //Usually CheckIsUniquePartnership will check for IsUniquePartnershipName too
             //since we checked it already, the exception caught will be more specified
             if (!IsUniquePartnershipPath(name, source, miniSyncPath, miniPartnershipList))
-                throw new ArgumentException("Such file/folder partnership already exist");
+                throw new ArgumentException("This partnership already exists.");
 
             miniPartnershipList.Add(name, element);
             StoreEnv(); //Save the partnership to disk immediately
@@ -207,6 +233,16 @@ namespace SyncButler
         {
             partnershipList.Remove(name);
             StoreEnv();
+        }
+
+        /// <summary>
+        /// Removes specified mini partnership in the mini partnership list
+        /// </summary>
+        /// <param name="idx">Removes the mini partnership at a given path</param>
+        public void RemoveMiniPartnership(string path)
+        {
+            miniPartnershipList.Remove(path);
+            StoreEnv(); //Save the partnership to disk immediately
         }
 
         /// <summary>

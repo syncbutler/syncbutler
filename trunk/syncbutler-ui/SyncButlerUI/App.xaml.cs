@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Windows;
+using System.Threading;
 using SyncButler;
 using SyncButler.Exceptions;
 
@@ -29,7 +30,6 @@ namespace SyncButlerUI
             {
                 if (Controller.TestSingleInstance(e.Args))
                 {
-
                     try
                     {
                         new MainWindow().ShowDialog();

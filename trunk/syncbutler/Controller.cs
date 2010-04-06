@@ -21,9 +21,12 @@ namespace SyncButler
 
         private SyncEnvironment syncEnvironment;
         private IGUI mainWindow;
+        private static List<String> errorList = new List<string>();
         private static Controller controller;
         private string sbsLogfile;
-		public static int conflictCount { get; set;}
+		public static int conflictCount {get; set;}
+        private static MiniPartnershipForm mpForm;
+        private static MiniPartnershipForm errForm;
 		
         /// <summary>
         /// Used by check and merged to see the total size of the files to be sync so far.
@@ -38,6 +41,9 @@ namespace SyncButler
             syncEnvironment = SyncEnvironment.GetInstance();
             //console = new SyncButlerConsole.Form1();
             //console.Show();
+            mpForm = new MiniPartnershipForm();
+            errForm = new MiniPartnershipForm();
+            errForm.Text = "Error List";
             Logging.Logger.GetInstance().DEBUG("Controller started up.");
         }
 
@@ -62,7 +68,6 @@ namespace SyncButler
         {
             if (controller == null)
                 controller = new Controller();
-
             return controller;
         }
 
@@ -110,26 +115,89 @@ namespace SyncButler
                 SingleInstance.Cleanup();
                 return false;
             }
-            // This is the 1st instance.
+            // This is the 1st instance. Handle the arguments.
+            ReceiveAction(args);
             return true;
         }
 
         /// <summary>
         /// Handles incoming data from other instances.
         /// </summary>
-        /// <param name="args">Command line arguments</param>
+        /// <param name="args">Command line arguments - Format: [flag] [path]</param>
         private static void ReceiveAction(string[] args)
         {
-            Controller.GetInstance().GrabFocus(); // grab focus
-            int i = 0;
-            foreach (string str in args) 
-            {
-                Logging.Logger.GetInstance().DEBUG(i++ + " " + str + " received");
-            }
+            Controller control = Controller.GetInstance();
+            control.GrabFocus(); // grab focus
 
-            
-            // TODO: Process the arguements received
+            string output = "";
+            foreach (string str in args)
+                output = output + str + " ";
+            output = output.TrimEnd();
+
+            if (!(args.Length == 2))
+            {
+                Logging.Logger.GetInstance().WARNING("Invalid Command Line Arguments" + output);
+                return;
+            }
+             
+            Logging.Logger.GetInstance().DEBUG(output + " received");
+            // TODO: Process the arguments received
+            switch (args[0])
+            {
+                case "-addmini":
+                    string error = AddToMiniPartnerships(args[1]);
+                    if (!(error == "")) //if some error is returned
+                    {
+                        errorList.Add(args[1] + error);
+                        UpdateErrorList();
+                    }
+                    UpdateMPList();
+                    break;
+                default:
+                    //unknown commands
+                    Logging.Logger.GetInstance().WARNING("Unknown Command Line Arguments" + output);
+                    break;
+            }
         }
+
+        private static void UpdateMPList()
+        {
+            mpForm.miniListBox.Items.Clear();
+            foreach (Partnership item in SyncEnvironment.GetInstance().GetMiniPartnershipsList().Values)
+                mpForm.miniListBox.Items.Add(item.Name);
+            if (!mpForm.Visible)
+                mpForm.ShowDialog();
+         //   mpForm.Refresh();
+        }
+
+        private static void UpdateErrorList()
+        {
+            errForm.miniListBox.Items.Clear();
+            foreach (string item in errorList)
+                errForm.miniListBox.Items.Add(item);
+            if (!errForm.Visible)
+                errForm.ShowDialog();
+          //  errForm.Refresh();
+        }
+        /// <summary>
+        /// Adds to the list of mini partnerships.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        private static string AddToMiniPartnerships(string path)
+        {
+            try
+            {
+                SyncEnvironment.GetInstance().AddMiniPartnership(path);
+            }
+            catch (ArgumentException ae)
+            {
+                return ae.Message;
+            }
+            return "";
+        }
+
+        
 
         public bool IsSBSDriveEnough()
         {
