@@ -13,18 +13,6 @@ namespace SyncButler.MRU
     /// </summary>
     public class MostRecentlyUsedFile
     {
-        [DllImport("shell32.dll")]
-        private static extern Int32 SHGetPathFromIDListW(
-            UIntPtr pidl, [MarshalAs(UnmanagedType.LPWStr)] StringBuilder pszPath);
-
-        [DllImport("shell32.dll")]
-        private static extern IntPtr ILCombine(
-            IntPtr pidl1, IntPtr pidl2);
-
-        [DllImport("shell32.dll")]
-        private static extern void ILFree(
-            IntPtr pidl);
-
         public static SyncableStatusMonitor statusMonitor = null;
 
         public static List<string> GetAll()
@@ -250,7 +238,7 @@ namespace SyncButler.MRU
                 throw new NotSupportedException("Imcompatible (Newer) Version of Windows Detected. Feature not supported");
 
             if (Environment.OSVersion.Version.Major >= 6)
-                return GetPidl(key, "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ComDlg32\\OpenSavePidlMRU\\*");
+                return Win32.Win32Wrapper.GetPidl(key, "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ComDlg32\\OpenSavePidlMRU\\*");
             else
                 return GetNonPidl(key, "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ComDlg32\\OpenSaveMRU\\*");
         }
@@ -312,7 +300,7 @@ namespace SyncButler.MRU
             {
                 if (!index.Equals("MRUListEx"))
                 {
-                    mrus.Add(GetPidl(index, key));
+                    mrus.Add(Win32.Win32Wrapper.GetPidl(index, key));
                 }
             }
             return mrus;
@@ -336,44 +324,6 @@ namespace SyncButler.MRU
             return value;
         }
 
-        /// <summary>
-        /// Get the most recently used (MRU) file for windows vista and above
-        /// </summary>
-        /// <param name="index">The index of the MRU</param>
-        /// <param name="key">The registry key to the MRU</param>
-        /// <returns>return path of the file</returns>
-        /// <exception cref="System.NullReferenceException">The given registry key or the index is not found.</exception>
-        private static string GetPidl(string index, string key)
-        {
-            RegistryKey regKey = Registry.CurrentUser.OpenSubKey(key);
-
-            if (regKey == null)
-                throw new NullReferenceException();
-
-            object value = regKey.GetValue(index);
-
-            if (value == null)
-                throw new NullReferenceException();
-
-            byte[] data = (byte[])(value);
-
-            IntPtr p = Marshal.AllocHGlobal(data.Length);
-
-            Marshal.Copy(data, 0, p, data.Length);
-
-            // get number of data;
-            UInt32 cidl = (UInt32)Marshal.ReadInt16(p);
-
-            // get parent folder
-            UIntPtr parentpidl = (UIntPtr)((UInt32)p);
-
-            StringBuilder path = new StringBuilder(256);
-
-            SHGetPathFromIDListW(parentpidl, path);
-
-            Marshal.Release(p);
-
-            return path.ToString();
-        }
+        
     }
 }

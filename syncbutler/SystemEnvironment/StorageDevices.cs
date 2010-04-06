@@ -217,6 +217,7 @@ namespace SyncButler.SystemEnvironment
 
             return list;
         }
+
         /// <summary>
         /// Returns a List of drive letters of Non USB storage devices attached to the computer.
         /// Drive letter format is of the format X:

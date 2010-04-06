@@ -36,6 +36,7 @@ namespace SyncButler
         private static char sbsDriveLetter;
         private static string resolution;
         private static double freeSpaceToUse;
+        private static List<String> unwanted;
 
         //List of runtime variables
         private static System.Configuration.Configuration config;
