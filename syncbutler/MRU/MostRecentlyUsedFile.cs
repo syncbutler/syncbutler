@@ -56,7 +56,7 @@ namespace SyncButler.MRU
             if (statusMonitor != null) statusMonitor(new SyncableStatus("", 0, 56, SyncableStatus.ActionType.Sync));
             List<string> drives = SystemEnvironment.StorageDevices.GetNonUSBDriveLetters();
             
-            drives.AddRange(SystemEnvironment.StorageDevices.GetUSBDriveLetters());
+            drives.AddRange(SystemEnvironment.StorageDevices.GetRemovableDeviceDriveLetters());
 
             int done = 1;
             double toPercent = 0; 

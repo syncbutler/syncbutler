@@ -117,6 +117,7 @@
     <None Include="Application.ico">
       <Visible>false</Visible>
     </None>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup>
     <BlendEmbeddedFont Include="Fonts\segoeuiz.ttf">
