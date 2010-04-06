@@ -1195,9 +1195,14 @@
 					</LinearGradientBrush>
 				</Rectangle.Fill>
 			</Rectangle>
-			<Button x:Name="ViewPartnerships" HorizontalAlignment="Right" Margin="0,258.731,168,-20.5" Style="{DynamicResource ViewPartnershipButton}" Width="167" Content="" Click="GoToViewPartnerships_Click" Cursor="Hand" TabIndex="3"/>
-			<Button x:Name="ExploreFeaturesButton" HorizontalAlignment="Right" Margin="0,0,-0.5,3.334" Style="{DynamicResource ExploreFeaturesButton}" VerticalAlignment="Bottom" Width="169.25" Height="182.269" Content="" d:LayoutOverrides="VerticalAlignment" Click="GoToExploreFeatures_Click" TabIndex="3" Cursor="Hand"/>
+			<Button x:Name="ViewPartnerships" HorizontalAlignment="Right" Margin="0,258.731,168,-20.5" Style="{DynamicResource ViewPartnershipButton}" Width="167" Content="" Click="GoToViewPartnerships_Click" Cursor="Hand" TabIndex="3">
+				<Button.ToolTip>View Partnership</Button.ToolTip>
+			</Button>
+			<Button x:Name="ExploreFeaturesButton" HorizontalAlignment="Right" Margin="0,0,-0.5,3.334" Style="{DynamicResource ExploreFeaturesButton}" VerticalAlignment="Bottom" Width="169.25" Height="182.269" Content="" d:LayoutOverrides="VerticalAlignment" Click="GoToExploreFeatures_Click" TabIndex="3" Cursor="Hand">
+				<Button.ToolTip>Explore Features</Button.ToolTip>
+			</Button>
 			<Button x:Name="CreatePartnershipButton" HorizontalAlignment="Left" Margin="7,0,0,2" Style="{DynamicResource CreatePartnersButton}" VerticalAlignment="Bottom" Width="164.483" Height="183.269" Content="" Cursor="Hand" Click="GoToCreatePartnership_Click" TabIndex="2" RenderTransformOrigin="0.5,0.5">
+				<Button.ToolTip>Create Partnership</Button.ToolTip>
 				<Button.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
@@ -1207,7 +1212,9 @@
 					</TransformGroup>
 				</Button.RenderTransform>
 			</Button>
-			<Button x:Name="SyncButton" Margin="-0.175,1,4.388,184.27" Style="{DynamicResource SyncButton}" Content="" Cursor="Hand" Click="Sync" TabIndex="1"/>
+			<Button x:Name="SyncButton" Margin="-0.175,1,4.388,184.27" Style="{DynamicResource SyncButton}" Content="" Cursor="Hand" Click="Sync" TabIndex="1">
+				<Button.ToolTip>Start Syncing!</Button.ToolTip>
+			</Button>
 		</Grid>
 		<Grid x:Name="CreateEditPartnershipsGrid" Margin="9.5,0,-60.193,0" Visibility="Hidden" RenderTransformOrigin="0.5,0.5" >
 			<Grid.RenderTransform>
