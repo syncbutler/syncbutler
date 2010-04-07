@@ -73,7 +73,10 @@ namespace SyncButler
 
         public override string ToString()
         {
-            return Label + " - " + "[" + DriveLetter + ":]";
+            if (Label != null && Label.Length != 0)
+                return Label + " - " + "[" + DriveLetter + ":]";
+            else
+                return "[" + this.DriveLetter + ":]";
         }
     }
 }
