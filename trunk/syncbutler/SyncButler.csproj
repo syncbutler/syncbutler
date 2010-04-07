@@ -89,6 +89,7 @@
     <Compile Include="SystemEnvironment\StorageDevices.cs" />
     <Compile Include="Win32\SHFILEINFO.cs" />
     <Compile Include="Win32\Win32.cs" />
+    <Compile Include="WindowDriveInfo.cs" />
     <Compile Include="WindowsFileSystem.cs" />
     <Compile Include="Conflict.cs" />
     <Compile Include="ISyncable.cs" />
