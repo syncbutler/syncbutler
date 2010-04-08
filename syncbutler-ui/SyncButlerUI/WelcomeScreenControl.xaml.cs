@@ -12,6 +12,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TetonWhitewaterKayak;
 using SyncButler;
+using System.Windows.Threading;
 
 namespace SyncButlerUI
 {
@@ -30,6 +31,15 @@ namespace SyncButlerUI
 			this.InitializeComponent();
             
 		}
+	    /// <summary>
+        /// a fix to focus control, when wpf give change focus to another control instead 
+        /// Source: http://stackoverflow.com/questions/1395887/wpf-cannot-set-focus/1401121#1401121
+        /// </summary>
+        /// <param name="a">the action "focus" of the textbox</param>
+        private void FocusControl(Action a)
+        {
+            this.Dispatcher.BeginInvoke(DispatcherPriority.Background, a);
+        }
 		
 		/// <summary>
 		/// Button for Naming the Computer the first time
@@ -52,6 +62,7 @@ namespace SyncButlerUI
                 controller.SetFirstComputerName(FirstTimeComputerNameText.Text.Trim());
                 CurrentState = State.OpenWindow;
                 VisualStateManager.GoToState(this, "HelpScreen1", false);
+				FocusControl(() => HelpScreen1NextBtn.Focus());
             }
             else
             {
@@ -62,7 +73,13 @@ namespace SyncButlerUI
 		{
             CurrentState = State.AllowClose;
 			VisualStateManager.GoToState(this, "HelpScreen1", false);
+			FocusControl(() => HelpScreen1NextBtn.Focus());
 		}
+        public void GoToSBSScreen()
+        {
+            VisualStateManager.GoToState(this, "HelpScreen3", false);
+            FocusControl(() => HelpScreenCloseBtn.Focus());
+        }
 		/// <summary>
 		/// Goes to the 2nd Screen of Help
 		/// </summary>
@@ -71,6 +88,7 @@ namespace SyncButlerUI
 		public void GoToHelpScreen2_Click(object sender,RoutedEventArgs e)
         {
             VisualStateManager.GoToState(this,"HelpScreen2",false);
+            FocusControl(() => HelpScreenFinishBtn.Focus());
 		}	
 		public void ExitTutorial_Click(object sender,RoutedEventArgs e)
         {
