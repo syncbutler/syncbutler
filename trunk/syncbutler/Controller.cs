@@ -594,7 +594,10 @@ namespace SyncButler
                 errorHandler.Invoke(new Exception("Device not detected\nPlease plug in the device configured for SBS."));
             }
         }
-
+        public void OpenFile(String filename)
+        {
+            System.Diagnostics.Process.Start(filename);
+        }
         /// <summary>
         /// This method is required to be run when the program is closed. It
         /// saves all the necessary state into memory
