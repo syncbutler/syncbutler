@@ -10,7 +10,7 @@ namespace SyncButler
     /// <summary>
     /// A logical repesentation of drive information
     /// </summary>
-    class WindowDriveInfo
+    public class WindowDriveInfo
     {
         private char DriveLetter;
         private String Label;
@@ -28,15 +28,19 @@ namespace SyncButler
             }
             this.DriveLetter = DriveLetter[0];
 
-            if (!Directory.Exists(DriveLetter + ":\\"))
+            if (!Directory.Exists(DriveLetter[0] + ":\\"))
             {
                 throw new Exception("invalid drive");
             }
 
-            DriveInfo di = new DriveInfo(DriveLetter);
+            DriveInfo di = new DriveInfo(""+ DriveLetter[0]);
             Label = di.VolumeLabel;
         }
 
+        public char GetDriveLetter()
+        {
+            return this.DriveLetter;
+        }
         /// <summary>
         /// The constructor to initilize the class
         /// </summary>
@@ -60,7 +64,7 @@ namespace SyncButler
         /// </summary>
         /// <param name="DriveLetters">A list of drive letters</param>
         /// <returns>A list of drive information</returns>
-        public static List<WindowDriveInfo> GetDriveInfo(Collection<String> DriveLetters)
+        public static List<WindowDriveInfo> GetDriveInfo(List<String> DriveLetters)
         {
             List<WindowDriveInfo> ToRtn = new List<WindowDriveInfo>(); 
             foreach (String s in DriveLetters)
@@ -77,6 +81,15 @@ namespace SyncButler
                 return Label + " - " + "[" + DriveLetter + ":]";
             else
                 return "[" + this.DriveLetter + ":]";
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is WindowDriveInfo))
+                return false;
+            WindowDriveInfo wdi = (WindowDriveInfo)obj;
+
+            return wdi.GetDriveLetter() == this.GetDriveLetter() ;
         }
     }
 }

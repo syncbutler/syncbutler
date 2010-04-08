@@ -86,19 +86,19 @@ namespace SyncButler
         /// get a list of usb drive letters
         /// </summary>
         /// <returns>a list of usb drive letters</returns>
-		public List<string> GetUSBDriveLetters()
+        public List<WindowDriveInfo> GetUSBDriveLetters()
 		{
             
-			return SyncButler.SystemEnvironment.StorageDevices.GetRemovableDeviceDriveLetters();
+			return WindowDriveInfo.GetDriveInfo(SyncButler.SystemEnvironment.StorageDevices.GetRemovableDeviceDriveLetters());
 		}
 
         /// <summary>
         /// Get a list of non usb drives letters
         /// </summary>
         /// <returns>a ist of non usb drive letters</returns>
-        public List<string> GetNonUSBDriveLetters()
+        public List<WindowDriveInfo> GetNonUSBDriveLetters()
         {
-            return SyncButler.SystemEnvironment.StorageDevices.GetNonUSBDriveLetters();
+            return WindowDriveInfo.GetDriveInfo(SyncButler.SystemEnvironment.StorageDevices.GetNonUSBDriveLetters());
         }
 
         /// <summary>
@@ -694,20 +694,28 @@ namespace SyncButler
         /// Get the sbs drive letter
         /// </summary>
         /// <returns>sbs drive letter</returns>
-        public char GetSBSDriveLetter()
+        public WindowDriveInfo GetSBSDriveLetter()
         {
+            char sbsDriveLetter;
             if (SyncEnvironment.SBSDriveId == null || SyncEnvironment.SBSDriveId.Length == 0)
-                return SyncEnvironment.SBSDriveLetter;
+                sbsDriveLetter =  SyncEnvironment.SBSDriveLetter;
             try
             {
                 string driveletter = SystemEnvironment.StorageDevices.GetDriveLetter(SyncEnvironment.SBSDriveId, SyncEnvironment.SBSDrivePartition);
                 if (driveletter.Length == 0)
-                    return SyncEnvironment.SBSDriveLetter;
-                return driveletter[0];
+                {
+                    sbsDriveLetter = SyncEnvironment.SBSDriveLetter;
+                }
+                else
+                {
+                    sbsDriveLetter = driveletter[0];
+                }
+                WindowDriveInfo wdi = new WindowDriveInfo(sbsDriveLetter);
+                return wdi;
             }
             catch (Exceptions.DriveNotSupportedException)
             {
-                return SyncEnvironment.SBSDriveLetter;
+                return new WindowDriveInfo("" + SyncEnvironment.SBSDriveLetter);
             }
         }
 
