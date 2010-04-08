@@ -227,7 +227,7 @@
 					</TransformGroup>
 				</Image.RenderTransform>
 			</Image>
-			<Button Margin="0,0,4.6,5.8" VerticalAlignment="Bottom" Height="39.2" Content="Next" FontWeight="Bold" FontSize="18.667" Click="GoToHelpScreen2_Click" HorizontalAlignment="Right" Width="83.2"/>
+			<Button Name="HelpScreen1NextBtn" Margin="0,0,4.6,5.8" VerticalAlignment="Bottom" Height="39.2" Content="Next" FontWeight="Bold" FontSize="18.667" Click="GoToHelpScreen2_Click" HorizontalAlignment="Right" Width="83.2" TabIndex="1"/>
 			<Image Margin="0,0,140.2,108" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="31.2" HorizontalAlignment="Right" Width="52">
 				<Image.RenderTransform>
 					<TransformGroup>
@@ -249,7 +249,7 @@
 				<ic:ExtendedVisualStateManager/>
 			</VisualStateManager.CustomVisualStateManager>
 
-			<Button Margin="67.08,0,4.6,5.8" VerticalAlignment="Bottom" Height="39.2" Content="FINISH" FontSize="18.667" FontWeight="Bold" Grid.Column="1" Click="ExitTutorial_Click"/>
+			<Button Margin="67.08,0,4.6,5.8" Name="HelpScreenFinishBtn" VerticalAlignment="Bottom" Height="39.2" Content="FINISH" FontSize="18.667" FontWeight="Bold" Grid.Column="1" Click="ExitTutorial_Click"/>
 			<Image x:Name="image3" Margin="204.3,148.5,239.22,0" Source="Images\StarBullet.png" Stretch="Fill" VerticalAlignment="Top" Height="41.6" RenderTransformOrigin="0.5,0.5">
 				<Image.RenderTransform>
 					<TransformGroup>
@@ -283,7 +283,7 @@
 			<VisualStateManager.CustomVisualStateManager>
 				<ic:ExtendedVisualStateManager/>
 			</VisualStateManager.CustomVisualStateManager>
-			<Button Margin="67.08,0,4.6,5.8" VerticalAlignment="Bottom" Height="39.2" Content="CLOSE" Grid.Column="1" FontWeight="Bold" FontSize="18.667" Click="ExitTutorial_Click"/>
+			<Button Name="HelpScreenCloseBtn" Margin="67.08,0,4.6,5.8" VerticalAlignment="Bottom" Height="39.2" Content="CLOSE" Grid.Column="1" FontWeight="Bold" FontSize="18.667" Click="ExitTutorial_Click"/>
 			<Image Margin="126.417,73.825,0,134.775" Source="Images/SBSWindow.png" Stretch="Fill"/>
 			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="13.8,104,0,0" VerticalAlignment="Top" Height="116.8" HorizontalAlignment="Left" Width="139.2" d:LayoutOverrides="VerticalAlignment"/>
 			<TextBlock Margin="21.6,112.8,0,0" Foreground="White" TextWrapping="Wrap" FontWeight="Bold" HorizontalAlignment="Left" Width="122" VerticalAlignment="Top" Height="99.2"><Run Text="New or recently used files appear here. "/><Run FontFamily="Walkway Black" FontSize="14.667" Text="SyncButler "/><Run Text="will make a duplicate and store it on your "/><Run Text="USB storage device."/></TextBlock>

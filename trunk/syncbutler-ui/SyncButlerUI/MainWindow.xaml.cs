@@ -92,9 +92,10 @@ namespace SyncButlerUI
           		if(controller.IsFirstSBSRun()){
 					FirstTimeStartupScreen dialog = new FirstTimeStartupScreen();
 					dialog.WelcomeScreenControl.FirstTimeComputerNameText.Visibility=Visibility.Hidden;
-					VisualStateManager.GoToState(dialog.WelcomeScreenControl,"HelpScreen3",false);
+					//VisualStateManager.GoToState(dialog.WelcomeScreenControl,"HelpScreen3",false);
 					controller.SetFirstSBSRun();
                     dialog.Title = "SyncButler - Help";
+                    dialog.WelcomeScreenControl.GoToSBSScreen();
 					dialog.ShowDialog();
 				}
                     homeWindow1.CheckIfEnoughSpace();

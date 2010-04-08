@@ -596,6 +596,7 @@ namespace SyncButlerUI
                 VisualStateManager.GoToState(dialog.WelcomeScreenControl, "HelpScreen3", false);
                 Controller.GetInstance().SetFirstSBSRun();
                 dialog.Title = "SyncButler - Help";
+                dialog.WelcomeScreenControl.GoToSBSScreen();
                 dialog.ShowDialog();
             }
         }
@@ -616,7 +617,7 @@ namespace SyncButlerUI
             this.folderOneTextBox.Clear();
             this.folderTwoTextBox.Clear();
             this.partnershipNameTextBox.Clear();
-            FocusControl(() => folderOneTextBox.Focus());
+            FocusControl(() => folderOneTextBox.Focus());			
         }
         /// <summary>
         /// GetPath of folder in directory browser dialog
@@ -752,9 +753,11 @@ namespace SyncButlerUI
         private void GoToExploreFeatures_Click(object sender, RoutedEventArgs e)
         {
             FirstTimeStartupScreen dialog = new FirstTimeStartupScreen();
-            dialog.WelcomeScreenControl.GoToHelpScreen();
+            
             dialog.WelcomeScreenControl.FirstTimeComputerNameText.Visibility = Visibility.Hidden;
             dialog.Title = "SyncButler - Help";
+            
+            dialog.WelcomeScreenControl.GoToHelpScreen();
             dialog.ShowDialog();
         }
 
