@@ -5,7 +5,6 @@
     <_SolutionProjectCacheVersion>3.5</_SolutionProjectCacheVersion>
   </PropertyGroup>
   <ItemGroup>
-    <_SolutionProjectProjects Include="..\syncbutler-console\SyncButlerConsole.csproj" />
     <_SolutionProjectProjects Include="..\syncbutler\SyncButler.csproj" />
     <_SolutionProjectProjects Include="SyncButlerUI\SyncButlerUI.csproj" />
   </ItemGroup>
@@ -14,10 +13,6 @@
       <Configuration>Debug</Configuration>
       <Platform>AnyCPU</Platform>
     </BuildLevel1>
-    <BuildLevel0 Include="..\syncbutler-console\SyncButlerConsole.csproj">
-      <Configuration>Debug</Configuration>
-      <Platform>AnyCPU</Platform>
-    </BuildLevel0>
     <BuildLevel0 Include="..\syncbutler\SyncButler.csproj">
       <Configuration>Debug</Configuration>
       <Platform>AnyCPU</Platform>
@@ -28,10 +23,6 @@
       <Configuration>Release</Configuration>
       <Platform>AnyCPU</Platform>
     </BuildLevel1>
-    <BuildLevel0 Include="..\syncbutler-console\SyncButlerConsole.csproj">
-      <Configuration>Release</Configuration>
-      <Platform>AnyCPU</Platform>
-    </BuildLevel0>
     <BuildLevel0 Include="..\syncbutler\SyncButler.csproj">
       <Configuration>Release</Configuration>
       <Platform>AnyCPU</Platform>
@@ -49,11 +40,11 @@
     <AspNetConfiguration>$(Configuration)</AspNetConfiguration>
   </PropertyGroup>
   <PropertyGroup>
-    <SolutionDir>D:\Documents\CS3215\CS3215 Project Source\syncbutler-ui\</SolutionDir>
+    <SolutionDir>C:\Users\Rachel^_^\Documents\My Dropbox\ver of syncbutler\SyncButler Merge\syncbutler-ui\</SolutionDir>
     <SolutionExt>.sln</SolutionExt>
     <SolutionFileName>SyncButlerUI.sln</SolutionFileName>
     <SolutionName>SyncButlerUI</SolutionName>
-    <SolutionPath>D:\Documents\CS3215\CS3215 Project Source\syncbutler-ui\SyncButlerUI.sln</SolutionPath>
+    <SolutionPath>C:\Users\Rachel^_^\Documents\My Dropbox\ver of syncbutler\SyncButler Merge\syncbutler-ui\SyncButlerUI.sln</SolutionPath>
   </PropertyGroup>
   <PropertyGroup>
     <TargetFrameworkVersion Condition="'$(TargetFrameworkVersion)' == '' and '$(MSBuildToolsVersion)' == '2.0'">v2.0</TargetFrameworkVersion>
@@ -64,7 +55,6 @@
       <SolutionConfiguration xmlns="">
         <ProjectConfiguration Project="{14E59299-D03C-44C8-9C0C-E2B4CC5C2BDB}">Debug|AnyCPU</ProjectConfiguration>
         <ProjectConfiguration Project="{91049E12-5D15-4092-ADBA-C8883AC12AA0}">Debug|AnyCPU</ProjectConfiguration>
-        <ProjectConfiguration Project="{CD271A2A-1A70-43A5-BB6B-ED171A11A222}">Debug|AnyCPU</ProjectConfiguration>
       </SolutionConfiguration>
     </CurrentSolutionConfigurationContents>
   </PropertyGroup>
@@ -73,7 +63,6 @@
       <SolutionConfiguration xmlns="">
         <ProjectConfiguration Project="{14E59299-D03C-44C8-9C0C-E2B4CC5C2BDB}">Release|AnyCPU</ProjectConfiguration>
         <ProjectConfiguration Project="{91049E12-5D15-4092-ADBA-C8883AC12AA0}">Release|AnyCPU</ProjectConfiguration>
-        <ProjectConfiguration Project="{CD271A2A-1A70-43A5-BB6B-ED171A11A222}">Release|AnyCPU</ProjectConfiguration>
       </SolutionConfiguration>
     </CurrentSolutionConfigurationContents>
   </PropertyGroup>
@@ -132,30 +121,6 @@
   <Target Name="SyncButler:Publish" Condition="'$(CurrentSolutionConfigurationContents)' != ''">
     <MSBuild Projects="..\syncbutler\SyncButler.csproj" Targets="Publish" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') " />
     <MSBuild Projects="..\syncbutler\SyncButler.csproj" Targets="Publish" Properties="Configuration=Release; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') " />
-  </Target>
-  <Target Name="SyncButlerConsole" Condition="'$(CurrentSolutionConfigurationContents)' != ''" Outputs="@(SyncButlerConsoleBuildOutput)">
-    <MSBuild Projects="..\syncbutler-console\SyncButlerConsole.csproj" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') ">
-      <Output TaskParameter="TargetOutputs" ItemName="SyncButlerConsoleBuildOutput" />
-    </MSBuild>
-    <MSBuild Projects="..\syncbutler-console\SyncButlerConsole.csproj" Properties="Configuration=Release; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') ">
-      <Output TaskParameter="TargetOutputs" ItemName="SyncButlerConsoleBuildOutput" />
-    </MSBuild>
-  </Target>
-  <Target Name="SyncButlerConsole:Clean" Condition="'$(CurrentSolutionConfigurationContents)' != ''">
-    <MSBuild Projects="..\syncbutler-console\SyncButlerConsole.csproj" Targets="Clean" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') " />
-    <MSBuild Projects="..\syncbutler-console\SyncButlerConsole.csproj" Targets="Clean" Properties="Configuration=Release; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') " />
-  </Target>
-  <Target Name="SyncButlerConsole:Rebuild" Condition="'$(CurrentSolutionConfigurationContents)' != ''" Outputs="@(SyncButlerConsoleBuildOutput)">
-    <MSBuild Projects="..\syncbutler-console\SyncButlerConsole.csproj" Targets="Rebuild" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') ">
-      <Output TaskParameter="TargetOutputs" ItemName="SyncButlerConsoleBuildOutput" />
-    </MSBuild>
-    <MSBuild Projects="..\syncbutler-console\SyncButlerConsole.csproj" Targets="Rebuild" Properties="Configuration=Release; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') ">
-      <Output TaskParameter="TargetOutputs" ItemName="SyncButlerConsoleBuildOutput" />
-    </MSBuild>
-  </Target>
-  <Target Name="SyncButlerConsole:Publish" Condition="'$(CurrentSolutionConfigurationContents)' != ''">
-    <MSBuild Projects="..\syncbutler-console\SyncButlerConsole.csproj" Targets="Publish" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') " />
-    <MSBuild Projects="..\syncbutler-console\SyncButlerConsole.csproj" Targets="Publish" Properties="Configuration=Release; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') " />
   </Target>
   <Target Name="Build" Condition="'$(CurrentSolutionConfigurationContents)' != ''" Outputs="@(CollectedBuildOutput)">
     <MSBuild Condition="@(BuildLevel0) != ''" Projects="@(BuildLevel0)" Properties="Configuration=%(Configuration); Platform=%(Platform); BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" BuildInParallel="true" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)">

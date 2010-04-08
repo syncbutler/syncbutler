@@ -53,9 +53,9 @@ namespace SyncButlerUI
         public ObservableCollection<ConflictList> mergedList;
         List<Resolved> ResolvedConflicts = new List<Resolved>();
         private SortedList<string, SortedList<string, string>> MRUs;
-	    public enum State{Home,Page1OfCreate,Page2OfCreate,Page3OfCreate,Page4OfCreate,ViewPartnership,SBS,Conflict,Settings,Page1OfEdit,Page2OfEdit,Page3OfEdit,Page4OfEdit,Result};
+	    public enum State{Home,Create,CreateDone,ViewPartnership,SBS,Conflict,Settings,Edit,EditDone,Result};
 	    public State CurrentState;
-
+		private string oldPartnershipName="";
         private string NewPartnershipName = "";
         private string LastWorkingFreeSpace = "0.00";
 
@@ -601,41 +601,24 @@ namespace SyncButlerUI
 		#region createPartnership
 		
 		/// <summary>
-		/// Goes the 2nd Page of Create Partnership to set Destination Values
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void GoToPartnershipDest_Click(object sender, RoutedEventArgs e){
-		    try
-			{
-				string folderPath = sourceTextBox.Text.Trim();
-			    checkInput(folderPath);
-			    PartnershipTempData.sourcePath=folderPath;
-                PartnershipFolder1Label.Content = PartnershipTempData.sourcePath;
-		        sourceTextBox.Text=PartnershipTempData.destinationPath;
-			    VisualStateManager.GoToState(this,"CreatePartnershipState2",false);
-				CurrentState = State.Page2OfCreate;
-                FocusControl(() => sourceTextBox.Focus());
-            }
-            catch (UserInputException uIException)
-            {
-				showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
-			}
-		}
-		
-		/// <summary>
 		/// go to the 1st page of create partnership to set source Textbox
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		
 		private void GoToCreatePartnership_Click(object sender, RoutedEventArgs e){
-            new PartnershipTempData();
-            VisualStateManager.GoToState(this,"CreatePartnershipState1",false);
-            CurrentState = State.Page1OfCreate;
-            this.sourceTextBox.Clear();
-            FocusControl(() => sourceTextBox.Focus());
+            VisualStateManager.GoToState(this,"CreatePartnershipState",false);
+            CurrentState = State.Create;
+            this.folderOneTextBox.Clear();
+			this.folderTwoTextBox.Clear();
+			this.partnershipNameTextBox.Clear();
+            FocusControl(() => folderOneTextBox.Focus());
 		}
+		/// <summary>
+		/// GetPath of folder in directory browser dialog
+		/// </summary>
+		/// <param name="Path"></param>
+		/// <returns></returns>
         private String GetPath(String Path)
         {
             System.Windows.Forms.FolderBrowserDialog fd = new System.Windows.Forms.FolderBrowserDialog();
@@ -648,61 +631,7 @@ namespace SyncButlerUI
             return fd.SelectedPath;
         }
 
-		/// <summary>
-		/// goes back to the 1st page from the 2nd page of create partnership
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void GoBackToCreatePartnershipSrc_Click(object sender, RoutedEventArgs e){
-		  	try
-			{
-
-				PartnershipTempData.destinationPath=sourceTextBox.Text;
-				sourceTextBox.Text=PartnershipTempData.sourcePath;
-				
-				VisualStateManager.GoToState(this,"CreatePartnershipState1",false);
-                FocusControl(() => sourceTextBox.Focus());
-			}
-            catch (UserInputException uIException)
-            {
-				showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
-			}
-		}
-		/// <summary>
-		/// goes to the 3rd page of create partnership
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void GoToCreatePartnershipName_Click(object sender, RoutedEventArgs e){
-			try{
-				string folderPath = sourceTextBox.Text.Trim();
-				checkInput(folderPath);
-				PartnershipTempData.destinationPath=folderPath;
-				ValidateFoldersHierachy();
-				sourceTextBox1.Text=PartnershipTempData.sourcePath;
-				destinationTextBox1.Text=PartnershipTempData.destinationPath;
-				partnershipNameTextBox.Text=PartnershipTempData.partnershipName;	
-				VisualStateManager.GoToState(this,"CreatePartnershipState3",false);
-				CurrentState = State.Page3OfCreate;
-                FocusControl(() => partnershipNameTextBox.Focus());
-            }
-            catch (UserInputException uIException)
-            {
-				showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
-			}	
-		}
-		/// <summary>
-		/// goes back to the 2nd page from the 3rd page of create partnership
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void GoBackToCreatePartnershipDes_Click(object sender, RoutedEventArgs e){
-		   PartnershipTempData.partnershipName=partnershipNameTextBox.Text;
-		   destinationTextBox1.Text=PartnershipTempData.destinationPath;
-		   VisualStateManager.GoToState(this,"CreatePartnershipState2",false);
-			CurrentState = State.Page2OfCreate;
-            FocusControl(() => sourceTextBox.Focus());
-		}
+		
 		
 		
 		/// <summary>
@@ -714,23 +643,23 @@ namespace SyncButlerUI
         {
             try
             {
-                if((partnershipNameTextBox.Text.Trim()).Equals(""))
+				
+				string folderOnePath = folderOneTextBox.Text.Trim();
+				checkInput(folderOnePath);
+			    string folderTwoPath = folderTwoTextBox.Text.Trim();
+				checkInput(folderTwoPath);
+				ValidateFoldersHierachy(folderOnePath,folderTwoPath);
+				string partnershipName = partnershipNameTextBox.Text.Trim();
+				sourceFolderPath.Text=folderOnePath;
+				destinationFolderPath.Text=folderTwoPath;
+				partnerShipName.Text=partnershipName;
+			   if((partnershipNameTextBox.Text.Trim()).Equals(""))
                     throw new UserInputException("Please input a partnership name");	
-
-                PartnershipTempData.partnershipName=partnershipNameTextBox.Text;
-                sourceFolderPath.Text=PartnershipTempData.sourcePath;
-                destinationFolderPath.Text=PartnershipTempData.destinationPath;
-                partnerShipName.Text=PartnershipTempData.partnershipName;
-                NewPartnershipName = partnerShipName.Text;
 
                 this.Controller.AddPartnership(partnerShipName.Text,sourceFolderPath.Text,destinationFolderPath.Text);
                 
-                VisualStateManager.GoToState(this,"CreatePartnershipDone1",false);
-				CurrentState = State.Page4OfCreate;
-                sourceTextBox1.Text="";
-                destinationTextBox1.Text="";
-                sourceTextBox.Text="";
-                PartnershipTempData.clear();
+                VisualStateManager.GoToState(this,"CreateDone",false);
+				CurrentState = State.CreateDone;
                 partnershipList.Items.Refresh();
             }
             catch (UserInputException uIException)
@@ -874,9 +803,9 @@ namespace SyncButlerUI
                 if (showMessageBox(CustomDialog.MessageType.Question, "There are no partnerships for me to sync. Would you like to create one now?") == true)
                 {
                     
-                    VisualStateManager.GoToState(this, "CreatePartnershipState1", false);
-                    CurrentState = State.Page1OfCreate;
-                    FocusControl(() => sourceTextBox.Focus());
+                    VisualStateManager.GoToState(this, "CreatePartnershipState", false);
+                    CurrentState = State.Create;
+                    FocusControl(() => folderOneTextBox.Focus());
 
                 }
                 else return;
@@ -933,23 +862,25 @@ namespace SyncButlerUI
         {
 			try
             {
-				if((partnershipNameTextBox.Text.Trim()).Equals(""))
+				string folderOnePath = folderOneTextBox.Text.Trim();
+				checkInput(folderOnePath);
+			    string folderTwoPath = folderTwoTextBox.Text.Trim();
+				checkInput(folderTwoPath);
+			    ValidateFoldersHierachy(folderOnePath,folderTwoPath);
+			
+				string partnershipName = partnershipNameTextBox.Text.Trim();
+				if(partnershipName.Equals(""))
                 {
 			        throw new UserInputException("Please input a partnership name");	
 				}
-			    PartnershipTempData.partnershipName=partnershipNameTextBox.Text;
-			    sourceFolderPath.Text=PartnershipTempData.sourcePath;
-			    destinationFolderPath.Text=PartnershipTempData.destinationPath;
-		        partnerShipName.Text=PartnershipTempData.partnershipName;
+			    sourceFolderPath.Text=folderOnePath;
+			    destinationFolderPath.Text=folderTwoPath;
+		        partnerShipName.Text=partnershipName;
 			    
-                this.Controller.UpdatePartnership(PartnershipTempData.oldPartnershipName,partnerShipName.Text,sourceFolderPath.Text,destinationFolderPath.Text);
+                this.Controller.UpdatePartnership(oldPartnershipName,partnershipName,folderOnePath,folderTwoPath);
 			    
-                VisualStateManager.GoToState(this,"EditPartnershipDone1",false);
-                CurrentState = State.Page4OfEdit;
-			    sourceTextBox1.Text="";
-			    destinationTextBox1.Text="";
-			    sourceTextBox.Text="";
-		        PartnershipTempData.clear();
+                VisualStateManager.GoToState(this,"EditDone",false);
+                CurrentState = State.EditDone;
 			    partnershipList.Items.Refresh();
             }
             catch (UserInputException uIException)
@@ -972,13 +903,14 @@ namespace SyncButlerUI
             {
                 throw new UserInputException("Please select a partnership to edit.");
 			}
-		 	new PartnershipTempData((Partnership)this.partnershipList.SelectedItem);
-                PartnershipTempData.oldPartnershipName= PartnershipTempData.partnershipName;
-                sourceTextBox.Text=PartnershipTempData.sourcePath;
-                PartnershipFolder1Label.Content = PartnershipTempData.sourcePath;
-                VisualStateManager.GoToState(this,"EditPartnershipState1",false);
-                CurrentState = State.Page1OfEdit;
-                FocusControl(() => sourceTextBox.Focus());
+			    Partnership currentPartnership=(Partnership)this.partnershipList.SelectedItem;
+                folderOneTextBox.Text=currentPartnership.LeftFullPath;
+                folderTwoTextBox.Text=currentPartnership.RightFullPath;
+			    partnershipNameTextBox.Text = currentPartnership.Name;
+                oldPartnershipName = currentPartnership.Name;
+			    VisualStateManager.GoToState(this,"EditPartnershipState",false);
+                CurrentState = State.Edit;
+                FocusControl(() => folderOneTextBox.Focus());
 			}
             catch(UserInputException uIException)
             {
@@ -986,87 +918,7 @@ namespace SyncButlerUI
 			}
 		  
 		}
-		/// <summary>
-		/// go to 2nd page of edit partnership
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void GoToEditPartnershipDest_Click(object sender, RoutedEventArgs e){
-		    try{
-				string folderPath = sourceTextBox.Text.Trim();
-			    checkInput(folderPath);
-				PartnershipTempData.sourcePath=folderPath;
-				sourceTextBox.Text=PartnershipTempData.destinationPath;
-                PartnershipFolder1Label.Content = PartnershipTempData.sourcePath;
-				VisualStateManager.GoToState(this,"EditPartnershipState2",false);
-				CurrentState = State.Page2OfEdit;
-                FocusControl(() => sourceTextBox.Focus());
-            }
-            catch (UserInputException uIException)
-            {
-				showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
-			}
-		}
-		
-		
-		/// <summary>
-		/// goes back to the 1st page from the 2nd page of create partnership
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void GoBackToEditPartnershipSrc_Click(object sender, RoutedEventArgs e){
-		  	try{
-
-			PartnershipTempData.destinationPath=sourceTextBox.Text;
-		    sourceTextBox.Text=PartnershipTempData.sourcePath;
-		    
-			VisualStateManager.GoToState(this,"EditPartnershipState1",false);
-            FocusControl(() => sourceTextBox.Focus());
-            CurrentState = State.Page1OfEdit;
-            }
-            catch (UserInputException uIException)
-            {
-				showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
-			}
-		}
-		/// <summary>
-		/// goes to the 3rd page of create partnership
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void GoToEditPartnershipName_Click(object sender, RoutedEventArgs e){
-			try{
-			string folderPath = sourceTextBox.Text.Trim();
-			checkInput(folderPath);
-			PartnershipTempData.destinationPath=folderPath;
-            ValidateFoldersHierachy();
-			sourceTextBox1.Text=PartnershipTempData.sourcePath;
-			destinationTextBox1.Text=PartnershipTempData.destinationPath;
-			partnershipNameTextBox.Text=PartnershipTempData.partnershipName.Trim();	
-			VisualStateManager.GoToState(this,"EditPartnershipState3",false);
-            FocusControl(() => partnershipNameTextBox.Focus());
-            CurrentState = State.Page3OfEdit;
-            }
-            catch (UserInputException uIException)
-            {
-				showMessageBox(CustomDialog.MessageType.Error,uIException.Message);
-			}	
-		}
-		/// <summary>
-		/// goes back to the 2nd page from the 3rd page of create partnership
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void GoBackToEditPartnershipDes_Click(object sender, RoutedEventArgs e){
-		   PartnershipTempData.partnershipName=partnershipNameTextBox.Text;
-		   destinationTextBox1.Text=PartnershipTempData.destinationPath;
-		   
-
-		   VisualStateManager.GoToState(this,"EditPartnershipState2",false);
-           FocusControl(() => sourceTextBox.Focus());
-           CurrentState = State.Page2OfEdit;
-		}
-		
+			
 		#endregion	
 		
 		/// <summary>
@@ -1376,10 +1228,10 @@ namespace SyncButlerUI
             }
            
 		}
-        private void ValidateFoldersHierachy()
+        private void ValidateFoldersHierachy(string path1,string path2)
         {
-            FileInfo sourceFI = new FileInfo(PartnershipTempData.sourcePath);
-            FileInfo destFI = new FileInfo(PartnershipTempData.destinationPath);
+            FileInfo sourceFI = new FileInfo(path1);
+            FileInfo destFI = new FileInfo(path2);
             char[] standard = { '\\', ' ' };
             string tempfolder1Name = sourceFI.FullName.TrimEnd(standard).ToLower() + "\\";
             string tempfolder2Name = destFI.FullName.TrimEnd(standard).ToLower() + "\\";
@@ -1480,17 +1332,11 @@ namespace SyncButlerUI
             {
 				switch(CurrentState)
 				{
-					case State.Page1OfCreate:
-						GoToPartnershipDest_Click(sender,e);
+					case State.Create:
+						CreatePartnership_Click(sender,e);
 						break;
-					case State.Page2OfCreate:
-						GoToCreatePartnershipName_Click(sender,e);
-						break;
-					case State.Page1OfEdit:
-						GoToEditPartnershipDest_Click(sender,e);
-						break;
-					case State.Page2OfEdit:
-						GoToEditPartnershipName_Click(sender,e);
+					case State.Edit:
+						SavePartnership_Click(sender,e);
 						break;
 					
 				}	
@@ -1502,24 +1348,172 @@ namespace SyncButlerUI
 			{
 				switch(CurrentState)
 				{
-					case State.Page3OfCreate:
+					case State.Create:
 						CreatePartnership_Click(sender,e);
 						break;
-					case State.Page3OfEdit:
+					case State.Edit:
 						SavePartnership_Click(sender,e);
 						break;
 				}
 			}
 		}
-		private void GetUserPath(object sender, RoutedEventArgs e)
+		private void GetFolderOneUserPath(object sender, RoutedEventArgs e)
 		{
             String FolderPath;
 
-            FolderPath = GetPath(this.sourceTextBox.Text.Trim());
+            FolderPath = GetPath(this.folderOneTextBox.Text.Trim());
             if (FolderPath != null)
             {
-                this.sourceTextBox.Text = FolderPath;
+                this.folderOneTextBox.Text = FolderPath;
             }
 		}
-	}
+		private void GetFolderTwoUserPath(object sender, RoutedEventArgs e)
+		{
+            String FolderPath;
+
+            FolderPath = GetPath(this.folderTwoTextBox.Text.Trim());
+            if (FolderPath != null)
+            {
+                this.folderTwoTextBox.Text = FolderPath;
+            }
+		}
+		
+		
+		   /// <summary>
+        /// If there's a scan running in HomeWindowControl, ask the user
+        /// if he wants to cancel. 
+        /// </summary>
+        /// <returns>True if the operation is stopped or cancelled</returns>
+        public bool StopExistingOperation()
+        {
+            if (!IsBusy()) return true;
+
+            CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok,
+                "There is currently an operation in progress. Please cancel the current operation before leaving this page.");
+            
+            // Without synchronization, cancelling the operation from here may be unpredictable
+            // ie. The operation has started to be cancelled, but hasn't really ended yet while the
+            // user has moved to a different page. For now, make the user cancel manually and wait until
+            // the op is really cancelled.
+            /* {
+                homeWindow1.CancelCurrentScan();
+                return true;
+            } */
+
+            return false;
+        }
+		
+		
+			private void GoToSetting(object sender, RoutedEventArgs e)
+		{
+            CurrentState = State.Settings;
+            if (!StopExistingOperation()) return;
+            IsLoadingSBS = true;
+            if (sender != null && sender.GetType() == typeof(String) && (sender.Equals("FirstSBSRun")))
+            {
+                FirstTimeHelp.Visibility = System.Windows.Visibility.Visible;
+			}
+            else
+            {
+                FirstTimeHelp.Visibility = System.Windows.Visibility.Hidden;
+            }
+			
+			VisualStateManager.GoToState(this, "Settings1", false);
+            
+            BackgroundWorker storageScanWorker = new BackgroundWorker();
+            ProgressBar progressWindow = new ProgressBar(storageScanWorker, "Loading Settings Page", "Searching for removable storage devices");
+            progressWindow.HideTotalProgress();
+            progressWindow.IsInderteminate = true;
+
+            List<string> DriveLetters = null;
+            bool noUSBDrives = false;
+
+            storageScanWorker.DoWork += new DoWorkEventHandler(delegate(Object worker, DoWorkEventArgs args)
+            {
+                DriveLetters = this.Controller.GetUSBDriveLetters();
+
+                // if there is no usb drive, let user to select some local hard disk, warn the user as well.
+                if (DriveLetters.Count == 0)
+                {
+                    DriveLetters = this.Controller.GetNonUSBDriveLetters();
+                    noUSBDrives = true;
+                }
+            });
+
+            storageScanWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(delegate(Object worker, RunWorkerCompletedEventArgs args)
+            {
+
+                this.ComputerNameTextBox.Text = this.Controller.GetComputerName();
+                this.NoUSBWarningTextBlock.Visibility = Visibility.Hidden;
+                this.SBSWorkingDriveComboBox.Items.Clear();
+                bool devicePluggedIn = false;
+                if (noUSBDrives)
+                {
+                    this.NoUSBWarningTextBlock.Visibility = Visibility.Visible;
+                    CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok,
+                        "Please plug in a portable storage device if you wish to use it with\nSync Butler, Sync!");
+                    this.SBSWorkingDriveComboBox.IsEnabled = false;
+                    this.SpaceToUseSlide.IsEnabled = false;
+                    this.SpaceToUseTextbox.IsEnabled = false;
+                    this.SBSSettingComboBox.IsEnabled = false;
+                    this.DefaultSettingButton.IsEnabled = false;
+                    this.SaveSettingButton.IsEnabled = false;
+                }
+                else
+                {
+                    this.SBSSettingComboBox.IsEnabled = true;
+                    this.DefaultSettingButton.IsEnabled = true;
+                    this.SaveSettingButton.IsEnabled = true;
+                    foreach (string s in DriveLetters)
+                    {
+                        this.SBSWorkingDriveComboBox.Items.Add(s[0]);
+                    }
+                    if (this.SBSWorkingDriveComboBox.Items.Contains(this.Controller.GetSBSDriveLetter()))
+                    {
+                        this.SBSWorkingDriveComboBox.SelectedItem = this.Controller.GetSBSDriveLetter();
+                        devicePluggedIn = true;
+                    }
+                    else if (this.SBSWorkingDriveComboBox.Items.Count != 0)
+                    {
+                        this.SBSWorkingDriveComboBox.SelectedIndex = 0;
+                    }
+                    if (devicePluggedIn)
+                    {
+                        if (this.Controller.SBSEnable.Equals("Enable"))
+                        {
+                            this.SpaceToUseSlide.Maximum = this.Controller.GetAvailableSpaceForDrive();
+                            this.SpaceToUseSlide.Value = this.Controller.GetFreeSpaceToUse();
+                            this.resolutionLabel.Content = this.Controller.GetResolution();
+                        }
+                        else
+                        {
+                            this.SpaceToUseSlide.Value = 0;
+                            this.resolutionLabel.Content = "KB";
+                            this.SpaceToUseSlide.IsEnabled = false;
+                            this.SpaceToUseTextbox.IsEnabled = false;
+                        }
+
+
+                        this.SBSWorkingDriveComboBox.IsEnabled = true;
+                        this.SBSSettingComboBox.Items.Clear();
+                        this.SBSSettingComboBox.Items.Add("Enable");
+                        this.SBSSettingComboBox.Items.Add("Disable");
+                        this.SBSSettingComboBox.SelectedItem = this.Controller.SBSEnable;
+                    }
+                    else
+                    {
+                        this.SBSWorkingDriveComboBox.IsEnabled = false;
+                        this.SBSSettingComboBox.Items.Clear();
+                        this.SBSSettingComboBox.Items.Add("Enable");
+                        this.SBSSettingComboBox.Items.Add("Disable");
+                        this.SBSSettingComboBox.SelectedItem = "Disable";
+                    }
+                    this.IsLoadingSBS = false;
+                }
+                progressWindow.TaskComplete();
+            });
+
+            progressWindow.Start();
+		}
+	}          
 }
