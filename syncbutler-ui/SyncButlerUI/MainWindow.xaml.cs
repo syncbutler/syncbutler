@@ -94,6 +94,7 @@ namespace SyncButlerUI
 					dialog.WelcomeScreenControl.FirstTimeComputerNameText.Visibility=Visibility.Hidden;
 					VisualStateManager.GoToState(dialog.WelcomeScreenControl,"HelpScreen3",false);
 					controller.SetFirstSBSRun();
+                    dialog.Title = "SyncButler - Help";
 					dialog.ShowDialog();
 				}
                     homeWindow1.CheckIfEnoughSpace();

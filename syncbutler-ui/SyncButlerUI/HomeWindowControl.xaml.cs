@@ -595,6 +595,7 @@ namespace SyncButlerUI
                 dialog.WelcomeScreenControl.FirstTimeComputerNameText.Visibility = Visibility.Hidden;
                 VisualStateManager.GoToState(dialog.WelcomeScreenControl, "HelpScreen3", false);
                 Controller.GetInstance().SetFirstSBSRun();
+                dialog.Title = "SyncButler - Help";
                 dialog.ShowDialog();
             }
         }
@@ -753,6 +754,7 @@ namespace SyncButlerUI
             FirstTimeStartupScreen dialog = new FirstTimeStartupScreen();
             dialog.WelcomeScreenControl.GoToHelpScreen();
             dialog.WelcomeScreenControl.FirstTimeComputerNameText.Visibility = Visibility.Hidden;
+            dialog.Title = "SyncButler - Help";
             dialog.ShowDialog();
         }
 
