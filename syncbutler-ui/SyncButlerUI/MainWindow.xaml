@@ -9,8 +9,10 @@
 	x:Class="SyncButlerUI.MainWindow"
 	x:Name="Window"
 	Title="SyncButler" 
-	Width="662" Height="480"
-	Closing = "cleanUp" Cursor="Arrow" WindowStyle="ThreeDBorderWindow" ResizeMode="CanMinimize" Icon="Images/logowTransparency.png" WindowStartupLocation="CenterScreen"
+	MinHeight="495" MinWidth="660"
+	Width="800" Height="600"
+	MaxWidth="1024" MaxHeight="768"
+	Closing = "cleanUp" Cursor="Arrow" Icon="Images/logowTransparency.png" WindowStartupLocation="CenterScreen" ScrollViewer.VerticalScrollBarVisibility="Disabled" SizeToContent="WidthAndHeight" WindowStyle="ThreeDBorderWindow" SnapsToDevicePixels="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
 	>
 
 	<Window.Resources>
@@ -233,15 +235,25 @@
 						<ControlTemplate.Resources>
 							<Storyboard x:Key="HomeAnimate">
 								<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="rectangle">
+									<SplineColorKeyFrame KeyTime="00:00:00" Value="Transparent"/>
 									<SplineColorKeyFrame KeyTime="00:00:01" Value="#00FFDD00"/>
 								</ColorAnimationUsingKeyFrames>
 								<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="rectangle">
-									<SplineDoubleKeyFrame KeyTime="00:00:01" Value="0.255"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.155"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:01" Value="0.325"/>
 								</DoubleAnimationUsingKeyFrames>
 							</Storyboard>
+							<Storyboard x:Key="ButtonHighlight">
+								<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
+									<SplineColorKeyFrame KeyTime="00:00:00" Value="Transparent"/>
+								</ColorAnimationUsingKeyFrames>
+								<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Color)">
+									<SplineColorKeyFrame KeyTime="00:00:00" Value="White"/>
+								</ColorAnimationUsingKeyFrames>
+							</Storyboard>
 						</ControlTemplate.Resources>
-						<Grid x:Name="HomeButton" Margin="-5,0,-19,0">
-							<Rectangle x:Name="rectangle" Cursor="Hand" VerticalAlignment="Top" Height="57.667" Width="Auto" RadiusX="5" RadiusY="5" Margin="12.333,1,19.667,0" Opacity="0.08">
+						<Grid x:Name="HomeButton" Margin="-5,0,-3.354,0">
+							<Rectangle x:Name="rectangle" Cursor="Hand" VerticalAlignment="Top" Height="49.156" Width="394.449" RadiusX="5" RadiusY="5" Margin="0,0.333,-0.061,0" Opacity="0.155" HorizontalAlignment="Right">
 								<Rectangle.Fill>
 									<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
 										<GradientStop Color="White" Offset="0"/>
@@ -249,7 +261,7 @@
 									</LinearGradientBrush>
 								</Rectangle.Fill>
 							</Rectangle>
-							<ContentPresenter x:Name="contentPresenter" Margin="59.496,21.5,41.837,4.5" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True" RenderTransformOrigin="0.5,0.5">
+							<ContentPresenter x:Name="contentPresenter" Margin="62.165,15.824,23.522,17.623" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True" RenderTransformOrigin="0.5,0.5" d:LayoutOverrides="VerticalAlignment">
 								<ContentPresenter.RenderTransform>
 									<TransformGroup>
 										<ScaleTransform/>
@@ -259,7 +271,7 @@
 									</TransformGroup>
 								</ContentPresenter.RenderTransform>
 							</ContentPresenter>
-							<Image x:Name="image" HorizontalAlignment="Left" Margin="13.333,9.168,0,13.499" VerticalAlignment="Stretch" Width="39.333" Height="Auto" Opacity="0.58" Source="Images\Computer.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
+							<Image x:Name="image" HorizontalAlignment="Left" Margin="15.003,0,0,3.999" VerticalAlignment="Bottom" Width="39.333" Height="46.781" Opacity="0.58" Source="Images\Computer.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
 								<Image.RenderTransform>
 									<TransformGroup>
 										<ScaleTransform/>
@@ -298,15 +310,17 @@
 						<ControlTemplate.Resources>
 							<Storyboard x:Key="Settings Animate">
 								<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="rectangle">
+									<SplineColorKeyFrame KeyTime="00:00:00" Value="Transparent"/>
 									<SplineColorKeyFrame KeyTime="00:00:01" Value="#00FFDD00"/>
 								</ColorAnimationUsingKeyFrames>
 								<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="rectangle">
-									<SplineDoubleKeyFrame KeyTime="00:00:01" Value="0.255"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.155"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:01" Value="0.325"/>
 								</DoubleAnimationUsingKeyFrames>
 							</Storyboard>
 						</ControlTemplate.Resources>
 						<Grid x:Name="SettingsButton">
-							<Rectangle x:Name="rectangle" Cursor="Hand" VerticalAlignment="Top" Height="58.667" Width="Auto" RadiusX="5" RadiusY="5" Margin="7.333,0,0.667,0" Opacity="0.08">
+							<Rectangle x:Name="rectangle" Cursor="Hand" VerticalAlignment="Top" Height="58.667" Width="Auto" RadiusX="5" RadiusY="5" Margin="7.333,0,0.667,0" Opacity="0.155">
 								<Rectangle.Fill>
 									<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
 										<GradientStop Color="White" Offset="0"/>
@@ -350,13 +364,13 @@
 									<SplineColorKeyFrame KeyTime="00:00:01" Value="#00FFDD00"/>
 								</ColorAnimationUsingKeyFrames>
 								<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="rectangle" Storyboard.TargetProperty="(UIElement.Opacity)">
-									<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.08"/>
-									<SplineDoubleKeyFrame KeyTime="00:00:01" Value="0.255"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.155"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:01" Value="0.325"/>
 								</DoubleAnimationUsingKeyFrames>
 							</Storyboard>
 						</ControlTemplate.Resources>
 						<Grid x:Name="SettingsButton" Margin="0,0,-2.333,0">
-							<Rectangle x:Name="rectangle" Cursor="Hand" VerticalAlignment="Top" Height="58.667" Width="Auto" RadiusX="5" RadiusY="5" Margin="7.333,0,3,0" Opacity="0.08">
+							<Rectangle x:Name="rectangle" Cursor="Hand" VerticalAlignment="Top" Height="51.751" Width="379.653" RadiusX="5" RadiusY="5" Margin="0,1.596,3,0" Opacity="0.155" HorizontalAlignment="Right">
 								<Rectangle.Fill>
 									<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
 										<GradientStop Color="White" Offset="0"/>
@@ -365,12 +379,12 @@
 								</Rectangle.Fill>
 							</Rectangle>
 							<ContentPresenter Margin="56.001,24.5,10.333,0" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True" Content="" VerticalAlignment="Top" Height="61.5" RenderTransformOrigin="0.515,0.772" IsEnabled="False"/>
-							<Image HorizontalAlignment="Left" Margin="11,12.168,0,10.499" VerticalAlignment="Stretch" Width="39.333" Height="Auto" Opacity="1" Source="Images/LogowTransparency.png" Stretch="Fill" Cursor="Hand">
+							<Image HorizontalAlignment="Left" Margin="12.5,0,0,6.999" VerticalAlignment="Bottom" Width="39.333" Height="39.333" Opacity="1" Source="Images/LogowTransparency.png" Stretch="Fill" Cursor="Hand">
 								<Image.OpacityMask>
 									<SolidColorBrush Color="White"/>
 								</Image.OpacityMask>
 							</Image>
-							<TextBlock Margin="53.667,13.5,-7.333,-22" TextWrapping="Wrap" FontSize="16"><Run Text="Sync Butler, "/><Run FontStyle="Italic" Text="Sync"/><Run Text="!"/></TextBlock>
+							<TextBlock Margin="56.667,13.5,-10.333,6.723" TextWrapping="Wrap" FontSize="16"><Run Text="Sync Butler, "/><Run FontStyle="Italic" Text="Sync"/><Run Text="!"/></TextBlock>
 						</Grid>
 						<ControlTemplate.Triggers>
 							<EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
@@ -396,49 +410,16 @@
 		</Style>
 		
 	</Window.Resources>
-
-	<Grid x:Name="LayoutRoot" Background="White">
+    <Viewbox Stretch="Fill" >
+	<Grid x:Name="LayoutRoot" Background="White" Width="800" Height="600">
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="779.027"/>
-			<ColumnDefinition MinWidth="96" Width="Auto"/>
-			<ColumnDefinition MinWidth="66" Width="Auto"/>
-			<ColumnDefinition MinWidth="165.5" Width="Auto"/>
+			<ColumnDefinition Width="941.027"/>
 		</Grid.ColumnDefinitions>
-		<local:HomeWindowControl x:Name="homeWindow1" Margin="140.166,0,135.527,3.5" Width="503.334" VerticalAlignment="Bottom" Height="452.5" />
-		<Rectangle x:Name="SideBar" RadiusX="1" RadiusY="2" Clip="M-2,-2.5 L181,-1 C181,-1 139,6 137.25139,63.919018 135.10359,135.06058 134.77045,298.3337 136,363.5 137.47077,441.45068 167.87586,445.0002 177,445 186,444.9998 -2,445 -2,445 z" HorizontalAlignment="Left" Width="187.527" VerticalAlignment="Bottom" Height="444" RenderTransformOrigin="0.5,0.5" Margin="0,0,0,4.5" Fill="Black">
-			<Rectangle.RenderTransform>
-				<TransformGroup>
-					<ScaleTransform ScaleY="1.025"/>
-					<SkewTransform/>
-					<RotateTransform/>
-					<TranslateTransform/>
-				</TransformGroup>
-			</Rectangle.RenderTransform>
-		</Rectangle>
-		<Rectangle x:Name="Sidebar_Copy" RadiusX="1" RadiusY="2" Clip="M-2,-2.5 L181,-1 C181,-1 139,6 137.25139,63.919018 135.10359,135.06058 134.77045,298.3337 136,363.5 137.47077,441.45068 167.87586,445.0002 177,445 186,444.9998 -2,445 -2,445 z" HorizontalAlignment="Left" Width="187.527" VerticalAlignment="Bottom" Height="444" RenderTransformOrigin="0.5,0.5" Margin="0,0,0,4.5">
-			<Rectangle.RenderTransform>
-				<TransformGroup>
-					<ScaleTransform ScaleY="1.025"/>
-					<SkewTransform/>
-					<RotateTransform/>
-					<TranslateTransform/>
-				</TransformGroup>
-			</Rectangle.RenderTransform>
-			<Rectangle.Fill>
-				<RadialGradientBrush RadiusX="0.98" RadiusY="0.925" GradientOrigin="0.032,0.995">
-					<GradientStop Color="#00000000" Offset="0.629"/>
-					<GradientStop Color="#FF002C35"/>
-				</RadialGradientBrush>
-			</Rectangle.Fill>
-		</Rectangle>
-		<Button x:Name="HomeButton" Margin="-6,-1.5,0,0" Style="{DynamicResource HomeButton}" VerticalAlignment="Top" Height="62" Content="Home" HorizontalAlignment="Left" Width="141.666" Click="goHome" Cursor="Hand" FontSize="18.667">
-			<Button.ToolTip>Home</Button.ToolTip>
-		</Button>
-		<Button x:Name="SettingsButton" Margin="-6,50.5,0,0" Style="{DynamicResource SettingsButton}" VerticalAlignment="Top" Height="62" Content="Home" HorizontalAlignment="Left" Width="141.666" Cursor="Hand" Click="GoToSetting">
-			<Button.ToolTip>Settings</Button.ToolTip>
-		</Button>
-		<Button x:Name="SyncButlerSyncButton" Margin="-6,109,0,0" Style="{DynamicResource SyncButtonTemplate}" VerticalAlignment="Top" Height="62" Content="Sync Butler,Sync" HorizontalAlignment="Left" Width="141.666" Cursor="Hand" Click="goToSyncButlerSync">
-			<Button.ToolTip>Sync Butler, Sync</Button.ToolTip>
-		</Button>
+		<local:HomeWindowControl x:Name="homeWindow1" Margin="0,0,156.863,12.283" VerticalAlignment="Bottom" Height="526.184" HorizontalAlignment="Right" Width="770.8" />
+		<Rectangle Fill="Black" RadiusX="1" RadiusY="2" Margin="-2.041,0,140.857,0" VerticalAlignment="Top" Height="56.382"/>
+		<Button x:Name="HomeButton" Margin="14.314,2.795,0,0" Style="{DynamicResource HomeButton}" VerticalAlignment="Top" Height="50.299" Content="Home" HorizontalAlignment="Left" Width="386.122" Click="goHome" Cursor="Hand" FontSize="18.667" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White"/>
+		<Button x:Name="SyncButlerSyncButton" Margin="408.966,1.557,152.061,0" Style="{DynamicResource SyncButtonTemplate}" VerticalAlignment="Top" Height="52.78" Content="Sync Butler,Sync" Cursor="Hand" Click="goToSyncButlerSync" Width="380" Background="{x:Null}" BorderBrush="{x:Null}"/>
+		
 	</Grid>
+	</Viewbox>
 </Window>
