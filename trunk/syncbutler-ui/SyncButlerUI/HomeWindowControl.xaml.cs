@@ -624,6 +624,7 @@ namespace SyncButlerUI
                         {
                             this.SBSWorkingDriveComboBox.Items.Add(s);
                         }
+                        
                         if (this.SBSWorkingDriveComboBox.Items.Contains(this.Controller.GetSBSDriveLetter()))
                         {
                             this.SBSWorkingDriveComboBox.SelectedItem = this.Controller.GetSBSDriveLetter();
@@ -640,8 +641,19 @@ namespace SyncButlerUI
                             {
                                 this.SBSSettingComboBox.Items.Add("Enable");
                                 this.SBSSettingComboBox.Items.Add("Disable");
-                                this.SBSSettingComboBox.SelectedItem = "Disable";
                             }
+                            this.SBSSettingComboBox.SelectedItem = "Disable";
+                            
+                        }
+                        else
+                        {
+                            this.SBSWorkingDriveComboBox.IsEnabled = true;
+                            if (this.SBSSettingComboBox.Items.IsEmpty)
+                            {
+                                this.SBSSettingComboBox.Items.Add("Enable");
+                                this.SBSSettingComboBox.Items.Add("Disable");
+                            }
+                            this.SBSSettingComboBox.SelectedItem = "Enable";
                         }
                         this.IsLoadingSBS = false;
                     }
