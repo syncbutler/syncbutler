@@ -53,7 +53,7 @@ namespace SyncButlerUI
         public ObservableCollection<ConflictList> mergedList;
         List<Resolved> ResolvedConflicts = new List<Resolved>();
         private SortedList<string, SortedList<string, string>> MRUs;
-        public enum State { Home, Create, CreateDone, ViewPartnership, SBS, Conflict, Settings, Edit, EditDone, Result };
+        public enum State { Home, Create, CreateDone, ViewPartnership,ViewMiniPartnership, SBS, Conflict, Settings, Edit, EditDone, Result };
         public State CurrentState;
         private string oldPartnershipName = "";
         private string NewPartnershipName = "";
@@ -794,20 +794,63 @@ namespace SyncButlerUI
         }
 
         /// <summary>
-        /// goes to view
+        /// goes to view partnerships
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void GoToViewPartnerships_Click(object sender, RoutedEventArgs e)
         {
-            VisualStateManager.GoToState(this, "ViewPartnership1", false);
-            CurrentState = State.ViewPartnership;
+            VisualStateManager.GoToState(this, "ViewPartnershipState", false);
+            CurrentState = State.ViewMiniPartnership;
             SortedList<string, Partnership> partnershiplist = this.Controller.GetPartnershipList();
-            this.partnershipList.ItemsSource = partnershiplist.Values;
-            this.partnershipList.Items.Refresh();
+       		this.partnershipList.ItemsSource = partnershiplist.Values;
+			this.partnershipList.Items.Refresh();
 
         }
+		/// <summary>
+        /// goes to view for mini partnerships
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ViewMiniPartnerships_Click(object sender, RoutedEventArgs e)
+        {
+            VisualStateManager.GoToState(this, "ViewMiniPartnershipState", false);
+            CurrentState = State.ViewMiniPartnership;
+            SortedList<string, Partnership> miniPartnershiplist = this.Controller.GetMiniPartnershipList();
+			this.minipartnershiplist.ItemsSource= miniPartnershiplist.Values;
+            this.minipartnershiplist.Items.Refresh();
+	
 
+        }
+ /// <summary>
+        /// Checks for the index selected and delete the mini partnership
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DeleteMiniPartnership_Click(object sender, RoutedEventArgs e)
+        {
+			//does not work at the moment
+         /*   try
+            {
+                if (minipartnershiplist.SelectedIndex < 0)
+                {
+                    throw new UserInputException("Please select a mini partnership to delete.");
+                }
+
+                if (showMessageBox(CustomDialog.MessageType.Question,
+                    "Are you sure you want to delete the \"" +
+                    minipartnershiplist.Items[minipartnershiplist.SelectedIndex] +
+                    "\" partnership?") == true)
+                {
+                    this.Controller.DeletePartnership(minipartnershiplist.SelectedIndex);
+                    minipartnershiplist.Items.Refresh();
+                }
+            }
+            catch (UserInputException uIException)
+            {
+                showMessageBox(CustomDialog.MessageType.Error, uIException.Message);
+            }*/
+        }
 
         /// <summary>
         /// Checks for the index selected and delete the partnership
@@ -932,7 +975,16 @@ namespace SyncButlerUI
                 AsyncStartSync(this.Controller.GetPartnershipList().Keys);
             }
         }
-
+		
+ 	     /// <summary>
+        /// When the user clicks Sync in the MiniPartnership List view.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SyncMiniPartnership_Click(object sender, RoutedEventArgs e)
+        {
+          //stub sync method
+        }
         /// <summary>
         /// When the user clicks Sync in the Partnership List view.
         /// </summary>

@@ -9,8 +9,7 @@
 	xmlns:Custom="http://schemas.microsoft.com/wpf/2008/toolkit"
 	xmlns:System="clr-namespace:System;assembly=mscorlib"
 	x:Class="SyncButlerUI.HomeWindowControl"
-	x:Name="UserControl"
-	d:DesignWidth="503.334" d:DesignHeight="444" RenderTransformOrigin="0.5,0.5" Width="770.8" Height="526.184">
+	x:Name="UserControl" d:DesignHeight="444" RenderTransformOrigin="0.5,0.5" Width="766.514" Height="526.184">
 	<UserControl.Resources>
 		<Style x:Key="SyncButton" TargetType="{x:Type Button}">
 			<Setter Property="Template">
@@ -153,7 +152,7 @@
 								</Image.RenderTransform>
 							</Image>
 							<TextBlock Margin="0.975,21.769,11.739,0" VerticalAlignment="Top" Height="49" TextWrapping="Wrap" TextAlignment="Center" Opacity="0.7"><Run FontStyle="Normal" Text="View "/><Run Text="Partnerships"/></TextBlock>
-							<Rectangle x:Name="Reflection_Copy" Opacity="0.045" Margin="0.032,0,-0.69,93.624" RadiusX="7" RadiusY="7" VerticalAlignment="Stretch" Height="Auto" Cursor="Hand" Width="Auto">
+							<Rectangle x:Name="Reflection_Copy" Opacity="0.045" Margin="0.032,0,-0.69,97.433" RadiusX="7" RadiusY="7" VerticalAlignment="Stretch" Height="Auto" Cursor="Hand" Width="Auto">
 								<Rectangle.Effect>
 									<BlurEffect/>
 								</Rectangle.Effect>
@@ -222,8 +221,8 @@
 								</DoubleAnimationUsingKeyFrames>
 							</Storyboard>
 						</ControlTemplate.Resources>
-						<Grid x:Name="CreatePartners" Margin="-1.262,-0.135,1.262,-1.214" Width="266.646">
-							<Rectangle x:Name="bigButton_Copy" Margin="-0.5,0,0.03,-1.651" VerticalAlignment="Bottom" Height="184.318" Cursor="Hand" Width="Auto">
+						<Grid x:Name="CreatePartners" Margin="-1.262,-0.135,0.168,-1.214" Width="Auto">
+							<Rectangle x:Name="bigButton_Copy" Margin="-0.5,0,-8.541,-1.651" VerticalAlignment="Bottom" Height="184.318" Cursor="Hand" Width="Auto">
 								<Rectangle.Fill>
 									<RadialGradientBrush RadiusX="1.901" RadiusY="0.853">
 										<GradientStop Color="#00000000" Offset="0.564"/>
@@ -231,8 +230,8 @@
 									</RadialGradientBrush>
 								</Rectangle.Fill>
 							</Rectangle>
-							<TextBlock Margin="100.736,76.753,37.303,0" VerticalAlignment="Top" Height="49.052" Opacity="0.5" FontFamily="Arial" FontSize="16" Foreground="White" TextWrapping="Wrap" Cursor="Hand" TextAlignment="Left"><Run Text="Select what "/><LineBreak/><Run Text="you want to sync"/></TextBlock>
-							<Image x:Name="image" Margin="9.483,62.342,0,37.862" Source="Images\Folder.png" Stretch="Fill" Opacity="0.595" HorizontalAlignment="Left" Width="82.939" RenderTransformOrigin="0.5,0.5" Height="82.939" d:LayoutOverrides="VerticalAlignment">
+							<TextBlock Margin="100.736,76.753,28.732,0" VerticalAlignment="Top" Height="49.052" Opacity="0.5" FontFamily="Arial" FontSize="16" Foreground="White" TextWrapping="Wrap" Cursor="Hand" TextAlignment="Left"><Run Text="Select what "/><LineBreak/><Run Text="you want to sync"/></TextBlock>
+							<Image x:Name="image" Margin="9.483,70.342,0,20.349" Source="Images\Folder.png" Stretch="Fill" Opacity="0.595" HorizontalAlignment="Left" Width="82.939" RenderTransformOrigin="0.5,0.5" Height="82.939" d:LayoutOverrides="VerticalAlignment">
 								<Image.RenderTransform>
 									<TransformGroup>
 										<ScaleTransform/>
@@ -242,8 +241,8 @@
 									</TransformGroup>
 								</Image.RenderTransform>
 							</Image>
-							<TextBlock Margin="1.073,16.721,4.126,0" VerticalAlignment="Top" Height="36.571" TextAlignment="Center" TextWrapping="Wrap" Opacity="0.68" d:LayoutOverrides="VerticalAlignment"><Run FontStyle="Normal" Text="Create"/><Run Text=" Partnership"/></TextBlock>
-							<Image x:Name="image1" Margin="15.483,0,0,44.957" Source="Images\Folder.png" Stretch="Fill" HorizontalAlignment="Left" Width="82.939" Opacity="0.595" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Bottom" Height="82.939">
+							<TextBlock Margin="1.073,21.221,-4.445,0" VerticalAlignment="Top" Height="36.571" TextAlignment="Center" TextWrapping="Wrap" Opacity="0.68" d:LayoutOverrides="VerticalAlignment"><Run FontStyle="Normal" Text="Create"/><Run Text=" Partnership"/></TextBlock>
+							<Image x:Name="image1" Margin="15.483,0,0,36.957" Source="Images\Folder.png" Stretch="Fill" HorizontalAlignment="Left" Width="82.939" Opacity="0.595" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Bottom" Height="82.939">
 								<Image.RenderTransform>
 									<TransformGroup>
 										<ScaleTransform/>
@@ -253,7 +252,7 @@
 									</TransformGroup>
 								</Image.RenderTransform>
 							</Image>
-							<Rectangle x:Name="Reflection_Copy" Opacity="0.045" Margin="-0.5,1.207,0.239,89.813" RadiusX="7" RadiusY="7" VerticalAlignment="Stretch" Height="Auto" Cursor="Hand" d:LayoutOverrides="VerticalAlignment">
+							<Rectangle x:Name="Reflection_Copy" Opacity="0.045" Margin="-0.5,1.207,-0.571,89.813" RadiusX="7" RadiusY="7" VerticalAlignment="Stretch" Height="Auto" Cursor="Hand">
 								<Rectangle.Effect>
 									<BlurEffect/>
 								</Rectangle.Effect>
@@ -474,7 +473,7 @@
 							</Rectangle>
 							<TextBlock Margin="0,19.448,2.376,89.235" VerticalAlignment="Stretch" Height="Auto" Opacity="0.6" FontFamily="Arial" FontSize="21.333" Foreground="White" TextAlignment="Center" TextWrapping="Wrap" Cursor="Hand" HorizontalAlignment="Right" Width="257.485"><Run Text="Explore "/><Run FontStyle="Italic" Text="Features"/></TextBlock>
 							<TextBlock Margin="99.621,75.852,-1.344,0" VerticalAlignment="Top" Height="51.212" Opacity="0.5" FontFamily="Arial" FontSize="16" Foreground="White" TextWrapping="Wrap" TextAlignment="Left" Cursor="Hand" Grid.Row="0"><Run Text="Discover a"/><LineBreak/><Run Text="new way of syncing"/></TextBlock>
-							<Rectangle x:Name="Reflection_Copy" Opacity="0.045" Margin="0.953,2.588,-1.059,87.497" RadiusX="7" RadiusY="6" VerticalAlignment="Stretch" Height="Auto" Cursor="Hand" d:LayoutOverrides="VerticalAlignment">
+							<Rectangle x:Name="Reflection_Copy" Opacity="0.045" Margin="0,2.588,-1.059,86.378" RadiusX="7" RadiusY="6" VerticalAlignment="Stretch" Height="Auto" Cursor="Hand" HorizontalAlignment="Right" Width="252.374">
 								<Rectangle.Effect>
 									<BlurEffect/>
 								</Rectangle.Effect>
@@ -683,6 +682,64 @@
 					</Setter.Value>
 				</Setter>
 			</Style>
+		<Style x:Key="ListBoxMiniPartnershipItemStyle" TargetType="{x:Type ListBoxItem}">
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+			<Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+			<Setter Property="Padding" Value="2,0,0,0"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type ListBoxItem}">
+						<Border x:Name="Bd" SnapsToDevicePixels="true" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" Height="96.638" Width="724.742">
+							<Grid Height="95.638" Margin="-2,0,0,0" VerticalAlignment="Bottom" Width="Auto">
+								<ContentPresenter HorizontalAlignment="Right" VerticalAlignment="Top" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="0,4.5,168.132,0" Content="" Visibility="Hidden"/>
+								<Image Margin="1,23.96,0,16.31" Source="Images\file.png" Stretch="Fill" HorizontalAlignment="Left" Width="60.956" VerticalAlignment="Stretch" Height="Auto"/>
+								<TextBlock x:Name="folder1" Margin="118.883,21.96,0,40.127" ToolTip="{Binding LeftFullPath}" Text="{Binding LeftFullPath}" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Stretch" Height="Auto">
+									<TextBlock.RenderTransform>
+										<TransformGroup>
+											<ScaleTransform ScaleX="1"/>
+											<SkewTransform/>
+											<RotateTransform/>
+											<TranslateTransform/>
+										</TransformGroup>
+									</TextBlock.RenderTransform>
+								</TextBlock>
+								<TextBlock x:Name="folder2" Margin="118.656,0,0,5.167" ToolTip="{Binding RightFullPath}" Text="{Binding RightFullPath}" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="32.96" d:LayoutOverrides="VerticalAlignment" RenderTransformOrigin="0.5,0.5">
+									<TextBlock.RenderTransform>
+										<TransformGroup>
+											<ScaleTransform ScaleX="1"/>
+											<SkewTransform/>
+											<RotateTransform/>
+											<TranslateTransform/>
+										</TransformGroup>
+									</TextBlock.RenderTransform>
+								</TextBlock>
+								<TextBlock x:Name="partnershipName" Margin="6,1.5,0,0" Text="{Binding Name}" TextWrapping="Wrap" HorizontalAlignment="Stretch" Width="Auto" VerticalAlignment="Top" Height="20.46" FontWeight="Bold"/>
+								<TextBlock Margin="67.689,21.46,0,0" Text="Folder 1:" TextWrapping="Wrap" TextAlignment="Right" HorizontalAlignment="Left" Width="46.876" VerticalAlignment="Top" Height="15.96"/>
+								<TextBlock Margin="66.608,0,0,22.167" Text="Folder 2:" TextWrapping="Wrap" TextAlignment="Right" HorizontalAlignment="Left" Width="47.957" VerticalAlignment="Bottom" Height="15.96"/>
+							</Grid>
+						</Border>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsSelected" Value="true">
+								<Setter Property="Background" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+								<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
+							</Trigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsSelected" Value="true"/>
+									<Condition Property="Selector.IsSelectionActive" Value="false"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Background" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+								<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+							</MultiTrigger>
+							<Trigger Property="IsEnabled" Value="false">
+								<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+							</Trigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
 	</UserControl.Resources>
 	<UserControl.RenderTransform>
 		<TransformGroup>
@@ -693,7 +750,7 @@
 		</TransformGroup>
 	</UserControl.RenderTransform>
 
-	<Grid x:Name="LayoutRoot">
+	<Grid x:Name="LayoutRoot" Margin="0,0,-4.762,0">
 		<VisualStateManager.VisualStateGroups>
 			<VisualStateGroup x:Name="VisualStateGroup">
 				<VisualState x:Name="Home">
@@ -729,7 +786,7 @@
 						</ObjectAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
-				<VisualState x:Name="ViewPartnership1">
+				<VisualState x:Name="ViewPartnershipState">
 					<Storyboard>
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="HomeWindow" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
@@ -817,9 +874,58 @@
 						</ObjectAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
+				<VisualState x:Name="ViewMiniPartnershipState">
+					<Storyboard>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="ViewPartnership" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock1" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="minipartnershiplist" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock4" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock5" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="partnershipList" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="Create" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="button4_Copy" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="button3_Copy" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="button2" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="button4" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="button3" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="viewMiniPartnershipBtn" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="viewPartnershipBtn" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+					</Storyboard>
+				</VisualState>
 			</VisualStateGroup>
 		</VisualStateManager.VisualStateGroups>
-		<Grid x:Name="HomeWindow" VerticalAlignment="Bottom" Height="526.184">
+		<Grid x:Name="HomeWindow" VerticalAlignment="Bottom" Height="526.184" Margin="0,0,0.476,0">
 			<Rectangle x:Name="background" RadiusX="1" RadiusY="2" Margin="0,0,-0.212,0" Cursor="Arrow">
 				<Rectangle.Fill>
 					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.504,0.026">
@@ -828,7 +934,7 @@
 					</LinearGradientBrush>
 				</Rectangle.Fill>
 			</Rectangle>
-			<Button x:Name="ViewPartnerships" HorizontalAlignment="Right" Margin="0,346.008,253.094,1.916" Style="{DynamicResource ViewPartnershipButton}" Width="256.981" Content="" Click="GoToViewPartnerships_Click" Cursor="Hand"  Background="{x:Null}" BorderBrush="{x:Null}" IsTabStop="False"/>
+			<Button x:Name="ViewPartnerships" HorizontalAlignment="Right" Margin="0,350.741,249.094,1.916" Style="{DynamicResource ViewPartnershipButton}" Width="256.981" Content="" Click="GoToViewPartnerships_Click" Cursor="Hand"  Background="{x:Null}" BorderBrush="{x:Null}" IsTabStop="False"/>
 			<Button x:Name="ExploreFeaturesButton" HorizontalAlignment="Right" Margin="0,0,-5.857,3.254" Style="{DynamicResource ExploreFeaturesButton}" VerticalAlignment="Bottom" Width="256.981" Height="172.281" Content="" Click="GoToExploreFeatures_Click"  Cursor="Hand" d:LayoutOverrides="VerticalAlignment" IsTabStop="False"/>
 			<Button x:Name="CreatePartnershipButton" HorizontalAlignment="Left" Margin="1.354,0,0,3.162" Style="{DynamicResource CreatePartnersButton}" Width="256.981" Content="" Cursor="Hand" Click="GoToCreatePartnership_Click"  RenderTransformOrigin="0.5,0.5" VerticalAlignment="Bottom" Height="172.281" BorderBrush="{x:Null}" Background="{x:Null}" IsTabStop="False">
 				<Button.RenderTransform>
@@ -842,7 +948,7 @@
 			</Button>
 			<Button x:Name="SyncButton" Margin="0,0,-0.213,180.176" Style="{DynamicResource SyncButton}" Content="" Cursor="Hand" Click="Sync" IsTabStop="False" />
 		</Grid>
-		<Grid x:Name="ViewPartnership" Margin="-2.973,0,2.973,-4" VerticalAlignment="Bottom" Height="532" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
+		<Grid x:Name="ViewPartnership" Margin="-2.973,0,3.449,-4" VerticalAlignment="Bottom" Height="532" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
 			<Grid.RenderTransform>
 				<TransformGroup>
 					<ScaleTransform/>
@@ -881,9 +987,9 @@
 				</Image.RenderTransform>
 			</Image>
 			<Image HorizontalAlignment="Left" Margin="43.279,27.608,0,0" VerticalAlignment="Top" Width="71.494" Height="70.773" Source="Images\Doc.png" Stretch="Fill"/>
-			<TextBlock Margin="118.691,37.303,111.653,0" VerticalAlignment="Top" Height="59.623" FontFamily="Arial" FontSize="24" FontWeight="Bold" Text="View Partnership" TextWrapping="Wrap"/>
-			<TextBlock Margin="118.691,65.211,116.06,0" VerticalAlignment="Top" Height="40.926" FontSize="13.333" TextWrapping="Wrap" Text="List of partnerships you have created."/>
-			<ListBox x:Name="partnershipList" Margin="32.163,107.706,26.46,71.374"  ItemContainerStyle="{DynamicResource ListBoxItemStyle1}" Background="White" BorderBrush="#FF787878" Foreground="Black" RenderTransformOrigin="0.5,0.5" Style="{DynamicResource ListBoxStyle1}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single"  >
+			<TextBlock x:Name="textBlock4" Margin="118.691,37.303,111.653,0" VerticalAlignment="Top" Height="59.623" FontFamily="Arial" FontSize="24" FontWeight="Bold" Text="View Partnership" TextWrapping="Wrap"/>
+			<TextBlock x:Name="textBlock1" Margin="118.691,65.211,116.06,0" VerticalAlignment="Top" Height="40.926" FontSize="13.333" TextWrapping="Wrap" Text="List of partnerships you have created."/>
+			<ListBox x:Name="partnershipList" Margin="32.163,107.706,29.169,128.87"  ItemContainerStyle="{DynamicResource ListBoxItemStyle1}" Background="White" BorderBrush="#FF787878" Foreground="Black" RenderTransformOrigin="0.5,0.5" Style="{DynamicResource ListBoxStyle1}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single"  >
 				<ListBox.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
@@ -893,12 +999,65 @@
 					</TransformGroup>
 				</ListBox.RenderTransform>
 			</ListBox>
-			<Button Margin="231.116,0,477.983,25.803"  VerticalAlignment="Bottom" Height="32.962" Content="Edit" Click="GoToEditPartnership_Click"/>
-			<Button  Margin="314.96,0,394.14,25.803" VerticalAlignment="Bottom" Height="32.962" Content="Delete" Click="DeletePartnership_Click"/>
-			<Button x:Name="Create"  Margin="0,0,313.465,25.803" VerticalAlignment="Bottom" Height="32.962" Content="Create" Click="GoToCreatePartnership_Click" HorizontalAlignment="Right" Width="61.701"/>
-			<Button Margin="480.955,0,228.145,25.803"  VerticalAlignment="Bottom" Height="32.962" Content="Sync" Click="SyncPartnership_Click"/>
+			<Button x:Name="button2" Margin="231.116,0,477.983,25.803"  VerticalAlignment="Bottom" Height="32.962" Content="Edit" Click="GoToEditPartnership_Click" Cursor="Hand"/>
+			<Button x:Name="button4"  Margin="314.96,0,394.14,25.803" VerticalAlignment="Bottom" Height="32.962" Content="Delete" Click="DeletePartnership_Click" RenderTransformOrigin="0.5,0.5" Cursor="Hand">
+				<Button.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Button.RenderTransform>
+			</Button>
+			<Button x:Name="Create"  Margin="0,0,313.465,25.803" VerticalAlignment="Bottom" Height="32.962" Content="Create" Click="GoToCreatePartnership_Click" HorizontalAlignment="Right" Width="61.701" Cursor="Hand"/>
+			<Button x:Name="button3" Margin="480.955,0,228.145,25.803"  VerticalAlignment="Bottom" Height="32.962" Content="Sync" Click="SyncPartnership_Click" RenderTransformOrigin="0.5,0.5" Cursor="Hand">
+				<Button.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Button.RenderTransform>
+			</Button>
+			<TextBlock Margin="37.04,0,29.169,66.299" VerticalAlignment="Bottom" Height="58.571" TextWrapping="Wrap"><Run Text="Chef fill this in . Chef fill this in. Chef fill this in. Chef fill this in . Chef fill this in. Chef fill this in.Chef fill this in . Chef fill this in. Chef fill this in. Chef fill this in . Chef fill this in. Chef fill this in. Chef fill this in. Chef fill this in. Chef fill this in. Chef fill this in. Chef fill this in. Chef fill this in. Chef fill this in. Chef fill this in. Chef fill this in. Chef fill this in. Chef fill this in. Chef fill this in. Chef fill this in."/><LineBreak/><Run Text=""/></TextBlock>
+			<Button x:Name="viewMiniPartnershipBtn" HorizontalAlignment="Right" Margin="0,61.211,31.169,0" VerticalAlignment="Top" Width="170.306" Height="35.715" Content="Show Mini Partnerships" Click="ViewMiniPartnerships_Click" Cursor="Hand"/>
+			<TextBlock x:Name="textBlock" Margin="118.691,37.303,111.653,0" VerticalAlignment="Top" Height="59.623" FontFamily="Arial" FontSize="24" FontWeight="Bold" Text="View Mini Partnership" TextWrapping="Wrap" Visibility="Hidden"/>
+			<ListBox x:Name="minipartnershiplist" Margin="32.163,107.706,29.169,128.87"  ItemContainerStyle="{DynamicResource ListBoxMiniPartnershipItemStyle}" Background="White" BorderBrush="#FF787878" Foreground="Black" RenderTransformOrigin="0.5,0.5" Style="{DynamicResource ListBoxStyle1}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single"  Visibility="Hidden"  >
+				<ListBox.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</ListBox.RenderTransform>
+			</ListBox>
+			<TextBlock x:Name="textBlock5" Margin="118.691,65.211,116.06,0" VerticalAlignment="Top" Height="40.926" FontSize="13.333" TextWrapping="Wrap" Text="List of mini partnerships you have created." Visibility="Hidden"/>
+			<Button  x:Name="button4_Copy"  Margin="308.96,0,400.14,25.803" VerticalAlignment="Bottom" Height="32.962" Content="Delete" Click="DeleteMiniPartnership_Click" RenderTransformOrigin="0.5,0.5" Visibility="Hidden" Cursor="Hand">
+				<Button.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Button.RenderTransform>
+			</Button>
+			<Button x:Name="button3_Copy" Margin="389.635,0,299.845,25.803"  VerticalAlignment="Bottom" Height="32.962" Content="Sync All" Click="SyncMiniPartnership_Click" RenderTransformOrigin="0.5,0.5" Visibility="Hidden" Cursor="Hand">
+				<Button.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Button.RenderTransform>
+			</Button>
+			<Button x:Name="viewPartnershipBtn" HorizontalAlignment="Right" Margin="0,61.211,31.169,0" VerticalAlignment="Top" Width="170.306" Height="35.715" Content="Show Partnerships" Visibility="Hidden" Click="GoToViewPartnerships_Click" Cursor="Hand"/>
 		</Grid>
-		<Grid x:Name="sbs" Margin="0.027,0,-1.5,0" VerticalAlignment="Bottom" Height="526.184" d:LayoutOverrides="GridBox" Visibility="Hidden" Background="Black" >
+		<Grid x:Name="sbs" Margin="0.027,0,-1.024,0" VerticalAlignment="Bottom" Height="526.184" d:LayoutOverrides="GridBox" Visibility="Hidden" Background="Black" >
 			<Rectangle x:Name="background_Copy2" RadiusX="1" RadiusY="2" Margin="0,0,-3.2,0" VerticalAlignment="Top" Height="526.184" Cursor="Arrow">
 				<Rectangle.Fill>
 					<RadialGradientBrush GradientOrigin="0.265,0.184" RadiusX="1.237" RadiusY="1.237">
@@ -933,7 +1092,7 @@
 			<TextBlock x:Name="textBlock_Copy" Margin="41.212,0,275.105,110.546" FontSize="13.333" TextWrapping="Wrap" Text="Mouse over to see" FontStyle="Italic" VerticalAlignment="Bottom" Height="18.747" TextAlignment="Center"/>			
 			<Button HorizontalAlignment="Right" IsTabStop="false" Margin="0,0,19.121,62.163" VerticalAlignment="Bottom" Width="71.527" Content="Show Help" Click="ShowHelp" Height="21.485"/>
 		</Grid>
-		<Grid x:Name="Conflict" Margin="0.027,0,-0.027,-4" VerticalAlignment="Bottom" Height="528" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
+		<Grid x:Name="Conflict" Margin="0.027,0,0.449,-4" VerticalAlignment="Bottom" Height="528" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
 			<Grid.RowDefinitions>
 				<RowDefinition/>
 			</Grid.RowDefinitions>
@@ -1029,7 +1188,7 @@
 			<Label HorizontalAlignment="Left" Margin="24.724,0,0,48.418" VerticalAlignment="Bottom" Content="Current File Progress:" FontWeight="Bold" Width="129.283" Height="30.485"/>
 			<Label HorizontalAlignment="Left" Margin="24.23,0,0,26.944" VerticalAlignment="Bottom" Content="Overall Progress:" FontWeight="Bold" Width="104.16" Height="30.485"/>
 		</Grid>
-		<Grid x:Name="Settings" Margin="0.027,0,-0.027,0" VerticalAlignment="Bottom" Height="526.184" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
+		<Grid x:Name="Settings" Margin="0.027,0,0.449,0" VerticalAlignment="Bottom" Height="526.184" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
 			<Grid.RenderTransform>
 				<TransformGroup>
 					<ScaleTransform/>
@@ -1133,7 +1292,7 @@
 			<Label x:Name="label" Margin="0,0,174.354,183.134" Content="100%" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="37.744" Height="24.739"/>
 			<Button HorizontalAlignment="Right" Margin="0,184.15,134.687,0" VerticalAlignment="Top" Width="144.216" Content="Refresh List" Click="RefreshSBSSettingDriveList"/>
 		</Grid>
-		<Grid x:Name="FirstTimeHelp" Margin="0,0,-1.5,-4" Visibility="Hidden">
+		<Grid x:Name="FirstTimeHelp" Margin="0,0,-1.024,-4" Visibility="Hidden">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="0.446*"/>
 				<ColumnDefinition Width="0.554*"/>
@@ -1197,7 +1356,7 @@
 				</Image.RenderTransform>
 			</Image>
 		</Grid>
-		<Grid x:Name="Result" Margin="0.027,0,-0.027,0" VerticalAlignment="Bottom" Height="528" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
+		<Grid x:Name="Result" Margin="0.027,0,0.449,0" VerticalAlignment="Bottom" Height="528" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
 			<Grid.RenderTransform>
 				<TransformGroup>
 					<ScaleTransform/>
@@ -1238,7 +1397,7 @@
 			</Custom:DataGrid>
 			<Button HorizontalAlignment="Right"  Margin="0,0,22.674,29.453" VerticalAlignment="Bottom" Width="74.854" Content="Ok!" Click="GoHome" Height="25.882"/>
 		</Grid>
-		<Grid x:Name="CreatePartnership" RenderTransformOrigin="0.5,0.5" Margin="0,0,-4.693,0" Visibility="Hidden" >
+		<Grid x:Name="CreatePartnership" RenderTransformOrigin="0.5,0.5" Margin="0,0,-4.217,0" Visibility="Hidden" >
 			<Grid.RenderTransform>
 				<TransformGroup>
 					<ScaleTransform/>
@@ -1410,7 +1569,7 @@
 				<Button x:Name="EditPartnershipButon" VerticalAlignment="Bottom" Height="23" Content="Save" RenderTransformOrigin="0.79,1.043" Click="SavePartnership_Click"  HorizontalAlignment="Right" Width="69" Margin="0,0,16.984,8.636" />
 			</Grid>
 		</Grid>
-		<Grid x:Name="CreateDoneGrid" RenderTransformOrigin="0.5,0.5" Margin="0,3,-0.027,0" Visibility="Hidden" >
+		<Grid x:Name="CreateDoneGrid" RenderTransformOrigin="0.5,0.5" Margin="0,3,0.449,0" Visibility="Hidden" >
 			<Grid.RenderTransform>
 				<TransformGroup>
 					<ScaleTransform/>
@@ -1504,7 +1663,7 @@
 						</TransformGroup>
 					</TextBlock.RenderTransform>
 				</TextBlock>
-				<Button x:Name="button6" HorizontalAlignment="Right" Margin="0,0,7.273,-7.44" VerticalAlignment="Bottom" Width="123.488" Height="45.039" Content="Go back to View&#xa;     Partnership" RenderTransformOrigin="0.79,1.043" Click="GoToViewPartnerships_Click" />
+				<Button x:Name="button6" HorizontalAlignment="Right" Margin="0,0,9.905,-7.44" VerticalAlignment="Bottom" Width="123.078" Height="45.039" Content="Go back to View&#xa;    Partnership" RenderTransformOrigin="0.79,1.043" Click="GoToViewPartnerships_Click" />
 			</Grid>
 			<TextBlock x:Name="textBlock2_Copy" Margin="110.989,52.609,0.959,0" VerticalAlignment="Top" Height="61.048" FontFamily="Arial" FontSize="24" FontWeight="Bold" Text="Partnership Created" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5">
 				<TextBlock.RenderTransform>
@@ -1516,7 +1675,7 @@
 					</TransformGroup>
 				</TextBlock.RenderTransform>
 			</TextBlock>
-			<Button x:Name="createAnotherPartnershipBtn" HorizontalAlignment="Right" Margin="0,0,30.377,61.737" VerticalAlignment="Bottom" Width="127.081" Height="46.653" Content="Create another&#xa;   Partnership" RenderTransformOrigin="0.79,1.043" Click="GoToCreatePartnership_Click" />
+			<Button x:Name="createAnotherPartnershipBtn" HorizontalAlignment="Right" Margin="0,0,36.322,61.737" VerticalAlignment="Bottom" Width="123.041" Height="46.653" Content="Create another&#xa;   Partnership" RenderTransformOrigin="0.79,1.043" Click="GoToCreatePartnership_Click" />
 		</Grid>
 	</Grid>
 </UserControl>
