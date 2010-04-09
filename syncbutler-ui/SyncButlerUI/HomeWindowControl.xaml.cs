@@ -173,7 +173,7 @@ namespace SyncButlerUI
             waitForErrorResponse.WaitOne();
             return worker.CancellationPending;
         }
-
+		
         /// <summary>
         /// Delegate to report progress of a Sync operation to the user
         /// </summary>
@@ -574,6 +574,80 @@ namespace SyncButlerUI
                 //	image.Source = new BitmapImage(new Uri("pack://application;/Images/bullet_toggle_plus.png", UriKind.Absolute));
             }
         }
+
+        private void RefreshSBSSettingDriveList(object sender, RoutedEventArgs e)
+		{
+            BackgroundWorker storageScanWorker = new BackgroundWorker();
+            ProgressBar progressWindow = new ProgressBar(storageScanWorker, "Refreshing drive list", "Searching for removable storage devices");
+            progressWindow.HideTotalProgress();
+            progressWindow.IsInderteminate = true;
+            List<WindowDriveInfo> DriveLetters = null;
+            bool noUSBDrives = false;
+            
+            storageScanWorker.DoWork += new DoWorkEventHandler(delegate(Object worker, DoWorkEventArgs args)
+                {
+                    DriveLetters = this.Controller.GetUSBDriveLetters();
+
+                    // if there is no usb drive, let user to select some local hard disk, warn the user as well.
+                    if (DriveLetters.Count == 0)
+                    {
+                        DriveLetters = this.Controller.GetNonUSBDriveLetters();
+                        noUSBDrives = true;
+                    }
+
+                });
+            storageScanWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(delegate(Object worker, RunWorkerCompletedEventArgs args)
+                {
+                    bool devicePluggedIn = false;
+                    if (noUSBDrives)
+                    {
+                        this.NoUSBWarningTextBlock.Visibility = Visibility.Visible;
+                        CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok,
+                            "Please plug in a portable storage device if you wish to use it with\nSync Butler, Sync!");
+                        this.SBSWorkingDriveComboBox.IsEnabled = false;
+                        this.SpaceToUseSlide.IsEnabled = false;
+                        this.SpaceToUseTextbox.IsEnabled = false;
+                        this.SBSSettingComboBox.IsEnabled = false;
+                        this.DefaultSettingButton.IsEnabled = false;
+                        this.SaveSettingButton.IsEnabled = false;
+                        
+                    }
+                    else
+                    {
+                        this.SBSSettingComboBox.IsEnabled = true;
+                        this.DefaultSettingButton.IsEnabled = true;
+                        this.SaveSettingButton.IsEnabled = true;
+                        SBSWorkingDriveComboBox.Items.Clear();
+                        foreach (WindowDriveInfo s in DriveLetters)
+                        {
+                            this.SBSWorkingDriveComboBox.Items.Add(s);
+                        }
+                        if (this.SBSWorkingDriveComboBox.Items.Contains(this.Controller.GetSBSDriveLetter()))
+                        {
+                            this.SBSWorkingDriveComboBox.SelectedItem = this.Controller.GetSBSDriveLetter();
+                            devicePluggedIn = true;
+                        }
+                        else if (this.SBSWorkingDriveComboBox.Items.Count != 0)
+                        {
+                            this.SBSWorkingDriveComboBox.SelectedIndex = 0;
+                        }
+                        if (devicePluggedIn)
+                        {
+                            this.SBSWorkingDriveComboBox.IsEnabled = false;
+                            if (this.SBSSettingComboBox.Items.IsEmpty)
+                            {
+                                this.SBSSettingComboBox.Items.Add("Enable");
+                                this.SBSSettingComboBox.Items.Add("Disable");
+                                this.SBSSettingComboBox.SelectedItem = "Disable";
+                            }
+                        }
+                        this.IsLoadingSBS = false;
+                    }
+                    progressWindow.TaskComplete();
+                });
+            progressWindow.Start();
+		}
+		
         private void GoHome()
         {
             this.FirstTimeHelp.Visibility = System.Windows.Visibility.Hidden;
