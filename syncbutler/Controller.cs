@@ -601,7 +601,7 @@ namespace SyncButler
         }
         public void OpenFile(String filename)
         {
-            System.Diagnostics.Process.Start(filename);
+                System.Diagnostics.Process.Start(filename);
         }
         /// <summary>
         /// This method is required to be run when the program is closed. It
