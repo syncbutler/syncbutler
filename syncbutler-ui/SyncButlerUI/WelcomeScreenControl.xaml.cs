@@ -61,7 +61,7 @@ namespace SyncButlerUI
                 controller = Controller.GetInstance();
                 controller.SetFirstComputerName(FirstTimeComputerNameText.Text.Trim());
                 CurrentState = State.OpenWindow;
-                VisualStateManager.GoToState(this, "HelpScreen1", false);
+                VisualStateManager.GoToState(this, "HelpScreenState", false);
 				FocusControl(() => HelpScreen1NextBtn.Focus());
             }
             else
@@ -72,12 +72,18 @@ namespace SyncButlerUI
 		public void GoToHelpScreen()
 		{
             CurrentState = State.AllowClose;
-			VisualStateManager.GoToState(this, "HelpScreen1", false);
+			VisualStateManager.GoToState(this, "HelpScreenState", false);
+			FocusControl(() => HelpScreen1NextBtn.Focus());
+		}
+		public void GoToFeaturesScreen()
+		{
+            CurrentState = State.AllowClose;
+			VisualStateManager.GoToState(this, "FeatureHelpState", false);
 			FocusControl(() => HelpScreen1NextBtn.Focus());
 		}
         public void GoToSBSScreen()
         {
-            VisualStateManager.GoToState(this, "HelpScreen3", false);
+            VisualStateManager.GoToState(this, "SBSHelpScreenState", false);
             FocusControl(() => HelpScreenCloseBtn.Focus());
         }
 		/// <summary>
@@ -87,7 +93,7 @@ namespace SyncButlerUI
 		/// <param name="e"></param>
 		public void GoToHelpScreen2_Click(object sender,RoutedEventArgs e)
         {
-            VisualStateManager.GoToState(this,"HelpScreen2",false);
+            VisualStateManager.GoToState(this,"SecondHelpScreenState",false);
             FocusControl(() => HelpScreenFinishBtn.Focus());
 		}	
 		public void ExitTutorial_Click(object sender,RoutedEventArgs e)

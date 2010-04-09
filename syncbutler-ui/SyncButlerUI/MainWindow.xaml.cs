@@ -100,7 +100,7 @@ namespace SyncButlerUI
 				}
                     homeWindow1.CheckIfEnoughSpace();
                     homeWindow1.CurrentState = HomeWindowControl.State.SBS;
-                    VisualStateManager.GoToState(homeWindow1, "SbsState1", false);
+                    VisualStateManager.GoToState(homeWindow1, "SbsState", false);
 					homeWindow1.LoadMRUs();
 
 				
@@ -108,7 +108,17 @@ namespace SyncButlerUI
 
 		}
 
-
+		private void Help_Click(object sender, RoutedEventArgs e)
+		{
+			FirstTimeStartupScreen dialog = new FirstTimeStartupScreen();
+            
+            dialog.WelcomeScreenControl.FirstTimeComputerNameText.Visibility = Visibility.Hidden;
+            dialog.Title = "SyncButler - Help";
+            
+            dialog.WelcomeScreenControl.GoToHelpScreen();
+            dialog.ShowDialog();
+			
+		}
 
 		private void cleanUp(object sender,  System.ComponentModel.CancelEventArgs e)
 		{
