@@ -236,24 +236,20 @@
 							<Storyboard x:Key="HomeAnimate">
 								<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="rectangle">
 									<SplineColorKeyFrame KeyTime="00:00:00" Value="Transparent"/>
-									<SplineColorKeyFrame KeyTime="00:00:01" Value="#00FFDD00"/>
+									<SplineColorKeyFrame KeyTime="00:00:00.5000000" Value="#00FFDD00"/>
 								</ColorAnimationUsingKeyFrames>
 								<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="rectangle">
-									<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.155"/>
-									<SplineDoubleKeyFrame KeyTime="00:00:01" Value="0.325"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.455"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0.57"/>
 								</DoubleAnimationUsingKeyFrames>
-							</Storyboard>
-							<Storyboard x:Key="ButtonHighlight">
-								<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
-									<SplineColorKeyFrame KeyTime="00:00:00" Value="Transparent"/>
-								</ColorAnimationUsingKeyFrames>
-								<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Color)">
+								<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="rectangle" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Color)">
 									<SplineColorKeyFrame KeyTime="00:00:00" Value="White"/>
+									<SplineColorKeyFrame KeyTime="00:00:00.5000000" Value="#FFFFF195"/>
 								</ColorAnimationUsingKeyFrames>
 							</Storyboard>
 						</ControlTemplate.Resources>
 						<Grid x:Name="HomeButton" Margin="-5,0,-3.354,0">
-							<Rectangle x:Name="rectangle" Cursor="Hand" VerticalAlignment="Top" Height="49.156" Width="394.449" RadiusX="5" RadiusY="5" Margin="0,0.333,-0.061,0" Opacity="0.155" HorizontalAlignment="Right">
+							<Rectangle x:Name="rectangle" Cursor="Hand" VerticalAlignment="Top" Height="49.156" Width="394.449" RadiusX="5" RadiusY="5" Margin="0,0.333,-0.061,0" Opacity="0.455" HorizontalAlignment="Right">
 								<Rectangle.Fill>
 									<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
 										<GradientStop Color="White" Offset="0"/>
@@ -361,16 +357,16 @@
 							<Storyboard x:Key="SBS animate">
 								<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="rectangle" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
 									<SplineColorKeyFrame KeyTime="00:00:00" Value="Transparent"/>
-									<SplineColorKeyFrame KeyTime="00:00:01" Value="#00FFDD00"/>
+									<SplineColorKeyFrame KeyTime="00:00:00.5000000" Value="#00FFDD00"/>
 								</ColorAnimationUsingKeyFrames>
 								<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="rectangle" Storyboard.TargetProperty="(UIElement.Opacity)">
-									<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.155"/>
-									<SplineDoubleKeyFrame KeyTime="00:00:01" Value="0.325"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.455"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0.57"/>
 								</DoubleAnimationUsingKeyFrames>
 							</Storyboard>
 						</ControlTemplate.Resources>
 						<Grid x:Name="SettingsButton" Margin="0,0,-2.333,0">
-							<Rectangle x:Name="rectangle" Cursor="Hand" VerticalAlignment="Top" Height="51.751" Width="379.653" RadiusX="5" RadiusY="5" Margin="0,1.596,3,0" Opacity="0.155" HorizontalAlignment="Right">
+							<Rectangle x:Name="rectangle" Cursor="Hand" VerticalAlignment="Top" Height="51.751" Width="379.653" RadiusX="5" RadiusY="5" Margin="0,1.596,3,0" Opacity="0.455" HorizontalAlignment="Right">
 								<Rectangle.Fill>
 									<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
 										<GradientStop Color="White" Offset="0"/>
