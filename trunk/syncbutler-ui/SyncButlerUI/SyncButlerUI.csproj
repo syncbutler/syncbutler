@@ -166,6 +166,7 @@
     <Resource Include="Images\file.png" />
     <Resource Include="Images\Folder.png" />
     <Resource Include="Images\HD.png" />
+    <Resource Include="Images\Help.png" />
     <Resource Include="Images\HelpScreenFolder.png" />
     <Resource Include="Images\HomeWindow.png" />
     <Resource Include="Images\Icons\SyncButler.ico" />

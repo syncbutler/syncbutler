@@ -732,6 +732,7 @@ namespace SyncButlerUI
                 sourceFolderPath.Text = folderOnePath;
                 destinationFolderPath.Text = folderTwoPath;
                 partnerShipName.Text = partnershipName;
+				NewPartnershipName = partnershipName;
                 if ((partnershipNameTextBox.Text.Trim()).Equals(""))
                     throw new UserInputException("Please input a partnership name");
 
@@ -874,7 +875,7 @@ namespace SyncButlerUI
             dialog.WelcomeScreenControl.FirstTimeComputerNameText.Visibility = Visibility.Hidden;
             dialog.Title = "SyncButler - Help";
             
-            dialog.WelcomeScreenControl.GoToHelpScreen();
+            dialog.WelcomeScreenControl.GoToFeaturesScreen();
             dialog.ShowDialog();
         }
 
@@ -1015,7 +1016,7 @@ namespace SyncButlerUI
                 sourceFolderPath.Text = folderOnePath;
                 destinationFolderPath.Text = folderTwoPath;
                 partnerShipName.Text = partnershipName;
-
+				NewPartnershipName = partnershipName;
                 this.Controller.UpdatePartnership(oldPartnershipName, partnershipName, folderOnePath, folderTwoPath);
 
                 VisualStateManager.GoToState(this, "EditDoneState", false);
