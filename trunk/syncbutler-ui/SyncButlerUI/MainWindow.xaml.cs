@@ -78,7 +78,7 @@ namespace SyncButlerUI
             homeWindow1.FirstTimeHelp.Visibility = System.Windows.Visibility.Hidden;
             if (!homeWindow1.StopExistingOperation()) return;
 			//homeWindow1.goHome(sender,e);
-			VisualStateManager.GoToState(homeWindow1,"Home",false);
+			VisualStateManager.GoToState(homeWindow1,"HomeState",false);
             homeWindow1.CurrentState = HomeWindowControl.State.Home;
 		}
 

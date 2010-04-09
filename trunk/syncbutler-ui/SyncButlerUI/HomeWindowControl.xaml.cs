@@ -119,8 +119,6 @@ namespace SyncButlerUI
             return false;
         }
 
-
-
         /// <summary>
         /// Add a list of conflicts to the resolve queue
         /// </summary>
@@ -175,7 +173,7 @@ namespace SyncButlerUI
             waitForErrorResponse.WaitOne();
             return worker.CancellationPending;
         }
-
+		
         /// <summary>
         /// Delegate to report progress of a Sync operation to the user
         /// </summary>
@@ -282,7 +280,7 @@ namespace SyncButlerUI
         private void AsyncStartSync(IEnumerable<string> partnershipNames)
         {
             Controller.conflictCount = 0;
-            VisualStateManager.GoToState(this, "ConflictState1", false);
+            VisualStateManager.GoToState(this, "ConflictStateState", false);
             CurrentState = State.Conflict;
             if (scanWorker != null)
             {
@@ -578,14 +576,14 @@ namespace SyncButlerUI
         }
 
         private void RefreshSBSSettingDriveList(object sender, RoutedEventArgs e)
-        {
+		{
             BackgroundWorker storageScanWorker = new BackgroundWorker();
             ProgressBar progressWindow = new ProgressBar(storageScanWorker, "Refreshing drive list", "Searching for removable storage devices");
             progressWindow.HideTotalProgress();
             progressWindow.IsInderteminate = true;
             List<WindowDriveInfo> DriveLetters = null;
             bool noUSBDrives = false;
-
+            
             storageScanWorker.DoWork += new DoWorkEventHandler(delegate(Object worker, DoWorkEventArgs args)
                 {
                     DriveLetters = this.Controller.GetUSBDriveLetters();
@@ -612,7 +610,7 @@ namespace SyncButlerUI
                         this.SBSSettingComboBox.IsEnabled = false;
                         this.DefaultSettingButton.IsEnabled = false;
                         this.SaveSettingButton.IsEnabled = false;
-
+                        
                     }
                     else
                     {
@@ -624,29 +622,10 @@ namespace SyncButlerUI
                         {
                             this.SBSWorkingDriveComboBox.Items.Add(s);
                         }
-                        WindowDriveInfo wdi;
-                        try
+                        if (this.SBSWorkingDriveComboBox.Items.Contains(this.Controller.GetSBSDriveLetter()))
                         {
-                            wdi = this.Controller.GetSBSDriveLetter();
-                        }
-                        catch (Exception ex)
-                        {
-                            if (ex.Message.Equals("invalid drive"))
-                                wdi = null;
-                            else
-                                throw ex;
-                        }
-                        if (wdi != null)
-                        {
-                            if (this.SBSWorkingDriveComboBox.Items.Contains(wdi))
-                            {
-                                this.SBSWorkingDriveComboBox.SelectedItem = wdi;
-                                devicePluggedIn = true;
-                            }
-                            else if (this.SBSWorkingDriveComboBox.Items.Count != 0)
-                            {
-                                this.SBSWorkingDriveComboBox.SelectedIndex = 0;
-                            }
+                            this.SBSWorkingDriveComboBox.SelectedItem = this.Controller.GetSBSDriveLetter();
+                            devicePluggedIn = true;
                         }
                         else if (this.SBSWorkingDriveComboBox.Items.Count != 0)
                         {
@@ -659,31 +638,20 @@ namespace SyncButlerUI
                             {
                                 this.SBSSettingComboBox.Items.Add("Enable");
                                 this.SBSSettingComboBox.Items.Add("Disable");
+                                this.SBSSettingComboBox.SelectedItem = "Disable";
                             }
-                            this.SBSSettingComboBox.SelectedItem = "Disable";
-
-                        }
-                        else
-                        {
-                            this.SBSWorkingDriveComboBox.IsEnabled = true;
-                            if (this.SBSSettingComboBox.Items.IsEmpty)
-                            {
-                                this.SBSSettingComboBox.Items.Add("Enable");
-                                this.SBSSettingComboBox.Items.Add("Disable");
-                            }
-                            this.SBSSettingComboBox.SelectedItem = "Enable";
                         }
                         this.IsLoadingSBS = false;
                     }
                     progressWindow.TaskComplete();
                 });
             progressWindow.Start();
-        }
-
+		}
+		
         private void GoHome()
         {
             this.FirstTimeHelp.Visibility = System.Windows.Visibility.Hidden;
-            VisualStateManager.GoToState(this, "Home", false);
+            VisualStateManager.GoToState(this, "HomeState", false);
             CurrentState = State.Home;
         }
         private void ShowHelp(object sender, RoutedEventArgs e)
@@ -723,7 +691,7 @@ namespace SyncButlerUI
             this.folderOneTextBox.Clear();
             this.folderTwoTextBox.Clear();
             this.partnershipNameTextBox.Clear();
-            FocusControl(() => folderOneTextBox.Focus());
+            FocusControl(() => folderOneTextBox.Focus());			
         }
         /// <summary>
         /// GetPath of folder in directory browser dialog
@@ -769,7 +737,7 @@ namespace SyncButlerUI
 
                 this.Controller.AddPartnership(partnerShipName.Text, sourceFolderPath.Text, destinationFolderPath.Text);
 
-                VisualStateManager.GoToState(this, "CreateDone", false);
+                VisualStateManager.GoToState(this, "CreateDoneState", false);
                 CurrentState = State.CreateDone;
                 partnershipList.Items.Refresh();
             }
@@ -842,7 +810,7 @@ namespace SyncButlerUI
                     minipartnershiplist.Items[minipartnershiplist.SelectedIndex] +
                     "\" partnership?") == true)
                 {
-                    this.Controller.DeletePartnership(minipartnershiplist.SelectedIndex);
+                    this.Controller.DeleteMiniPartnership(minipartnershiplist.SelectedIndex);
                     minipartnershiplist.Items.Refresh();
                 }
             }
@@ -902,10 +870,10 @@ namespace SyncButlerUI
         private void GoToExploreFeatures_Click(object sender, RoutedEventArgs e)
         {
             FirstTimeStartupScreen dialog = new FirstTimeStartupScreen();
-
+            
             dialog.WelcomeScreenControl.FirstTimeComputerNameText.Visibility = Visibility.Hidden;
             dialog.Title = "SyncButler - Help";
-
+            
             dialog.WelcomeScreenControl.GoToHelpScreen();
             dialog.ShowDialog();
         }
@@ -1050,7 +1018,7 @@ namespace SyncButlerUI
 
                 this.Controller.UpdatePartnership(oldPartnershipName, partnershipName, folderOnePath, folderTwoPath);
 
-                VisualStateManager.GoToState(this, "EditDone", false);
+                VisualStateManager.GoToState(this, "EditDoneState", false);
                 CurrentState = State.EditDone;
                 partnershipList.Items.Refresh();
             }
@@ -1277,67 +1245,46 @@ namespace SyncButlerUI
             if (this.SBSSettingComboBox.SelectedIndex != -1 &&
                 this.SBSSettingComboBox.SelectedItem.Equals("Enable") && !IsLoadingSBS)
             {
-
                 if (SBSWorkingDriveComboBox.SelectedIndex != -1)
                 {
-                    if (Directory.Exists(((WindowDriveInfo)SBSWorkingDriveComboBox.SelectedItem).GetDriveLetter() + ":\\"))
+                    SpaceToUseSlide.Value = 0;
+                    DriveInfo di = new DriveInfo("" + ((WindowDriveInfo)SBSWorkingDriveComboBox.SelectedItem).GetDriveLetter());
+                    long freespace = di.AvailableFreeSpace;
+
+                    if (freespace / GIGA_BYTE > 10)
                     {
-                        SpaceToUseSlide.IsEnabled = true;
-                        SpaceToUseTextbox.IsEnabled = true;
-                        SpaceToUseSlide.Value = 0;
-                        DriveInfo di = new DriveInfo("" + ((WindowDriveInfo)SBSWorkingDriveComboBox.SelectedItem).GetDriveLetter());
-                        long freespace = di.AvailableFreeSpace;
+                        resolutionLabel.Content = "GB";
+                        SpaceToUseSlide.Maximum = freespace / GIGA_BYTE;
 
-                        if (freespace / GIGA_BYTE > 10)
-                        {
-                            resolutionLabel.Content = "GB";
-                            SpaceToUseSlide.Maximum = freespace / GIGA_BYTE;
-
-                        }
-                        else if (freespace / MEGA_BYTE > 500)
-                        {
-                            resolutionLabel.Content = "MB";
-                            SpaceToUseSlide.Maximum = freespace / MEGA_BYTE;
-                        }
-                        else if (freespace / MEGA_BYTE > 2)
-                        {
-                            resolutionLabel.Content = "KB";
-                            SpaceToUseSlide.Maximum = freespace / KILO_BYTE;
-                        }
-                        else
-                        {
-                            resolutionLabel.Content = "Bytes";
-                            SpaceToUseSlide.Maximum = freespace;
-                        }
-                        SpaceToUseSlide.Value = 0.1 * SpaceToUseSlide.Maximum;
+                    }
+                    else if (freespace / MEGA_BYTE > 500)
+                    {
+                        resolutionLabel.Content = "MB";
+                        SpaceToUseSlide.Maximum = freespace / MEGA_BYTE;
+                    }
+                    else if (freespace / MEGA_BYTE > 2)
+                    {
+                        resolutionLabel.Content = "KB";
+                        SpaceToUseSlide.Maximum = freespace / KILO_BYTE;
                     }
                     else
                     {
-                        CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Please check your device\nSBS cannot find it");
-                        SpaceToUseSlide.Maximum = 0;
-                        SpaceToUseSlide.Value = 0;
-                        SpaceToUseSlide.IsEnabled = false;
-                        SpaceToUseTextbox.IsEnabled = false;
+                        resolutionLabel.Content = "Bytes";
+                        SpaceToUseSlide.Maximum = freespace;
                     }
+                    SpaceToUseSlide.Value = 0.1 * SpaceToUseSlide.Maximum;
                 }
             }
         }
         public void CheckIfEnoughSpace()
         {
-            if (!Controller.IsSBSEnable())
+            if (!Controller.GetInstance().IsSBSDriveEnough())
             {
                 SBSSync.IsEnabled = false;
             }
             else
             {
-                if (!Controller.GetInstance().IsSBSDriveEnough())
-                {
-                    SBSSync.IsEnabled = false;
-                }
-                else
-                {
-                    SBSSync.IsEnabled = true;
-                }
+                SBSSync.IsEnabled = true;
             }
         }
         private void SpaceToUseChanged(Object sender, KeyEventArgs e)
@@ -1517,7 +1464,7 @@ namespace SyncButlerUI
         {
 
             //ShowResult();
-            VisualStateManager.GoToState(this, "Result1", false);
+            VisualStateManager.GoToState(this, "ResultState", false);
             CurrentState = State.Result;
             SyncResultListBox.ItemsSource = ResolvedConflicts;
         }
@@ -1601,31 +1548,19 @@ namespace SyncButlerUI
 
         private void OpenSelectedOnList(object sender, MouseEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed)
+            String path = "";
+            if (WeirdFile_List.SelectedIndex != -1)
             {
-                String path = "";
-                if (WeirdFile_List.SelectedIndex != -1)
-                {
-                    path = MRUs["sensitive"][(String)WeirdFile_List.SelectedItem];
-                }
-                if (Favourites_List.SelectedIndex != -1)
-                {
-                    path = MRUs["interesting"][(String)Favourites_List.SelectedItem];
-                }
-                if (path.Length != 0 && File.Exists(path))
-                {
-                    try
-                    {
-                        Controller.GetInstance().OpenFile(path);
-                    }
-                    catch (Win32Exception)
-                    {
-                        CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "There was an error in opening the associated file.");
-                    }
-                }
+                path = MRUs["sensitive"][(String)WeirdFile_List.SelectedItem];
             }
+            if (Favourites_List.SelectedIndex != -1)
+            {
+                path = MRUs["interesting"][(String)Favourites_List.SelectedItem];
+            }
+            if (path.Length != 0 && File.Exists(path))
+                Controller.GetInstance().OpenFile(path);
         }
-
+        
         private void GoToSetting(object sender, RoutedEventArgs e)
         {
             CurrentState = State.Settings;
@@ -1640,7 +1575,7 @@ namespace SyncButlerUI
                 FirstTimeHelp.Visibility = System.Windows.Visibility.Hidden;
             }
 
-            VisualStateManager.GoToState(this, "Settings1", false);
+            VisualStateManager.GoToState(this, "SettingsState", false);
 
             BackgroundWorker storageScanWorker = new BackgroundWorker();
             ProgressBar progressWindow = new ProgressBar(storageScanWorker, "Loading Settings Page", "Searching for removable storage devices");
@@ -1690,36 +1625,16 @@ namespace SyncButlerUI
                     {
                         this.SBSWorkingDriveComboBox.Items.Add(s);
                     }
-                    WindowDriveInfo sbsdrive;
-                    try
-                    {
-                        sbsdrive = this.Controller.GetSBSDriveLetter();
-                    }
-                    catch (Exception ex)
-                    {
-                        if (ex.Message.Equals("invalid drive"))
-                            sbsdrive = null;
-                        else
-                            throw ex;
-                    }
-                    if (sbsdrive != null)
-                    {
-                        if (this.SBSWorkingDriveComboBox.Items.Contains(sbsdrive))
-                        {
-                            this.SBSWorkingDriveComboBox.SelectedItem = this.Controller.GetSBSDriveLetter();
-                            devicePluggedIn = true;
-                        }
-                        else if (this.SBSWorkingDriveComboBox.Items.Count != 0)
-                        {
-                            this.SBSWorkingDriveComboBox.SelectedIndex = 0;
-                        }
 
+                    if (this.SBSWorkingDriveComboBox.Items.Contains(this.Controller.GetSBSDriveLetter()))
+                    {
+                        this.SBSWorkingDriveComboBox.SelectedItem = this.Controller.GetSBSDriveLetter();
+                        devicePluggedIn = true;
                     }
                     else if (this.SBSWorkingDriveComboBox.Items.Count != 0)
                     {
                         this.SBSWorkingDriveComboBox.SelectedIndex = 0;
                     }
-
                     if (devicePluggedIn)
                     {
                         if (this.Controller.SBSEnable.Equals("Enable"))
@@ -1754,7 +1669,6 @@ namespace SyncButlerUI
                     this.IsLoadingSBS = false;
                 }
                 progressWindow.TaskComplete();
-
             });
 
             progressWindow.Start();
