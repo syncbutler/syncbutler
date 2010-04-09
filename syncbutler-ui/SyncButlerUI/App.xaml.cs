@@ -20,7 +20,7 @@ namespace SyncButlerUI
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public static void Main()
         {
-            AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve); 
+            //AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve); 
             SyncButlerUI.App app = new SyncButlerUI.App();
             app.InitializeComponent();
             app.Run();           
