@@ -54,7 +54,7 @@ namespace SyncButler
             {
                 throw new Exception("invalid drive");
             }
-
+            
             DriveInfo di = new DriveInfo("" + DriveLetter);
             Label = di.VolumeLabel;
         }
@@ -74,6 +74,18 @@ namespace SyncButler
             return ToRtn;
         }
 
+        public override bool Equals(object obj)
+        {
+            if (!(obj is WindowDriveInfo))
+            {
+                return false;
+            }
+            else
+            {
+                WindowDriveInfo wdi = (WindowDriveInfo) obj;
+                return (wdi.GetDriveLetter() == this.GetDriveLetter() && wdi.Label.Equals(this.Label));
+            }
+        }
 
         public override string ToString()
         {
