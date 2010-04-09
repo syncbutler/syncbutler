@@ -9,10 +9,10 @@
 	x:Class="SyncButlerUI.MainWindow"
 	x:Name="Window"
 	Title="SyncButler" 
-	MinHeight="495" MinWidth="660"
+	MinHeight="600" MinWidth="800"
 	Width="800" Height="600"
-	MaxWidth="1024" MaxHeight="768"
-	Closing = "cleanUp" Cursor="Arrow" Icon="Images/logowTransparency.png" WindowStartupLocation="CenterScreen" ScrollViewer.VerticalScrollBarVisibility="Disabled" SizeToContent="WidthAndHeight" WindowStyle="ThreeDBorderWindow" SnapsToDevicePixels="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+	MaxWidth="800" MaxHeight="600"
+	Closing = "cleanUp" Cursor="Arrow" Icon="Images/logowTransparency.png" WindowStartupLocation="CenterScreen" ScrollViewer.VerticalScrollBarVisibility="Disabled" SizeToContent="WidthAndHeight" WindowStyle="ThreeDBorderWindow" SnapsToDevicePixels="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ResizeMode="NoResize"
 	>
 
 	<Window.Resources>
