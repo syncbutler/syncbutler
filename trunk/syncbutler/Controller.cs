@@ -216,6 +216,11 @@ namespace SyncButler
             }
         }
 
+        public bool IsSBSEnable()
+        {
+            return SyncEnvironment.SBSEnable.Equals("Enable");
+        }
+
         public long GetAvailableSpaceForDrive()
         {
             try
@@ -701,7 +706,7 @@ namespace SyncButler
         {
             char sbsDriveLetter;
             if (SyncEnvironment.SBSDriveId == null || SyncEnvironment.SBSDriveId.Length == 0)
-                sbsDriveLetter =  SyncEnvironment.SBSDriveLetter;
+                return null;
             try
             {
                 string driveletter = SystemEnvironment.StorageDevices.GetDriveLetter(SyncEnvironment.SBSDriveId, SyncEnvironment.SBSDrivePartition);

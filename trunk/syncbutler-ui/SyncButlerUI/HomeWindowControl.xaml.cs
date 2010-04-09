@@ -119,6 +119,8 @@ namespace SyncButlerUI
             return false;
         }
 
+
+
         /// <summary>
         /// Add a list of conflicts to the resolve queue
         /// </summary>
@@ -173,7 +175,7 @@ namespace SyncButlerUI
             waitForErrorResponse.WaitOne();
             return worker.CancellationPending;
         }
-		
+
         /// <summary>
         /// Delegate to report progress of a Sync operation to the user
         /// </summary>
@@ -576,14 +578,14 @@ namespace SyncButlerUI
         }
 
         private void RefreshSBSSettingDriveList(object sender, RoutedEventArgs e)
-		{
+        {
             BackgroundWorker storageScanWorker = new BackgroundWorker();
             ProgressBar progressWindow = new ProgressBar(storageScanWorker, "Refreshing drive list", "Searching for removable storage devices");
             progressWindow.HideTotalProgress();
             progressWindow.IsInderteminate = true;
             List<WindowDriveInfo> DriveLetters = null;
             bool noUSBDrives = false;
-            
+
             storageScanWorker.DoWork += new DoWorkEventHandler(delegate(Object worker, DoWorkEventArgs args)
                 {
                     DriveLetters = this.Controller.GetUSBDriveLetters();
@@ -610,7 +612,7 @@ namespace SyncButlerUI
                         this.SBSSettingComboBox.IsEnabled = false;
                         this.DefaultSettingButton.IsEnabled = false;
                         this.SaveSettingButton.IsEnabled = false;
-                        
+
                     }
                     else
                     {
@@ -646,8 +648,8 @@ namespace SyncButlerUI
                     progressWindow.TaskComplete();
                 });
             progressWindow.Start();
-		}
-		
+        }
+
         private void GoHome()
         {
             this.FirstTimeHelp.Visibility = System.Windows.Visibility.Hidden;
@@ -691,7 +693,7 @@ namespace SyncButlerUI
             this.folderOneTextBox.Clear();
             this.folderTwoTextBox.Clear();
             this.partnershipNameTextBox.Clear();
-            FocusControl(() => folderOneTextBox.Focus());			
+            FocusControl(() => folderOneTextBox.Focus());
         }
         /// <summary>
         /// GetPath of folder in directory browser dialog
@@ -827,10 +829,10 @@ namespace SyncButlerUI
         private void GoToExploreFeatures_Click(object sender, RoutedEventArgs e)
         {
             FirstTimeStartupScreen dialog = new FirstTimeStartupScreen();
-            
+
             dialog.WelcomeScreenControl.FirstTimeComputerNameText.Visibility = Visibility.Hidden;
             dialog.Title = "SyncButler - Help";
-            
+
             dialog.WelcomeScreenControl.GoToHelpScreen();
             dialog.ShowDialog();
         }
@@ -1226,13 +1228,20 @@ namespace SyncButlerUI
         }
         public void CheckIfEnoughSpace()
         {
-            if (!Controller.GetInstance().IsSBSDriveEnough())
+            if (!Controller.IsSBSEnable())
             {
                 SBSSync.IsEnabled = false;
             }
             else
             {
-                SBSSync.IsEnabled = true;
+                if (!Controller.GetInstance().IsSBSDriveEnough())
+                {
+                    SBSSync.IsEnabled = false;
+                }
+                else
+                {
+                    SBSSync.IsEnabled = true;
+                }
             }
         }
         private void SpaceToUseChanged(Object sender, KeyEventArgs e)
@@ -1508,7 +1517,7 @@ namespace SyncButlerUI
             if (path.Length != 0 && File.Exists(path))
                 Controller.GetInstance().OpenFile(path);
         }
-        
+
         private void GoToSetting(object sender, RoutedEventArgs e)
         {
             CurrentState = State.Settings;
@@ -1574,14 +1583,18 @@ namespace SyncButlerUI
                         this.SBSWorkingDriveComboBox.Items.Add(s);
                     }
 
-                    if (this.SBSWorkingDriveComboBox.Items.Contains(this.Controller.GetSBSDriveLetter()))
+                    WindowDriveInfo sbsdrive = this.Controller.GetSBSDriveLetter();
+                    if (sbsdrive == null)
                     {
-                        this.SBSWorkingDriveComboBox.SelectedItem = this.Controller.GetSBSDriveLetter();
-                        devicePluggedIn = true;
-                    }
-                    else if (this.SBSWorkingDriveComboBox.Items.Count != 0)
-                    {
-                        this.SBSWorkingDriveComboBox.SelectedIndex = 0;
+                        if (this.SBSWorkingDriveComboBox.Items.Contains(sbsdrive))
+                        {
+                            this.SBSWorkingDriveComboBox.SelectedItem = this.Controller.GetSBSDriveLetter();
+                            devicePluggedIn = true;
+                        }
+                        else if (this.SBSWorkingDriveComboBox.Items.Count != 0)
+                        {
+                            this.SBSWorkingDriveComboBox.SelectedIndex = 0;
+                        }
                     }
                     if (devicePluggedIn)
                     {
@@ -1617,6 +1630,7 @@ namespace SyncButlerUI
                     this.IsLoadingSBS = false;
                 }
                 progressWindow.TaskComplete();
+
             });
 
             progressWindow.Start();
