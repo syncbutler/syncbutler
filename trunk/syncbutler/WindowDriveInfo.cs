@@ -82,14 +82,5 @@ namespace SyncButler
             else
                 return "[" + this.DriveLetter + ":]";
         }
-
-        public override bool Equals(object obj)
-        {
-            if (!(obj is WindowDriveInfo))
-                return false;
-            WindowDriveInfo wdi = (WindowDriveInfo)obj;
-
-            return wdi.GetDriveLetter() == this.GetDriveLetter() ;
-        }
     }
 }

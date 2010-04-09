@@ -1103,7 +1103,7 @@
 					</TransformGroup>
 				</ComboBox.RenderTransform>
 			</ComboBox>
-			<ComboBox x:Name="SBSWorkingDriveComboBox"  Margin="205.211,183.702,134.687,0" SelectionChanged="SBSUpdateSpaceDetails" VerticalAlignment="Top" Height="20.927"/>
+			<ComboBox x:Name="SBSWorkingDriveComboBox"  Margin="205.211,183.702,295.332,0" SelectionChanged="SBSUpdateSpaceDetails" VerticalAlignment="Top" Height="20.927"/>
 			<TextBox x:Name="SpaceToUseTextbox" HorizontalAlignment="Right" Margin="0,0,84.64,204.1" TextWrapping="Wrap" Width="72.159" KeyUp="SpaceToUseChanged" VerticalAlignment="Bottom" Height="20.927"/>
 			<Button x:Name="SaveSettingButton"  HorizontalAlignment="Left" Margin="30.567,0,0,40.122" VerticalAlignment="Bottom" Width="72.159" Content="Save" Click="SaveSetting" Height="20.926"/>
 			<Button x:Name="CancelSettingButton"  Margin="136.276,0,0,40.122" VerticalAlignment="Bottom" Content="Cancel" Click="GoHome" HorizontalAlignment="Left" Width="72.159" Height="20.926" />
@@ -1121,6 +1121,7 @@
 			<Label x:Name="resolutionLabel" HorizontalAlignment="Right" Margin="0,0,35.074,205.015" Content="KB" Width="45.717" VerticalAlignment="Bottom" Height="24.739"/>
 			<Slider x:Name="SpaceToUseSlide" Margin="30.197,0,173.172,205.015" ValueChanged="SpaceToUseSlided" VerticalAlignment="Bottom" Height="20.012"/>
 			<Label x:Name="label" Margin="0,0,174.354,183.134" Content="100%" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="37.744" Height="24.739"/>
+			<Button HorizontalAlignment="Right" Margin="0,184.15,134.687,0" VerticalAlignment="Top" Width="144.216" Content="Refresh List" Click="RefreshSBSSettingDriveList"/>
 		</Grid>
 		<Grid x:Name="FirstTimeHelp" Margin="0,0,-1.5,-4" Visibility="Hidden">
 			<Grid.ColumnDefinitions>
