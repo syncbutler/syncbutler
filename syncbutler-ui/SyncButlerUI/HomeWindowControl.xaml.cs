@@ -624,11 +624,29 @@ namespace SyncButlerUI
                         {
                             this.SBSWorkingDriveComboBox.Items.Add(s);
                         }
-                        
-                        if (this.SBSWorkingDriveComboBox.Items.Contains(this.Controller.GetSBSDriveLetter()))
+                        WindowDriveInfo wdi;
+                        try
                         {
-                            this.SBSWorkingDriveComboBox.SelectedItem = this.Controller.GetSBSDriveLetter();
-                            devicePluggedIn = true;
+                            wdi = this.Controller.GetSBSDriveLetter();
+                        }
+                        catch (Exception ex)
+                        {
+                            if (ex.Message.Equals("invalid drive"))
+                                wdi = null;
+                            else
+                                throw ex;
+                        }
+                        if (wdi != null)
+                        {
+                            if (this.SBSWorkingDriveComboBox.Items.Contains(wdi))
+                            {
+                                this.SBSWorkingDriveComboBox.SelectedItem = wdi;
+                                devicePluggedIn = true;
+                            }
+                            else if (this.SBSWorkingDriveComboBox.Items.Count != 0)
+                            {
+                                this.SBSWorkingDriveComboBox.SelectedIndex = 0;
+                            }
                         }
                         else if (this.SBSWorkingDriveComboBox.Items.Count != 0)
                         {
@@ -643,7 +661,7 @@ namespace SyncButlerUI
                                 this.SBSSettingComboBox.Items.Add("Disable");
                             }
                             this.SBSSettingComboBox.SelectedItem = "Disable";
-                            
+
                         }
                         else
                         {
@@ -1207,34 +1225,48 @@ namespace SyncButlerUI
             if (this.SBSSettingComboBox.SelectedIndex != -1 &&
                 this.SBSSettingComboBox.SelectedItem.Equals("Enable") && !IsLoadingSBS)
             {
+
                 if (SBSWorkingDriveComboBox.SelectedIndex != -1)
                 {
-                    SpaceToUseSlide.Value = 0;
-                    DriveInfo di = new DriveInfo("" + ((WindowDriveInfo)SBSWorkingDriveComboBox.SelectedItem).GetDriveLetter());
-                    long freespace = di.AvailableFreeSpace;
+                    if (Directory.Exists(((WindowDriveInfo)SBSWorkingDriveComboBox.SelectedItem).GetDriveLetter() + ":\\"))
+                    {
+                        SpaceToUseSlide.IsEnabled = true;
+                        SpaceToUseTextbox.IsEnabled = true;
+                        SpaceToUseSlide.Value = 0;
+                        DriveInfo di = new DriveInfo("" + ((WindowDriveInfo)SBSWorkingDriveComboBox.SelectedItem).GetDriveLetter());
+                        long freespace = di.AvailableFreeSpace;
 
-                    if (freespace / GIGA_BYTE > 10)
-                    {
-                        resolutionLabel.Content = "GB";
-                        SpaceToUseSlide.Maximum = freespace / GIGA_BYTE;
+                        if (freespace / GIGA_BYTE > 10)
+                        {
+                            resolutionLabel.Content = "GB";
+                            SpaceToUseSlide.Maximum = freespace / GIGA_BYTE;
 
-                    }
-                    else if (freespace / MEGA_BYTE > 500)
-                    {
-                        resolutionLabel.Content = "MB";
-                        SpaceToUseSlide.Maximum = freespace / MEGA_BYTE;
-                    }
-                    else if (freespace / MEGA_BYTE > 2)
-                    {
-                        resolutionLabel.Content = "KB";
-                        SpaceToUseSlide.Maximum = freespace / KILO_BYTE;
+                        }
+                        else if (freespace / MEGA_BYTE > 500)
+                        {
+                            resolutionLabel.Content = "MB";
+                            SpaceToUseSlide.Maximum = freespace / MEGA_BYTE;
+                        }
+                        else if (freespace / MEGA_BYTE > 2)
+                        {
+                            resolutionLabel.Content = "KB";
+                            SpaceToUseSlide.Maximum = freespace / KILO_BYTE;
+                        }
+                        else
+                        {
+                            resolutionLabel.Content = "Bytes";
+                            SpaceToUseSlide.Maximum = freespace;
+                        }
+                        SpaceToUseSlide.Value = 0.1 * SpaceToUseSlide.Maximum;
                     }
                     else
                     {
-                        resolutionLabel.Content = "Bytes";
-                        SpaceToUseSlide.Maximum = freespace;
+                        CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Please check your device\nSBS cannot find it");
+                        SpaceToUseSlide.Maximum = 0;
+                        SpaceToUseSlide.Value = 0;
+                        SpaceToUseSlide.IsEnabled = false;
+                        SpaceToUseTextbox.IsEnabled = false;
                     }
-                    SpaceToUseSlide.Value = 0.1 * SpaceToUseSlide.Maximum;
                 }
             }
         }
@@ -1594,9 +1626,19 @@ namespace SyncButlerUI
                     {
                         this.SBSWorkingDriveComboBox.Items.Add(s);
                     }
-
-                    WindowDriveInfo sbsdrive = this.Controller.GetSBSDriveLetter();
-                    if (sbsdrive == null)
+                    WindowDriveInfo sbsdrive;
+                    try
+                    {
+                        sbsdrive = this.Controller.GetSBSDriveLetter();
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex.Message.Equals("invalid drive"))
+                            sbsdrive = null;
+                        else
+                            throw ex;
+                    }
+                    if (sbsdrive != null)
                     {
                         if (this.SBSWorkingDriveComboBox.Items.Contains(sbsdrive))
                         {
@@ -1607,7 +1649,13 @@ namespace SyncButlerUI
                         {
                             this.SBSWorkingDriveComboBox.SelectedIndex = 0;
                         }
+
                     }
+                    else if (this.SBSWorkingDriveComboBox.Items.Count != 0)
+                    {
+                        this.SBSWorkingDriveComboBox.SelectedIndex = 0;
+                    }
+
                     if (devicePluggedIn)
                     {
                         if (this.Controller.SBSEnable.Equals("Enable"))
