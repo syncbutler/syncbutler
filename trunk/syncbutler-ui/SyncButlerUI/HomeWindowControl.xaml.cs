@@ -1549,17 +1549,29 @@ namespace SyncButlerUI
 
         private void OpenSelectedOnList(object sender, MouseEventArgs e)
         {
-            String path = "";
-            if (WeirdFile_List.SelectedIndex != -1)
+            if (e.LeftButton == MouseButtonState.Pressed)
             {
-                path = MRUs["sensitive"][(String)WeirdFile_List.SelectedItem];
+                String path = "";
+                if (WeirdFile_List.SelectedIndex != -1)
+                {
+                    path = MRUs["sensitive"][(String)WeirdFile_List.SelectedItem];
+                }
+                if (Favourites_List.SelectedIndex != -1)
+                {
+                    path = MRUs["interesting"][(String)Favourites_List.SelectedItem];
+                }
+                if (path.Length != 0 && File.Exists(path))
+                {
+                    try
+                    {
+                        Controller.GetInstance().OpenFile(path);
+                    }
+                    catch (Win32Exception)
+                    {
+                        CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "There was an error in opening the associated file.");
+                    }
+                }
             }
-            if (Favourites_List.SelectedIndex != -1)
-            {
-                path = MRUs["interesting"][(String)Favourites_List.SelectedItem];
-            }
-            if (path.Length != 0 && File.Exists(path))
-                Controller.GetInstance().OpenFile(path);
         }
 
         private void GoToSetting(object sender, RoutedEventArgs e)
