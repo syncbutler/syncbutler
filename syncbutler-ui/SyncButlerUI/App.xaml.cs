@@ -54,7 +54,7 @@ namespace SyncButlerUI
                     {
                         try
                         {
-                            new MainWindow().ShowDialog();
+                            (new MainWindow()).ShowDialog();
                         }
                         catch (UserCancelledException)
                         {
