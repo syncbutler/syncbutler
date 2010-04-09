@@ -280,7 +280,7 @@ namespace SyncButlerUI
         private void AsyncStartSync(IEnumerable<string> partnershipNames)
         {
             Controller.conflictCount = 0;
-            VisualStateManager.GoToState(this, "ConflictStateState", false);
+            VisualStateManager.GoToState(this, "ConflictState", false);
             CurrentState = State.Conflict;
             if (scanWorker != null)
             {
