@@ -133,7 +133,7 @@
 							</Storyboard>
 						</ControlTemplate.Resources>
 						<Grid Margin="-2.585,-0.286,-0.461,0.286" Width="Auto" Height="181.794">
-							<Rectangle x:Name="bigButton_Copy" Margin="-0.334,-0.594,-0.327,0" VerticalAlignment="Stretch" Height="Auto" Cursor="Hand" Width="Auto">
+							<Rectangle x:Name="bigButton_Copy" Margin="-0.334,0,-0.327,0" VerticalAlignment="Stretch" Height="Auto" Cursor="Hand" Width="Auto">
 								<Rectangle.Fill>
 									<RadialGradientBrush RadiusX="1.901" RadiusY="0.853">
 										<GradientStop Color="#00000000" Offset="0.564"/>
@@ -152,8 +152,8 @@
 									</TransformGroup>
 								</Image.RenderTransform>
 							</Image>
-							<TextBlock Margin="0.975,17.769,11.739,0" VerticalAlignment="Top" Height="49" TextWrapping="Wrap" TextAlignment="Center" Opacity="0.7"><Run FontStyle="Normal" Text="View "/><Run Text="Partnerships"/></TextBlock>
-							<Rectangle x:Name="Reflection_Copy" Opacity="0.045" Margin="0.032,0,-0.69,98.386" RadiusX="7" RadiusY="7" VerticalAlignment="Stretch" Height="Auto" Cursor="Hand" Width="Auto">
+							<TextBlock Margin="0.975,21.769,11.739,0" VerticalAlignment="Top" Height="49" TextWrapping="Wrap" TextAlignment="Center" Opacity="0.7"><Run FontStyle="Normal" Text="View "/><Run Text="Partnerships"/></TextBlock>
+							<Rectangle x:Name="Reflection_Copy" Opacity="0.045" Margin="0.032,0,-0.69,93.624" RadiusX="7" RadiusY="7" VerticalAlignment="Stretch" Height="Auto" Cursor="Hand" Width="Auto">
 								<Rectangle.Effect>
 									<BlurEffect/>
 								</Rectangle.Effect>
@@ -828,7 +828,7 @@
 					</LinearGradientBrush>
 				</Rectangle.Fill>
 			</Rectangle>
-			<Button x:Name="ViewPartnerships" HorizontalAlignment="Right" Margin="0,351.987,253.094,1.916" Style="{DynamicResource ViewPartnershipButton}" Width="256.981" Content="" Click="GoToViewPartnerships_Click" Cursor="Hand"  Background="{x:Null}" BorderBrush="{x:Null}" IsTabStop="False"/>
+			<Button x:Name="ViewPartnerships" HorizontalAlignment="Right" Margin="0,346.008,253.094,1.916" Style="{DynamicResource ViewPartnershipButton}" Width="256.981" Content="" Click="GoToViewPartnerships_Click" Cursor="Hand"  Background="{x:Null}" BorderBrush="{x:Null}" IsTabStop="False"/>
 			<Button x:Name="ExploreFeaturesButton" HorizontalAlignment="Right" Margin="0,0,-5.857,3.254" Style="{DynamicResource ExploreFeaturesButton}" VerticalAlignment="Bottom" Width="256.981" Height="172.281" Content="" Click="GoToExploreFeatures_Click"  Cursor="Hand" d:LayoutOverrides="VerticalAlignment" IsTabStop="False"/>
 			<Button x:Name="CreatePartnershipButton" HorizontalAlignment="Left" Margin="1.354,0,0,3.162" Style="{DynamicResource CreatePartnersButton}" Width="256.981" Content="" Cursor="Hand" Click="GoToCreatePartnership_Click"  RenderTransformOrigin="0.5,0.5" VerticalAlignment="Bottom" Height="172.281" BorderBrush="{x:Null}" Background="{x:Null}" IsTabStop="False">
 				<Button.RenderTransform>
