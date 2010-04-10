@@ -269,7 +269,7 @@ namespace SyncButlerUI
         {
             List<string> singletonList = new List<string>();
             singletonList.Add(partnershipName);
-            AsyncStartSync(singletonList);
+            AsyncStartSync(singletonList, this.Controller.GetPartnershipList());
         }
 
         /// <summary>
@@ -277,7 +277,7 @@ namespace SyncButlerUI
         /// </summary>
         /// <param name="partnershipNames">A collection of partnerships to scan</param>
         /// <returns></returns>
-        private void AsyncStartSync(IEnumerable<string> partnershipNames)
+        private void AsyncStartSync(IEnumerable<string> partnershipNames, SortedList<string, Partnership> partnershipList)
         {
             Controller.ConflictCount = 0;
             VisualStateManager.GoToState(this, "ConflictState", false);
@@ -386,11 +386,11 @@ namespace SyncButlerUI
                                 return false;
                             }
                             else return true;
-                        });
+                        }, partnershipList);
 
                         worker.ReportProgress(100, null);
                         mergedList.Add(cl);
-                        this.Controller.CleanUpOrphans(friendlyName);
+                        this.Controller.CleanUpOrphans(friendlyName, partnershipList);
                     }
                     catch (UserCancelledException)
                     {
@@ -798,8 +798,7 @@ namespace SyncButlerUI
         /// <param name="e"></param>
         private void DeleteMiniPartnership_Click(object sender, RoutedEventArgs e)
         {
-			//does not work at the moment
-         /*   try
+            try
             {
                 if (minipartnershiplist.SelectedIndex < 0)
                 {
@@ -818,7 +817,7 @@ namespace SyncButlerUI
             catch (UserInputException uIException)
             {
                 showMessageBox(CustomDialog.MessageType.Error, uIException.Message);
-            }*/
+            }
         }
 
         /// <summary>
@@ -941,7 +940,7 @@ namespace SyncButlerUI
             }
             else if (showMessageBox(CustomDialog.MessageType.Question, "Are you sure you want to sync all partnerships?") == true)
             {
-                AsyncStartSync(this.Controller.GetPartnershipList().Keys);
+                AsyncStartSync(this.Controller.GetPartnershipList().Keys, this.Controller.GetPartnershipList());
             }
         }
 		
@@ -952,7 +951,12 @@ namespace SyncButlerUI
         /// <param name="e"></param>
         private void SyncMiniPartnership_Click(object sender, RoutedEventArgs e)
         {
-          //stub sync method
+            ResolvedConflicts = new List<Resolved>();
+            if (this.Controller.GetMiniPartnershipList().Count < 1)
+                showMessageBox(CustomDialog.MessageType.Message, "There are no mini partnerships.");
+
+            else if (showMessageBox(CustomDialog.MessageType.Question, "Are you sure you want to sync all mini partnerships?") == true)
+                AsyncStartSync(this.Controller.GetMiniPartnershipList().Keys, this.Controller.GetMiniPartnershipList());
         }
         /// <summary>
         /// When the user clicks Sync in the Partnership List view.

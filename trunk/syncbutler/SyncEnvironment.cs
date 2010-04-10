@@ -55,7 +55,7 @@ namespace SyncButler
         {
             get
             {
-                return sbsDriveLetter + @":\" + DEFAULT_SBS_RELATIVE_PATH;
+                return sbsDriveLetter + @":\" + DEFAULT_SBS_RELATIVE_PATH + SyncEnvironment.computerName;
             }
         }
 
