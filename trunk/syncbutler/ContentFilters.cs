@@ -67,41 +67,41 @@ namespace SyncButler
         //gameFormats
 
         private static string videoFormats =
-            "(.avi)|(.wmv)|(.mkv)|(.rmvb)|(.mp4)|(.m4v)|(.mov)|(.mpg)|(.flv)";
+            "(\\.avi)|(\\.wmv)|(\\.mkv)|(\\.rmvb)|(\\.mp4)|(\\.m4v)|(\\.mov)|(\\.mpg)|(\\.flv)";
 
         private static string audioFormats =
-            "(.wma)|(.mp3)|(.ogg)|(.flac)|(.m4a)|(.alac)|(.wav)|(.aac)|(.midi)|(.mid)";
+            "(\\.wma)|(\\.mp3)|(\\.ogg)|(\\.flac)|(\\.m4a)|(\\.alac)|(\\.wav)|(\\.aac)|(\\.midi)|(\\.mid)";
 
         private static string pictureFormats =
-            "(.jpg)|(.jpeg)|(.gif)|(.png)|(.raw)|(.bmp)|(.tiff)";
+            "(\\.jpg)|(\\.jpeg)|(\\.gif)|(\\.png)|(\\.raw)|(\\.bmp)|(\\.tiff)";
 
         //PL can mean Perl or Prolog, HS is Haskell, F is Fortran
         //AS is Actionscript
         private static string sourceCodeFormats =
-            "(.c)|(.cpp)|(.cs)|(.java)|(.pl)|(.py)|(.php)|(.pas)|(.js)|(.jsp)|(.asp)|(.f)|(.hs)|(.as)";
+            "(\\.c)|(\\.cpp)|(\\.cs)|(\\.java)|(\\.pl)|(\\.py)|(\\.php)|(\\.pas)|(\\.js)|(\\.jsp)|(\\.asp)|(\\.f)|(\\.hs)|(\\.as)";
 
         //Microsoft Office, OpenOffice, LaTeX
         private static string productivityFormats =
-            "(.doc)|(.docx)|(.xls)|(.xlsx)|(.ppt)|(.pptx)|(.rtf)|(.odt)|(.ods)|(.odp)|(.pdf)|" +
-            "(.accdb)|(.sdb)|(.txt)|(.csv)|(.tex)";
+            "(\\.doc)|(\\.docx)|(\\.xls)|(\\.xlsx)|(\\.ppt)|(\\.pptx)|(\\.rtf)|(\\.odt)|(\\.ods)|(\\.odp)|(\\.pdf)|" +
+            "(\\.accdb)|(\\.sdb)|(\\.txt)|(\\.csv)|(\\.tex)";
 
         //AUP is Audacity project, CEL is Adobe Audition, CPR is Cubase,
         //NPR is Nuendo, CWP is Cakewalk, Premiere Pro, other Adobe Suite
         private static string mediaCreationFormats =
-            "(.aup)|(.cel)|(.cpr)|(.npr)|(.cwp)|(.prproj)|(.ai)|(.flp)|(.fla)|(.psd)|(.pdd)|(.drw)";
+            "(\\.aup)|(\\.cel)|(\\.cpr)|(\\.npr)|(\\.cwp)|(\\.prproj)|(\\.ai)|(\\.flp)|(\\.fla)|(\\.psd)|(\\.pdd)|(\\.drw)";
 
         private static string archiveFormats =
-            "(.7z)|(.rar)|(.zip)";
+            "(\\.7z)|(\\.rar)|(\\.zip)";
 
         private static string programSetupFormats =
-            "(setup)|(.msi)";
+            "(setup)|(\\.msi)";
 
         //AutoCAD, 3dStudioMax
         private static string engineeringFormats =
-            "(.dwg)|(.dwf)|(.3ds)|(.max)";
+            "(\\.dwg)|(\\.dwf)|(\\.3ds)|(\\.max)";
 
         private static string gameFormats =
-            "(.sav)";
+            "(\\.sav)";
         #endregion
 
         //This sorted list will be iterated to determine which level of interest
