@@ -39,7 +39,7 @@ namespace SyncButler
             syncEnvironment = SyncEnvironment.GetInstance();
             //console = new SyncButlerConsole.Form1();
             //console.Show();
-            ToggleRegistryKey();
+            AddRegistryKey();
         }
 
         /// <summary>
@@ -744,7 +744,7 @@ namespace SyncButler
             SyncEnvironment.GetInstance().StoreSettings();
         }
 
-        public void ToggleRegistryKey()
+        public void AddRegistryKey()
         {
             try
             {
