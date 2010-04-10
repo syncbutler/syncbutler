@@ -83,7 +83,7 @@ namespace SyncButlerUI
 		}
 
 
-		private void goToSyncButlerSync(object sender, RoutedEventArgs e)
+		public void goToSyncButlerSync(object sender, RoutedEventArgs e)
 		{
             
             homeWindow1.FirstTimeHelp.Visibility = System.Windows.Visibility.Hidden;

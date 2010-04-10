@@ -1278,7 +1278,7 @@
 			<ComboBox x:Name="SBSWorkingDriveComboBox"  Margin="205.211,183.702,295.332,0" SelectionChanged="SBSUpdateSpaceDetails" VerticalAlignment="Top" Height="20.927"/>
 			<TextBox x:Name="SpaceToUseTextbox" HorizontalAlignment="Right" Margin="0,0,84.64,204.1" TextWrapping="Wrap" Width="72.159" KeyUp="SpaceToUseChanged" VerticalAlignment="Bottom" Height="20.927"/>
 			<Button x:Name="SaveSettingButton"  HorizontalAlignment="Left" Margin="30.567,0,0,40.122" VerticalAlignment="Bottom" Width="72.159" Content="Save" Click="SaveSetting" Height="20.926"/>
-			<Button x:Name="CancelSettingButton"  Margin="136.276,0,0,40.122" VerticalAlignment="Bottom" Content="Cancel" Click="GoHome" HorizontalAlignment="Left" Width="72.159" Height="20.926" />
+			<Button x:Name="CancelSettingButton"  Margin="136.276,0,0,40.122" VerticalAlignment="Bottom" Content="Cancel" Click="SBSSettingCancel" HorizontalAlignment="Left" Width="72.159" Height="20.926" />
 			<Button x:Name="DefaultSettingButton" IsTabStop="False" HorizontalAlignment="Right" Margin="0,0,166.657,40.122" VerticalAlignment="Bottom" Width="72.159" Content="Default"  Click="DefaultSetting" Height="20.926"/>
 			<Button Margin="0,0,56.119,40.122" VerticalAlignment="Bottom" Content="Show Help" HorizontalAlignment="Right" Width="72.159" Click="ShowHelp" Height="20.926"/>
 			<TextBlock x:Name="textBlock9_Copy1" Margin="29.764,252.81,241.99,238.261" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap"><TextBlock.RenderTransform>
