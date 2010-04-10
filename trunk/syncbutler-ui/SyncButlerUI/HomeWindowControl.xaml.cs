@@ -1278,6 +1278,7 @@ namespace SyncButlerUI
 
         private void SBSUpdateSpaceDetails(object sender, RoutedEventArgs e)
         {
+            int preferedSize = 250;
             if (this.SBSSettingComboBox.SelectedIndex != -1 &&
                 this.SBSSettingComboBox.SelectedItem.Equals("Enable") && !IsLoadingSBS)
             {
@@ -1308,7 +1309,17 @@ namespace SyncButlerUI
                         resolutionLabel.Content = "Bytes";
                         SpaceToUseSlide.Maximum = freespace;
                     }
-                    SpaceToUseSlide.Value = 0.1 * SpaceToUseSlide.Maximum;
+                    if (freespace < preferedSize * MEGA_BYTE)
+                        SpaceToUseSlide.Value = 0.1 * SpaceToUseSlide.Maximum;
+                    else
+                    {
+                        if (resolutionLabel.Content.Equals("MB"))
+                            SpaceToUseSlide.Value = preferedSize;
+                        else if (resolutionLabel.Content.Equals("GB"))
+                            SpaceToUseSlide.Value = preferedSize * KILO_BYTE;
+
+                    }
+
                 }
             }
         }
