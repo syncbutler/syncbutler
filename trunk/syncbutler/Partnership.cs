@@ -57,12 +57,12 @@ namespace SyncButler
         /// <summary>
         /// This allows the GUI to call back to the Partnership
         /// </summary>
-        public SyncableStatusMonitor statusMonitor = null;
+        public SyncableStatusMonitor statusMonitor;
 
         /// <summary>
         /// This allows the GUI to report errors and attempt to continue from there
         /// </summary>
-        public SyncableErrorHandler errorHandler = null;
+        public SyncableErrorHandler errorHandler;
 
         /// <summary>
         /// A dictionary of the hash values from the last sync.

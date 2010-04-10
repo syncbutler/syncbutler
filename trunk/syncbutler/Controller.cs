@@ -24,14 +24,14 @@ namespace SyncButler
         private static List<String> errorList = new List<string>();
         private static Controller controller;
         private string sbsLogfile;
-		public static int conflictCount {get; set;}
+		public static int ConflictCount {get; set;}
         private static MiniPartnershipForm mpForm;
         private static MiniPartnershipForm errForm;
 		
         /// <summary>
         /// Used by check and merged to see the total size of the files to be sync so far.
         /// </summary>
-        private long totalSizeSoFar = 0;
+        private long totalSizeSoFar;
 
         /// <summary>
         /// This constructor should never be invoked directly. Use GetInstance() to obtain an instance of Controller.
@@ -86,7 +86,7 @@ namespace SyncButler
         /// get a list of usb drive letters
         /// </summary>
         /// <returns>a list of usb drive letters</returns>
-        public List<WindowDriveInfo> GetUSBDriveLetters()
+        public static List<WindowDriveInfo> GetUSBDriveLetters()
 		{
             
 			return WindowDriveInfo.GetDriveInfo(SyncButler.SystemEnvironment.StorageDevices.GetRemovableDeviceDriveLetters());
@@ -96,7 +96,7 @@ namespace SyncButler
         /// Get a list of non usb drives letters
         /// </summary>
         /// <returns>a ist of non usb drive letters</returns>
-        public List<WindowDriveInfo> GetNonUSBDriveLetters()
+        public static List<WindowDriveInfo> GetNonUSBDriveLetters()
         {
             return WindowDriveInfo.GetDriveInfo(SyncButler.SystemEnvironment.StorageDevices.GetNonUSBDriveLetters());
         }
@@ -146,7 +146,7 @@ namespace SyncButler
             {
                 case "-addmini":
                     string error = AddToMiniPartnerships(args[1]);
-                    if (!(error == "")) //if some error is returned
+                    if (!(String.IsNullOrEmpty(error))) //if some error is returned
                     {
                         errorList.Add(args[1] + error);
                         UpdateErrorList();
@@ -216,7 +216,7 @@ namespace SyncButler
             }
         }
 
-        public bool IsSBSEnable()
+        public static bool IsSBSEnable()
         {
             return SyncEnvironment.SBSEnable.Equals("Enable");
         }
@@ -288,9 +288,9 @@ namespace SyncButler
         /// Delete a partnership from the list of partnerships based at an index.
         /// </summary>
         /// <param name="idx">Index of the partnership to be deleted.</param>
-        public void DeletePartnership(int idx)
+        public void DeletePartnership(int index)
         {
-            syncEnvironment.RemovePartnership(idx);
+            syncEnvironment.RemovePartnership(index);
         }
 
         /// <summary>
@@ -342,7 +342,7 @@ namespace SyncButler
         /// </summary>
         /// <param name="friendlyName">Friendly name of partnership</param>
         /// <returns>The Partnership object with that unique friendly name</returns>
-        public Partnership GetPartnership(string friendlyName)
+        public static Partnership GetPartnership(string friendlyName)
         {
             return SyncEnvironment.GetInstance().GetPartnership(friendlyName);
         }
@@ -352,14 +352,14 @@ namespace SyncButler
         /// </summary>
         /// <param name="idx">Index of the partnership to be synced.</param>
         /// <returns>ObservableCollection conflict list with a list of conflicts. Will be null if there are no conflicts.</returns>
-        public ConflictList SyncPartnership(String name, SyncableStatusMonitor monitor, SyncableErrorHandler errorhandler) 
+        public ConflictList SyncPartnership(String name, SyncableStatusMonitor monitor, SyncableErrorHandler errorHandler) 
         {
 			Partnership curPartnership = syncEnvironment.GetPartnershipsList()[name];
 
             curPartnership.statusMonitor = monitor;
-            curPartnership.errorHandler = errorhandler;
+            curPartnership.errorHandler = errorHandler;
 			List<Conflict> conflict = curPartnership.Sync();
-			conflictCount+= conflict.Count;
+			ConflictCount+= conflict.Count;
             curPartnership.statusMonitor = null;
 
             return new ConflictList(conflict, name);
@@ -370,7 +370,7 @@ namespace SyncButler
             syncEnvironment.GetPartnershipsList()[partnershipName].CleanOrphanedChecksums();
         }
 
-        public List<Conflict> RemoveAutoResolvableConflicts(ConflictList cl)
+        public static List<Conflict> RemoveAutoResolvableConflicts(ConflictList cl)
         {
             List<Conflict> resolvableConflicts = new List<Conflict>();
             for (int i = cl.Conflicts.Count - 1; i >= 0; i--)
@@ -386,10 +386,10 @@ namespace SyncButler
             return resolvableConflicts;
         }
 
-        public Resolved ResolveConflict(Conflict toResolve, SyncableStatusMonitor OnProgressUpdate, BackgroundWorker workerObj)
+        public static Resolved ResolveConflict(Conflict toResolve, SyncableStatusMonitor onProgressUpdate, BackgroundWorker worker)
         {
-            workerObj.ReportProgress(0, toResolve.GetPartnership().Name);
-            toResolve.SetStatusMonitor(OnProgressUpdate);
+            worker.ReportProgress(0, toResolve.GetPartnership().Name);
+            toResolve.SetStatusMonitor(onProgressUpdate);
             Resolved ret = toResolve.Resolve();
             toResolve.SetStatusMonitor(null);
             return ret;
@@ -398,7 +398,7 @@ namespace SyncButler
         /// <summary>
         /// Not Implemented. Turns the recent file monitoring on/off.
         /// </summary>
-        public void ToggleMonitor()
+        public static void ToggleMonitor()
         {
             throw new NotImplementedException();
         }
@@ -448,7 +448,7 @@ namespace SyncButler
             }
         }
 
-        private long GetSizeInResolution(String Resolution, long size)
+        private static long GetSizeInResolution(String Resolution, long size)
         {
             if (Resolution.Equals("GB"))
             {
@@ -542,7 +542,7 @@ namespace SyncButler
             return rtn;
         }
 
-        public SortedList<string, SortedList<string, string>> GetMonitoredFiles()
+        public static SortedList<string, SortedList<string, string>> GetMonitoredFiles()
         {
             SortedList<string, SortedList<string, string>> ret = ContentFilters.Spilt(MostRecentlyUsedFile.ConvertToSortedList(MostRecentlyUsedFile.GetAll()));
             return ret;
@@ -552,7 +552,7 @@ namespace SyncButler
         /// Get the username of the current logon user
         /// </summary>
         /// <returns>Return the user name</returns>
-        public static String GetCurrentLogonUser()
+        public static String GetCurrentLogOnUser()
         {
             return System.Security.Principal.WindowsIdentity.GetCurrent().Name;
         }
@@ -575,7 +575,7 @@ namespace SyncButler
                 else
                 {
                     string syncTo = driveLetter + ":\\SyncButler\\" + SyncEnvironment.ComputerName + "\\";
-                    if (!WindowsFolder.CheckIfUserHasRightsTo(syncTo, GetCurrentLogonUser()))
+                    if (!WindowsFolder.CheckIfUserHasRightsTo(syncTo, GetCurrentLogOnUser()))
                     {
                         errorHandler.Invoke(new Exception("Permisson denied\nPlease check if you have the rights to the folder for SBS at " + driveLetter + ":\\SyncButler\\"));
                     }
@@ -599,9 +599,9 @@ namespace SyncButler
                 errorHandler.Invoke(new Exception("Device not detected\nPlease plug in the device configured for SBS."));
             }
         }
-        public void OpenFile(String filename)
+        public static void OpenFile(String fileName)
         {
-                System.Diagnostics.Process.Start(filename);
+                System.Diagnostics.Process.Start(fileName);
         }
         /// <summary>
         /// This method is required to be run when the program is closed. It
@@ -617,7 +617,7 @@ namespace SyncButler
         /// This checks in with sync environment to check if the program has ran before.
         /// </summary>
         /// <returns>True if has ran before, false otherwise</returns>
-        public bool IsNotFirstRun()
+        public static bool IsNotFirstRun()
         {
             return (SyncEnvironment.FirstRunComplete && SyncEnvironment.ComputerNamed);
         }
@@ -628,13 +628,13 @@ namespace SyncButler
 		/// <param name="ComputerName">Computer name of the user</param>
 		/// <param name="EnableSBS">[Not in use]If the user wants sbs to be enabled</param>
 		/// <param name="SBSDrive">The working drive letter</param>
-        public void SaveSetting(string ComputerName, string EnableSBS, char SBSDrive, Double FreeSpaceToUse, String Resolution)
+        public static void SaveSetting(string computerName, string enableSBS, char SBSDrive, Double freeSpaceToUse, String resolution)
 		{
-            SyncEnvironment.ComputerName = ComputerName;
+            SyncEnvironment.ComputerName = computerName;
             SyncEnvironment.SBSDriveLetter = SBSDrive;
-            SyncEnvironment.SBSEnable = EnableSBS;
-            SyncEnvironment.FreeSpaceToUse = FreeSpaceToUse;
-            SyncEnvironment.Resolution = Resolution;
+            SyncEnvironment.SBSEnable = enableSBS;
+            SyncEnvironment.FreeSpaceToUse = freeSpaceToUse;
+            SyncEnvironment.Resolution = resolution;
             SyncEnvironment.SBSDriveId = SystemEnvironment.StorageDevices.GetDriveID(SBSDrive + ":");
             SyncEnvironment.SBSDrivePartition = SystemEnvironment.StorageDevices.GetDrivePartitionIndex(SBSDrive + ":");
             SyncEnvironment.GetInstance().StoreSettings();
@@ -654,7 +654,7 @@ namespace SyncButler
         /// computer name
         /// </summary>
         /// <param name="name">The computer name (new)</param>
-        public void SetComputerName(string name)
+        public static void SetComputerName(string name)
         {
             SyncEnvironment.ComputerName = name;
         }
@@ -662,7 +662,7 @@ namespace SyncButler
         /// <summary>
         /// Gets or sets the status of the SBS feature.
         /// </summary>
-        public string SBSEnable
+        public static string SBSEnable
         {
             get { return (SyncEnvironment.SBSEnable == null) ? "Disable" : SyncEnvironment.SBSEnable; }
             set { SyncEnvironment.SBSEnable = value; }
@@ -684,7 +684,7 @@ namespace SyncButler
         /// Used to set the initial computer name or to replace an exisiting
         /// computer name
         /// </summary>
-        public void SetFirstSBSRun()
+        public static void SetFirstSBSRun()
         {
             SyncEnvironment.FirstSBSRun = false;
             SyncEnvironment.GetInstance().updateFirstSBSRun();
@@ -693,7 +693,7 @@ namespace SyncButler
         /// Used to get if SBS has runned before
         /// </summary>
         /// <returns></returns>
-        public bool IsFirstSBSRun()
+        public static bool IsFirstSBSRun()
         {
             return SyncEnvironment.FirstSBSRun;
         }
@@ -702,7 +702,7 @@ namespace SyncButler
         /// Get the sbs drive letter
         /// </summary>
         /// <returns>sbs drive letter</returns>
-        public WindowDriveInfo GetSBSDriveLetter()
+        public static WindowDriveInfo GetSBSDriveLetter()
         {
             char sbsDriveLetter;
             if (SyncEnvironment.SBSDriveId == null || SyncEnvironment.SBSDriveId.Length == 0)
@@ -727,7 +727,7 @@ namespace SyncButler
             }
         }
 
-        public void SetSBSDriveLetter(char driveLetter)
+        public static void SetSBSDriveLetter(char driveLetter)
         {
             SyncEnvironment.SBSDriveLetter = driveLetter;
         }
@@ -745,7 +745,7 @@ namespace SyncButler
         /// Set the amount of free space to use that the user allow
         /// </summary>
         /// <param name="FreeSpaceToUse">the amount of free space allowed</param>
-        public void SetFreeSpaceToUse(double FreeSpaceToUse)
+        public static void SetFreeSpaceToUse(double FreeSpaceToUse)
         {
             SyncEnvironment.FreeSpaceToUse = FreeSpaceToUse;
         }
@@ -755,15 +755,15 @@ namespace SyncButler
             return SyncEnvironment.Resolution;
         }
 
-        public void SetResolution(String Resolution)
+        public static void SetResolution(String resolution)
         {
-            SyncEnvironment.Resolution = Resolution;
+            SyncEnvironment.Resolution = resolution;
         }
         /// <summary>
         /// Remove the shell integration context menu from the registry
         /// and disable the settings
         /// </summary>
-        public void RemoveDisableContextMenu()
+        public static void RemoveDisableContextMenu()
         {
             //Registry action to remove key
 

@@ -15,16 +15,16 @@ namespace SyncButler
         // Fields required for named pipes
         private static string uniqueIdentifier;
         private static string pipeName = "SyncButlerIPC"; // Eventually load this from settings?
-        private static NamedPipeServerStream pipeServer = null;
-        private static IAsyncResult listeningSession = null;
-        private static bool closingPipe = false;
+        private static NamedPipeServerStream pipeServer;
+        private static IAsyncResult listeningSession;
+        private static bool closingPipe;
 
         // Fields for mutexes -- used for instance detection
-        private static Mutex mutex = null;
+        private static Mutex mutex;
         public delegate void ReceiveDelegate(string[] args); //acts as a storage for incoming data
 
         // Stores the delegate which will be called when data arrives from a new instance of SyncButler
-        static private ReceiveDelegate m_Receive = null;
+        static private ReceiveDelegate m_Receive;
         static public ReceiveDelegate Receiver
         {
             get

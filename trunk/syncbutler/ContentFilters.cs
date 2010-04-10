@@ -44,7 +44,7 @@ namespace SyncButler
 
         #region extension
         //Combined censorship filter
-        private static Regex sensitivePattern = null;
+        private static Regex sensitivePattern;
                 
         //Interesting file types
         //
@@ -106,8 +106,8 @@ namespace SyncButler
 
         //This sorted list will be iterated to determine which level of interest
         //the file type is in.
-        private static SortedList<String, ValueLevel> interestingFormatValue= null;
-        private static Regex interestingPattern = null;
+        private static SortedList<String, ValueLevel> interestingFormatValue;
+        private static Regex interestingPattern;
 
         private static string interestingFormatPattern =
             videoFormats + "|" + audioFormats + "|" + productivityFormats + "|" +

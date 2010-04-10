@@ -279,7 +279,7 @@ namespace SyncButlerUI
         /// <returns></returns>
         private void AsyncStartSync(IEnumerable<string> partnershipNames)
         {
-            Controller.conflictCount = 0;
+            Controller.ConflictCount = 0;
             VisualStateManager.GoToState(this, "ConflictState", false);
             CurrentState = State.Conflict;
             if (scanWorker != null)
@@ -338,14 +338,14 @@ namespace SyncButlerUI
 
                 foreach (ConflictList cl in mergedList)
                 {
-                    autoResolveConflicts.AddRange(this.Controller.RemoveAutoResolvableConflicts(cl));
+                    autoResolveConflicts.AddRange(Controller.RemoveAutoResolvableConflicts(cl));
                 }
 
                 ConflictList.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
                 ConflictList.ItemsSource = mergedList;
                 ConflictList.Items.Refresh();
                 ConflictList.IsEnabled = true;
-                if (Controller.conflictCount != 0)
+                if (Controller.ConflictCount != 0)
                 {
                     resolveButton.IsEnabled = true;
                 }
@@ -459,7 +459,7 @@ namespace SyncButlerUI
                             worker.ReportProgress(0, partnershipName);
                         }
 
-                        ResolvedConflicts.Add(this.Controller.ResolveConflict(curConflict, reporter, worker));
+                        ResolvedConflicts.Add(Controller.ResolveConflict(curConflict, reporter, worker));
                         if (curConflict.AutoResolveAction == SyncButler.Conflict.Action.Unknown) manualResolveCount++;
                         else autoResolveCount++;
                     }
@@ -521,7 +521,7 @@ namespace SyncButlerUI
                     //CurrentSyncingFile.Text = "Scan cancelled.\nConflicts automatically processed: " + autoResolveCount +
                     //"\nConflicts manually processed: " + manualResolveCount;
                     CurrentSyncingFile.Text = "Scan cancelled.";
-                    if (Controller.conflictCount != 0)
+                    if (Controller.ConflictCount != 0)
                     {
                         resolveButton.IsEnabled = true;
                     }
@@ -586,12 +586,12 @@ namespace SyncButlerUI
             
             storageScanWorker.DoWork += new DoWorkEventHandler(delegate(Object worker, DoWorkEventArgs args)
                 {
-                    DriveLetters = this.Controller.GetUSBDriveLetters();
+                    DriveLetters = Controller.GetUSBDriveLetters();
 
                     // if there is no usb drive, let user to select some local hard disk, warn the user as well.
                     if (DriveLetters.Count == 0)
                     {
-                        DriveLetters = this.Controller.GetNonUSBDriveLetters();
+                        DriveLetters = Controller.GetNonUSBDriveLetters();
                         noUSBDrives = true;
                     }
 
@@ -622,9 +622,9 @@ namespace SyncButlerUI
                         {
                             this.SBSWorkingDriveComboBox.Items.Add(s);
                         }
-                        if (this.SBSWorkingDriveComboBox.Items.Contains(this.Controller.GetSBSDriveLetter()))
+                        if (this.SBSWorkingDriveComboBox.Items.Contains(Controller.GetSBSDriveLetter()))
                         {
-                            this.SBSWorkingDriveComboBox.SelectedItem = this.Controller.GetSBSDriveLetter();
+                            this.SBSWorkingDriveComboBox.SelectedItem = Controller.GetSBSDriveLetter();
                             devicePluggedIn = true;
                         }
                         else if (this.SBSWorkingDriveComboBox.Items.Count != 0)
@@ -668,7 +668,7 @@ namespace SyncButlerUI
                 FirstTimeStartupScreen dialog = new FirstTimeStartupScreen();
                 dialog.WelcomeScreenControl.FirstTimeComputerNameText.Visibility = Visibility.Hidden;
                 VisualStateManager.GoToState(dialog.WelcomeScreenControl, "HelpScreen3", false);
-                Controller.GetInstance().SetFirstSBSRun();
+                Controller.SetFirstSBSRun();
                 dialog.Title = "SyncButler - Help";
                 dialog.WelcomeScreenControl.GoToSBSScreen();
                 dialog.ShowDialog();
@@ -1204,7 +1204,7 @@ namespace SyncButlerUI
                 }
                 else
                 {
-                    Controller.GetInstance().SaveSetting(ComputerName, SBSEnable, DriveLetter, FreeSpaceToUse, Resolution);
+                    Controller.SaveSetting(ComputerName, SBSEnable, DriveLetter, FreeSpaceToUse, Resolution);
                     showMessageBox(CustomDialog.MessageType.Success, "The setting has been changed.");
                 }
             }
@@ -1552,7 +1552,7 @@ namespace SyncButlerUI
                 path = MRUs["interesting"][(String)Favourites_List.SelectedItem];
             }
             if (path.Length != 0 && File.Exists(path))
-                Controller.GetInstance().OpenFile(path);
+                Controller.OpenFile(path);
         }
         
 
@@ -1583,12 +1583,12 @@ namespace SyncButlerUI
 
             storageScanWorker.DoWork += new DoWorkEventHandler(delegate(Object worker, DoWorkEventArgs args)
             {
-                DriveLetters = this.Controller.GetUSBDriveLetters();
+                DriveLetters = Controller.GetUSBDriveLetters();
 
                 // if there is no usb drive, let user to select some local hard disk, warn the user as well.
                 if (DriveLetters.Count == 0)
                 {
-                    DriveLetters = this.Controller.GetNonUSBDriveLetters();
+                    DriveLetters = Controller.GetNonUSBDriveLetters();
                     noUSBDrives = true;
                 }
             });
@@ -1622,9 +1622,9 @@ namespace SyncButlerUI
                         this.SBSWorkingDriveComboBox.Items.Add(s);
                     }
 
-                    if (this.SBSWorkingDriveComboBox.Items.Contains(this.Controller.GetSBSDriveLetter()))
+                    if (this.SBSWorkingDriveComboBox.Items.Contains(Controller.GetSBSDriveLetter()))
                     {
-                        this.SBSWorkingDriveComboBox.SelectedItem = this.Controller.GetSBSDriveLetter();
+                        this.SBSWorkingDriveComboBox.SelectedItem = Controller.GetSBSDriveLetter();
                         devicePluggedIn = true;
                     }
                     else if (this.SBSWorkingDriveComboBox.Items.Count != 0)
@@ -1633,7 +1633,7 @@ namespace SyncButlerUI
                     }
                     if (devicePluggedIn)
                     {
-                        if (this.Controller.SBSEnable.Equals("Enable"))
+                        if (Controller.SBSEnable.Equals("Enable"))
                         {
                             this.SpaceToUseSlide.Maximum = this.Controller.GetAvailableSpaceForDrive();
                             this.SpaceToUseSlide.Value = this.Controller.GetFreeSpaceToUse();
@@ -1652,7 +1652,7 @@ namespace SyncButlerUI
                         this.SBSSettingComboBox.Items.Clear();
                         this.SBSSettingComboBox.Items.Add("Enable");
                         this.SBSSettingComboBox.Items.Add("Disable");
-                        this.SBSSettingComboBox.SelectedItem = this.Controller.SBSEnable;
+                        this.SBSSettingComboBox.SelectedItem = Controller.SBSEnable;
                     }
                     else
                     {
