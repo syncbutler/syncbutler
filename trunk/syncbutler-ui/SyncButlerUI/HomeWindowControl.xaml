@@ -576,9 +576,6 @@
 				</Setter.Value>
 			</Setter>
 		</Style>
-		
-		
-		<Storyboard x:Key="MouseOverSecretFileList"/>
 		<Style x:Key="ListBoxStyle1" TargetType="{x:Type ListBox}">
 			<Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
 			<Setter Property="BorderBrush" Value="{StaticResource ListBorder}"/>
@@ -740,7 +737,20 @@
 				</Setter.Value>
 			</Setter>
 		</Style>
+		<Storyboard x:Key="HideTextOnMouseOver">
+			<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock_Copy" Storyboard.TargetProperty="(UIElement.Visibility)">
+				<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+			</ObjectAnimationUsingKeyFrames>
+		</Storyboard>
 	</UserControl.Resources>
+	<UserControl.Triggers>
+		<EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="WeirdFile_List">
+			<BeginStoryboard x:Name="MouseOverSecretFileList_BeginStoryboard" Storyboard="{StaticResource HideTextOnMouseOver}"/>
+		</EventTrigger>
+		<EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="WeirdFile_List">
+			<StopStoryboard BeginStoryboardName="MouseOverSecretFileList_BeginStoryboard"/>
+		</EventTrigger>
+	</UserControl.Triggers>
 	<UserControl.RenderTransform>
 		<TransformGroup>
 			<ScaleTransform ScaleX="1.05" ScaleY="1.05"/>
@@ -1063,7 +1073,7 @@
 			</Button>
 			<Button x:Name="viewPartnershipBtn" HorizontalAlignment="Right" Margin="0,61.211,31.169,0" VerticalAlignment="Top" Width="170.306" Height="35.715" Content="Show Partnerships" Visibility="Hidden" Click="GoToViewPartnerships_Click" Cursor="Hand"/>
 		</Grid>
-		<Grid x:Name="sbs" Margin="0.027,0,-1.024,0" VerticalAlignment="Bottom" Height="526.184" d:LayoutOverrides="GridBox" Visibility="Hidden" Background="Black" >
+		<Grid x:Name="sbs" Margin="0.027,0,-1.024,0" VerticalAlignment="Bottom" Height="526.184" d:LayoutOverrides="GridBox" Background="Black" Visibility="Hidden" >
 			<Rectangle x:Name="background_Copy2" RadiusX="1" RadiusY="2" Margin="0,0,-3.2,0" VerticalAlignment="Top" Height="526.184" Cursor="Arrow">
 				<Rectangle.Fill>
 					<RadialGradientBrush GradientOrigin="0.265,0.184" RadiusX="1.237" RadiusY="1.237">
