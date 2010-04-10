@@ -45,7 +45,7 @@ namespace SyncButlerUI
 
         }
         #endregion
-		public void CloseApp(Object sender, RoutedEventArgs e){
+		private void CloseApp(Object sender, RoutedEventArgs e){
             if (WelcomeScreenControl.CurrentState == WelcomeScreenControl.State.AllowClose)
                 this.DialogResult = false;
             else

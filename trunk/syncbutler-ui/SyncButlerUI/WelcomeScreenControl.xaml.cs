@@ -23,7 +23,6 @@ namespace SyncButlerUI
 	{
         public enum State { AllowClose, OpenWindow }
         public State CurrentState;
-        private static string[] reserved = { "con", "prn", "aux", "nul", "com1", "com2", "com3", "com4", "com5", "com6", "com7", "com8", "com9", "lpt1", "lpt2", "lpt3", "lpt4", "lpt5", "lpt6", "lpt7", "lpt8" };
 		public Controller controller;
 		public WelcomeScreenControl()
 		{
@@ -91,12 +90,12 @@ namespace SyncButlerUI
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		public void GoToHelpScreen2_Click(object sender,RoutedEventArgs e)
+		private void GoToHelpScreen2_Click(object sender,RoutedEventArgs e)
         {
             VisualStateManager.GoToState(this,"SecondHelpScreenState",false);
             FocusControl(() => HelpScreenFinishBtn.Focus());
 		}	
-		public void ExitTutorial_Click(object sender,RoutedEventArgs e)
+		private void ExitTutorial_Click(object sender,RoutedEventArgs e)
         {
         	Window.GetWindow(this).DialogResult=true;
 		}			

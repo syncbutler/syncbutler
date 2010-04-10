@@ -40,17 +40,17 @@ namespace SyncButlerUI
             public ErrorReportingSource source;
             public Object failedObject;
 
-            public ErrorReportingMessage(Exception exceptionThrown, ErrorReportingSource source, Object failedObject)
+            public ErrorReportingMessage(Exception exceptionThrown, ErrorReportingSource source, Object failed)
             {
                 this.exceptionThrown = exceptionThrown;
                 this.source = source;
-                this.failedObject = failedObject;
+                this.failedObject = failed;
             }
         }
         #endregion
 
         #region fields&Attributes
-        public ObservableCollection<ConflictList> mergedList;
+        private ObservableCollection<ConflictList> mergedList;
         List<Resolved> ResolvedConflicts = new List<Resolved>();
         private SortedList<string, SortedList<string, string>> MRUs;
         public enum State { Home, Create, CreateDone, ViewPartnership,ViewMiniPartnership, SBS, Conflict, Settings, Edit, EditDone, Result };
@@ -80,16 +80,16 @@ namespace SyncButlerUI
         public SyncButler.Controller Controller { get; set; }
         #endregion
 
-        public enum CurrentActionEnum { Scanning, Resolving, Idle }
-        CurrentActionEnum CurrentAction = CurrentActionEnum.Idle;
+        public enum CurrentActions { Scanning, Resolving, Idle }
+        CurrentActions CurrentAction = CurrentActions.Idle;
 
         #region CountersForUI
-        private int autoResolveCount = 0;
-        private int manualResolveCount = 0;
+        private int autoResolveCount;
+        private int manualResolveCount;
         #endregion
 
         public bool IsLoadingSBS = true;
-        private int lastClickedIndex = 0;
+        private int lastClickedIndex;
 
         #endregion
 
@@ -179,7 +179,7 @@ namespace SyncButlerUI
         /// </summary>
         /// <param name="workerObj"></param>
         /// <param name="args"></param>
-        protected void DisplayProgress(Object workerObj, ProgressChangedEventArgs args)
+        private void DisplayProgress(Object worker, ProgressChangedEventArgs args)
         {
             if (args.UserState is String)
             {
@@ -210,7 +210,7 @@ namespace SyncButlerUI
                 switch (CustomDialog.Show(this, msgTemplate, CustomDialog.MessageType.Error, CustomDialog.MessageResponse.Cancel, message))
                 {
                     case CustomDialog.MessageResponse.Cancel:
-                        ((BackgroundWorker)workerObj).CancelAsync();
+                        ((BackgroundWorker)worker).CancelAsync();
                         break;
                     case CustomDialog.MessageResponse.Retry:
                         System.Diagnostics.Debug.Assert(msg.source == ErrorReportingSource.Resolver, "Cannot Retry errors nor generated during conflict resolution");
@@ -251,7 +251,7 @@ namespace SyncButlerUI
             CurrentSyncingFile.Text = verb + status.EntityPath;
             SubProgressBar.Value = status.curTaskPercentComplete;
 
-            if (CurrentAction == CurrentActionEnum.Resolving)
+            if (CurrentAction == CurrentActions.Resolving)
             {
                 int processed = (conflictsProcessed > 0) ? conflictsProcessed - 1 : conflictsProcessed;
                 int total = processed + newConflicts.Count + 1;
@@ -403,7 +403,7 @@ namespace SyncButlerUI
 
 
             scanWorker.RunWorkerAsync();
-            CurrentAction = CurrentActionEnum.Scanning;
+            CurrentAction = CurrentActions.Scanning;
             return;
         }
         /// <summary>
@@ -544,7 +544,7 @@ namespace SyncButlerUI
             });
 
             resolveWorker.RunWorkerAsync();
-            CurrentAction = CurrentActionEnum.Resolving;
+            CurrentAction = CurrentActions.Resolving;
 
         }
 
@@ -580,7 +580,7 @@ namespace SyncButlerUI
             BackgroundWorker storageScanWorker = new BackgroundWorker();
             ProgressBar progressWindow = new ProgressBar(storageScanWorker, "Refreshing drive list", "Searching for removable storage devices");
             progressWindow.HideTotalProgress();
-            progressWindow.IsInderteminate = true;
+            progressWindow.IsIndeterminate = true;
             List<WindowDriveInfo> DriveLetters = null;
             bool noUSBDrives = false;
             
@@ -698,7 +698,7 @@ namespace SyncButlerUI
         /// </summary>
         /// <param name="Path"></param>
         /// <returns></returns>
-        private String GetPath(String Path)
+        private static String GetPath(String Path)
         {
             System.Windows.Forms.FolderBrowserDialog fd = new System.Windows.Forms.FolderBrowserDialog();
             if (Directory.Exists(Path))
@@ -733,7 +733,7 @@ namespace SyncButlerUI
                 destinationFolderPath.Text = folderTwoPath;
                 partnerShipName.Text = partnershipName;
 				NewPartnershipName = partnershipName;
-                if ((partnershipNameTextBox.Text.Trim()).Equals(""))
+                if (String.IsNullOrEmpty(partnershipNameTextBox.Text.Trim()))
                     throw new UserInputException("Please input a partnership name");
 
                 this.Controller.AddPartnership(partnerShipName.Text, sourceFolderPath.Text, destinationFolderPath.Text);
@@ -1341,13 +1341,13 @@ namespace SyncButlerUI
         /// <summary>
         /// Checks the sourceTextbox for values if its empty or if the directory exists
         /// </summary>
-        private void checkInput(string folderPath)
+        private static void checkInput(string folderPath)
         {
             if (folderPath.Length > 266)
             {
                 throw new UserInputException("Folder Path is too long");
             }
-            else if (folderPath.Equals(""))
+            else if (String.IsNullOrEmpty(folderPath))
             {
                 throw new UserInputException("Please select a Folder");
             }
@@ -1362,13 +1362,6 @@ namespace SyncButlerUI
                 {
                     throw new UserInputException("CD Drive syncing is not supported in this version");
                 }
-
-                /*
-                else if (di.DriveType == DriveType.Network)
-                {
-                    throw new UserInputException("Network drive syncing is not supported in this version");
-                }
-                */
             }
 
         }
@@ -1562,6 +1555,8 @@ namespace SyncButlerUI
                 Controller.GetInstance().OpenFile(path);
         }
         
+
+//TODO: refactor this
         private void GoToSetting(object sender, RoutedEventArgs e)
         {
             CurrentState = State.Settings;
@@ -1581,7 +1576,7 @@ namespace SyncButlerUI
             BackgroundWorker storageScanWorker = new BackgroundWorker();
             ProgressBar progressWindow = new ProgressBar(storageScanWorker, "Loading Settings Page", "Searching for removable storage devices");
             progressWindow.HideTotalProgress();
-            progressWindow.IsInderteminate = true;
+            progressWindow.IsIndeterminate = true;
 
             List<WindowDriveInfo> DriveLetters = null;
             bool noUSBDrives = false;

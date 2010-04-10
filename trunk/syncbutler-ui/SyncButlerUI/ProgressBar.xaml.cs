@@ -26,13 +26,13 @@ namespace SyncButlerUI
             public string taskDescription;
         }
 
-        protected bool Cancelling = false;
-        protected BackgroundWorker taskWorker;
-        protected Semaphore waitForMessageResponse;
-        protected CustomDialog.MessageResponse messageResponse;
-        protected bool isClosing = false;
+        //private bool Cancelling;
+        private BackgroundWorker taskWorker;
+        private Semaphore waitForMessageResponse;
+        private CustomDialog.MessageResponse messageResponse;
+        private bool isClosing;
 
-        public bool IsInderteminate
+        public bool IsIndeterminate
         {
             set
             {
@@ -74,7 +74,7 @@ namespace SyncButlerUI
 
             SubProgress.Value = 0;
             TotalProgress.Value = 0;
-            Cancelling = false;
+         //   Cancelling = false;
             isClosing = false;
             waitForMessageResponse = new Semaphore(0, 1);
             messageResponse = CustomDialog.MessageResponse.NotUsed;

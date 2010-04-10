@@ -55,17 +55,17 @@ namespace SyncButlerUI
             public string message;
         }
 
-        protected MessageResponse userResponse;
-        protected MessageResponse button1Response, button2Response, button3Response;
+        private MessageResponse userResponse;
+        private MessageResponse button1Response, button2Response, button3Response;
 
         protected CustomDialog()
         {
             InitializeComponent();
         }
 
-        protected static string ResponseString(MessageResponse resp)
+        protected static string ResponseString(MessageResponse response)
         {
-            switch (resp)
+            switch (response)
             {
                 case MessageResponse.Cancel: return "Cancel";
                 case MessageResponse.No: return "No";
