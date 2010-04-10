@@ -7,6 +7,7 @@ using SyncButler.MRU;
 using System.Xml;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using Microsoft.Win32;
 
 namespace SyncButler
 {
@@ -25,9 +26,7 @@ namespace SyncButler
         private static Controller controller;
         private string sbsLogfile;
 		public static int ConflictCount {get; set;}
-        private static MiniPartnershipForm mpForm;
-        private static MiniPartnershipForm errForm;
-		
+        
         /// <summary>
         /// Used by check and merged to see the total size of the files to be sync so far.
         /// </summary>
@@ -41,9 +40,7 @@ namespace SyncButler
             syncEnvironment = SyncEnvironment.GetInstance();
             //console = new SyncButlerConsole.Form1();
             //console.Show();
-            mpForm = new MiniPartnershipForm();
-            errForm = new MiniPartnershipForm();
-            errForm.Text = "Error List";
+            ToggleRegistryKey();
             Logging.Logger.GetInstance().DEBUG("Controller started up.");
         }
 
@@ -149,9 +146,7 @@ namespace SyncButler
                     if (!(String.IsNullOrEmpty(error))) //if some error is returned
                     {
                         errorList.Add(args[1] + error);
-                        UpdateErrorList();
                     }
-                    UpdateMPList();
                     break;
                 default:
                     //unknown commands
@@ -160,25 +155,6 @@ namespace SyncButler
             }
         }
 
-        private static void UpdateMPList()
-        {
-            mpForm.miniListBox.Items.Clear();
-            foreach (Partnership item in SyncEnvironment.GetInstance().GetMiniPartnershipsList().Values)
-                mpForm.miniListBox.Items.Add(item.Name);
-            if (!mpForm.Visible)
-                mpForm.ShowDialog();
-         //   mpForm.Refresh();
-        }
-
-        private static void UpdateErrorList()
-        {
-            errForm.miniListBox.Items.Clear();
-            foreach (string item in errorList)
-                errForm.miniListBox.Items.Add(item);
-            if (!errForm.Visible)
-                errForm.ShowDialog();
-          //  errForm.Refresh();
-        }
         /// <summary>
         /// Adds to the list of mini partnerships.
         /// </summary>
@@ -195,9 +171,7 @@ namespace SyncButler
                 return ae.Message;
             }
             return "";
-        }
-
-        
+        }        
 
         public bool IsSBSDriveEnough()
         {
@@ -303,6 +277,24 @@ namespace SyncButler
         }
 
         /// <summary>
+        /// Delete a partnership from the list of mini partnerships based at an index.
+        /// </summary>
+        /// <param name="index">Index of the partnership to be deleted.</param>
+        public void DeleteMiniPartnership(int index)
+        {
+            syncEnvironment.RemoveMiniPartnership(index);
+        }
+
+        /// <summary>
+        /// Delete a partnership from the list of mini partnerships based on the friendly name.
+        /// </summary>
+        /// <param name="name">The name of the mini partnership to be deleted.</param>
+        public void DeleteMiniPartnership(string name)
+        {
+            syncEnvironment.RemoveMiniPartnership(name);
+        }
+
+        /// <summary>
         /// Updates the details of an existing partnership in the partnership list
         /// </summary>
         /// <param name="oldName">Old friendly name of a partnership</param>
@@ -352,9 +344,9 @@ namespace SyncButler
         /// </summary>
         /// <param name="idx">Index of the partnership to be synced.</param>
         /// <returns>ObservableCollection conflict list with a list of conflicts. Will be null if there are no conflicts.</returns>
-        public ConflictList SyncPartnership(String name, SyncableStatusMonitor monitor, SyncableErrorHandler errorHandler) 
+        public ConflictList SyncPartnership(String name, SyncableStatusMonitor monitor, SyncableErrorHandler errorHandler, SortedList<string, Partnership> partnershipList)
         {
-			Partnership curPartnership = syncEnvironment.GetPartnershipsList()[name];
+			Partnership curPartnership = partnershipList[name];
 
             curPartnership.statusMonitor = monitor;
             curPartnership.errorHandler = errorHandler;
@@ -365,9 +357,9 @@ namespace SyncButler
             return new ConflictList(conflict, name);
         }
 
-        public void CleanUpOrphans(String partnershipName)
+        public void CleanUpOrphans(String partnershipName, SortedList<string,Partnership> partnershipList)
         {
-            syncEnvironment.GetPartnershipsList()[partnershipName].CleanOrphanedChecksums();
+            partnershipList[partnershipName].CleanOrphanedChecksums();
         }
 
         public static List<Conflict> RemoveAutoResolvableConflicts(ConflictList cl)
@@ -393,22 +385,6 @@ namespace SyncButler
             Resolved ret = toResolve.Resolve();
             toResolve.SetStatusMonitor(null);
             return ret;
-        }
-
-        /// <summary>
-        /// Not Implemented. Turns the recent file monitoring on/off.
-        /// </summary>
-        public static void ToggleMonitor()
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Not Implemented. 
-        /// </summary>
-        public void EditMonitor()
-        {
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -784,5 +760,23 @@ namespace SyncButler
             SyncEnvironment.EnableShellContext = true;
             SyncEnvironment.GetInstance().StoreSettings();
         }
+
+        public void ToggleRegistryKey()
+        {
+            try
+            {
+
+                RegistryKey key = Registry.CurrentUser.CreateSubKey(@"Software\Classes\AllFilesystemObjects\shell");
+                key.SetValue(null, "open");
+                RegistryKey sbs = key.CreateSubKey("Sync Butler, Sync!");
+                sbs.CreateSubKey("command").SetValue(null, System.Reflection.Assembly.GetEntryAssembly().Location + " -addmini \"%1\" ");
+                sbs.SetValue("icon", System.Reflection.Assembly.GetEntryAssembly().Location);
+            }
+            catch (Exception e)
+            {
+                Logging.Logger.GetInstance().WARNING("Error on adding registry key" + e.Message);
+            }
+        }
+
     }
 }
