@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using SyncButler.Exceptions;
-using System.Windows.Forms;
 using SyncButler.MRU;
 using System.Xml;
 using System.Collections.ObjectModel;
@@ -41,7 +40,6 @@ namespace SyncButler
             //console = new SyncButlerConsole.Form1();
             //console.Show();
             ToggleRegistryKey();
-            Logging.Logger.GetInstance().DEBUG("Controller started up.");
         }
 
         /// <summary>
@@ -247,15 +245,6 @@ namespace SyncButler
 
             if (WindowsFileSystem.PathsEqual(leftPath, appPath) || WindowsFileSystem.PathsEqual(rightPath, appPath))
                 throw new UserInputException("Cannot create a partnership on the running SyncButler directory!");
-        }
-
-        /// <summary>
-        /// Adds a minipartnership
-        /// </summary>
-        /// <param name="source">Full path to the source</param>
-        public void AddMiniPartnership(string source)
-        {
-            syncEnvironment.AddMiniPartnership(source);
         }
         
         /// <summary>

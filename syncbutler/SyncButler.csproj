@@ -67,12 +67,6 @@
     <Compile Include="Exceptions\UserInputException.cs" />
     <Compile Include="IGUI.cs" />
     <Compile Include="Logging\Logger.cs" />
-    <Compile Include="MiniPartnershipForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MiniPartnershipForm.Designer.cs">
-      <DependentUpon>MiniPartnershipForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="MRU\MostRecentlyUsedFile.cs" />
     <Compile Include="MRU\MRUList.cs" />
     <Compile Include="MRU\SyncedMRU.cs" />
@@ -105,10 +99,6 @@
     <EmbeddedResource Include="logstyle.css" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MiniPartnershipForm.resx">
-      <DependentUpon>MiniPartnershipForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="MRU\Design.xslt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
