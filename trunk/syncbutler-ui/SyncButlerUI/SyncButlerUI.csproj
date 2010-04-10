@@ -129,7 +129,6 @@
     <None Include="Application.ico">
       <Visible>false</Visible>
     </None>
-    <None Include="SyncButlerUI.sln" />
   </ItemGroup>
   <ItemGroup>
     <BlendEmbeddedFont Include="Fonts\segoeui.ttf">
