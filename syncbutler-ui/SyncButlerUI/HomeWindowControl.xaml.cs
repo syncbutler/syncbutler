@@ -316,6 +316,8 @@ namespace SyncButlerUI
             CurrentSyncingFile.Text = "Initializing scan...";
             PartnershipName.Text = "";
 
+            bool NeedsUserIntervention = false;
+
             scanWorker.ProgressChanged += new ProgressChangedEventHandler(DisplayProgress);
 
             scanWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(delegate(Object workerObj, RunWorkerCompletedEventArgs args)
@@ -345,7 +347,7 @@ namespace SyncButlerUI
                 ConflictList.ItemsSource = mergedList;
                 ConflictList.Items.Refresh();
                 ConflictList.IsEnabled = true;
-                if (Controller.ConflictCount != 0)
+                if (NeedsUserIntervention)
                 {
                     resolveButton.IsEnabled = true;
                 }
@@ -389,6 +391,7 @@ namespace SyncButlerUI
                         }, partnershipList);
 
                         worker.ReportProgress(100, null);
+                        foreach (Conflict c in cl.Conflicts) if (c.AutoResolveAction == SyncButler.Conflict.Action.Unknown) NeedsUserIntervention = true;
                         mergedList.Add(cl);
                         this.Controller.CleanUpOrphans(friendlyName, partnershipList);
                     }
