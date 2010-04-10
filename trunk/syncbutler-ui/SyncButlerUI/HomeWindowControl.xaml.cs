@@ -1202,7 +1202,7 @@ namespace SyncButlerUI
             }
             else
             {
-                if (!Directory.Exists(DriveLetter + ":\\"))
+                if (!Directory.Exists(DriveLetter + ":\\") && SBSEnable.Equals("Enable"))
                 {
                     CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Please check your device\nSBS cannot find it");
                 }
@@ -1609,12 +1609,19 @@ namespace SyncButlerUI
                     this.NoUSBWarningTextBlock.Visibility = Visibility.Visible;
                     CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok,
                         "Please plug in a portable storage device if you wish to use it with\nSync Butler, Sync!");
+                    if (this.SBSSettingComboBox.Items.IsEmpty)
+                    {
+                        this.SBSSettingComboBox.Items.Add("Enable");
+                        this.SBSSettingComboBox.Items.Add("Disable");
+                    }
+                    this.SBSSettingComboBox.SelectedItem = "Disable";
                     this.SBSWorkingDriveComboBox.IsEnabled = false;
                     this.SpaceToUseSlide.IsEnabled = false;
                     this.SpaceToUseTextbox.IsEnabled = false;
                     this.SBSSettingComboBox.IsEnabled = false;
                     this.DefaultSettingButton.IsEnabled = false;
                     this.SaveSettingButton.IsEnabled = false;
+
                 }
                 else
                 {
