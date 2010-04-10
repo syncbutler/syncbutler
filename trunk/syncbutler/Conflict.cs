@@ -20,7 +20,7 @@ namespace SyncButler
         /// <summary>
         /// Possible actions for conflict resolution.
         /// </summary>
-        public enum Action { CopyToLeft, DeleteLeft, Merge, CopyToRight, DeleteRight, Ignore, Unknown };
+        public enum Action { CopyToLeft, DeleteLeft, Merge, CopyToRight, DeleteRight, Ignore, Unknown, Error };
 
         /// <summary>
         /// Constructor used to instantiate a Conflict object.

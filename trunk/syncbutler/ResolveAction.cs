@@ -43,6 +43,7 @@ namespace SyncButler
                 case Conflict.Action.Ignore: return "Do not do anything";
                 case Conflict.Action.Merge: return "Merge differences";
                 case Conflict.Action.Unknown: return "You should not see this";
+                case Conflict.Action.Error: return "An error hsa occured";
                 default: return "Bad Action?";
             }
         }
