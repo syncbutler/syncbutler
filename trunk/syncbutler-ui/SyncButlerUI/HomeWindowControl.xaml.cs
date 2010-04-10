@@ -1186,7 +1186,20 @@ namespace SyncButlerUI
             // Start the whole process
             progressWindow.Start();
         }
-
+        private void SBSSettingCancel(object sender, RoutedEventArgs e)
+        {
+            if (Controller.IsSBSEnable())
+            {
+                VisualStateManager.GoToState(this, "SbsState", false);
+                LoadMRUs();
+                CurrentState = State.SBS;
+            }
+            else
+            {
+                VisualStateManager.GoToState(this, "HomeState", false);
+                CurrentState = State.Home;
+            }
+        }
         private void SaveSetting(object sender, RoutedEventArgs e)
         {
 
@@ -1212,7 +1225,22 @@ namespace SyncButlerUI
                 else
                 {
                     Controller.SaveSetting(ComputerName, SBSEnable, DriveLetter, FreeSpaceToUse, Resolution);
-                    showMessageBox(CustomDialog.MessageType.Success, "The setting has been changed.");
+                    if (SBSEnable.Equals("Enable"))
+                    {
+                        String ExtraMsg = String.Format("Sync Butler is going to sync your files to :\r\n\t {0}", Controller.GetSBSPath());
+                        showMessageBox(CustomDialog.MessageType.Success, "The setting has been changed.\r\n" + ExtraMsg);
+                        VisualStateManager.GoToState(this, "SbsState", false);
+                        LoadMRUs();
+                        CurrentState = State.SBS;
+                    }
+                    else
+                    {
+                        showMessageBox(CustomDialog.MessageType.Success, "The setting has been changed.");
+                        VisualStateManager.GoToState(this, "HomeState", false);
+                        CurrentState = State.Home;
+                    }
+
+                    
                 }
             }
 
@@ -1546,7 +1574,7 @@ namespace SyncButlerUI
 
             return false;
         }
-
+        
         private void OpenSelectedOnList(object sender, MouseEventArgs e)
         {
             String path = "";

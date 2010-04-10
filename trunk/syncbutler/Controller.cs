@@ -417,7 +417,7 @@ namespace SyncButler
                     if (totalSizeSoFar + CurrentFileSize <= limit)
                     {
                         ToMerge.Add(key, FileListToCheck[key]);
-                        return false;
+                        //return false;
                     }
                 }
                 return false;
@@ -486,31 +486,16 @@ namespace SyncButler
             MostRecentlyUsedFile.statusMonitor = statusMonitor;
             SortedList<string,SortedList<string,string>> splited = ContentFilters.Spilt(MostRecentlyUsedFile.ConvertToSortedList(MostRecentlyUsedFile.GetAll()));
             String[] mrulevels = { "interestingHigh", "interestingMedHigh", "interestingMed", "interestingLowMed", "interestingLow", "interestingUltraLow" };
-            bool done = false;
-            for (int i = 0; i < mrulevels.Length && !done; i++)
+     
+            for (int i = 0; i < mrulevels.Length; i++)
             {
-                if (!CheckAndMerge(interesting, splited[mrulevels[i]], limit))
-                {
-                    done = true;
-                }
+                CheckAndMerge(interesting, splited[mrulevels[i]], limit);
+                //if (!CheckAndMerge(interesting, splited[mrulevels[i]], limit))
+                //{
+                //    done = true;
+                //}
             }
-            //if (CheckAndMerge(interesting, splited["interestingHigh"], limit))
-            //{
-            //    if (CheckAndMerge(interesting, splited["interestingMedHigh"], limit))
-            //    {
-            //        if (CheckAndMerge(interesting, splited["interestingMed"], limit))
-            //        {
-            //            if (CheckAndMerge(interesting, splited["interestingLowMed"], limit))
-            //            {
-            //                if (CheckAndMerge(interesting, splited["interestingLow"], limit))
-            //                {
-            //                    CheckAndMerge(interesting, splited["interestingUltraLow"], limit);
-            //                }
-            //            }
-            //        }
-                 
-            //    }
-            //}
+            
             SortedList<string, string> sensitive = splited["sensitive"];
             rtn.Add("sensitive", sensitive);
             rtn.Add("interesting", interesting);
@@ -532,7 +517,10 @@ namespace SyncButler
         {
             return System.Security.Principal.WindowsIdentity.GetCurrent().Name;
         }
-
+        public static string GetSBSPath()
+        {
+            return GetSBSPath(SyncEnvironment.SBSDriveLetter);
+        }
         /// <summary>
         /// Sync the mrus that are listed. Please read MRUList to understand how file is actually saved.
         /// </summary>
@@ -550,7 +538,7 @@ namespace SyncButler
                 }
                 else
                 {
-                    string syncTo = driveLetter + ":\\SyncButler\\" + SyncEnvironment.ComputerName + "\\";
+                    string syncTo = GetSBSPath(driveLetter);
                     if (!WindowsFolder.CheckIfUserHasRightsTo(syncTo, GetCurrentLogOnUser()))
                     {
                         errorHandler.Invoke(new Exception("Permisson denied\nPlease check if you have the rights to the folder for SBS at " + driveLetter + ":\\SyncButler\\"));
@@ -574,6 +562,12 @@ namespace SyncButler
             {
                 errorHandler.Invoke(new Exception("Device not detected\nPlease plug in the device configured for SBS."));
             }
+        }
+
+        private static string GetSBSPath(char driveLetter)
+        {
+            string syncTo = driveLetter + ":\\SyncButler\\" + SyncEnvironment.ComputerName + "\\";
+            return syncTo;
         }
         public static void OpenFile(String fileName)
         {
