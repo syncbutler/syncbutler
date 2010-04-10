@@ -120,205 +120,24 @@
 						</ObjectAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
-				<VisualState x:Name="FeatureHelpState1">
+				<VisualState x:Name="FeatureHelpState">
 					<Storyboard>
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="WelcomeScreen1" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
 						</ObjectAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle_Copy" Storyboard.TargetProperty="(UIElement.Opacity)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock_Copy" Storyboard.TargetProperty="(UIElement.Opacity)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle_Copy" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-56"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock_Copy" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-56"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle_Copy" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-99.5"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock_Copy" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="10"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle_Copy" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.606"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle1" Storyboard.TargetProperty="(UIElement.Opacity)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock1" Storyboard.TargetProperty="(UIElement.Opacity)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="75"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="177.5"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="61"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="167"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock1" Storyboard.TargetProperty="(TextElement.FontSize)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="16"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.806"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle_Copy1" Storyboard.TargetProperty="(UIElement.Opacity)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock_Copy1" Storyboard.TargetProperty="(UIElement.Opacity)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle_Copy1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-0.5"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle_Copy1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="129"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock_Copy1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="10"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock_Copy1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="129"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle_Copy1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.962"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle2" Storyboard.TargetProperty="(UIElement.Opacity)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock2" Storyboard.TargetProperty="(UIElement.Opacity)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle2" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="304"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock2" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="276"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle2" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="62.5"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock2" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="67"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock2" Storyboard.TargetProperty="(TextElement.FontSize)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="14.667"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock2" Storyboard.TargetProperty="(FrameworkElement.Height)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="104"/>
-						</DoubleAnimationUsingKeyFrames>
-						<ThicknessAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock2" Storyboard.TargetProperty="(FrameworkElement.Margin)">
-							<SplineThicknessKeyFrame KeyTime="00:00:00" Value="16.8,5,148.2,0"/>
-						</ThicknessAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle2" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.085"/>
-						</DoubleAnimationUsingKeyFrames>
-						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="image1" Storyboard.TargetProperty="(UIElement.Visibility)">
-							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
-						</ObjectAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="image1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-118"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="image1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-622"/>
-						</DoubleAnimationUsingKeyFrames>
-					</Storyboard>
-				</VisualState>
-				<VisualState x:Name="FeatureHelpState2">
-					<Storyboard>
-						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="WelcomeScreen1" Storyboard.TargetProperty="(UIElement.Visibility)">
-							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
-						</ObjectAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle1_Copy" Storyboard.TargetProperty="(UIElement.Opacity)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock1_Copy" Storyboard.TargetProperty="(UIElement.Opacity)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle_Copy2" Storyboard.TargetProperty="(UIElement.Opacity)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock_Copy2" Storyboard.TargetProperty="(UIElement.Opacity)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle1_Copy" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="189"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock1_Copy" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="189"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle_Copy2" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="189"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock_Copy2" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="189"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle1_Copy" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="2"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock1_Copy" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="2"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle_Copy2" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="2"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock_Copy2" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="2"/>
-						</DoubleAnimationUsingKeyFrames>
-						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="image4" Storyboard.TargetProperty="(UIElement.Visibility)">
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="grid1" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
 						</ObjectAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
-				<VisualState x:Name="FeatureHelpState3">
+				<VisualState x:Name="SBSHelpState">
 					<Storyboard>
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="WelcomeScreen1" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
 						</ObjectAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle1_Copy1" Storyboard.TargetProperty="(UIElement.Opacity)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock1_Copy1" Storyboard.TargetProperty="(UIElement.Opacity)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle_Copy3" Storyboard.TargetProperty="(UIElement.Opacity)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock_Copy3" Storyboard.TargetProperty="(UIElement.Opacity)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle1_Copy1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="136"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock1_Copy1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="136"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle_Copy3" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="136"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock_Copy3" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="136"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle1_Copy1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-7"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock1_Copy1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-7"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle_Copy3" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-7"/>
-						</DoubleAnimationUsingKeyFrames>
-						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock_Copy3" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-7"/>
-						</DoubleAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="SBSHelp1" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
 			</VisualStateGroup>
@@ -615,161 +434,166 @@
 			</Image>
 
 		</Grid>
-		<Rectangle x:Name="rectangle1" Fill="White" Stroke="Black" StrokeThickness="3" RadiusX="15" RadiusY="15" Margin="43,-104,136.2,0" VerticalAlignment="Top" Height="118.4" Opacity="0" RenderTransformOrigin="0.5,0.5">
-			<Rectangle.RenderTransform>
-				<TransformGroup>
-					<ScaleTransform/>
-					<SkewTransform/>
-					<RotateTransform/>
-					<TranslateTransform/>
-				</TransformGroup>
-			</Rectangle.RenderTransform>
-		</Rectangle>
-		<TextBlock x:Name="textBlock1" Margin="79.8,-67,144.2,0" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="69.6" Opacity="0" RenderTransformOrigin="0.5,0.5"><TextBlock.RenderTransform>
-				<TransformGroup>
-					<ScaleTransform/>
-					<SkewTransform/>
-					<RotateTransform/>
-					<TranslateTransform/>
-				</TransformGroup>
-			</TextBlock.RenderTransform><Span><Run Text="Sync Butler is a file and folder synchronization tool for Windows that helps keep your files the same across multiple computers."/></Span></TextBlock>
-		<Rectangle x:Name="rectangle_Copy" Fill="White" Stroke="Black" StrokeThickness="3" RadiusX="15" RadiusY="15" Margin="59.8,70.9,23.8,0" VerticalAlignment="Top" Height="79.2" Opacity="0" RenderTransformOrigin="0.5,0.5">
-			<Rectangle.RenderTransform>
-				<TransformGroup>
-					<ScaleTransform/>
-					<SkewTransform/>
-					<RotateTransform/>
-					<TranslateTransform/>
-				</TransformGroup>
-			</Rectangle.RenderTransform>
-		</Rectangle>
-		<TextBlock x:Name="textBlock_Copy" Margin="90.5,87.1,1.4,0" VerticalAlignment="Top" Height="48.8" FontSize="29.333" TextWrapping="Wrap" FontWeight="Bold" Opacity="0" RenderTransformOrigin="0.5,0.5">
-			<TextBlock.RenderTransform>
-				<TransformGroup>
-					<ScaleTransform/>
-					<SkewTransform/>
-					<RotateTransform/>
-					<TranslateTransform/>
-				</TransformGroup>
-			</TextBlock.RenderTransform><Run Text="What is "/><Run FontFamily="Walkway Black" Text="Sync"/><Run FontFamily="Walkway Black" Text=" "/><Run FontFamily="Walkway Black" Text="Butler"/><Run Text="?"/></TextBlock>
-		<Rectangle x:Name="rectangle2" Fill="White" Stroke="Black" StrokeThickness="3" RadiusX="15" RadiusY="15" Margin="27.313,-33,144.513,0" VerticalAlignment="Top" Height="118.4" Opacity="0" RenderTransformOrigin="0.5,0.5">
-			<Rectangle.RenderTransform>
-				<TransformGroup>
-					<ScaleTransform/>
-					<SkewTransform/>
-					<RotateTransform/>
-					<TranslateTransform/>
-				</TransformGroup>
-			</Rectangle.RenderTransform>
-		</Rectangle>
-		<TextBlock x:Name="textBlock2" Margin="36.8,37,187.2,0" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="69.6" Opacity="0" RenderTransformOrigin="0.5,0.5"><TextBlock.RenderTransform>
-				<TransformGroup>
-					<ScaleTransform/>
-					<SkewTransform/>
-					<RotateTransform/>
-					<TranslateTransform/>
-				</TransformGroup>
-			</TextBlock.RenderTransform><Span><Run Text="While there are more than a few file synchronization programs available today, Sync Butler is the only such program to take ease-of-use seriously. Every feature is designed to simplify interaction between you and Sync Butler without compromising the intelligence behind his unique synchronization process."/></Span></TextBlock>
-		<Rectangle x:Name="rectangle_Copy1" Fill="White" Stroke="Black" StrokeThickness="3" RadiusX="15" RadiusY="15" Margin="31.8,70.9,51.8,0" VerticalAlignment="Top" Height="79.2" Opacity="0" RenderTransformOrigin="0.5,0.5">
-			<Rectangle.RenderTransform>
-				<TransformGroup>
-					<ScaleTransform/>
-					<SkewTransform/>
-					<RotateTransform/>
-					<TranslateTransform/>
-				</TransformGroup>
-			</Rectangle.RenderTransform>
-		</Rectangle>
-		<TextBlock x:Name="textBlock_Copy1" Margin="62.5,87.1,29.4,0" VerticalAlignment="Top" Height="48.8" FontSize="29.333" TextWrapping="Wrap" FontWeight="Bold" Opacity="0" RenderTransformOrigin="0.5,0.5"><TextBlock.RenderTransform>
-				<TransformGroup>
-					<ScaleTransform/>
-					<SkewTransform/>
-					<RotateTransform/>
-					<TranslateTransform/>
-				</TransformGroup>
-			</TextBlock.RenderTransform><Run Text="So, what's different in "/><Run FontFamily="Walkway Black" Text="Sync"/><Run FontFamily="Walkway Black" Text=" "/><Run FontFamily="Walkway Black" Text="Butler"/><Run Text="?"/></TextBlock>
-		<Image x:Name="image1" Margin="124.379,0,0,-330" Source="Images/logowTransparency.png" Stretch="Fill" Visibility="Hidden" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Bottom" Height="134" HorizontalAlignment="Left" Width="133.621">
-			<Image.RenderTransform>
-				<TransformGroup>
-					<ScaleTransform/>
-					<SkewTransform/>
-					<RotateTransform/>
-					<TranslateTransform/>
-				</TransformGroup>
-			</Image.RenderTransform>
-		</Image>
-		<Rectangle x:Name="rectangle1_Copy" Fill="White" Stroke="Black" StrokeThickness="3" RadiusX="15" RadiusY="15" Margin="45,-23,134.2,0" VerticalAlignment="Top" Height="128.4" Opacity="0" RenderTransformOrigin="0.5,0.5">
-			<Rectangle.RenderTransform>
-				<TransformGroup>
-					<ScaleTransform/>
-					<SkewTransform/>
-					<RotateTransform/>
-					<TranslateTransform/>
-				</TransformGroup>
-			</Rectangle.RenderTransform>
-		</Rectangle>
-		<TextBlock x:Name="textBlock1_Copy" Margin="75.8,-3,214.2,0" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="98.6" Opacity="0" RenderTransformOrigin="0.5,0.5" FontSize="14.667"><TextBlock.RenderTransform>
-				<TransformGroup>
-					<ScaleTransform/>
-					<SkewTransform/>
-					<RotateTransform/>
-					<TranslateTransform/>
-				</TransformGroup>
-			</TextBlock.RenderTransform><Span><Run Text="'Sync Butler, "/></Span><Span FontStyle="Italic"><Run Text="Sync"/></Span><Run Text="' is a special feature of Sync Butler that syncs the files which you might need later on "/><Run FontStyle="Italic" Text="(with your permission, of course!)"/><Run Text=". This ensures that you'll have your most recent work with you, just in case."/></TextBlock>
-		<Rectangle x:Name="rectangle_Copy2" Fill="White" Stroke="Black" StrokeThickness="3" RadiusX="15" RadiusY="15" Margin="33.8,-84.1,49.8,0" VerticalAlignment="Top" Height="79.2" Opacity="0" RenderTransformOrigin="0.5,0.5">
-			<Rectangle.RenderTransform>
-				<TransformGroup>
-					<ScaleTransform/>
-					<SkewTransform/>
-					<RotateTransform/>
-					<TranslateTransform/>
-				</TransformGroup>
-			</Rectangle.RenderTransform>
-		</Rectangle>
-		<TextBlock x:Name="textBlock_Copy2" Margin="64.5,-67.9,27.4,0" VerticalAlignment="Top" Height="48.8" FontSize="29.333" TextWrapping="Wrap" FontWeight="Bold" Opacity="0" RenderTransformOrigin="0.5,0.5"><TextBlock.RenderTransform>
-				<TransformGroup>
-					<ScaleTransform/>
-					<SkewTransform/>
-					<RotateTransform/>
-					<TranslateTransform/>
-				</TransformGroup>
-			</TextBlock.RenderTransform><Run Text="What is"/><Run Text=" '"/><Run FontFamily="Walkway Black" Text="Sync"/><Run FontFamily="Walkway Black" Text=" "/><Run FontFamily="Walkway Black" Text="Butler"/><Run Text=", "/><Run FontStyle="Italic" Text="Sync"/><Run Text="'"/><Run Text="?"/></TextBlock>
-		<Image x:Name="image4" Margin="0,111,30.396,195" Source="Images/logowTransparency.png" Stretch="Fill" Visibility="Hidden" HorizontalAlignment="Right" Width="173.507"/>
-		<Rectangle x:Name="rectangle1_Copy1" Fill="White" Stroke="Black" StrokeThickness="3" RadiusX="15" RadiusY="15" Margin="58,-23,121.2,0" VerticalAlignment="Top" Height="93.4" Opacity="0" RenderTransformOrigin="0.5,0.5">
-			<Rectangle.RenderTransform>
-				<TransformGroup>
-					<ScaleTransform/>
-					<SkewTransform/>
-					<RotateTransform/>
-					<TranslateTransform/>
-				</TransformGroup>
-			</Rectangle.RenderTransform>
-		</Rectangle>
-		<TextBlock x:Name="textBlock1_Copy1" Margin="78.8,-3,130.2,0" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="63.6" Opacity="0" RenderTransformOrigin="0.5,0.5" FontSize="14.667"><TextBlock.RenderTransform>
-				<TransformGroup>
-					<ScaleTransform/>
-					<SkewTransform/>
-					<RotateTransform/>
-					<TranslateTransform/>
-				</TransformGroup>
-			</TextBlock.RenderTransform><Run Text="If your file is recent "/><Run FontStyle="Italic" Text="(within the last 10 days)"/><Run Text=" and Sync Butler thinks it is interesting enough, he will sync them each time you sync all your partnerships."/></TextBlock>
-		<Rectangle x:Name="rectangle_Copy3" Fill="White" Stroke="Black" StrokeThickness="3" RadiusX="15" RadiusY="15" Margin="46.8,-84.1,36.8,0" VerticalAlignment="Top" Height="79.2" Opacity="0" RenderTransformOrigin="0.5,0.5">
-			<Rectangle.RenderTransform>
-				<TransformGroup>
-					<ScaleTransform/>
-					<SkewTransform/>
-					<RotateTransform/>
-					<TranslateTransform/>
-				</TransformGroup>
-			</Rectangle.RenderTransform>
-		</Rectangle>
-		<TextBlock x:Name="textBlock_Copy3" Margin="77.5,-67.9,14.4,0" VerticalAlignment="Top" Height="48.8" FontSize="29.333" TextWrapping="Wrap" FontWeight="Bold" Opacity="0" RenderTransformOrigin="0.5,0.5"><TextBlock.RenderTransform>
-				<TransformGroup>
-					<ScaleTransform/>
-					<SkewTransform/>
-					<RotateTransform/>
-					<TranslateTransform/>
-				</TransformGroup>
-			</TextBlock.RenderTransform><Run Text="How does "/><Run Text="'"/><Run FontFamily="Walkway Black" Text="Sync"/><Run FontFamily="Walkway Black" Text=" "/><Run FontFamily="Walkway Black" Text="Butler"/><Run Text=", "/><Run FontStyle="Italic" Text="Sync"/><Run Text="'"/><Run Text=" work"/><Run Text="?"/></TextBlock>
+		<Grid x:Name="grid1" Margin="-1.2,4,1.4,0" Visibility="Hidden">
+			<Rectangle x:Name="rectangle1" Fill="White" Stroke="Black" StrokeThickness="3" RadiusX="15" RadiusY="15" Margin="134.2,84.5,56.8,0" VerticalAlignment="Top" Height="118.4" RenderTransformOrigin="0.5,0.5">
+				<Rectangle.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Rectangle.RenderTransform>
+			</Rectangle>
+			<TextBlock x:Name="textBlock1" Margin="156,112.5,67.8,0" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="69.6" RenderTransformOrigin="0.5,0.5" FontSize="16"><TextBlock.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</TextBlock.RenderTransform><Span><Run Text="Sync Butler is a file and folder synchronization tool for Windows that helps keep your files the same across multiple computers."/></Span></TextBlock>
+			<Rectangle x:Name="rectangle_Copy" Fill="White" Stroke="Black" StrokeThickness="3" RadiusX="15" RadiusY="15" Margin="86,23.9,228.4,0" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" Height="79.2">
+				<Rectangle.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Rectangle.RenderTransform>
+			</Rectangle>
+			<TextBlock x:Name="textBlock_Copy" Margin="99.2,46.1,-7.5,0" FontSize="29.333" TextWrapping="Wrap" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" Height="48.8"><TextBlock.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</TextBlock.RenderTransform><Run Text="What is "/><Run FontFamily="Walkway Black" Text="Sync"/><Run FontFamily="Walkway Black" Text=" "/><Run FontFamily="Walkway Black" Text="Butler"/><Run Text="?"/></TextBlock>
+			<Rectangle x:Name="rectangle2" Fill="White" Stroke="Black" StrokeThickness="3" RadiusX="15" RadiusY="15" Margin="78.013,0,48.613,65.6" VerticalAlignment="Bottom" Height="133.4" RenderTransformOrigin="0.5,0.5">
+				<Rectangle.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Rectangle.RenderTransform>
+			</Rectangle>
+			<TextBlock x:Name="textBlock2" Margin="95.3,0,57.2,80" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="104" RenderTransformOrigin="0.5,0.5" FontSize="16"><TextBlock.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</TextBlock.RenderTransform><Span><Run Text="While there are more than a few file synchronization programs available today, Sync Butler is the only such program to take ease-of-use seriously. Every feature is designed to simplify interaction between you and Sync Butler without compromising the intelligence behind his unique synchronization process."/></Span></TextBlock>
+			<Rectangle x:Name="rectangle_Copy1" Fill="White" Stroke="Black" StrokeThickness="3" RadiusX="15" RadiusY="15" Margin="40,212.9,59.9,183.9" RenderTransformOrigin="0.5,0.5">
+				<Rectangle.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Rectangle.RenderTransform>
+			</Rectangle>
+			<TextBlock x:Name="textBlock_Copy1" Margin="67.2,231.1,24.5,196.1" FontSize="29.333" TextWrapping="Wrap" FontWeight="Bold" RenderTransformOrigin="0.5,0.5"><TextBlock.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</TextBlock.RenderTransform><Run Text="So, what's different in "/><Run FontFamily="Walkway Black" Text="Sync"/><Run FontFamily="Walkway Black" Text=" "/><Run FontFamily="Walkway Black" Text="Butler"/><Run Text="?"/></TextBlock>
+			<Image x:Name="image1" Margin="17.579,78,0,0" Source="Images/logowTransparency.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" Height="134" HorizontalAlignment="Left" Width="133.621">
+				<Image.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Image.RenderTransform>
+			</Image>
+			<Button x:Name="FeatureHelpCloseBtn" Margin="0,0,5.9,7.8" Content="CLOSE" FontWeight="Bold" FontSize="18.667" Click="ExitTutorial_Click" HorizontalAlignment="Right" Width="83.2" VerticalAlignment="Bottom" Height="39.2"/>
+		</Grid>
+		<Grid x:Name="SBSHelp1" Margin="3.8,-1.6,4.6,4.3" Visibility="Hidden">
+			<Rectangle x:Name="rectangle1_Copy" Fill="White" Stroke="Black" StrokeThickness="3" RadiusX="15" RadiusY="15" Margin="29.2,78.1,141.6,0" VerticalAlignment="Top" Height="128.4" RenderTransformOrigin="0.5,0.5">
+				<Rectangle.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Rectangle.RenderTransform>
+			</Rectangle>
+			<TextBlock x:Name="textBlock1_Copy" Margin="60,98.1,221.6,0" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="98.6" RenderTransformOrigin="0.5,0.5" FontSize="14.667"><TextBlock.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</TextBlock.RenderTransform><Span><Run Text="'Sync Butler, "/></Span><Span FontStyle="Italic"><Run Text="Sync"/></Span><Run Text="' is a special feature of Sync Butler that syncs the files which you might need later on "/><Run FontStyle="Italic" Text="(with your permission, of course!)"/><Run Text=". This ensures that you'll have your most recent work with you, just in case."/></TextBlock>
+			<Rectangle x:Name="rectangle_Copy2" Fill="White" Stroke="Black" StrokeThickness="3" RadiusX="15" RadiusY="15" Margin="18,17,57.2,0" VerticalAlignment="Top" Height="79.2" RenderTransformOrigin="0.5,0.5">
+				<Rectangle.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Rectangle.RenderTransform>
+			</Rectangle>
+			<TextBlock x:Name="textBlock_Copy2" Margin="48.7,33.2,34.8,0" VerticalAlignment="Top" Height="48.8" FontSize="29.333" TextWrapping="Wrap" FontWeight="Bold" RenderTransformOrigin="0.5,0.5"><TextBlock.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</TextBlock.RenderTransform><Run Text="What is"/><Run Text=" '"/><Run FontFamily="Walkway Black" Text="Sync"/><Run FontFamily="Walkway Black" Text=" "/><Run FontFamily="Walkway Black" Text="Butler"/><Run Text=", "/><Run FontStyle="Italic" Text="Sync"/><Run Text="'"/><Run Text="?"/></TextBlock>
+			<Image x:Name="image4" Margin="0,72.6,37.796,230.7" Source="Images/logowTransparency.png" Stretch="Fill" HorizontalAlignment="Right" Width="173.507"/>
+			<Rectangle x:Name="rectangle1_Copy1" Fill="White" Stroke="Black" StrokeThickness="3" RadiusX="15" RadiusY="15" Margin="42.2,0,128.6,43.3" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Bottom" Height="93.4">
+				<Rectangle.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Rectangle.RenderTransform>
+			</Rectangle>
+			<TextBlock x:Name="textBlock1_Copy1" Margin="63,0,137.6,53.1" FontWeight="Bold" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" FontSize="14.667" VerticalAlignment="Bottom" Height="63.6"><TextBlock.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</TextBlock.RenderTransform><Run Text="If your file is recent "/><Run FontStyle="Italic" Text="(within the last 10 days)"/><Run Text=" and Sync Butler thinks it is interesting enough, he will sync them each time you sync all your partnerships."/></TextBlock>
+			<Rectangle x:Name="rectangle_Copy3" Fill="White" Stroke="Black" StrokeThickness="3" RadiusX="15" RadiusY="15" Margin="31,0,44.2,118.6" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Bottom" Height="79.2">
+				<Rectangle.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Rectangle.RenderTransform>
+			</Rectangle>
+			<TextBlock x:Name="textBlock_Copy3" Margin="61.7,0,21.8,132.8" FontSize="29.333" TextWrapping="Wrap" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Bottom" Height="48.8"><TextBlock.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</TextBlock.RenderTransform><Run Text="How does "/><Run Text="'"/><Run FontFamily="Walkway Black" Text="Sync"/><Run FontFamily="Walkway Black" Text=" "/><Run FontFamily="Walkway Black" Text="Butler"/><Run Text=", "/><Run FontStyle="Italic" Text="Sync"/><Run Text="'"/><Run Text=" work"/><Run Text="?"/></TextBlock>
+			<Button x:Name="SBSHelpScreenNextBtn" VerticalAlignment="Bottom" Height="39.2" Content="Next" FontWeight="Bold" FontSize="18.667" Click="GoToSBSDemoHelpScreen_Click" HorizontalAlignment="Right" Width="83.2" TabIndex="1" Margin="0,0,1.5,1.5"/>
+		</Grid>
 	</Grid>
 </UserControl>
