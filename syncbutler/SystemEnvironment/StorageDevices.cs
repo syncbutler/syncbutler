@@ -106,7 +106,7 @@ namespace SyncButler.SystemEnvironment
         /// <exception cref="Exceptions.DriveNotSupportedException">Thrown if the low-level details of the drive could not be accessed.</exception>
         public static string GetDriveLetter(string driveID, int partitionIndex)
         {
-            if ((driveID.Length == 0) || (partitionIndex == -1))
+            if (driveID == null || (driveID.Length == 0) || (partitionIndex == -1))
                 throw new Exceptions.DriveNotSupportedException("The drive type could not be determined.");
 
             string letter = "";
