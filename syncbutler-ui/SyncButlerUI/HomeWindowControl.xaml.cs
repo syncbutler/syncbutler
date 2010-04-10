@@ -352,7 +352,7 @@ namespace SyncButlerUI
                     resolveButton.IsEnabled = true;
                 }
                 doneButton.IsEnabled = true;
-                CurrentSyncingFile.Text = "Scan complete. Please look at the list of conflicts.";
+                CurrentSyncingFile.Text = "Scan complete. Please check if there are any conflicts which require your attention.";
 
                 ThreadSafeAddResolve(autoResolveConflicts);
 
@@ -513,7 +513,17 @@ namespace SyncButlerUI
             {
                 //CurrentSyncingFile.Text = "Scan complete.\nConflicts automatically processed: " + autoResolveCount +
                 //    "\nConflicts manually processed: " + manualResolveCount;
-                CurrentSyncingFile.Text = "Scan complete.";
+                int manualCount = 0;
+                foreach (ConflictList cl in mergedList) manualCount += cl.Conflicts.Count;
+                if ((manualResolveCount > 0) || (manualCount == 0))
+                {
+                    CurrentSyncingFile.Text = "Syncing complete.";
+                }
+                else
+                {
+                    CurrentSyncingFile.Text = "Scan complete. Please check if there are any conflicts which require your attention.";
+                }
+                
                 partnershipNameTextBox.Text = "";
 
                 TotalProgressBar.Value = 0;
@@ -523,7 +533,7 @@ namespace SyncButlerUI
                 {
                     //CurrentSyncingFile.Text = "Scan cancelled.\nConflicts automatically processed: " + autoResolveCount +
                     //"\nConflicts manually processed: " + manualResolveCount;
-                    CurrentSyncingFile.Text = "Scan cancelled.";
+                    CurrentSyncingFile.Text = "Sync cancelled.";
                     if (Controller.ConflictCount != 0)
                     {
                         resolveButton.IsEnabled = true;
