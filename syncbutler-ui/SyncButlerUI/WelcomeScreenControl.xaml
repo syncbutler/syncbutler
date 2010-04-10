@@ -125,7 +125,7 @@
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="WelcomeScreen1" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
 						</ObjectAnimationUsingKeyFrames>
-						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="grid1" Storyboard.TargetProperty="(UIElement.Visibility)">
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="FeatureHelp" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
 						</ObjectAnimationUsingKeyFrames>
 					</Storyboard>
@@ -136,6 +136,22 @@
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
 						</ObjectAnimationUsingKeyFrames>
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="SBSHelp1" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+					</Storyboard>
+				</VisualState>
+				<VisualState x:Name="FeatureSBSHelpState">
+					<Storyboard>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="WelcomeScreen1" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="SBSHelp1" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="SBSHelpScreenNextBtn" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="SBSFeatureHelpCloseBtn" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
 						</ObjectAnimationUsingKeyFrames>
 					</Storyboard>
@@ -434,7 +450,7 @@
 			</Image>
 
 		</Grid>
-		<Grid x:Name="grid1" Margin="-1.2,4,1.4,0" Visibility="Hidden">
+		<Grid x:Name="FeatureHelp" Margin="-1.2,4,1.4,0" Visibility="Hidden">
 			<Rectangle x:Name="rectangle1" Fill="White" Stroke="Black" StrokeThickness="3" RadiusX="15" RadiusY="15" Margin="134.2,84.5,56.8,0" VerticalAlignment="Top" Height="118.4" RenderTransformOrigin="0.5,0.5">
 				<Rectangle.RenderTransform>
 					<TransformGroup>
@@ -517,7 +533,7 @@
 					</TransformGroup>
 				</Image.RenderTransform>
 			</Image>
-			<Button x:Name="FeatureHelpCloseBtn" Margin="0,0,5.9,7.8" Content="CLOSE" FontWeight="Bold" FontSize="18.667" Click="ExitTutorial_Click" HorizontalAlignment="Right" Width="83.2" VerticalAlignment="Bottom" Height="39.2"/>
+			<Button x:Name="FeatureHelpNextBtn" Margin="0,0,5.9,7.8" Content="Next" FontWeight="Bold" FontSize="18.667" Click="GoToFeaturesSBSScreen_Click" HorizontalAlignment="Right" Width="83.2" VerticalAlignment="Bottom" Height="39.2"/>
 		</Grid>
 		<Grid x:Name="SBSHelp1" Margin="3.8,-1.6,4.6,4.3" Visibility="Hidden">
 			<Rectangle x:Name="rectangle1_Copy" Fill="White" Stroke="Black" StrokeThickness="3" RadiusX="15" RadiusY="15" Margin="29.2,78.1,141.6,0" VerticalAlignment="Top" Height="128.4" RenderTransformOrigin="0.5,0.5">
@@ -594,6 +610,7 @@
 					</TransformGroup>
 				</TextBlock.RenderTransform><Run Text="How does "/><Run Text="'"/><Run FontFamily="Walkway Black" Text="Sync"/><Run FontFamily="Walkway Black" Text=" "/><Run FontFamily="Walkway Black" Text="Butler"/><Run Text=", "/><Run FontStyle="Italic" Text="Sync"/><Run Text="'"/><Run Text=" work"/><Run Text="?"/></TextBlock>
 			<Button x:Name="SBSHelpScreenNextBtn" VerticalAlignment="Bottom" Height="39.2" Content="Next" FontWeight="Bold" FontSize="18.667" Click="GoToSBSDemoHelpScreen_Click" HorizontalAlignment="Right" Width="83.2" TabIndex="1" Margin="0,0,1.5,1.5"/>
+			<Button x:Name="SBSFeatureHelpCloseBtn" Margin="0,0,0.7,1.6" Content="CLOSE" FontWeight="Bold" FontSize="18.667" Click="ExitTutorial_Click" HorizontalAlignment="Right" Width="83.2" VerticalAlignment="Bottom" Height="39.2" Visibility="Hidden"/>
 		</Grid>
 	</Grid>
 </UserControl>
