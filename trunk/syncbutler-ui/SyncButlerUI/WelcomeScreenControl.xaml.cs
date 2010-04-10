@@ -78,9 +78,15 @@ namespace SyncButlerUI
 		{
             CurrentState = State.AllowClose;
 			VisualStateManager.GoToState(this, "FeatureHelpState", false);
-			FocusControl(() => HelpScreen1NextBtn.Focus());
+			FocusControl(() => FeatureHelpCloseBtn.Focus());
 		}
         public void GoToSBSScreen()
+        {
+            VisualStateManager.GoToState(this, "SBSHelpState", false);
+            FocusControl(() => SBSHelpScreenNextBtn.Focus());
+        }
+		
+		public void GoToDemoSBSScreen()
         {
             VisualStateManager.GoToState(this, "SBSHelpScreenState", false);
             FocusControl(() => HelpScreenCloseBtn.Focus());
@@ -107,5 +113,14 @@ namespace SyncButlerUI
                 NameIt_Click(sender, e);
             }
 		}
+				/// <summary>
+		/// Goes to the 2nd Screen of Help
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void GoToSBSDemoHelpScreen_Click(object sender,RoutedEventArgs e)
+        {
+			GoToDemoSBSScreen();
+		}	
 	}
 }
