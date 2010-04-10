@@ -25,8 +25,8 @@ namespace SyncButler
         private SortedList<string,Partnership> miniPartnershipList;
         private static bool allowAutoSyncForConflictFreeTasks;
         private static bool firstRunComplete;
-        private static bool computerNamed = false;
-        private static bool enableShellContext = false; //Defaults to false
+        private static bool computerNamed;
+        private static bool enableShellContext;//Defaults to false
         private static long fileReadBufferSize = 2048000; //2MB, How much of the data file is read each cycle. Default value.
         private static string computerName;
         private static bool firstSBSRun;
@@ -45,8 +45,8 @@ namespace SyncButler
         private static SettingsSection storedSettings;
         private static PartnershipSection storedPartnerships;
         private static SyncEnvironment syncEnv;
-        private static Assembly syncButlerAssembly = null;
-        private static string _appPath = null;
+        private static Assembly syncButlerAssembly;
+        private static string _appPath;
 
         /// <summary>
         /// Path to thumbdrive for mini partnerships
@@ -65,7 +65,6 @@ namespace SyncButler
         /// </summary>
         private SyncEnvironment()
         {
-            firstRunComplete = false;
             _appPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
             IntialEnv();
             
@@ -759,7 +758,7 @@ namespace SyncButler
         /// <param name="leftPath">Full Path of the left file</param>
         /// <param name="rightPath">Full Path of the right file</param>
         /// <returns>True if they are compatible</returns>
-        private bool CheckFilePartnerAbility(string leftpath, string rightpath)
+        private static bool CheckFilePartnerAbility(string leftpath, string rightpath)
         {
             //Ensuring the left and right files are the same
             int positionLeft = leftpath.LastIndexOf(@"\");

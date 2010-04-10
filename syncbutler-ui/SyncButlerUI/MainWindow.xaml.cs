@@ -30,7 +30,7 @@ namespace SyncButlerUI
 			try
             {
 			    controller = Controller.GetInstance();
-                if (!(controller.IsNotFirstRun()))
+                if (!(Controller.IsNotFirstRun()))
                 {
                     FirstTimeStartupScreen dialog = new FirstTimeStartupScreen();
 
@@ -89,11 +89,11 @@ namespace SyncButlerUI
             homeWindow1.FirstTimeHelp.Visibility = System.Windows.Visibility.Hidden;
 		
             if (!homeWindow1.StopExistingOperation()) return;
-          		if(controller.IsFirstSBSRun()){
+          		if(Controller.IsFirstSBSRun()){
 					FirstTimeStartupScreen dialog = new FirstTimeStartupScreen();
 					dialog.WelcomeScreenControl.FirstTimeComputerNameText.Visibility=Visibility.Hidden;
 					//VisualStateManager.GoToState(dialog.WelcomeScreenControl,"HelpScreen3",false);
-					controller.SetFirstSBSRun();
+					Controller.SetFirstSBSRun();
                     dialog.Title = "SyncButler - Help";
                     dialog.WelcomeScreenControl.GoToSBSScreen();
 					dialog.ShowDialog();

@@ -46,16 +46,16 @@ namespace SyncButler
         /// </summary>
         /// <param name="DriveLetter">Create a drive info base on the drive letter</param>
         /// <exception cref="System.Exception">If the given drive letter is not a valid drive</exception>
-        public WindowDriveInfo(char DriveLetter)
+        public WindowDriveInfo(char driveLetter)
         {
-            this.DriveLetter = DriveLetter;
+            this.DriveLetter = driveLetter;
 
-            if (!Directory.Exists(DriveLetter + ":\\"))
+            if (!Directory.Exists(driveLetter + ":\\"))
             {
                 throw new Exception("invalid drive");
             }
             
-            DriveInfo di = new DriveInfo("" + DriveLetter);
+            DriveInfo di = new DriveInfo("" + driveLetter);
             Label = di.VolumeLabel;
         }
 

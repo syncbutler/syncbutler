@@ -65,11 +65,11 @@ namespace SyncButler
             }
         }
 
-        public Resolved(ISyncable Left, ISyncable Right, ActionDone Action)
+        public Resolved(ISyncable left, ISyncable right, ActionDone action)
         {
-            this.left = Left;
-            this.right = Right;
-            this.action = Action;
+            this.left = left;
+            this.right = right;
+            this.action = action;
         }
 
         public enum ActionDone
