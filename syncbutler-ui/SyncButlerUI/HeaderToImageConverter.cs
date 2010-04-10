@@ -13,7 +13,7 @@ namespace WPF_Explorer_Tree
     [ValueConversion(typeof(string), typeof(bool))]
     public class HeaderToImageConverter : IValueConverter
     {
-        public static HeaderToImageConverter Instance = new HeaderToImageConverter();
+        private static HeaderToImageConverter Instance = new HeaderToImageConverter();
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
