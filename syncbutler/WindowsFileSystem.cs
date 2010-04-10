@@ -164,6 +164,13 @@ namespace SyncButler
             }
         }
 
+        public bool DoNotSync()
+        {
+            return ((nativeFileSystemObj.Attributes & FileAttributes.System) |
+                (nativeFileSystemObj.Attributes & FileAttributes.Offline) |
+                (nativeFileSystemObj.Attributes & FileAttributes.Temporary)) != 0;
+        }
+
         /// <summary>
         /// Method that is used internally to update the drive letter of the root path, based on the current drive ID.
         /// Useful for correcting the drive letters of portable devices.

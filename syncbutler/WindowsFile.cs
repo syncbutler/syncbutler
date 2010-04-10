@@ -562,6 +562,12 @@ namespace SyncButler
                 }
             }
 
+            if (this.DoNotSync() || partner.DoNotSync())
+            {
+                conflictList.Add(new Conflict(this, partner, Conflict.Action.Ignore, Conflict.Action.Ignore));
+                return conflictList;
+            }
+
             try
             {
                 checksumCacheFresh = false; // Invalidate checksum cache
