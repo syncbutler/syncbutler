@@ -1108,7 +1108,7 @@ namespace SyncButlerUI
                 }
                 progressWindow.TaskComplete();
                 SBSSync.IsEnabled = true;
-                SBSDone.IsEnabled = true;
+                //SBSDone.IsEnabled = true;
             });
 
             mruWorker.DoWork += new DoWorkEventHandler(delegate(Object worker, DoWorkEventArgs args)
@@ -1474,7 +1474,7 @@ namespace SyncButlerUI
 
         public void LoadMRUs()
         {
-            SBSDone.IsEnabled = false;
+            //SBSDone.IsEnabled = false;
 
             BackgroundWorker sbsScanWorker = new BackgroundWorker();
             ProgressBar progressWindow = new ProgressBar(sbsScanWorker, "Loading SyncButler, Sync!");
