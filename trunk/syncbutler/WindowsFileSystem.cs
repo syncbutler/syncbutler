@@ -164,8 +164,17 @@ namespace SyncButler
             }
         }
 
+        /// <summary>
+        /// Checks whether we should sync this object.
+        /// </summary>
+        /// <returns>True if it shouldn't be synced, false if it should be synced.</returns>
         public bool DoNotSync()
         {
+            nativeFileSystemObj.Refresh();
+
+            // This is included because -1 is returned if the object does not exist.
+            if (!nativeFileSystemObj.Exists) return false;
+
             return ((nativeFileSystemObj.Attributes & FileAttributes.System) |
                 (nativeFileSystemObj.Attributes & FileAttributes.Offline) |
                 (nativeFileSystemObj.Attributes & FileAttributes.Temporary)) != 0;
