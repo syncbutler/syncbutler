@@ -158,7 +158,7 @@
 				</VisualState>
 			</VisualStateGroup>
 		</VisualStateManager.VisualStateGroups>
-		<Rectangle Margin="-1,-1,-2,-2" RadiusX="20" RadiusY="20" Fill="#FF575757" Opacity="0.8"/>
+		<Rectangle Margin="-1.2,4,-1.8,-7" RadiusX="20" RadiusY="20" Fill="#FF575757" Opacity="0.8"/>
 		<Grid x:Name="WelcomeScreen1">
 			<Image x:Name="image" Margin="-5,-48,15,-102" Stretch="Fill" Source="Images\SunBurst.png" RenderTransformOrigin="0.5,0.5" Opacity="0.365">
 				<Image.RenderTransform>
@@ -187,31 +187,21 @@
 			</VisualStateManager.CustomVisualStateManager>
 			<Image Margin="123.6,92,118.318,112.8" Stretch="Fill" Source="Images\HomeWindow.png"/>
 			<Grid HorizontalAlignment="Left" Width="640" VerticalAlignment="Top" Height="480">
-				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="13.6,194,0,238" HorizontalAlignment="Left" Width="96"/>
-				<TextBlock Margin="20.8,201.6,0,228.8" Foreground="White" Text="Click on it to find out more!" TextWrapping="Wrap" FontWeight="Bold" HorizontalAlignment="Left" Width="86"/>
-				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Margin="29.2,104.3,0,0" VerticalAlignment="Top" Height="31.2" Opacity="0.495" HorizontalAlignment="Left" Width="77.6" d:LayoutOverrides="VerticalAlignment"/>
-				<TextBlock Margin="0,95.1,538.4,0" FontWeight="Bold" Foreground="White" TextWrapping="Wrap" HorizontalAlignment="Right" VerticalAlignment="Top" Width="63.6" Height="51.2"><Run Text=""/><LineBreak/><Run Text="Main Page"/></TextBlock>
-				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Margin="0,0,8,245.4" Opacity="0.495" HorizontalAlignment="Right" Width="183.2" VerticalAlignment="Bottom" Height="35.2"/>
-				<TextBlock Margin="0,0,23.256,255.8" FontWeight="Bold" Foreground="White" Text="Sync all your partnerships!" TextWrapping="Wrap" HorizontalAlignment="Right" Width="152.602" VerticalAlignment="Bottom" Height="16"/>
+				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="0,0,15.8,79.2" HorizontalAlignment="Right" Width="97" VerticalAlignment="Bottom" Height="77.6"/>
+				<TextBlock Margin="0,0,18.8,68.2" Foreground="White" TextWrapping="Wrap" FontWeight="Bold" HorizontalAlignment="Right" Width="86" VerticalAlignment="Bottom" Height="83.6"><Run Text="Click on it to find out more about "/><Run FontFamily="Walkway Black" FontSize="14.667" FontWeight="Bold" Foreground="White" Text="Sync Butler"/><Run FontFamily="Walkway Black" FontSize="14.667" FontWeight="Bold" Foreground="White" Text="!"/></TextBlock>
+				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Margin="22.867,103.634,0,0" VerticalAlignment="Top" Height="31.2" Opacity="0.495" HorizontalAlignment="Left" Width="77.6" d:LayoutOverrides="VerticalAlignment"/>
+				<TextBlock Margin="0,94.434,544.733,0" FontWeight="Bold" Foreground="White" TextWrapping="Wrap" HorizontalAlignment="Right" VerticalAlignment="Top" Width="63.6" Height="51.2"><Run Text=""/><LineBreak/><Run Text="Main Page"/></TextBlock>
+				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Margin="0,0,10.8,239.4" Opacity="0.495" HorizontalAlignment="Right" Width="183.2" VerticalAlignment="Bottom" Height="35.2"/>
+				<TextBlock Margin="0,0,26.056,249.8" FontWeight="Bold" Foreground="White" Text="Sync all your partnerships!" TextWrapping="Wrap" HorizontalAlignment="Right" Width="152.602" VerticalAlignment="Bottom" Height="16"/>
 				<Rectangle Fill="#FF073948" Stroke="#FF006C8D" StrokeThickness="3" RadiusX="5" RadiusY="5" Margin="0,53.2,24.8,0" VerticalAlignment="Top" Height="122.4" HorizontalAlignment="Right" Width="135.2" d:LayoutOverrides="VerticalAlignment"/>
 				<TextBlock Margin="0,59.2,24.8,0" FontWeight="Bold" Foreground="#FF75CBDB" TextWrapping="Wrap" HorizontalAlignment="Right" VerticalAlignment="Top" Width="128.4" Height="42.4"><Run FontSize="13.333" Text=" "/><Run Text="What is a"/><Run Text="..."/><LineBreak/><Run FontSize="16" Text="  &quot;partnership&quot;?"/></TextBlock>
-				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="82.8,0,0,44.8" VerticalAlignment="Bottom" Height="47.2" HorizontalAlignment="Left" Width="144.8"/>
-				<TextBlock Margin="91.6,0,0,50" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="34.4" FontWeight="Bold" HorizontalAlignment="Left" Width="130"><Run Text="Tells "/><Run FontFamily="Walkway Black" FontSize="14.667" Text="SyncButler"/><Run Text=" which folders to sync."/></TextBlock>
-				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="263.8,0,251.4,21.8" VerticalAlignment="Bottom" Height="69.6"/>
-				<TextBlock Margin="272.6,0,259.8,33.8" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="48" FontWeight="Bold" RenderTransformOrigin="0.5,0.5"><Run Text="View the folders which "/><Run FontFamily="Walkway Black" FontSize="14.667" Text="SyncButler "/><Run Text="is keeping in sync."/></TextBlock>
-				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="0,0,123.6,44.4" VerticalAlignment="Bottom" Height="47.2" HorizontalAlignment="Right" Width="105.6"/>
-				<TextBlock Margin="0,0,129.6,49.6" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="34.4" FontWeight="Bold" HorizontalAlignment="Right" Width="90.8" Text="Shows this help page again."/>
+				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="22.8,0,0,52.8" VerticalAlignment="Bottom" Height="47.2" HorizontalAlignment="Left" Width="144.8"/>
+				<TextBlock Margin="31.6,0,0,58" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="34.4" FontWeight="Bold" HorizontalAlignment="Left" Width="130"><Run Text="Tells "/><Run FontFamily="Walkway Black" FontSize="14.667" Text="SyncButler"/><Run Text=" which folders to sync."/></TextBlock>
+				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="189.8,0,0,22.8" VerticalAlignment="Bottom" Height="69.6" HorizontalAlignment="Left" Width="124.8"/>
+				<TextBlock Margin="198.6,0,0,34.8" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="48" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Width="107.6"><Run Text="View the folders which "/><Run FontFamily="Walkway Black" FontSize="14.667" Text="SyncButler "/><Run Text="is keeping in sync."/></TextBlock>
+				<Rectangle Fill="Black" Stroke="#FF62DE37" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="0,0,169.8,34.8" VerticalAlignment="Bottom" Height="57" HorizontalAlignment="Right" Width="134.4"/>
+				<TextBlock Margin="0,0,175.8,43.2" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="38" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="116.6" Text="*New* Check out the new Mini-Sync!"/>
 			</Grid>
-			<Image HorizontalAlignment="Left" Margin="91.6,190,0,0" Width="52" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Top" Height="31.2">
-				<Image.RenderTransform>
-					<TransformGroup>
-						<ScaleTransform/>
-						<SkewTransform/>
-						<RotateTransform Angle="-36.944"/>
-						<TranslateTransform X="1.93" Y="-11.382"/>
-					</TransformGroup>
-				</Image.RenderTransform>
-			</Image>
 			<Image HorizontalAlignment="Right" Margin="0,99.6,497.1,349.2" Width="52" RenderTransformOrigin="0.5,0.5" Source="Images\arrow1.png" Stretch="Fill">
 				<Image.RenderTransform>
 					<TransformGroup>
@@ -222,18 +212,18 @@
 					</TransformGroup>
 				</Image.RenderTransform>
 			</Image>
-			<Image Margin="0,0,165.572,224.918" RenderTransformOrigin="0.5,0.5" Source="Images\arrow1.png" Stretch="Fill" HorizontalAlignment="Right" Width="69.776" VerticalAlignment="Bottom" Height="41.866">
+			<Image Margin="0,0,188.572,240.918" RenderTransformOrigin="0.5,0.5" Source="Images\arrow1.png" Stretch="Fill" HorizontalAlignment="Right" Width="69.776" VerticalAlignment="Bottom" Height="41.866">
 				<Image.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
 						<SkewTransform/>
-						<RotateTransform Angle="152.522"/>
+						<RotateTransform Angle="185.596"/>
 						<TranslateTransform/>
 					</TransformGroup>
 				</Image.RenderTransform>
 			</Image>
-			<TextBlock Margin="0,100.3,25.2,0" VerticalAlignment="Top" Height="63.8" TextWrapping="Wrap" HorizontalAlignment="Right" Width="118.6"><Run FontFamily="C:\Users\Bryan\Documents\Edu\BComp\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\Fonts\#Segoe UI" FontWeight="Normal" Foreground="White" Text="A partnership refers to the (two) folders that "/><Run FontFamily="Walkway Black" FontSize="14.667" FontWeight="Bold" Foreground="White" Text="SyncButler"/><Run FontFamily="C:\Users\Bryan\Documents\Edu\BComp\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\Fonts\#Segoe UI" FontWeight="Bold" Foreground="White" Text=" "/><Run FontFamily="C:\Users\Bryan\Documents\Edu\BComp\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\Fonts\#Segoe UI" FontWeight="Normal" Foreground="White" Text="should keep in sync."/></TextBlock>
-			<Image Margin="191.4,0,0,93.4" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="31.2" HorizontalAlignment="Left" Width="52">
+			<TextBlock Margin="0,100.3,25.2,0" VerticalAlignment="Top" Height="63.8" TextWrapping="Wrap" HorizontalAlignment="Right" Width="118.6"><Run FontFamily="C:\Users\Bryan\Documents\Edu\BComp\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\Fonts\#Segoe UI" FontWeight="Normal" Foreground="White" Text="A partnership refers to the (two) folders that "/><Run FontFamily="Walkway Black" FontSize="14.667" FontWeight="Bold" Foreground="White" Text="Sync Butler"/><Run FontFamily="C:\Users\Bryan\Documents\Edu\BComp\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\Fonts\#Segoe UI" FontWeight="Bold" Foreground="White" Text=" "/><Run FontFamily="C:\Users\Bryan\Documents\Edu\BComp\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\Fonts\#Segoe UI" FontWeight="Normal" Foreground="White" Text="should keep in sync."/></TextBlock>
+			<Image Margin="131.4,0,0,101.4" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="31.2" HorizontalAlignment="Left" Width="52">
 				<Image.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
@@ -243,39 +233,39 @@
 					</TransformGroup>
 				</Image.RenderTransform>
 			</Image>
-			<Image Margin="314.8,0,273.2,98" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="31.2">
+			<Image Margin="253.133,0,0,100.333" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="31.2" HorizontalAlignment="Left" Width="52">
 				<Image.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
 						<SkewTransform/>
-						<RotateTransform Angle="-83.984"/>
-						<TranslateTransform X="1.93" Y="-11.382"/>
-					</TransformGroup>
-				</Image.RenderTransform>
-			</Image>
-			<Image x:Name="image2" Margin="194.8,0,0,121.8" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="31.2" Opacity="0" HorizontalAlignment="Left" Width="52">
-				<Image.RenderTransform>
-					<TransformGroup>
-						<ScaleTransform/>
-						<SkewTransform/>
-						<RotateTransform Angle="-69.408"/>
+						<RotateTransform Angle="-68.685"/>
 						<TranslateTransform X="1.93" Y="-11.382"/>
 					</TransformGroup>
 				</Image.RenderTransform>
 			</Image>
 			<Button Name="HelpScreen1NextBtn" Margin="0,0,4.6,5.8" VerticalAlignment="Bottom" Height="39.2" Content="Next" FontWeight="Bold" FontSize="18.667" Click="GoToHelpScreen2_Click" HorizontalAlignment="Right" Width="83.2" TabIndex="1"/>
-			<Image Margin="0,0,140.2,108" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="31.2" HorizontalAlignment="Right" Width="52">
+			<Image Margin="0,0,126.2,147" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="31.2" HorizontalAlignment="Right" Width="52">
 				<Image.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
 						<SkewTransform/>
-						<RotateTransform Angle="-114.419"/>
+						<RotateTransform Angle="-150.515"/>
 						<TranslateTransform X="1.93" Y="-11.382"/>
 					</TransformGroup>
 				</Image.RenderTransform>
 			</Image>
 			<Rectangle Fill="#80FFFFFF" Stroke="Black" HorizontalAlignment="Left" Margin="23.333,17,0,0" VerticalAlignment="Top" Width="257" Height="48.667" RadiusX="7" RadiusY="7" StrokeThickness="5"/>
-			<TextBlock Margin="31,17,297,0" VerticalAlignment="Top" Height="53" Text="Tutorial : Basics" TextWrapping="Wrap" FontSize="32" FontWeight="Bold" Foreground="Black"/>
+			<TextBlock Margin="31,17,0,0" VerticalAlignment="Top" Height="53" Text="Tutorial : Basics" TextWrapping="Wrap" FontSize="32" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Left" Width="237"/>
+			<Image Margin="313.133,0,274.867,108.333" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="31.2">
+				<Image.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform Angle="-107.541"/>
+						<TranslateTransform X="1.93" Y="-11.382"/>
+					</TransformGroup>
+				</Image.RenderTransform>
+			</Image>
 
 		</Grid>
 		<Grid x:Name="HelpPage2" Visibility="Hidden">
@@ -286,7 +276,7 @@
 				<ic:ExtendedVisualStateManager/>
 			</VisualStateManager.CustomVisualStateManager>
 
-			<Button Margin="0,0,4.6,5.8" Name="HelpScreenFinishBtn" VerticalAlignment="Bottom" Height="39.2" Content="FINISH" FontSize="18.667" FontWeight="Bold" Click="ExitTutorial_Click" HorizontalAlignment="Right" Width="83.2"/>
+			<Button Margin="0,0,4.6,5.8" Name="HelpScreenFinishBtn" VerticalAlignment="Bottom" Height="39.2" Content="Close" FontSize="18.667" FontWeight="Bold" Click="ExitTutorial_Click" HorizontalAlignment="Right" Width="83.2"/>
 			<Image x:Name="image3" Margin="201.3,177,0,0" Source="Images\StarBullet.png" Stretch="Fill" VerticalAlignment="Top" Height="41.6" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Width="41.6">
 				<Image.RenderTransform>
 					<TransformGroup>
@@ -301,7 +291,7 @@
 			<Image Margin="0,224.925,132.8,147.4" Source="Images\HelpScreenFolder.png" Stretch="Fill" HorizontalAlignment="Right" Width="107.675"/>
 			<Image Margin="274.081,238.83,286.457,161.482" Source="Images\logowTransparency.png" Stretch="Fill"/>
 			<Rectangle x:Name="rectangle" Fill="White" Stroke="Black" StrokeThickness="3" RadiusX="15" RadiusY="15" Margin="31.8,70.9,51.8,0" VerticalAlignment="Top" Height="79.2"/>
-			<TextBlock x:Name="textBlock" Margin="62.5,87.1,29.4,0" VerticalAlignment="Top" Height="48.8" FontSize="29.333" TextWrapping="Wrap" FontWeight="Bold"><Run Text="How does "/><Run FontFamily="Walkway Black" Text="SyncButler"/><Run FontFamily="Fonts/#Segoe UI" Text=" "/><Run Text="sync your files?"/></TextBlock>
+			<TextBlock x:Name="textBlock" Margin="62.5,87.1,51.8,0" VerticalAlignment="Top" Height="48.8" FontSize="29.333" TextWrapping="Wrap" FontWeight="Bold"><Run Text="How does "/><Run FontFamily="Walkway Black" Text="Sync Butler"/><Run FontFamily="Fonts/#Segoe UI" Text=" "/><Run Text="sync your files?"/></TextBlock>
 			<Grid x:Name="grid" Margin="77.3,0,98.7,22.933" VerticalAlignment="Bottom" Height="118.4">
 				<Rectangle Fill="White" Stroke="Black" StrokeThickness="3" RadiusX="15" RadiusY="15" Margin="0,0,3.2,0"/>
 				<TextBlock Margin="11.2,16.2,0,0" VerticalAlignment="Top" Height="22.4" FontWeight="Bold" TextWrapping="Wrap"><Run Text="He "/><Run Text="scans the folders you chose and does the following automatically:"/></TextBlock>
@@ -321,133 +311,91 @@
 			<VisualStateManager.CustomVisualStateManager>
 				<ic:ExtendedVisualStateManager/>
 			</VisualStateManager.CustomVisualStateManager>
-			<Button Name="HelpScreenCloseBtn" Margin="0,0,4.6,5.8" VerticalAlignment="Bottom" Height="39.2" Content="CLOSE" FontWeight="Bold" FontSize="18.667" Click="ExitTutorial_Click" HorizontalAlignment="Right" Width="83.2"/>
-			<Image Margin="126.417,73.825,154.88,134.775" Source="Images/SBSWindow.png" Stretch="Fill"/>
-			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="13.8,104,0,0" VerticalAlignment="Top" Height="116.8" HorizontalAlignment="Left" Width="139.2" d:LayoutOverrides="VerticalAlignment"/>
-			<TextBlock Margin="21.6,112.8,0,0" Foreground="White" TextWrapping="Wrap" FontWeight="Bold" HorizontalAlignment="Left" Width="122" VerticalAlignment="Top" Height="99.2"><Run Text="New or recently used files appear here. "/><Run FontFamily="Walkway Black" FontSize="14.667" Text="SyncButler "/><Run Text="will make a duplicate and store it on your "/><Run Text="USB storage device."/></TextBlock>
-			<Image HorizontalAlignment="Left" Margin="133.6,138.4,0,0" Width="52" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Top" Height="31.2">
+			<Button Name="HelpScreenCloseBtn" Margin="0,0,4.6,5.8" VerticalAlignment="Bottom" Height="39.2" Content="Close" FontWeight="Bold" FontSize="18.667" Click="ExitTutorial_Click" HorizontalAlignment="Right" Width="83.2"/>
+			<Image Margin="150.417,79,130.88,129.6" Source="Images/SBSWindow.png" Stretch="Fill" StretchDirection="DownOnly"/>
+			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="12.297,92.827,0,0" VerticalAlignment="Top" Height="116.8" HorizontalAlignment="Left" Width="125.62" d:LayoutOverrides="VerticalAlignment"/>
+			<TextBlock Margin="20.097,101.627,0,0" Foreground="White" TextWrapping="Wrap" FontWeight="Bold" HorizontalAlignment="Left" Width="117.998" VerticalAlignment="Top" Height="99.2"><Run Text="New or recently used files appear here. "/><Run FontFamily="Walkway Black" FontSize="14.667" Text="SyncButler "/><Run Text="will make a duplicate and store it on your "/><Run Text="USB storage device."/></TextBlock>
+			<Image HorizontalAlignment="Left" Margin="124.933,182.4,0,0" Width="52" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Top" Height="31.2">
 				<Image.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
 						<SkewTransform/>
-						<RotateTransform Angle="-12.959"/>
+						<RotateTransform Angle="19.821"/>
 						<TranslateTransform X="1.93" Y="-11.382"/>
 					</TransformGroup>
 				</Image.RenderTransform>
 			</Image>
-			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="107.4,12,101.4,0" VerticalAlignment="Top" Height="65.6" d:LayoutOverrides="VerticalAlignment"/>
-			<TextBlock Margin="120.6,17.364,112.733,0" Foreground="White" TextWrapping="Wrap" FontWeight="Bold" VerticalAlignment="Top" Height="56.461"><Run FontFamily="Walkway Black" FontSize="14.667" Text="SyncButler"/><Run FontFamily="Fonts/#Segoe UI" FontSize="14.667" FontStyle="Italic" Text=", Sync!"/><Run FontFamily="Fonts/#Segoe UI" Text=" "/><Run FontFamily="Fonts/#Segoe UI" Text="is a special feature of "/><Run FontFamily="Walkway Black" FontSize="14.667" Text="SyncButler "/><Run FontFamily="Fonts/#Segoe UI" Text="that will attempt to identify files which you may need, and sync them automatically so that you will always have your most recent work with you."/></TextBlock>
-			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="13.8,238.4,0,0" VerticalAlignment="Top" Height="164" HorizontalAlignment="Left" Width="139.2"/>
-			<TextBlock Margin="21.6,0,0,85.6" Foreground="White" TextWrapping="Wrap" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="122" Height="148"><Run Text="Files which "/><Run FontFamily="Walkway Black" FontSize="14.667" Text="SyncButler"/><Run FontFamily="Fonts/#Segoe UI" Text=" feels are sensitive in nature will not be displayed in the list above. Instead, they will be shown here only when your mouse goes over this box."/></TextBlock>
-			<Image HorizontalAlignment="Left" Margin="133.6,0,0,161.6" Width="52" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="31.2">
+			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="9.798,238.4,0,0" VerticalAlignment="Top" Height="164" HorizontalAlignment="Left" Width="129.8"/>
+			<TextBlock Margin="16.931,0,0,85.6" Foreground="White" TextWrapping="Wrap" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="122" Height="148"><Run Text="Files which "/><Run FontFamily="Walkway Black" FontSize="14.667" Text="Sync Butler"/><Run FontFamily="Fonts/#Segoe UI" Text=" feels are sensitive in nature will not be displayed in the list above. Instead, they will be shown here only when your mouse goes over this box."/></TextBlock>
+			<Image HorizontalAlignment="Left" Margin="132.101,0,0,158.934" Width="52" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="31.2">
 				<Image.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
 						<SkewTransform/>
-						<RotateTransform Angle="0.321"/>
+						<RotateTransform Angle="-11.622"/>
 						<TranslateTransform X="1.93" Y="-11.382"/>
 					</TransformGroup>
 				</Image.RenderTransform>
 			</Image>
-			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="154.8,383.6,202,0" VerticalAlignment="Top" Height="67.2"/>
-			<TextBlock Margin="164.972,0,208.844,36.389" Foreground="White" TextWrapping="Wrap" FontWeight="Bold" VerticalAlignment="Bottom" Height="50.97" Text="This button will mark a selected file in the recent used file list as sensitive or clear a selected file in the sensitive list as safe to sync."/>
-			<Image Margin="0,0,261.8,112.6" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="26.2" HorizontalAlignment="Right" Width="52">
+			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="169.8,383.6,257,0" VerticalAlignment="Top" Height="81.345"/>
+			<TextBlock Margin="182.64,0,260.51,21.722" Foreground="White" TextWrapping="Wrap" FontWeight="Bold" VerticalAlignment="Bottom" Height="65.637" Text="This button will mark a selected file in the recent used file list as sensitive or clear a selected file in the sensitive list as safe to sync."/>
+			<Image Margin="223.2,0,0,202.6" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="26.2" HorizontalAlignment="Left" Width="52">
 				<Image.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
 						<SkewTransform/>
-						<RotateTransform Angle="-90.401"/>
+						<RotateTransform Angle="-95.112"/>
 						<TranslateTransform X="1.93" Y="-11.382"/>
 					</TransformGroup>
 				</Image.RenderTransform>
 			</Image>
-			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="0,349.225,3.6,0" VerticalAlignment="Top" Height="49.6" HorizontalAlignment="Right" Width="194.4"/>
-			<TextBlock Margin="0,0,6.8,84.375" Foreground="White" TextWrapping="Wrap" FontWeight="Bold" Text="Click this button to start syncing your new or recently used files." VerticalAlignment="Bottom" Height="37.6" HorizontalAlignment="Right" Width="184.4"/>
-			<Image HorizontalAlignment="Right" Margin="0,0,187.192,139.637" Width="58.026" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="34.816">
+			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="0,216.5,3.233,0" VerticalAlignment="Top" Height="72.566" HorizontalAlignment="Right" Width="119.647"/>
+			<TextBlock Margin="0,227.466,19.033,201.434" Foreground="White" TextWrapping="Wrap" FontWeight="Bold" Text="Click this button to show this help again!" HorizontalAlignment="Right" Width="90.4"/>
+			<Image HorizontalAlignment="Right" Margin="0,0,141.525,153.97" Width="58.026" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="34.816">
 				<Image.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
 						<SkewTransform/>
-						<RotateTransform Angle="244.128"/>
+						<RotateTransform Angle="126.398"/>
 						<TranslateTransform X="1.93" Y="-11.382"/>
 					</TransformGroup>
 				</Image.RenderTransform>
 			</Image>
-			<Image Margin="315.032,223.7,272.968,230.1" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill">
+			<Image Margin="236.518,0,0,110.39" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="23.369" HorizontalAlignment="Left" Width="46.383">
 				<Image.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
 						<SkewTransform/>
-						<RotateTransform Angle="-110.377"/>
+						<RotateTransform Angle="-94.59"/>
 						<TranslateTransform X="1.93" Y="-11.382"/>
 					</TransformGroup>
 				</Image.RenderTransform>
 			</Image>
-			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="0,229,8,0" VerticalAlignment="Top" Height="49.6" HorizontalAlignment="Right" Width="194.4"/>
-			<TextBlock Margin="0,237.8,11.2,204.6" Foreground="White" TextWrapping="Wrap" FontWeight="Bold" Text="Click this button to show and hide help." HorizontalAlignment="Right" Width="184.4"/>
-			<Image HorizontalAlignment="Right" Margin="0,0,163.025,155.97" Width="58.026" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="34.816">
+			<Image Margin="228.2,0,0,156.932" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="26.2" HorizontalAlignment="Left" Width="52">
 				<Image.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
 						<SkewTransform/>
-						<RotateTransform Angle="121.504"/>
-						<TranslateTransform X="1.93" Y="-11.382"/>
-					</TransformGroup>
-				</Image.RenderTransform>
-			</Image>
-			<Image Margin="0,0,261.8,150.432" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="26.2" HorizontalAlignment="Right" Width="52">
-				<Image.RenderTransform>
-					<TransformGroup>
-						<ScaleTransform/>
-						<SkewTransform/>
-						<RotateTransform Angle="-90.401"/>
-						<TranslateTransform X="1.93" Y="-11.382"/>
-					</TransformGroup>
-				</Image.RenderTransform>
-			</Image>
-			<Image Margin="0,0,261.8,189.932" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="26.2" HorizontalAlignment="Right" Width="52">
-				<Image.RenderTransform>
-					<TransformGroup>
-						<ScaleTransform/>
-						<SkewTransform/>
-						<RotateTransform Angle="-90.401"/>
+						<RotateTransform Angle="-94.762"/>
 						<TranslateTransform X="1.93" Y="-11.382"/>
 					</TransformGroup>
 				</Image.RenderTransform>
 			</Image>
 
-			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="0,145,57.333,0" VerticalAlignment="Top" Height="49.6" d:LayoutOverrides="VerticalAlignment" HorizontalAlignment="Right" Width="194.4"/>
-			<TextBlock Margin="0,153.8,60.533,0" Foreground="White" TextWrapping="Wrap" FontWeight="Bold" Text="Click this button to enable feature and change settings" VerticalAlignment="Top" Height="37.6" HorizontalAlignment="Right" Width="184.4"/>
-			<Image HorizontalAlignment="Right" Margin="0,205.214,212.358,239.97" Width="58.026" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill">
+			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="0,364.025,14.2,0" VerticalAlignment="Top" Height="64.6" HorizontalAlignment="Right" Width="212.533"/>
+			<TextBlock Margin="0,0,23.233,59.875" Foreground="White" TextWrapping="Wrap" FontWeight="Bold" Text="Click this button to change where it saves the file to and how much disk space it should use." VerticalAlignment="Bottom" Height="49.6" HorizontalAlignment="Right" Width="193.4"/>
+			<Image HorizontalAlignment="Right" Margin="0,0,191.358,132.804" Width="58.026" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="34.816">
 				<Image.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
 						<SkewTransform/>
-						<RotateTransform Angle="121.504"/>
+						<RotateTransform Angle="231.032"/>
 						<TranslateTransform X="1.93" Y="-11.382"/>
 					</TransformGroup>
 				</Image.RenderTransform>
 			</Image>
-			<Image HorizontalAlignment="Right" Margin="0,0,233.691,202.637" Width="58.026" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="34.816">
-				<Image.RenderTransform>
-					<TransformGroup>
-						<ScaleTransform/>
-						<SkewTransform/>
-						<RotateTransform Angle="121.504"/>
-						<TranslateTransform X="1.93" Y="-11.382"/>
-					</TransformGroup>
-				</Image.RenderTransform>
-			</Image>
-			<Image HorizontalAlignment="Right" Margin="0,0,234.358,157.304" Width="58.026" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="34.816">
-				<Image.RenderTransform>
-					<TransformGroup>
-						<ScaleTransform/>
-						<SkewTransform/>
-						<RotateTransform Angle="88.104"/>
-						<TranslateTransform X="1.93" Y="-11.382"/>
-					</TransformGroup>
-				</Image.RenderTransform>
-			</Image>
+			<Rectangle Fill="#80FFFFFF" Stroke="Black" Margin="23.333,17,96.533,0" VerticalAlignment="Top" Height="48.667" RadiusX="7" RadiusY="7" StrokeThickness="5"/>
+			<TextBlock Margin="31,17,107,0" VerticalAlignment="Top" Height="53" TextWrapping="Wrap" FontSize="32" FontWeight="Bold" Foreground="Black"><Run Text="Tutorial : Using "/><Run FontFamily="Walkway Black" FontStyle="Normal" Text="Sync Butler"/><Run FontStyle="Normal" Text=", "/><Run FontFamily="D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\Fonts\#Segoe UI" FontStyle="Italic" Text="Sync"/><Run FontFamily="D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\Fonts\#Segoe UI" Text="!"/></TextBlock>
 
 		</Grid>
 		<Grid x:Name="FeatureHelp" Margin="-1.2,4,1.4,0" Visibility="Hidden">
@@ -461,14 +409,14 @@
 					</TransformGroup>
 				</Rectangle.RenderTransform>
 			</Rectangle>
-			<TextBlock x:Name="textBlock1" Margin="156,112.5,67.8,0" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="69.6" RenderTransformOrigin="0.5,0.5" FontSize="16"><TextBlock.RenderTransform>
+			<TextBlock x:Name="textBlock1" Margin="156,112.5,76.8,0" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="69.6" RenderTransformOrigin="0.5,0.5" FontSize="16" TextAlignment="Justify"><TextBlock.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
 						<SkewTransform/>
 						<RotateTransform/>
 						<TranslateTransform/>
 					</TransformGroup>
-				</TextBlock.RenderTransform><Span><Run Text="Sync Butler is a file and folder synchronization tool for Windows that helps keep your files the same across multiple computers."/></Span></TextBlock>
+				</TextBlock.RenderTransform><Run FontFamily="Walkway Black" Text="Sync Butler "/><Run Text="is a file and folder synchronization tool for Windows that helps keep your files the same across multiple computers."/></TextBlock>
 			<Rectangle x:Name="rectangle_Copy" Fill="White" Stroke="Black" StrokeThickness="3" RadiusX="15" RadiusY="15" Margin="86,23.9,228.4,0" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" Height="79.2">
 				<Rectangle.RenderTransform>
 					<TransformGroup>
@@ -497,14 +445,14 @@
 					</TransformGroup>
 				</Rectangle.RenderTransform>
 			</Rectangle>
-			<TextBlock x:Name="textBlock2" Margin="95.3,0,57.2,80" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="104" RenderTransformOrigin="0.5,0.5" FontSize="16"><TextBlock.RenderTransform>
+			<TextBlock x:Name="textBlock2" Margin="92.3,0,62.9,80" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="104" RenderTransformOrigin="0.5,0.5" FontSize="16" TextAlignment="Justify"><TextBlock.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
 						<SkewTransform/>
 						<RotateTransform/>
 						<TranslateTransform/>
 					</TransformGroup>
-				</TextBlock.RenderTransform><Span><Run Text="While there are more than a few file synchronization programs available today, Sync Butler is the only such program to take ease-of-use seriously. Every feature is designed to simplify interaction between you and Sync Butler without compromising the intelligence behind his unique synchronization process."/></Span></TextBlock>
+				</TextBlock.RenderTransform><Run Text="While there are more than a few file synchronization programs available today, "/><Run FontFamily="Walkway Black" Text="Sync Butler "/><Run Text="is the only such program to take ease-of-use seriously. Every feature is designed to simplify interaction between you and "/><Run FontFamily="Walkway Black" Text="Sync Butler "/><Run Text="without compromising the intelligence behind his unique synchronization process."/></TextBlock>
 			<Rectangle x:Name="rectangle_Copy1" Fill="White" Stroke="Black" StrokeThickness="3" RadiusX="15" RadiusY="15" Margin="40,212.9,59.9,183.9" RenderTransformOrigin="0.5,0.5">
 				<Rectangle.RenderTransform>
 					<TransformGroup>
@@ -546,14 +494,14 @@
 					</TransformGroup>
 				</Rectangle.RenderTransform>
 			</Rectangle>
-			<TextBlock x:Name="textBlock1_Copy" Margin="60,98.1,221.6,0" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="98.6" RenderTransformOrigin="0.5,0.5" FontSize="14.667"><TextBlock.RenderTransform>
+			<TextBlock x:Name="textBlock1_Copy" Margin="60,98.1,221.6,0" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="98.6" RenderTransformOrigin="0.5,0.5" FontSize="14.667" TextAlignment="Justify"><TextBlock.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
 						<SkewTransform/>
 						<RotateTransform/>
 						<TranslateTransform/>
 					</TransformGroup>
-				</TextBlock.RenderTransform><Span><Run Text="'Sync Butler, "/></Span><Span FontStyle="Italic"><Run Text="Sync"/></Span><Run Text="' is a special feature of Sync Butler that syncs the files which you might need later on "/><Run FontStyle="Italic" Text="(with your permission, of course!)"/><Run Text=". This ensures that you'll have your most recent work with you, just in case."/></TextBlock>
+				</TextBlock.RenderTransform><Run Text="'"/><Run FontFamily="Walkway Black" Text="Sync Butler"/><Run Text=", "/><Run FontStyle="Italic" Text="Sync"/><Run Text="' is a special feature of "/><Run FontFamily="Walkway Black" Text="Sync Butler"/><Run Text=" that syncs the files which you might need later on "/><Run FontStyle="Italic" Text="(with your permission, of course!)"/><Run Text=". This ensures that you'll have your most recent work with you, just in case."/></TextBlock>
 			<Rectangle x:Name="rectangle_Copy2" Fill="White" Stroke="Black" StrokeThickness="3" RadiusX="15" RadiusY="15" Margin="18,17,57.2,0" VerticalAlignment="Top" Height="79.2" RenderTransformOrigin="0.5,0.5">
 				<Rectangle.RenderTransform>
 					<TransformGroup>
@@ -610,7 +558,7 @@
 					</TransformGroup>
 				</TextBlock.RenderTransform><Run Text="How does "/><Run Text="'"/><Run FontFamily="Walkway Black" Text="Sync"/><Run FontFamily="Walkway Black" Text=" "/><Run FontFamily="Walkway Black" Text="Butler"/><Run Text=", "/><Run FontStyle="Italic" Text="Sync"/><Run Text="'"/><Run Text=" work"/><Run Text="?"/></TextBlock>
 			<Button x:Name="SBSHelpScreenNextBtn" VerticalAlignment="Bottom" Height="39.2" Content="Next" FontWeight="Bold" FontSize="18.667" Click="GoToSBSDemoHelpScreen_Click" HorizontalAlignment="Right" Width="83.2" TabIndex="1" Margin="0,0,1.5,1.5"/>
-			<Button x:Name="SBSFeatureHelpCloseBtn" Margin="0,0,0.7,1.6" Content="CLOSE" FontWeight="Bold" FontSize="18.667" Click="ExitTutorial_Click" HorizontalAlignment="Right" Width="83.2" VerticalAlignment="Bottom" Height="39.2" Visibility="Hidden"/>
+			<Button x:Name="SBSFeatureHelpCloseBtn" Margin="0,0,0.7,1.6" Content="Close" FontWeight="Bold" FontSize="18.667" Click="ExitTutorial_Click" HorizontalAlignment="Right" Width="83.2" VerticalAlignment="Bottom" Height="39.2" Visibility="Hidden"/>
 		</Grid>
 	</Grid>
 </UserControl>
