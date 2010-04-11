@@ -1027,7 +1027,7 @@
 					</TransformGroup>
 				</ListBox.RenderTransform>
 			</ListBox>
-			<Button x:Name="button2" Margin="227.116,0,480.684,25.803"  VerticalAlignment="Bottom" Height="32.962" Content="Edit" Click="GoToEditPartnership_Click" Cursor="Hand" FontSize="14.667" Width="63"/>
+			<Button x:Name="button2" Margin="224.116,0,483.684,25.803"  VerticalAlignment="Bottom" Height="32.962" Content="Edit" Click="GoToEditPartnership_Click" Cursor="Hand" FontSize="14.667" Width="63"/>
 			<Button x:Name="button4"  Margin="311.96,0,395.84,25.803" VerticalAlignment="Bottom" Height="32.962" Content="Delete" Click="DeletePartnership_Click" RenderTransformOrigin="0.5,0.5" Cursor="Hand" FontSize="14.667" Width="63">
 				<Button.RenderTransform>
 					<TransformGroup>
@@ -1039,7 +1039,7 @@
 				</Button.RenderTransform>
 			</Button>
 			<Button x:Name="Create"  Margin="0,0,308.465,25.803" VerticalAlignment="Bottom" Height="32.962" Content="Create" Click="GoToCreatePartnership_Click" HorizontalAlignment="Right" Width="63" Cursor="Hand" FontSize="14.667"/>
-			<Button x:Name="button3" Margin="486.455,0,221.345,25.803"  VerticalAlignment="Bottom" Height="32.962" Content="Sync" Click="SyncPartnership_Click" RenderTransformOrigin="0.5,0.5" Cursor="Hand" FontSize="14.667" Width="63">
+			<Button x:Name="button3" Margin="488.455,0,219.345,25.803"  VerticalAlignment="Bottom" Height="32.962" Content="Sync" Click="SyncPartnership_Click" RenderTransformOrigin="0.5,0.5" Cursor="Hand" FontSize="14.667" Width="63">
 				<Button.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
@@ -1049,7 +1049,7 @@
 					</TransformGroup>
 				</Button.RenderTransform>
 			</Button>
-			<TextBlock x:Name="textBlock13" Margin="0,100.926,22.93,81.727" TextWrapping="Wrap" HorizontalAlignment="Right" Width="241.987" FontSize="14.667"><Run FontSize="21.333" FontWeight="Bold" Text="Welcome to"/><LineBreak/><Run FontSize="21.333" FontWeight="Bold" Text="Mini-Partnerships!"/><LineBreak/><LineBreak/><Run FontSize="16" Text="These mini-partnerships are created automatically when you use the &quot;"/><Run FontSize="16" FontWeight="Bold" Text="Mini-Sync"/><Run FontSize="16" Text="&quot; feature."/><LineBreak/><LineBreak/><Run FontSize="16" Text="You can easily "/><Run FontSize="16" FontWeight="Bold" Text="create "/><Run FontSize="16" Text="more "/><Run FontSize="16" FontWeight="Bold" Text="mini-partnerships"/><Run FontSize="16" Text=" by "/><Run FontSize="16" FontWeight="Bold" Text="right-clicking "/><Run FontSize="16" Text="a folder or file and then selecting &quot;"/><Run FontSize="16" FontWeight="Bold" Text="Mini-Sync This!&quot;"/><Run FontSize="16" Text="."/><LineBreak/><LineBreak/><Run FontSize="16" Text="If you "/><Run FontSize="16" FontWeight="Bold" Text="edit "/><Run FontSize="16" Text="these files on other computers, you just need to click on "/><Run FontSize="16" FontWeight="Bold" Text="Sync All"/><Run FontSize="16" Text=" (in "/><Run FontSize="16" FontWeight="Bold" Text="Home"/><Run FontSize="16" Text=") to update the copy that is on this computer!"/></TextBlock>
+			<TextBlock x:Name="textBlock13" Margin="0,100.926,22.93,81.727" TextWrapping="Wrap" HorizontalAlignment="Right" Width="241.987" FontSize="14.667" TextAlignment="Justify"><Run FontSize="21.333" FontWeight="Bold" Text="Welcome to"/><LineBreak/><Run FontSize="21.333" FontWeight="Bold" Text="Mini-Partnerships!"/><LineBreak/><LineBreak/><Run FontSize="16" Text="The mini-partnerships on the left are created automatically when you use the &quot;"/><Run FontSize="16" FontWeight="Bold" Text="Mini-Sync"/><Run FontSize="16" Text="&quot; feature."/><LineBreak/><LineBreak/><Run FontSize="16" Text="You can easily "/><Run FontSize="16" FontWeight="Bold" Text="create "/><Run FontSize="16" Text="more "/><Run FontSize="16" FontWeight="Bold" Text="mini-partnerships"/><Run FontSize="16" Text=" by "/><Run FontSize="16" FontWeight="Bold" Text="right-clicking "/><Run FontSize="16" Text="a folder or file and then selecting &quot;"/><Run FontSize="16" FontWeight="Bold" Text="Mini-Sync This!&quot;"/><Run FontSize="16" Text="."/><LineBreak/><LineBreak/><Run FontSize="16" Text="If you "/><Run FontSize="16" FontWeight="Bold" Text="edit "/><Run FontSize="16" Text="these files on other computers, you just need to click on "/><Run FontSize="16" FontWeight="Bold" Text="Sync All"/><Run FontSize="16" Text=" (in "/><Run FontSize="16" FontWeight="Bold" Text="Home"/><Run FontSize="16" Text=") to update the copy that is on this computer!"/></TextBlock>
 			<Button x:Name="viewMiniPartnershipBtn" HorizontalAlignment="Right" Margin="0,46.303,31.169,0" VerticalAlignment="Top" Width="182" Height="35.715" Content="Show Mini Partnerships" Click="ViewMiniPartnerships_Click" Cursor="Hand" FontSize="16">
 				<Button.Background>
 					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
@@ -1125,8 +1125,8 @@
 					</TransformGroup>
 				</Image.RenderTransform>
 			</Image>
-			<TextBlock Margin="0,30.457,35.328,0" FontFamily="Arial" FontSize="32" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="54.564" HorizontalAlignment="Right" Width="269.488" FontStyle="Italic"><Run FontFamily="Walkway Black" FontStyle="Normal" Text="Sync Butler"/><Run FontStyle="Normal" Text=", "/><Run FontFamily="Fonts/#Segoe UI" FontStyle="Italic" Text="Sync!"/></TextBlock>
-			<TextBlock Margin="0,84.521,17.329,0" FontSize="14.667" TextWrapping="Wrap" HorizontalAlignment="Right" Width="301.445" VerticalAlignment="Top" Height="175.839" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"><Run FontSize="21.333" FontStyle="Italic" FontWeight="Bold" Text="There is nothing for you to do here!"/><LineBreak/><Run FontSize="8" Text=" "/><LineBreak/><Run Text="This is just a "/><Run FontWeight="Bold" Text="preview page"/><Run Text=" for "/><Run FontFamily="Walkway Black" FontStyle="Normal" FontWeight="Bold" Text="Sync Butler"/><Run FontFamily="Arial" FontStyle="Normal" FontWeight="Bold" Text=", "/><Run FontFamily="D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\Fonts\#Segoe UI" FontStyle="Italic" FontWeight="Bold" Text="Sync!"/><Run Text=". The files shown in the Favourites Box will be "/><Run FontWeight="Bold" Text="automatically sync"/><Run Text=" to your selected portable storage device when you click on "/><Run FontWeight="Bold" Text="Sync All"/><Run Text=" in the "/><Run FontWeight="Bold" Text="Home"/><Run Text=" page."/></TextBlock>
+			<TextBlock Margin="0,30.457,27.659,0" FontFamily="Arial" FontSize="32" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="54.564" HorizontalAlignment="Right" Width="269.488" FontStyle="Italic"><Run FontFamily="Walkway Black" FontStyle="Normal" Text="Sync Butler"/><Run FontStyle="Normal" Text=", "/><Run FontFamily="Fonts/#Segoe UI" FontStyle="Italic" Text="Sync!"/></TextBlock>
+			<TextBlock Margin="0,85.521,16.663,0" FontSize="14.667" TextWrapping="Wrap" HorizontalAlignment="Right" Width="301.445" VerticalAlignment="Top" Height="61.553" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" TextAlignment="Center"><Run FontSize="21.333" FontWeight="Bold" Text="There is nothing for"/><LineBreak/><Run FontSize="21.333" FontWeight="Bold" Text="you to do here!"/><LineBreak/><Run FontSize="8" Text=" "/><LineBreak/></TextBlock>
 			<ListBox x:Name="Favourites_List"  Margin="39.273,72.384,337.477,0" GotFocus="FocusMe" VerticalAlignment="Top" Height="187.976" MouseDoubleClick="OpenSelectedOnList" FontSize="14.667" />
 			<Button x:Name="Edit_Selector"  Margin="65.812,277.562,0,218.622" Content="Move Selected File to the Other Side" RenderTransformOrigin="0.79,1.043" Cursor="Hand" Click="SBSMoveToOther" FontSize="14.667" Width="253" Height="30" HorizontalAlignment="Left" d:LayoutOverrides="Width">
 				<Button.Background>
@@ -1150,13 +1150,23 @@
 					</LinearGradientBrush>
 				</Button.Background>
 			</Button>
-			<Button x:Name="SBSSettings"  HorizontalAlignment="Right" Margin="0,0,140.677,40.322" VerticalAlignment="Bottom" Width="84" Height="30" Content="Settings" RenderTransformOrigin="0.79,1.043" Cursor="Hand" Click="GoToSetting" FontSize="14.667"/>
+			<Button x:Name="SBSSettings"  HorizontalAlignment="Right" Margin="0,0,140.677,40.322" VerticalAlignment="Bottom" Width="84" Height="30" Content="Settings" RenderTransformOrigin="0.79,1.043" Cursor="Hand" Click="GoToSetting" FontSize="14.667">
+				<Button.Background>
+					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+						<GradientStop Color="#FFF3F3F3" Offset="0"/>
+						<GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+						<GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+						<GradientStop Color="#FF9EB0EE" Offset="1"/>
+					</LinearGradientBrush>
+				</Button.Background>
+			</Button>
 			<TextBlock Margin="39.273,34.957,0,0" FontFamily="Fonts/#Segoe UI" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="25.927" HorizontalAlignment="Left" Width="196.578" Text="Favourites List"/>
 			<TextBlock x:Name="textBlock_Copy" Margin="41.212,0,337.477,112.046" FontSize="16" TextWrapping="Wrap" Text="Mouse over to see" FontStyle="Italic" VerticalAlignment="Bottom" Height="18.747" TextAlignment="Center"/>			
 			<Button HorizontalAlignment="Right" IsTabStop="false" Margin="0,0,30.483,40.322" VerticalAlignment="Bottom" Width="84" Content="Show Help" Click="ShowHelp" Height="30" FontSize="14.667"/>
-			<TextBlock Margin="0,273.36,17.329,0" FontSize="14.667" TextWrapping="Wrap" HorizontalAlignment="Right" Width="301.445" VerticalAlignment="Top" Height="158.974" d:LayoutOverrides="HorizontalAlignment"><Run Text="The "/><Run FontWeight="Bold" Text="Favourites Box"/><Run Text=" lists your recently used and newly created files. "/><LineBreak/><Run FontSize="8" Text=" "/><LineBreak/><Run Text="Click "/><Run FontStyle="Italic" FontWeight="Bold" Text="Copy"/><Run Text=" to copy these files to your portable storage. "/><LineBreak/><Run FontSize="8" Text=" "/><LineBreak/><Run Text="This feature will make a quick copy of those files so that you will always have your most recent work with you."/><LineBreak/><Run Text=""/></TextBlock>
-			<Path Stretch="Fill" Stroke="#FF908A8A" StrokeThickness="2" HorizontalAlignment="Right" Margin="0,76.925,30.483,0" VerticalAlignment="Top" Width="281.365" Height="2" Data="M1.0000301,0.99999902 L187.03178,0.99999902"/>
-			<Path Stretch="Fill" Stroke="#FF908A8A" StrokeThickness="2" HorizontalAlignment="Right" Margin="0,262.86,30.483,261.324" Width="281.365" Data="M1.0000301,0.99999902 L187.03178,0.99999902"/>
+			<TextBlock Margin="0,273.36,16.663,0" FontSize="14.667" TextWrapping="Wrap" HorizontalAlignment="Right" Width="301.445" VerticalAlignment="Top" Height="158.974" d:LayoutOverrides="HorizontalAlignment" TextAlignment="Justify"><Run Text="The "/><Run FontWeight="Bold" Text="Favourites Box"/><Run Text=" lists your recently used and newly created files. "/><LineBreak/><Run FontSize="8" Text=" "/><LineBreak/><Run Text="If you wish, you may click "/><Run FontWeight="Bold" Text="Copy"/><Run Text=" to copy these files to your portable storage. "/><LineBreak/><Run FontSize="8" Text=" "/><LineBreak/><Run Text="This feature will make a quick copy of those files so that you will always have your most recent work with you."/><LineBreak/><Run Text=""/></TextBlock>
+			<Path Stretch="Fill" Stroke="#FF908A8A" StrokeThickness="2" HorizontalAlignment="Right" Margin="0,76.925,29.66,0" VerticalAlignment="Top" Width="276.52" Height="2" Data="M1.0000301,0.99999902 L187.03178,0.99999902"/>
+			<Path Stretch="Fill" Stroke="#FF908A8A" StrokeThickness="2" HorizontalAlignment="Right" Margin="0,260.361,27.659,0" Width="281.365" Data="M1.0000301,0.99999902 L187.03178,0.99999902" VerticalAlignment="Top" Height="2"/>
+			<TextBlock Margin="0,152.378,16.663,0" FontSize="14.667" TextWrapping="Wrap" HorizontalAlignment="Right" Width="301.445" VerticalAlignment="Top" Height="95.839" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" TextAlignment="Justify"><Run Text="This is just a "/><Run FontWeight="Bold" Text="preview page"/><Run Text=" for "/><Run FontFamily="Walkway Black" FontStyle="Normal" FontWeight="Bold" Text="Sync Butler"/><Run FontFamily="Arial" FontStyle="Normal" FontWeight="Bold" Text=", "/><Run FontFamily="D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\Fonts\#Segoe UI" FontStyle="Italic" FontWeight="Bold" Text="Sync!"/><Run Text=". The files shown in the Favourites Box will be "/><Run FontWeight="Bold" Text="automatically sync"/><Run Text=" to your selected portable storage device when you click on "/><Run FontWeight="Bold" Text="Sync All"/><Run Text=" in the "/><Run FontWeight="Bold" Text="Home"/><Run Text=" page."/></TextBlock>
 		</Grid>
 		<Grid x:Name="Conflict" Margin="0.027,0,0.449,-4" VerticalAlignment="Bottom" Height="528" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
 			<Grid.RowDefinitions>
@@ -1246,9 +1256,18 @@
 				</Custom:DataGrid.RowDetailsTemplate>
 
 			</Custom:DataGrid>
-			<TextBlock x:Name="CurrentSyncingFile_Copy" Margin="23.736,61.272,146.106,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="78.454" FontSize="14.667"><Run Text="Sync Butler is syncing your files. If Sync Butler do not know what to do with a file, it will list it below. Please select the action you will like Sync Butler to take. When you are done, simply click on "/><Run FontWeight="Bold" Text="Fix Issues "/><Run Text="button."/></TextBlock>
-			<Button x:Name="resolveButton"  HorizontalAlignment="Right" Margin="0,94.657,22.322,0" VerticalAlignment="Top" Width="119.784" Height="31" Content="Fix Issues" Click="ResolvePartnership_Click" IsEnabled="False" FontSize="14.667"/>
-			<Button x:Name="doneButton" HorizontalAlignment="Right"  Margin="0,0,175.892,115.99" VerticalAlignment="Bottom" Width="75.3" Height="29.078" Content="Done" IsEnabled="False" Click="GoHome" FontSize="14.667"/>
+			<TextBlock x:Name="CurrentSyncingFile_Copy" Margin="23.736,61.272,158.487,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="78.454" FontSize="14.667" TextAlignment="Justify"><Run Text="Sync Butler is syncing your files. If Sync Butler do not know what to do with a file, it will list it below. Please select the action you will like Sync Butler to take. When you are done, simply click on "/><Run FontWeight="Bold" Text="Fix Issues "/><Run Text="button."/></TextBlock>
+			<Button x:Name="resolveButton"  HorizontalAlignment="Right" Margin="0,94.657,22.322,0" VerticalAlignment="Top" Width="119.784" Height="31" Content="Fix Issues" Click="ResolvePartnership_Click" IsEnabled="False" FontSize="14.667">
+				<Button.Background>
+					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+						<GradientStop Color="#FFF3F3F3" Offset="0"/>
+						<GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+						<GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+						<GradientStop Color="#FFD2FF87" Offset="1"/>
+					</LinearGradientBrush>
+				</Button.Background>
+			</Button>
+			<Button x:Name="doneButton" HorizontalAlignment="Right"  Margin="0,0,175.892,115.99" VerticalAlignment="Bottom" Width="75.3" Height="29.078" Content="Close" IsEnabled="False" Click="GoHome" FontSize="14.667"/>
 			<Button x:Name="goToResultPageButton" HorizontalAlignment="Right"  Margin="0,0,27.582,115.99" VerticalAlignment="Bottom" Width="132" Height="29.078" Content="Go To Result Page" IsEnabled="False" Click="ShowResult" FontSize="14.667"/>
 			<Button x:Name="CancelButton" IsTabStop="False"  Margin="0,57.621,22.322,0" VerticalAlignment="Top" Height="31" Content="Cancel Sync" Click="CancelButton_Click" HorizontalAlignment="Right" Width="119.784" FontSize="14.667"/>
 			<Label HorizontalAlignment="Left" Margin="24.724,0,0,48.418" VerticalAlignment="Bottom" Content="Current File Progress:" FontWeight="Bold" Width="129.283" Height="30.485"/>
@@ -1300,7 +1319,7 @@
 						<TranslateTransform/>
 					</TransformGroup>
 				</TextBlock.RenderTransform><Run FontFamily="Walkway Black" FontStyle="Normal" Text="Sync Butler"/><Run FontStyle="Normal" Text=", "/><Run FontFamily="D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\Fonts\#Segoe UI" Text="Sync!"/><Run Text=" Settings"/></TextBlock>
-			<TextBlock x:Name="NoUSBWarningTextBlock" Margin="30.567,0,0,133.868" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="105.837" FontSize="14.667" HorizontalAlignment="Left" Width="234.763"><TextBlock.RenderTransform>
+			<TextBlock x:Name="NoUSBWarningTextBlock" Margin="30.567,0,0,133.868" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="105.837" FontSize="14.667" HorizontalAlignment="Left" Width="234.763" TextAlignment="Justify"><TextBlock.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
 						<SkewTransform/>
@@ -1363,7 +1382,16 @@
 			<Label x:Name="resolutionLabel" HorizontalAlignment="Right" Margin="0,217.31,33.574,0" Content="KB" Width="45.717" FontSize="14.667" VerticalAlignment="Top" Height="29.381"/>
 			<Slider x:Name="SpaceToUseSlide" Margin="292.554,221.157,193.258,0" ValueChanged="SpaceToUseSlided" FontSize="14.667" VerticalAlignment="Top" Height="26.154"/>
 			<Label x:Name="label" Margin="0,246.311,185.758,243.705" Content="100%" HorizontalAlignment="Right" Width="52.584" FontSize="16"/>
-			<Button Margin="291.054,0,249.746,176.106" VerticalAlignment="Bottom" Content="Search Again for Portable Storage" Click="RefreshSBSSettingDriveList" FontSize="14.667" Height="32"/>
+			<Button Margin="291.054,0,249.746,176.106" VerticalAlignment="Bottom" Content="Search Again for Portable Storage" Click="RefreshSBSSettingDriveList" FontSize="14.667" Height="32">
+				<Button.Background>
+					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+						<GradientStop Color="#FFF3F3F3" Offset="0"/>
+						<GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+						<GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+						<GradientStop Color="#FF9EB0EE" Offset="1"/>
+					</LinearGradientBrush>
+				</Button.Background>
+			</Button>
 			<Path Stretch="Fill" Stroke="#FF908A8A" StrokeThickness="2" HorizontalAlignment="Left" Margin="23.656,75.973,0,0" VerticalAlignment="Top" Width="192.794" Height="2" Data="M1.0000301,0.99999902 L187.03178,0.99999902"/>
 		</Grid>
 		<Grid x:Name="FirstTimeHelp" Margin="0,0,-1.024,-4" Visibility="Hidden">
@@ -1459,7 +1487,7 @@
 				</Rectangle.Fill>
 			</Rectangle>
 			<Image x:Name="image1_Copy5" Margin="184.002,136.825,1.47,14.143" Source="Images\logo.png" Stretch="Fill" Opacity="0.04"/>
-			<TextBlock x:Name="ConflictsLabel3" Margin="117.547,40.335,0,0" FontSize="24" FontWeight="Bold" Text="Result" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Width="177.273" Height="33.673"/>
+			<TextBlock x:Name="ConflictsLabel3" Margin="117.547,40.335,0,0" FontSize="24" FontWeight="Bold" Text="Result of Sync" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Width="177.273" Height="33.673"/>
 			<Custom:DataGrid x:Name="SyncResultListBox" Margin="28.976,104.5,22.674,96.867" SelectionUnit="FullRow" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"  CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False" > 
 				<Custom:DataGrid.Columns>
 					<Custom:DataGridTextColumn Header="Folder 1" MinWidth="180"  Binding="{Binding Left}"/>
@@ -1522,7 +1550,7 @@
 					</TransformGroup>
 				</Image.RenderTransform>
 			</Image>
-			<TextBlock x:Name="PathLabel" Margin="0,133.128,217.955,372.257" FontSize="14.667" TextWrapping="Wrap" HorizontalAlignment="Right" Width="103.588" RenderTransformOrigin="0.5,0.5" Text="Folder 1's Path:" Grid.Column="1"><TextBlock.RenderTransform>
+			<TextBlock x:Name="PathLabel" Margin="0,129.427,217.955,375.958" FontSize="14.667" TextWrapping="Wrap" HorizontalAlignment="Right" Width="103.588" RenderTransformOrigin="0.5,0.5" Text="Folder 1's Path:" Grid.Column="1"><TextBlock.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
 						<SkewTransform/>
@@ -1563,7 +1591,7 @@
 				</Button.RenderTransform>
 			</Button>
 			<TextBlock Margin="0,103.864,141.443,0" FontSize="16" TextWrapping="Wrap" Text="Step 1 of 3 :" HorizontalAlignment="Right" Width="114.074" VerticalAlignment="Top" Height="29.338" FontWeight="Bold" TextDecorations="Underline" FontStyle="Italic"/>
-			<TextBlock Margin="0,246.901,-85.7,183.021" FontSize="14.667" TextWrapping="Wrap" HorizontalAlignment="Right" Width="337.15"><Run Text="Please select another folder you want to "/><Run FontWeight="Bold" Text="keep in sync "/><Run Text="with the folder selected above."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="Usually, this folder is found on "/><Run FontWeight="Bold" Text="a portable storage device "/><Run Text="so you may carry your files with you."/><LineBreak/><Run Text=""/></TextBlock>
+			<TextBlock Margin="0,246.901,-85.7,183.021" FontSize="14.667" TextWrapping="Wrap" HorizontalAlignment="Right" Width="337.15" TextAlignment="Justify"><Run Text="Please select another folder you want to "/><Run FontWeight="Bold" Text="keep in sync "/><Run Text="with the folder selected above."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="Usually, this folder is found on "/><Run FontWeight="Bold" Text="a portable storage device "/><Run Text="so you may carry your files with you."/><LineBreak/><Run Text=""/></TextBlock>
 			<Image x:Name="image3_Copy" HorizontalAlignment="Left" Margin="127.467,0,0,217.196" Width="42.604" Source="Images\Folder.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Bottom" Height="41.93" Grid.Column="1">
 				<Image.RenderTransform>
 					<TransformGroup>
@@ -1574,7 +1602,7 @@
 					</TransformGroup>
 				</Image.RenderTransform>
 			</Image>
-			<TextBlock x:Name="textBlock11_Copy" Margin="0,265.558,219.161,239.827" FontSize="14.667" TextWrapping="Wrap" HorizontalAlignment="Right" Width="102.382" Text="Folder 2's Path:" RenderTransformOrigin="0.5,0.5" Grid.Column="1">
+			<TextBlock x:Name="textBlock11_Copy" Margin="0,258.357,219.161,247.028" FontSize="14.667" TextWrapping="Wrap" HorizontalAlignment="Right" Width="102.382" Text="Folder 2's Path:" RenderTransformOrigin="0.5,0.5" Grid.Column="1" d:LayoutOverrides="VerticalAlignment">
 				<TextBlock.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
@@ -1607,7 +1635,7 @@
 			</TextBlock>
 			<TextBlock Margin="0,0,-85.574,13.959" FontSize="14.667" TextWrapping="Wrap" HorizontalAlignment="Right" Width="337.024" TextAlignment="Justify" VerticalAlignment="Bottom" Height="95.527"><Run Text="Please give this partnership a name that will allow you to identify the partnership easily."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="For example, &quot;Work Files&quot; or &quot;Music Collection&quot; or &quot;School Projects&quot;."/></TextBlock>
 			<TextBlock Margin="0,0,-12.336,110.986" FontSize="16" TextWrapping="Wrap" Text="Step 3 of 3 :" HorizontalAlignment="Right" Width="267.853" VerticalAlignment="Bottom" Height="30.972" FontWeight="Bold" TextDecorations="Underline" FontStyle="Italic"/>
-			<TextBox x:Name="folderOneTextBox" Margin="179.425,157.927,24.32,0" VerticalAlignment="Top" TextWrapping="Wrap" MaxLength="266"  RenderTransformOrigin="0.372,1.387" KeyDown="SourceTextBox_Enter" d:LayoutOverrides="VerticalAlignment" Height="24" FontSize="14.667" Grid.Column="1" >
+			<TextBox x:Name="folderOneTextBox" Margin="179.425,158.927,24.32,0" VerticalAlignment="Top" TextWrapping="Wrap" MaxLength="266"  RenderTransformOrigin="0.372,1.387" KeyDown="SourceTextBox_Enter" d:LayoutOverrides="VerticalAlignment" Height="24" FontSize="14.667" Grid.Column="1" >
 				<TextBox.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
