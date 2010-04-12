@@ -761,6 +761,10 @@
 	</UserControl.RenderTransform>
 
 	<Grid x:Name="LayoutRoot" Margin="0,0,-4.762,0">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="0.389*"/>
+			<ColumnDefinition Width="0.611*"/>
+		</Grid.ColumnDefinitions>
 		<VisualStateManager.VisualStateGroups>
 			<VisualStateGroup x:Name="VisualStateGroup">
 				<VisualState x:Name="HomeState">
@@ -944,7 +948,7 @@
 				</VisualState>
 			</VisualStateGroup>
 		</VisualStateManager.VisualStateGroups>
-		<Grid x:Name="HomeWindow" VerticalAlignment="Bottom" Height="526.184" Margin="0,0,0.476,0">
+		<Grid x:Name="HomeWindow" VerticalAlignment="Bottom" Height="526.184" Margin="0,0,0.476,0" Grid.ColumnSpan="2">
 			<Rectangle x:Name="background" RadiusX="1" RadiusY="2" Margin="0,0,-0.212,0" Cursor="Arrow">
 				<Rectangle.Fill>
 					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.504,0.026">
@@ -976,7 +980,7 @@
 			</Button>
 			<Button x:Name="SyncButton" Margin="0,0,-0.213,180.176" Style="{DynamicResource SyncButton}" Content="" Cursor="Hand" Click="Sync" IsTabStop="False" />
 		</Grid>
-		<Grid x:Name="ViewPartnership" Margin="-2.973,0,3.449,-4" VerticalAlignment="Bottom" Height="532" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
+		<Grid x:Name="ViewPartnership" Margin="-2.973,0,3.449,-4" VerticalAlignment="Bottom" Height="532" RenderTransformOrigin="0.5,0.5" Visibility="Hidden" Grid.ColumnSpan="2">
 			<Grid.RenderTransform>
 				<TransformGroup>
 					<ScaleTransform/>
@@ -1103,7 +1107,7 @@
 				</Button.Background>
 			</Button>
 		</Grid>
-		<Grid x:Name="sbs" Margin="0.027,0,-1.024,0" VerticalAlignment="Bottom" Height="526.184" d:LayoutOverrides="GridBox" Background="Black" Visibility="Hidden" >
+		<Grid x:Name="sbs" Margin="0.027,0,-1.024,0" VerticalAlignment="Bottom" Height="526.184" Background="Black" Visibility="Hidden" Grid.ColumnSpan="2" >
 			<Rectangle x:Name="background_Copy2" RadiusX="1" RadiusY="2" Margin="0,0,-3.2,0" VerticalAlignment="Top" Height="526.184" Cursor="Arrow">
 				<Rectangle.Fill>
 					<RadialGradientBrush GradientOrigin="0.265,0.184" RadiusX="1.237" RadiusY="1.237">
@@ -1170,7 +1174,7 @@
 			<TextBlock x:Name="SBSPathTextBlock" Margin="42.033,0,0,54" VerticalAlignment="Bottom" Height="23.738" TextWrapping="Wrap" HorizontalAlignment="Left" Width="152.38" FontSize="16" Text="Files will be saved to: "/>
 			<Label x:Name="SBSPathLabel" Margin="196.931,0,337.477,51" VerticalAlignment="Bottom" Height="29.893" Content="Label" FontSize="14.667" FontWeight="Bold"/>
 		</Grid>
-		<Grid x:Name="Conflict" Margin="0.027,0,0.449,-4" VerticalAlignment="Bottom" Height="528" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
+		<Grid x:Name="Conflict" Margin="0.027,0,0.449,-4" VerticalAlignment="Bottom" Height="528" RenderTransformOrigin="0.5,0.5" Visibility="Hidden" Grid.ColumnSpan="2">
 			<Grid.RowDefinitions>
 				<RowDefinition/>
 			</Grid.RowDefinitions>
@@ -1279,7 +1283,7 @@
 			<Label HorizontalAlignment="Left" Margin="24.724,0,0,48.418" VerticalAlignment="Bottom" Content="Current File Progress:" FontWeight="Bold" Width="129.283" Height="30.485"/>
 			<Label HorizontalAlignment="Left" Margin="24.23,0,0,26.944" VerticalAlignment="Bottom" Content="Overall Progress:" FontWeight="Bold" Width="104.16" Height="30.485"/>
 		</Grid>
-		<Grid x:Name="Settings" Margin="0.027,0,0.449,0" VerticalAlignment="Bottom" Height="526.184" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
+		<Grid x:Name="Settings" Margin="0.027,0,0.449,0" VerticalAlignment="Bottom" Height="526.184" RenderTransformOrigin="0.5,0.5" Visibility="Hidden" Grid.ColumnSpan="2">
 			<Grid.RenderTransform>
 				<TransformGroup>
 					<ScaleTransform/>
@@ -1325,7 +1329,7 @@
 						<TranslateTransform/>
 					</TransformGroup>
 				</TextBlock.RenderTransform><Run FontFamily="Walkway Black" FontStyle="Normal" Text="Sync Butler"/><Run FontStyle="Normal" Text=", "/><Run FontFamily="D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\Fonts\#Segoe UI" Text="Sync!"/><Run Text=" Settings"/></TextBlock>
-			<TextBlock x:Name="NoUSBWarningTextBlock" Margin="30.567,0,0,133.868" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="105.837" FontSize="14.667" HorizontalAlignment="Left" Width="234.763" TextAlignment="Justify"><TextBlock.RenderTransform>
+			<TextBlock x:Name="NoUSBWarningTextBlock" Margin="30.567,0,0,73.868" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="105.837" FontSize="14.667" HorizontalAlignment="Left" Width="234.763" TextAlignment="Justify" Visibility="Hidden"><TextBlock.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
 						<SkewTransform/>
@@ -1362,7 +1366,7 @@
 				</ComboBox.RenderTransform>
 			</ComboBox>
 			<ComboBox x:Name="SBSWorkingDriveComboBox"  Margin="290.925,187.15,287.722,0" SelectionChanged="SBSUpdateSpaceDetails" VerticalAlignment="Top" Height="24" FontSize="14.667"/>
-			<TextBox x:Name="SpaceToUseTextbox" HorizontalAlignment="Right" Margin="0,220.81,98.926,0" TextWrapping="Wrap" Width="72.159" KeyUp="SpaceToUseChanged" FontSize="14.667" VerticalAlignment="Top" Height="26"/>
+			<TextBox x:Name="SpaceToUseTextbox" HorizontalAlignment="Right" Margin="0,230.81,98.926,0" TextWrapping="Wrap" Width="72.159" KeyUp="SpaceToUseChanged" FontSize="14.667" VerticalAlignment="Top" Height="26"/>
 			<Button x:Name="SaveSettingButton"  HorizontalAlignment="Left" Margin="30.567,0,0,40.122" VerticalAlignment="Bottom" Width="95" Content="Save" Click="SaveSetting" Height="33" FontSize="14.667">
 				<Button.Background>
 					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
@@ -1376,7 +1380,7 @@
 			<Button x:Name="CancelSettingButton"  Margin="141.739,0,0,40.122" VerticalAlignment="Bottom" Content="Cancel" Click="SBSSettingCancel" HorizontalAlignment="Left" Width="95" Height="33" FontSize="14.667" />
 			<Button x:Name="DefaultSettingButton" IsTabStop="False" HorizontalAlignment="Right" Margin="0,0,140.342,40.122" VerticalAlignment="Bottom" Width="95" Content="Default"  Click="DefaultSetting" Height="33" FontSize="14.667"/>
 			<Button Margin="0,0,33.574,40.122" VerticalAlignment="Bottom" Content="Show Help" HorizontalAlignment="Right" Width="95" Click="ShowHelp" Height="33" FontSize="14.667"/>
-			<TextBlock x:Name="textBlock9_Copy1" Margin="29.764,217.81,0,0" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap" FontSize="14.667" HorizontalAlignment="Left" Width="220.475" VerticalAlignment="Top" Height="30"><TextBlock.RenderTransform>
+			<TextBlock x:Name="textBlock9_Copy1" Margin="29.764,227.81,0,0" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap" FontSize="14.667" HorizontalAlignment="Left" Width="220.475" VerticalAlignment="Top" Height="30"><TextBlock.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
 						<SkewTransform/>
@@ -1384,11 +1388,11 @@
 						<TranslateTransform/>
 					</TransformGroup>
 				</TextBlock.RenderTransform><Run FontFamily="Walkway Black" FontWeight="Bold" Text="Sync Butler"/><Run FontWeight="Bold" Text=", "/><Run FontStyle="Italic" FontWeight="Bold" Text="Sync"/><Run FontWeight="Bold" Text="!"/><Run Text=" "/><Run Text="D"/><Run Text="isk "/><Run Text="U"/><Run Text="sage"/><Run Text=":"/></TextBlock>
-			<Label HorizontalAlignment="Left" Margin="288.054,250.311,0,239.705" Content="0%" Width="36.723" FontSize="16"/>
-			<Label x:Name="resolutionLabel" HorizontalAlignment="Right" Margin="0,217.31,33.574,0" Content="KB" Width="45.717" FontSize="14.667" VerticalAlignment="Top" Height="29.381"/>
-			<Slider x:Name="SpaceToUseSlide" Margin="292.554,221.157,193.258,0" ValueChanged="SpaceToUseSlided" FontSize="14.667" VerticalAlignment="Top" Height="26.154"/>
-			<Label x:Name="label" Margin="0,246.311,185.758,243.705" Content="100%" HorizontalAlignment="Right" Width="52.584" FontSize="16"/>
-			<Button Margin="291.054,0,249.746,176.106" VerticalAlignment="Bottom" Content="Search Again for Portable Storage" Click="RefreshSBSSettingDriveList" FontSize="14.667" Height="32">
+			<Label HorizontalAlignment="Left" Margin="288.054,260.311,0,229.705" Content="0%" Width="36.723" FontSize="16"/>
+			<Label x:Name="resolutionLabel" HorizontalAlignment="Right" Margin="0,227.31,33.574,0" Content="KB" Width="45.717" FontSize="14.667" VerticalAlignment="Top" Height="29.381"/>
+			<Slider x:Name="SpaceToUseSlide" Margin="292.554,231.157,193.258,0" ValueChanged="SpaceToUseSlided" FontSize="14.667" VerticalAlignment="Top" Height="26.154"/>
+			<Label x:Name="label" Margin="0,256.311,185.758,233.705" Content="100%" HorizontalAlignment="Right" Width="52.584" FontSize="16"/>
+			<Button Margin="291.054,0,249.746,116.106" VerticalAlignment="Bottom" Content="Search Again for Portable Storage" Click="RefreshSBSSettingDriveList" FontSize="14.667" Height="32">
 				<Button.Background>
 					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
 						<GradientStop Color="#FFF3F3F3" Offset="0"/>
@@ -1399,8 +1403,9 @@
 				</Button.Background>
 			</Button>
 			<Path Stretch="Fill" Stroke="#FF908A8A" StrokeThickness="2" HorizontalAlignment="Left" Margin="23.656,75.973,0,0" VerticalAlignment="Top" Width="192.794" Height="2" Data="M1.0000301,0.99999902 L187.03178,0.99999902"/>
+			<CheckBox Margin="29.764,296.831,283.004,0" VerticalAlignment="Top" Content="Sync all your recent file when you sync all Partnership&#xd;&#xa;&#xd;&#xa;" FontSize="14.667" Height="27.126"/>
 		</Grid>
-		<Grid x:Name="FirstTimeHelp" Margin="0,0,-1.024,-4" Visibility="Hidden">
+		<Grid x:Name="FirstTimeHelp" Margin="0,0,-1.024,-4" Visibility="Hidden" Grid.ColumnSpan="2">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="0.446*"/>
 				<ColumnDefinition Width="0.554*"/>
@@ -1464,7 +1469,7 @@
 				</Image.RenderTransform>
 			</Image>
 		</Grid>
-		<Grid x:Name="Result" Margin="0.027,0,0.449,0" VerticalAlignment="Bottom" Height="528" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
+		<Grid x:Name="Result" Margin="0.027,0,0.449,0" VerticalAlignment="Bottom" Height="528" RenderTransformOrigin="0.5,0.5" Visibility="Hidden" Grid.ColumnSpan="2">
 			<Grid.RenderTransform>
 				<TransformGroup>
 					<ScaleTransform/>
@@ -1514,7 +1519,7 @@
 				</Button.Background>
 			</Button>
 		</Grid>
-		<Grid x:Name="CreatePartnership" RenderTransformOrigin="0.5,0.5" Margin="0,-6,-4.217,6" Visibility="Hidden" >
+		<Grid x:Name="CreatePartnership" RenderTransformOrigin="0.5,0.5" Margin="0,-6,-4.217,6" Visibility="Hidden" Grid.ColumnSpan="2" >
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="0.353*"/>
 				<ColumnDefinition Width="0.647*"/>
@@ -1717,7 +1722,7 @@
 				</Image.RenderTransform>
 			</Image>
 		</Grid>
-		<Grid x:Name="CreateDoneGrid" RenderTransformOrigin="0.5,0.5" Margin="0,3,0.449,0" Visibility="Hidden" >
+		<Grid x:Name="CreateDoneGrid" RenderTransformOrigin="0.5,0.5" Margin="0,3,0.449,0" Visibility="Hidden" Grid.ColumnSpan="2" >
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="0.177*"/>
 				<ColumnDefinition Width="0.823*"/>
