@@ -1217,9 +1217,9 @@ namespace SyncButlerUI
             char DriveLetter = ((WindowDriveInfo)this.SBSWorkingDriveComboBox.SelectedItem).GetDriveLetter();
             double FreeSpaceToUse = double.Parse(this.LastWorkingFreeSpace);
             string Resolution = this.resolutionLabel.Content.ToString();
-            if (FreeSpaceToUse <= 0 && SBSEnable.Equals("Enable"))
+            if (CalcuateUserRequestedSpace() <= 250 * MEGA_BYTE & SBSEnable.Equals("Enable"))
             {
-                showMessageBox(CustomDialog.MessageType.Warning, "The free space allocated too low. Please set it above 0 bytes.");
+                showMessageBox(CustomDialog.MessageType.Warning, "Sync Butler needs about 250MB on your storage device to carry your recent files. It may not be able to carry the files you need, when you need them. Please give Sync Bulter more storage space!");
             }
             else if (!ComputerNameChecker.IsComputerNameValid(ComputerName))
             {
@@ -1249,7 +1249,7 @@ namespace SyncButlerUI
                         CurrentState = State.Home;
                     }
 
-                    
+
                 }
             }
 
@@ -1295,6 +1295,8 @@ namespace SyncButlerUI
                 {
                     SpaceToUseSlide.Value = 0;
                     DriveInfo di = new DriveInfo("" + ((WindowDriveInfo)SBSWorkingDriveComboBox.SelectedItem).GetDriveLetter());
+                    SpaceToUseSlide.IsEnabled = true;
+                    SpaceToUseTextbox.IsEnabled = true;
                     long freespace = di.AvailableFreeSpace;
 
                     if (freespace / GIGA_BYTE > 10)
@@ -1318,12 +1320,19 @@ namespace SyncButlerUI
                         resolutionLabel.Content = "Bytes";
                         SpaceToUseSlide.Maximum = freespace;
                     }
-                    if (freespace < preferedSize * MEGA_BYTE)
-                        SpaceToUseSlide.Value = 0.1 * SpaceToUseSlide.Maximum;
+                    if (freespace <= preferedSize * MEGA_BYTE)
+                    {
+                        CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok,
+                            "Sync Butler needs about 250MB on your storage device to carry your recent files.\r\nIt may not be able to carry the files you need, when you need them.\r\nPlease use a device with a bigger space");
+                        SpaceToUseSlide.IsEnabled = false;
+                        SpaceToUseTextbox.IsEnabled = false;
+                    }
                     else
                     {
                         if (resolutionLabel.Content.Equals("MB"))
                             SpaceToUseSlide.Value = preferedSize;
+                        else if (resolutionLabel.Content.Equals("KB"))
+                            SpaceToUseSlide.Value = preferedSize * KILO_BYTE;
                         else if (resolutionLabel.Content.Equals("GB"))
                             SpaceToUseSlide.Value = preferedSize * KILO_BYTE;
 
@@ -1375,6 +1384,19 @@ namespace SyncButlerUI
                 SpaceToUseTextbox.Focus();
             }
         }
+        private double CalcuateUserRequestedSpace()
+        {
+            double value = double.Parse(this.SpaceToUseTextbox.Text);
+            if (resolutionLabel.Content.Equals("GB"))
+                return value * GIGA_BYTE;
+            else if (resolutionLabel.Content.Equals("MB"))
+                return value * MEGA_BYTE;
+            else if (resolutionLabel.Content.Equals("KB"))
+                return value * KILO_BYTE;
+            else
+                return value;
+        }
+
         private void SpaceToUseSlided(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
         {
             double value = e.NewValue;
