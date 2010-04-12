@@ -169,7 +169,7 @@
 			</Image>
 			<Image Margin="96,24,139,51" Source="Images\butler-glow.png" Stretch="Fill"/>
 			<Image Margin="125.592,0,147.808,75.4" Source="Images\logowTransparency.png" Stretch="Fill" VerticalAlignment="Center" Height="366.6"/>
-			<Button HorizontalAlignment="Right" Margin="0,0,23.5,12" VerticalAlignment="Bottom" Width="154.5" Height="42" Content="Name It! " FontSize="16" Click="NameIt_Click"/>
+			<Button HorizontalAlignment="Right" Margin="0,0,23.5,12" VerticalAlignment="Bottom" Width="154.5" Height="42" Content="Name It! " FontSize="17.333" Click="NameIt_Click" FontWeight="Bold"/>
 			<TextBox x:Name="FirstTimeComputerNameText" Margin="42,0,197.5,12" VerticalAlignment="Bottom" Height="42" TextWrapping="Wrap" FontSize="18.667" TetonWhitewaterKayak_WinUI:Placeholder.Text="Please enter a name for this computer" KeyDown="FirstTimeComputerNameText_Enter" />
 			<TextBlock Margin="115.5,0,144.5,66.5" VerticalAlignment="Bottom" Height="32" Text="Welcome to Sync Butler" TextWrapping="Wrap" TextAlignment="Center" FontWeight="Bold" FontSize="26.667"/>
 
@@ -182,34 +182,34 @@
 			<VisualStateManager.CustomVisualStateManager>
 				<ic:ExtendedVisualStateManager/>
 			</VisualStateManager.CustomVisualStateManager>
-			<Image Margin="123.6,92,118.318,112.8" Stretch="Fill" Source="Images\HomeWindow.png"/>
+			<Image Margin="123.6,111.5,118.318,93.3" Stretch="Fill" Source="Images\HomeWindow.png"/>
 			<Grid HorizontalAlignment="Left" Width="640" VerticalAlignment="Top" Height="480">
-				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="0,0,15.8,79.2" HorizontalAlignment="Right" Width="97" VerticalAlignment="Bottom" Height="77.6"/>
-				<TextBlock Margin="0,0,18.8,68.2" Foreground="White" TextWrapping="Wrap" FontWeight="Bold" HorizontalAlignment="Right" Width="86" VerticalAlignment="Bottom" Height="83.6"><Run Text="Click on it to find out more about "/><Run FontFamily="Walkway Black" FontSize="14.667" FontWeight="Bold" Foreground="White" Text="Sync Butler"/><Run FontFamily="Walkway Black" FontSize="14.667" FontWeight="Bold" Foreground="White" Text="!"/></TextBlock>
-				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Margin="22.867,103.634,0,0" VerticalAlignment="Top" Height="31.2" Opacity="0.495" HorizontalAlignment="Left" Width="77.6" d:LayoutOverrides="VerticalAlignment"/>
-				<TextBlock Margin="0,94.434,544.733,0" FontWeight="Bold" Foreground="White" TextWrapping="Wrap" HorizontalAlignment="Right" VerticalAlignment="Top" Width="63.6" Height="51.2"><Run Text=""/><LineBreak/><Run Text="Main Page"/></TextBlock>
-				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Margin="0,0,10.8,239.4" Opacity="0.495" HorizontalAlignment="Right" Width="183.2" VerticalAlignment="Bottom" Height="35.2"/>
-				<TextBlock Margin="0,0,26.056,249.8" FontWeight="Bold" Foreground="White" Text="Sync all your partnerships!" TextWrapping="Wrap" HorizontalAlignment="Right" Width="152.602" VerticalAlignment="Bottom" Height="16"/>
+				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="0,0,107.672,7.862" HorizontalAlignment="Right" Width="97" VerticalAlignment="Bottom" Height="77.6"/>
+				<TextBlock Margin="0,0,110.672,-3.138" Foreground="White" TextWrapping="Wrap" FontWeight="Bold" HorizontalAlignment="Right" Width="86" VerticalAlignment="Bottom" Height="83.6"><Run Text="Click on it to find out more about "/><Run FontFamily="Walkway Black" FontSize="14.667" FontWeight="Bold" Foreground="White" Text="Sync Butler"/><Run FontFamily="Walkway Black" FontSize="14.667" FontWeight="Bold" Foreground="White" Text="!"/></TextBlock>
+				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Margin="22.867,100.966,0,0" VerticalAlignment="Top" Height="31.2" Opacity="0.495" HorizontalAlignment="Left" Width="77.6" d:LayoutOverrides="VerticalAlignment"/>
+				<TextBlock Margin="0,91.766,544.733,0" FontWeight="Bold" Foreground="White" TextWrapping="Wrap" HorizontalAlignment="Right" VerticalAlignment="Top" Width="63.6" Height="51.2"><Run Text=""/><LineBreak/><Run Text="Main Page"/></TextBlock>
+				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Margin="0,0,10.8,220.724" Opacity="0.495" HorizontalAlignment="Right" Width="183.2" VerticalAlignment="Bottom" Height="35.2"/>
+				<TextBlock Margin="0,0,26.056,231.124" FontWeight="Bold" Foreground="White" Text="Sync all your partnerships!" TextWrapping="Wrap" HorizontalAlignment="Right" Width="152.602" VerticalAlignment="Bottom" Height="16"/>
 				<Rectangle Fill="#FF073948" Stroke="#FF006C8D" StrokeThickness="3" RadiusX="5" RadiusY="5" Margin="0,53.2,24.8,0" VerticalAlignment="Top" Height="122.4" HorizontalAlignment="Right" Width="135.2" d:LayoutOverrides="VerticalAlignment"/>
 				<TextBlock Margin="0,59.2,24.8,0" FontWeight="Bold" Foreground="#FF75CBDB" TextWrapping="Wrap" HorizontalAlignment="Right" VerticalAlignment="Top" Width="128.4" Height="42.4"><Run FontSize="13.333" Text=" "/><Run Text="What is a"/><Run Text="..."/><LineBreak/><Run FontSize="16" Text="  &quot;partnership&quot;?"/></TextBlock>
-				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="22.8,0,0,52.8" VerticalAlignment="Bottom" Height="47.2" HorizontalAlignment="Left" Width="144.8"/>
-				<TextBlock Margin="31.6,0,0,58" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="34.4" FontWeight="Bold" HorizontalAlignment="Left" Width="130"><Run Text="Tells "/><Run FontFamily="Walkway Black" FontSize="14.667" Text="SyncButler"/><Run Text=" which folders to sync."/></TextBlock>
-				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="189.8,0,0,22.8" VerticalAlignment="Bottom" Height="69.6" HorizontalAlignment="Left" Width="124.8"/>
-				<TextBlock Margin="198.6,0,0,34.8" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="48" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Width="107.6"><Run Text="View the folders which "/><Run FontFamily="Walkway Black" FontSize="14.667" Text="SyncButler "/><Run Text="is keeping in sync."/></TextBlock>
-				<Rectangle Fill="Black" Stroke="#FF62DE37" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="0,0,169.8,34.8" VerticalAlignment="Bottom" Height="57" HorizontalAlignment="Right" Width="134.4"/>
-				<TextBlock Margin="0,0,175.8,43.2" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="38" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="116.6" Text="*New* Check out the new Mini-Sync!"/>
+				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="18.131,0,0,35.458" VerticalAlignment="Bottom" Height="47.2" HorizontalAlignment="Left" Width="144.8"/>
+				<TextBlock Margin="26.931,0,0,40.658" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="34.4" FontWeight="Bold" HorizontalAlignment="Left" Width="130"><Run Text="Tells "/><Run FontFamily="Walkway Black" FontSize="14.667" Text="SyncButler"/><Run Text=" which folders to sync."/></TextBlock>
+				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="250.467,0,264.733,8" VerticalAlignment="Bottom" Height="69.6"/>
+				<TextBlock Margin="259.267,0,273.133,20" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="48" FontWeight="Bold" RenderTransformOrigin="0.5,0.5"><Run Text="View the folders which "/><Run FontFamily="Walkway Black" FontSize="14.667" Text="SyncButler "/><Run Text="is keeping in sync."/></TextBlock>
+				<Rectangle Fill="Black" Stroke="#FF62DE37" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="0,16.8,181.333,0" VerticalAlignment="Top" Height="68.333" HorizontalAlignment="Right" Width="123.067"/>
+				<TextBlock Margin="0,26.467,191.333,0" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top" Height="49.333" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="103.267" Text="*New* Check out Sync Butler's Hat Trick!"/>
 			</Grid>
-			<Image HorizontalAlignment="Right" Margin="0,99.6,497.1,349.2" Width="52" RenderTransformOrigin="0.5,0.5" Source="Images\arrow1.png" Stretch="Fill">
+			<Image HorizontalAlignment="Right" Margin="0,108.6,495.1,340.2" Width="52" RenderTransformOrigin="0.5,0.5" Source="Images\arrow1.png" Stretch="Fill">
 				<Image.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
 						<SkewTransform/>
-						<RotateTransform Angle="-9.406"/>
+						<RotateTransform Angle="16.526"/>
 						<TranslateTransform/>
 					</TransformGroup>
 				</Image.RenderTransform>
 			</Image>
-			<Image Margin="0,0,188.572,240.918" RenderTransformOrigin="0.5,0.5" Source="Images\arrow1.png" Stretch="Fill" HorizontalAlignment="Right" Width="69.776" VerticalAlignment="Bottom" Height="41.866">
+			<Image Margin="0,0,193.239,221.585" RenderTransformOrigin="0.5,0.5" Source="Images\arrow1.png" Stretch="Fill" HorizontalAlignment="Right" Width="69.776" VerticalAlignment="Bottom" Height="41.866">
 				<Image.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
@@ -220,7 +220,7 @@
 				</Image.RenderTransform>
 			</Image>
 			<TextBlock Margin="0,100.3,25.2,0" VerticalAlignment="Top" Height="63.8" TextWrapping="Wrap" HorizontalAlignment="Right" Width="118.6"><Run FontFamily="C:\Users\Bryan\Documents\Edu\BComp\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\Fonts\#Segoe UI" FontWeight="Normal" Foreground="White" Text="A partnership refers to the (two) folders that "/><Run FontFamily="Walkway Black" FontSize="14.667" FontWeight="Bold" Foreground="White" Text="Sync Butler"/><Run FontFamily="C:\Users\Bryan\Documents\Edu\BComp\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\Fonts\#Segoe UI" FontWeight="Bold" Foreground="White" Text=" "/><Run FontFamily="C:\Users\Bryan\Documents\Edu\BComp\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\Fonts\#Segoe UI" FontWeight="Normal" Foreground="White" Text="should keep in sync."/></TextBlock>
-			<Image Margin="131.4,0,0,101.4" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="31.2" HorizontalAlignment="Left" Width="52">
+			<Image Margin="106.733,0,0,92.067" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="31.2" HorizontalAlignment="Left" Width="52">
 				<Image.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
@@ -230,35 +230,35 @@
 					</TransformGroup>
 				</Image.RenderTransform>
 			</Image>
-			<Image Margin="253.133,0,0,100.333" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="31.2" HorizontalAlignment="Left" Width="52">
+			<Image Margin="283.133,0,304.867,85" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="31.2">
 				<Image.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
 						<SkewTransform/>
-						<RotateTransform Angle="-68.685"/>
+						<RotateTransform Angle="-76.622"/>
 						<TranslateTransform X="1.93" Y="-11.382"/>
 					</TransformGroup>
 				</Image.RenderTransform>
 			</Image>
 			<Button Name="HelpScreen1NextBtn" Margin="0,0,4.6,5.8" VerticalAlignment="Bottom" Height="39.2" Content="Next" FontWeight="Bold" FontSize="18.667" Click="GoToHelpScreen2_Click" HorizontalAlignment="Right" Width="83.2" TabIndex="1"/>
-			<Image Margin="0,0,126.2,147" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="31.2" HorizontalAlignment="Right" Width="52">
+			<Image Margin="0,0,154.862,98.333" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="31.2" HorizontalAlignment="Right" Width="52">
 				<Image.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
 						<SkewTransform/>
-						<RotateTransform Angle="-150.515"/>
+						<RotateTransform Angle="-110.457"/>
 						<TranslateTransform X="1.93" Y="-11.382"/>
 					</TransformGroup>
 				</Image.RenderTransform>
 			</Image>
 			<Rectangle Fill="#80FFFFFF" Stroke="Black" HorizontalAlignment="Left" Margin="23.333,17,0,0" VerticalAlignment="Top" Width="257" Height="48.667" RadiusX="7" RadiusY="7" StrokeThickness="5"/>
 			<TextBlock Margin="31,17,0,0" VerticalAlignment="Top" Height="53" Text="Tutorial : Basics" TextWrapping="Wrap" FontSize="32" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Left" Width="237"/>
-			<Image Margin="313.133,0,274.867,108.333" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="31.2">
+			<Image Margin="0,104.467,259.527,0" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Top" Height="31.2" HorizontalAlignment="Right" Width="52">
 				<Image.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
 						<SkewTransform/>
-						<RotateTransform Angle="-107.541"/>
+						<RotateTransform Angle="-259.127"/>
 						<TranslateTransform X="1.93" Y="-11.382"/>
 					</TransformGroup>
 				</Image.RenderTransform>
@@ -288,7 +288,7 @@
 			<Image Margin="0,224.925,132.8,147.4" Source="Images\HelpScreenFolder.png" Stretch="Fill" HorizontalAlignment="Right" Width="107.675"/>
 			<Image Margin="274.081,238.83,286.457,161.482" Source="Images\logowTransparency.png" Stretch="Fill"/>
 			<Rectangle x:Name="rectangle" Fill="White" Stroke="Black" StrokeThickness="3" RadiusX="15" RadiusY="15" Margin="31.8,70.9,51.8,0" VerticalAlignment="Top" Height="79.2"/>
-			<TextBlock x:Name="textBlock" Margin="62.5,87.1,51.8,0" VerticalAlignment="Top" Height="48.8" FontSize="29.333" TextWrapping="Wrap" FontWeight="Bold"><Run Text="How does "/><Run FontFamily="Walkway Black" Text="Sync Butler"/><Run FontFamily="Fonts/#Segoe UI" Text=" "/><Run Text="sync your files?"/></TextBlock>
+			<TextBlock x:Name="textBlock" Margin="55,88.6,71.3,0" VerticalAlignment="Top" Height="48.8" FontSize="29.333" TextWrapping="Wrap" FontWeight="Bold"><Run Text="How does "/><Run FontFamily="Walkway Black" Text="Sync Butler"/><Run FontFamily="Fonts/#Segoe UI" Text=" "/><Run Text="sync your files?"/></TextBlock>
 			<Grid x:Name="grid" Margin="77.3,0,98.7,22.933" VerticalAlignment="Bottom" Height="118.4">
 				<Rectangle Fill="White" Stroke="Black" StrokeThickness="3" RadiusX="15" RadiusY="15" Margin="0,0,3.2,0"/>
 				<TextBlock Margin="11.2,16.2,0,0" VerticalAlignment="Top" Height="22.4" FontWeight="Bold" TextWrapping="Wrap"><Run Text="He "/><Run Text="scans the folders you chose and does the following automatically:"/></TextBlock>
@@ -450,7 +450,7 @@
 						<TranslateTransform/>
 					</TransformGroup>
 				</TextBlock.RenderTransform><Run Text="While there are more than a few file synchronization programs available today, "/><Run FontFamily="Walkway Black" Text="Sync Butler "/><Run Text="is the only such program to take ease-of-use seriously. Every feature is designed to simplify interaction between you and "/><Run FontFamily="Walkway Black" Text="Sync Butler "/><Run Text="without compromising the intelligence behind his unique synchronization process."/></TextBlock>
-			<Rectangle x:Name="rectangle_Copy1" Fill="White" Stroke="Black" StrokeThickness="3" RadiusX="15" RadiusY="15" Margin="40,212.9,59.9,183.9" RenderTransformOrigin="0.5,0.5">
+			<Rectangle x:Name="rectangle_Copy1" Fill="White" Stroke="#FF62DE37" StrokeThickness="3" RadiusX="15" RadiusY="15" Margin="40,212.9,59.9,183.9" RenderTransformOrigin="0.5,0.5">
 				<Rectangle.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
@@ -536,7 +536,7 @@
 						<TranslateTransform/>
 					</TransformGroup>
 				</TextBlock.RenderTransform><Run Text="If your file is recent "/><Run FontStyle="Italic" Text="(within the last 10 days)"/><Run Text=" and Sync Butler thinks it is interesting enough, he will sync them each time you sync all your partnerships."/></TextBlock>
-			<Rectangle x:Name="rectangle_Copy3" Fill="White" Stroke="Black" StrokeThickness="3" RadiusX="15" RadiusY="15" Margin="31,0,44.2,118.6" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Bottom" Height="79.2">
+			<Rectangle x:Name="rectangle_Copy3" Fill="White" Stroke="#FF62DE37" StrokeThickness="3" RadiusX="15" RadiusY="15" Margin="31,0,44.2,118.6" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Bottom" Height="79.2">
 				<Rectangle.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>

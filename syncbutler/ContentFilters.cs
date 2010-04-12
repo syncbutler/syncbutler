@@ -61,7 +61,7 @@ namespace SyncButler
             vulgarities + "|" + confidentiality + "|" + personal;
         #endregion
 
-        #region extension
+        #region Extension
         //Combined censorship filter
         private static Regex sensitivePattern;
                 
