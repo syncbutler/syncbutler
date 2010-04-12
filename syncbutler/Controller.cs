@@ -206,6 +206,21 @@ namespace SyncButler
             return SyncEnvironment.SBSEnable.Equals("Enable");
         }
 
+        public static bool CanDoSBS()
+        {
+            List<WindowDriveInfo> DriveLetters = null;
+            DriveLetters = Controller.GetUSBDriveLetters();
+            if (DriveLetters.Count == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return DriveLetters.Contains(Controller.GetSBSDriveLetter());
+            }
+            //return false;
+        }
+
         public long GetAvailableSpaceForDrive()
         {
             try
@@ -529,6 +544,14 @@ namespace SyncButler
             return GetSBSPath(SyncEnvironment.SBSDriveLetter);
         }
 
+        public void AutoSyncRecentFiles(SyncableStatusMonitor statusMonitor, SyncableErrorHandler errorHandler)
+        {
+            SortedList<string, SortedList<string, string>> MRUs;
+            MRUs = GetMonitoredFiles();
+            SyncMRUs(MRUs["interesting"], statusMonitor, errorHandler);
+        }
+
+
         /// <summary>
         /// Sync the mrus that are listed. Please read MRUList to understand how file is actually saved.
         /// </summary>
@@ -610,22 +633,34 @@ namespace SyncButler
         {
             return !(SyncEnvironment.FirstRunComplete && SyncEnvironment.ComputerNamed);
         }
-		
+
+        /// <summary>
+        /// Check if the auto sync for sbs is allowed
+        /// </summary>
+        /// <returns></returns>
+        public static bool IsAutoSyncRecentFileAllowed()
+        {
+            return (SyncEnvironment.EnableSyncAll);
+        }
+
 		/// <summary>
 		/// Assigns the settings and stores it to disk.
 		/// </summary>
 		/// <param name="ComputerName">Computer name of the user</param>
 		/// <param name="EnableSBS">[Not in use]If the user wants sbs to be enabled</param>
 		/// <param name="SBSDrive">The working drive letter</param>
-        public static void SaveSetting(string computerName, string enableSBS, char SBSDrive, Double freeSpaceToUse, String resolution)
-		{
+        public static void SaveSetting(string computerName, string enableSBS, char SBSDrive, Double freeSpaceToUse, String resolution, bool enableSyncAll)
+        {
+
             SyncEnvironment.ComputerName = computerName;
             SyncEnvironment.SBSDriveLetter = SBSDrive;
             SyncEnvironment.SBSEnable = enableSBS;
             SyncEnvironment.FreeSpaceToUse = freeSpaceToUse;
             SyncEnvironment.Resolution = resolution;
             SyncEnvironment.SBSDriveId = SystemEnvironment.StorageDevices.GetDriveID(SBSDrive + ":");
+            SyncEnvironment.EnableSyncAll = enableSyncAll;
             SyncEnvironment.SBSDrivePartition = SystemEnvironment.StorageDevices.GetDrivePartitionIndex(SBSDrive + ":");
+
             SyncEnvironment.GetInstance().StoreSettings();
 		}
 

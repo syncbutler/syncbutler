@@ -1365,7 +1365,7 @@
 				</Button.Background>
 			</Button>
 			<Path Stretch="Fill" Stroke="#FF908A8A" StrokeThickness="2" HorizontalAlignment="Left" Margin="23.656,75.973,0,0" VerticalAlignment="Top" Width="192.794" Height="2" Data="M1.0000301,0.99999902 L187.03178,0.99999902"/>
-			<CheckBox Margin="29.764,294.831,283.004,0" VerticalAlignment="Top" Content="Sync all your recent file when you sync all Partnership&#xd;&#xa;&#xd;&#xa;" FontSize="14.667" Height="27.126"/>
+			<CheckBox x:Name="SBSSettingEnableSyncAll" Margin="29.764,296.831,283.004,0" VerticalAlignment="Top" Content="Sync all your recent file when you sync all Partnership&#xd;&#xa;&#xd;&#xa;" FontSize="14.667" Height="27.126"/>
 		</Grid>
 		<Grid x:Name="FirstTimeHelp" Margin="0,0,-1.024,-4" Grid.ColumnSpan="2" Visibility="Hidden">
 			<Grid.ColumnDefinitions>

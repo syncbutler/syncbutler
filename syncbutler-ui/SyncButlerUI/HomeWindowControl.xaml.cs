@@ -959,6 +959,10 @@ namespace SyncButlerUI
         private void Sync(object sender, RoutedEventArgs e)
         {
             ResolvedConflicts = new List<Resolved>();
+            if (Controller.IsAutoSyncRecentFileAllowed() && Controller.IsSBSEnable() && Controller.CanDoSBS())
+            {
+                // todo: add syncMRU here
+            }
             if (this.Controller.GetPartnershipList().Count < 1)
             {
                 if (showMessageBox(CustomDialog.MessageType.Question, "There are no partnerships for me to sync. Would you like to create one now?") == true)
@@ -1239,6 +1243,8 @@ namespace SyncButlerUI
             char DriveLetter = ((WindowDriveInfo)this.SBSWorkingDriveComboBox.SelectedItem).GetDriveLetter();
             double FreeSpaceToUse = double.Parse(this.LastWorkingFreeSpace);
             string Resolution = this.resolutionLabel.Content.ToString();
+            bool enableSyncAll = (bool)this.SBSSettingEnableSyncAll.IsChecked;
+
             if (CalcuateUserRequestedSpace() <= 250 * MEGA_BYTE & SBSEnable.Equals("Enable"))
             {
                 showMessageBox(CustomDialog.MessageType.Warning, "Sync Butler needs about 250MB on your storage device to carry your recent files. It may not be able to carry the files you need, when you need them. Please give Sync Bulter more storage space!");
@@ -1255,7 +1261,7 @@ namespace SyncButlerUI
                 }
                 else
                 {
-                    Controller.SaveSetting(ComputerName, SBSEnable, DriveLetter, FreeSpaceToUse, Resolution);
+                    Controller.SaveSetting(ComputerName, SBSEnable, DriveLetter, FreeSpaceToUse, Resolution, enableSyncAll);
                     if (SBSEnable.Equals("Enable"))
                     {
                         String ExtraMsg = String.Format("SBS will now save your recent files to: {0}", Controller.GetSBSPath());
@@ -1774,6 +1780,7 @@ namespace SyncButlerUI
                             this.SpaceToUseSlide.Maximum = this.Controller.GetAvailableSpaceForDrive();
                             this.SpaceToUseSlide.Value = this.Controller.GetFreeSpaceToUse();
                             this.resolutionLabel.Content = this.Controller.GetResolution();
+                            this.SBSSettingEnableSyncAll.IsChecked = Controller.IsAutoSyncRecentFileAllowed();
                         }
                         else
                         {

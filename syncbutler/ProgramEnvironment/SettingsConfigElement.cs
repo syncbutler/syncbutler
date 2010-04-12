@@ -161,6 +161,20 @@ namespace SyncButler.ProgramEnvironment
                 this["SBSEnable"] = value;
             }
         }
+
+        [ConfigurationProperty("EnableSyncAll")]
+        public bool EnableSyncAll
+        {
+            get
+            {
+                return (bool)this["EnableSyncAll"];
+            }
+            set
+            {
+                this["EnableSyncAll"] = value;
+            }
+        }
+
         [ConfigurationProperty("SBSDrivePartition")]
         public int SBSDrivePartition
         {
