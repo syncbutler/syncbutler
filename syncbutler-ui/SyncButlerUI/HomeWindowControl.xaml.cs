@@ -604,7 +604,7 @@ namespace SyncButlerUI
                     // if there is no usb drive, let user to select some local hard disk, warn the user as well.
                     if (DriveLetters.Count == 0)
                     {
-                        DriveLetters = Controller.GetNonUSBDriveLetters();
+                        //DriveLetters = Controller.GetNonUSBDriveLetters();
                         noUSBDrives = true;
                     }
 
@@ -630,7 +630,9 @@ namespace SyncButlerUI
                         this.SBSSettingComboBox.IsEnabled = true;
                         this.DefaultSettingButton.IsEnabled = true;
                         this.SaveSettingButton.IsEnabled = true;
+                        SBSWorkingDriveComboBox.IsEnabled = true;
                         SBSWorkingDriveComboBox.Items.Clear();
+
                         foreach (WindowDriveInfo s in DriveLetters)
                         {
                             this.SBSWorkingDriveComboBox.Items.Add(s);
@@ -644,15 +646,16 @@ namespace SyncButlerUI
                         {
                             this.SBSWorkingDriveComboBox.SelectedIndex = 0;
                         }
-                        if (devicePluggedIn)
+                        if (!devicePluggedIn)
                         {
                             this.SBSWorkingDriveComboBox.IsEnabled = false;
                             if (this.SBSSettingComboBox.Items.IsEmpty)
                             {
                                 this.SBSSettingComboBox.Items.Add("Enable");
                                 this.SBSSettingComboBox.Items.Add("Disable");
-                                this.SBSSettingComboBox.SelectedItem = "Disable";
+                                
                             }
+                            this.SBSSettingComboBox.SelectedItem = "Disable";
                         }
                         this.IsLoadingSBS = false;
                     }
@@ -1717,16 +1720,25 @@ namespace SyncButlerUI
                     {
                         this.SBSWorkingDriveComboBox.Items.Add(s);
                     }
+                    WindowDriveInfo wdi = Controller.GetSBSDriveLetter();
 
-                    if (this.SBSWorkingDriveComboBox.Items.Contains(Controller.GetSBSDriveLetter()))
+                    if (wdi != null)
                     {
-                        this.SBSWorkingDriveComboBox.SelectedItem = Controller.GetSBSDriveLetter();
-                        devicePluggedIn = true;
+                        if (this.SBSWorkingDriveComboBox.Items.Contains(Controller.GetSBSDriveLetter()))
+                        {
+                            this.SBSWorkingDriveComboBox.SelectedItem = Controller.GetSBSDriveLetter();
+                            devicePluggedIn = true;
+                        }
+                        else if (this.SBSWorkingDriveComboBox.Items.Count != 0)
+                        {
+                            this.SBSWorkingDriveComboBox.SelectedIndex = 0;
+                        }
                     }
                     else if (this.SBSWorkingDriveComboBox.Items.Count != 0)
                     {
                         this.SBSWorkingDriveComboBox.SelectedIndex = 0;
                     }
+
                     if (devicePluggedIn)
                     {
                         if (Controller.SBSEnable.Equals("Enable"))
