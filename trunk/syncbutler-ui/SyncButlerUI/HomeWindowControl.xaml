@@ -1499,7 +1499,7 @@
 			</Rectangle>
 			<Image x:Name="image1_Copy5" Margin="184.002,136.825,1.47,14.143" Source="Images\logo.png" Stretch="Fill" Opacity="0.04"/>
 			<TextBlock x:Name="ConflictsLabel3" Margin="119.547,40.335,0,0" FontSize="24" FontWeight="Bold" Text="Result of Sync" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Width="177.273" Height="33.673"/>
-			<Custom:DataGrid x:Name="SyncResultListBox" Margin="29.138,104.5,21.662,0" SelectionUnit="FullRow" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"  CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False" Width="720" VerticalAlignment="Top" Height="355" > 
+			<Custom:DataGrid x:Name="SyncResultListBox" IsReadOnly="True" Margin="29.138,104.5,21.662,0" SelectionUnit="FullRow" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"  CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False" Width="720" VerticalAlignment="Top" Height="355" > 
 				<Custom:DataGrid.Columns>
 					<Custom:DataGridTextColumn Header="Folder 1" MinWidth="290"  Binding="{Binding Left}"/>
 					<Custom:DataGridTextColumn Header="Action" MinWidth="140"  Binding="{Binding Action}"/>
