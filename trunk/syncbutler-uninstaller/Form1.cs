@@ -42,6 +42,7 @@ namespace SyncButler.Uninstaller
         private void button1_Click(object sender, EventArgs e)
         {
             UninstallUtils.Uninstall();
+            MessageBox.Show("Uninstall completed!", "Done!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
     }
 }
