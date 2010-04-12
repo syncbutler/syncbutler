@@ -1127,7 +1127,7 @@ namespace SyncButlerUI
                     CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Files were successfully synced and logged to,\n\n" + Controller.GetInstance().SBSLogFile);
                 }
                 progressWindow.TaskComplete();
-                SBSSync.IsEnabled = true;
+                //SBSSync.IsEnabled = true;
                 //SBSDone.IsEnabled = true;
             });
 
@@ -1212,7 +1212,7 @@ namespace SyncButlerUI
                 }
             });
 
-            SBSSync.IsEnabled = false;
+            //SBSSync.IsEnabled = false;
             // Start the whole process
             progressWindow.Start();
         }
@@ -1367,11 +1367,11 @@ namespace SyncButlerUI
         {
             if (!Controller.GetInstance().IsSBSDriveEnough())
             {
-                SBSSync.IsEnabled = false;
+                //SBSSync.IsEnabled = false;
             }
             else
             {
-                SBSSync.IsEnabled = true;
+                //SBSSync.IsEnabled = true;
             }
         }
         private void SpaceToUseChanged(Object sender, KeyEventArgs e)
@@ -1487,14 +1487,16 @@ namespace SyncButlerUI
         }
         private void FocusMe(object sender, EventArgs e)
         {
-            if (Favourites_List.IsFocused)
-                WeirdFile_List.SelectedIndex = -1;
-            else
+			
+            if (!Favourites_List.IsFocused)
+                //WeirdFile_List.SelectedIndex = -1;
+            //else
                 Favourites_List.SelectedIndex = -1;
         }
 
         private void SBSMoveToOther(object sender, EventArgs e)
         {
+			/*
             SortedList<string, string> sensitive = MRUs["sensitive"];
             SortedList<string, string> interesting = MRUs["interesting"];
             // move from weird to fav
@@ -1513,6 +1515,7 @@ namespace SyncButlerUI
 
             Favourites_List.Items.Refresh();
             WeirdFile_List.Items.Refresh();
+			*/
         }
 
         public void LoadMRUs()
@@ -1558,7 +1561,7 @@ namespace SyncButlerUI
             sbsScanWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(delegate(Object worker, RunWorkerCompletedEventArgs args)
             {
                 Favourites_List.ItemsSource = MRUs["interesting"].Keys;
-                WeirdFile_List.ItemsSource = MRUs["sensitive"].Keys;
+                //WeirdFile_List.ItemsSource = MRUs["sensitive"].Keys;
                 progressWindow.TaskComplete();
             });
 
@@ -1654,10 +1657,10 @@ namespace SyncButlerUI
         private void OpenSelectedOnList(object sender, MouseEventArgs e)
         {
             String path = "";
-            if (WeirdFile_List.SelectedIndex != -1)
-            {
-                path = MRUs["sensitive"][(String)WeirdFile_List.SelectedItem];
-            }
+            //if (WeirdFile_List.SelectedIndex != -1)
+            //{
+            //    path = MRUs["sensitive"][(String)WeirdFile_List.SelectedItem];
+            //}
             if (Favourites_List.SelectedIndex != -1)
             {
                 path = MRUs["interesting"][(String)Favourites_List.SelectedItem];
