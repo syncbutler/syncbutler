@@ -138,23 +138,26 @@ namespace SyncButlerUI
         {
 
             homeWindow1.FirstTimeHelp.Visibility = System.Windows.Visibility.Hidden;
-
+            String nextState = "SbsState";
             if (!homeWindow1.StopExistingOperation()) return;
-            if (Controller.IsFirstSBSRun())
-            {
-                FirstTimeStartupScreen dialog = new FirstTimeStartupScreen();
-                dialog.WelcomeScreenControl.FirstTimeComputerNameText.Visibility = Visibility.Hidden;
-                //VisualStateManager.GoToState(dialog.WelcomeScreenControl,"HelpScreen3",false);
-                Controller.SetFirstSBSRun();
-                dialog.Title = "SyncButler - Help";
-                dialog.WelcomeScreenControl.GoToSBSScreen();
-                dialog.ShowDialog();
-            }
-            homeWindow1.CheckIfEnoughSpace();
-            homeWindow1.CurrentState = HomeWindowControl.State.SBS;
-            VisualStateManager.GoToState(homeWindow1, "SbsState", false);
-            homeWindow1.LoadMRUs();
-        }
+          		if(Controller.IsFirstSBSRun() || !Controller.IsSBSEnable()){
+					FirstTimeStartupScreen dialog = new FirstTimeStartupScreen();
+					dialog.WelcomeScreenControl.FirstTimeComputerNameText.Visibility=Visibility.Hidden;
+                    dialog.Title = "SyncButler - Help";
+                    dialog.WelcomeScreenControl.GoToSBSScreen();
+					dialog.ShowDialog();
+                    if (dialog.WelcomeScreenControl.WantToShowSettingPage() && !Controller.IsSBSEnable())
+                    {
+                        homeWindow1.GoToSetting();
+                        return;
+                    }
+                    Controller.SetFirstSBSRun();
+				}
+                    homeWindow1.CheckIfEnoughSpace();
+                    homeWindow1.CurrentState = HomeWindowControl.State.SBS;
+                    VisualStateManager.GoToState(homeWindow1, nextState, false);
+					homeWindow1.LoadMRUs();
+		}
 
         private void Help_Click(object sender, RoutedEventArgs e)
         {

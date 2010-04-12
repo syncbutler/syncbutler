@@ -110,12 +110,30 @@ namespace SyncButlerUI
         {
             VisualStateManager.GoToState(this,"SecondHelpScreenState",false);
             FocusControl(() => HelpScreenFinishBtn.Focus());
-		}	
-		private void ExitTutorial_Click(object sender,RoutedEventArgs e)
+		}
+	    private bool wantToShowSettingPage;
+        private void ExitTutorial_Click(object sender, RoutedEventArgs e)
         {
-        	Window.GetWindow(this).DialogResult=true;
-		}			
-		
+            Window.GetWindow(this).DialogResult = true;
+        }	
+        private void ExitSBSTutorial_Click(object sender, RoutedEventArgs e)
+        {
+            wantToShowSettingPage = false;
+            if (Controller.IsFirstSBSRun())
+            {
+                if (CustomDialog.Show(this, CustomDialog.MessageTemplate.YesNo, CustomDialog.MessageResponse.No,
+                                "Yes, Please show me the settings page so I may turn on SB!\nNo, maybe next time.") == CustomDialog.MessageResponse.Yes)
+                {
+                    wantToShowSettingPage = true;
+                }
+            }
+            Window.GetWindow(this).DialogResult = true;
+		}
+
+        public bool WantToShowSettingPage()
+        {
+            return wantToShowSettingPage;
+        }
 		private void FirstTimeComputerNameText_Enter(object sender, System.Windows.Input.KeyEventArgs e)
 		{
             if (e.Key == Key.Return)
