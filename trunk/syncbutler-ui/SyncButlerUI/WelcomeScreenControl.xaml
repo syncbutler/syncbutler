@@ -169,7 +169,7 @@
 			</Image>
 			<Image Margin="96,24,139,51" Source="Images\butler-glow.png" Stretch="Fill"/>
 			<Image Margin="125.592,0,147.808,75.4" Source="Images\logowTransparency.png" Stretch="Fill" VerticalAlignment="Center" Height="366.6"/>
-			<Button HorizontalAlignment="Right" Margin="0,0,23.5,12" VerticalAlignment="Bottom" Width="154.5" Height="42" Content="Name It! " FontSize="17.333" Click="NameIt_Click" FontWeight="Bold"/>
+			<Button HorizontalAlignment="Right" Margin="0,0,23.5,12" VerticalAlignment="Bottom" Width="154.5" Height="42" Content="Name It! " FontSize="18.667" Click="NameIt_Click" FontWeight="Bold"/>
 			<TextBox x:Name="FirstTimeComputerNameText" Margin="42,0,197.5,12" VerticalAlignment="Bottom" Height="42" TextWrapping="Wrap" FontSize="18.667" TetonWhitewaterKayak_WinUI:Placeholder.Text="Please enter a name for this computer" KeyDown="FirstTimeComputerNameText_Enter" />
 			<TextBlock Margin="115.5,0,144.5,66.5" VerticalAlignment="Bottom" Height="32" Text="Welcome to Sync Butler" TextWrapping="Wrap" TextAlignment="Center" FontWeight="Bold" FontSize="26.667"/>
 
@@ -478,7 +478,7 @@
 					</TransformGroup>
 				</Image.RenderTransform>
 			</Image>
-			<Button x:Name="FeatureHelpNextBtn" Content="Next" FontWeight="Bold" FontSize="18.667" Click="GoToFeaturesSBSScreen_Click" HorizontalAlignment="Right" Width="83.2" VerticalAlignment="Bottom" Height="39.2" RenderTransformOrigin="0.355,0" Margin="0,0,4.6,5.8"/>
+			<Button x:Name="FeatureHelpNextBtn" Content="Next" FontWeight="Bold" FontSize="18.667" Click="GoToFeaturesSBSScreen_Click" HorizontalAlignment="Right" Width="83.2" VerticalAlignment="Bottom" Height="39.2" RenderTransformOrigin="0.355,0" Margin="0,0,4.6,6.466"/>
 		</Grid>
 		<Grid x:Name="SBSHelp1" Margin="3.8,-1.6,4.6,4.3" Visibility="Hidden">
 			<Rectangle x:Name="rectangle1_Copy" Fill="White" Stroke="Black" StrokeThickness="3" RadiusX="15" RadiusY="15" Margin="29.2,78.1,141.6,0" VerticalAlignment="Top" Height="128.4" RenderTransformOrigin="0.5,0.5">
@@ -555,7 +555,7 @@
 					</TransformGroup>
 				</TextBlock.RenderTransform><Run Text="How does "/><Run Text="'"/><Run FontFamily="Walkway Black" Text="Sync"/><Run FontFamily="Walkway Black" Text=" "/><Run FontFamily="Walkway Black" Text="Butler"/><Run Text=", "/><Run FontStyle="Italic" Text="Sync"/><Run Text="'"/><Run Text=" work"/><Run Text="?"/></TextBlock>
 			<Button x:Name="SBSHelpScreenNextBtn" VerticalAlignment="Bottom" Height="39.2" Content="Next" FontWeight="Bold" FontSize="18.667" Click="GoToSBSDemoHelpScreen_Click" HorizontalAlignment="Right" Width="83.2" TabIndex="1" Margin="0,0,1.5,1.5"/>
-			<Button x:Name="SBSFeatureHelpCloseBtn" HorizontalAlignment="Right" Margin="0,0,0.7,1.6" Content="Close" FontWeight="Bold" FontSize="18.667" Click="ExitSBSTutorial_Click" Width="83.2" VerticalAlignment="Bottom" Height="39.2"/>
+			<Button x:Name="SBSFeatureHelpCloseBtn" HorizontalAlignment="Right" Margin="0,0,1.533,1.933" Content="Close" FontWeight="Bold" FontSize="18.667" Click="ExitSBSTutorial_Click" Width="83.2" VerticalAlignment="Bottom" Height="39.2"/>
 		</Grid>
 	</Grid>
 </UserControl>
