@@ -49,11 +49,15 @@ namespace SyncButlerUI
         {
 			if(FirstTimeComputerNameText.Text.Trim().Length == 0)
 			{
-				CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Please enter a valid computer name.");
+                CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Please enter a valid computer name.\nOnly combination of Alphabets and Numbers are allowed.");
 			}
             else if (!ComputerNameChecker.IsComputerNameValid(FirstTimeComputerNameText.Text.Trim()))
             {
-                CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, FirstTimeComputerNameText.Text.Trim() + " is not a valid name");
+                CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, FirstTimeComputerNameText.Text.Trim() + " is not a valid name\nOnly combination of Alphabets and Numbers are allowed.");
+            }
+            else if (FirstTimeComputerNameText.Text.Length > 16)
+            {
+                CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Please limit the length of the computer name to 16 characters.");
             }
             else if (FirstTimeComputerNameText.Text.Length != 0)
             {
@@ -61,7 +65,7 @@ namespace SyncButlerUI
                 controller.SetFirstComputerName(FirstTimeComputerNameText.Text.Trim());
                 CurrentState = State.OpenWindow;
                 VisualStateManager.GoToState(this, "HelpScreenState", false);
-				FocusControl(() => HelpScreen1NextBtn.Focus());
+                FocusControl(() => HelpScreen1NextBtn.Focus());
             }
             else
             {
