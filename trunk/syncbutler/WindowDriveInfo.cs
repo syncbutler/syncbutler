@@ -54,9 +54,11 @@ namespace SyncButler
             {
                 throw new Exception("invalid drive");
             }
-            
-            DriveInfo di = new DriveInfo("" + driveLetter);
-            Label = di.VolumeLabel;
+            else
+            {
+                DriveInfo di = new DriveInfo("" + driveLetter);
+                Label = di.VolumeLabel;
+            }
         }
 
         /// <summary>

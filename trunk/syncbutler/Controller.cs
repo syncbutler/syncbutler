@@ -691,7 +691,16 @@ namespace SyncButler
                 if (driveletter.Length == 0) sbsDriveLetter = SyncEnvironment.SBSDriveLetter;
                 else sbsDriveLetter = driveletter[0];
 
-                WindowDriveInfo wdi = new WindowDriveInfo(sbsDriveLetter);
+                WindowDriveInfo wdi = null;
+                try
+                {
+                    wdi = new WindowDriveInfo(sbsDriveLetter);
+                }
+                catch (Exception ex)
+                {
+                    if (!ex.Message.Equals("invalid drive"))
+                        throw ex;
+                }
                 return wdi;
             }
             catch (Exceptions.DriveNotSupportedException)
