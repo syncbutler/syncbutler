@@ -618,7 +618,7 @@
 								<Image Margin="19.091,2.333,0,6.046" VerticalAlignment="Stretch" Height="Auto" Source="Images/Folder.png" Stretch="Fill" HorizontalAlignment="Left" Width="24.621" Opacity="0.445" />
 								<Image HorizontalAlignment="Left" Margin="15.576,3.214,0,5.165" VerticalAlignment="Stretch" Width="24.621" Height="Auto" Source="Images\Folder.png" Stretch="Fill" Opacity="0.41"/>
 								<TextBlock HorizontalAlignment="Left" Margin="45.087,-1.166,0,0" Width="113.5" Text="Partnership Name:" TextWrapping="Wrap" VerticalAlignment="Top" Height="17" FontWeight="Bold" />
-								<TextBlock x:Name="ConflictNo" HorizontalAlignment="Stretch" Margin="204.94,0.006,146.227,6.993" Width="Auto" TextWrapping="Wrap" Text="(No Actions Required)" VerticalAlignment="Stretch" Height="Auto">
+								<TextBlock x:Name="ConflictNo" HorizontalAlignment="Stretch" Margin="204.94,0.006,146.227,6.993" Width="Auto" TextWrapping="Wrap" Text="(Done!)" VerticalAlignment="Stretch" Height="Auto">
 									<TextBlock.Style>
 										<Style TargetType="{x:Type TextBlock}">
 										<Setter Property="Visibility" Value="Collapsed"/>
@@ -1487,9 +1487,9 @@
 			<TextBlock x:Name="ConflictsLabel3" Margin="119.547,40.335,0,0" FontSize="24" FontWeight="Bold" Text="Result of Sync" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Width="177.273" Height="33.673"/>
 			<Custom:DataGrid x:Name="SyncResultListBox" IsReadOnly="True" Margin="29.138,104.5,21.662,0" SelectionUnit="FullRow" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"  CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False" Width="720" VerticalAlignment="Top" Height="355" > 
 				<Custom:DataGrid.Columns>
-					<Custom:DataGridTextColumn Header="Folder 1" MinWidth="290"  Binding="{Binding Left}"/>
-					<Custom:DataGridTextColumn Header="Action" MinWidth="140"  Binding="{Binding Action}"/>
-					<Custom:DataGridTextColumn Header="Folder 2" MinWidth="290"  Binding="{Binding Right}"/>
+					<Custom:DataGridTextColumn Header="Folder 1" MinWidth="285" Binding="{Binding Left}"/>
+					<Custom:DataGridTextColumn Header="Action Taken" MinWidth="145" Binding="{Binding Action}"/>
+					<Custom:DataGridTextColumn Header="Folder 2" MinWidth="285" Binding="{Binding Right}"/>
 				</Custom:DataGrid.Columns>
 				
 				
@@ -1632,7 +1632,7 @@
 			</TextBlock>
 			<TextBlock Margin="0,0,-85.574,13.959" FontSize="14.667" TextWrapping="Wrap" HorizontalAlignment="Right" Width="337.024" TextAlignment="Justify" VerticalAlignment="Bottom" Height="95.527"><Run Text="Please give this partnership a name that will allow you to identify the partnership easily."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="For example, &quot;Work Files&quot; or &quot;Music Collection&quot; or &quot;School Projects&quot;."/></TextBlock>
 			<TextBlock Margin="0,0,-12.336,110.986" FontSize="16" TextWrapping="Wrap" Text="Step 3 of 3 :" HorizontalAlignment="Right" Width="267.853" VerticalAlignment="Bottom" Height="30.972" FontWeight="Bold" TextDecorations="Underline" FontStyle="Italic"/>
-			<TextBox x:Name="folderOneTextBox" Margin="179.425,158.927,24.32,0" VerticalAlignment="Top" TextWrapping="Wrap" MaxLength="266"  RenderTransformOrigin="0.372,1.387" KeyDown="SourceTextBox_Enter" d:LayoutOverrides="VerticalAlignment" Height="24" FontSize="14.667" Grid.Column="1" >
+			<TextBox x:Name="folderOneTextBox" Margin="179.425,158.927,24.32,0" VerticalAlignment="Top" MaxLength="300"  RenderTransformOrigin="0.372,1.387" KeyDown="SourceTextBox_Enter" d:LayoutOverrides="VerticalAlignment" Height="24" FontSize="14.667" Grid.Column="1" >
 				<TextBox.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
@@ -1642,7 +1642,7 @@
 					</TransformGroup>
 				</TextBox.RenderTransform>
 			</TextBox>
-			<TextBox x:Name="folderTwoTextBox" Margin="179.017,287.357,24.32,0" VerticalAlignment="Top" TextWrapping="Wrap" MaxLength="266"  RenderTransformOrigin="0.372,1.387" KeyDown="SourceTextBox_Enter" Height="24" FontSize="14.667" Grid.Column="1" >
+			<TextBox x:Name="folderTwoTextBox" Margin="179.017,287.357,24.32,0" VerticalAlignment="Top" MaxLength="300"  RenderTransformOrigin="0.372,1.387" KeyDown="SourceTextBox_Enter" Height="24" FontSize="14.667" Grid.Column="1" >
 				<TextBox.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
@@ -1652,7 +1652,7 @@
 					</TransformGroup>
 				</TextBox.RenderTransform>
 			</TextBox>
-			<TextBox x:Name="partnershipNameTextBox" Margin="179.985,0,24.32,77.162" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="24"  KeyDown="PartnershipNameTextBox_Enter" RenderTransformOrigin="0.5,0.5" FontSize="14.667" Grid.Column="1" >
+			<TextBox x:Name="partnershipNameTextBox" Margin="179.985,0,24.32,77.162" VerticalAlignment="Bottom" Height="24"  KeyDown="PartnershipNameTextBox_Enter" RenderTransformOrigin="0.5,0.5" FontSize="14.667" Grid.Column="1" >
 				<TextBox.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>

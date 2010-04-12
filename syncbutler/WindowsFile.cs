@@ -685,23 +685,23 @@ namespace SyncButler
             }
             catch (IOException e)
             {
-                exp = new Exception("An I/O error was encountered while processing " + parentPartnership.Name + ": " + e.Message);
+                exp = new Exception("I am having a problem accessing a file while syncing " + parentPartnership.Name + ":\n\n" + e.Message);
             }
             catch (UnauthorizedAccessException e)
             {
-                exp = new Exception("A permissions error was encountered while processing " + parentPartnership.Name + ": " + e.Message);
+                exp = new Exception("I was denied permission to access a file while syncing " + parentPartnership.Name + ":\n\n" + e.Message);
             }
             catch (System.Security.SecurityException e)
             {
-                exp = new Exception("A permissions error was encountered while processing " + parentPartnership.Name + ": " + e.Message);
+                exp = new Exception("I was denied permission to access a file while syncing " + parentPartnership.Name + ":\n\n" + e.Message);
             }
             catch (InvalidActionException e)
             {
-                exp = new Exception("An invalid action occurred while processing " + parentPartnership.Name + ": " + e.Message);
+                exp = new Exception("I might have done something I was not supposed to while syncing " + parentPartnership.Name + ":\n\n" + e.Message);
             }
             catch (Exception e)
             {
-                exp = new Exception("An error occurred while processing " + parentPartnership.Name + ": " + e.Message);
+                exp = new Exception("There seems to be a problem syncing " + parentPartnership.Name + ":\n\n" + e.Message);
             }
 
             if (exp != null && errorHandler != null)

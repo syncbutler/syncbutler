@@ -232,7 +232,7 @@ namespace SyncButlerUI
                         ((BackgroundWorker)worker).CancelAsync();
                         break;
                     case CustomDialog.MessageResponse.Retry:
-                        System.Diagnostics.Debug.Assert(msg.source == ErrorReportingSource.Resolver, "Cannot Retry errors nor generated during conflict resolution");
+                        System.Diagnostics.Debug.Assert(msg.source == ErrorReportingSource.Resolver, "I was unsuccessful in retrying your request. Some errors occured when I was fixing the issues.");
                         ThreadSafeAddResolve((Conflict)msg.failedObject);
                         break;
                 }
@@ -302,8 +302,8 @@ namespace SyncButlerUI
             CurrentState = State.Conflict;
             if (scanWorker != null)
             {
-                showMessageBox(CustomDialog.MessageType.Error, "There is already a scan " +
-                    "in progress. Please stop the current scan before starting another.");
+                showMessageBox(CustomDialog.MessageType.Error, "There is already a sync " +
+                    "in progress. Please stop the sync before starting another.");
 
                 return;
             }
@@ -331,7 +331,7 @@ namespace SyncButlerUI
             doneButton.IsEnabled = false;
             CancelButton.IsEnabled = true;
             goToResultPageButton.IsEnabled = false;
-            CurrentSyncingFile.Text = "Initializing scan...";
+            CurrentSyncingFile.Text = "Preparing to sync...";
             PartnershipName.Text = "";
 
             bool NeedsUserIntervention = false;
@@ -347,7 +347,7 @@ namespace SyncButlerUI
                 {
                     //CurrentSyncingFile.Text = "Scan cancelled.\nConflicts automatically processed: " + autoResolveCount +
                     //    "\nConflicts manually processed: " + manualResolveCount;
-                    CurrentSyncingFile.Text = "Scan cancelled.";
+                    CurrentSyncingFile.Text = "Scan Cancelled.";
                     scanWorker = null;
                     CancelButton.IsEnabled = false;
 
@@ -370,7 +370,7 @@ namespace SyncButlerUI
                     resolveButton.IsEnabled = true;
                 }
                 doneButton.IsEnabled = true;
-                CurrentSyncingFile.Text = "Scan complete. Please check if there are any conflicts which require your attention.";
+                CurrentSyncingFile.Text = "I am almost done with syncing.\nHowever, there are some outstanding issues which I need your help with.";
 
                 ThreadSafeAddResolve(autoResolveConflicts);
 
@@ -446,7 +446,7 @@ namespace SyncButlerUI
 
             //TotalProgressBar.IsIndeterminate = true;
             //SubProgressBar.IsIndeterminate = true;
-            CurrentSyncingFile.Text = "Getting ready to resolve conflicts...";
+            CurrentSyncingFile.Text = "Getting ready to fix outstanding issues...";
             PartnershipName.Text = "";
 
             TotalProgressBar.Visibility = Visibility.Visible;
@@ -491,23 +491,23 @@ namespace SyncButlerUI
                     }
                     catch (IOException e)
                     {
-                        exp = new Exception("There was a problem accessing a file while processing " + partnershipName + ": " + e.Message);
+                        exp = new Exception("I am having a problem accessing a file while syncing " + partnershipName + ":\n\n" + e.Message);
                     }
                     catch (UnauthorizedAccessException e)
                     {
-                        exp = new Exception("A permissions error was encountered while processing " + partnershipName + ": " + e.Message);
+                        exp = new Exception("I was denied permission to access a file while syncing " + partnershipName + ":\n\n" + e.Message);
                     }
                     catch (System.Security.SecurityException e)
                     {
-                        exp = new Exception("A permissions error was encountered while processing " + partnershipName + ": " + e.Message);
+                        exp = new Exception("I was denied permission to access a file while syncing " + partnershipName + ":\n\n" + e.Message);
                     }
                     catch (InvalidActionException e)
                     {
-                        exp = new Exception("An invalid action occurred while processing " + partnershipName + ": " + e.Message);
+                        exp = new Exception("I might have done something I was not supposed to while syncing " + partnershipName + ":\n\n" + e.Message);
                     }
                     catch (Exception e)
                     {
-                        exp = new Exception("A problem was encountered while processing " + partnershipName + ": " + e.Message);
+                        exp = new Exception("There seems to be a problem syncing " + partnershipName + ":\n\n" + e.Message);
                     }
 
                     if (exp != null)
@@ -535,11 +535,11 @@ namespace SyncButlerUI
                 foreach (ConflictList cl in mergedList) manualCount += cl.Conflicts.Count;
                 if ((manualResolveCount > 0) || (manualCount == 0))
                 {
-                    CurrentSyncingFile.Text = "Syncing complete.";
+                    CurrentSyncingFile.Text = "Syncing Complete.";
                 }
                 else
                 {
-                    CurrentSyncingFile.Text = "Scan complete. Please check if there are any conflicts which require your attention.";
+                    CurrentSyncingFile.Text = "I am almost done with syncing.\nHowever, there are some outstanding issues which I need your help with.";
                 }
                 
                 partnershipNameTextBox.Text = "";
@@ -551,7 +551,7 @@ namespace SyncButlerUI
                 {
                     //CurrentSyncingFile.Text = "Scan cancelled.\nConflicts automatically processed: " + autoResolveCount +
                     //"\nConflicts manually processed: " + manualResolveCount;
-                    CurrentSyncingFile.Text = "Sync cancelled.";
+                    CurrentSyncingFile.Text = "Sync Cancelled.";
                     if (Controller.ConflictCount != 0)
                     {
                         resolveButton.IsEnabled = true;
@@ -1193,7 +1193,7 @@ namespace SyncButlerUI
                         {
                             // Define the parameters of the message box to show the user
 
-                            info.message = "An error occured while syncing: " + exp.Message + "\n\nWhat would you like me to do?";
+                            info.message = "I encountered a problem while syncing:\n\n" + exp.Message + "\n\nWhat would you like me to do?";
                             info.messageType = CustomDialog.MessageType.Error;
                             info.messageTemplate = CustomDialog.MessageTemplate.SkipCancel;
                             info.parent = this;
@@ -1247,7 +1247,7 @@ namespace SyncButlerUI
 
             if (CalcuateUserRequestedSpace() <= 250 * MEGA_BYTE & SBSEnable.Equals("Enable"))
             {
-                showMessageBox(CustomDialog.MessageType.Warning, "Sync Butler needs about 250MB on your storage device to carry your recent files. It may not be able to carry the files you need, when you need them. Please give Sync Bulter more storage space!");
+                showMessageBox(CustomDialog.MessageType.Warning, "Sync Butler needs at least 250MB on your storage device to carry your recent files. It may not be able to carry the files you need, when you need them. Please give Sync Bulter more storage space!");
             }
             else if (!ComputerNameChecker.IsComputerNameValid(ComputerName))
             {
@@ -1264,7 +1264,7 @@ namespace SyncButlerUI
                     Controller.SaveSetting(ComputerName, SBSEnable, DriveLetter, FreeSpaceToUse, Resolution, enableSyncAll);
                     if (SBSEnable.Equals("Enable"))
                     {
-                        String ExtraMsg = String.Format("SBS will now save your recent files to: {0}", Controller.GetSBSPath());
+                        String ExtraMsg = String.Format("Sync Butler, Sync! will now save your recent files to:\n{0}", Controller.GetSBSPath());
                         showMessageBox(CustomDialog.MessageType.Success, "The setting has been changed.\r\n" + ExtraMsg);
                         VisualStateManager.GoToState(this, "SbsState", false);
                         LoadMRUs();
@@ -1272,7 +1272,7 @@ namespace SyncButlerUI
                     }
                     else
                     {
-                        showMessageBox(CustomDialog.MessageType.Success, "SBS is disabled.\r\nYou may activate the feature later by click on the SBS button.");
+                        showMessageBox(CustomDialog.MessageType.Success, "Sync Butler, Sync! is disabled.\r\nYou may turn on the feature later by click on the Sync Butler, Sync! button.");
                         VisualStateManager.GoToState(this, "HomeState", false);
                         CurrentState = State.Home;
                     }
@@ -1351,7 +1351,7 @@ namespace SyncButlerUI
                     if (freespace <= preferedSize * MEGA_BYTE)
                     {
                         CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok,
-                            "Sync Butler needs about 250MB on your storage device to carry your recent files.\r\nIt may not be able to carry the files you need, when you need them.\r\nPlease use a device with a bigger space");
+                            "Sync Butler needs at least 250MB on your storage device to carry your recent files.\r\nIt may not be able to carry the files you need, when you need them.\r\nPlease use a device with a bigger space");
                         SpaceToUseSlide.IsEnabled = false;
                         SpaceToUseTextbox.IsEnabled = false;
                     }
@@ -1450,22 +1450,22 @@ namespace SyncButlerUI
         {
             if (folderPath.Length > 266)
             {
-                throw new UserInputException("Folder Path is too long");
+                throw new UserInputException("The path to the Folder is too long.");
             }
             else if (String.IsNullOrEmpty(folderPath))
             {
-                throw new UserInputException("Please select a Folder");
+                throw new UserInputException("Please select a Folder before continuing.");
             }
             else if (!Directory.Exists(folderPath))
             {
-                throw new UserInputException("No Such Folder");
+                throw new UserInputException("The Folder you have given do not exist.");
             }
             else if (folderPath[0] != '\\')
             {
                 DriveInfo di = new DriveInfo("" + folderPath[0]);
                 if (di.DriveType == DriveType.CDRom)
                 {
-                    throw new UserInputException("CD Drive syncing is not supported in this version");
+                    throw new UserInputException("Syncing with a CD ROM is not supported in this version");
                 }
             }
 
@@ -1480,15 +1480,15 @@ namespace SyncButlerUI
 
             if (tempfolder2Name.Equals(tempfolder1Name))
             {
-                throw new UserInputException("The same folders were selected. \n\nPlease pick another folder.");
+                throw new UserInputException("The same folders were selected.\n\nPlease pick another folder.");
             }
             else if (tempfolder1Name.IndexOf(tempfolder2Name) == 0)
             {
-                throw new UserInputException("The 1st folder is a subfolder of the 2nd folder. \n\nPlease select another folder.");
+                throw new UserInputException("The 1st folder is a subfolder of the 2nd folder.\n\nPlease select another folder.");
             }
             else if (tempfolder2Name.IndexOf(tempfolder1Name) == 0)
             {
-                throw new UserInputException("The 2nd folder is a subfolder of the 1st folder. \n\nPlease select another folder.");
+                throw new UserInputException("The 2nd folder is a subfolder of the 1st folder.\n\nPlease select another folder.");
             }
         }
         private void FocusMe(object sender, EventArgs e)
@@ -1646,7 +1646,7 @@ namespace SyncButlerUI
             if (!IsBusy()) return true;
 
             CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok,
-                "There is currently an operation in progress. Please cancel the current operation before leaving this page.");
+                "I am working on something in this screen at the moment. Please click Cancel if you wish to leave this screen.");
 
             // Without synchronization, cancelling the operation from here may be unpredictable
             // ie. The operation has started to be cancelled, but hasn't really ended yet while the
@@ -1700,7 +1700,7 @@ namespace SyncButlerUI
             VisualStateManager.GoToState(this, "SettingsState", false);
 
             BackgroundWorker storageScanWorker = new BackgroundWorker();
-            ProgressBar progressWindow = new ProgressBar(storageScanWorker, "Loading Settings Page", "Searching for removable storage devices");
+            ProgressBar progressWindow = new ProgressBar(storageScanWorker, "Retrieving your settings...", "Searching for Portable Storage Devices");
             progressWindow.HideTotalProgress();
             progressWindow.IsIndeterminate = true;
 
