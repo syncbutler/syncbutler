@@ -42,7 +42,7 @@
 									</RadialGradientBrush>
 								</Rectangle.Fill>
 							</Rectangle>
-							<Image x:Name="image" Cursor="Hand" HorizontalAlignment="Left" Margin="55.5,60.779,0,63.737" Width="212.356" Opacity="0.6" RenderTransformOrigin="0.5,0.5" Source="Images\Synchonize.png" Stretch="Fill" Height="212.356">
+							<Image x:Name="image" Cursor="Hand" HorizontalAlignment="Left" Margin="99,83.347,0,78.876" Width="183.785" Opacity="0.6" RenderTransformOrigin="0.5,0.5" Source="Images\Synchonize.png" Stretch="Fill" Height="Auto">
 								<Image.RenderTransform>
 									<TransformGroup>
 										<ScaleTransform/>
@@ -63,8 +63,8 @@
 									</LinearGradientBrush>
 								</Rectangle.Fill>
 							</Rectangle>
-							<TextBlock Cursor="Hand" Margin="290.709,178.5,97.884,19.483" Opacity="0.7" FontFamily="Arial" FontSize="18.667" Foreground="White" TextWrapping="Wrap"><Run Text="Work anywhere."/><LineBreak/><Run Text="Start sy"/><Run Text="nchronizing your files!"/></TextBlock>
-							<ContentPresenter Margin="290.5,132,101.524,65.23" VerticalAlignment="Stretch" Height="Auto" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Content="Start Syncing" RecognizesAccessKey="True"/>
+							<TextBlock Cursor="Hand" Margin="299.709,171,88.884,86.376" Opacity="0.7" FontFamily="Arial" FontSize="18.667" Foreground="White" TextWrapping="Wrap" d:LayoutOverrides="VerticalAlignment"><Run Text="Work anywhere."/><LineBreak/><Run Text="Start sy"/><Run Text="nchronizing your files!"/></TextBlock>
+							<ContentPresenter Margin="299.5,124.5,92.524,0" VerticalAlignment="Top" Height="46.5" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Content="Start Syncing" RecognizesAccessKey="True"/>
 						</Grid>
 						<ControlTemplate.Triggers>
 							<EventTrigger RoutedEvent="FrameworkElement.Loaded" SourceName="bigButton_Copy">
@@ -1127,8 +1127,8 @@
 			</Image>
 			<TextBlock Margin="0,30.457,33.659,0" FontFamily="Arial" FontSize="32" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="54.564" HorizontalAlignment="Right" Width="269.488" FontStyle="Italic"><Run FontFamily="Walkway Black" FontStyle="Normal" Text="Sync Butler"/><Run FontStyle="Normal" Text=", "/><Run FontFamily="Fonts/#Segoe UI" FontStyle="Italic" Text="Sync!"/></TextBlock>
 			<TextBlock Margin="0,85.521,22.663,0" FontSize="14.667" TextWrapping="Wrap" HorizontalAlignment="Right" Width="301.445" VerticalAlignment="Top" Height="61.553" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" TextAlignment="Center"><Run FontSize="21.333" FontWeight="Bold" Text="There is nothing for"/><LineBreak/><Run FontSize="21.333" FontWeight="Bold" Text="you to do here!"/><LineBreak/><Run FontSize="8" Text=" "/><LineBreak/></TextBlock>
-			<ListBox x:Name="Favourites_List"  Margin="39.273,72.384,337.477,0" GotFocus="FocusMe" VerticalAlignment="Top" Height="187.976" MouseDoubleClick="OpenSelectedOnList" FontSize="14.667" />
-			<Button x:Name="Edit_Selector"  Margin="65.812,277.562,0,218.622" Content="Move Selected File to the Other Side" RenderTransformOrigin="0.79,1.043" Cursor="Hand" Click="SBSMoveToOther" FontSize="14.667" Width="253" Height="30" HorizontalAlignment="Left" d:LayoutOverrides="Width">
+			<ListBox x:Name="Favourites_List"  Margin="39.273,72.384,337.477,0" GotFocus="FocusMe" VerticalAlignment="Top" Height="173" MouseDoubleClick="OpenSelectedOnList" FontSize="14.667" />
+			<Button x:Name="Edit_Selector"  Margin="65.812,255.062,0,241.122" Content="Move Selected File to the Other Side" RenderTransformOrigin="0.79,1.043" Cursor="Hand" Click="SBSMoveToOther" FontSize="14.667" Width="253" Height="30" HorizontalAlignment="Left" d:LayoutOverrides="VerticalAlignment, Width">
 				<Button.Background>
 					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
 						<GradientStop Color="#FFF3F3F3" Offset="0"/>
@@ -1138,9 +1138,9 @@
 					</LinearGradientBrush>
 				</Button.Background>
 			</Button>
-			<TextBlock x:Name="textBlock8" Margin="0,0,408.195,183.521" FontSize="16" TextWrapping="Wrap" HorizontalAlignment="Right" Width="322.595" FontWeight="Bold" FontStyle="Italic" Text="Excluded Files" VerticalAlignment="Bottom" Height="26.243" FontFamily="Fonts/#Segoe UI"/>
-			<ListBox x:Name="WeirdFile_List"  Margin="42.018,0,337.477,62.163" VerticalAlignment="Bottom" Height="118.796" Style="{DynamicResource weirdFilesListItemsStyle}" GotFocus="FocusMe" MouseDoubleClick="OpenSelectedOnList" FontSize="14.667" />
-			<Button x:Name="SBSSync" Margin="351.431,0,360.842,218.622" VerticalAlignment="Bottom" Height="30" Content="Copy!" RenderTransformOrigin="0.79,1.043" Cursor="Hand" Click="MRUSync" FontSize="14.667">
+			<TextBlock x:Name="textBlock8" Margin="0,0,408.195,210.521" FontSize="16" TextWrapping="Wrap" HorizontalAlignment="Right" Width="322.595" FontWeight="Bold" FontStyle="Italic" Text="Excluded Files" VerticalAlignment="Bottom" Height="26.243" FontFamily="Fonts/#Segoe UI"/>
+			<ListBox x:Name="WeirdFile_List"  Margin="42.018,0,337.477,117.663" VerticalAlignment="Bottom" Height="90" Style="{DynamicResource weirdFilesListItemsStyle}" GotFocus="FocusMe" MouseDoubleClick="OpenSelectedOnList" FontSize="14.667" />
+			<Button x:Name="SBSSync" Margin="348.431,255.062,363.842,241.122" Content="Copy!" RenderTransformOrigin="0.79,1.043" Cursor="Hand" Click="MRUSync" FontSize="14.667">
 				<Button.Background>
 					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
 						<GradientStop Color="#FFF3F3F3" Offset="0"/>
@@ -1150,7 +1150,7 @@
 					</LinearGradientBrush>
 				</Button.Background>
 			</Button>
-			<Button x:Name="SBSSettings"  HorizontalAlignment="Right" Margin="0,0,140.677,56.512" VerticalAlignment="Bottom" Width="84" Height="30" Content="Settings" RenderTransformOrigin="0.79,1.043" Cursor="Hand" Click="GoToSetting" FontSize="14.667">
+			<Button x:Name="SBSSettings"  HorizontalAlignment="Right" Margin="0,0,179.32,52.893" VerticalAlignment="Bottom" Width="84" Height="30" Content="Settings" RenderTransformOrigin="0.79,1.043" Cursor="Hand" Click="GoToSetting" FontSize="14.667">
 				<Button.Background>
 					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
 						<GradientStop Color="#FFF3F3F3" Offset="0"/>
@@ -1161,14 +1161,14 @@
 				</Button.Background>
 			</Button>
 			<TextBlock Margin="39.273,34.957,0,0" FontFamily="Fonts/#Segoe UI" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="25.927" HorizontalAlignment="Left" Width="196.578" Text="Favourites List"/>
-			<TextBlock x:Name="textBlock_Copy" Margin="41.212,0,337.477,112.046" FontSize="16" TextWrapping="Wrap" Text="Mouse over to see" FontStyle="Italic" VerticalAlignment="Bottom" Height="18.747" TextAlignment="Center"/>			
-			<Button HorizontalAlignment="Right" IsTabStop="false" Margin="0,0,32.388,55.56" VerticalAlignment="Bottom" Width="84" Content="Show Help" Click="ShowHelp" Height="30" FontSize="14.667"/>
+			<TextBlock x:Name="textBlock_Copy" Margin="42.033,0,336.656,151.832" FontSize="16" TextWrapping="Wrap" Text="Mouse over to see" FontStyle="Italic" VerticalAlignment="Bottom" Height="18.747" TextAlignment="Center"/>			
+			<Button HorizontalAlignment="Right" IsTabStop="false" Margin="0,0,72.031,53.441" VerticalAlignment="Bottom" Width="84" Content="Show Help" Click="ShowHelp" Height="30" FontSize="14.667"/>
 			<TextBlock Margin="0,273.36,22.663,0" FontSize="14.667" TextWrapping="Wrap" HorizontalAlignment="Right" Width="301.445" VerticalAlignment="Top" Height="158.974" d:LayoutOverrides="HorizontalAlignment" TextAlignment="Justify"><Run Text="The "/><Run FontWeight="Bold" Text="Favourites Box"/><Run Text=" lists your recently used and newly created files. "/><LineBreak/><Run FontSize="8" Text=" "/><LineBreak/><Run Text="If you wish, you may click "/><Run FontWeight="Bold" Text="Copy"/><Run Text=" to copy these files to your portable storage. "/><LineBreak/><Run FontSize="8" Text=" "/><LineBreak/><Run Text="This feature will make a quick copy of those files so that you will always have your most recent work with you."/><LineBreak/><Run Text=""/></TextBlock>
 			<Path Stretch="Fill" Stroke="#FF908A8A" StrokeThickness="2" HorizontalAlignment="Right" Margin="0,76.925,35.66,0" VerticalAlignment="Top" Width="276.52" Height="2" Data="M1.0000301,0.99999902 L187.03178,0.99999902"/>
 			<Path Stretch="Fill" Stroke="#FF908A8A" StrokeThickness="2" HorizontalAlignment="Right" Margin="0,260.361,33.659,0" Width="281.365" Data="M1.0000301,0.99999902 L187.03178,0.99999902" VerticalAlignment="Top" Height="2"/>
-			<TextBlock Margin="0,152.378,22.663,0" FontSize="14.667" TextWrapping="Wrap" HorizontalAlignment="Right" Width="301.445" VerticalAlignment="Top" Height="95.839" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" TextAlignment="Justify"><Run Text="This is just a "/><Run FontWeight="Bold" Text="preview page"/><Run Text=" for "/><Run FontFamily="Walkway Black" FontStyle="Normal" FontWeight="Bold" Text="Sync Butler"/><Run FontFamily="Arial" FontStyle="Normal" FontWeight="Bold" Text=", "/><Run FontFamily="D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\Fonts\#Segoe UI" FontStyle="Italic" FontWeight="Bold" Text="Sync!"/><Run Text=". The files shown in the Favourites Box will be "/><Run FontWeight="Bold" Text="automatically sync"/><Run Text=" to your selected portable storage device when you click on "/><Run FontWeight="Bold" Text="Sync All"/><Run Text=" in the "/><Run FontWeight="Bold" Text="Home"/><Run Text=" page."/></TextBlock>
-			<TextBlock x:Name="SBSPathTextBlock" Margin="42.033,0,0,26.989" VerticalAlignment="Bottom" Height="20.952" TextWrapping="Wrap" HorizontalAlignment="Left" Width="239.047"><Run FontFamily="Walkway Black" FontSize="14.667" Text="Sync Butler"/><Run FontSize="14.667" FontStyle="Italic" FontWeight="Bold" Text=", Sync!"/><Run FontStyle="Italic" FontWeight="Bold" Text=" "/><Run Text="will save your files to: "/></TextBlock>
-			<Label x:Name="SBSPathLabel" Margin="278.223,0,15.002,22.227" VerticalAlignment="Bottom" Height="27.619" Content="Label"/>
+			<TextBlock Margin="0,152.378,22.663,0" FontSize="14.667" TextWrapping="Wrap" HorizontalAlignment="Right" Width="301.445" VerticalAlignment="Top" Height="103.983" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" TextAlignment="Justify"><Run Text="This is just a "/><Run FontWeight="Bold" Text="preview page"/><Run Text=" for "/><Run FontFamily="Walkway Black" FontStyle="Normal" FontWeight="Bold" Text="Sync Butler"/><Run FontFamily="Arial" FontStyle="Normal" FontWeight="Bold" Text=", "/><Run FontFamily="D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\Fonts\#Segoe UI" FontStyle="Italic" FontWeight="Bold" Text="Sync!"/><Run Text=". The files shown in the Favourites Box will be "/><Run FontWeight="Bold" Text="automatically sync"/><Run Text=" to your selected portable storage device when you click on "/><Run FontWeight="Bold" Text="Sync All"/><Run Text=" in the "/><Run FontWeight="Bold" Text="Home"/><Run Text=" page."/></TextBlock>
+			<TextBlock x:Name="SBSPathTextBlock" Margin="42.033,0,0,54" VerticalAlignment="Bottom" Height="23.738" TextWrapping="Wrap" HorizontalAlignment="Left" Width="152.38" FontSize="16" Text="Files will be saved to: "/>
+			<Label x:Name="SBSPathLabel" Margin="196.931,0,337.477,51" VerticalAlignment="Bottom" Height="29.893" Content="Label" FontSize="14.667" FontWeight="Bold"/>
 		</Grid>
 		<Grid x:Name="Conflict" Margin="0.027,0,0.449,-4" VerticalAlignment="Bottom" Height="528" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
 			<Grid.RowDefinitions>
@@ -1493,12 +1493,12 @@
 				</Rectangle.Fill>
 			</Rectangle>
 			<Image x:Name="image1_Copy5" Margin="184.002,136.825,1.47,14.143" Source="Images\logo.png" Stretch="Fill" Opacity="0.04"/>
-			<TextBlock x:Name="ConflictsLabel3" Margin="117.547,40.335,0,0" FontSize="24" FontWeight="Bold" Text="Result of Sync" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Width="177.273" Height="33.673"/>
-			<Custom:DataGrid x:Name="SyncResultListBox" Margin="28.976,104.5,22.674,96.867" SelectionUnit="FullRow" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"  CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False" > 
+			<TextBlock x:Name="ConflictsLabel3" Margin="119.547,40.335,0,0" FontSize="24" FontWeight="Bold" Text="Result of Sync" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Width="177.273" Height="33.673"/>
+			<Custom:DataGrid x:Name="SyncResultListBox" Margin="29.138,104.5,21.662,0" SelectionUnit="FullRow" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"  CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False" Width="720" VerticalAlignment="Top" Height="355" > 
 				<Custom:DataGrid.Columns>
-					<Custom:DataGridTextColumn Header="Folder 1" MinWidth="180"  Binding="{Binding Left}"/>
-					<Custom:DataGridTextColumn Header="Action" MinWidth="120"  Binding="{Binding Action}"/>
-					<Custom:DataGridTextColumn Header="Folder 2" MinWidth="180"  Binding="{Binding Right}"/>
+					<Custom:DataGridTextColumn Header="Folder 1" MinWidth="290"  Binding="{Binding Left}"/>
+					<Custom:DataGridTextColumn Header="Action" MinWidth="140"  Binding="{Binding Action}"/>
+					<Custom:DataGridTextColumn Header="Folder 2" MinWidth="290"  Binding="{Binding Right}"/>
 				</Custom:DataGrid.Columns>
 				
 				
