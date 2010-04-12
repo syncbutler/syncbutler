@@ -145,6 +145,15 @@ namespace SyncButler
         }
 
         /// <summary>
+        /// Gets the directory containing this file system object.
+        /// </summary>
+        /// <returns>The string of the directory.</returns>
+        public override string GetContainingFolder()
+        {
+            return this.nativeFileObj.Directory.FullName;
+        }
+
+        /// <summary>
         /// Constructor that takes in four parameters, a root path, the full path,
         /// the parent partnership, and the parent folder
         /// </summary>

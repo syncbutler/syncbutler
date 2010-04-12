@@ -58,6 +58,28 @@ namespace SyncButler
             userActions.AddAction(Action.Ignore);
             if (suggestedAction != Action.Unknown) userActions.SetSelectedAction(suggestedAction);
         }
+
+        /// <summary>
+        /// Gets the folder containing the left ISyncable.
+        /// </summary>
+        public string LeftFolder
+        {
+            get
+            {
+                return this.left.GetContainingFolder();
+            }
+        }
+
+        /// <summary>
+        /// Gets the folder containing the right ISyncable.
+        /// </summary>
+        public string RightFolder
+        {
+            get
+            {
+                return this.right.GetContainingFolder();
+            }
+        }
 		
         /// <summary>
         /// Constructor used to instantiate a Conflict object.
