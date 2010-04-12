@@ -505,10 +505,16 @@ namespace SyncButler
         {
             return System.Security.Principal.WindowsIdentity.GetCurrent().Name;
         }
+
+        /// <summary>
+        /// Get the path to the folder where SBS will store files.
+        /// </summary>
+        /// <returns>A string of the path.</returns>
         public static string GetSBSPath()
         {
             return GetSBSPath(SyncEnvironment.SBSDriveLetter);
         }
+
         /// <summary>
         /// Sync the mrus that are listed. Please read MRUList to understand how file is actually saved.
         /// </summary>
@@ -552,15 +558,26 @@ namespace SyncButler
             }
         }
 
+        /// <summary>
+        /// Get the path where SBS will store files, given the drive letter.
+        /// </summary>
+        /// <param name="driveLetter">The drive letter to use with SBS.</param>
+        /// <returns>A string containing the path.</returns>
         private static string GetSBSPath(char driveLetter)
         {
             string syncTo = driveLetter + ":\\SyncButler\\" + SyncEnvironment.ComputerName + "\\";
             return syncTo;
         }
-        public static void OpenFile(String fileName)
+
+        /// <summary>
+        /// Opens a file in its associated viewer.
+        /// </summary>
+        /// <param name="fileName">The path to the file name.</param>
+        public static void OpenFile(string fileName)
         {
                 System.Diagnostics.Process.Start(fileName);
         }
+
         /// <summary>
         /// This method is required to be run when the program is closed. It
         /// saves all the necessary state into memory
@@ -581,7 +598,7 @@ namespace SyncButler
         }
 		
 		/// <summary>
-		/// 
+		/// Assigns the settings and stores it to disk.
 		/// </summary>
 		/// <param name="ComputerName">Computer name of the user</param>
 		/// <param name="EnableSBS">[Not in use]If the user wants sbs to be enabled</param>
@@ -685,6 +702,10 @@ namespace SyncButler
             }
         }
 
+        /// <summary>
+        /// Sets the drive letter for SBS to store its files on.
+        /// </summary>
+        /// <param name="driveLetter">The drive letter of the path.</param>
         public static void SetSBSDriveLetter(char driveLetter)
         {
             SyncEnvironment.SBSDriveLetter = driveLetter;
@@ -717,6 +738,7 @@ namespace SyncButler
         {
             SyncEnvironment.Resolution = resolution;
         }
+
         /// <summary>
         /// Remove the shell integration context menu from the registry
         /// and disable the settings
@@ -743,6 +765,9 @@ namespace SyncButler
             SyncEnvironment.GetInstance().StoreSettings();
         }
 
+        /// <summary>
+        /// Adds the registry key for Mini-Sync right-click function.
+        /// </summary>
         public void AddRegistryKey()
         {
             try
