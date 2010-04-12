@@ -53,6 +53,11 @@ namespace SyncButlerUI
         {
             //will not handle on 1st run.
         }
+        public void FillInCreatePartnership(string path)
+        {
+            //will not handle on 1st run.
+        }
+
         #endregion
 
 		private void CloseApp(Object sender, RoutedEventArgs e){

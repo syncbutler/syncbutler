@@ -168,7 +168,7 @@ namespace SyncButler.Logging
             XmlNode msg = logElem.AppendChild(this.xmlLog.CreateElement("message"));
             msg.AppendChild(this.xmlLog.CreateTextNode(message));
 
-            this.xmlLog.Save(LOG_FILE);
+            //this.xmlLog.Save(LOG_FILE);
         }
     }
 }

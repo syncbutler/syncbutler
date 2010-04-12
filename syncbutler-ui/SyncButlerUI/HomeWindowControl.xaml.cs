@@ -700,7 +700,7 @@ namespace SyncButlerUI
         /// <param name="sender"></param>
         /// <param name="e"></param>
 
-        private void GoToCreatePartnership_Click(object sender, RoutedEventArgs e)
+        internal void GoToCreatePartnership_Click(object sender, RoutedEventArgs e)
         {
             VisualStateManager.GoToState(this, "CreatePartnershipState", false);
             CurrentState = State.Create;

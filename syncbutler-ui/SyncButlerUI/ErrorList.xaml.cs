@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.ComponentModel;
 
 namespace SyncButlerUI
 {
@@ -20,7 +21,6 @@ namespace SyncButlerUI
 		public ErrorList()
 		{
 			this.InitializeComponent();
-			
 			// Insert code required on object creation below this point.
 		}
 
@@ -28,6 +28,12 @@ namespace SyncButlerUI
         {
             errorTable.RowGroups[1].Rows.Clear();
             this.Hide();
+        }
+
+        void ErrorList_Closing(object sender, CancelEventArgs e)
+        {
+            closeWindow_Click(sender, null);
+            e.Cancel = true;
         }
 	}
 }
