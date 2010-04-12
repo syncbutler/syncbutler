@@ -680,19 +680,16 @@ namespace SyncButler
         public static WindowDriveInfo GetSBSDriveLetter()
         {
             char sbsDriveLetter;
-            if (SyncEnvironment.SBSDriveId == null || SyncEnvironment.SBSDriveId.Length == 0)
-                return null;
+
+            if (SyncEnvironment.SBSDriveId == null || SyncEnvironment.SBSDriveId.Length == 0) return null;
+
             try
             {
                 string driveletter = SystemEnvironment.StorageDevices.GetDriveLetter(SyncEnvironment.SBSDriveId, SyncEnvironment.SBSDrivePartition);
-                if (driveletter.Length == 0)
-                {
-                    sbsDriveLetter = SyncEnvironment.SBSDriveLetter;
-                }
-                else
-                {
-                    sbsDriveLetter = driveletter[0];
-                }
+                
+                if (driveletter.Length == 0) sbsDriveLetter = SyncEnvironment.SBSDriveLetter;
+                else sbsDriveLetter = driveletter[0];
+
                 WindowDriveInfo wdi = new WindowDriveInfo(sbsDriveLetter);
                 return wdi;
             }
