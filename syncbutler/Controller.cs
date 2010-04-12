@@ -664,6 +664,7 @@ namespace SyncButler
             SyncEnvironment.FirstSBSRun = false;
             SyncEnvironment.GetInstance().updateFirstSBSRun();
         }
+
         /// <summary>
         /// Used to get if SBS has runned before
         /// </summary>
