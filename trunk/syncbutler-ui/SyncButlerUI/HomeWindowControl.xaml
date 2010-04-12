@@ -618,7 +618,7 @@
 								<Image Margin="19.091,2.333,0,6.046" VerticalAlignment="Stretch" Height="Auto" Source="Images/Folder.png" Stretch="Fill" HorizontalAlignment="Left" Width="24.621" Opacity="0.445" />
 								<Image HorizontalAlignment="Left" Margin="15.576,3.214,0,5.165" VerticalAlignment="Stretch" Width="24.621" Height="Auto" Source="Images\Folder.png" Stretch="Fill" Opacity="0.41"/>
 								<TextBlock HorizontalAlignment="Left" Margin="45.087,-1.166,0,0" Width="113.5" Text="Partnership Name:" TextWrapping="Wrap" VerticalAlignment="Top" Height="17" FontWeight="Bold" />
-								<TextBlock x:Name="ConflictNo" HorizontalAlignment="Stretch" Margin="204.94,12.006,146.227,6.993" Width="Auto" TextWrapping="Wrap" Text="(No Actions Required)" VerticalAlignment="Stretch" Height="Auto">
+								<TextBlock x:Name="ConflictNo" HorizontalAlignment="Stretch" Margin="204.94,0.006,146.227,6.993" Width="Auto" TextWrapping="Wrap" Text="(No Actions Required)" VerticalAlignment="Stretch" Height="Auto">
 									<TextBlock.Style>
 										<Style TargetType="{x:Type TextBlock}">
 										<Setter Property="Visibility" Value="Collapsed"/>
