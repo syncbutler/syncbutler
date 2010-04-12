@@ -32,9 +32,7 @@ namespace SyncButler.Uninstaller
     {
         /* Registry keys that should be deleted (in proper order) */
         public static string[] DELETE_REG_LIST = {
-            @"Software\Classes\AllFilesystemObjects\shell\Sync Butler, Sync!",
-            @"Software\Classes\AllFilesystemObjects\shell\Mini-Sync This!",
-            @"Software\Classes\Folder\shell\Mini-Sync This!",
+            @"Software\Classes\Folder\shell\Sync this Folder!",
         };
 
         /* Files that should remain (file names only, no full paths) */

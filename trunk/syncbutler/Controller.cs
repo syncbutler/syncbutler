@@ -834,7 +834,7 @@ namespace SyncButler
 
                 RegistryKey key = Registry.CurrentUser.CreateSubKey(@"Software\Classes\Folder\shell");
                 key.SetValue(null, "open");
-                RegistryKey sbs = key.CreateSubKey("Mini-Sync This!");
+                RegistryKey sbs = key.CreateSubKey("Sync this Folder!");
                 sbs.CreateSubKey("command").SetValue(null, System.Reflection.Assembly.GetEntryAssembly().Location + " -addmini \"%1\" ");
                 sbs.SetValue("icon", System.Reflection.Assembly.GetEntryAssembly().Location);
                 sbs.SetValue("MultiSelectModel", "Single");
