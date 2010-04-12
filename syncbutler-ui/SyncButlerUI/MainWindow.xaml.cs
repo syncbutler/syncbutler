@@ -25,12 +25,13 @@ namespace SyncButlerUI
 	public partial class MainWindow : Window, IGUI
 	{
 		private SyncButler.Controller controller;
+        private ErrorList el;
 		public MainWindow()
 		{
 			try
             {
 			    controller = Controller.GetInstance();
-                if (!(Controller.IsNotFirstRun()))
+                if (Controller.IsFirstRun())
                 {
                     FirstTimeStartupScreen dialog = new FirstTimeStartupScreen();
 
@@ -50,12 +51,28 @@ namespace SyncButlerUI
 			// Insert code required on object creation below this point.
             controller.SetWindow(this);
             this.homeWindow1.Controller = this.controller;
+            el = new ErrorList();
 		}
 
-        /// <summary>
-        /// Calling this will use the dispatcher to bring this window to the top.
-        /// </summary>
-        public void GrabFocus()
+        public void AddToErrorList(string path, string error)
+        {
+            this.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.SystemIdle,
+                new Action(
+                    delegate()
+                    {
+                        TableRow tr = new TableRow();
+                        tr.FontSize = 10;
+                        tr.Background = System.Windows.Media.Brushes.White;
+                        tr.Cells.Add(new TableCell(new Paragraph(new Run(path))));
+                        tr.Cells.Add(new TableCell(new Paragraph(new Run(error))));
+                        this.el.errorTable.RowGroups[1].Rows.Add(tr);
+                        this.el.Show();
+                        this.el.Focus();
+                    }
+                    ));    
+        }
+
+        public void GrabFocus(Controller.WinStates ws)
         {
             this.Dispatcher.Invoke(
                 System.Windows.Threading.DispatcherPriority.SystemIdle,
@@ -63,12 +80,28 @@ namespace SyncButlerUI
                 new Action(
                     delegate()
                     {
-                        this.Activate();
-                        this.Topmost = true; //to bring to front
-                        this.Topmost = false; //to remove always on top
+                        GrabFocus();
+                        //switch to a screen based on ws.
+                        switch (ws)
+                        {
+                            case Controller.WinStates.MiniPartnerships:
+                                homeWindow1.ViewMiniPartnerships_Click(this, null);
+                                break;
+                            default:
+                                break;
+                        }
                     }
                     ));
-            
+        }
+
+        /// <summary>
+        /// Calling this will use the dispatcher to bring this window to the top.
+        /// </summary>
+        public void GrabFocus()
+        {
+            this.Activate();
+            this.Topmost = true; //to bring to front
+            this.Topmost = false; //to remove always on top
         }
 
     
@@ -102,10 +135,6 @@ namespace SyncButlerUI
                     homeWindow1.CurrentState = HomeWindowControl.State.SBS;
                     VisualStateManager.GoToState(homeWindow1, "SbsState", false);
 					homeWindow1.LoadMRUs();
-
-				
-
-
 		}
 
 		private void Help_Click(object sender, RoutedEventArgs e)

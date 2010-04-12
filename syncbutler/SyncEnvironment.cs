@@ -177,6 +177,9 @@ namespace SyncButler
             //Check that the path exists.
             if (!(fileExist || directoryExist))
                 throw new ArgumentException("This path does not exist.");
+
+            if (!IsValidSystemObject(source))
+                throw new ArgumentException("Selected folder is a system folder which cannot be synchronised.");
             
             System.Diagnostics.Debug.Assert((name != null) && (name.Length > 0));
             Partnership element;

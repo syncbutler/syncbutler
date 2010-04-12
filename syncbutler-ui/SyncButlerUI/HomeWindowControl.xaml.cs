@@ -787,24 +787,23 @@ namespace SyncButlerUI
             SortedList<string, Partnership> partnershiplist = this.Controller.GetPartnershipList();
        		this.partnershipList.ItemsSource = partnershiplist.Values;
 			this.partnershipList.Items.Refresh();
-
         }
 		/// <summary>
         /// goes to view for mini partnerships
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ViewMiniPartnerships_Click(object sender, RoutedEventArgs e)
+        internal void ViewMiniPartnerships_Click(object sender, RoutedEventArgs e)
         {
             VisualStateManager.GoToState(this, "ViewMiniPartnershipState", false);
             CurrentState = State.ViewMiniPartnership;
             SortedList<string, Partnership> miniPartnershiplist = this.Controller.GetMiniPartnershipList();
-			this.minipartnershiplist.ItemsSource= miniPartnershiplist.Values;
+			this.minipartnershiplist.ItemsSource = miniPartnershiplist.Values;
             this.minipartnershiplist.Items.Refresh();
-	
-
+            
         }
- /// <summary>
+        
+        /// <summary>
         /// Checks for the index selected and delete the mini partnership
         /// </summary>
         /// <param name="sender"></param>

@@ -10,5 +10,7 @@ namespace SyncButler
     public interface IGUI
     {
         void GrabFocus();
+        void GrabFocus(Controller.WinStates ws);
+        void AddToErrorList(string path, string error);
     }
 }

@@ -60,14 +60,9 @@ namespace SyncButlerUI
                         {
                             base.Shutdown(0);
                         }
-
                     }
-                    else
-                    {
-                        base.Shutdown(0);
-                    }
-
-                    base.OnStartup(e);
+                    base.Shutdown(0);                    
+                    //base.OnStartup(e);
                 }
         }
 	}

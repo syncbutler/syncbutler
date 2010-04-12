@@ -25,7 +25,8 @@ namespace SyncButler
         private static Controller controller;
         private string sbsLogfile;
 		public static int ConflictCount {get; set;}
-        
+        public enum WinStates { Main, MiniPartnerships }
+
         /// <summary>
         /// Used by check and merged to see the total size of the files to be sync so far.
         /// </summary>
@@ -71,10 +72,10 @@ namespace SyncButler
             mainWindow = win;
         }
 
-        public void GrabFocus()
+        public void GrabFocus(WinStates ws)
         {
             if (mainWindow != null)
-                mainWindow.GrabFocus();
+                mainWindow.GrabFocus(ws);
         }
 
         /// <summary>
@@ -83,7 +84,6 @@ namespace SyncButler
         /// <returns>a list of usb drive letters</returns>
         public static List<WindowDriveInfo> GetUSBDriveLetters()
 		{
-            
 			return WindowDriveInfo.GetDriveInfo(SyncButler.SystemEnvironment.StorageDevices.GetRemovableDeviceDriveLetters());
 		}
 
@@ -110,8 +110,9 @@ namespace SyncButler
                 SingleInstance.Cleanup();
                 return false;
             }
-            // This is the 1st instance. Handle the arguments.
-            ReceiveAction(args);
+            // This is the 1st instance. Handle the arguments if it is not the first run.
+            if (!IsFirstRun())
+                SingleInstance.Receiver(args);
             return true;
         }
 
@@ -122,8 +123,6 @@ namespace SyncButler
         private static void ReceiveAction(string[] args)
         {
             Controller control = Controller.GetInstance();
-            control.GrabFocus(); // grab focus
-
             string output = "";
             foreach (string str in args)
                 output = output + str + " ";
@@ -136,14 +135,14 @@ namespace SyncButler
             }
              
             Logging.Logger.GetInstance().DEBUG(output + " received");
-            // TODO: Process the arguments received
             switch (args[0])
             {
                 case "-addmini":
                     string error = AddToMiniPartnerships(args[1]);
+                    control.GrabFocus(WinStates.MiniPartnerships);
                     if (!(String.IsNullOrEmpty(error))) //if some error is returned
                     {
-                        errorList.Add(args[1] + error);
+                        GetInstance().mainWindow.AddToErrorList(args[1], error);
                     }
                     break;
                 default:
@@ -575,10 +574,10 @@ namespace SyncButler
         /// <summary>
         /// This checks in with sync environment to check if the program has ran before.
         /// </summary>
-        /// <returns>True if has ran before, false otherwise</returns>
-        public static bool IsNotFirstRun()
+        /// <returns>True if this is the first run, false otherwise</returns>
+        public static bool IsFirstRun()
         {
-            return (SyncEnvironment.FirstRunComplete && SyncEnvironment.ComputerNamed);
+            return !(SyncEnvironment.FirstRunComplete && SyncEnvironment.ComputerNamed);
         }
 		
 		/// <summary>
@@ -751,7 +750,7 @@ namespace SyncButler
 
                 RegistryKey key = Registry.CurrentUser.CreateSubKey(@"Software\Classes\AllFilesystemObjects\shell");
                 key.SetValue(null, "open");
-                RegistryKey sbs = key.CreateSubKey("Sync Butler, Sync!");
+                RegistryKey sbs = key.CreateSubKey("Mini-Sync This!");
                 sbs.CreateSubKey("command").SetValue(null, System.Reflection.Assembly.GetEntryAssembly().Location + " -addmini \"%1\" ");
                 sbs.SetValue("icon", System.Reflection.Assembly.GetEntryAssembly().Location);
             }
