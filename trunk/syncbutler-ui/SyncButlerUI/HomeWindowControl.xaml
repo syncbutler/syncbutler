@@ -1150,7 +1150,7 @@
 					</LinearGradientBrush>
 				</Button.Background>
 			</Button>
-			<Button x:Name="SBSSettings"  HorizontalAlignment="Right" Margin="0,0,140.677,40.322" VerticalAlignment="Bottom" Width="84" Height="30" Content="Settings" RenderTransformOrigin="0.79,1.043" Cursor="Hand" Click="GoToSetting" FontSize="14.667">
+			<Button x:Name="SBSSettings"  HorizontalAlignment="Right" Margin="0,0,140.677,56.512" VerticalAlignment="Bottom" Width="84" Height="30" Content="Settings" RenderTransformOrigin="0.79,1.043" Cursor="Hand" Click="GoToSetting" FontSize="14.667">
 				<Button.Background>
 					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
 						<GradientStop Color="#FFF3F3F3" Offset="0"/>
@@ -1162,11 +1162,13 @@
 			</Button>
 			<TextBlock Margin="39.273,34.957,0,0" FontFamily="Fonts/#Segoe UI" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="25.927" HorizontalAlignment="Left" Width="196.578" Text="Favourites List"/>
 			<TextBlock x:Name="textBlock_Copy" Margin="41.212,0,337.477,112.046" FontSize="16" TextWrapping="Wrap" Text="Mouse over to see" FontStyle="Italic" VerticalAlignment="Bottom" Height="18.747" TextAlignment="Center"/>			
-			<Button HorizontalAlignment="Right" IsTabStop="false" Margin="0,0,30.483,40.322" VerticalAlignment="Bottom" Width="84" Content="Show Help" Click="ShowHelp" Height="30" FontSize="14.667"/>
+			<Button HorizontalAlignment="Right" IsTabStop="false" Margin="0,0,32.388,55.56" VerticalAlignment="Bottom" Width="84" Content="Show Help" Click="ShowHelp" Height="30" FontSize="14.667"/>
 			<TextBlock Margin="0,273.36,22.663,0" FontSize="14.667" TextWrapping="Wrap" HorizontalAlignment="Right" Width="301.445" VerticalAlignment="Top" Height="158.974" d:LayoutOverrides="HorizontalAlignment" TextAlignment="Justify"><Run Text="The "/><Run FontWeight="Bold" Text="Favourites Box"/><Run Text=" lists your recently used and newly created files. "/><LineBreak/><Run FontSize="8" Text=" "/><LineBreak/><Run Text="If you wish, you may click "/><Run FontWeight="Bold" Text="Copy"/><Run Text=" to copy these files to your portable storage. "/><LineBreak/><Run FontSize="8" Text=" "/><LineBreak/><Run Text="This feature will make a quick copy of those files so that you will always have your most recent work with you."/><LineBreak/><Run Text=""/></TextBlock>
 			<Path Stretch="Fill" Stroke="#FF908A8A" StrokeThickness="2" HorizontalAlignment="Right" Margin="0,76.925,35.66,0" VerticalAlignment="Top" Width="276.52" Height="2" Data="M1.0000301,0.99999902 L187.03178,0.99999902"/>
 			<Path Stretch="Fill" Stroke="#FF908A8A" StrokeThickness="2" HorizontalAlignment="Right" Margin="0,260.361,33.659,0" Width="281.365" Data="M1.0000301,0.99999902 L187.03178,0.99999902" VerticalAlignment="Top" Height="2"/>
 			<TextBlock Margin="0,152.378,22.663,0" FontSize="14.667" TextWrapping="Wrap" HorizontalAlignment="Right" Width="301.445" VerticalAlignment="Top" Height="95.839" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" TextAlignment="Justify"><Run Text="This is just a "/><Run FontWeight="Bold" Text="preview page"/><Run Text=" for "/><Run FontFamily="Walkway Black" FontStyle="Normal" FontWeight="Bold" Text="Sync Butler"/><Run FontFamily="Arial" FontStyle="Normal" FontWeight="Bold" Text=", "/><Run FontFamily="D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\Fonts\#Segoe UI" FontStyle="Italic" FontWeight="Bold" Text="Sync!"/><Run Text=". The files shown in the Favourites Box will be "/><Run FontWeight="Bold" Text="automatically sync"/><Run Text=" to your selected portable storage device when you click on "/><Run FontWeight="Bold" Text="Sync All"/><Run Text=" in the "/><Run FontWeight="Bold" Text="Home"/><Run Text=" page."/></TextBlock>
+			<TextBlock x:Name="SBSPathTextBlock" Margin="42.033,0,0,26.989" VerticalAlignment="Bottom" Height="20.952" TextWrapping="Wrap" HorizontalAlignment="Left" Width="239.047"><Run FontFamily="Walkway Black" FontSize="14.667" Text="Sync Butler"/><Run FontSize="14.667" FontStyle="Italic" FontWeight="Bold" Text=", Sync!"/><Run FontStyle="Italic" FontWeight="Bold" Text=" "/><Run Text="will save your files to: "/></TextBlock>
+			<Label x:Name="SBSPathLabel" Margin="278.223,0,15.002,22.227" VerticalAlignment="Bottom" Height="27.619" Content="Label"/>
 		</Grid>
 		<Grid x:Name="Conflict" Margin="0.027,0,0.449,-4" VerticalAlignment="Bottom" Height="528" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
 			<Grid.RowDefinitions>

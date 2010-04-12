@@ -1495,6 +1495,18 @@ namespace SyncButlerUI
 
         public void LoadMRUs()
         {
+            if (!Controller.IsSBSEnable())
+            {
+                this.SBSPathLabel.Visibility = Visibility.Hidden;
+                this.SBSPathTextBlock.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                this.SBSPathTextBlock.Visibility = Visibility.Visible;
+                this.SBSPathLabel.Content = Controller.GetSBSPath();
+                this.SBSPathLabel.Visibility = Visibility.Visible;
+            }
+
             //SBSDone.IsEnabled = false;
 
             BackgroundWorker sbsScanWorker = new BackgroundWorker();
