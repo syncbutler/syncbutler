@@ -1207,6 +1207,7 @@ namespace SyncButlerUI
             }
             else
             {
+                showMessageBox(CustomDialog.MessageType.Success, "SBS is disabled.\r\nYou may activate the feature later by click on the SBS button.");
                 VisualStateManager.GoToState(this, "HomeState", false);
                 CurrentState = State.Home;
             }
@@ -1238,7 +1239,7 @@ namespace SyncButlerUI
                     Controller.SaveSetting(ComputerName, SBSEnable, DriveLetter, FreeSpaceToUse, Resolution);
                     if (SBSEnable.Equals("Enable"))
                     {
-                        String ExtraMsg = String.Format("Sync Butler is going to sync your files to :\r\n\t {0}", Controller.GetSBSPath());
+                        String ExtraMsg = String.Format("SBS will now save your recent files to: {0}", Controller.GetSBSPath());
                         showMessageBox(CustomDialog.MessageType.Success, "The setting has been changed.\r\n" + ExtraMsg);
                         VisualStateManager.GoToState(this, "SbsState", false);
                         LoadMRUs();
@@ -1246,7 +1247,7 @@ namespace SyncButlerUI
                     }
                     else
                     {
-                        showMessageBox(CustomDialog.MessageType.Success, "The setting has been changed.");
+                        showMessageBox(CustomDialog.MessageType.Success, "SBS is disabled.\r\nYou may activate the feature later by click on the SBS button.");
                         VisualStateManager.GoToState(this, "HomeState", false);
                         CurrentState = State.Home;
                     }
@@ -1647,7 +1648,13 @@ namespace SyncButlerUI
         }
         
 
-//TODO: refactor this
+
+        public void GoToSetting()
+        {
+            GoToSetting(null, null);
+        }
+
+        //TODO: refactor this
         private void GoToSetting(object sender, RoutedEventArgs e)
         {
             CurrentState = State.Settings;
