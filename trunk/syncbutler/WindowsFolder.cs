@@ -640,6 +640,15 @@ namespace SyncButler
         }
 
         /// <summary>
+        /// Gets the directory containing this file system object.
+        /// </summary>
+        /// <returns>The string of the directory.</returns>
+        public override string GetContainingFolder()
+        {
+            return this.nativeDirObj.FullName;
+        }
+
+        /// <summary>
         /// Serializes this object into XML
         /// </summary>
         /// <param name="xmlData"></param>

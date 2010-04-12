@@ -276,7 +276,6 @@ namespace SyncButlerUI
         /// Starts a BackgroundWorker object for a Syncing (ie. Scan);
         /// </summary>
         /// <param name="partnershipNames">A collection of partnerships to scan</param>
-        /// <returns></returns>
         private void AsyncStartSync(IEnumerable<string> partnershipNames, SortedList<string, Partnership> partnershipList)
         {
             Controller.ConflictCount = 0;

@@ -1236,8 +1236,12 @@
 							</ListBox.Style>
 							<ListBox.ItemTemplate>
 								<DataTemplate>
-										<Grid Height="41" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="700.742" >
+										<Grid Height="58" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="700.742" >
 										<TextBlock x:Name="Offending_Path" HorizontalAlignment="Stretch" Margin="38.191,3.502,170.431,1.457" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Text="{Binding OffendingPath}" TextWrapping="Wrap" d:LayoutOverrides="VerticalAlignment"/>
+										<TextBlock x:Name="Folder1_Label" HorizontalAlignment="Stretch" Margin="48.191,20.502,170.431,1.457" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Text="Folder 1:" TextWrapping="Wrap" d:LayoutOverrides="VerticalAlignment"/>
+										<TextBlock x:Name="Folder1_Path" HorizontalAlignment="Stretch" Margin="98.191,20.502,170.431,1.457" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Text="{Binding LeftFolder}" TextWrapping="Wrap" d:LayoutOverrides="VerticalAlignment"/>
+										<TextBlock x:Name="Folder2_Label" HorizontalAlignment="Stretch" Margin="48.191,37.502,170.431,1.457" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Text="Folder 2:" TextWrapping="Wrap" d:LayoutOverrides="VerticalAlignment"/>
+										<TextBlock x:Name="Folder2_Path" HorizontalAlignment="Stretch" Margin="98.191,37.502,170.431,1.457" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Text="{Binding RightFolder}" TextWrapping="Wrap" d:LayoutOverrides="VerticalAlignment"/>
 										<ComboBox x:Name="Action_Taken"  ItemsSource="{Binding Path=userActions}" DisplayMemberPath="Description" SelectedItem="{Binding userActions.SelectedAction}" Margin="0,5.769,6.135,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="22" HorizontalAlignment="Right" Width="114.522" >
 											<ComboBox.RenderTransform>
 												<TransformGroup>

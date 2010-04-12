@@ -50,6 +50,12 @@ namespace SyncButler
         Partnership GetParentPartnership();
 
         /// <summary>
+        /// Gets the path to the directory containing this ISyncable.
+        /// </summary>
+        /// <returns></returns>
+        string GetContainingFolder();
+
+        /// <summary>
         /// This method is called on the root ISyncables just
         /// before left.Sync(right) is invoked.
         /// </summary>

@@ -260,6 +260,12 @@ namespace SyncButler
         #region ISyncable Members
 
         /// <summary>
+        /// This should be overridden by the appropriate child object's method.
+        /// </summary>
+        /// <returns></returns>
+        public abstract string GetContainingFolder();
+
+        /// <summary>
         /// Checks and returns whether the file or folder exists.
         /// Calls Refresh() on the underlying native file system object before attempting the check.
         /// </summary>
