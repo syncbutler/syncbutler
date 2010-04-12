@@ -80,6 +80,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ErrorList.xaml.cs">
+      <DependentUpon>ErrorList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Placeholder.cs" />
     <Compile Include="CustomDialog.xaml.cs">
       <DependentUpon>CustomDialog.xaml</DependentUpon>
@@ -102,6 +105,10 @@
       <DependentUpon>WelcomeScreenControl.xaml</DependentUpon>
     </Compile>
     <Page Include="CustomDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ErrorList.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
