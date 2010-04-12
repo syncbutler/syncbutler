@@ -118,6 +118,37 @@ namespace SyncButler
         }
 
         /// <summary>
+        /// Gets the human-readable form of the offending path.
+        /// </summary>
+        public string FriendlyOffendingPath
+        {
+            get
+            {
+                return this.GetFriendlyOffendingPath();
+            }
+        }
+
+        /// <summary>
+        /// Gets a more human-readable offending path, instead of folder:\\ and file:\\.
+        /// </summary>
+        /// <returns>A human-readable offending path.</returns>
+        public string GetFriendlyOffendingPath()
+        {
+            string path = GetOffendingPath();
+
+            if (path.ToLower().StartsWith(@"folder:\\"))
+            {
+                path = path.Replace(@"folder:\\", "Folder '") + "'";
+            }
+            else if (path.ToLower().StartsWith(@"file:\\"))
+            {
+                path = path.Replace(@"file:\\", "File '") + "'";
+            }
+
+            return path;
+        }
+
+        /// <summary>
         /// Gets or sets whether this conflict should be ignored.
         /// </summary>
         public bool IgnoreConflict
@@ -133,12 +164,14 @@ namespace SyncButler
         }
 		
 		/// <summary>
-		/// Gets the relative  for conflicts
+		/// Gets the relative path for conflicts
 		/// </summary>
 		/// <returns></returns>
-		public string OffendingPath{
-			get{
-			 return GetOffendingPath();	
+		public string OffendingPath
+        {
+			get
+            {
+			    return GetOffendingPath();	
 			}
 		}
         /// <summary>
