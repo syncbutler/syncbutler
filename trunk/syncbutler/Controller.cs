@@ -25,7 +25,7 @@ namespace SyncButler
         private static Controller controller;
         private string sbsLogfile;
 		public static int ConflictCount {get; set;}
-        public enum WinStates { Main, MiniPartnerships }
+        public enum WinStates { Main, MiniPartnerships, CreatePartnership }
 
         /// <summary>
         /// Used by check and merged to see the total size of the files to be sync so far.
@@ -112,7 +112,7 @@ namespace SyncButler
             }
             // This is the 1st instance. Handle the arguments if it is not the first run.
             if (!IsFirstRun())
-                SingleInstance.Receiver(args);
+                ReceiveAction(args);
             return true;
         }
 
@@ -138,12 +138,7 @@ namespace SyncButler
             switch (args[0])
             {
                 case "-addmini":
-                    string error = AddToMiniPartnerships(args[1]);
-                    control.GrabFocus(WinStates.MiniPartnerships);
-                    if (!(String.IsNullOrEmpty(error))) //if some error is returned
-                    {
-                        GetInstance().mainWindow.AddToErrorList(args[1], error);
-                    }
+                    GetInstance().mainWindow.FillInCreatePartnership(args[1]);
                     break;
                 default:
                     //unknown commands
@@ -771,7 +766,10 @@ namespace SyncButler
             SyncEnvironment.EnableShellContext = true;
             SyncEnvironment.GetInstance().StoreSettings();
         }
-
+        
+        /// <summary>
+        /// Adds the registry key for the context menu
+        /// </summary>
         /// <summary>
         /// Adds the registry key for Mini-Sync right-click function.
         /// </summary>
@@ -780,11 +778,12 @@ namespace SyncButler
             try
             {
 
-                RegistryKey key = Registry.CurrentUser.CreateSubKey(@"Software\Classes\AllFilesystemObjects\shell");
+                RegistryKey key = Registry.CurrentUser.CreateSubKey(@"Software\Classes\Folder\shell");
                 key.SetValue(null, "open");
                 RegistryKey sbs = key.CreateSubKey("Mini-Sync This!");
                 sbs.CreateSubKey("command").SetValue(null, System.Reflection.Assembly.GetEntryAssembly().Location + " -addmini \"%1\" ");
                 sbs.SetValue("icon", System.Reflection.Assembly.GetEntryAssembly().Location);
+                sbs.SetValue("MultiSelectModel", "Single");
             }
             catch (Exception e)
             {

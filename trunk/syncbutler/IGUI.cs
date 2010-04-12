@@ -12,5 +12,6 @@ namespace SyncButler
         void GrabFocus();
         void GrabFocus(Controller.WinStates ws);
         void AddToErrorList(string path, string error);
+        void FillInCreatePartnership(string str);
     }
 }

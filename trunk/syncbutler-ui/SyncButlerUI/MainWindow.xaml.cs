@@ -19,18 +19,18 @@ using SyncButler.Exceptions;
 
 namespace SyncButlerUI
 {
-	/// <summary>
-	/// Interaction logic for MainWindow.xaml
-	/// </summary>
-	public partial class MainWindow : Window, IGUI
-	{
-		private SyncButler.Controller controller;
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window, IGUI
+    {
+        private SyncButler.Controller controller;
         private ErrorList el;
-		public MainWindow()
-		{
-			try
+        public MainWindow()
+        {
+            try
             {
-			    controller = Controller.GetInstance();
+                controller = Controller.GetInstance();
                 if (Controller.IsFirstRun())
                 {
                     FirstTimeStartupScreen dialog = new FirstTimeStartupScreen();
@@ -40,20 +40,21 @@ namespace SyncButlerUI
                         throw new UserCancelledException();
                     }
                 }
-				this.InitializeComponent();
-               
-			}
+                this.InitializeComponent();
+
+            }
             catch (UserCancelledException)
             {
                 throw new UserCancelledException();
-			}
+            }
 
-			// Insert code required on object creation below this point.
+            // Insert code required on object creation below this point.
             controller.SetWindow(this);
             this.homeWindow1.Controller = this.controller;
             el = new ErrorList();
-		}
+        }
 
+        #region IGUI
         public void AddToErrorList(string path, string error)
         {
             this.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.SystemIdle,
@@ -69,7 +70,7 @@ namespace SyncButlerUI
                         this.el.Show();
                         this.el.Focus();
                     }
-                    ));    
+                    ));
         }
 
         public void GrabFocus(Controller.WinStates ws)
@@ -86,6 +87,9 @@ namespace SyncButlerUI
                         {
                             case Controller.WinStates.MiniPartnerships:
                                 homeWindow1.ViewMiniPartnerships_Click(this, null);
+                                break;
+                            case Controller.WinStates.CreatePartnership:
+                                homeWindow1.GoToCreatePartnership_Click(this, null);
                                 break;
                             default:
                                 break;
@@ -104,55 +108,70 @@ namespace SyncButlerUI
             this.Topmost = false; //to remove always on top
         }
 
-    
+        public void FillInCreatePartnership(string path)
+        {
+            this.Dispatcher.Invoke(
+                System.Windows.Threading.DispatcherPriority.Normal,
+                TimeSpan.FromSeconds(1),
+                new Action(
+                    delegate()
+                    {
+                        GrabFocus(Controller.WinStates.CreatePartnership);
+                        homeWindow1.folderOneTextBox.Text = path;
+                        homeWindow1.partnershipNameTextBox.Text = path;
+                    }
+                    ));
+        }
 
-		private void goHome(object sender, RoutedEventArgs e)
-		{
+        #endregion
+        private void goHome(object sender, RoutedEventArgs e)
+        {
             homeWindow1.FirstTimeHelp.Visibility = System.Windows.Visibility.Hidden;
             if (!homeWindow1.StopExistingOperation()) return;
-			//homeWindow1.goHome(sender,e);
-			VisualStateManager.GoToState(homeWindow1,"HomeState",false);
+            //homeWindow1.goHome(sender,e);
+            VisualStateManager.GoToState(homeWindow1, "HomeState", false);
             homeWindow1.CurrentState = HomeWindowControl.State.Home;
-		}
+        }
 
 
-		public void goToSyncButlerSync(object sender, RoutedEventArgs e)
-		{
-            
+        public void goToSyncButlerSync(object sender, RoutedEventArgs e)
+        {
+
             homeWindow1.FirstTimeHelp.Visibility = System.Windows.Visibility.Hidden;
-		
-            if (!homeWindow1.StopExistingOperation()) return;
-          		if(Controller.IsFirstSBSRun()){
-					FirstTimeStartupScreen dialog = new FirstTimeStartupScreen();
-					dialog.WelcomeScreenControl.FirstTimeComputerNameText.Visibility=Visibility.Hidden;
-					//VisualStateManager.GoToState(dialog.WelcomeScreenControl,"HelpScreen3",false);
-					Controller.SetFirstSBSRun();
-                    dialog.Title = "SyncButler - Help";
-                    dialog.WelcomeScreenControl.GoToSBSScreen();
-					dialog.ShowDialog();
-				}
-                    homeWindow1.CheckIfEnoughSpace();
-                    homeWindow1.CurrentState = HomeWindowControl.State.SBS;
-                    VisualStateManager.GoToState(homeWindow1, "SbsState", false);
-					homeWindow1.LoadMRUs();
-		}
 
-		private void Help_Click(object sender, RoutedEventArgs e)
-		{
-			FirstTimeStartupScreen dialog = new FirstTimeStartupScreen();
-            
+            if (!homeWindow1.StopExistingOperation()) return;
+            if (Controller.IsFirstSBSRun())
+            {
+                FirstTimeStartupScreen dialog = new FirstTimeStartupScreen();
+                dialog.WelcomeScreenControl.FirstTimeComputerNameText.Visibility = Visibility.Hidden;
+                //VisualStateManager.GoToState(dialog.WelcomeScreenControl,"HelpScreen3",false);
+                Controller.SetFirstSBSRun();
+                dialog.Title = "SyncButler - Help";
+                dialog.WelcomeScreenControl.GoToSBSScreen();
+                dialog.ShowDialog();
+            }
+            homeWindow1.CheckIfEnoughSpace();
+            homeWindow1.CurrentState = HomeWindowControl.State.SBS;
+            VisualStateManager.GoToState(homeWindow1, "SbsState", false);
+            homeWindow1.LoadMRUs();
+        }
+
+        private void Help_Click(object sender, RoutedEventArgs e)
+        {
+            FirstTimeStartupScreen dialog = new FirstTimeStartupScreen();
+
             dialog.WelcomeScreenControl.FirstTimeComputerNameText.Visibility = Visibility.Hidden;
             dialog.Title = "SyncButler - Help";
-            
+
             dialog.WelcomeScreenControl.GoToHelpScreen();
             dialog.ShowDialog();
-			
-		}
 
-		private void cleanUp(object sender,  System.ComponentModel.CancelEventArgs e)
-		{
-            if(this.controller != null)
-			    this.controller.Shutdown();
-		}
-	}
+        }
+
+        private void cleanUp(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (this.controller != null)
+                this.controller.Shutdown();
+        }
+    }
 }

@@ -4,6 +4,7 @@
 	x:Class="SyncButlerUI.ErrorList"
 	x:Name="Window"
 	Title="ErrorList"
+    Closing="ErrorList_Closing"
 	Width="640" Height="480">
     <Grid>
         <Grid.RowDefinitions>
