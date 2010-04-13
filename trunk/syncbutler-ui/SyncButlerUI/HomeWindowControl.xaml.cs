@@ -1227,7 +1227,6 @@ namespace SyncButlerUI
                 }
             });
 
-            //SBSSync.IsEnabled = false;
             // Start the whole process
             progressWindow.Start();
         }
@@ -1245,6 +1244,7 @@ namespace SyncButlerUI
                 VisualStateManager.GoToState(this, "HomeState", false);
                 CurrentState = State.Home;
             }
+            FirstTimeHelp.Visibility = System.Windows.Visibility.Hidden;
         }
         private void SaveSetting(object sender, RoutedEventArgs e)
         {
@@ -1256,7 +1256,7 @@ namespace SyncButlerUI
             string Resolution = this.resolutionLabel.Content.ToString();
             bool enableSyncAll = (bool)this.SBSSettingEnableSyncAll.IsChecked;
 
-            if (CalcuateUserRequestedSpace() < 250 * MEGA_BYTE & SBSEnable.Equals("Enable"))
+            if (SBSEnable.Equals("Enable") && CalcuateUserRequestedSpace() < 250 * MEGA_BYTE )
             {
                 CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Sync Butler needs at least 250MB on your storage device to carry your recent files. It may not be able to carry the files you need, when you need them. Please give Sync Bulter more storage space!");
             }
@@ -1273,6 +1273,7 @@ namespace SyncButlerUI
                 else
                 {
                     Controller.SaveSetting(ComputerName, SBSEnable, DriveLetter, FreeSpaceToUse, Resolution, enableSyncAll);
+                    FirstTimeHelp.Visibility = System.Windows.Visibility.Hidden;
                     if (SBSEnable.Equals("Enable"))
                     {
                         String ExtraMsg = String.Format("Sync Butler, Sync! will now save your recent files to:\n{0}", Controller.GetSBSPath());
@@ -1287,7 +1288,7 @@ namespace SyncButlerUI
                         VisualStateManager.GoToState(this, "HomeState", false);
                         CurrentState = State.Home;
                     }
-
+                    
 
                 }
             }
