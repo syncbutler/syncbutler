@@ -1238,7 +1238,7 @@ namespace SyncButlerUI
             }
             else
             {
-                CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Sync Butler, Sync! is disabled.\r\nYou may turn on the feature later by click on the Sync Butler, Sync! button.");
+                CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Sync Butler, Sync! is currently not enabled.\r\n\r\nYou may turn on the feature later by click on the Sync Butler, Sync! button.");
                 VisualStateManager.GoToState(this, "HomeState", false);
                 CurrentState = State.Home;
             }
@@ -1274,15 +1274,15 @@ namespace SyncButlerUI
                     FirstTimeHelp.Visibility = System.Windows.Visibility.Hidden;
                     if (SBSEnable.Equals("Enable"))
                     {
-                        String ExtraMsg = String.Format("Sync Butler, Sync! will now save your recent files to:\n{0}", Controller.GetSBSPath());
-                        CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "The setting has been changed.\r\n" + ExtraMsg);
+                        String ExtraMsg = String.Format("Sync Butler, Sync! will now save your recent files to:\n\n{0}", Controller.GetSBSPath());
+                        CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "The settings has been changed.\r\n\r\n" + ExtraMsg);
                         VisualStateManager.GoToState(this, "SbsState", false);
                         LoadMRUs();
                         CurrentState = State.SBS;
                     }
                     else
                     {
-                        CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Sync Butler, Sync! is disabled.\r\nYou may turn on the feature later by click on the Sync Butler, Sync! button.");
+                        CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Sync Butler, Sync! is currently not enabled.\r\n\r\nYou may turn on the feature later by click on the Sync Butler, Sync! button.");
                         VisualStateManager.GoToState(this, "HomeState", false);
                         CurrentState = State.Home;
                     }

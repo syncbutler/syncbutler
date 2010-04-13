@@ -1170,7 +1170,7 @@
 			<Image x:Name="image1_Copy2" Margin="182.092,130.331,9.455,22.247" Source="Images\logo.png" Stretch="Fill" Opacity="0.04"/>
 			<Rectangle Stroke="Black" RadiusX="5" RadiusY="2" Margin="18.798,374.118,17.383,0" VerticalAlignment="Top" Height="142.286"/>
 			<TextBlock x:Name="PartnershipName" Margin="29.169,0,267.738,111.641" VerticalAlignment="Bottom" Height="36.427" FontSize="14.667" FontWeight="Bold" Text="Partnership Name" TextWrapping="Wrap"/>
-			<TextBlock x:Name="CurrentSyncingFile" Margin="29.169,0,27.582,67.554" VerticalAlignment="Bottom" Height="40.087" TextWrapping="Wrap" Text="Currently Syncing: C:/doc/xml.xml"/>
+			<TextBlock x:Name="CurrentSyncingFile" Margin="29.169,0,27.582,67.554" VerticalAlignment="Bottom" Height="40.087" TextWrapping="Wrap" Text="Currently Syncing: C:/doc/xml.xml" FontSize="14.667"/>
 			<ProgressBar x:Name="SubProgressBar" Margin="162.316,0,27.582,44.081" VerticalAlignment="Bottom" Height="16.776"/>
 			<ProgressBar x:Name="TotalProgressBar" Margin="162.316,0,27.582,19.467" VerticalAlignment="Bottom" Height="16.776"/>
 			<TextBlock x:Name="ConflictsLabel" Margin="22.749,18.326,124.473,0" FontSize="24" FontWeight="Bold" Text="Sync Status" TextWrapping="Wrap" VerticalAlignment="Top" Height="42.946"/>
@@ -1506,7 +1506,7 @@
 					</LinearGradientBrush>
 				</Button.Background>
 			</Button>
-			<Image HorizontalAlignment="Left" Margin="39.894,26.697,0,0" VerticalAlignment="Top" Width="71.079" Height="71.079" Source="Images/Symbol-Refresh.png" Stretch="Fill"/>
+			<Image HorizontalAlignment="Left" Margin="29.138,15.941,0,0" VerticalAlignment="Top" Width="81.835" Height="81.835" Source="Images/Symbol-Refresh.png" Stretch="Fill"/>
 		</Grid>
 		<Grid x:Name="CreatePartnership" RenderTransformOrigin="0.5,0.5" Margin="0,-6,-4.217,6" Visibility="Hidden" Grid.ColumnSpan="2" >
 			<Grid.ColumnDefinitions>
@@ -1520,7 +1520,7 @@
 					<TranslateTransform/>
 				</TransformGroup>
 			</Grid.RenderTransform>
-			<Rectangle x:Name="background_Copy4" Cursor="Arrow" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="776.3" Margin="0,5.5,-0.807,-12.857">
+			<Rectangle x:Name="background_Copy4" Cursor="Arrow" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="776.3" Margin="0,8,-0.807,-15.357">
 				<Rectangle.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
@@ -1557,7 +1557,7 @@
 						<TranslateTransform/>
 					</TransformGroup>
 				</TextBlock.RenderTransform></TextBlock>
-			<TextBlock x:Name="textBlock3_Copy" Margin="137.05,39.548,300.887,0" FontFamily="Fonts/#Segoe UI" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" Text="Creating a Sync Partnership" VerticalAlignment="Top" Height="33.858"/>
+			<TextBlock x:Name="textBlock3_Copy" Margin="137.05,37.547,300.887,0" FontFamily="Fonts/#Segoe UI" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" Text="Creating a Sync Partnership" VerticalAlignment="Top" Height="33.858"/>
 			<TextBlock x:Name="textBlock12" Margin="0,135.702,416.17,0" FontSize="14.667" TextWrapping="Wrap" HorizontalAlignment="Right" Width="337.024" TextAlignment="Justify" VerticalAlignment="Top" Height="50.735" Text="Please select a folder that contains your media and documents."/>
 			<Image x:Name="image2_Copy" Margin="0,0,331.673,347.83" Source="Images\Misc.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Bottom" Height="41.93" HorizontalAlignment="Right" Width="42.604">
 				<Image.RenderTransform>
@@ -1649,8 +1649,8 @@
 					</TransformGroup>
 				</Image.RenderTransform>
 			</Image>
-			<Image Margin="41.075,31.663,0,0" Source="Images/Folder.png" Stretch="Fill" VerticalAlignment="Top" Height="69.334" HorizontalAlignment="Left" Width="69.334"/>
-			<Image Margin="57.377,39.44,0,0" Source="Images/Edit.png" Stretch="Fill" HorizontalAlignment="Left" VerticalAlignment="Top" Width="57.27" Height="57.27"/>
+			<Image Margin="39.741,21.658,0,0" Source="Images/Folder.png" Stretch="Fill" VerticalAlignment="Top" Height="69.334" HorizontalAlignment="Left" Width="69.334"/>
+			<Image Margin="56.043,29.435,0,0" Source="Images/Edit.png" Stretch="Fill" HorizontalAlignment="Left" VerticalAlignment="Top" Width="57.27" Height="57.27"/>
 			<Image x:Name="image3_Copy1" HorizontalAlignment="Right" Margin="0,0,327.673,78.886" Width="42.604" Source="Images\Folder.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Bottom" Height="41.93" Opacity="0.895">
 				<Image.RenderTransform>
 					<TransformGroup>
