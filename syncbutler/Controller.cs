@@ -40,9 +40,11 @@ namespace SyncButler
 
         private SyncEnvironment syncEnvironment;
         private IGUI mainWindow;
-        private static List<String> errorList = new List<string>();
+        private static List<string> errorList = new List<string>();
         private static Controller controller;
         private string sbsLogfile;
+        private static Queue<string[]> startupParams;
+
 		public static int ConflictCount {get; set;}
         public enum WinStates { Main, MiniPartnerships, CreatePartnership }
 
@@ -130,9 +132,14 @@ namespace SyncButler
                 return false;
             }
             // This is the 1st instance. Handle the arguments if it is not the first run.
-            if (!IsFirstRun())
-                ReceiveAction(args);
+            QueueStartArguments(args);
             return true;
+        }
+
+        private static void QueueStartArguments(string[] args)
+        {
+            startupParams = new Queue<string[]>();
+            startupParams.Enqueue(args);
         }
 
         /// <summary>
@@ -673,7 +680,7 @@ namespace SyncButler
         /// <returns>True if this is the first run, false otherwise</returns>
         public static bool IsFirstRun()
         {
-            return !(SyncEnvironment.FirstRunComplete && SyncEnvironment.ComputerNamed);
+            return !SyncEnvironment.FirstRunComplete || !SyncEnvironment.ComputerNamed;
         }
 
         /// <summary>
@@ -887,5 +894,13 @@ namespace SyncButler
             }
         }
 
+
+        public static void HandleStartupArgs()
+        {
+            if (startupParams != null)
+            {
+                Controller.ReceiveAction(startupParams.Dequeue());
+            }
+        }
     }
 }
