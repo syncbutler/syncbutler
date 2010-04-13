@@ -482,7 +482,7 @@ namespace SyncButler
             }
             catch (DriveNotFoundException)
             {
-                exp = new Exception("A storage device was not found. SyncButler cannot sync " + parentPartnership.Name);
+                exp = new Exception("A storage device was not found. Sync Butler cannot sync " + parentPartnership.Name);
 
                 if (errorHandler == null) throw exp;
                 else

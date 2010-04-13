@@ -279,7 +279,7 @@ namespace SyncButler
             }
 
             if (WindowsFileSystem.PathsEqual(leftPath, appPath) || WindowsFileSystem.PathsEqual(rightPath, appPath))
-                throw new UserInputException("Cannot create a partnership on the running SyncButler directory!");
+                throw new UserInputException("Cannot create a partnership on the running Sync Butler directory!");
         }
         
         /// <summary>

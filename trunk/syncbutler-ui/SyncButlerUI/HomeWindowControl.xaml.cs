@@ -706,7 +706,7 @@ namespace SyncButlerUI
                 dialog.WelcomeScreenControl.FirstTimeComputerNameText.Visibility = Visibility.Hidden;
                 VisualStateManager.GoToState(dialog.WelcomeScreenControl, "HelpScreen3", false);
                 Controller.SetFirstSBSRun();
-                dialog.Title = "SyncButler - Help";
+                dialog.Title = "Sync Butler - Help";
                 dialog.WelcomeScreenControl.GoToSBSScreen();
                 dialog.ShowDialog();
             }
@@ -903,7 +903,7 @@ namespace SyncButlerUI
             FirstTimeStartupScreen dialog = new FirstTimeStartupScreen();
             
             dialog.WelcomeScreenControl.FirstTimeComputerNameText.Visibility = Visibility.Hidden;
-            dialog.Title = "SyncButler - Help";
+            dialog.Title = "Sync Butler - Help";
             
             dialog.WelcomeScreenControl.GoToFeaturesScreen();
             dialog.ShowDialog();
@@ -1128,7 +1128,7 @@ namespace SyncButlerUI
             mruWorker.WorkerSupportsCancellation = true;
 
             // Progress bar window
-            ProgressBar progressWindow = new ProgressBar(mruWorker, "SyncButler, Sync!");
+            ProgressBar progressWindow = new ProgressBar(mruWorker, "Sync Butler, Sync!");
 
             bool cancelled = false;
 
@@ -1553,7 +1553,7 @@ namespace SyncButlerUI
             //SBSDone.IsEnabled = false;
 
             BackgroundWorker sbsScanWorker = new BackgroundWorker();
-            ProgressBar progressWindow = new ProgressBar(sbsScanWorker, "Loading SyncButler, Sync!");
+            ProgressBar progressWindow = new ProgressBar(sbsScanWorker, "Loading Sync Butler, Sync!");
             progressWindow.HideTotalProgress();
 
             sbsScanWorker.DoWork += new DoWorkEventHandler(delegate(Object worker, DoWorkEventArgs args)
