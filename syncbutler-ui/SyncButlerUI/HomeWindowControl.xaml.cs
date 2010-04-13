@@ -1260,7 +1260,7 @@ namespace SyncButlerUI
             }
             else
             {
-                showMessageBox(CustomDialog.MessageType.Success, "SBS is disabled.\r\nYou may activate the feature later by click on the SBS button.");
+                showMessageBox(CustomDialog.MessageType.Success, "Sync Butler, Sync! is disabled.\r\nYou may turn on the feature later by click on the Sync Butler, Sync! button.");
                 VisualStateManager.GoToState(this, "HomeState", false);
                 CurrentState = State.Home;
             }
