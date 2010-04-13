@@ -1275,7 +1275,7 @@ namespace SyncButlerUI
             string Resolution = this.resolutionLabel.Content.ToString();
             bool enableSyncAll = (bool)this.SBSSettingEnableSyncAll.IsChecked;
 
-            if (CalcuateUserRequestedSpace() <= 250 * MEGA_BYTE & SBSEnable.Equals("Enable"))
+            if (CalcuateUserRequestedSpace() < 250 * MEGA_BYTE & SBSEnable.Equals("Enable"))
             {
                 showMessageBox(CustomDialog.MessageType.Warning, "Sync Butler needs at least 250MB on your storage device to carry your recent files. It may not be able to carry the files you need, when you need them. Please give Sync Bulter more storage space!");
             }
