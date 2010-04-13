@@ -302,8 +302,8 @@
 						<Border x:Name="Bd" SnapsToDevicePixels="true" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" Height="96.638" Width="724.742">
 							<Grid Height="95.638" Margin="-2,0,0,0" VerticalAlignment="Bottom" Width="Auto">
 								<ContentPresenter HorizontalAlignment="Right" VerticalAlignment="Top" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="0,4.5,168.132,0" Content="" Visibility="Hidden"/>
-								<Image Margin="1,23.96,0,16.31" Source="Images\Misc.png" Stretch="Fill" HorizontalAlignment="Left" Width="60.956" VerticalAlignment="Stretch" Height="Auto"/>
-								<TextBlock x:Name="folder1" Margin="130.883,20.96,0,40.127" ToolTip="{Binding LeftFullPath}" Text="{Binding LeftFullPath}" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Stretch" Height="Auto">
+								<Image Margin="1,26.96,0,16.31" Source="Images\Misc.png" Stretch="Fill" HorizontalAlignment="Left" Width="60.956" VerticalAlignment="Stretch" Height="Auto"/>
+								<TextBlock x:Name="folder1" HorizontalAlignment="Left" Margin="126.883,29.96,0,40.127" Width="550" TextTrimming="CharacterEllipsis" ToolTip="{Binding LeftFullPath}" Text="{Binding LeftFullPath}" TextWrapping="NoWrap" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Stretch" Height="Auto">
 									<TextBlock.RenderTransform>
 										<TransformGroup>
 											<ScaleTransform ScaleX="1"/>
@@ -313,7 +313,7 @@
 										</TransformGroup>
 									</TextBlock.RenderTransform>
 								</TextBlock>
-								<TextBlock x:Name="folder2" Margin="130.656,0,0,5.167" ToolTip="{Binding RightFullPath}" Text="{Binding RightFullPath}" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="32.96" d:LayoutOverrides="VerticalAlignment" RenderTransformOrigin="0.5,0.5">
+								<TextBlock x:Name="folder2" HorizontalAlignment="Left" Margin="126.656,0,0,7.167" Width="550" TextTrimming="CharacterEllipsis" ToolTip="{Binding RightFullPath}" Text="{Binding RightFullPath}" TextWrapping="NoWrap" VerticalAlignment="Bottom" Height="32.96" d:LayoutOverrides="VerticalAlignment" RenderTransformOrigin="0.5,0.5">
 									<TextBlock.RenderTransform>
 										<TransformGroup>
 											<ScaleTransform ScaleX="1"/>
@@ -323,9 +323,9 @@
 										</TransformGroup>
 									</TextBlock.RenderTransform>
 								</TextBlock>
-								<TextBlock x:Name="partnershipName" Margin="6,1.5,0,0" Text="{Binding Name}" TextWrapping="Wrap" HorizontalAlignment="Stretch" Width="Auto" VerticalAlignment="Top" Height="20.46" FontWeight="Bold"/>
-								<TextBlock Margin="67.689,21.46,0,0" Text="Folder 1:" TextWrapping="Wrap" TextAlignment="Right" HorizontalAlignment="Left" Width="55.876" VerticalAlignment="Top" Height="15.96"/>
-								<TextBlock Margin="66.608,0,0,22.167" Text="Folder 2:" TextWrapping="Wrap" TextAlignment="Right" HorizontalAlignment="Left" Width="55.876" VerticalAlignment="Bottom" Height="15.96"/>
+								<TextBlock x:Name="partnershipName" Margin="6,1.5,0,0" Text="{Binding Name}" TextWrapping="NoWrap" ToolTip="{Binding Name}" TextTrimming="CharacterEllipsis" HorizontalAlignment="Left" Width="600" VerticalAlignment="Top" Height="24.46" FontWeight="Bold" FontSize="18"/>
+								<TextBlock Margin="67.689,31.46,0,0" FontSize="12" FontWeight="Bold" Text="Folder 1:" TextWrapping="Wrap" TextAlignment="Right" HorizontalAlignment="Left" Width="55.876" VerticalAlignment="Top" Height="15.96"/>
+								<TextBlock Margin="66.608,0,0,22.167" FontSize="12" FontWeight="Bold" Text="Folder 2:" TextWrapping="Wrap" TextAlignment="Right" HorizontalAlignment="Left" Width="55.876" VerticalAlignment="Bottom" Height="15.96"/>
 							</Grid>
 						</Border>
 						<ControlTemplate.Triggers>
@@ -1203,11 +1203,11 @@
 							<ListBox.ItemTemplate>
 								<DataTemplate>
 										<Grid Height="58" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="700.742" >
-										<TextBlock x:Name="Offending_Path" HorizontalAlignment="Stretch" Margin="38.191,3.502,170.431,1.457" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Text="{Binding FriendlyOffendingPath}" TextWrapping="Wrap" d:LayoutOverrides="VerticalAlignment"/>
+										<TextBlock x:Name="Offending_Path" Margin="38.191,3.502,170.431,1.457" VerticalAlignment="Stretch" HorizontalAlignment="Left" Width="400" Height="Auto" Text="{Binding FriendlyOffendingPath}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" ToolTip="{Binding FriendlyOffendingPath}" d:LayoutOverrides="VerticalAlignment"/>
 										<TextBlock x:Name="Folder1_Label" HorizontalAlignment="Stretch" Margin="48.191,20.502,170.431,1.457" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Text="Folder 1:" TextWrapping="Wrap" d:LayoutOverrides="VerticalAlignment"/>
-										<TextBlock x:Name="Folder1_Path" HorizontalAlignment="Stretch" Margin="98.191,20.502,170.431,1.457" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Text="{Binding LeftFolder}" TextWrapping="Wrap" d:LayoutOverrides="VerticalAlignment"/>
+										<TextBlock x:Name="Folder1_Path" Margin="98.191,20.502,170.431,1.457" TextWrapping="NoWrap" HorizontalAlignment="Left" ToolTip="{Binding LeftFolder}" VerticalAlignment="Stretch" Width="430" Height="Auto" Text="{Binding LeftFolder}" d:LayoutOverrides="VerticalAlignment" TextTrimming="CharacterEllipsis"/>
 										<TextBlock x:Name="Folder2_Label" HorizontalAlignment="Stretch" Margin="48.191,37.502,170.431,1.457" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Text="Folder 2:" TextWrapping="Wrap" d:LayoutOverrides="VerticalAlignment"/>
-										<TextBlock x:Name="Folder2_Path" HorizontalAlignment="Stretch" Margin="98.191,37.502,170.431,1.457" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Text="{Binding RightFolder}" TextWrapping="Wrap" d:LayoutOverrides="VerticalAlignment"/>
+										<TextBlock x:Name="Folder2_Path" Margin="98.191,37.502,170.431,1.457" TextWrapping="NoWrap" HorizontalAlignment="Left" ToolTip="{Binding RightFolder}" VerticalAlignment="Stretch" Width="430" Height="Auto" Text="{Binding RightFolder}" d:LayoutOverrides="VerticalAlignment" TextTrimming="CharacterEllipsis"/>
 										<ComboBox x:Name="Action_Taken"  ItemsSource="{Binding Path=userActions}" DisplayMemberPath="Description" SelectedItem="{Binding userActions.SelectedAction}" Margin="0,5.769,6.135,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="22" HorizontalAlignment="Right" Width="114.522" >
 											<ComboBox.RenderTransform>
 												<TransformGroup>
