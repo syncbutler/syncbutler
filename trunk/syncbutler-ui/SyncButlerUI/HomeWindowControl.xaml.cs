@@ -965,35 +965,43 @@ namespace SyncButlerUI
             ResolvedConflicts = new List<Resolved>();
              
             #region Sync Most Recently used files
-            String errorMsg = "";
-            if (Controller.IsAutoSyncRecentFileAllowed() && Controller.IsSBSEnable() && Controller.CanDoSBS())
+            bool DidSBS = false;
+            if (showMessageBox(CustomDialog.MessageType.Question, "Are you sure you want to sync all partnerships?") == true)
             {
-                BackgroundWorker sbsWorker = new BackgroundWorker();
-                ProgressBar progressWindow = new ProgressBar(sbsWorker, "Sync Butler, Sync", "Copying recently file...");
-                progressWindow.HideTotalProgress();
-                progressWindow.IsIndeterminate = true;
-                sbsWorker.DoWork += new DoWorkEventHandler(delegate(Object worker, DoWorkEventArgs args)
+                String errorMsg = "";
+                if (Controller.IsAutoSyncRecentFileAllowed() && Controller.IsSBSEnable() && Controller.CanDoSBS())
                 {
-
-                    errorMsg = Controller.AutoSyncRecentFiles();
-                });
-                sbsWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(delegate(Object worker, RunWorkerCompletedEventArgs args)
-                {
-                    if (String.IsNullOrEmpty(errorMsg))
+                    BackgroundWorker sbsWorker = new BackgroundWorker();
+                    DidSBS = true;
+                    ProgressBar progressWindow = new ProgressBar(sbsWorker, "Sync Butler, Sync", "Syncing your recently used file...");
+                    progressWindow.HideTotalProgress();
+                    progressWindow.IsIndeterminate = true;
+                    sbsWorker.DoWork += new DoWorkEventHandler(delegate(Object worker, DoWorkEventArgs args)
                     {
-                        CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Done copying recent files");
-                    }
-                    else
+                        errorMsg = Controller.AutoSyncRecentFiles();
+                    });
+                    sbsWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(delegate(Object worker, RunWorkerCompletedEventArgs args)
                     {
-                        CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, String.Format("Unable to copy some files. There were some errror.\r{0}", errorMsg));
-                    }
-                    progressWindow.TaskComplete();                    
-                });
-                progressWindow.Start();
+                        if (String.IsNullOrEmpty(errorMsg))
+                        {
+                            CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Finished syncing recent files");
+                        }
+                        else
+                        {
+                            CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, String.Format("Unable to sync some files. Due to some errror.\r{0}", errorMsg));
+                        }
+                        progressWindow.TaskComplete();
+                    });
+                    progressWindow.Start();
+                }
+            }
+            else
+            {
+                return;
             }
             #endregion
 
-            if (this.Controller.GetPartnershipList().Count < 1)
+            if (this.Controller.GetPartnershipList().Count < 1 && !DidSBS)
             {
                 if (showMessageBox(CustomDialog.MessageType.Question, "There are no partnerships for me to sync. Would you like to create one now?") == true)
                 {
@@ -1005,7 +1013,7 @@ namespace SyncButlerUI
                 }
                 else return;
             }
-            else if (showMessageBox(CustomDialog.MessageType.Question, "Are you sure you want to sync all partnerships?") == true)
+            else if(this.Controller.GetPartnershipList().Count > 1)
             {
                 AsyncStartSync(this.Controller.GetPartnershipList().Keys, this.Controller.GetPartnershipList());
             }
