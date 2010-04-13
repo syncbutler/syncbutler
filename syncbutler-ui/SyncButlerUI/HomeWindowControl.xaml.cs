@@ -632,7 +632,6 @@ namespace SyncButlerUI
                     bool devicePluggedIn = false;
                     if (noUSBDrives)
                     {
-                        this.NoUSBWarningTextBlock.Visibility = Visibility.Visible;
                         CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok,
                             "Please plug in a portable storage device if you wish to use it with\nSync Butler, Sync!");
                         this.SBSWorkingDriveComboBox.IsEnabled = false;
@@ -641,7 +640,8 @@ namespace SyncButlerUI
                         this.SBSSettingComboBox.IsEnabled = false;
                         this.DefaultSettingButton.IsEnabled = false;
                         this.SaveSettingButton.IsEnabled = false;
-                        
+                        this.NoUSBWarningTextBlock.Visibility = Visibility.Visible;
+
                     }
                     else
                     {
@@ -649,6 +649,7 @@ namespace SyncButlerUI
                         this.DefaultSettingButton.IsEnabled = true;
                         this.SaveSettingButton.IsEnabled = true;
                         SBSWorkingDriveComboBox.IsEnabled = true;
+                        this.NoUSBWarningTextBlock.Visibility = Visibility.Hidden;
                         SBSWorkingDriveComboBox.Items.Clear();
 
                         foreach (WindowDriveInfo s in DriveLetters)
