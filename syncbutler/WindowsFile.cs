@@ -688,7 +688,10 @@ namespace SyncButler
             }
             catch (IOException e)
             {
-                exp = new Exception("I am having a problem accessing a file while syncing " + parentPartnership.Name + ":\n\n" + e.Message);
+                if (e.Message.StartsWith("Could not find a part of the path "))
+                    exp = new Exception("I could not be find the folder " + e.Message.Substring("Could not find a part of the path ".Length));
+                else
+                    exp = new Exception("I am having a problem accessing a folder while syncing " + parentPartnership.Name + ":\n\n" + e.Message);
             }
             catch (UnauthorizedAccessException e)
             {

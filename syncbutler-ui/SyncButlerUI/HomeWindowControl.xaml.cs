@@ -491,7 +491,10 @@ namespace SyncButlerUI
                     }
                     catch (IOException e)
                     {
-                        exp = new Exception("I am having a problem accessing a file while syncing " + partnershipName + ":\n\n" + e.Message);
+                        if (e.Message.StartsWith("Could not find a part of the path "))
+                            exp = new Exception("I could not be find the folder " + e.Message.Substring("Could not a find part of the path ".Length));
+                        else
+                            exp = new Exception("I am having a problem accessing a folder while syncing " + partnershipName + ":\n\n" + e.Message);
                     }
                     catch (UnauthorizedAccessException e)
                     {
@@ -1477,15 +1480,15 @@ namespace SyncButlerUI
         {
             if (folderPath.Length > 266)
             {
-                throw new UserInputException("The path to the Folder is too long.");
+                throw new UserInputException("The path to the folder is too long.");
             }
             else if (String.IsNullOrEmpty(folderPath))
             {
-                throw new UserInputException("Please select a Folder before continuing.");
+                throw new UserInputException("Please select a folder before continuing.");
             }
             else if (!Directory.Exists(folderPath))
             {
-                throw new UserInputException("The Folder you have given does not exist.");
+                throw new UserInputException("The folder you have given does not exist.");
             }
             else if (folderPath[0] != '\\')
             {
