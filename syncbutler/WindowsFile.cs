@@ -332,7 +332,10 @@ namespace SyncButler
             string tempName = null;
             for (int i = 0; i < 10000; i++)
             {
-                tempName = destFile.nativeFileObj.FullName + "." + i + ".syncbutler_safecopy";
+                //tempName = destFile.nativeFileObj.FullName + "." + i + ".syncbutler_safecopy";
+
+                tempName = GetDriveLetter(destFile.nativeFileObj.FullName) + destFile.nativeFileObj.Name + "." + i + ".syncbutler_safecopy";
+
                 if (File.Exists(tempName)) continue;
                 outputStream = new FileStream(tempName, FileMode.CreateNew, FileAccess.Write, FileShare.None);
                 break;
