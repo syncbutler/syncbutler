@@ -1378,6 +1378,7 @@ namespace SyncButlerUI
                 }
             }
         }
+
         public void CheckIfEnoughSpace()
         {
             if (!Controller.GetInstance().IsSBSDriveEnough())
@@ -1535,6 +1536,7 @@ namespace SyncButlerUI
 
         public void LoadMRUs()
         {
+            bool preview;
             if (!Controller.IsSBSEnable())
             {
                 this.SBSPathLabel.Visibility = Visibility.Hidden;
@@ -1542,6 +1544,7 @@ namespace SyncButlerUI
 				this.SBSWarningImage.Visibility = Visibility.Hidden;
 				this.SBSWarningImage.Visibility = Visibility.Visible;
 				this.SBSfeatureDisabledTextBlock.Visibility = Visibility.Visible;
+                preview = true;
             }
             else
             {
@@ -1550,6 +1553,7 @@ namespace SyncButlerUI
                 this.SBSPathLabel.Visibility = Visibility.Visible;
 				this.SBSWarningImage.Visibility = Visibility.Hidden;
 				this.SBSfeatureDisabledTextBlock.Visibility = Visibility.Hidden;
+                preview = false;
             }
 
             //SBSDone.IsEnabled = false;
@@ -1571,7 +1575,7 @@ namespace SyncButlerUI
                     pinfo.SubTaskPercent = status.curTaskPercentComplete;
                     ((BackgroundWorker)worker).ReportProgress(0, pinfo);
                     return true;
-                });
+                }, preview);
 
                 pinfo.SubTaskPercent = 100;
                 pinfo.taskDescription = "Finishing...";
