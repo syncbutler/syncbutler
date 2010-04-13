@@ -1231,7 +1231,7 @@
 				</Custom:DataGrid.RowDetailsTemplate>
 
 			</Custom:DataGrid>
-			<TextBlock x:Name="CurrentSyncingFile_Copy" Margin="23.736,61.272,158.487,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="78.454" FontSize="14.667" TextAlignment="Justify"><Run Text="Sync Butler is syncing your files. If Sync Butler do not know what to do with a file, it will list it below. Please select the action you will like Sync Butler to take. When you are done, simply click on "/><Run FontWeight="Bold" Text="Fix Issues "/><Run Text="button."/></TextBlock>
+			<TextBlock x:Name="CurrentSyncingFile_Copy" Margin="23.736,61.272,158.487,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="78.454" FontSize="14.667" TextAlignment="Justify"><Run FontFamily="Walkway Black" FontSize="16" Text="Sync Butler "/><Run Text="is syncing your files. If "/><Run FontFamily="Walkway Black" FontSize="16" Text="Sync Butler "/><Run Text="do"/><Run Text="es"/><Run Text=" not know what to do with a file, "/><Run Text="he"/><Run Text=" will list it below. "/><Run Text="When that happens, p"/><Run Text="lease select the action you will like "/><Run FontFamily="Walkway Black" FontSize="16" Text="Sync Butler "/><Run Text="to take. When you are done, simply click on"/><Run Text=" the"/><Run Text=" "/><Run FontWeight="Bold" Text="Fix Issues "/><Run Text="button."/></TextBlock>
 			<Button x:Name="resolveButton"  HorizontalAlignment="Right" Margin="0,94.657,22.322,0" VerticalAlignment="Top" Width="119.784" Height="31" Content="Fix Issues" Click="ResolvePartnership_Click" IsEnabled="False" FontSize="14.667">
 				<Button.Background>
 					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
