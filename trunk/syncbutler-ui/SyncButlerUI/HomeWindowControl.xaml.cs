@@ -959,10 +959,28 @@ namespace SyncButlerUI
         private void Sync(object sender, RoutedEventArgs e)
         {
             ResolvedConflicts = new List<Resolved>();
+
+            #region Sync Most Recently used files
             if (Controller.IsAutoSyncRecentFileAllowed() && Controller.IsSBSEnable() && Controller.CanDoSBS())
             {
-                // todo: add syncMRU here
+                BackgroundWorker sbsWorker = new BackgroundWorker();
+                ProgressBar progressWindow = new ProgressBar(sbsWorker, "Sync Butler, Sync", "Syncing your recently used file...");
+                progressWindow.HideTotalProgress();
+                progressWindow.IsIndeterminate = true;
+                sbsWorker.DoWork += new DoWorkEventHandler(delegate(Object worker, DoWorkEventArgs args)
+                {
+
+                    Controller.AutoSyncRecentFiles();
+                });
+                sbsWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(delegate(Object worker, RunWorkerCompletedEventArgs args)
+                {
+                    CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Finished syncing recent files");
+                    progressWindow.TaskComplete();                    
+                });
+                progressWindow.Start();
             }
+            #endregion
+
             if (this.Controller.GetPartnershipList().Count < 1)
             {
                 if (showMessageBox(CustomDialog.MessageType.Question, "There are no partnerships for me to sync. Would you like to create one now?") == true)

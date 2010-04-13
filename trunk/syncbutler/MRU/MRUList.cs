@@ -129,9 +129,11 @@ namespace SyncButler.MRU
                         }
                         else
                         {
-                            if (!statusMonitor(new SyncableStatus(MRUs[mru], 0, 0, SyncableStatus.ActionType.Sync)))
-                                return Conflicts;
-
+                            if (statusMonitor != null)
+                            {
+                                if (!statusMonitor(new SyncableStatus(MRUs[mru], 0, 0, SyncableStatus.ActionType.Sync)))
+                                    return Conflicts;
+                            }
                             WindowsFile MRUFile = new WindowsFile(MRUs[mru]);
                             WindowsFile Target = new WindowsFile(SyncTo + mru);
                             if (MRUFile.Length != Target.Length)
