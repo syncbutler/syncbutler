@@ -511,10 +511,15 @@ namespace SyncButler
         /// <summary>
         /// Returns a list of most recently used files.
         /// </summary>
-        public SortedList<string,SortedList<string,string>> GetMonitoredFiles(SyncableStatusMonitor statusMonitor)
+        public SortedList<string,SortedList<string,string>> GetMonitoredFiles(SyncableStatusMonitor statusMonitor, bool preview)
         {
             totalSizeSoFar = 0;
-            long limit = GetUserLimit();
+
+            long limit;
+            if (preview)
+                limit = 250 * 1024 * 1024;
+            else
+                limit = GetUserLimit();
             
             SortedList<string, SortedList<string, string>> rtn = new SortedList<string, SortedList<string, string>>();
             SortedList<string, string> interesting = new SortedList<string, string>();
