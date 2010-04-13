@@ -209,6 +209,24 @@ namespace SyncButler
         }
 
         /// <summary>
+        /// Gets the descriptive element of the partnership given a root directory.
+        /// e.g. If the root directory is the left element of this partnership, then 'Folder 1' is returned.
+        /// </summary>
+        /// <param name="rootdir">The root directory to check.</param>
+        /// <returns>A string describing the element matched, or empty string if not found.</returns>
+        public string GetPartnershipElem(string rootdir)
+        {
+            string elem = "";
+
+            if (rootdir.TrimEnd('\\').Equals(this.LeftFullPath.TrimEnd('\\')))
+                elem = "Folder 1";
+            else if (rootdir.TrimEnd('\\').Equals(this.RightFullPath.TrimEnd('\\')))
+                elem = "Folder 2";
+
+            return elem;
+        }
+
+        /// <summary>
         /// (Overloaded) Retrieves the last known checksum from the dictionary
         /// </summary>
         /// <param name="entityPath">An "entityPath" (see SyncEnvironment) representation that needs its record (hash) retrieved</param>
