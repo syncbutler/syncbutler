@@ -119,7 +119,7 @@ namespace SyncButler
         /// Tests for the existence of another instance and sets up single instance listener if this is the first instance
         /// </summary>
         /// <param name="args">Command line arguments</param>
-        public static Boolean TestSingleInstance(String[] args)
+        public static bool TestSingleInstance(String[] args)
         {
             // test if this is the first instance and does the initialisation for the single instancing
             if (!SingleInstance.IsFirst(new SingleInstance.ReceiveDelegate(ReceiveAction)))

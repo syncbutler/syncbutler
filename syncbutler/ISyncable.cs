@@ -112,14 +112,14 @@ namespace SyncButler
         /// Determines if the two ISyncables has changed
         /// </summary>
         /// <returns>true if the isyncable is changed, false otherwise</returns>
-        Boolean HasChanged();
+        bool HasChanged();
 
         /// <summary>
         /// Determines the equality of two ISyncables
         /// </summary>
         /// <param name="item">The other ISyncable in question</param>
         /// <returns>True if equal, false otherwise</returns>
-        Boolean Equals(ISyncable item);
+        bool Equals(ISyncable item);
 
         /// <summary>
         /// Returns a checksum that represents the current state of the syncable object.
