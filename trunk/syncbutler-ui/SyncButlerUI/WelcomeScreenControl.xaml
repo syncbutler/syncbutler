@@ -169,8 +169,8 @@
 			</Image>
 			<Image Margin="96,24,139,51" Source="Images\butler-glow.png" Stretch="Fill"/>
 			<Image Margin="125.592,0,147.808,75.4" Source="Images\logowTransparency.png" Stretch="Fill" VerticalAlignment="Center" Height="366.6"/>
-			<Button HorizontalAlignment="Right" Margin="0,0,23.5,12" VerticalAlignment="Bottom" Width="154.5" Height="42" Content="Name It! " FontSize="18.667" Click="NameIt_Click" FontWeight="Bold"/>
-			<TextBox x:Name="FirstTimeComputerNameText" Margin="42,0,197.5,12" VerticalAlignment="Bottom" Height="42" TextWrapping="Wrap" FontSize="18.667" TetonWhitewaterKayak_WinUI:Placeholder.Text="Please enter a name for this computer" KeyDown="FirstTimeComputerNameText_Enter" />
+			<Button HorizontalAlignment="Right" Margin="0,0,23.5,12" VerticalAlignment="Bottom" Width="154.5" Height="42" Content="Name It! " FontSize="24" Click="NameIt_Click" FontWeight="Bold"/>
+			<TextBox x:Name="FirstTimeComputerNameText" Margin="42,0,197.5,12" VerticalAlignment="Bottom" Height="42" TextWrapping="Wrap" FontSize="24" TetonWhitewaterKayak_WinUI:Placeholder.Text="Please enter a name for this computer" KeyDown="FirstTimeComputerNameText_Enter" />
 			<TextBlock Margin="115.5,0,144.5,66.5" VerticalAlignment="Bottom" Height="32" Text="Welcome to Sync Butler" TextWrapping="Wrap" TextAlignment="Center" FontWeight="Bold" FontSize="26.667"/>
 
 
