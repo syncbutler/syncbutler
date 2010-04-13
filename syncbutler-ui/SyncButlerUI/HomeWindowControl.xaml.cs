@@ -969,7 +969,7 @@ namespace SyncButlerUI
             if (Controller.IsAutoSyncRecentFileAllowed() && Controller.IsSBSEnable() && Controller.CanDoSBS())
             {
                 BackgroundWorker sbsWorker = new BackgroundWorker();
-                ProgressBar progressWindow = new ProgressBar(sbsWorker, "Sync Butler, Sync", "Syncing your recently used file...");
+                ProgressBar progressWindow = new ProgressBar(sbsWorker, "Sync Butler, Sync", "Copying recently file...");
                 progressWindow.HideTotalProgress();
                 progressWindow.IsIndeterminate = true;
                 sbsWorker.DoWork += new DoWorkEventHandler(delegate(Object worker, DoWorkEventArgs args)
@@ -981,11 +981,11 @@ namespace SyncButlerUI
                 {
                     if (String.IsNullOrEmpty(errorMsg))
                     {
-                        CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Finished syncing recent files");
+                        CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Done copying recent files");
                     }
                     else
                     {
-                        CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, String.Format("Unable to sync some files. Due to some errror.\r{0}", errorMsg));
+                        CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, String.Format("Unable to copy some files. There were some errror.\r{0}", errorMsg));
                     }
                     progressWindow.TaskComplete();                    
                 });
