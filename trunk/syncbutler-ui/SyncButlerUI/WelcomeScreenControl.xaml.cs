@@ -178,5 +178,12 @@ namespace SyncButlerUI
         {
 			GoToFeaturesSBSScreen();
 		}	
+		
+		private void whatIsComputerName_Click(object sender,RoutedEventArgs e)
+        {
+			    CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok,
+                "Chef fill this in.Chef fill this in.Chef fill this in.Chef fill this in.Chef fill this in.Chef fill this in.Chef fill this in.Chef fill this in.Chef fill this in.Chef fill this in.");
+
+		}
 	}
 }
