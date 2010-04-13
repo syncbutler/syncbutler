@@ -747,15 +747,15 @@ namespace SyncButler
 
                 if (this.nativeFileObj.Exists && !partner.nativeFileObj.Exists)
                 {
-                    msg += "The file was deleted from Folder 2 and it was modified in Folder 1. ";
+                    msg += "The file was deleted from Folder 2 and it was updated in Folder 1. ";
                 }
                 else if (!this.nativeFileObj.Exists && partner.nativeFileObj.Exists)
                 {
-                    msg += "The file was deleted from Folder 1 and it was modified in Folder 2. ";
+                    msg += "The file was deleted from Folder 1 and it was updated in Folder 2. ";
                 }
                 else if (!this.Equals(partner))
                 {
-                    msg += "Both files were modified";
+                    msg += "Both files were updated";
 
                     if (this.LastWriteTime < partner.LastWriteTime)
                         msg += " and folder 2 has a more recent version of the file. ";
