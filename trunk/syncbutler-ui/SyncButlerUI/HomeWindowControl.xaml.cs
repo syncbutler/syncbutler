@@ -1484,7 +1484,7 @@ namespace SyncButlerUI
             }
             else if (!Directory.Exists(folderPath))
             {
-                throw new UserInputException("The Folder you have given do not exist.");
+                throw new UserInputException("The Folder you have given does not exist.");
             }
             else if (folderPath[0] != '\\')
             {
