@@ -295,7 +295,9 @@ namespace SyncButler.MRU
             List<string> mrus = new List<string>();
             RegistryKey regKey = Registry.CurrentUser.OpenSubKey(key);
             if (regKey == null)
-                throw new NullReferenceException();
+            {
+                return mrus;
+            }
             foreach (string index in regKey.GetValueNames())
             {
                 if (!index.Equals("MRUListEx"))
@@ -318,7 +320,9 @@ namespace SyncButler.MRU
             List<string> mrus = new List<string>();
             RegistryKey regKey = Registry.CurrentUser.OpenSubKey(key);
             if (regKey == null)
-                throw new NullReferenceException();
+            {
+                return mrus;
+            }
             foreach (string index in regKey.GetValueNames())
             {
                 if (!index.Equals("MRUListEx"))
