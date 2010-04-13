@@ -83,8 +83,11 @@
 			<Setter Property="Template">
 				<Setter.Value>
 					<ControlTemplate TargetType="{x:Type Button}">
-						<Grid Margin="11,9,-4,0">
-							<Image Source="Images/Help.png" Stretch="Fill" HorizontalAlignment="Right" Width="30" VerticalAlignment="Bottom" Height="30" Margin="0,0,-2,2" Opacity="0.85"/>
+						<Grid Margin="13.047,9,-6.08,2.011">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*"/>
+							</Grid.ColumnDefinitions>
+							<Image Source="Images/Help.png" Stretch="Fill" HorizontalAlignment="Right" Width="30.033" VerticalAlignment="Bottom" Height="30.034" Margin="0,0,0,-0.028" Opacity="0.85" Grid.Column="0"/>
 						</Grid>
 						<ControlTemplate.Triggers>
 							<Trigger Property="IsFocused" Value="True"/>
@@ -197,7 +200,7 @@
 			<TextBox x:Name="FirstTimeComputerNameText" Margin="75.729,0,223.771,12" VerticalAlignment="Bottom" Height="34" TextWrapping="Wrap" FontSize="20" TetonWhitewaterKayak_WinUI:Placeholder.Text="Please enter a name for this computer" KeyDown="FirstTimeComputerNameText_Enter" />
 			<Button HorizontalAlignment="Right" Margin="0,0,79.733,12" VerticalAlignment="Bottom" Width="115" Height="34" Content="Name It! " FontSize="20" Click="NameIt_Click" FontWeight="Bold"/>
 			<TextBlock Margin="125.668,0,134.332,65.229" VerticalAlignment="Bottom" Height="32" Text="Welcome to Sync Butler" TextWrapping="Wrap" TextAlignment="Center" FontWeight="Bold" FontSize="26.667"/>
-			<Button HorizontalAlignment="Right" Margin="0,5.084,53.893,0" Style="{DynamicResource whatisFriendlyNameHelp}" VerticalAlignment="Top" Width="41" Height="41" Content="Button" Click="whatIsComputerName_Click" Cursor="Hand" Background="{x:Null}" Opacity="0.9"/>
+			<Button HorizontalAlignment="Right" Margin="0,5.084,53.893,0" Style="{DynamicResource whatisFriendlyNameHelp}" VerticalAlignment="Top" Width="37" Height="41" Content="Button" Click="whatIsComputerName_Click" Cursor="Hand" Background="{x:Null}" Opacity="0.9"/>
 
 
 		</Grid>

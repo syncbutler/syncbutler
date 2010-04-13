@@ -750,8 +750,7 @@
 
 	<Grid x:Name="LayoutRoot" Margin="0,0,-4.762,0">
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="0.389*"/>
-			<ColumnDefinition Width="0.611*"/>
+			<ColumnDefinition/>
 		</Grid.ColumnDefinitions>
 		<VisualStateManager.VisualStateGroups>
 			<VisualStateGroup x:Name="VisualStateGroup">
@@ -933,7 +932,7 @@
 				</VisualState>
 			</VisualStateGroup>
 		</VisualStateManager.VisualStateGroups>
-		<Grid x:Name="HomeWindow" VerticalAlignment="Bottom" Height="526.184" Margin="0,0,0.476,0" Grid.ColumnSpan="2">
+		<Grid x:Name="HomeWindow" VerticalAlignment="Bottom" Height="526.184" Margin="0,0,0.476,0">
 			<Rectangle x:Name="background" RadiusX="1" RadiusY="2" Margin="0,0,-0.212,0" Cursor="Arrow">
 				<Rectangle.Fill>
 					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.504,0.026">
@@ -965,7 +964,7 @@
 				</Button.RenderTransform>
 			</Button>
 		</Grid>
-		<Grid x:Name="ViewPartnership" Margin="-2.973,0,3.449,-4" VerticalAlignment="Bottom" Height="532" RenderTransformOrigin="0.5,0.5" Visibility="Hidden" Grid.ColumnSpan="2">
+		<Grid x:Name="ViewPartnership" Margin="-2.973,0,3.449,-4" VerticalAlignment="Bottom" Height="532" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
 			<Grid.RenderTransform>
 				<TransformGroup>
 					<ScaleTransform/>
@@ -1092,7 +1091,7 @@
 				</Button.Background>
 			</Button>
 		</Grid>
-		<Grid x:Name="sbs" Margin="0.027,0,-1.024,0" VerticalAlignment="Bottom" Height="526.184" Background="Black" Visibility="Hidden" Grid.ColumnSpan="2" >
+		<Grid x:Name="sbs" Margin="0.027,0,-1.024,0" VerticalAlignment="Bottom" Height="526.184" Background="Black" Visibility="Hidden" >
 			<Rectangle x:Name="background_Copy2" RadiusX="1" RadiusY="2" Margin="0,0,-3.2,0" VerticalAlignment="Top" Height="526.184" Cursor="Arrow">
 				<Rectangle.Fill>
 					<RadialGradientBrush GradientOrigin="0.265,0.184" RadiusX="1.237" RadiusY="1.237">
@@ -1135,8 +1134,10 @@
 			<TextBlock x:Name="SBSPathTextBlock" Margin="42.033,0,0,54" VerticalAlignment="Bottom" Height="23.738" TextWrapping="Wrap" HorizontalAlignment="Left" Width="152.38" FontSize="16" Text="Files will be saved to: "/>
 			<Label x:Name="SBSPathLabel" Margin="196.931,0,337.477,51" VerticalAlignment="Bottom" Height="29.893" Content="Label" FontSize="14.667" FontWeight="Bold"/>
 			<TextBlock Margin="0,414.94,51.869,0" TextWrapping="Wrap" HorizontalAlignment="Right" Width="272.239" VerticalAlignment="Top" Height="16.158" TextAlignment="Justify" RenderTransformOrigin="0.503,6.252" FontStyle="Italic" d:LayoutOverrides="HorizontalAlignment" FontSize="10.667"><Run Text="*Only if you "/><Run FontWeight="Bold" Text="enable "/><Run Text="this feature in the settings, of course!"/></TextBlock>
+			<TextBlock x:Name="SBSfeatureDisabledTextBlock" Margin="235.846,0,247.383,25.084" VerticalAlignment="Bottom" Height="19.048" Text="Feature is disabled, the files above is only a preview" TextWrapping="Wrap"/>
+			<Image x:Name="SBSWarningImage" HorizontalAlignment="Left" Margin="200.635,0,0,20.183" VerticalAlignment="Bottom" Width="31.238" Height="31.238" Source="Warning.png" Stretch="Fill"/>
 		</Grid>
-		<Grid x:Name="Conflict" Margin="0.027,0,0.449,-4" VerticalAlignment="Bottom" Height="528" RenderTransformOrigin="0.5,0.5" Visibility="Hidden" Grid.ColumnSpan="2">
+		<Grid x:Name="Conflict" Margin="0.027,0,0.449,-4" VerticalAlignment="Bottom" Height="528" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
 			<Grid.RowDefinitions>
 				<RowDefinition/>
 			</Grid.RowDefinitions>
@@ -1247,7 +1248,7 @@
 			<Label HorizontalAlignment="Left" Margin="24.724,0,0,37.418" VerticalAlignment="Bottom" Content="Current File Progress:" FontWeight="Bold" Width="129.283" Height="30.485"/>
 			<Label HorizontalAlignment="Left" Margin="24.23,0,0,15.944" VerticalAlignment="Bottom" Content="Overall Progress:" FontWeight="Bold" Width="104.16" Height="30.485"/>
 		</Grid>
-		<Grid x:Name="Settings" Margin="0.027,0,0.449,0" VerticalAlignment="Bottom" Height="526.184" RenderTransformOrigin="0.5,0.5" Visibility="Hidden" Grid.ColumnSpan="2">
+		<Grid x:Name="Settings" Margin="0.027,0,0.449,0" VerticalAlignment="Bottom" Height="526.184" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
 			<Grid.RenderTransform>
 				<TransformGroup>
 					<ScaleTransform/>
@@ -1369,7 +1370,7 @@
 			<Path Stretch="Fill" Stroke="#FF908A8A" StrokeThickness="2" HorizontalAlignment="Left" Margin="23.656,75.973,0,0" VerticalAlignment="Top" Width="192.794" Height="2" Data="M1.0000301,0.99999902 L187.03178,0.99999902"/>
 			<CheckBox x:Name="SBSSettingEnableSyncAll" Margin="29.764,296.831,173.529,0" VerticalAlignment="Top" Content="Sync all your recent file when you click &quot;Start syncing&quot; in the main screen&#xa;&#xa;" FontSize="14.667" TabIndex="-1" Height="27.126" IsChecked="True" Visibility="Hidden"/>
 		</Grid>
-		<Grid x:Name="FirstTimeHelp" Margin="0,0,-1.024,-4" Grid.ColumnSpan="2" Visibility="Hidden">
+		<Grid x:Name="FirstTimeHelp" Margin="0,0,-1.024,-4" Visibility="Hidden">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="0.446*"/>
 				<ColumnDefinition Width="0.554*"/>
@@ -1457,7 +1458,7 @@
 				</Image.RenderTransform>
 			</Image>
 		</Grid>
-		<Grid x:Name="Result" Margin="0.027,0,0.449,0" VerticalAlignment="Bottom" Height="528" RenderTransformOrigin="0.5,0.5" Visibility="Hidden" Grid.ColumnSpan="2">
+		<Grid x:Name="Result" Margin="0.027,0,0.449,0" VerticalAlignment="Bottom" Height="528" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
 			<Grid.RenderTransform>
 				<TransformGroup>
 					<ScaleTransform/>
@@ -1508,7 +1509,7 @@
 			</Button>
 			<Image HorizontalAlignment="Left" Margin="29.138,15.941,0,0" VerticalAlignment="Top" Width="81.835" Height="81.835" Source="Images/Symbol-Refresh.png" Stretch="Fill"/>
 		</Grid>
-		<Grid x:Name="CreatePartnership" RenderTransformOrigin="0.5,0.5" Margin="0,-6,-4.217,6" Visibility="Hidden" Grid.ColumnSpan="2" >
+		<Grid x:Name="CreatePartnership" RenderTransformOrigin="0.5,0.5" Margin="0,-6,-4.217,6" Visibility="Hidden" >
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition/>
 			</Grid.ColumnDefinitions>
@@ -1732,7 +1733,7 @@
 				</Button.Background>
 			</Button>
 		</Grid>
-		<Grid x:Name="CreateDoneGrid" RenderTransformOrigin="0.5,0.5" Margin="0,3,0.449,0" Visibility="Hidden" Grid.ColumnSpan="2" >
+		<Grid x:Name="CreateDoneGrid" RenderTransformOrigin="0.5,0.5" Margin="0,3,0.449,0" Visibility="Hidden" >
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="0.177*"/>
 				<ColumnDefinition Width="0.823*"/>
