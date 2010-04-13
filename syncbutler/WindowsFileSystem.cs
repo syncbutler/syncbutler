@@ -245,7 +245,7 @@ namespace SyncButler
         }
 
         /// <summary>
-        /// Returns the drive letter in the format of C:\
+        /// Returns the drive letter in the format of C:
         /// It can return the drive letter from any path that contains it.
         /// </summary>
         /// <param name="somePath">A path containing the drive letter</param>
