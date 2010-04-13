@@ -63,7 +63,7 @@ namespace SyncButler.MRU
             if (statusMonitor != null) statusMonitor(new SyncableStatus("", 0, 56, SyncableStatus.ActionType.Sync));
             List<string> drives = SystemEnvironment.StorageDevices.GetNonUSBDriveLetters();
             
-            drives.AddRange(SystemEnvironment.StorageDevices.GetRemovableDeviceDriveLetters());
+            //drives.AddRange(SystemEnvironment.StorageDevices.GetRemovableDeviceDriveLetters());
 
             int done = 1;
             double toPercent = 0; 
@@ -71,9 +71,13 @@ namespace SyncButler.MRU
 
             foreach (string drive in drives)
             {
-                if (statusMonitor != null) statusMonitor(new SyncableStatus("", 0, ((int)(done * toPercent)) + 56, SyncableStatus.ActionType.Sync));
-                mergedList.AddRange(MostRecentlyUsedFile.Scan(drive, depth, days));
-                done++;
+                DriveInfo di = new DriveInfo(drive);
+                if (di.DriveType == DriveType.Fixed)
+                {
+                    if (statusMonitor != null) statusMonitor(new SyncableStatus("", 0, ((int)(done * toPercent)) + 56, SyncableStatus.ActionType.Sync));
+                    mergedList.AddRange(MostRecentlyUsedFile.Scan(drive, depth, days));
+                    done++;
+                }
             }
             
             return CleanUP(mergedList);
