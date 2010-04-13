@@ -302,9 +302,8 @@ namespace SyncButlerUI
             CurrentState = State.Conflict;
             if (scanWorker != null)
             {
-                showMessageBox(CustomDialog.MessageType.Error, "There is already a sync " +
+                CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "There is already a sync " +
                     "in progress. Please stop the sync before starting another.");
-
                 return;
             }
 
@@ -782,11 +781,11 @@ namespace SyncButlerUI
             }
             catch (UserInputException uIException)
             {
-                showMessageBox(CustomDialog.MessageType.Error, uIException.Message);
+                CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, uIException.Message);
             }
             catch (ArgumentException argEx)
             {
-                showMessageBox(CustomDialog.MessageType.Error, argEx.Message);
+                CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, argEx.Message);
             }
         }
         #endregion
@@ -842,10 +841,9 @@ namespace SyncButlerUI
                     throw new UserInputException("Please select a mini partnership to delete.");
                 }
 
-                if (showMessageBox(CustomDialog.MessageType.Question,
-                    "Are you sure you want to delete the \"" +
+                if(CustomDialog.Show(this, CustomDialog.MessageTemplate.YesNo, CustomDialog.MessageResponse.No, "Are you sure you want to delete the \"" +
                     minipartnershiplist.Items[minipartnershiplist.SelectedIndex] +
-                    "\" partnership?") == true)
+                    "\" partnership?") == CustomDialog.MessageResponse.Yes)
                 {
                     this.Controller.DeleteMiniPartnership(minipartnershiplist.SelectedIndex);
                     minipartnershiplist.Items.Refresh();
@@ -853,7 +851,7 @@ namespace SyncButlerUI
             }
             catch (UserInputException uIException)
             {
-                showMessageBox(CustomDialog.MessageType.Error, uIException.Message);
+                CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, uIException.Message);
             }
         }
 
@@ -870,11 +868,7 @@ namespace SyncButlerUI
                 {
                     throw new UserInputException("Please select a partnership to delete.");
                 }
-
-                if (showMessageBox(CustomDialog.MessageType.Question,
-                    "Are you sure you want to delete the \"" +
-                    partnershipList.Items[partnershipList.SelectedIndex] +
-                    "\" partnership?") == true)
+                if(CustomDialog.Show(this, CustomDialog.MessageTemplate.YesNo, CustomDialog.MessageResponse.No,"Are you sure you want to delete the \"" +partnershipList.Items[partnershipList.SelectedIndex] +"\" partnership?") == CustomDialog.MessageResponse.Yes)
                 {
                     this.Controller.DeletePartnership(partnershipList.SelectedIndex);
                     partnershipList.Items.Refresh();
@@ -882,7 +876,7 @@ namespace SyncButlerUI
             }
             catch (UserInputException uIException)
             {
-                showMessageBox(CustomDialog.MessageType.Error, uIException.Message);
+                CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, uIException.Message);
             }
         }
 
@@ -951,7 +945,7 @@ namespace SyncButlerUI
         /// <param name="e"></param>
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            if (showMessageBox(CustomDialog.MessageType.Question, "Are you sure you want to stop this scan?"))
+            if(CustomDialog.Show(this,CustomDialog.MessageTemplate.YesNo,CustomDialog.MessageResponse.No,"Are you sure you want to stop this scan?") == CustomDialog.MessageResponse.Yes)
                 CancelCurrentScan();
         }
 
@@ -966,7 +960,7 @@ namespace SyncButlerUI
              
             #region Sync Most Recently used files
             bool DidSBS = false;
-            if (showMessageBox(CustomDialog.MessageType.Question, "Are you sure you want to sync all partnerships?") == true)
+            if(CustomDialog.Show(this,CustomDialog.MessageTemplate.YesNo,CustomDialog.MessageResponse.No,"Are you sure you want to sync all partnerships?") == CustomDialog.MessageResponse.Yes)
             {
                 String errorMsg = "";
                 if (Controller.IsAutoSyncRecentFileAllowed() && Controller.IsSBSEnable() && Controller.CanDoSBS())
@@ -1003,7 +997,7 @@ namespace SyncButlerUI
 
             if (this.Controller.GetPartnershipList().Count < 1 && !DidSBS)
             {
-                if (showMessageBox(CustomDialog.MessageType.Question, "There are no partnerships for me to sync. Would you like to create one now?") == true)
+                if(CustomDialog.Show(this,CustomDialog.MessageTemplate.YesNo,CustomDialog.MessageResponse.No,"There are no partnerships for me to sync. Would you like to create one now?") == CustomDialog.MessageResponse.Yes)
                 {
 
                     VisualStateManager.GoToState(this, "CreatePartnershipState", false);
@@ -1028,9 +1022,8 @@ namespace SyncButlerUI
         {
             ResolvedConflicts = new List<Resolved>();
             if (this.Controller.GetMiniPartnershipList().Count < 1)
-                showMessageBox(CustomDialog.MessageType.Message, "There are no mini partnerships.");
-
-            else if (showMessageBox(CustomDialog.MessageType.Question, "Are you sure you want to sync all mini partnerships?") == true)
+                CustomDialog.Show(this,CustomDialog.MessageTemplate.OkOnly,CustomDialog.MessageResponse.Ok,"There are no mini partnerships.");
+            else if(CustomDialog.Show(this,CustomDialog.MessageTemplate.YesNo,CustomDialog.MessageResponse.No,"Are you sure you want to sync all mini partnerships?") == CustomDialog.MessageResponse.Yes)
                 AsyncStartSync(this.Controller.GetMiniPartnershipList().Keys, this.Controller.GetMiniPartnershipList());
         }
         /// <summary>
@@ -1047,8 +1040,7 @@ namespace SyncButlerUI
                 {
                     throw new UserInputException("Please select a partnership to sync.");
                 }
-
-                if (showMessageBox(CustomDialog.MessageType.Question, "Are you sure you want to sync this partnership?") == true)
+                if(CustomDialog.Show(this,CustomDialog.MessageTemplate.YesNo,CustomDialog.MessageResponse.No, "Are you sure you want to sync this partnership?") == CustomDialog.MessageResponse.Yes)
                 {
                     Partnership partnershipSelected = (Partnership)partnershipList.SelectedValue;
 
@@ -1057,7 +1049,7 @@ namespace SyncButlerUI
             }
             catch (UserInputException uIException)
             {
-                showMessageBox(CustomDialog.MessageType.Error, uIException.Message);
+                CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, uIException.Message);
             }
 
         }
@@ -1070,7 +1062,7 @@ namespace SyncButlerUI
         private void SyncThisPartnership_Click(object sender, RoutedEventArgs e)
         {
             ResolvedConflicts = new List<Resolved>();
-            if (showMessageBox(CustomDialog.MessageType.Question, "Are you sure you want to sync now?"))
+            if(CustomDialog.Show(this,CustomDialog.MessageTemplate.YesNo,CustomDialog.MessageResponse.No,"Are you sure you want to sync now?") == CustomDialog.MessageResponse.Yes)
             {
                 AsyncStartSync(NewPartnershipName);
             }
@@ -1104,7 +1096,7 @@ namespace SyncButlerUI
             }
             catch (UserInputException uIException)
             {
-                showMessageBox(CustomDialog.MessageType.Error, uIException.Message);
+                CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, uIException.Message);
             }
         }
 
@@ -1135,7 +1127,7 @@ namespace SyncButlerUI
             }
             catch (UserInputException uIException)
             {
-                showMessageBox(CustomDialog.MessageType.Error, uIException.Message);
+                CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, uIException.Message);
             }
 
         }
@@ -1268,7 +1260,7 @@ namespace SyncButlerUI
             }
             else
             {
-                showMessageBox(CustomDialog.MessageType.Success, "Sync Butler, Sync! is disabled.\r\nYou may turn on the feature later by click on the Sync Butler, Sync! button.");
+                CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Sync Butler, Sync! is disabled.\r\nYou may turn on the feature later by click on the Sync Butler, Sync! button.");
                 VisualStateManager.GoToState(this, "HomeState", false);
                 CurrentState = State.Home;
             }
@@ -1285,7 +1277,7 @@ namespace SyncButlerUI
 
             if (CalcuateUserRequestedSpace() < 250 * MEGA_BYTE & SBSEnable.Equals("Enable"))
             {
-                showMessageBox(CustomDialog.MessageType.Warning, "Sync Butler needs at least 250MB on your storage device to carry your recent files. It may not be able to carry the files you need, when you need them. Please give Sync Bulter more storage space!");
+                CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Sync Butler needs at least 250MB on your storage device to carry your recent files. It may not be able to carry the files you need, when you need them. Please give Sync Bulter more storage space!");
             }
             else if (!ComputerNameChecker.IsComputerNameValid(ComputerName))
             {
@@ -1303,14 +1295,14 @@ namespace SyncButlerUI
                     if (SBSEnable.Equals("Enable"))
                     {
                         String ExtraMsg = String.Format("Sync Butler, Sync! will now save your recent files to:\n{0}", Controller.GetSBSPath());
-                        showMessageBox(CustomDialog.MessageType.Success, "The setting has been changed.\r\n" + ExtraMsg);
+                        CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "The setting has been changed.\r\n" + ExtraMsg);
                         VisualStateManager.GoToState(this, "SbsState", false);
                         LoadMRUs();
                         CurrentState = State.SBS;
                     }
                     else
                     {
-                        showMessageBox(CustomDialog.MessageType.Success, "Sync Butler, Sync! is disabled.\r\nYou may turn on the feature later by click on the Sync Butler, Sync! button.");
+                        CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Sync Butler, Sync! is disabled.\r\nYou may turn on the feature later by click on the Sync Butler, Sync! button.");
                         VisualStateManager.GoToState(this, "HomeState", false);
                         CurrentState = State.Home;
                     }
@@ -1337,7 +1329,7 @@ namespace SyncButlerUI
                     }
                     else
                     {
-                        showMessageBox(CustomDialog.MessageType.Error, "A Portable Storage was not found.\nPlease check if the device is plugged in.");
+                        CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "A Portable Storage was not found.\nPlease check if the device is plugged in.");
                     }
                 }
                 else
