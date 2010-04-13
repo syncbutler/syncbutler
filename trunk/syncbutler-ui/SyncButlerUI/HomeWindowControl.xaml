@@ -1189,7 +1189,7 @@
 				</Custom:DataGrid.Columns>
 				<Custom:DataGrid.RowDetailsTemplate>
 					<DataTemplate>
-						<ListBox x:Name="conflictsListBox" MaxHeight="124" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding Conflicts}" BorderThickness="1" BorderBrush="Black" Width="724.742">
+						<ListBox x:Name="conflictsListBox" MaxHeight="165" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding Conflicts}" BorderThickness="1" BorderBrush="Black" Width="705">
 							<ListBox.Style>
 									<Style TargetType="{x:Type ListBox}">
 										<Setter Property="Visibility" Value="Visible"/>
@@ -1202,7 +1202,7 @@
 							</ListBox.Style>
 							<ListBox.ItemTemplate>
 								<DataTemplate>
-										<Grid Height="75" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="700.742" >
+										<Grid Height="75" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="680" >
 										<TextBlock x:Name="Offending_Path" FontWeight="Bold" Margin="38.191,3.502,170.431,1.457" VerticalAlignment="Stretch" HorizontalAlignment="Left" Width="400" Height="Auto" Text="{Binding FriendlyOffendingPath}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" ToolTip="{Binding FriendlyOffendingPath}" d:LayoutOverrides="VerticalAlignment"/>
 										<TextBlock x:Name="Folder1_Label" FontWeight="Bold" HorizontalAlignment="Stretch" Margin="48.191,20.502,170.431,1.457" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Text="Folder 1:" TextWrapping="Wrap" d:LayoutOverrides="VerticalAlignment"/>
 										<TextBlock x:Name="Folder1_Path" Margin="101.191,20.502,170.431,1.457" TextWrapping="NoWrap" HorizontalAlignment="Left" ToolTip="{Binding LeftFolder}" VerticalAlignment="Stretch" Width="430" Height="Auto" Text="{Binding LeftFolder}" d:LayoutOverrides="VerticalAlignment" TextTrimming="CharacterEllipsis"/>
@@ -1210,7 +1210,7 @@
 										<TextBlock x:Name="Folder2_Path" Margin="101.191,37.502,170.431,1.457" TextWrapping="NoWrap" HorizontalAlignment="Left" ToolTip="{Binding RightFolder}" VerticalAlignment="Stretch" Width="430" Height="Auto" Text="{Binding RightFolder}" d:LayoutOverrides="VerticalAlignment" TextTrimming="CharacterEllipsis"/>
 										<TextBlock x:Name="Reason_Label" FontWeight="Bold" HorizontalAlignment="Stretch" Margin="48.191,53.502,170.431,1.457" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Text="Reason:" TextWrapping="Wrap" d:LayoutOverrides="VerticalAlignment"/>
 										<TextBlock x:Name="Reason_Actual" Margin="101.191,53.502,170.431,1.457" TextWrapping="NoWrap" HorizontalAlignment="Left" ToolTip="{Binding Reason}" VerticalAlignment="Stretch" Width="430" Height="Auto" Text="{Binding Reason}" d:LayoutOverrides="VerticalAlignment" TextTrimming="CharacterEllipsis"/>
-										<ComboBox x:Name="Action_Taken"  ItemsSource="{Binding Path=userActions}" DisplayMemberPath="Description" SelectedItem="{Binding userActions.SelectedAction}" Margin="0,5.769,6.135,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="22" HorizontalAlignment="Right" Width="114.522" >
+										<ComboBox x:Name="Action_Taken"  ItemsSource="{Binding Path=userActions}" DisplayMemberPath="Description" SelectedItem="{Binding userActions.SelectedAction}" Margin="0,5.769,6.135,15" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="22" HorizontalAlignment="Right" Width="114.522" >
 											<ComboBox.RenderTransform>
 												<TransformGroup>
 													<ScaleTransform/>
@@ -1221,7 +1221,7 @@
 											</ComboBox.RenderTransform>
 										</ComboBox>
 										<Image Margin="1.924,3.435,0,1.037" Source="Images/File.png" Stretch="Uniform" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="27.743" Height="Auto"/>
-										<TextBlock HorizontalAlignment="Right" FontWeight="Bold" Margin="0,8.638,121.302,6.655" Width="43" Text="Action:" TextWrapping="NoWrap" VerticalAlignment="Stretch" Height="Auto"/>		
+										<TextBlock HorizontalAlignment="Right" FontWeight="Bold" Margin="0,8.638,131.302,6.655" Width="43" Text="Action:" TextWrapping="NoWrap" VerticalAlignment="Stretch" Height="Auto"/>		
 									</Grid>
 								</DataTemplate>
 							</ListBox.ItemTemplate>
