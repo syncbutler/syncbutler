@@ -489,7 +489,7 @@ namespace SyncButler
                 throw new NotSupportedException();
             }
         }
-
+        String[] mrulevels = { "interestingHigh", "interestingMedHigh", "interestingMed", "interestingLowMed", "interestingLow", "interestingUltraLow" };
         /// <summary>
         /// Returns a list of most recently used files.
         /// </summary>
@@ -502,15 +502,11 @@ namespace SyncButler
             SortedList<string, string> interesting = new SortedList<string, string>();
             MostRecentlyUsedFile.statusMonitor = statusMonitor;
             SortedList<string,SortedList<string,string>> splited = ContentFilters.Spilt(MostRecentlyUsedFile.ConvertToSortedList(MostRecentlyUsedFile.GetAll()));
-            String[] mrulevels = { "interestingHigh", "interestingMedHigh", "interestingMed", "interestingLowMed", "interestingLow", "interestingUltraLow" };
+            
      
             for (int i = 0; i < mrulevels.Length; i++)
             {
                 CheckAndMerge(interesting, splited[mrulevels[i]], limit);
-                //if (!CheckAndMerge(interesting, splited[mrulevels[i]], limit))
-                //{
-                //    done = true;
-                //}
             }
             
             SortedList<string, string> sensitive = splited["sensitive"];
@@ -544,13 +540,42 @@ namespace SyncButler
             return GetSBSPath(SyncEnvironment.SBSDriveLetter);
         }
 
-        public void AutoSyncRecentFiles(SyncableStatusMonitor statusMonitor, SyncableErrorHandler errorHandler)
+        public void AutoSyncRecentFiles()
         {
-            SortedList<string, SortedList<string, string>> MRUs;
-            MRUs = GetMonitoredFiles();
-            SyncMRUs(MRUs["interesting"], statusMonitor, errorHandler);
+            long limit = GetUserLimit();
+            SortedList<string, SortedList<string, string>> MRUs = new SortedList<string, SortedList<string, string>>();
+            SortedList<string, string> interesting = new SortedList<string, string>();
+            SortedList<string, SortedList<string, string>> splited = ContentFilters.Spilt(MostRecentlyUsedFile.ConvertToSortedList(MostRecentlyUsedFile.GetAll()));
+
+
+            for (int i = 0; i < mrulevels.Length; i++)
+            {
+                CheckAndMerge(interesting, splited[mrulevels[i]], limit);
+            }
+            MRUs.Add("interesting", interesting);
+            //MRUs = GetMonitoredFiles();
+            SyncMRUs(MRUs["interesting"]);
         }
 
+        public void SyncMRUs(SortedList<string, string> toSync)
+        {
+            char driveLetter = SyncEnvironment.SBSDriveLetter;
+            string driveid = SyncEnvironment.SBSDriveId;
+            int drivePartition = SyncEnvironment.SBSDrivePartition;
+            if (SystemEnvironment.StorageDevices.GetDriveLetter(driveid, drivePartition).Length != 0)
+            {
+                string syncTo = GetSBSPath(driveLetter);
+                if (WindowsFolder.CheckIfUserHasRightsTo(syncTo, GetCurrentLogOnUser()))
+                {
+                    driveLetter = SystemEnvironment.StorageDevices.GetDriveLetter(driveid, drivePartition)[0];
+                    MRUList mruList = new MRUList();
+                    mruList.Load(toSync);
+                    mruList.Sync(SyncEnvironment.ComputerName, driveLetter);
+                    SBSLogFile = syncTo;
+                    MRUList.SaveInfoTo(syncTo + "Open this Report in a Browser.xml", mruList);
+                }
+            }            
+        }
 
         /// <summary>
         /// Sync the mrus that are listed. Please read MRUList to understand how file is actually saved.
