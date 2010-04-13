@@ -334,7 +334,9 @@ namespace SyncButler
             {
                 //tempName = destFile.nativeFileObj.FullName + "." + i + ".syncbutler_safecopy";
 
-                tempName = GetDriveLetter(destFile.nativeFileObj.FullName) + destFile.nativeFileObj.Name + "." + i + ".syncbutler_safecopy";
+                //tempName = GetDriveLetter(destFile.nativeFileObj.FullName) + "\\" + destFile.nativeFileObj.Name + "." + i + ".syncbutler_safecopy";
+
+                tempName = GenerateRandomFilename(destFile.rootPath);
 
                 if (File.Exists(tempName)) continue;
                 outputStream = new FileStream(tempName, FileMode.CreateNew, FileAccess.Write, FileShare.None);
@@ -845,8 +847,8 @@ namespace SyncButler
         /// <summary>
         /// Return total file size of a given list of files
         /// </summary>
-        /// <param name="files">the list of files</param>
-        /// <returns>total file size</returns>
+        /// <param name="files">The list of files</param>
+        /// <returns>Total file size</returns>
         public static long SizeOf(IList<String> files)
         {
             long totalSize = 0;
@@ -858,9 +860,55 @@ namespace SyncButler
             return totalSize;
         }
 
+        /// <summary>
+        /// Returns total file size of a given file.
+        /// </summary>
+        /// <param name="filename">The file name.</param>
+        /// <returns>File size of file.</returns>
+        /// <exception cref="FileNotFoundException">If the file does not exist.</exception>
         public static long SizeOf(String filename)
         {
             return (new FileInfo(filename)).Length;
+        }
+
+        /// <summary>
+        /// Generates a random file name for a root directory and checks for collisions between this and files in the root directory specified.
+        /// </summary>
+        /// <param name="rootdir">The directory which this random file might be created.</param>
+        /// <returns>A unique and random file name with the root dir prefix.</returns>
+        public static string GenerateRandomFilename(string rootdir)
+        {
+            string filename;
+            rootdir = rootdir.Trim().TrimEnd('\\');
+
+            do
+            {
+                filename = RandomString(6, true);
+            }
+            while (File.Exists(rootdir + "\\" + filename));
+
+            return rootdir + "\\" + filename;
+        }
+
+        /// <summary>
+        /// Generates a random string with the given length.
+        /// </summary>
+        /// <param name="size">Size of the string</param>
+        /// <param name="lowerCase">If true, generate lowercase string</param>
+        /// <returns>Random string</returns>
+        private static string RandomString(int size, bool lowerCase)
+        {
+            StringBuilder builder = new StringBuilder();
+            Random random = new Random();
+            char ch;
+            for (int i = 0; i < size; i++)
+            {
+                ch = Convert.ToChar(Convert.ToInt32(Math.Floor(26 * random.NextDouble() + 65)));
+                builder.Append(ch);
+            }
+            if (lowerCase)
+                return builder.ToString().ToLower();
+            return builder.ToString();
         }
     }
 }
