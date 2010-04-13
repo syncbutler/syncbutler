@@ -68,6 +68,37 @@ namespace SyncButler
         }
 
         /// <summary>
+        /// Gets a human-readable form of the entity path.
+        /// </summary>
+        public string FriendlyEntityPath
+        {
+            get
+            {
+                return GetFriendlyEntityPath();
+            }
+        }
+
+        /// <summary>
+        /// Gets a human-readable form of the entity path.
+        /// </summary>
+        /// <returns>A string with the human-readable form of the entity path.</returns>
+        public string GetFriendlyEntityPath()
+        {
+            string path = _entityPath;
+
+            if (path.ToLower().StartsWith(@"folder:\\"))
+            {
+                path = path.Replace(@"folder:\\", "Folder '") + "'";
+            }
+            else if (path.ToLower().StartsWith(@"file:\\"))
+            {
+                path = path.Replace(@"file:\\", "File '") + "'";
+            }
+
+            return path;
+        }
+
+        /// <summary>
         /// Percentage of work completed.
         /// NOTE: Not implemented in the ISyncables yet!
         /// </summary>

@@ -267,7 +267,7 @@ namespace SyncButlerUI
                 case SyncableStatus.ActionType.Delete: verb = "Deleting: "; break;
             }
 
-            CurrentSyncingFile.Text = verb + status.EntityPath;
+            CurrentSyncingFile.Text = verb + status.FriendlyEntityPath;
             SubProgressBar.Value = status.curTaskPercentComplete;
 
             if (CurrentAction == CurrentActions.Resolving)
