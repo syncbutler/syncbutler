@@ -190,6 +190,7 @@
     <Resource Include="Images\Synchonize.png" />
     <Resource Include="Images\treefolder.png" />
     <Resource Include="Images\Usbstick.png" />
+    <Resource Include="Warning.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\syncbutler\SyncButler.csproj">

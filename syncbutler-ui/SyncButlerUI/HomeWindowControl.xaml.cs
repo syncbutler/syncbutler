@@ -704,7 +704,6 @@ namespace SyncButlerUI
             {
                 FirstTimeStartupScreen dialog = new FirstTimeStartupScreen();
                 dialog.WelcomeScreenControl.FirstTimeComputerNameText.Visibility = Visibility.Hidden;
-                VisualStateManager.GoToState(dialog.WelcomeScreenControl, "HelpScreen3", false);
                 Controller.SetFirstSBSRun();
                 dialog.Title = "Sync Butler - Help";
                 dialog.WelcomeScreenControl.GoToSBSScreen();
@@ -1540,12 +1539,17 @@ namespace SyncButlerUI
             {
                 this.SBSPathLabel.Visibility = Visibility.Hidden;
                 this.SBSPathTextBlock.Visibility = Visibility.Hidden;
+				this.SBSWarningImage.Visibility = Visibility.Hidden;
+				this.SBSWarningImage.Visibility = Visibility.Visible;
+				this.SBSfeatureDisabledTextBlock.Visibility = Visibility.Visible;
             }
             else
             {
                 this.SBSPathTextBlock.Visibility = Visibility.Visible;
                 this.SBSPathLabel.Content = Controller.GetSBSPath();
                 this.SBSPathLabel.Visibility = Visibility.Visible;
+				this.SBSWarningImage.Visibility = Visibility.Hidden;
+				this.SBSfeatureDisabledTextBlock.Visibility = Visibility.Hidden;
             }
 
             //SBSDone.IsEnabled = false;
