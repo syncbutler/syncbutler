@@ -446,6 +446,13 @@ namespace SyncButler
         }
 
         /// <summary>
+        /// Compares an object with another ISyncable and returns the reason for its differences.
+        /// </summary>
+        /// <param name="obj">The other ISyncable object to compare with.</param>
+        /// <returns>A string of the reason.</returns>
+        public abstract string GetDifferenceReason(ISyncable obj);
+
+        /// <summary>
         /// Scans the File/Folders and reports a list of conflicts
         /// </summary>
         /// <param name="otherPair"></param>

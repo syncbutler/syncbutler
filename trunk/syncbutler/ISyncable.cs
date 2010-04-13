@@ -134,6 +134,13 @@ namespace SyncButler
         long GetStoredChecksum();
 
         /// <summary>
+        /// Compares an object with another ISyncable and returns the reason for its differences.
+        /// </summary>
+        /// <param name="obj">The other ISyncable object to compare with.</param>
+        /// <returns>A string of the reason.</returns>
+        string GetDifferenceReason(ISyncable obj);
+
+        /// <summary>
         /// Adds/Updates the checksum dictionary in the parentPartnership object
         /// </summary>
         void UpdateStoredChecksum();
