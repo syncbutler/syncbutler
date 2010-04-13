@@ -169,6 +169,7 @@ namespace SyncButlerUI
                     if (dialog.WelcomeScreenControl.WantToShowSettingPage() && !Controller.IsSBSEnable())
                     {
                         homeWindow1.GoToSetting();
+                        homeWindow1.FirstTimeHelp.Visibility = System.Windows.Visibility.Visible;
                         return;
                     }
                     Controller.SetFirstSBSRun();
