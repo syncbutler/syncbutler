@@ -182,7 +182,8 @@ namespace SyncButlerUI
 		private void whatIsComputerName_Click(object sender,RoutedEventArgs e)
         {
 			    CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok,
-                "Chef fill this in.Chef fill this in.Chef fill this in.Chef fill this in.Chef fill this in.Chef fill this in.Chef fill this in.Chef fill this in.Chef fill this in.Chef fill this in.");
+                "The computer name you give will be used to name a folder, which will be used to store your recent files.\n\n" +
+				"Give a different name for the computers you own to take full advantage of Sync Butler's unique feature, Sync Butler, Sync!");
 
 		}
 	}
