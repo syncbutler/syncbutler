@@ -1345,12 +1345,12 @@ namespace SyncButlerUI
                         SpaceToUseSlide.Maximum = freespace / GIGA_BYTE;
 
                     }
-                    else if (freespace / MEGA_BYTE > 500)
+                    else if (freespace / GIGA_BYTE <= 10 && freespace / MEGA_BYTE >= 2)
                     {
                         resolutionLabel.Content = "MB";
                         SpaceToUseSlide.Maximum = freespace / MEGA_BYTE;
                     }
-                    else if (freespace / MEGA_BYTE > 2)
+                    else if (freespace / MEGA_BYTE < 2 )
                     {
                         resolutionLabel.Content = "KB";
                         SpaceToUseSlide.Maximum = freespace / KILO_BYTE;
@@ -1374,7 +1374,7 @@ namespace SyncButlerUI
                         else if (resolutionLabel.Content.Equals("KB"))
                             SpaceToUseSlide.Value = preferedSize * KILO_BYTE;
                         else if (resolutionLabel.Content.Equals("GB"))
-                            SpaceToUseSlide.Value = preferedSize * KILO_BYTE;
+                            SpaceToUseSlide.Value = preferedSize * GIGA_BYTE;
 
                     }
 
