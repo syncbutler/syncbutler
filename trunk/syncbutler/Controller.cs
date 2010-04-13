@@ -164,13 +164,25 @@ namespace SyncButler
             switch (args[0])
             {
                 case "-addmini":
-                    GetInstance().mainWindow.FillInCreatePartnership(args[1]);
+                    GetInstance().mainWindow.FillInCreatePartnership(TrimPath(args[1]));
                     break;
                 default:
                     //unknown commands
                     Logging.Logger.GetInstance().WARNING("Unknown Command Line Arguments" + output);
                     break;
             }
+        }
+
+        /// <summary>
+        /// Trims a path provided for use in FillInCreatePartnership.
+        /// </summary>
+        /// <param name="path">The string of the path to trim.</param>
+        /// <returns>The path with invalid characters trimmed away.</returns>
+        private static string TrimPath(string path)
+        {
+            path = path.Trim();
+            path = path.Trim('"', '?', '*', '|', '>', '<');
+            return path;
         }
 
         /// <summary>
