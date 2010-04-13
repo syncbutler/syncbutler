@@ -71,6 +71,7 @@ namespace SyncButlerUI
             controller.SetWindow(this);
             this.homeWindow1.Controller = this.controller;
             el = new ErrorList();
+            Controller.HandleStartupArgs();
         }
 
         #region IGUI
