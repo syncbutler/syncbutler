@@ -303,7 +303,7 @@
 							<Grid Height="95.638" Margin="-2,0,0,0" VerticalAlignment="Bottom" Width="Auto">
 								<ContentPresenter HorizontalAlignment="Right" VerticalAlignment="Top" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="0,4.5,168.132,0" Content="" Visibility="Hidden"/>
 								<Image Margin="1,23.96,0,16.31" Source="Images\Misc.png" Stretch="Fill" HorizontalAlignment="Left" Width="60.956" VerticalAlignment="Stretch" Height="Auto"/>
-								<TextBlock x:Name="folder1" Margin="118.883,21.96,0,40.127" ToolTip="{Binding LeftFullPath}" Text="{Binding LeftFullPath}" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Stretch" Height="Auto">
+								<TextBlock x:Name="folder1" Margin="130.883,21.96,0,40.127" ToolTip="{Binding LeftFullPath}" Text="{Binding LeftFullPath}" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Stretch" Height="Auto">
 									<TextBlock.RenderTransform>
 										<TransformGroup>
 											<ScaleTransform ScaleX="1"/>
@@ -313,7 +313,7 @@
 										</TransformGroup>
 									</TextBlock.RenderTransform>
 								</TextBlock>
-								<TextBlock x:Name="folder2" Margin="118.656,0,0,5.167" ToolTip="{Binding RightFullPath}" Text="{Binding RightFullPath}" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="32.96" d:LayoutOverrides="VerticalAlignment" RenderTransformOrigin="0.5,0.5">
+								<TextBlock x:Name="folder2" Margin="130.656,0,0,5.167" ToolTip="{Binding RightFullPath}" Text="{Binding RightFullPath}" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="32.96" d:LayoutOverrides="VerticalAlignment" RenderTransformOrigin="0.5,0.5">
 									<TextBlock.RenderTransform>
 										<TransformGroup>
 											<ScaleTransform ScaleX="1"/>
@@ -324,8 +324,8 @@
 									</TextBlock.RenderTransform>
 								</TextBlock>
 								<TextBlock x:Name="partnershipName" Margin="6,1.5,0,0" Text="{Binding Name}" TextWrapping="Wrap" HorizontalAlignment="Stretch" Width="Auto" VerticalAlignment="Top" Height="20.46" FontWeight="Bold"/>
-								<TextBlock Margin="67.689,21.46,0,0" Text="Folder 1:" TextWrapping="Wrap" TextAlignment="Right" HorizontalAlignment="Left" Width="46.876" VerticalAlignment="Top" Height="15.96"/>
-								<TextBlock Margin="66.608,0,0,22.167" Text="Folder 2:" TextWrapping="Wrap" TextAlignment="Right" HorizontalAlignment="Left" Width="47.957" VerticalAlignment="Bottom" Height="15.96"/>
+								<TextBlock Margin="67.689,21.46,0,0" Text="Folder 1:" TextWrapping="Wrap" TextAlignment="Right" HorizontalAlignment="Left" Width="55.876" VerticalAlignment="Top" Height="15.96"/>
+								<TextBlock Margin="66.608,0,0,22.167" Text="Folder 2:" TextWrapping="Wrap" TextAlignment="Right" HorizontalAlignment="Left" Width="55.876" VerticalAlignment="Bottom" Height="15.96"/>
 							</Grid>
 						</Border>
 						<ControlTemplate.Triggers>
