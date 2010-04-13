@@ -182,6 +182,10 @@ namespace SyncButler
         {
             path = path.Trim();
             path = path.Trim('"', '?', '*', '|', '>', '<');
+
+            if (path.EndsWith(":"))
+                path += "\\";
+
             return path;
         }
 
