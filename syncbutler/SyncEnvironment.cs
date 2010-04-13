@@ -587,7 +587,7 @@ namespace SyncButler
             firstSBSRun = true;
             sbsDrivePartition = -1;
             ConfigurationSetup();
-            enableSyncAll = false;
+            enableSyncAll = true;
 
             // Prepare to read the custom sections (Pre declared needed for valid settings
             // file check. (Hint, the first run complete is hidden in the xml file)
