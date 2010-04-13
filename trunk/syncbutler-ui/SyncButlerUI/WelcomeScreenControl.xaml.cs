@@ -141,7 +141,7 @@ namespace SyncButlerUI
             if (Controller.IsFirstSBSRun())
             {
                 if (CustomDialog.Show(this, CustomDialog.MessageTemplate.YesNo, CustomDialog.MessageResponse.No,
-                                "Yes, Please show me the settings page so I may turn on SB!\nNo, maybe next time.") == CustomDialog.MessageResponse.Yes)
+                                "Sync Butler, Sync! is currently not enabled.\n\nShould I show you to the Setting's screen so you may turn on Sync Butler, Sync! ?") == CustomDialog.MessageResponse.Yes)
                 {
                     wantToShowSettingPage = true;
                 }
