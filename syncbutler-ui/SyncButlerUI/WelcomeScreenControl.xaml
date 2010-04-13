@@ -308,7 +308,8 @@
 			<VisualStateManager.CustomVisualStateManager>
 				<ic:ExtendedVisualStateManager/>
 			</VisualStateManager.CustomVisualStateManager>
-			<Button Name="HelpScreenCloseBtn" VerticalAlignment="Bottom" Height="39.2" Content="Close" FontWeight="Bold" FontSize="18.667" Click="ExitTutorial_Click" HorizontalAlignment="Right" Width="83.2" Margin="0,0,6,6" RenderTransformOrigin="0.637,1.25"/>
+			<!--Button Name="HelpScreenCloseBtn" VerticalAlignment="Bottom" Height="39.2" Content="Close" FontWeight="Bold" FontSize="18.667" Click="ExitTutorial_Click" HorizontalAlignment="Right" Width="83.2" Margin="0,0,6,6" RenderTransformOrigin="0.637,1.25"/-->
+			<Button x:Name="HelpScreenCloseBtn" HorizontalAlignment="Right" Margin="0,0,1.5,1.5" Content="Close" FontWeight="Bold" FontSize="18.667" Click="ExitSBSTutorial_Click" Width="83.2" VerticalAlignment="Bottom" Height="39.2"/>
 			<Image Margin="150.417,79,130.88,129.6" Source="Images/SBSWindow.png" Stretch="Fill" StretchDirection="DownOnly"/>
 			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="12.297,92.827,0,0" VerticalAlignment="Top" Height="116.8" HorizontalAlignment="Left" Width="125.62" d:LayoutOverrides="VerticalAlignment"/>
 			<TextBlock Margin="20.097,101.627,0,0" Foreground="White" TextWrapping="Wrap" FontWeight="Bold" HorizontalAlignment="Left" Width="117.998" VerticalAlignment="Top" Height="99.2"><Run Text="New or recently used files appear here. "/><Run FontFamily="Walkway Black" FontSize="14.667" Text="SyncButler "/><Run Text="will make a duplicate and store it on your "/><Run Text="USB storage device."/></TextBlock>
@@ -555,7 +556,6 @@
 					</TransformGroup>
 				</TextBlock.RenderTransform><Run Text="How does "/><Run Text="'"/><Run FontFamily="Walkway Black" Text="Sync"/><Run FontFamily="Walkway Black" Text=" "/><Run FontFamily="Walkway Black" Text="Butler"/><Run Text=", "/><Run FontStyle="Italic" Text="Sync"/><Run Text="'"/><Run Text=" work"/><Run Text="?"/></TextBlock>
 			<Button x:Name="SBSHelpScreenNextBtn" VerticalAlignment="Bottom" Height="39.2" Content="Next" FontWeight="Bold" FontSize="18.667" Click="GoToSBSDemoHelpScreen_Click" HorizontalAlignment="Right" Width="83.2" TabIndex="1" Margin="0,0,1.5,1.5"/>
-			<Button x:Name="SBSFeatureHelpCloseBtn" HorizontalAlignment="Right" Margin="0,0,1.533,1.933" Content="Close" FontWeight="Bold" FontSize="18.667" Click="ExitSBSTutorial_Click" Width="83.2" VerticalAlignment="Bottom" Height="39.2"/>
 		</Grid>
 	</Grid>
 </UserControl>

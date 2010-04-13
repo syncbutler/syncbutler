@@ -107,7 +107,7 @@ namespace SyncButlerUI
 		{
             CurrentState = State.AllowClose;
 			VisualStateManager.GoToState(this, "FeatureSBSHelpState", false);
-			FocusControl(() => SBSFeatureHelpCloseBtn.Focus());
+			FocusControl(() => HelpScreenCloseBtn.Focus());
 		}
         public void GoToSBSScreen()
         {
