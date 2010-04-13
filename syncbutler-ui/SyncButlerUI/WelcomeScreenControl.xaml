@@ -79,6 +79,24 @@
 				<SplineDoubleKeyFrame KeyTime="00:00:04.9000000" Value="0"/>
 			</DoubleAnimationUsingKeyFrames>
 		</Storyboard>
+		<Style x:Key="whatisFriendlyNameHelp" TargetType="{x:Type Button}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type Button}">
+						<Grid>
+							<Image Source="Images/Help.png" Stretch="Fill" HorizontalAlignment="Left" Width="40"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsFocused" Value="True"/>
+							<Trigger Property="IsDefaulted" Value="True"/>
+							<Trigger Property="IsMouseOver" Value="True"/>
+							<Trigger Property="IsPressed" Value="True"/>
+							<Trigger Property="IsEnabled" Value="False"/>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
 	</UserControl.Resources>
 	<UserControl.Triggers>
 		<EventTrigger RoutedEvent="FrameworkElement.Loaded">
@@ -172,6 +190,7 @@
 			<Button HorizontalAlignment="Right" Margin="0,0,23.5,12" VerticalAlignment="Bottom" Width="154.5" Height="34" Content="Name It! " FontSize="20" Click="NameIt_Click" FontWeight="Bold"/>
 			<TextBox x:Name="FirstTimeComputerNameText" Margin="42,0,197.5,12" VerticalAlignment="Bottom" Height="34" TextWrapping="Wrap" FontSize="20" TetonWhitewaterKayak_WinUI:Placeholder.Text="Please enter a name for this computer" KeyDown="FirstTimeComputerNameText_Enter" />
 			<TextBlock Margin="115.5,0,144.5,66.5" VerticalAlignment="Bottom" Height="32" Text="Welcome to Sync Butler" TextWrapping="Wrap" TextAlignment="Center" FontWeight="Bold" FontSize="26.667"/>
+			<Button HorizontalAlignment="Right" Margin="0,0,28,54" Style="{DynamicResource whatisFriendlyNameHelp}" VerticalAlignment="Bottom" Width="40" Height="40" Content="Button" Click="whatIsComputerName_Click" Opacity="0.55" Cursor="Hand"/>
 
 
 		</Grid>
