@@ -260,11 +260,11 @@ namespace SyncButlerUI
             {
                 case SyncableStatus.ActionType.Checksum:
                 case SyncableStatus.ActionType.Sync:
-                    verb = "Scanning: ";
+                    verb = "Scanning ";
                     break;
 
-                case SyncableStatus.ActionType.Copy: verb = "Copying: "; break;
-                case SyncableStatus.ActionType.Delete: verb = "Deleting: "; break;
+                case SyncableStatus.ActionType.Copy: verb = "Copying "; break;
+                case SyncableStatus.ActionType.Delete: verb = "Deleting "; break;
             }
 
             CurrentSyncingFile.Text = verb + status.FriendlyEntityPath;

@@ -88,11 +88,11 @@ namespace SyncButler
 
             if (path.ToLower().StartsWith(@"folder:\\"))
             {
-                path = path.Replace(@"folder:\\", "Folder '") + "'";
+                path = path.Replace(@"folder:\\", "Folder: ");
             }
             else if (path.ToLower().StartsWith(@"file:\\"))
             {
-                path = path.Replace(@"file:\\", "File '") + "'";
+                path = path.Replace(@"file:\\", "File: ");
             }
 
             return path;
