@@ -221,23 +221,24 @@ namespace SyncButlerUI
             switch (msgType)
             {
                 case MessageType.Error:
-                    dialogTitle = "SyncButler: Error";
+                    dialogTitle = "Sync Butler: Error";
                     imageUri = "Images/error.png";
                     break;
 
                 case MessageType.Success:
-                    dialogTitle = "SyncButler: Success";
+                    dialogTitle = "Sync Butler: Success";
                     break;
 
                 case MessageType.Message:
-                    dialogTitle = "SyncButler";
+                    dialogTitle = "Sync Butler";
                     break;
 
                 case MessageType.Warning:
-                    dialogTitle = "SyncButler: Warning";
+                    dialogTitle = "Sync Butler: Warning";
                     break;
 
                 case MessageType.Question:
+                    dialogTitle = "Sync Butler: Question";
                     break;
 
                 default:

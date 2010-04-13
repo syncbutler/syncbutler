@@ -23,7 +23,7 @@ using System.Collections.Generic;
 namespace SyncButler.Exceptions
 {
     /// <summary>
-    /// This is a custom SyncButler exception. It is thrown when the user provides an invalid input.
+    /// This is a custom Sync Butler exception. It is thrown when the user provides an invalid input.
     /// </summary>
     public class UserInputException : Exception
     {
