@@ -368,6 +368,52 @@ namespace SyncButler
             return (subject.Checksum().Equals(Checksum()));
         }
 
+
+        /// <summary>
+        /// Compares an object with another ISyncable and returns the reason for its differences.
+        /// </summary>
+        /// <param name="obj">The other ISyncable object to compare with.</param>
+        /// <returns>A string of the reason.</returns>
+        public override string GetDifferenceReason(ISyncable obj)
+        {
+
+            if (obj is WindowsFolder)
+            {
+                string msg = "";
+                WindowsFolder partner = (WindowsFolder)obj;
+
+                if (this.nativeDirObj.Exists && !partner.nativeDirObj.Exists)
+                {
+                    msg += "The folder was deleted from Folder 2 and it was modified in Folder 1. ";
+                }
+                else if (!this.nativeDirObj.Exists && partner.nativeDirObj.Exists)
+                {
+                    msg += "The folder was deleted from Folder 1 and it was modified in Folder 2. ";
+                }
+                else if (!this.Equals(partner))
+                {
+                    msg += "Both folders were modified";
+
+                    if (this.LastWriteTime < partner.LastWriteTime)
+                        msg += " and folder 2 has a more recent version of the folder. ";
+                    else if (this.LastWriteTime > partner.LastWriteTime)
+                        msg += " and folder 1 has a more recent version of the folder. ";
+                    else
+                        msg += " at the same time.";
+                }
+                else
+                {
+                    msg = "No reason available.";
+                }
+
+                return msg;
+            }
+            else
+            {
+                return "Invalid object comparison.";
+            }
+        } 
+
         /// <summary>
         /// Returns a string which represents the folder in the context of the partnership
         /// </summary>

@@ -79,6 +79,27 @@ namespace SyncButler
         }
 
         /// <summary>
+        /// Gets the reason behind the conflict.
+        /// This is used mainly for UI.
+        /// </summary>
+        /// <returns>A string containing the reason for this conflict.</returns>
+        public string GetReason()
+        {
+            return this.left.GetDifferenceReason(this.right);
+        }
+
+        /// <summary>
+        /// Gets the reason behind the conflict.
+        /// </summary>
+        public string Reason
+        {
+            get
+            {
+                return GetReason();
+            }
+        }
+
+        /// <summary>
         /// Gets the folder containing the left ISyncable.
         /// </summary>
         public string LeftFolder

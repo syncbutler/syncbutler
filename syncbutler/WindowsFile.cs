@@ -583,7 +583,7 @@ namespace SyncButler
             }
             catch (DriveNotFoundException)
             {
-                exp = new Exception("A storage device was not found. SyncButler cannot sync " + parentPartnership.Name);
+                exp = new Exception("A storage device was not found. Sync Butler cannot sync " + parentPartnership.Name);
 
                 if (errorHandler == null) throw exp;
                 else
@@ -730,6 +730,51 @@ namespace SyncButler
         public override ISyncable CreateChild(string entityPath)
         {
             throw new ArgumentException();
+        }
+
+
+        /// <summary>
+        /// Compares an object with another ISyncable and returns the reason for its differences.
+        /// </summary>
+        /// <param name="obj">The other ISyncable object to compare with.</param>
+        /// <returns>A string of the reason.</returns>
+        public override string GetDifferenceReason(ISyncable obj)
+        {
+            if (obj is WindowsFile)
+            {
+                string msg = "";
+                WindowsFile partner = (WindowsFile)obj;
+
+                if (this.nativeFileObj.Exists && !partner.nativeFileObj.Exists)
+                {
+                    msg += "The file was deleted from Folder 2 and it was modified in Folder 1. ";
+                }
+                else if (!this.nativeFileObj.Exists && partner.nativeFileObj.Exists)
+                {
+                    msg += "The file was deleted from Folder 1 and it was modified in Folder 2. ";
+                }
+                else if (!this.Equals(partner))
+                {
+                    msg += "Both files were modified";
+
+                    if (this.LastWriteTime < partner.LastWriteTime)
+                        msg += " and folder 2 has a more recent version of the file. ";
+                    else if (this.LastWriteTime > partner.LastWriteTime)
+                        msg += " and folder 1 has a more recent version of the file. ";
+                    else
+                        msg += " at the same time.";
+                }
+                else
+                {
+                    msg = "No reason available.";
+                }
+
+                return msg;
+            }
+            else
+            {
+                return "Invalid object comparison.";
+            }
         }
 
         /// <summary>
