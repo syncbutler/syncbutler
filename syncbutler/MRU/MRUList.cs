@@ -122,29 +122,33 @@ namespace SyncButler.MRU
                 {
                     if (File.Exists(MRUs[mru]))
                     {
-
-                        if (!File.Exists(SyncTo + mru))
+                        if (File.Exists(SyncTo + mru))
                         {
-                            this.Copy(MRUs[mru], SyncTo + mru);
+                            File.Delete(SyncTo + mru);
                         }
-                        else
-                        {
-                            if (statusMonitor != null)
-                            {
-                                if (!statusMonitor(new SyncableStatus(MRUs[mru], 0, 0, SyncableStatus.ActionType.Sync)))
-                                    return Conflicts;
-                            }
-                            WindowsFile MRUFile = new WindowsFile(MRUs[mru]);
-                            WindowsFile Target = new WindowsFile(SyncTo + mru);
-                            if (MRUFile.Length != Target.Length)
-                            {
-                                Conflicts.Add(new Conflict(MRUFile, Target, Conflict.Action.CopyToRight));
-                            }
-                            else if (!WindowsFile.HaveEqualChecksums(MRUFile, Target))
-                            {
-                                Conflicts.Add(new Conflict(MRUFile, Target, Conflict.Action.CopyToRight));
-                            }
-                        }
+                        this.Copy(MRUs[mru], SyncTo + mru);
+                        //if (!File.Exists(SyncTo + mru))
+                        //{
+                        //    this.Copy(MRUs[mru], SyncTo + mru);
+                        //}
+                        //else
+                        //{
+                        //    if (statusMonitor != null)
+                        //    {
+                        //        if (!statusMonitor(new SyncableStatus(MRUs[mru], 0, 0, SyncableStatus.ActionType.Sync)))
+                        //            return Conflicts;
+                        //    }
+                        //    WindowsFile MRUFile = new WindowsFile(MRUs[mru]);
+                        //    WindowsFile Target = new WindowsFile(SyncTo + mru);
+                        //    if (MRUFile.Length != Target.Length)
+                        //    {
+                        //        Conflicts.Add(new Conflict(MRUFile, Target, Conflict.Action.CopyToRight));
+                        //    }
+                        //    else if (!WindowsFile.HaveEqualChecksums(MRUFile, Target))
+                        //    {
+                        //        Conflicts.Add(new Conflict(MRUFile, Target, Conflict.Action.CopyToRight));
+                        //    }
+                        //}
                     }
                 }
                 catch (Exception e)

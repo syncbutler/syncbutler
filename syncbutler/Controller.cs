@@ -540,7 +540,7 @@ namespace SyncButler
             return GetSBSPath(SyncEnvironment.SBSDriveLetter);
         }
 
-        public void AutoSyncRecentFiles()
+        public string AutoSyncRecentFiles()
         {
             long limit = GetUserLimit();
             SortedList<string, SortedList<string, string>> MRUs = new SortedList<string, SortedList<string, string>>();
@@ -553,28 +553,45 @@ namespace SyncButler
                 CheckAndMerge(interesting, splited[mrulevels[i]], limit);
             }
             MRUs.Add("interesting", interesting);
-            //MRUs = GetMonitoredFiles();
-            SyncMRUs(MRUs["interesting"]);
+            return SyncMRUs(MRUs["interesting"]);
         }
 
-        public void SyncMRUs(SortedList<string, string> toSync)
+        public string SyncMRUs(SortedList<string, string> toSync)
         {
             char driveLetter = SyncEnvironment.SBSDriveLetter;
             string driveid = SyncEnvironment.SBSDriveId;
             int drivePartition = SyncEnvironment.SBSDrivePartition;
-            if (SystemEnvironment.StorageDevices.GetDriveLetter(driveid, drivePartition).Length != 0)
+            String errorMsg = "";
+            try
             {
-                string syncTo = GetSBSPath(driveLetter);
-                if (WindowsFolder.CheckIfUserHasRightsTo(syncTo, GetCurrentLogOnUser()))
+                if (SystemEnvironment.StorageDevices.GetDriveLetter(driveid, drivePartition).Length != 0)
                 {
-                    driveLetter = SystemEnvironment.StorageDevices.GetDriveLetter(driveid, drivePartition)[0];
-                    MRUList mruList = new MRUList();
-                    mruList.Load(toSync);
-                    mruList.Sync(SyncEnvironment.ComputerName, driveLetter);
-                    SBSLogFile = syncTo;
-                    MRUList.SaveInfoTo(syncTo + "Open this Report in a Browser.xml", mruList);
+                    string syncTo = GetSBSPath(driveLetter);
+                    if (WindowsFolder.CheckIfUserHasRightsTo(syncTo, GetCurrentLogOnUser()))
+                    {
+                        driveLetter = SystemEnvironment.StorageDevices.GetDriveLetter(driveid, drivePartition)[0];
+                        MRUList mruList = new MRUList();
+                        mruList.Load(toSync);
+                        mruList.Sync(SyncEnvironment.ComputerName, driveLetter);
+                        SBSLogFile = syncTo;
+                        MRUList.SaveInfoTo(syncTo + "Open this Report in a Browser.xml", mruList);
+                    }
+                    else
+                    {
+                        errorMsg = "Permisson denied\nPlease check if you have the rights to the folder for SBS at " + driveLetter + ":\\SyncButler\\";
+                    }
+
                 }
-            }            
+                else
+                {
+                    errorMsg = "Device not detected\nPlease plug in the device configured for SBS.";
+                }
+            }
+            catch (Exceptions.DriveNotSupportedException)
+            {
+                errorMsg = "Device not detected\nPlease plug in the device configured for SBS.";
+            }
+            return errorMsg;
         }
 
         /// <summary>
