@@ -343,7 +343,7 @@ namespace SyncButler
                 break;
             }
 
-            if (outputStream == null) throw new IOException("Could not create a temporary file to be used for safe copying");
+            if (outputStream == null) throw new IOException("Could not create a temporary file to be used for safe copying.");
 
             byte [] buf = new byte[bufferSize];
             long totalCopied = 0;
@@ -363,7 +363,7 @@ namespace SyncButler
 
                 if (statusMonitor != null)
                 {
-                    if (!statusMonitor(new SyncableStatus(EntityPath(), 0, (int)(totalCopied * toPercent), SyncableStatus.ActionType.Copy)))
+                    if (!statusMonitor(new SyncableStatus(EntityPath(), 0, (int)(totalCopied * toPercent), SyncableStatus.ActionType.Copy, destFile.parentPartnership.GetPartnershipElem(destFile.rootPath))))
                     {
                         inputStream.Close();
                         outputStream.Close();
@@ -464,7 +464,7 @@ namespace SyncButler
 
                     if (percentComplete > 100) percentComplete = 100;
 
-                    if (!statusMonitor(new SyncableStatus(curObj, 0, percentComplete, SyncableStatus.ActionType.Checksum)))
+                    if (!statusMonitor(new SyncableStatus(curObj, 0, percentComplete, SyncableStatus.ActionType.Checksum, this.parentPartnership.GetPartnershipElem(this.rootPath))))
                         throw new UserCancelledException();
                 }
 

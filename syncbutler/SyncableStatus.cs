@@ -35,10 +35,11 @@ namespace SyncButler
             Sync
         };
 
-        protected string _entityPath;
-        protected int _percentComplete;
-        protected int _curTaskPercentComplete;
-        protected ActionType _actionType;
+        private string entityPath;
+        private int percentComplete;
+        private int curTaskPercentComplete;
+        private ActionType type;
+        private string partnerElem;
 
         /// <summary>
         /// Creates the SyncableStatus with the required information
@@ -49,10 +50,24 @@ namespace SyncButler
         /// <param name="actionType">The current action being performed</param>
         public SyncableStatus(string entityPath, int percentComplete, int curTaskPercentComplete, ActionType actionType)
         {
-            this._entityPath = entityPath;
-            this._percentComplete = percentComplete;
-            this._curTaskPercentComplete = curTaskPercentComplete;
-            this._actionType = actionType;
+            this.entityPath = entityPath;
+            this.percentComplete = percentComplete;
+            this.curTaskPercentComplete = curTaskPercentComplete;
+            this.type = actionType;
+            this.partnerElem = "";
+        }
+
+        /// <summary>
+        /// Creates the SyncableStatus with the required information and also includes the partnership element (see also Partnership.GetPartnershipElem()).
+        /// </summary>
+        /// <param name="entityPath">The object/node currently being worked on</param>
+        /// <param name="percentComplete">The overall percentage of the task which is complete</param>
+        /// <param name="curTaskPercentComplete">The percentage of the current task which is complete</param>
+        /// <param name="actionType">The current action being performed</param>
+        /// <param name="partnerElem">A text description describing this entity in relation to the partnership.</param>
+        public SyncableStatus(string entityPath, int percentComplete, int curTaskPercentComplete, ActionType actionType, string partnerElem) : this(entityPath, percentComplete, curTaskPercentComplete, actionType)
+        {
+            this.partnerElem = partnerElem;
         }
 
         /// <summary>
@@ -63,7 +78,7 @@ namespace SyncButler
         {
             get
             {
-                return _entityPath;
+                return entityPath;
             }
         }
 
@@ -84,7 +99,7 @@ namespace SyncButler
         /// <returns>A string with the human-readable form of the entity path.</returns>
         public string GetFriendlyEntityPath()
         {
-            string path = _entityPath;
+            string path = entityPath;
 
             if (path.ToLower().StartsWith(@"folder:\\"))
             {
@@ -95,6 +110,19 @@ namespace SyncButler
                 path = path.Replace(@"file:\\", "File: ");
             }
 
+            if (this.partnerElem.Length > 0)
+            {
+                string join = "";
+
+                if (this.type == ActionType.Checksum) join = "in";
+                else if (this.type == ActionType.Copy) join = "to";
+                else if (this.type == ActionType.Delete) join = "from";
+                else if (this.type == ActionType.Merge) join = "with";
+
+                if (join.Length > 0)
+                    path = path + " " + join + " " + this.partnerElem;
+            }
+
             return path;
         }
 
@@ -102,11 +130,11 @@ namespace SyncButler
         /// Percentage of work completed.
         /// NOTE: Not implemented in the ISyncables yet!
         /// </summary>
-        public int percentComplete
+        public int PercentComplete
         {
             get
             {
-                return _percentComplete;
+                return percentComplete;
             }
         }
 
@@ -114,22 +142,22 @@ namespace SyncButler
         /// Percentage of the work on the current subtask (as given in
         /// curObject) is complete.
         /// </summary>
-        public int curTaskPercentComplete
+        public int CurTaskPercentComplete
         {
             get
             {
-                return _curTaskPercentComplete;
+                return curTaskPercentComplete;
             }
         }
 
         /// <summary>
         /// The type of action currently being performed
         /// </summary>
-        public ActionType actionType
+        public ActionType Type
         {
             get
             {
-                return _actionType;
+                return type;
             }
         }
     }

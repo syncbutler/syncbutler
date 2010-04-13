@@ -256,7 +256,7 @@ namespace SyncButlerUI
             SyncableStatus status = (SyncableStatus)args.UserState;
             string verb = "";
 
-            switch (status.actionType)
+            switch (status.Type)
             {
                 case SyncableStatus.ActionType.Checksum:
                 case SyncableStatus.ActionType.Sync:
@@ -268,7 +268,7 @@ namespace SyncButlerUI
             }
 
             CurrentSyncingFile.Text = verb + status.FriendlyEntityPath;
-            SubProgressBar.Value = status.curTaskPercentComplete;
+            SubProgressBar.Value = status.CurTaskPercentComplete;
 
             if (CurrentAction == CurrentActions.Resolving)
             {
@@ -391,7 +391,7 @@ namespace SyncButlerUI
                     {
                         ConflictList cl = this.Controller.SyncPartnership(friendlyName, delegate(SyncableStatus status)
                         {
-                            worker.ReportProgress(status.percentComplete, status);
+                            worker.ReportProgress(status.PercentComplete, status);
                             if (worker.CancellationPending) return false;
                             return true;
                         },
@@ -458,7 +458,7 @@ namespace SyncButlerUI
 
                 SyncableStatusMonitor reporter = delegate(SyncableStatus status)
                 {
-                    worker.ReportProgress(status.percentComplete, status);
+                    worker.ReportProgress(status.PercentComplete, status);
                     if (worker.CancellationPending) return false;
                     return true;
                 };
@@ -1159,7 +1159,7 @@ namespace SyncButlerUI
                     this.Controller.SyncMRUs(MRUs["interesting"], delegate(SyncableStatus status)
                     { // Status reporting - triggers whenever SyncMRU has made progress
 
-                        pinfo.SubTaskPercent = status.curTaskPercentComplete;
+                        pinfo.SubTaskPercent = status.CurTaskPercentComplete;
                         pinfo.TotalTaskPercent = 0;
                         pinfo.taskDescription = status.EntityPath;
                         // Report the progress back to the progress bar
@@ -1572,7 +1572,7 @@ namespace SyncButlerUI
 
                 MRUs = Controller.GetInstance().GetMonitoredFiles(delegate(SyncableStatus status)
                 {
-                    pinfo.SubTaskPercent = status.curTaskPercentComplete;
+                    pinfo.SubTaskPercent = status.CurTaskPercentComplete;
                     ((BackgroundWorker)worker).ReportProgress(0, pinfo);
                     return true;
                 }, preview);

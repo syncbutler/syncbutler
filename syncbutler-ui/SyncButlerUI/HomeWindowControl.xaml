@@ -1171,9 +1171,9 @@
 			<Image x:Name="image1_Copy2" Margin="182.092,130.331,9.455,22.247" Source="Images\logo.png" Stretch="Fill" Opacity="0.04"/>
 			<Rectangle Stroke="Black" RadiusX="5" RadiusY="2" Margin="18.798,374.118,17.383,0" VerticalAlignment="Top" Height="142.286"/>
 			<TextBlock x:Name="PartnershipName" Margin="29.169,0,267.738,111.641" VerticalAlignment="Bottom" Height="36.427" FontSize="14.667" FontWeight="Bold" Text="Partnership Name" TextWrapping="Wrap"/>
-			<TextBlock x:Name="CurrentSyncingFile" Margin="29.169,0,27.582,67.554" VerticalAlignment="Bottom" Height="40.087" TextWrapping="Wrap" Text="Currently Syncing: C:/doc/xml.xml" FontSize="14.667"/>
-			<ProgressBar x:Name="SubProgressBar" Margin="162.316,0,27.582,44.081" VerticalAlignment="Bottom" Height="16.776"/>
-			<ProgressBar x:Name="TotalProgressBar" Margin="162.316,0,27.582,19.467" VerticalAlignment="Bottom" Height="16.776"/>
+			<TextBlock x:Name="CurrentSyncingFile" Margin="29.169,0,27.582,67.554" VerticalAlignment="Bottom" Height="40.087" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" Text="Currently Syncing: C:/doc/xml.xml" FontSize="14.667"/>
+			<ProgressBar x:Name="SubProgressBar" Margin="162.316,0,27.582,46.081" VerticalAlignment="Bottom" Height="16.776"/>
+			<ProgressBar x:Name="TotalProgressBar" Margin="162.316,0,27.582,23.467" VerticalAlignment="Bottom" Height="16.776"/>
 			<TextBlock x:Name="ConflictsLabel" Margin="22.749,18.326,124.473,0" FontSize="24" FontWeight="Bold" Text="Sync Status" TextWrapping="Wrap" VerticalAlignment="Top" Height="42.946"/>
 			<Custom:DataGrid x:Name="ConflictList"  Margin="23.736,130.331,22.322,163.948" RowDetailsVisibilityMode="VisibleWhenSelected"  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True" CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False" GridLinesVisibility="Vertical" HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding StaticResource, Mode=TwoWay}" Custom:SelectiveScrollingGrid.SelectiveScrollingOrientation="Horizontal" CanUserResizeRows="False" HeadersVisibility="None" VerticalScrollBarVisibility="Visible" RenderTransformOrigin="0.5,0.5" EnableRowVirtualization="True" RowBackground="White" AlternatingRowBackground="WhiteSmoke" CellStyle="{DynamicResource ConflictDataGridCellStyle}" Focusable="False" Grid.IsSharedSizeScope="True" SelectedIndex="-1" SelectionMode="Single">
 			<Custom:DataGrid.RenderTransform>
