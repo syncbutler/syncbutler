@@ -202,7 +202,7 @@ namespace SyncButlerUI
         {
             if (args.UserState is String)
             {
-                PartnershipName.Text = (String)args.UserState + " (Syncing...)";
+                PartnershipName.Text = " Syncing: " + (String)args.UserState;
                 return;
             }
 
