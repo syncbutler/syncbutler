@@ -223,9 +223,8 @@ namespace SyncButler
             }
             else
             {
-                return DriveLetters.Contains(Controller.GetSBSDriveLetter());
+                return Controller.IsSBSEnable() && Controller.IsAutoSyncRecentFileAllowed() && DriveLetters.Contains(Controller.GetSBSDriveLetter());
             }
-            //return false;
         }
 
         public long GetAvailableSpaceForDrive()

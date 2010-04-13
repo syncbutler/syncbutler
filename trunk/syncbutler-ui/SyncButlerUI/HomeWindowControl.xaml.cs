@@ -938,16 +938,26 @@ namespace SyncButlerUI
         private void Sync(object sender, RoutedEventArgs e)
         {
             ResolvedConflicts = new List<Resolved>();
-             
-            #region Sync Most Recently used files
-            bool DidSBS = false;
-            if(CustomDialog.Show(this,CustomDialog.MessageTemplate.YesNo,CustomDialog.MessageResponse.No,"Are you sure you want to sync all partnerships?") == CustomDialog.MessageResponse.Yes)
+            bool canDoSBS = Controller.CanDoSBS();
+            if (this.Controller.GetPartnershipList().Count < 1 && !canDoSBS)
+            {
+                if (CustomDialog.Show(this, CustomDialog.MessageTemplate.YesNo, CustomDialog.MessageResponse.No, "There are no partnerships for me to sync. Would you like to create one now?") == CustomDialog.MessageResponse.Yes)
+                {
+
+                    VisualStateManager.GoToState(this, "CreatePartnershipState", false);
+                    CurrentState = State.Create;
+                    FocusControl(() => folderOneTextBox.Focus());
+
+                }
+            }
+            else if(CustomDialog.Show(this,CustomDialog.MessageTemplate.YesNo,CustomDialog.MessageResponse.No,"Are you sure you want to sync all partnerships?") == CustomDialog.MessageResponse.Yes)
             {
                 String errorMsg = "";
-                if (Controller.IsAutoSyncRecentFileAllowed() && Controller.IsSBSEnable() && Controller.CanDoSBS())
+
+                #region Sync Most Recently used files
+                if (canDoSBS)
                 {
                     BackgroundWorker sbsWorker = new BackgroundWorker();
-                    DidSBS = true;
                     ProgressBar progressWindow = new ProgressBar(sbsWorker, "Sync Butler, Sync", "Syncing your recently used file...");
                     progressWindow.HideTotalProgress();
                     progressWindow.IsIndeterminate = true;
@@ -969,28 +979,16 @@ namespace SyncButlerUI
                     });
                     progressWindow.Start();
                 }
+                #endregion
+
+                if (this.Controller.GetPartnershipList().Count > 0)
+                {
+                    AsyncStartSync(this.Controller.GetPartnershipList().Keys, this.Controller.GetPartnershipList());
+                }
             }
             else
             {
                 return;
-            }
-            #endregion
-
-            if (this.Controller.GetPartnershipList().Count < 1 && !DidSBS)
-            {
-                if(CustomDialog.Show(this,CustomDialog.MessageTemplate.YesNo,CustomDialog.MessageResponse.No,"There are no partnerships for me to sync. Would you like to create one now?") == CustomDialog.MessageResponse.Yes)
-                {
-
-                    VisualStateManager.GoToState(this, "CreatePartnershipState", false);
-                    CurrentState = State.Create;
-                    FocusControl(() => folderOneTextBox.Focus());
-
-                }
-                else return;
-            }
-            else if(this.Controller.GetPartnershipList().Count > 1)
-            {
-                AsyncStartSync(this.Controller.GetPartnershipList().Keys, this.Controller.GetPartnershipList());
             }
         }
 		
