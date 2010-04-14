@@ -225,9 +225,9 @@
 				<Rectangle Fill="#FF073948" Stroke="#FF006C8D" StrokeThickness="3" RadiusX="5" RadiusY="5" Margin="0,53.2,24.8,0" VerticalAlignment="Top" Height="122.4" HorizontalAlignment="Right" Width="135.2" d:LayoutOverrides="VerticalAlignment"/>
 				<TextBlock Margin="0,59.2,24.8,0" FontWeight="Bold" Foreground="#FF75CBDB" TextWrapping="Wrap" HorizontalAlignment="Right" VerticalAlignment="Top" Width="128.4" Height="42.4"><Run FontSize="13.333" Text=" "/><Run Text="What is a"/><Run Text="..."/><LineBreak/><Run FontSize="16" Text="  &quot;partnership&quot;?"/></TextBlock>
 				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="18.131,0,0,35.458" VerticalAlignment="Bottom" Height="47.2" HorizontalAlignment="Left" Width="144.8"/>
-				<TextBlock Margin="26.931,0,0,40.658" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="34.4" FontWeight="Bold" HorizontalAlignment="Left" Width="130"><Run Text="Tells "/><Run FontFamily="Walkway Black" FontSize="14.667" Text="SyncButler"/><Run Text=" which folders to sync."/></TextBlock>
-				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="250.467,0,264.733,8" VerticalAlignment="Bottom" Height="69.6"/>
-				<TextBlock Margin="259.267,0,273.133,20" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="48" FontWeight="Bold" RenderTransformOrigin="0.5,0.5"><Run Text="View the folders which "/><Run FontFamily="Walkway Black" FontSize="14.667" Text="SyncButler "/><Run Text="is keeping in sync."/></TextBlock>
+				<TextBlock Margin="26.931,0,0,40.658" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="34.4" FontWeight="Bold" HorizontalAlignment="Left" Width="130"><Run Text="Tells "/><Run FontFamily="Walkway Black" FontSize="14.667" Text="Sync Butler"/><Run Text=" which folders to sync."/></TextBlock>
+				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="250.467,0,257.733,8" VerticalAlignment="Bottom" Height="69.6"/>
+				<TextBlock Margin="260.267,0,265.133,20" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="48" FontWeight="Bold" RenderTransformOrigin="0.5,0.5"><Run Text="View the folders which "/><Run FontFamily="Walkway Black" FontSize="14.667" Text="Sync Butler "/><Run Text="is keeping in sync."/></TextBlock>
 				<Rectangle Fill="Black" Stroke="#FF62DE37" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="0,16.8,187.333,0" VerticalAlignment="Top" Height="68.333" HorizontalAlignment="Right" Width="117.067"/>
 				<TextBlock Margin="0,26.467,198.333,0" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top" Height="49.333" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="96.267"><Run Text="*New* Check out "/><Run FontFamily="Walkway Black" FontSize="14.667" Text="Sync Butler"/><Run Text="'s Hat Trick!"/></TextBlock>
 			</Grid>
@@ -341,7 +341,7 @@
 				<ic:ExtendedVisualStateManager/>
 			</VisualStateManager.CustomVisualStateManager>
 			<!--Button Name="HelpScreenCloseBtn" VerticalAlignment="Bottom" Height="39.2" Content="Close" FontWeight="Bold" FontSize="18.667" Click="ExitTutorial_Click" HorizontalAlignment="Right" Width="83.2" Margin="0,0,6,6" RenderTransformOrigin="0.637,1.25"/-->
-			<Button x:Name="HelpScreenCloseBtn" HorizontalAlignment="Right" Margin="0,0,1.5,1.5" Content="Close" FontWeight="Bold" FontSize="18.667" Click="ExitSBSTutorial_Click" Width="83.2" VerticalAlignment="Bottom" Height="39.2"/>
+			<Button x:Name="HelpScreenCloseBtn" HorizontalAlignment="Right" Margin="0,0,6.116,6.116" Content="Close" FontWeight="Bold" FontSize="18.667" Click="ExitSBSTutorial_Click" Width="83.2" VerticalAlignment="Bottom" Height="39.2"/>
 			<Image Margin="150.417,79,130.88,129.6" Source="Images/SBSWindow.png" Stretch="Fill" StretchDirection="DownOnly"/>
 			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="12.297,92.827,0,0" VerticalAlignment="Top" Height="116.8" HorizontalAlignment="Left" Width="125.62" d:LayoutOverrides="VerticalAlignment"/>
 			<TextBlock Margin="20.097,101.627,0,0" Foreground="White" TextWrapping="Wrap" FontWeight="Bold" HorizontalAlignment="Left" Width="117.998" VerticalAlignment="Top" Height="99.2"><Run Text="New or recently used files appear here. "/><Run FontFamily="Walkway Black" FontSize="14.667" Text="SyncButler "/><Run Text="will make a duplicate and store it on your "/><Run Text="USB storage device."/></TextBlock>
@@ -588,7 +588,7 @@
 					</TransformGroup>
 				</TextBlock.RenderTransform><Run Text="How does "/><Run Text="'"/><Run FontFamily="Walkway Black" Text="Sync"/><Run FontFamily="Walkway Black" Text=" "/><Run FontFamily="Walkway Black" Text="Butler"/><Run Text=", "/><Run FontStyle="Italic" Text="Sync"/><Run Text="'"/><Run Text=" work"/><Run Text="?"/></TextBlock>
 			<Button x:Name="SBSHelpScreenNextBtn" VerticalAlignment="Bottom" Height="39.2" Content="Next" FontWeight="Bold" FontSize="18.667" Click="GoToSBSDemoHelpScreen_Click" HorizontalAlignment="Right" Width="83.2" TabIndex="1" Margin="0,0,1.5,1.5"/>
-			<Button x:Name="HelpScreenCloseBtn1" HorizontalAlignment="Right" Margin="0,0,2.1,1.8" Content="Close" FontWeight="Bold" FontSize="18.667" Click="ExitSBSTutorial_Click" Width="83.2" VerticalAlignment="Bottom" Height="39.2" Opacity="0"/>
+			<Button x:Name="HelpScreenCloseBtn1" HorizontalAlignment="Right" Margin="0,0,1.1,1.954" Content="Close" FontWeight="Bold" FontSize="18.667" Click="ExitSBSTutorial_Click" Width="83.2" VerticalAlignment="Bottom" Height="39.2" Opacity="0"/>
 		</Grid>
 	</Grid>
 </UserControl>
