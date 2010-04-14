@@ -633,6 +633,7 @@ namespace SyncButlerUI
             storageScanWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(delegate(Object worker, RunWorkerCompletedEventArgs args)
                 {
                     bool devicePluggedIn = false;
+                    SBSWorkingDriveComboBox.Items.Clear();
                     if (noUSBDrives)
                     {
                         #region if there is no usb device found
@@ -657,7 +658,7 @@ namespace SyncButlerUI
                         SBSWorkingDriveComboBox.IsEnabled = true;
                         this.NoUSBWarningTextBlock.Visibility = Visibility.Hidden;
                         this.SBSSettingDeviceNotFoundTextBox.Visibility = Visibility.Hidden;
-                        SBSWorkingDriveComboBox.Items.Clear();
+                        
 
                         foreach (WindowDriveInfo s in DriveLetters)
                         {
@@ -679,8 +680,10 @@ namespace SyncButlerUI
                             {
                                 this.SBSSettingComboBox.Items.Add("Enable");
                                 this.SBSSettingComboBox.Items.Add("Disable");
+                            }
+                            if (this.SBSWorkingDriveComboBox.Items.IsEmpty)
+                            {
                                 this.SBSSettingDeviceNotFoundTextBox.Visibility = Visibility.Visible;
-                                
                             }
                             this.SBSSettingComboBox.SelectedItem = "Disable";
                             this.SBSWorkingDriveComboBox.IsEnabled = false;
