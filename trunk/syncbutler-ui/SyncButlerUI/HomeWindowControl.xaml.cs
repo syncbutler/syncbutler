@@ -958,7 +958,7 @@ namespace SyncButlerUI
                 if (canDoSBS)
                 {
                     BackgroundWorker sbsWorker = new BackgroundWorker();
-                    ProgressBar progressWindow = new ProgressBar(sbsWorker, "Sync Butler, Sync", "Syncing your recently used file...");
+                    ProgressBar progressWindow = new ProgressBar(sbsWorker, "Sync Butler, Sync", "Syncing your recently used files...");
                     progressWindow.HideTotalProgress();
                     progressWindow.IsIndeterminate = true;
                     sbsWorker.DoWork += new DoWorkEventHandler(delegate(Object worker, DoWorkEventArgs args)
@@ -973,7 +973,7 @@ namespace SyncButlerUI
                         }
                         else
                         {
-                            CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, String.Format("Unable to sync some files. Due to some errror.\r{0}", errorMsg));
+                            CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, String.Format("There was a problem and I was unable to sync some or all of your files. The problem was this: \n{0}", errorMsg));
                         }
                         progressWindow.TaskComplete();
                     });
