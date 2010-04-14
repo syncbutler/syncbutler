@@ -1396,11 +1396,11 @@ namespace SyncButlerUI
                     {
                         CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok,
                             "Sync Butler needs at least 250MB on your storage device to carry your recent files.\r\nIt may not be able to carry the files you need, when you need them.\r\nPlease use a device with a bigger space");
-                        SpaceToUseSlide.IsEnabled = false;
-                        SpaceToUseTextbox.IsEnabled = false;
+                        //SpaceToUseSlide.IsEnabled = false;
+                        //SpaceToUseTextbox.IsEnabled = false;
                     }
-                    else
-                    {
+                    //else
+                    //{
                         int preferredSize = (int) (freespace * 0.1 / MEGA_BYTE);
                         if (preferredSize < minimumSize) preferredSize = minimumSize;
 
@@ -1411,7 +1411,7 @@ namespace SyncButlerUI
                         else if (resolutionLabel.Content.Equals("GB"))
                             SpaceToUseSlide.Value = preferredSize * GIGA_BYTE;
 
-                    }
+                    //}
 
                 }
             }
