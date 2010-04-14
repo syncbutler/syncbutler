@@ -73,7 +73,7 @@ namespace SyncButler.MRU
                 if (di.DriveType == DriveType.Fixed)
                 {
                     if (statusMonitor != null) statusMonitor(new SyncableStatus("", 0, ((int)(done * toPercent)) + 56, SyncableStatus.ActionType.Sync));
-                    mergedList.AddRange(MostRecentlyUsedFile.Scan(drive, depth, days));
+                    mergedList.AddRange(MostRecentlyUsedFile.Scan(drive[0] + ":\\", depth, days));
                     done++;
                 }
             }
