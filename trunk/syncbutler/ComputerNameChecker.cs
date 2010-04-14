@@ -30,20 +30,18 @@ namespace SyncButler
         private static string[] reserved = { "con", "prn", "aux", "nul", "com1", "com2", "com3", "com4", "com5", "com6", "com7", "com8", "com9", "lpt1", "lpt2", "lpt3", "lpt4", "lpt5", "lpt6", "lpt7", "lpt8" };
         private static string pattern = "^[A-Za-z_0-9]+$";
         
+        /// <summary>
+        /// Checks if a given string is a valid name for the computer.
+        /// </summary>
+        /// <param name="computerName">name of the computer</param>
+        /// <returns>true if the name is valid(not reserved), false otherwise</returns>
         public static bool IsComputerNameValid(String computerName)
         {
             Regex regex = new Regex(pattern);
-            if (computerName.Length != 0)
-            {
-                if (regex.IsMatch(computerName))
-                {
-                    if (Array.IndexOf(reserved, computerName) == -1)
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
+            if ((computerName.Length != 0) && regex.IsMatch(computerName) && (Array.IndexOf(reserved, computerName) == -1))
+                return true;
+            else 
+                return false;
         }
 
     }

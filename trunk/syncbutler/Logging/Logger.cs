@@ -26,7 +26,7 @@ using System.IO;
 namespace SyncButler.Logging
 {
     /// <summary>
-    /// This is in charge of carrying out logging operations
+    /// This is in charge of carrying out logging operations.
     /// </summary>
     public sealed class Logger
     {

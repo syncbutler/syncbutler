@@ -153,10 +153,22 @@ namespace SyncButler
             
             return false;
         }
+
+        /// <summary>
+        /// Retrieves the value of the enumeration as an integer.
+        /// </summary>
+        /// <param name="d">A ValueLevel</param>
+        /// <returns>An integer representing the value of the parameter.</returns>
         private static int ConvertEnumToInt(ValueLevel d)
         {
             return (int)Enum.Parse(typeof(ValueLevel), Enum.GetName(typeof(ValueLevel), d));
         }
+
+        /// <summary>
+        /// Splits a whole list of most recently used files into several bands based on level of interest.
+        /// </summary>
+        /// <param name="mrus">A sorted list of MRUs</param>
+        /// <returns>A sorted list containing 6 different keys with 6 lists of MRUs banded together based on the level of interest.</returns>
         public static SortedList<string, SortedList<string, string>> Spilt(SortedList<string, string> mrus)
         {
             SortedList<string, string> interestingUltraLow = new SortedList<string, string>();
@@ -170,7 +182,7 @@ namespace SyncButler
             int InterestingLevel = 0;
             foreach (string filename in mrus.Keys)
             {
-                InterestingLevel = ConvertEnumToInt(isInteresting(filename));
+                InterestingLevel = ConvertEnumToInt(IsInteresting(filename));
                 if (isSensitive(filename))
                 {
                     sensitive.Add(filename, mrus[filename]);
@@ -220,7 +232,7 @@ namespace SyncButler
         /// </summary>
         /// <param name="text">The text to be checked (filename for example)</param>
         /// <returns>A ValueLevel that ranges from 0 to 15. 0 represent no value</returns>
-        public static ValueLevel isInteresting(string text)
+        public static ValueLevel IsInteresting(string text)
         {
             string lowerCapsText = text.ToLower();
 

@@ -82,6 +82,10 @@ namespace SyncButler.MRU
             MRUs = new SortedList<string,string>();
         }
 
+        /// <summary>
+        /// Used to populate the MRU list.
+        /// </summary>
+        /// <param name="mrus">A sorted list of MRU files.</param>
         public void Load(SortedList<string,string> mrus)
         {
             MRUs = mrus;
@@ -142,6 +146,11 @@ namespace SyncButler.MRU
             return Conflicts;
         }
 
+        /// <summary>
+        /// Attempts to copy a file from a source to a destination safely.
+        /// </summary>
+        /// <param name="sourcePath">Path to the source</param>
+        /// <param name="destPath">Path to the destination</param>
         protected void Copy(string sourcePath, string destPath)
         {
             FileInfo sourceFile = new FileInfo(sourcePath);
