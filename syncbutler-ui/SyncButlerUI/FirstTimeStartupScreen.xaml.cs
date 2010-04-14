@@ -43,7 +43,7 @@ namespace SyncButlerUI
         {
             this.InitializeComponent();
             this.ShowInTaskbar = true;
-            Controller.GetInstance().SetWindow(this);
+            Controller.GetInstance().SetWindow(this, false);
 		}
         
         #region IGUI Members

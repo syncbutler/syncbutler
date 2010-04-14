@@ -66,9 +66,8 @@ namespace SyncButlerUI
             {
                 throw new UserCancelledException();
             }
-
             // Insert code required on object creation below this point.
-            controller.SetWindow(this);
+            controller.SetWindow(this, true);
             this.homeWindow1.Controller = this.controller;
             el = new ErrorList();
             Controller.HandleStartupArgs();
