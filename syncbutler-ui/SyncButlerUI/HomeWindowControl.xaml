@@ -1135,6 +1135,7 @@
 			<TextBlock x:Name="SBSPathTextBlock" Margin="42.033,0,0,54" VerticalAlignment="Bottom" Height="23.738" TextWrapping="Wrap" HorizontalAlignment="Left" Width="152.38" FontSize="16" Text="Files will be saved to: "/>
 			<Label x:Name="SBSPathLabel" Margin="196.931,0,337.477,51" VerticalAlignment="Bottom" Height="29.893" Content="Label" FontSize="14.667" FontWeight="Bold"/>
 			<TextBlock x:Name="SBSfeatureDisabledTextBlock" Margin="108.016,0,358.144,50" VerticalAlignment="Bottom" Height="38.096" Text="This feature is turned off in Settings. The files listed above are for preview only and will not be copied." TextWrapping="Wrap" FontSize="13.333"/>
+			<TextBlock x:Name="SBSDriveNotPluggedInDisabledTextBlock" Margin="108.016,0,358.144,26.037" VerticalAlignment="Bottom" Height="62.059" Text="The assigned SBS portable storage is not attached to the system now. The files listed above are for preview only and will not be copied." TextWrapping="Wrap" FontSize="13.333"/>
 			<Image x:Name="SBSWarningImage" HorizontalAlignment="Left" Margin="64.207,0,0,50.655" VerticalAlignment="Bottom" Width="39.809" Height="39.809" Source="Warning.png" Stretch="Fill"/>
 		</Grid>
 		<Grid x:Name="Conflict" Margin="0.027,0,0.449,-4" VerticalAlignment="Bottom" Height="528" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
