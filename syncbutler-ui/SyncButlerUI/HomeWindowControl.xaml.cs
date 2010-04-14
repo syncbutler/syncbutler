@@ -972,7 +972,7 @@ namespace SyncButlerUI
                 if (canDoSBS)
                 {
                     BackgroundWorker sbsWorker = new BackgroundWorker();
-                    ProgressBar progressWindow = new ProgressBar(sbsWorker, "Sync Butler, Sync", "Syncing your recently used files...");
+                    ProgressBar progressWindow = new ProgressBar(sbsWorker, "Sync Butler, Sync", "Syncing your recently used files to " + Controller.GetSBSPath());
                     progressWindow.HideTotalProgress();
                     progressWindow.IsIndeterminate = true;
                     sbsWorker.DoWork += new DoWorkEventHandler(delegate(Object worker, DoWorkEventArgs args)
@@ -1886,7 +1886,7 @@ namespace SyncButlerUI
                         this.SBSSettingComboBox.Items.Add("Enable");
                         this.SBSSettingComboBox.Items.Add("Disable");
                         this.SBSSettingComboBox.SelectedItem = "Disable";
-                        if (this.SBSWorkingDriveComboBox.Items.Count > 0)
+                        if (this.SBSWorkingDriveComboBox.Items.Count > 0 && Controller.IsSBSEnable())
                             this.SBSSettingDeviceNotFoundTextBox.Visibility = Visibility.Visible;
                         else
                             this.SBSSettingDeviceNotFoundTextBox.Visibility = Visibility.Hidden;
