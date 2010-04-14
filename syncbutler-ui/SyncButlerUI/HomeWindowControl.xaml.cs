@@ -1325,7 +1325,7 @@ namespace SyncButlerUI
 
         private void SBSUpdateSpaceDetails(object sender, RoutedEventArgs e)
         {
-            int preferedSize = 250;
+            int minimumSize = 250;
             if (this.SBSSettingComboBox.SelectedIndex != -1 &&
                 this.SBSSettingComboBox.SelectedItem.Equals("Enable") && !IsLoadingSBS)
             {
@@ -1358,7 +1358,7 @@ namespace SyncButlerUI
                         resolutionLabel.Content = "Bytes";
                         SpaceToUseSlide.Maximum = freespace;
                     }
-                    if (freespace <= preferedSize * MEGA_BYTE)
+                    if (freespace <= minimumSize * MEGA_BYTE)
                     {
                         CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok,
                             "Sync Butler needs at least 250MB on your storage device to carry your recent files.\r\nIt may not be able to carry the files you need, when you need them.\r\nPlease use a device with a bigger space");
@@ -1367,12 +1367,15 @@ namespace SyncButlerUI
                     }
                     else
                     {
+                        int preferredSize = (int) (freespace * 0.1 / MEGA_BYTE);
+                        if (preferredSize < minimumSize) preferredSize = minimumSize;
+
                         if (resolutionLabel.Content.Equals("MB"))
-                            SpaceToUseSlide.Value = preferedSize;
+                            SpaceToUseSlide.Value = preferredSize;
                         else if (resolutionLabel.Content.Equals("KB"))
-                            SpaceToUseSlide.Value = preferedSize * KILO_BYTE;
+                            SpaceToUseSlide.Value = preferredSize * KILO_BYTE;
                         else if (resolutionLabel.Content.Equals("GB"))
-                            SpaceToUseSlide.Value = preferedSize * GIGA_BYTE;
+                            SpaceToUseSlide.Value = preferredSize * GIGA_BYTE;
 
                     }
 
