@@ -745,6 +745,8 @@ namespace SyncButler
         {
             if (!Directory.Exists(DirectoryPath))
             {
+                if (DirectoryPath == null)
+                    return true;
                 return CheckIfUserHasRightsTo(Path.GetDirectoryName(DirectoryPath), User);
             }
             try
