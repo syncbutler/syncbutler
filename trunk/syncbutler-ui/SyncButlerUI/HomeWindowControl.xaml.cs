@@ -1000,7 +1000,7 @@ namespace SyncButlerUI
                     
                     #endregion
 
-                    MRUSync(this.Controller.GetPartnershipList().Count > 0);
+                    SyncMRU(this.Controller.GetPartnershipList().Count > 0);
 
                 }
                 #endregion
@@ -1140,7 +1140,7 @@ namespace SyncButlerUI
         /// <summary>
         /// Syncs MRUs
         /// </summary>
-        private void MRUSync(bool SyncPartnershipIsNext)
+        private void SyncMRU(bool SyncPartnershipIsNext)
         {
 
 

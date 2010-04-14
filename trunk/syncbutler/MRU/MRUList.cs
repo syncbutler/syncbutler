@@ -181,7 +181,7 @@ namespace SyncButler.MRU
 
                 if (statusMonitor != null)
                 {
-                    if (!statusMonitor(new SyncableStatus(sourceFile.FullName, 0, (int)(totalCopied * toPercent), SyncableStatus.ActionType.Copy)))
+                    if (!statusMonitor(new SyncableStatus(String.Format("Copying to {1}: {0}", sourceFile.Name, destFile.Directory), 0, (int)(totalCopied * toPercent), SyncableStatus.ActionType.Copy)))
                     {
                         inputStream.Close();
                         outputStream.Close();
