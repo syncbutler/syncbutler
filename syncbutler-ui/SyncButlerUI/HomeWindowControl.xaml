@@ -819,6 +819,9 @@
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="Settings" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
 						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="FirstTimeHelp" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
 				<VisualState x:Name="EditPartnershipState">
@@ -1113,11 +1116,11 @@
 					</TransformGroup>
 				</Image.RenderTransform>
 			</Image>
-			<TextBlock Margin="0,30.457,34.659,0" FontFamily="Arial" FontSize="32" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="54.564" HorizontalAlignment="Right" Width="269.488" FontStyle="Italic"><Run FontFamily="Walkway Black" FontStyle="Normal" Text="Sync Butler"/><Run FontStyle="Normal" Text=", "/><Run FontFamily="Fonts/#Segoe UI" FontStyle="Italic" Text="Sync!"/></TextBlock>
-			<TextBlock Margin="0,108.521,22.663,0" FontSize="18.667" TextWrapping="Wrap" HorizontalAlignment="Right" Width="301.445" VerticalAlignment="Top" Height="82.22" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" TextAlignment="Center"><Run FontWeight="Bold" Text="These files are copied automatically*, there is"/><LineBreak/><Run FontWeight="Bold" Text="nothing for you to do here!"/><LineBreak/></TextBlock>
-			<ListBox x:Name="Favourites_List"  Margin="39.273,72.384,337.477,95.086" GotFocus="FocusMe" MouseDoubleClick="OpenSelectedOnList" FontSize="14.667" />
-			<TextBlock Margin="39.273,34.957,0,0" FontFamily="Fonts/#Segoe UI" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="25.927" HorizontalAlignment="Left" Width="196.578" Text="Favourites List"/>
-			<Button x:Name="SBSSettings"  HorizontalAlignment="Right" Margin="0,0,178.32,49.893" VerticalAlignment="Bottom" Width="84" Height="30" Content="Settings" RenderTransformOrigin="0.79,1.043" Cursor="Hand" Click="GoToSetting" FontSize="14.667">
+			<TextBlock Margin="47.126,30.457,0,0" FontFamily="Arial" FontSize="32" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="54.564" FontStyle="Italic" HorizontalAlignment="Left" Width="269.488"><Run FontFamily="Walkway Black" FontStyle="Normal" Text="Sync Butler"/><Run FontStyle="Normal" Text=", "/><Run FontFamily="Fonts/#Segoe UI" FontStyle="Italic" Text="Sync!"/></TextBlock>
+			<TextBlock Margin="0,108.521,443.663,0" FontSize="18.667" TextWrapping="Wrap" HorizontalAlignment="Right" Width="301.445" VerticalAlignment="Top" Height="82.22" d:LayoutOverrides="VerticalAlignment" TextAlignment="Center"><Run FontWeight="Bold" Text="These files are copied automatically*, there is"/><LineBreak/><Run FontWeight="Bold" Text="nothing for you to do here!"/><LineBreak/></TextBlock>
+			<ListBox x:Name="Favourites_List"  Margin="348.273,72.384,28.477,95.086" GotFocus="FocusMe" MouseDoubleClick="OpenSelectedOnList" FontSize="14.667" />
+			<TextBlock Margin="348.273,34.957,227.422,0" FontFamily="Fonts/#Segoe UI" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="25.927" Text="Favourites List"/>
+			<Button x:Name="SBSSettings" Margin="84.953,0,0,49.893" VerticalAlignment="Bottom" Height="30" Content="Settings" RenderTransformOrigin="0.79,1.043" Cursor="Hand" Click="GoToSetting" FontSize="14.667" HorizontalAlignment="Left" Width="84">
 				<Button.Background>
 					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
 						<GradientStop Color="#FFF3F3F3" Offset="0"/>
@@ -1127,16 +1130,17 @@
 					</LinearGradientBrush>
 				</Button.Background>
 			</Button>			
-			<Button HorizontalAlignment="Right" Margin="0,0,71.031,50.441" VerticalAlignment="Bottom" Width="84" Content="Show Help" Click="ShowHelp" Height="30" FontSize="14.667"/>
-			<Path Stretch="Fill" Stroke="#FF908A8A" StrokeThickness="2" HorizontalAlignment="Right" Margin="0,76.925,36.66,0" VerticalAlignment="Top" Width="276.52" Height="2" Data="M1.0000301,0.99999902 L187.03178,0.99999902"/>
-			<Path Stretch="Fill" Stroke="#FF908A8A" StrokeThickness="2" Margin="0,219.741,32.815,0" Data="M1.0000301,0.99999902 L187.03178,0.99999902" VerticalAlignment="Top" Height="2" HorizontalAlignment="Right" Width="281.365"/>
-			<TextBlock Margin="0,248.233,22.663,0" FontSize="14.667" TextWrapping="Wrap" HorizontalAlignment="Right" Width="301.445" VerticalAlignment="Top" Height="142.738" d:LayoutOverrides="HorizontalAlignment" TextAlignment="Justify"><Run Text="The files shown in the "/><Run FontWeight="Bold" Text="Favourites List"/><Run Text=" box will be "/><Run FontWeight="Bold" Text="automatically copied "/><Run Text="to your selected portable storage device."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="Simply click on "/><Run FontWeight="Bold" Text="Start Syncing"/><Run Text=" in the "/><Run FontWeight="Bold" Text="Home"/><Run Text=" page to copy these files to your "/><Run FontWeight="Bold" Text="portable storage device"/><Run Text="!"/></TextBlock>
-			<TextBlock Margin="0,411.702,51.869,0" TextWrapping="Wrap" HorizontalAlignment="Right" Width="272.239" VerticalAlignment="Top" Height="16.158" TextAlignment="Justify" RenderTransformOrigin="0.503,6.252" FontStyle="Italic" d:LayoutOverrides="HorizontalAlignment" FontSize="10.667"><Run Text="*Only if you "/><Run FontWeight="Bold" Text="enable "/><Run Text="this feature in the settings, of course!"/></TextBlock>
-			<TextBlock x:Name="SBSPathTextBlock" Margin="42.033,0,0,54" VerticalAlignment="Bottom" Height="23.738" TextWrapping="Wrap" HorizontalAlignment="Left" Width="152.38" FontSize="16" Text="Files will be saved to: "/>
-			<Label x:Name="SBSPathLabel" Margin="196.931,0,337.477,51" VerticalAlignment="Bottom" Height="29.893" Content="Label" FontSize="14.667" FontWeight="Bold"/>
-			<TextBlock x:Name="SBSfeatureDisabledTextBlock" Margin="108.016,0,358.144,50" VerticalAlignment="Bottom" Height="38.096" Text="This feature is turned off in Settings. The files listed above are for preview only and will not be copied." TextWrapping="Wrap" FontSize="13.333"/>
-			<TextBlock x:Name="SBSDriveNotPluggedInDisabledTextBlock" Margin="108.016,0,358.144,26.037" VerticalAlignment="Bottom" Height="62.059" Text="The assigned SBS portable storage is not attached to the system now. The files listed above are for preview only and will not be copied." TextWrapping="Wrap" FontSize="13.333"/>
-			<Image x:Name="SBSWarningImage" HorizontalAlignment="Left" Margin="64.207,0,0,50.655" VerticalAlignment="Bottom" Width="39.809" Height="39.809" Source="Warning.png" Stretch="Fill"/>
+			<Button Margin="192.242,0,0,50.441" VerticalAlignment="Bottom" Content="Show Help" Click="ShowHelp" Height="30" FontSize="14.667" HorizontalAlignment="Left" Width="84"/>
+			<Path Stretch="Fill" Stroke="#FF908A8A" StrokeThickness="2" Margin="38.093,76.925,0,0" VerticalAlignment="Top" Height="2" Data="M1.0000301,0.99999902 L187.03178,0.99999902" HorizontalAlignment="Left" Width="276.52"/>
+			<Path Stretch="Fill" Stroke="#FF908A8A" StrokeThickness="2" Margin="37.093,219.741,0,0" Data="M1.0000301,0.99999902 L187.03178,0.99999902" VerticalAlignment="Top" Height="2" HorizontalAlignment="Left" Width="281.365"/>
+			<TextBlock Margin="0,248.233,443.663,0" FontSize="14.667" TextWrapping="Wrap" HorizontalAlignment="Right" Width="301.445" VerticalAlignment="Top" Height="142.738" TextAlignment="Justify"><Run Text="The files shown in the "/><Run FontWeight="Bold" Text="Favourites List"/><Run Text=" box will be "/><Run FontWeight="Bold" Text="automatically copied "/><Run Text="to your selected portable storage device."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="Simply click on "/><Run FontWeight="Bold" Text="Start Syncing"/><Run Text=" in the "/><Run FontWeight="Bold" Text="Home"/><Run Text=" page to copy these files to your "/><Run FontWeight="Bold" Text="portable storage device"/><Run Text="!"/></TextBlock>
+			<TextBlock Margin="0,411.702,472.869,0" TextWrapping="Wrap" HorizontalAlignment="Right" Width="272.239" VerticalAlignment="Top" Height="16.158" TextAlignment="Justify" RenderTransformOrigin="0.503,6.252" FontStyle="Italic" FontSize="10.667"><Run Text="*Only if you "/><Run FontWeight="Bold" Text="enable "/><Run Text="this feature in the settings, of course!"/></TextBlock>
+			<Rectangle Fill="Black" Stroke="#FF62DE37" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="354.273,435.088,32.953,0" VerticalAlignment="Top" Height="63.059"/>
+			<TextBlock x:Name="SBSPathTextBlock" Margin="364.033,0,255.86,47" VerticalAlignment="Bottom" Height="23.738" TextWrapping="Wrap" FontSize="16" Text="Files will be saved to: " Foreground="White"/>
+			<Label x:Name="SBSPathLabel" Margin="0,0,47.144,44" VerticalAlignment="Bottom" Height="29.893" Content="Label" FontSize="14.667" FontWeight="Bold" HorizontalAlignment="Right" Width="209.198" Foreground="White"/>
+			<TextBlock x:Name="SBSfeatureDisabledTextBlock" Margin="0,0,47.144,41" VerticalAlignment="Bottom" Height="38.096" Text="This feature is turned off in Settings. The files listed above are for preview only and will not be copied." TextWrapping="Wrap" FontSize="13.333" HorizontalAlignment="Right" Width="306.113" Foreground="White"/>
+			<TextBlock x:Name="SBSDriveNotPluggedInDisabledTextBlock" Margin="0,0,47.144,26.037" VerticalAlignment="Bottom" Height="62.059" Text="The assigned SBS portable storage is not attached to the system now. The files listed above are for preview only and will not be copied." TextWrapping="Wrap" FontSize="13.333" HorizontalAlignment="Right" Width="306.113" Foreground="White"/>
+			<Image x:Name="SBSWarningImage" Margin="374.207,0,358.257,41.655" VerticalAlignment="Bottom" Height="39.809" Source="Warning.png" Stretch="Fill" d:IsHidden="True"/>
 		</Grid>
 		<Grid x:Name="Conflict" Margin="0.027,0,0.449,-4" VerticalAlignment="Bottom" Height="528" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
 			<Grid.RowDefinitions>
