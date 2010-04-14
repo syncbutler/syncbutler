@@ -366,12 +366,12 @@
 								</Rectangle.Fill>
 							</Rectangle>
 							<ContentPresenter Margin="56.001,24.5,10.333,0" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True" Content="" VerticalAlignment="Top" Height="61.5" RenderTransformOrigin="0.515,0.772" IsEnabled="False"/>
-							<Image HorizontalAlignment="Left" Margin="12.5,0,0,6.999" VerticalAlignment="Bottom" Width="39.333" Height="39.333" Opacity="1" Source="Images/LogowTransparency.png" Stretch="Fill" Cursor="Hand">
+							<Image HorizontalAlignment="Left" Margin="12.5,0,0,4.999" VerticalAlignment="Bottom" Width="39.333" Height="39.333" Opacity="1" Source="Images/LogowTransparency.png" Stretch="Fill" Cursor="Hand">
 								<Image.OpacityMask>
 									<SolidColorBrush Color="White"/>
 								</Image.OpacityMask>
 							</Image>
-							<TextBlock Margin="56.667,11.5,10.333,10" TextWrapping="Wrap" FontSize="18.667"><Run FontFamily="Walkway Black" Text="Sync Butler"/><Run Text=", "/><Run FontFamily="Fonts/#Segoe UI" FontStyle="Italic" FontWeight="Bold" Text="Sync"/><Run Text="!"/></TextBlock>
+							<TextBlock Margin="56.667,13.5,10.333,8" TextWrapping="Wrap" FontSize="18.667"><Run FontFamily="Walkway Black" Text="Sync Butler"/><Run Text=", "/><Run FontFamily="Fonts/#Segoe UI" FontStyle="Italic" FontWeight="Bold" Text="Sync"/><Run Text="!"/></TextBlock>
 						</Grid>
 						<ControlTemplate.Triggers>
 							<EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
