@@ -1716,7 +1716,7 @@ namespace SyncButlerUI
             CurrentState = State.Settings;
             if (!StopExistingOperation()) return;
             IsLoadingSBS = true;
-
+            SpaceToUseTextbox.Text = "0";
             #region show help if required
             if (sender != null && sender.GetType() == typeof(String) && (sender.Equals("FirstSBSRun")))
             {
