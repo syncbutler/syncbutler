@@ -1139,8 +1139,8 @@
 			<TextBlock x:Name="SBSPathTextBlock" Margin="364.033,0,255.86,47" VerticalAlignment="Bottom" Height="23.738" TextWrapping="Wrap" FontSize="16" Text="Files will be saved to: " Foreground="White"/>
 			<Label x:Name="SBSPathLabel" Margin="0,0,47.144,44" VerticalAlignment="Bottom" Height="29.893" Content="Label" FontSize="14.667" FontWeight="Bold" HorizontalAlignment="Right" Width="209.198" Foreground="White"/>
 			<TextBlock x:Name="SBSfeatureDisabledTextBlock" Margin="0,0,47.144,41" VerticalAlignment="Bottom" Height="38.096" Text="This feature is turned off in Settings. The files listed above are for preview only and will not be copied." TextWrapping="Wrap" FontSize="13.333" HorizontalAlignment="Right" Width="306.113" Foreground="White"/>
-			<TextBlock x:Name="SBSDriveNotPluggedInDisabledTextBlock" Margin="0,0,47.144,26.037" VerticalAlignment="Bottom" Height="62.059" Text="The assigned SBS portable storage is not attached to the system now. The files listed above are for preview only and will not be copied." TextWrapping="Wrap" FontSize="13.333" HorizontalAlignment="Right" Width="306.113" Foreground="White"/>
-			<Image x:Name="SBSWarningImage" Margin="374.207,0,358.257,41.655" VerticalAlignment="Bottom" Height="39.809" Source="Warning.png" Stretch="Fill" d:IsHidden="True"/>
+			<TextBlock x:Name="SBSDriveNotPluggedInDisabledTextBlock" Margin="0,0,64.287,26.037" VerticalAlignment="Bottom" Height="62.059" Text="The assigned portable storage is not attached to the system now. The files listed above are for preview only and will not be copied." TextWrapping="Wrap" FontSize="13.333" HorizontalAlignment="Right" Width="288.97" Foreground="White"/>
+			<Image x:Name="SBSWarningImage" Margin="374.207,0,358.257,41.655" VerticalAlignment="Bottom" Height="39.809" Source="Warning.png" Stretch="Fill"/>
 		</Grid>
 		<Grid x:Name="Conflict" Margin="0.027,0,0.449,-4" VerticalAlignment="Bottom" Height="528" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
 			<Grid.RowDefinitions>
@@ -1374,14 +1374,14 @@
 			<Label x:Name="label" Margin="0,256.311,185.758,233.705" Content="100%" HorizontalAlignment="Right" Width="52.584" FontSize="16"/>
 			<Path Stretch="Fill" Stroke="#FF908A8A" StrokeThickness="2" HorizontalAlignment="Left" Margin="23.656,75.973,0,0" VerticalAlignment="Top" Width="192.794" Height="2" Data="M1.0000301,0.99999902 L187.03178,0.99999902"/>
 			<CheckBox x:Name="SBSSettingEnableSyncAll" Margin="29.764,296.831,173.529,0" VerticalAlignment="Top" Content="Sync all your recent file when you click &quot;Start syncing&quot; in the main screen&#xa;&#xa;" FontSize="14.667" TabIndex="-1" Height="27.126" IsChecked="True" Visibility="Hidden"/>
-			<TextBlock x:Name="SBSSettingDeviceNotFoundTextBox" Margin="29.764,0,37.342,86.989" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap" FontSize="14.667" VerticalAlignment="Bottom" Height="71.385" Visibility="Hidden"><TextBlock.RenderTransform>
+			<TextBlock x:Name="SBSSettingDeviceNotFoundTextBox" Margin="207.339,0,170.266,99.383" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap" FontSize="14.667" VerticalAlignment="Bottom" Height="66.328" TextAlignment="Justify" Visibility="Hidden"><TextBlock.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
 						<SkewTransform/>
 						<RotateTransform/>
 						<TranslateTransform/>
 					</TransformGroup>
-				</TextBlock.RenderTransform><Run Text="The "/><Run Text="previously "/><Run Text="assigned "/><Run Text="portable storage "/><Run Text="device "/><Run Text="is not found to be attached to the system now."/><LineBreak/><Run Text="Please "/><Run Text="plug in the storage device to make any changes for the device."/></TextBlock>
+				</TextBlock.RenderTransform><Run Text="There is another portable storage device that is assigned to this feature. It is not plugged into the system now. Please "/><Run Text="plug in the device to make any changes for this feature."/></TextBlock>
 		</Grid>
 		<Grid x:Name="FirstTimeHelp" Margin="0,0,-1.024,-4" Visibility="Hidden">
 			<Grid.ColumnDefinitions>
