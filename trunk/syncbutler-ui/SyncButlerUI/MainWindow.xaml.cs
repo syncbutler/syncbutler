@@ -53,8 +53,7 @@ namespace SyncButlerUI
                 if (Controller.IsFirstRun())
                 {
                     FirstTimeStartupScreen dialog = new FirstTimeStartupScreen();
-					dialog.Owner = this;
-                    if (!((bool)dialog.ShowDialog()))
+					if (!((bool)dialog.ShowDialog()))
                     {
                         throw new UserCancelledException();
                     }
