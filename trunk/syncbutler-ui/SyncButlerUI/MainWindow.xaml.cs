@@ -53,7 +53,7 @@ namespace SyncButlerUI
                 if (Controller.IsFirstRun())
                 {
                     FirstTimeStartupScreen dialog = new FirstTimeStartupScreen();
-					dialog.Owner = Window.GetWindow(this);
+					dialog.Owner = this;
                     if (!((bool)dialog.ShowDialog()))
                     {
                         throw new UserCancelledException();
@@ -165,7 +165,7 @@ namespace SyncButlerUI
 					dialog.WelcomeScreenControl.FirstTimeComputerNameText.Visibility=Visibility.Hidden;
                     dialog.Title = "Sync Butler - Help";
                     dialog.WelcomeScreenControl.GoToSBSScreen();
-					dialog.Owner = Window.GetWindow(this);
+					dialog.Owner = this;
 					dialog.ShowDialog();
                     if (dialog.WelcomeScreenControl.WantToShowSettingPage() && !Controller.IsSBSEnable())
                     {
@@ -190,7 +190,7 @@ namespace SyncButlerUI
             dialog.Title = "Sync Butler - Help";
 
             dialog.WelcomeScreenControl.GoToHelpScreen();
-			dialog.Owner = Window.GetWindow(this);
+			dialog.Owner = this;
             dialog.ShowDialog();
 
         }
