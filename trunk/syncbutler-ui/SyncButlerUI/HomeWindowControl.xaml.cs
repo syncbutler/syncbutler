@@ -713,6 +713,7 @@ namespace SyncButlerUI
                 Controller.SetFirstSBSRun();
                 dialog.Title = "Sync Butler - Help";
                 dialog.WelcomeScreenControl.GoToSBSHelpScreen();
+				dialog.Owner = Window.GetWindow(this);
                 dialog.ShowDialog();
             }
         }
@@ -911,6 +912,7 @@ namespace SyncButlerUI
             dialog.Title = "Sync Butler - Help";
             
             dialog.WelcomeScreenControl.GoToFeaturesScreen();
+			dialog.Owner = Window.GetWindow(this);
             dialog.ShowDialog();
             if (dialog.WelcomeScreenControl.WantToShowSettingPage() && !Controller.IsSBSEnable())
             {
