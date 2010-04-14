@@ -1721,7 +1721,7 @@ namespace SyncButlerUI
             CurrentState = State.Settings;
             if (!StopExistingOperation()) return;
             IsLoadingSBS = true;
-            SpaceToUseTextbox.Text = "0";
+            SpaceToUseSlide.Value = 0.0;
             #region show help if required
             if (sender != null && sender.GetType() == typeof(String) && (sender.Equals("FirstSBSRun")))
             {
@@ -1777,6 +1777,7 @@ namespace SyncButlerUI
                     }
                     this.SBSSettingComboBox.SelectedItem = "Disable";
                     this.SBSWorkingDriveComboBox.IsEnabled = false;
+                    this.SpaceToUseTextbox.Text = "0.0";
                     this.SpaceToUseSlide.IsEnabled = false;
                     this.SpaceToUseTextbox.IsEnabled = false;
                     this.SBSSettingComboBox.IsEnabled = false;
@@ -1855,6 +1856,7 @@ namespace SyncButlerUI
                         this.SBSSettingComboBox.Items.Add("Enable");
                         this.SBSSettingComboBox.Items.Add("Disable");
                         this.SBSSettingComboBox.SelectedItem = "Disable";
+                        this.SpaceToUseTextbox.Text = "0.0";
                         if (this.SBSWorkingDriveComboBox.Items.Count > 0 && Controller.IsSBSEnable())
                             this.SBSSettingDeviceNotFoundTextBox.Visibility = Visibility.Visible;
                         else
