@@ -972,7 +972,7 @@ namespace SyncButlerUI
                 if (canDoSBS)
                 {
                     BackgroundWorker sbsWorker = new BackgroundWorker();
-                    ProgressBar progressWindow = new ProgressBar(sbsWorker, "Sync Butler, Sync", "Syncing your recently used files to " + Controller.GetSBSPath());
+                    ProgressBar progressWindow = new ProgressBar(sbsWorker, "Sync Butler, Sync", "Copying your recent files to " + Controller.GetSBSPath());
                     progressWindow.HideTotalProgress();
                     progressWindow.IsIndeterminate = true;
                     sbsWorker.DoWork += new DoWorkEventHandler(delegate(Object worker, DoWorkEventArgs args)
