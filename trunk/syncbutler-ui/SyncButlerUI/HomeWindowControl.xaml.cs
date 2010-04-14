@@ -1546,18 +1546,32 @@ namespace SyncButlerUI
             {
                 this.SBSPathLabel.Visibility = Visibility.Hidden;
                 this.SBSPathTextBlock.Visibility = Visibility.Hidden;
-				this.SBSWarningImage.Visibility = Visibility.Hidden;
 				this.SBSWarningImage.Visibility = Visibility.Visible;
 				this.SBSfeatureDisabledTextBlock.Visibility = Visibility.Visible;
+                this.SBSDriveNotPluggedInDisabledTextBlock.Visibility = Visibility.Hidden;
                 preview = true;
             }
             else
             {
-                this.SBSPathTextBlock.Visibility = Visibility.Visible;
-                this.SBSPathLabel.Content = Controller.GetSBSPath();
-                this.SBSPathLabel.Visibility = Visibility.Visible;
-				this.SBSWarningImage.Visibility = Visibility.Hidden;
-				this.SBSfeatureDisabledTextBlock.Visibility = Visibility.Hidden;
+                if (Controller.CanDoSBS())
+                {
+
+                    this.SBSWarningImage.Visibility = Visibility.Hidden;
+                    this.SBSPathTextBlock.Visibility = Visibility.Visible;
+                    this.SBSPathLabel.Content = Controller.GetSBSPath();
+                    this.SBSPathLabel.Visibility = Visibility.Visible;
+                    this.SBSfeatureDisabledTextBlock.Visibility = Visibility.Hidden;
+                    this.SBSDriveNotPluggedInDisabledTextBlock.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    this.SBSPathLabel.Visibility = Visibility.Hidden;
+                    this.SBSPathTextBlock.Visibility = Visibility.Hidden;
+                    this.SBSWarningImage.Visibility = Visibility.Visible;
+					this.SBSfeatureDisabledTextBlock.Visibility = Visibility.Hidden;
+                    this.SBSDriveNotPluggedInDisabledTextBlock.Visibility = Visibility.Visible;
+					preview = true;
+                }
                 preview = false;
             }
 

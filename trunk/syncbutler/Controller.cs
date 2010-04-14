@@ -805,8 +805,9 @@ namespace SyncButler
             try
             {
                 string driveletter = SystemEnvironment.StorageDevices.GetDriveLetter(SyncEnvironment.SBSDriveId, SyncEnvironment.SBSDrivePartition);
-                
-                if (driveletter.Length == 0) sbsDriveLetter = SyncEnvironment.SBSDriveLetter;
+
+                if (driveletter.Length == 0)
+                    return null;
                 else sbsDriveLetter = driveletter[0];
 
                 WindowDriveInfo wdi = null;
