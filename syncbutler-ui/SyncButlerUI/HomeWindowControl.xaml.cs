@@ -1161,7 +1161,7 @@ namespace SyncButlerUI
                 if (!cancelled)
                 {
                     if(!SyncPartnershipIsNext)
-                        CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Files were successfully copied to: \r\n" + Controller.GetSBSPath() + "\r\n\r\nA log has also been made at:\r\n" + Controller.GetInstance().SBSLogFile);
+                        CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Files were successfully copied to: \r\n" + Controller.GetSBSPath() + "\r\n\r\nA log was also been made in:\r\n" + Controller.GetInstance().SBSLogFile);
                 }
                 progressWindow.TaskComplete();
 
@@ -1309,7 +1309,7 @@ namespace SyncButlerUI
             {
                 if (!Directory.Exists(DriveLetter + ":\\") && SBSEnable.Equals("Enable"))
                 {
-                    CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Please check your device\nSBS cannot find it");
+                    CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Please check your the status of your portable storage device.\nSync Butler was unable to read it.");
                 }
                 else
                 {
