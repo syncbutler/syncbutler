@@ -702,11 +702,12 @@ namespace SyncButlerUI
             }
             else if (CurrentState == HomeWindowControl.State.SBS)
             {
+                //GoToExploreFeatures_Click(null, null);
                 FirstTimeStartupScreen dialog = new FirstTimeStartupScreen();
                 dialog.WelcomeScreenControl.FirstTimeComputerNameText.Visibility = Visibility.Hidden;
                 Controller.SetFirstSBSRun();
                 dialog.Title = "Sync Butler - Help";
-                dialog.WelcomeScreenControl.GoToSBSScreen();
+                dialog.WelcomeScreenControl.GoToSBSHelpScreen();
                 dialog.ShowDialog();
             }
         }
