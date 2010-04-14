@@ -61,9 +61,7 @@ namespace SyncButler.MRU
             mergedList.AddRange(MostRecentlyUsedFile.Scan(Environment.GetFolderPath(Environment.SpecialFolder.MyMusic), depth, days));
             
             if (statusMonitor != null) statusMonitor(new SyncableStatus("", 0, 56, SyncableStatus.ActionType.Sync));
-            List<string> drives = SystemEnvironment.StorageDevices.GetNonUSBDriveLetters();
-            
-            //drives.AddRange(SystemEnvironment.StorageDevices.GetRemovableDeviceDriveLetters());
+            List<string> drives = SystemEnvironment.StorageDevices.GetNonUSBDriveLetters();           
 
             int done = 1;
             double toPercent = 0; 

@@ -1115,7 +1115,7 @@
 			</Image>
 			<TextBlock Margin="46.126,30.457,0,0" FontFamily="Arial" FontSize="32" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="54.564" FontStyle="Italic" HorizontalAlignment="Left" Width="269.488"><Run FontFamily="Walkway Black" FontStyle="Normal" Text="Sync Butler"/><Run FontStyle="Normal" Text=", "/><Run FontFamily="Fonts/#Segoe UI" FontStyle="Italic" Text="Sync!"/></TextBlock>
 			<TextBlock Margin="0,108.521,444.663,0" FontSize="18.667" TextWrapping="Wrap" HorizontalAlignment="Right" Width="301.445" VerticalAlignment="Top" Height="82.22" d:LayoutOverrides="VerticalAlignment" TextAlignment="Center"><Run FontWeight="Bold" Text="These files are copied automatically*, there is"/><LineBreak/><Run FontWeight="Bold" Text="nothing for you to do here!"/><LineBreak/></TextBlock>
-			<ListBox x:Name="Favourites_List"  Margin="348.273,72.384,28.477,95.086" GotFocus="FocusMe" MouseDoubleClick="OpenSelectedOnList" FontSize="14.667" />
+			<ListBox x:Name="Favourites_List"  Margin="348.273,72.384,28.477,95.086" MouseDoubleClick="OpenSelectedOnList" FontSize="14.667" />
 			<TextBlock Margin="348.273,34.957,227.422,0" FontFamily="Fonts/#Segoe UI" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="25.927" Text="Favourites List"/>
 			<Button x:Name="SBSSettings" Margin="83.953,0,0,49.893" VerticalAlignment="Bottom" Height="30" Content="Settings" RenderTransformOrigin="0.79,1.043" Cursor="Hand" Click="GoToSetting" FontSize="14.667" HorizontalAlignment="Left" Width="84">
 				<Button.Background>
