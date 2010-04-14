@@ -88,9 +88,10 @@ namespace SyncButler
             return controller;
         }
 
-        public void SetWindow(IGUI win)
+        public void SetWindow(IGUI win, bool overwrite)
         {
-            mainWindow = win;
+            if (mainWindow == null || overwrite)
+                mainWindow = win;
         }
 
         public void GrabFocus(WinStates ws)

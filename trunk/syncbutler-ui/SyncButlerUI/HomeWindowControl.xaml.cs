@@ -915,6 +915,12 @@ namespace SyncButlerUI
             
             dialog.WelcomeScreenControl.GoToFeaturesScreen();
             dialog.ShowDialog();
+            if (dialog.WelcomeScreenControl.WantToShowSettingPage() && !Controller.IsSBSEnable())
+            {
+                GoToSetting();
+                FirstTimeHelp.Visibility = System.Windows.Visibility.Visible;
+                return;
+            }
         }
 
 
