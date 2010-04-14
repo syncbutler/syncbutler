@@ -127,7 +127,8 @@ namespace SyncButler.MRU
                                 (fi.Attributes & FileAttributes.Offline) |
                                 (fi.Attributes & FileAttributes.Temporary)) == 0)
                             {
-                                if ((DateTime.Now - fi.LastWriteTime).TotalDays <= (howRecent))
+                                if ((DateTime.Now - fi.LastWriteTime).TotalDays <= (howRecent) ||
+                                    (DateTime.Now - fi.CreationTime).TotalDays <= (howRecent))
                                 {
                                     files.Add(fi.FullName);
                                 }
