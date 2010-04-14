@@ -1000,7 +1000,7 @@ namespace SyncButlerUI
                     
                     #endregion
 
-                    MRUSync();
+                    MRUSync(this.Controller.GetPartnershipList().Count > 0);
 
                 }
                 #endregion
@@ -1140,10 +1140,9 @@ namespace SyncButlerUI
         /// <summary>
         /// Syncs MRUs
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MRUSync()
+        private void MRUSync(bool SyncPartnershipIsNext)
         {
+
 
             // Background worker to do the actual work
             BackgroundWorker mruWorker = new BackgroundWorker();
@@ -1161,7 +1160,8 @@ namespace SyncButlerUI
             { // Code to run on completion
                 if (!cancelled)
                 {
-                    CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Files were successfully synced to: \r\n" + Controller.GetSBSPath() + "\r\n\r\nA log has also been made at:\r\n" + Controller.GetInstance().SBSLogFile);
+                    if(!SyncPartnershipIsNext)
+                        CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Files were successfully copied to: \r\n" + Controller.GetSBSPath() + "\r\n\r\nA log has also been made at:\r\n" + Controller.GetInstance().SBSLogFile);
                 }
                 progressWindow.TaskComplete();
 
