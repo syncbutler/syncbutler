@@ -109,6 +109,7 @@ namespace SyncButlerUI
                                 break;
                             case Controller.WinStates.CreatePartnership:
                                 homeWindow1.GoToCreatePartnership_Click(this, null);
+                                if (this.Window.WindowState == WindowState.Minimized) this.Window.WindowState = WindowState.Normal;
                                 break;
                             default:
                                 break;
