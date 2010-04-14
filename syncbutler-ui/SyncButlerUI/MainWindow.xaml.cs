@@ -169,6 +169,7 @@ namespace SyncButlerUI
                     {
                         homeWindow1.GoToSetting();
                         homeWindow1.FirstTimeHelp.Visibility = System.Windows.Visibility.Visible;
+                        Controller.SetFirstSBSRun();
                         return;
                     }
                     Controller.SetFirstSBSRun();
