@@ -619,6 +619,7 @@ namespace SyncButlerUI
             
             storageScanWorker.DoWork += new DoWorkEventHandler(delegate(Object worker, DoWorkEventArgs args)
                 {
+                    #region search for portable devices
                     DriveLetters = Controller.GetUSBDriveLetters();
 
                     // if there is no usb drive, let user to select some local hard disk, warn the user as well.
@@ -627,13 +628,14 @@ namespace SyncButlerUI
                         //DriveLetters = Controller.GetNonUSBDriveLetters();
                         noUSBDrives = true;
                     }
-
+                    #endregion
                 });
             storageScanWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(delegate(Object worker, RunWorkerCompletedEventArgs args)
                 {
                     bool devicePluggedIn = false;
                     if (noUSBDrives)
                     {
+                        #region if there is no usb device found
                         CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok,
                             "Please plug in a portable storage device if you wish to use it with\nSync Butler, Sync!");
                         this.SBSWorkingDriveComboBox.IsEnabled = false;
@@ -643,15 +645,18 @@ namespace SyncButlerUI
                         this.DefaultSettingButton.IsEnabled = false;
                         this.SaveSettingButton.IsEnabled = false;
                         this.NoUSBWarningTextBlock.Visibility = Visibility.Visible;
-
+                        this.SBSSettingDeviceNotFoundTextBox.Visibility = Visibility.Hidden;
+                        #endregion
                     }
                     else
                     {
+                        #region some usb device is/are found
                         this.SBSSettingComboBox.IsEnabled = true;
                         this.DefaultSettingButton.IsEnabled = true;
                         this.SaveSettingButton.IsEnabled = true;
                         SBSWorkingDriveComboBox.IsEnabled = true;
                         this.NoUSBWarningTextBlock.Visibility = Visibility.Hidden;
+                        this.SBSSettingDeviceNotFoundTextBox.Visibility = Visibility.Hidden;
                         SBSWorkingDriveComboBox.Items.Clear();
 
                         foreach (WindowDriveInfo s in DriveLetters)
@@ -674,11 +679,14 @@ namespace SyncButlerUI
                             {
                                 this.SBSSettingComboBox.Items.Add("Enable");
                                 this.SBSSettingComboBox.Items.Add("Disable");
+                                this.SBSSettingDeviceNotFoundTextBox.Visibility = Visibility.Visible;
                                 
                             }
                             this.SBSSettingComboBox.SelectedItem = "Disable";
+                            this.SBSWorkingDriveComboBox.IsEnabled = false;
                         }
                         this.IsLoadingSBS = false;
+                        #endregion
                     }
                     progressWindow.TaskComplete();
                 });
@@ -1254,11 +1262,27 @@ namespace SyncButlerUI
             double FreeSpaceToUse = double.Parse(this.LastWorkingFreeSpace);
             string Resolution = this.resolutionLabel.Content.ToString();
             bool enableSyncAll = (bool)this.SBSSettingEnableSyncAll.IsChecked;
+            double userrequestedspace = CalcuateUserRequestedSpace();
 
-            if (SBSEnable.Equals("Enable") && CalcuateUserRequestedSpace() < 250 * MEGA_BYTE )
+            if (SBSEnable.Equals("Enable") && userrequestedspace < 250 * MEGA_BYTE && userrequestedspace > 0)
             {
-                CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Sync Butler needs at least 250MB on your storage device to carry your recent files. It may not be able to carry the files you need, when you need them. Please give Sync Bulter more storage space!");
+                if (CustomDialog.Show(this, CustomDialog.MessageTemplate.YesNo, CustomDialog.MessageResponse.No, "Sync Butler needs at least 250MB on your storage device to carry more of your recent files. It may not be able to carry the files you need, when you need them. Do you want to give Sync Bulter more storage space!") ==
+                    CustomDialog.MessageResponse.No)
+                {
+                    Controller.SaveSetting(ComputerName, SBSEnable, DriveLetter, FreeSpaceToUse, Resolution, enableSyncAll);
+
+                    String ExtraMsg = String.Format("Sync Butler, Sync! will now save your recent files to:\n\n{0}", Controller.GetSBSPath());
+                    CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "The settings has been changed.\r\n\r\n" + ExtraMsg);
+                    VisualStateManager.GoToState(this, "SbsState", false);
+                    LoadMRUs();
+                    CurrentState = State.SBS;
+                }
             }
+            else if(SBSEnable.Equals("Enable") &&userrequestedspace <= 0)
+            {
+                CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Please give Sync Bulter some storage space to work with!");
+            }
+            
             else if (!ComputerNameChecker.IsComputerNameValid(ComputerName))
             {
                 CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, ComputerName + " is not a valid name");
@@ -1746,6 +1770,7 @@ namespace SyncButlerUI
 
             storageScanWorker.DoWork += new DoWorkEventHandler(delegate(Object worker, DoWorkEventArgs args)
             {
+                #region Get List Of Device
                 DriveLetters = Controller.GetUSBDriveLetters();
 
                 // if there is no usb drive, let user to select some local hard disk, warn the user as well.
@@ -1754,6 +1779,7 @@ namespace SyncButlerUI
                     DriveLetters = Controller.GetNonUSBDriveLetters();
                     noUSBDrives = true;
                 }
+                #endregion
             });
 
             storageScanWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(delegate(Object worker, RunWorkerCompletedEventArgs args)
@@ -1765,6 +1791,7 @@ namespace SyncButlerUI
                 bool devicePluggedIn = false;
                 if (noUSBDrives)
                 {
+                    #region if there is no usb device
                     this.NoUSBWarningTextBlock.Visibility = Visibility.Visible;
                     CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok,
                         "Please plug in a portable storage device if you wish to use it with\nSync Butler, Sync!");
@@ -1780,10 +1807,13 @@ namespace SyncButlerUI
                     this.SBSSettingComboBox.IsEnabled = false;
                     this.DefaultSettingButton.IsEnabled = false;
                     this.SaveSettingButton.IsEnabled = false;
+                    this.SBSSettingDeviceNotFoundTextBox.Visibility = Visibility.Hidden;
+                    #endregion
 
                 }
                 else
                 {
+                    #region if some usb device is plugged in
                     this.SBSSettingComboBox.IsEnabled = true;
                     this.DefaultSettingButton.IsEnabled = true;
                     this.SaveSettingButton.IsEnabled = true;
@@ -1795,6 +1825,7 @@ namespace SyncButlerUI
 
                     if (wdi != null)
                     {
+                        #region if previously there is a sbs drive letter
                         if (this.SBSWorkingDriveComboBox.Items.Contains(Controller.GetSBSDriveLetter()))
                         {
                             this.SBSWorkingDriveComboBox.SelectedItem = Controller.GetSBSDriveLetter();
@@ -1804,20 +1835,24 @@ namespace SyncButlerUI
                         {
                             this.SBSWorkingDriveComboBox.SelectedIndex = 0;
                         }
+                        #endregion
                     }
                     else if (this.SBSWorkingDriveComboBox.Items.Count != 0)
                     {
                         this.SBSWorkingDriveComboBox.SelectedIndex = 0;
                     }
 
+                    
                     if (devicePluggedIn)
                     {
+                        #region if the previously assigned device is plugged in
                         if (Controller.SBSEnable.Equals("Enable"))
                         {
                             this.SpaceToUseSlide.Maximum = this.Controller.GetAvailableSpaceForDrive();
                             this.SpaceToUseSlide.Value = this.Controller.GetFreeSpaceToUse();
                             this.resolutionLabel.Content = this.Controller.GetResolution();
                             this.SBSSettingEnableSyncAll.IsChecked = Controller.IsAutoSyncRecentFileAllowed();
+                            this.SBSSettingDeviceNotFoundTextBox.Visibility = Visibility.Hidden;
                         }
                         else
                         {
@@ -1833,16 +1868,26 @@ namespace SyncButlerUI
                         this.SBSSettingComboBox.Items.Add("Enable");
                         this.SBSSettingComboBox.Items.Add("Disable");
                         this.SBSSettingComboBox.SelectedItem = Controller.SBSEnable;
+                        #endregion
                     }
+                    
+
                     else
                     {
+                        #region if device is not plugged in
                         this.SBSWorkingDriveComboBox.IsEnabled = false;
                         this.SBSSettingComboBox.Items.Clear();
                         this.SBSSettingComboBox.Items.Add("Enable");
                         this.SBSSettingComboBox.Items.Add("Disable");
                         this.SBSSettingComboBox.SelectedItem = "Disable";
+                        if (this.SBSWorkingDriveComboBox.Items.Count > 0)
+                            this.SBSSettingDeviceNotFoundTextBox.Visibility = Visibility.Visible;
+                        else
+                            this.SBSSettingDeviceNotFoundTextBox.Visibility = Visibility.Hidden;
+                        #endregion
                     }
                     this.IsLoadingSBS = false;
+                    #endregion
                 }
                 progressWindow.TaskComplete();
             });
