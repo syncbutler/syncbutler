@@ -34,6 +34,10 @@ namespace SyncButler.MRU
     {
         public static SyncableStatusMonitor statusMonitor = null;
 
+        /// <summary>
+        /// Retrieves recently used files from various sources and compiles them into a list.
+        /// </summary>
+        /// <returns>A list of most recently used files</returns>
         public static List<string> GetAll()
         {
             int depth = 2;
@@ -81,6 +85,11 @@ namespace SyncButler.MRU
             return CleanUP(mergedList);
         }
 
+        /// <summary>
+        /// Creates a sorted list base on a list of MRUs.
+        /// </summary>
+        /// <param name="MRUs">A list of most recently used files.</param>
+        /// <returns>A sorted list of MRUs based on the filename.</returns>
         public static SortedList<string, string> ConvertToSortedList(List<string> MRUs)
         {
             SortedList<string, string> MRUSorted = new SortedList<string, string>();

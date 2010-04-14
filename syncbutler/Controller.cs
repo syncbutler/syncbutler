@@ -43,7 +43,7 @@ namespace SyncButler
         private static List<string> errorList = new List<string>();
         private static Controller controller;
         private string sbsLogfile;
-        private static Queue<string[]> startupParams;
+        private static string[] startupParams;
 
 		public static int ConflictCount {get; set;}
         public enum WinStates { Main, MiniPartnerships, CreatePartnership }
@@ -73,6 +73,10 @@ namespace SyncButler
             set { this.sbsLogfile = value; }
         }
 
+        /// <summary>
+        /// Checks if the program is running from a CD drive.
+        /// </summary>
+        /// <returns>true if it is, false otherwise.</returns>
         public static bool IsOnCDRom()
         {
             return SystemEnvironment.StorageDevices.GetDeviceType(Environment.GetCommandLineArgs()[0][0] + ":").Equals(SystemEnvironment.StorageDevices.DeviceType.CDRom);
@@ -88,12 +92,21 @@ namespace SyncButler
             return controller;
         }
 
+        /// <summary>
+        /// Sets the reference to the window currently shown to the user.
+        /// </summary>
+        /// <param name="win">A window which implements IGUI</param>
+        /// <param name="overwrite">Determines whether the value will be overwritten or not.</param>
         public void SetWindow(IGUI win, bool overwrite)
         {
             if (mainWindow == null || overwrite)
                 mainWindow = win;
         }
 
+        /// <summary>
+        /// Attempts to grab focus.
+        /// </summary>
+        /// <param name="ws">The state (a page in the UI) to go into after grabbibg focus.</param>
         public void GrabFocus(WinStates ws)
         {
             if (mainWindow != null)
@@ -133,14 +146,17 @@ namespace SyncButler
                 return false;
             }
             // This is the 1st instance. Handle the arguments if it is not the first run.
-            QueueStartArguments(args);
+            SaveStartArguments(args);
             return true;
         }
 
-        private static void QueueStartArguments(string[] args)
+        /// <summary>
+        /// Saves the startup parameter to be handled later.
+        /// </summary>
+        /// <param name="args">Startup parameter</param>
+        private static void SaveStartArguments(string[] args)
         {
-            startupParams = new Queue<string[]>();
-            startupParams.Enqueue(args);
+            startupParams = args;
         }
 
         /// <summary>
@@ -208,6 +224,10 @@ namespace SyncButler
             return "";
         }        
 
+        /// <summary>
+        /// Checks if the drive for SBS has enough space.
+        /// </summary>
+        /// <returns>true if the drive has enough space based on the set user limit, false otherwise</returns>
         public bool IsSBSDriveEnough()
         {
             long required = GetUserLimit();
@@ -216,8 +236,8 @@ namespace SyncButler
                 string driveLetter = SystemEnvironment.StorageDevices.GetDriveLetter(SyncEnvironment.SBSDriveId, SyncEnvironment.SBSDrivePartition);
                 if (driveLetter.Length == 0)
                     return false;
-                long avabilableSpace = SystemEnvironment.StorageDevices.GetAvailableSpace(driveLetter);
-                return required <= avabilableSpace;
+                long availableSpace = SystemEnvironment.StorageDevices.GetAvailableSpace(driveLetter);
+                return required <= availableSpace;
             }
             catch (Exceptions.DriveNotSupportedException)
             {
@@ -225,25 +245,33 @@ namespace SyncButler
             }
         }
 
+        /// <summary>
+        /// Checks if the Sync Butler, Sync! feature is enabled.
+        /// </summary>
+        /// <returns>true if it is enabled, false otherwise</returns>
         public static bool IsSBSEnable()
         {
             return SyncEnvironment.SBSEnable.Equals("Enable");
         }
 
+        /// <summary>
+        /// Checks if SBS can proceed
+        /// </summary>
+        /// <returns>true if the feature is enabled, auto sync is allowed and the external drive is not missing</returns>
         public static bool CanDoSBS()
         {
             List<WindowDriveInfo> DriveLetters = null;
             DriveLetters = Controller.GetUSBDriveLetters();
             if (DriveLetters.Count == 0)
-            {
                 return false;
-            }
             else
-            {
                 return Controller.IsSBSEnable() && Controller.IsAutoSyncRecentFileAllowed() && DriveLetters.Contains(Controller.GetSBSDriveLetter());
-            }
         }
 
+        /// <summary>
+        /// Used to retrive the amount of space available for the SBS drive
+        /// </summary>
+        /// <returns>Space available for the SBS drive</returns>
         public long GetAvailableSpaceForDrive()
         {
             try
@@ -397,11 +425,21 @@ namespace SyncButler
             return new ConflictList(conflict, name);
         }
 
+        /// <summary>
+        /// Calls the method to clean up orphaned checksums.
+        /// </summary>
+        /// <param name="partnershipName"></param>
+        /// <param name="partnershipList"></param>
         public void CleanUpOrphans(String partnershipName, SortedList<string,Partnership> partnershipList)
         {
             partnershipList[partnershipName].CleanOrphanedChecksums();
         }
 
+        /// <summary>
+        /// Removes all conflicts which can be auto resolved by the program and returns a list of conflicts which can't
+        /// </summary>
+        /// <param name="cl">a ConflictList containing all conflicts</param>
+        /// <returns>A list of Conflict objects which require user intervention</returns>
         public static List<Conflict> RemoveAutoResolvableConflicts(ConflictList cl)
         {
             List<Conflict> resolvableConflicts = new List<Conflict>();
@@ -418,6 +456,13 @@ namespace SyncButler
             return resolvableConflicts;
         }
 
+        /// <summary>
+        /// Resolves a conflict
+        /// </summary>
+        /// <param name="toResolve">The Conflict to resolve</param>
+        /// <param name="onProgressUpdate">A SyncableStatusMonitor</param>
+        /// <param name="worker">BackgroundWorker for threaded processing</param>
+        /// <returns></returns>
         public static Resolved ResolveConflict(Conflict toResolve, SyncableStatusMonitor onProgressUpdate, BackgroundWorker worker)
         {
             worker.ReportProgress(0, toResolve.GetPartnership().Name);
@@ -464,21 +509,27 @@ namespace SyncButler
             }
         }
 
-        private static long GetSizeInResolution(String Resolution, long size)
+        /// <summary>
+        /// Returns a given size based on the resolution
+        /// </summary>
+        /// <param name="resolution">string representation of the required resolution {GB,MB,KB,Bytes}</param>
+        /// <param name="size">the size in bytes</param>
+        /// <returns>the size in the specified resolution</returns>
+        private static long GetSizeInResolution(string resolution, long size)
         {
-            if (Resolution.Equals("GB"))
+            if (resolution.Equals("GB"))
             {
                 return size / GIGABYTE;
             }
-            else if (Resolution.Equals("MB"))
+            else if (resolution.Equals("MB"))
             {
                 return size / MEGABYTE;
             }
-            else if (Resolution.Equals("KB"))
+            else if (resolution.Equals("KB"))
             {
                 return size / KILOBYTE;
             }
-            else if (Resolution.Equals("Bytes"))
+            else if (resolution.Equals("Bytes"))
             {
                 return size;
             }
@@ -487,25 +538,30 @@ namespace SyncButler
                 throw new NotSupportedException();
             }
         }
+
+        /// <summary>
+        /// Returns the limit set by the user in bytes
+        /// </summary>
+        /// <returns>size limit in bytes</returns>
         private long GetUserLimit()
         {
-            String Resolution = this.GetResolution();
-            long FreeSpaceTouse = (long)this.GetFreeSpaceToUse();
-            if (Resolution.Equals("GB"))
+            String resolution = this.GetResolution();
+            long freeSpaceTouse = (long)this.GetFreeSpaceToUse();
+            if (resolution.Equals("GB"))
             {
-                return FreeSpaceTouse * GIGABYTE;
+                return freeSpaceTouse * GIGABYTE;
             }
-            else if (Resolution.Equals("MB"))
+            else if (resolution.Equals("MB"))
             {
-                return FreeSpaceTouse * MEGABYTE;
+                return freeSpaceTouse * MEGABYTE;
             }
-            else if (Resolution.Equals("KB"))
+            else if (resolution.Equals("KB"))
             {
-                return FreeSpaceTouse * KILOBYTE;
+                return freeSpaceTouse * KILOBYTE;
             }
-            else if (Resolution.Equals("Bytes"))
+            else if (resolution.Equals("Bytes"))
             {
-                return FreeSpaceTouse;
+                return freeSpaceTouse;
             }
             else
             {
@@ -513,6 +569,7 @@ namespace SyncButler
             }
         }
         String[] mrulevels = { "interestingHigh", "interestingMedHigh", "interestingMed", "interestingLowMed", "interestingLow", "interestingUltraLow" };
+
         /// <summary>
         /// Returns a list of most recently used files.
         /// </summary>
@@ -544,6 +601,10 @@ namespace SyncButler
             return rtn;
         }
 
+        /// <summary>
+        /// Retrieves sorted lists of recently used files separated into bands of interest levels.
+        /// </summary>
+        /// <returns>A sorted list (based on levels of interest) of sorted lists of MRUs.</returns>
         public static SortedList<string, SortedList<string, string>> GetMonitoredFiles()
         {
             SortedList<string, SortedList<string, string>> ret = ContentFilters.Spilt(MostRecentlyUsedFile.ConvertToSortedList(MostRecentlyUsedFile.GetAll()));
@@ -568,6 +629,10 @@ namespace SyncButler
             return GetSBSPath(SyncEnvironment.SBSDriveLetter);
         }
 
+        /// <summary>
+        /// Currently unused.
+        /// </summary>
+        /// <returns></returns>
         public string AutoSyncRecentFiles()
         {
             long limit = GetUserLimit();
@@ -584,6 +649,11 @@ namespace SyncButler
             return SyncMRUs(MRUs["interesting"]);
         }
 
+        /// <summary>
+        /// Currently unused.
+        /// </summary>
+        /// <param name="toSync"></param>
+        /// <returns></returns>
         public string SyncMRUs(SortedList<string, string> toSync)
         {
             char driveLetter = SyncEnvironment.SBSDriveLetter;
@@ -867,12 +937,21 @@ namespace SyncButler
             SyncEnvironment.FreeSpaceToUse = FreeSpaceToUse;
         }
 
-        public String GetResolution()
+
+        /// <summary>
+        /// Returns the current resolution
+        /// </summary>
+        /// <returns></returns>
+        public string GetResolution()
         {
             return SyncEnvironment.Resolution;
         }
 
-        public static void SetResolution(String resolution)
+        /// <summary>
+        /// Sets the resolution
+        /// </summary>
+        /// <param name="resolution">One of the following {GB,MB,KB,Bytes}</param>
+        public static void SetResolution(string resolution)
         {
             SyncEnvironment.Resolution = resolution;
         }
@@ -927,13 +1006,13 @@ namespace SyncButler
             }
         }
 
-
+        /// <summary>
+        /// Called after initialisation to process the startup arguments.
+        /// </summary>
         public static void HandleStartupArgs()
         {
             if (startupParams != null)
-            {
-                Controller.ReceiveAction(startupParams.Dequeue());
-            }
+                Controller.ReceiveAction(startupParams);
         }
     }
 }
