@@ -443,8 +443,6 @@ namespace SyncButlerUI
             resolveWorker.WorkerReportsProgress = true;
             resolveWorker.WorkerSupportsCancellation = true;
 
-            //TotalProgressBar.IsIndeterminate = true;
-            //SubProgressBar.IsIndeterminate = true;
             CurrentSyncingFile.Text = "Getting ready to fix outstanding issues...";
             PartnershipName.Text = "";
 
@@ -531,8 +529,6 @@ namespace SyncButlerUI
 
             resolveWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(delegate(Object workerObj, RunWorkerCompletedEventArgs args)
             {
-                //CurrentSyncingFile.Text = "Scan complete.\nConflicts automatically processed: " + autoResolveCount +
-                //    "\nConflicts manually processed: " + manualResolveCount;
                 int manualCount = 0;
                 foreach (ConflictList cl in mergedList) manualCount += cl.Conflicts.Count;
                 if ((manualResolveCount > 0) || (manualCount == 0))
@@ -551,8 +547,6 @@ namespace SyncButlerUI
 
                 if (operationCancelled)
                 {
-                    //CurrentSyncingFile.Text = "Scan cancelled.\nConflicts automatically processed: " + autoResolveCount +
-                    //"\nConflicts manually processed: " + manualResolveCount;
                     CurrentSyncingFile.Text = "Sync Cancelled.";
                     if (Controller.ConflictCount != 0)
                     {
@@ -969,33 +963,45 @@ namespace SyncButlerUI
             }
             else if(CustomDialog.Show(this,CustomDialog.MessageTemplate.YesNo,CustomDialog.MessageResponse.No,"Are you sure you want to sync all partnerships?") == CustomDialog.MessageResponse.Yes)
             {
-                String errorMsg = "";
 
                 #region Sync Most Recently used files
                 if (canDoSBS)
                 {
-                    BackgroundWorker sbsWorker = new BackgroundWorker();
-                    ProgressBar progressWindow = new ProgressBar(sbsWorker, "Sync Butler, Sync", "Copying your recent files to " + Controller.GetSBSPath());
+                    #region find mrus
+                    BackgroundWorker sbsScanWorker = new BackgroundWorker();
+                    ProgressBar progressWindow = new ProgressBar(sbsScanWorker, "Searching for your recent files...");
                     progressWindow.HideTotalProgress();
-                    progressWindow.IsIndeterminate = true;
-                    sbsWorker.DoWork += new DoWorkEventHandler(delegate(Object worker, DoWorkEventArgs args)
+
+                    sbsScanWorker.DoWork += new DoWorkEventHandler(delegate(Object worker, DoWorkEventArgs args)
                     {
-                        errorMsg = Controller.AutoSyncRecentFiles();
+                        ProgressBar.ProgressBarInfo pinfo;
+                        pinfo.SubTaskPercent = 0;
+                        pinfo.taskDescription = "Searching for your recent files...";
+                        pinfo.TotalTaskPercent = 0;
+                        ((BackgroundWorker)worker).ReportProgress(0, pinfo);
+
+                        MRUs = Controller.GetInstance().GetMonitoredFiles(delegate(SyncableStatus status)
+                        {
+                            pinfo.SubTaskPercent = status.CurTaskPercentComplete;
+                            ((BackgroundWorker)worker).ReportProgress(0, pinfo);
+                            return true;
+                        }, false);
+
+                        pinfo.SubTaskPercent = 100;
+                        pinfo.taskDescription = "Finishing...";
+                        ((BackgroundWorker)worker).ReportProgress(0, pinfo);
                     });
-                    sbsWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(delegate(Object worker, RunWorkerCompletedEventArgs args)
+
+                    sbsScanWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(delegate(Object worker, RunWorkerCompletedEventArgs args)
                     {
-                        if (String.IsNullOrEmpty(errorMsg))
-                        {
-                            if (this.Controller.GetPartnershipList().Count == 0)
-                                CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Done copying recent files.");
-                        }
-                        else
-                        {
-                            CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, String.Format("There was a problem and I was unable to sync some or all of your files. The problem was this: \n{0}", errorMsg));
-                        }
                         progressWindow.TaskComplete();
                     });
                     progressWindow.Start();
+                    
+                    #endregion
+
+                    MRUSync();
+
                 }
                 #endregion
 
@@ -1136,7 +1142,7 @@ namespace SyncButlerUI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void MRUSync(object sender, RoutedEventArgs e)
+        private void MRUSync()
         {
 
             // Background worker to do the actual work
@@ -1155,11 +1161,10 @@ namespace SyncButlerUI
             { // Code to run on completion
                 if (!cancelled)
                 {
-                    CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Files were successfully synced and logged to,\n\n" + Controller.GetInstance().SBSLogFile);
+                    CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Files were successfully synced to: \r\n" + Controller.GetSBSPath() + "\r\n\r\nA log has also been made at:\r\n" + Controller.GetInstance().SBSLogFile);
                 }
                 progressWindow.TaskComplete();
-                //SBSSync.IsEnabled = true;
-                //SBSDone.IsEnabled = true;
+
             });
 
             mruWorker.DoWork += new DoWorkEventHandler(delegate(Object worker, DoWorkEventArgs args)
@@ -1170,7 +1175,7 @@ namespace SyncButlerUI
                 // Show some initial information on the progress window
                 pinfo.SubTaskPercent = 0;
                 pinfo.TotalTaskPercent = 0;
-                pinfo.taskDescription = "Starting...";
+                pinfo.taskDescription = "Starting to copy your recent files ...";
                 workerObj.ReportProgress(0, pinfo);
 
                 try
@@ -1214,6 +1219,10 @@ namespace SyncButlerUI
                             info.parent = this;
                             progressWindow.RequestMessageDialog(workerObj, info);
                             cancelled = true;
+                            return false;
+                        }
+                        else if (exp is SyncButler.Exceptions.UserCancelledException)
+                        {
                             return false;
                         }
                         else
@@ -1417,17 +1426,6 @@ namespace SyncButlerUI
             }
         }
 
-        public void CheckIfEnoughSpace()
-        {
-            if (!Controller.GetInstance().IsSBSDriveEnough())
-            {
-                //SBSSync.IsEnabled = false;
-            }
-            else
-            {
-                //SBSSync.IsEnabled = true;
-            }
-        }
         private void SpaceToUseChanged(Object sender, KeyEventArgs e)
         {
             if (SpaceToUseTextbox.Text.Trim().Length != 0)
@@ -1539,42 +1537,22 @@ namespace SyncButlerUI
                 throw new UserInputException("The 2nd folder is a subfolder of the 1st folder.\n\nPlease select another folder.");
             }
         }
-        private void FocusMe(object sender, EventArgs e)
-        {
-			
-            if (!Favourites_List.IsFocused)
-                //WeirdFile_List.SelectedIndex = -1;
-            //else
-                Favourites_List.SelectedIndex = -1;
-        }
-
-        private void SBSMoveToOther(object sender, EventArgs e)
-        {
-			/*
-            SortedList<string, string> sensitive = MRUs["sensitive"];
-            SortedList<string, string> interesting = MRUs["interesting"];
-            // move from weird to fav
-            if (WeirdFile_List.SelectedIndex != -1)
-            {
-
-                interesting.Add((String)WeirdFile_List.SelectedItem, (String)sensitive[(String)WeirdFile_List.SelectedItem]);
-                sensitive.Remove((String)WeirdFile_List.SelectedItem);
-            }
-            // move from fav to weird
-            else if (Favourites_List.SelectedIndex != -1)
-            {
-                sensitive.Add((String)Favourites_List.SelectedItem, (String)interesting[(String)Favourites_List.SelectedItem]);
-                interesting.Remove((String)Favourites_List.SelectedItem);
-            }
-
-            Favourites_List.Items.Refresh();
-            WeirdFile_List.Items.Refresh();
-			*/
-        }
 
         public void LoadMRUs()
         {
-            bool preview;
+            FindMRUs(false);
+            Favourites_List.ItemsSource = MRUs["interesting"].Keys;
+            Favourites_List.Items.Refresh();
+        }
+
+        /// <summary>
+        /// Find a list of mru base on the space limit imposed by the user 
+        /// or if any reason tt sbs is disable, a 250mb limit is imposed
+        /// </summary>
+        /// <param name="preview">If this list of mru is for preview or not</param>
+        private void FindMRUs(bool preview)
+        {
+
             if (!Controller.IsSBSEnable())
             {
                 this.SBSPathLabel.Visibility = Visibility.Hidden;
@@ -1608,8 +1586,6 @@ namespace SyncButlerUI
                 preview = false;
             }
 
-            //SBSDone.IsEnabled = false;
-
             BackgroundWorker sbsScanWorker = new BackgroundWorker();
             ProgressBar progressWindow = new ProgressBar(sbsScanWorker, "Loading Sync Butler, Sync!");
             progressWindow.HideTotalProgress();
@@ -1636,8 +1612,6 @@ namespace SyncButlerUI
 
             sbsScanWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(delegate(Object worker, RunWorkerCompletedEventArgs args)
             {
-                Favourites_List.ItemsSource = MRUs["interesting"].Keys;
-                //WeirdFile_List.ItemsSource = MRUs["sensitive"].Keys;
                 progressWindow.TaskComplete();
             });
 
@@ -1646,8 +1620,6 @@ namespace SyncButlerUI
 
         private void ShowResult(object sender, EventArgs e)
         {
-
-            //ShowResult();
             VisualStateManager.GoToState(this, "ResultState", false);
             CurrentState = State.Result;
             SyncResultListBox.ItemsSource = ResolvedConflicts;
@@ -1718,25 +1690,12 @@ namespace SyncButlerUI
             CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok,
                 "I am working on something in this screen at the moment. Please click on Cancel Sync if you wish to leave this screen.");
 
-            // Without synchronization, cancelling the operation from here may be unpredictable
-            // ie. The operation has started to be cancelled, but hasn't really ended yet while the
-            // user has moved to a different page. For now, make the user cancel manually and wait until
-            // the op is really cancelled.
-            /* {
-                homeWindow1.CancelCurrentScan();
-                return true;
-            } */
-
             return false;
         }
         
         private void OpenSelectedOnList(object sender, MouseEventArgs e)
         {
             String path = "";
-            //if (WeirdFile_List.SelectedIndex != -1)
-            //{
-            //    path = MRUs["sensitive"][(String)WeirdFile_List.SelectedItem];
-            //}
             if (Favourites_List.SelectedIndex != -1)
             {
                 path = MRUs["interesting"][(String)Favourites_List.SelectedItem];
@@ -1752,12 +1711,13 @@ namespace SyncButlerUI
             GoToSetting(null, null);
         }
 
-        //TODO: refactor this
         private void GoToSetting(object sender, RoutedEventArgs e)
         {
             CurrentState = State.Settings;
             if (!StopExistingOperation()) return;
             IsLoadingSBS = true;
+
+            #region show help if required
             if (sender != null && sender.GetType() == typeof(String) && (sender.Equals("FirstSBSRun")))
             {
                 FirstTimeHelp.Visibility = System.Windows.Visibility.Visible;
@@ -1766,6 +1726,7 @@ namespace SyncButlerUI
             {
                 FirstTimeHelp.Visibility = System.Windows.Visibility.Hidden;
             }
+            #endregion
 
             VisualStateManager.GoToState(this, "SettingsState", false);
 
