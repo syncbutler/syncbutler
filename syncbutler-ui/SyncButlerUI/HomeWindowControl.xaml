@@ -1171,7 +1171,7 @@
 			<Image x:Name="image1_Copy2" Margin="182.092,130.331,9.455,22.247" Source="Images\logo.png" Stretch="Fill" Opacity="0.04"/>
 			<Rectangle Stroke="Black" RadiusX="5" RadiusY="2" Margin="18.798,374.118,17.383,0" VerticalAlignment="Top" Height="142.286"/>
 			<TextBlock x:Name="PartnershipName" Margin="29.169,0,267.738,111.641" VerticalAlignment="Bottom" Height="36.427" FontSize="14.667" FontWeight="Bold" Text="Partnership Name" TextWrapping="Wrap"/>
-			<TextBlock x:Name="CurrentSyncingFile" Margin="29.169,0,27.582,69.903" VerticalAlignment="Bottom" Height="35.738" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" Text="Currently Syncing: C:/doc/xml.xml" FontSize="13.333"/>
+			<TextBlock x:Name="CurrentSyncingFile" Margin="29.169,0,27.582,69.903" VerticalAlignment="Bottom" Height="35.738" TextTrimming="CharacterEllipsis" TextWrapping="Wrap" Text="Currently Syncing: C:/doc/xml.xml" FontSize="13.333" Grid.RowSpan="2"/>
 			<ProgressBar x:Name="SubProgressBar" Margin="162.316,0,27.582,46.081" VerticalAlignment="Bottom" Height="16.776"/>
 			<ProgressBar x:Name="TotalProgressBar" Margin="162.316,0,27.582,23.467" VerticalAlignment="Bottom" Height="16.776"/>
 			<TextBlock x:Name="ConflictsLabel" Margin="22.749,18.326,124.473,0" FontSize="24" FontWeight="Bold" Text="Sync Status" TextWrapping="Wrap" VerticalAlignment="Top" Height="42.946"/>
