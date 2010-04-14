@@ -159,6 +159,9 @@
 						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="SBSHelp1" Storyboard.TargetProperty="(UIElement.Visibility)">
 							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
 						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="HelpScreenCloseBtn1" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
 				<VisualState x:Name="FeatureSBSHelpState">
@@ -585,7 +588,7 @@
 					</TransformGroup>
 				</TextBlock.RenderTransform><Run Text="How does "/><Run Text="'"/><Run FontFamily="Walkway Black" Text="Sync"/><Run FontFamily="Walkway Black" Text=" "/><Run FontFamily="Walkway Black" Text="Butler"/><Run Text=", "/><Run FontStyle="Italic" Text="Sync"/><Run Text="'"/><Run Text=" work"/><Run Text="?"/></TextBlock>
 			<Button x:Name="SBSHelpScreenNextBtn" VerticalAlignment="Bottom" Height="39.2" Content="Next" FontWeight="Bold" FontSize="18.667" Click="GoToSBSDemoHelpScreen_Click" HorizontalAlignment="Right" Width="83.2" TabIndex="1" Margin="0,0,1.5,1.5"/>
-			<Button x:Name="HelpScreenCloseBtn1" HorizontalAlignment="Right" Margin="0,0,2.1,1.8" Content="Close" FontWeight="Bold" FontSize="18.667" Click="ExitTutorial_Click" Width="83.2" VerticalAlignment="Bottom" Height="39.2" Opacity="0"/>
+			<Button x:Name="HelpScreenCloseBtn1" HorizontalAlignment="Right" Margin="0,0,2.1,1.8" Content="Close" FontWeight="Bold" FontSize="18.667" Click="ExitSBSTutorial_Click" Width="83.2" VerticalAlignment="Bottom" Height="39.2" Opacity="0"/>
 		</Grid>
 	</Grid>
 </UserControl>

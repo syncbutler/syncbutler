@@ -97,12 +97,20 @@ namespace SyncButlerUI
 			VisualStateManager.GoToState(this, "HelpScreenState", false);
 			FocusControl(() => HelpScreen1NextBtn.Focus());
 		}
+        public void GoToSBSHelpScreen()
+        {
+            VisualStateManager.GoToState(this, "SBSHelpState", false);
+            FocusControl(() => SBSHelpScreenNextBtn.Focus());
+            IsSBSHelpButton = true;
+        }
 		public void GoToFeaturesScreen()
 		{
             CurrentState = State.AllowClose;
 			VisualStateManager.GoToState(this, "FeatureHelpState", false);
+
 			FocusControl(() => FeatureHelpNextBtn.Focus());
 		}
+        private bool IsSBSHelpButton;
 		public void GoToFeaturesSBSScreen()
 		{
             CurrentState = State.AllowClose;
@@ -135,17 +143,20 @@ namespace SyncButlerUI
         {
             Window.GetWindow(this).DialogResult = true;
         }	
+        
         private void ExitSBSTutorial_Click(object sender, RoutedEventArgs e)
         {
             wantToShowSettingPage = false;
-            if (!Controller.IsSBSEnable())
+            if (!Controller.IsSBSEnable() && !IsSBSHelpButton)
             {
                 if (CustomDialog.Show(this, CustomDialog.MessageTemplate.YesNo, CustomDialog.MessageResponse.No,
                                 "Sync Butler, Sync! is currently not enabled.\n\nShould I show you to the Setting's screen so you may turn on Sync Butler, Sync! ?") == CustomDialog.MessageResponse.Yes)
                 {
                     wantToShowSettingPage = true;
                 }
+                
             }
+            IsSBSHelpButton = false;
             Window.GetWindow(this).DialogResult = true;
 		}
 
