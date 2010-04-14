@@ -969,7 +969,8 @@ namespace SyncButlerUI
                     {
                         if (String.IsNullOrEmpty(errorMsg))
                         {
-                            CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Finished syncing recent files");
+                            if (this.Controller.GetPartnershipList().Count == 0)
+                                CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Finished syncing recent files");
                         }
                         else
                         {
