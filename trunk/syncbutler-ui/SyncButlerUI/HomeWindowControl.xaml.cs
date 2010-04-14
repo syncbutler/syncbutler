@@ -1697,13 +1697,16 @@ namespace SyncButlerUI
         
         private void OpenSelectedOnList(object sender, MouseEventArgs e)
         {
-            String path = "";
-            if (Favourites_List.SelectedIndex != -1)
+            if (e.RightButton == MouseButtonState.Released)
             {
-                path = MRUs["interesting"][(String)Favourites_List.SelectedItem];
+                String path = "";
+                if (Favourites_List.SelectedIndex != -1)
+                {
+                    path = MRUs["interesting"][(String)Favourites_List.SelectedItem];
+                }
+                if (path.Length != 0 && File.Exists(path))
+                    Controller.OpenFile(path);
             }
-            if (path.Length != 0 && File.Exists(path))
-                Controller.OpenFile(path);
         }
         
 
