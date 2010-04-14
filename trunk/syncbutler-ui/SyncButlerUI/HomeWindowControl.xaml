@@ -1171,7 +1171,7 @@
 			<Image x:Name="image1_Copy2" Margin="182.092,130.331,9.455,22.247" Source="Images\logo.png" Stretch="Fill" Opacity="0.04"/>
 			<Rectangle Stroke="Black" RadiusX="5" RadiusY="2" Margin="18.798,374.118,17.383,0" VerticalAlignment="Top" Height="142.286"/>
 			<TextBlock x:Name="PartnershipName" Margin="29.169,0,267.738,111.641" VerticalAlignment="Bottom" Height="36.427" FontSize="14.667" FontWeight="Bold" Text="Partnership Name" TextWrapping="Wrap"/>
-			<TextBlock x:Name="CurrentSyncingFile" Margin="29.169,0,27.582,69.903" VerticalAlignment="Bottom" Height="35.738" TextTrimming="CharacterEllipsis" TextWrapping="Wrap" Text="Currently Syncing: C:/doc/xml.xml" FontSize="13.333" Grid.RowSpan="2"/>
+			<TextBlock x:Name="CurrentSyncingFile" Margin="29.169,0,27.582,70.903" VerticalAlignment="Bottom" Height="35.738" TextTrimming="CharacterEllipsis" TextWrapping="Wrap" Text="Currently Syncing: C:/doc/xml.xml" FontSize="13.333"/>
 			<ProgressBar x:Name="SubProgressBar" Margin="162.316,0,27.582,46.081" VerticalAlignment="Bottom" Height="16.776"/>
 			<ProgressBar x:Name="TotalProgressBar" Margin="162.316,0,27.582,23.467" VerticalAlignment="Bottom" Height="16.776"/>
 			<TextBlock x:Name="ConflictsLabel" Margin="22.749,18.326,124.473,0" FontSize="24" FontWeight="Bold" Text="Sync Status" TextWrapping="Wrap" VerticalAlignment="Top" Height="42.946"/>
@@ -1387,8 +1387,8 @@
 					</TransformGroup>
 				</Image.RenderTransform>
 			</Image>
-			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="112.85,128.71,205.645,0" VerticalAlignment="Top" Height="39.079" d:LayoutOverrides="VerticalAlignment" Grid.Column="1"/>
-			<TextBlock Margin="122.125,133.223,213.19,0" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top" Height="31.898" FontSize="10.667" Grid.Column="1" TextAlignment="Justify"><Run Text="Enable or disable "/><Run FontFamily="Walkway Black" FontSize="12" FontWeight="Bold" Text="Sync Butler"/><Run FontWeight="Bold" Text=", "/><Run FontStyle="Italic" FontWeight="Bold" Text="Sync!"/></TextBlock>
+			<Rectangle Fill="Black" Stroke="#FFFC0404" StrokeThickness="4" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="112.85,128.71,205.645,0" VerticalAlignment="Top" Height="39.079" d:LayoutOverrides="VerticalAlignment" Grid.Column="1"/>
+			<TextBlock Margin="121.125,132.223,0,0" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top" Height="31.898" FontSize="10.667" Grid.Column="1" TextAlignment="Justify" HorizontalAlignment="Left" Width="92.539"><Run Text="Enable or disable "/><Run FontFamily="Walkway Black" FontSize="12" FontWeight="Bold" Text="Sync Butler"/><Run FontWeight="Bold" Text=", "/><Run FontStyle="Italic" FontWeight="Bold" Text="Sync!"/></TextBlock>
 			<Image Margin="57.232,150.273,0,0" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Top" Height="22.515" IsHitTestVisible="False" Grid.Column="1" HorizontalAlignment="Left" Width="37.528">
 				<Image.RenderTransform>
 					<TransformGroup>
@@ -1401,7 +1401,7 @@
 			</Image>
 			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="0,150.953,90.524,0" VerticalAlignment="Top" Height="72.609" HorizontalAlignment="Right" Width="109.937" d:LayoutOverrides="VerticalAlignment" Grid.Column="1"/>
 			<TextBlock Margin="0,158.134,98.093,0" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top" Height="56.533" FontSize="10.667" HorizontalAlignment="Right" Width="93.428" Grid.Column="1" TextAlignment="Justify"><Run Text="The drive which "/><Run FontFamily="Walkway Black" FontSize="12" FontWeight="Bold" Text="Sync Butler"/><Run FontWeight="Bold" Text=", "/><Run FontStyle="Italic" FontWeight="Bold" Text="Sync!"/><Run Text="should use"/><Run Text=" to store the files."/></TextBlock>
-			<Image Margin="172.298,186.197,0,0" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Top" Height="22.515" IsHitTestVisible="False" Grid.Column="1" HorizontalAlignment="Left" Width="37.524">
+			<Image Margin="172.298,188.197,0,0" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Top" Height="22.515" IsHitTestVisible="False" Grid.Column="1" HorizontalAlignment="Left" Width="37.524">
 				<Image.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
@@ -1435,7 +1435,7 @@
 			</Image>
 			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="6.409,388.44,0,0" VerticalAlignment="Top" Height="60.704" Grid.Column="1" HorizontalAlignment="Left" Width="132.446"/>
 			<TextBlock Margin="15.366,0,0,87.825" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="47.073" FontSize="10.667" Text="Click here if you have just plugged in your portable storage device." Grid.Column="1" TextAlignment="Justify" HorizontalAlignment="Left" Width="114.673"/>
-			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="0,378.095,63.993,0" VerticalAlignment="Top" Height="42.597" Grid.Column="1" HorizontalAlignment="Right" Width="84.827"/>
+			<Rectangle Fill="Black" Stroke="#FF62DE37" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="0,378.095,63.993,0" VerticalAlignment="Top" Height="42.597" Grid.Column="1" HorizontalAlignment="Right" Width="84.827"/>
 			<TextBlock Margin="0,0,73.666,113.492" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="32.787" FontSize="10.667" Text="Hide the help balloons." Grid.Column="1" TextAlignment="Justify" HorizontalAlignment="Right" Width="65.149"/>
 			<Image Margin="0,0,108.867,63.797" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" HorizontalAlignment="Right" Width="43.534" IsHitTestVisible="False" Grid.Column="1" VerticalAlignment="Bottom" Height="26.121">
 				<Image.RenderTransform>

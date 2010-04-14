@@ -1669,7 +1669,7 @@ namespace SyncButlerUI
             if (!IsBusy()) return true;
 
             CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok,
-                "I am working on something in this screen at the moment. Please click Cancel if you wish to leave this screen.");
+                "I am working on something in this screen at the moment. Please click on Cancel Sync if you wish to leave this screen.");
 
             // Without synchronization, cancelling the operation from here may be unpredictable
             // ie. The operation has started to be cancelled, but hasn't really ended yet while the
