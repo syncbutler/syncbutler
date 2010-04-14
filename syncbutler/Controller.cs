@@ -723,13 +723,24 @@ namespace SyncButler
         {
 
             SyncEnvironment.ComputerName = computerName;
-            SyncEnvironment.SBSDriveLetter = SBSDrive;
             SyncEnvironment.SBSEnable = enableSBS;
             SyncEnvironment.FreeSpaceToUse = freeSpaceToUse;
             SyncEnvironment.Resolution = resolution;
-            SyncEnvironment.SBSDriveId = SystemEnvironment.StorageDevices.GetDriveID(SBSDrive + ":");
+            if (enableSBS.Equals("Enable"))
+            {
+                SyncEnvironment.SBSDriveLetter = SBSDrive;
+                SyncEnvironment.SBSDriveId = SystemEnvironment.StorageDevices.GetDriveID(SBSDrive + ":");
+                SyncEnvironment.SBSDrivePartition = SystemEnvironment.StorageDevices.GetDrivePartitionIndex(SBSDrive + ":");
+            }
+            else
+            {
+                SyncEnvironment.SBSDriveLetter = '1';
+                SyncEnvironment.SBSDriveId = null;
+                SyncEnvironment.SBSDrivePartition = -1;
+            }
+            
             SyncEnvironment.EnableSyncAll = enableSyncAll;
-            SyncEnvironment.SBSDrivePartition = SystemEnvironment.StorageDevices.GetDrivePartitionIndex(SBSDrive + ":");
+
 
             SyncEnvironment.GetInstance().StoreSettings();
 		}
