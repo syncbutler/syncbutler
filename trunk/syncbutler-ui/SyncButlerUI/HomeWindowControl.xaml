@@ -9,7 +9,7 @@
 	xmlns:Custom="http://schemas.microsoft.com/wpf/2008/toolkit"
 	xmlns:System="clr-namespace:System;assembly=mscorlib"
 	x:Class="SyncButlerUI.HomeWindowControl"
-	x:Name="UserControl" d:DesignHeight="444" RenderTransformOrigin="0.5,0.5" Width="766.514" Height="526.184">
+	x:Name="UserControl" d:DesignHeight="444" RenderTransformOrigin="0.5,0.5" Width="770.8" Height="526.184">
 	<UserControl.Resources>
 		<Style x:Key="SyncButton" TargetType="{x:Type Button}">
 			<Setter Property="Template">
@@ -33,7 +33,7 @@
 								</DoubleAnimationUsingKeyFrames>
 							</Storyboard>
 						</ControlTemplate.Resources>
-						<Grid x:Name="Sync_Button" Margin="0.318,0,0,0">
+						<Grid x:Name="Sync_Button" Margin="0.318,0,0,0" Width="770.8">
 							<Rectangle x:Name="bigButton_Copy" Margin="-2.19,0,0.645,0.269" VerticalAlignment="Bottom" Height="335.651" Cursor="Hand">
 								<Rectangle.Fill>
 									<RadialGradientBrush RadiusX="1.264" RadiusY="1.006">
@@ -42,12 +42,12 @@
 									</RadialGradientBrush>
 								</Rectangle.Fill>
 							</Rectangle>
-							<Image x:Name="image" Cursor="Hand" HorizontalAlignment="Left" Margin="99,83.347,0,78.876" Width="183.785" Opacity="0.6" RenderTransformOrigin="0.5,0.5" Source="Images\Synchonize.png" Stretch="Fill" Height="Auto">
+							<Image x:Name="image" Cursor="Hand" HorizontalAlignment="Stretch" Margin="99,83.347,488.015,78.876" Width="183.785" Opacity="0.6" RenderTransformOrigin="0.5,0.5" Source="Images\Synchonize.png" Stretch="Fill" Height="Auto">
 								<Image.RenderTransform>
 									<TransformGroup>
-										<ScaleTransform/>
-										<SkewTransform/>
-										<RotateTransform/>
+										<ScaleTransform ScaleX="1" ScaleY="1"/>
+										<SkewTransform AngleX="0" AngleY="0"/>
+										<RotateTransform Angle="0"/>
 										<TranslateTransform/>
 									</TransformGroup>
 								</Image.RenderTransform>
@@ -231,7 +231,7 @@
 								</Rectangle.Fill>
 							</Rectangle>
 							<TextBlock Margin="100.736,76.753,28.732,0" VerticalAlignment="Top" Height="49.052" Opacity="0.5" FontFamily="Arial" FontSize="16" Foreground="White" TextWrapping="Wrap" Cursor="Hand" TextAlignment="Left"><Run Text="Select what "/><LineBreak/><Run Text="you want to sync"/></TextBlock>
-							<Image x:Name="image" Margin="9.483,70.342,0,20.349" Source="Images\Folder.png" Stretch="Fill" Opacity="0.595" HorizontalAlignment="Left" Width="82.939" RenderTransformOrigin="0.5,0.5" Height="82.939" d:LayoutOverrides="VerticalAlignment">
+							<Image x:Name="image" Margin="13.485,71.929,0,21.936" Source="Images\Folder.png" Stretch="Fill" Opacity="0.595" HorizontalAlignment="Left" Width="82.939" RenderTransformOrigin="0.5,0.5" Height="82.939" d:LayoutOverrides="VerticalAlignment">
 								<Image.RenderTransform>
 									<TransformGroup>
 										<ScaleTransform/>
@@ -242,7 +242,7 @@
 								</Image.RenderTransform>
 							</Image>
 							<TextBlock Margin="1.073,21.221,-4.445,0" VerticalAlignment="Top" Height="36.571" TextAlignment="Center" TextWrapping="Wrap" Opacity="0.68" d:LayoutOverrides="VerticalAlignment"><Run FontStyle="Normal" Text="Create"/><Run Text=" Partnership"/></TextBlock>
-							<Image x:Name="image1" Margin="15.483,0,0,36.957" Source="Images\Folder.png" Stretch="Fill" HorizontalAlignment="Left" Width="82.939" Opacity="0.595" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Bottom" Height="82.939">
+							<Image x:Name="image1" Margin="19.485,0,0,36.957" Source="Images\Folder.png" Stretch="Fill" HorizontalAlignment="Left" Width="82.939" Opacity="0.595" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Bottom" Height="82.939">
 								<Image.RenderTransform>
 									<TransformGroup>
 										<ScaleTransform/>
@@ -484,7 +484,7 @@
 									</LinearGradientBrush>
 								</Rectangle.Fill>
 							</Rectangle>
-							<Image x:Name="image" Margin="-9.154,33.317,0,19.881" Source="Images\star.png" Stretch="Fill" Opacity="0.6" RenderTransformOrigin="0.5,0.5" Width="127.485" Height="127.485" HorizontalAlignment="Left">
+							<Image x:Name="image" Margin="3.639,39.995,0,23.384" Source="Images\star.png" Stretch="Fill" Opacity="0.6" RenderTransformOrigin="0.5,0.5" Width="110.331" Height="Auto" HorizontalAlignment="Left">
 								<Image.RenderTransform>
 									<TransformGroup>
 										<ScaleTransform/>
@@ -952,8 +952,8 @@
 					</TransformGroup>
 				</Button.RenderTransform>
 			</Button>
-			<Button x:Name="ExploreFeaturesButton" HorizontalAlignment="Right" Margin="0,0,-1.524,-0.286" Style="{DynamicResource ExploreFeaturesButton}" VerticalAlignment="Bottom" Width="256.981" Height="174.821" Content="" Click="GoToExploreFeatures_Click"  Cursor="Hand" d:LayoutOverrides="VerticalAlignment" IsTabStop="False"/>
-			<Button x:Name="CreatePartnershipButton" HorizontalAlignment="Left" Margin="1.354,0,0,-0.013" Style="{DynamicResource CreatePartnersButton}" Width="256.981" Content="" Cursor="Hand" Click="GoToCreatePartnership_Click"  RenderTransformOrigin="0.5,0.5" VerticalAlignment="Bottom" Height="175.456" BorderBrush="{x:Null}" Background="{x:Null}" IsTabStop="False">
+			<Button x:Name="ExploreFeaturesButton" HorizontalAlignment="Right" Margin="0,0,-5.524,-0.286" Style="{DynamicResource ExploreFeaturesButton}" VerticalAlignment="Bottom" Width="261.954" Height="174.821" Content="" Click="GoToExploreFeatures_Click"  Cursor="Hand" d:LayoutOverrides="VerticalAlignment" IsTabStop="False"/>
+			<Button x:Name="CreatePartnershipButton" HorizontalAlignment="Left" Margin="1.854,0,0,-0.013" Style="{DynamicResource CreatePartnersButton}" Width="256.981" Content="" Cursor="Hand" Click="GoToCreatePartnership_Click"  RenderTransformOrigin="0.5,0.5" VerticalAlignment="Bottom" Height="175.456" BorderBrush="{x:Null}" Background="{x:Null}" IsTabStop="False">
 				<Button.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
@@ -1305,7 +1305,7 @@
 					</TransformGroup>
 				</TextBlock.RenderTransform><Run FontWeight="Bold" Text="Note:"/><LineBreak/><Run Text="No"/><Run Text=" portable storage device was detected. Please plug in a portable storage device if you wish to use it with "/><Run FontFamily="Walkway Black" FontWeight="Bold" Text="Sync Butler"/><Run FontWeight="Bold" Text=", "/><Run FontStyle="Italic" FontWeight="Bold" Text="Sync"/><Run FontWeight="Bold" Text="!"/><LineBreak/><Run Text=""/></TextBlock>
 			<Label HorizontalAlignment="Left" Margin="25.046,90.608,0,0" VerticalAlignment="Top" Content="This computer's name:&#xa;" Height="34.044" Width="170.898" FontSize="14.667"/>
-			<TextBlock x:Name="textBlock9_Copy" HorizontalAlignment="Left" Margin="30.497,155.274,0,0" VerticalAlignment="Top" Width="185.953" Height="30" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap" FontSize="14.667"><TextBlock.RenderTransform>
+			<TextBlock x:Name="textBlock9_Copy" HorizontalAlignment="Left" Margin="30.497,155.274,0,0" VerticalAlignment="Top" Width="254.986" Height="30" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap" FontSize="14.667"><TextBlock.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
 						<SkewTransform/>
@@ -1313,14 +1313,6 @@
 						<TranslateTransform/>
 					</TransformGroup>
 				</TextBlock.RenderTransform><Run FontFamily="Walkway Black" FontWeight="Bold" Text="Sync Butler"/><Run FontWeight="Bold" Text=", "/><Run FontStyle="Italic" FontWeight="Bold" Text="Sync"/><Run FontWeight="Bold" Text="!"/><Run Text=" "/><Run Text="Settings:"/><LineBreak/><Run Text=""/></TextBlock>
-			<TextBlock x:Name="textBlock9" HorizontalAlignment="Left" Margin="29.764,192.243,0,0" Width="255.719" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" FontSize="14.667"><TextBlock.RenderTransform>
-					<TransformGroup>
-						<ScaleTransform/>
-						<SkewTransform/>
-						<RotateTransform/>
-						<TranslateTransform/>
-					</TransformGroup>
-				</TextBlock.RenderTransform><Run FontFamily="Walkway Black" FontWeight="Bold" Text="Sync Butler"/><Run FontWeight="Bold" Text=", "/><Run FontStyle="Italic" FontWeight="Bold" Text="Sync"/><Run FontWeight="Bold" Text="! "/><Run Text="Destination Drive:"/><LineBreak/><Run Text=""/></TextBlock>
 			<TextBox x:Name="ComputerNameTextBox"  Margin="290.925,95.153,193.258,0" VerticalAlignment="Top" TextWrapping="Wrap" Height="24" FontSize="14.667"/>
 			<ComboBox x:Name="SBSSettingComboBox"  Margin="290.925,155.112,365.13,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" SelectionChanged="SBSSettingChanged" Height="24" FontSize="14.667">
 				<ComboBox.RenderTransform>
@@ -1333,6 +1325,14 @@
 				</ComboBox.RenderTransform>
 			</ComboBox>
 			<ComboBox x:Name="SBSWorkingDriveComboBox"  Margin="290.925,191.743,249.746,0" SelectionChanged="SBSUpdateSpaceDetails" VerticalAlignment="Top" Height="24" FontSize="14.667"/>
+			<TextBlock x:Name="textBlock9" HorizontalAlignment="Left" Margin="29.764,192.243,0,0" Width="274.132" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" FontSize="14.667"><TextBlock.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</TextBlock.RenderTransform><Run FontFamily="Walkway Black" FontWeight="Bold" Text="Sync Butler"/><Run FontWeight="Bold" Text=", "/><Run FontStyle="Italic" FontWeight="Bold" Text="Sync"/><Run FontWeight="Bold" Text="! "/><Run Text="Destination Drive:"/><LineBreak/><Run Text=""/></TextBlock>
 			<Slider x:Name="SpaceToUseSlide" Margin="292.554,231.157,193.258,0" ValueChanged="SpaceToUseSlided" FontSize="14.667" VerticalAlignment="Top" Height="26.154"/>
 			<TextBox x:Name="SpaceToUseTextbox" HorizontalAlignment="Right" Margin="0,230.81,98.926,0" TextWrapping="Wrap" Width="72.159" KeyUp="SpaceToUseChanged" FontSize="14.667" VerticalAlignment="Top" Height="26"/>
 			<Button Margin="291.054,0,249.746,174.106" VerticalAlignment="Bottom" Content="Search Again for Portable Storage" Click="RefreshSBSSettingDriveList" FontSize="14.667" Height="32">
@@ -1358,7 +1358,7 @@
 			<Button x:Name="CancelSettingButton"  Margin="141.739,0,0,40.122" VerticalAlignment="Bottom" Content="Cancel" Click="SBSSettingCancel" HorizontalAlignment="Left" Width="95" Height="33" FontSize="14.667" />
 			<Button x:Name="DefaultSettingButton" IsTabStop="False" HorizontalAlignment="Right" Margin="0,0,187.342,40.122" VerticalAlignment="Bottom" Width="130" Content="Restore Defaults"  Click="DefaultSetting" Height="33" FontSize="14.667"/>
 			<Button Margin="0,0,37.342,40.122" VerticalAlignment="Bottom" Content="Show Help" HorizontalAlignment="Right" Width="130" Click="ShowHelp" Height="33" FontSize="14.667"/>
-			<TextBlock x:Name="textBlock9_Copy1" Margin="29.764,227.81,0,0" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap" FontSize="14.667" HorizontalAlignment="Left" Width="220.475" VerticalAlignment="Top" Height="30"><TextBlock.RenderTransform>
+			<TextBlock x:Name="textBlock9_Copy1" Margin="29.764,227.81,0,0" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap" FontSize="14.667" HorizontalAlignment="Left" Width="235.566" VerticalAlignment="Top" Height="30"><TextBlock.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
 						<SkewTransform/>
@@ -1397,8 +1397,8 @@
 					</TransformGroup>
 				</Image.RenderTransform>
 			</Image>
-			<Rectangle Fill="Black" Stroke="#FFFC0404" StrokeThickness="4" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="112.85,128.71,205.645,0" VerticalAlignment="Top" Height="39.079" d:LayoutOverrides="VerticalAlignment" Grid.Column="1"/>
-			<TextBlock Margin="121.125,132.223,0,0" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top" Height="31.898" FontSize="10.667" Grid.Column="1" TextAlignment="Justify" HorizontalAlignment="Left" Width="92.539"><Run Text="Enable or disable "/><Run FontFamily="Walkway Black" FontSize="12" FontWeight="Bold" Text="Sync Butler"/><Run FontWeight="Bold" Text=", "/><Run FontStyle="Italic" FontWeight="Bold" Text="Sync!"/></TextBlock>
+			<Rectangle Fill="Black" Stroke="#FFFC0404" StrokeThickness="4" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="112.85,128.71,200.461,0" VerticalAlignment="Top" Height="39.696" d:LayoutOverrides="VerticalAlignment" Grid.Column="1"/>
+			<TextBlock Margin="121.125,132.223,210.85,0" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top" Height="47.612" FontSize="10.667" Grid.Column="1" TextAlignment="Justify"><Run Text="Enable or disable "/><Run FontFamily="Walkway Black" FontSize="12" FontWeight="Bold" Text="Sync Butler"/><Run FontWeight="Bold" Text=", "/><Run FontStyle="Italic" FontWeight="Bold" Text="Sync!"/></TextBlock>
 			<Image Margin="57.232,150.273,0,0" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Top" Height="22.515" IsHitTestVisible="False" Grid.Column="1" HorizontalAlignment="Left" Width="37.528">
 				<Image.RenderTransform>
 					<TransformGroup>
@@ -1409,8 +1409,8 @@
 					</TransformGroup>
 				</Image.RenderTransform>
 			</Image>
-			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="0,150.953,90.524,0" VerticalAlignment="Top" Height="72.609" HorizontalAlignment="Right" Width="109.937" d:LayoutOverrides="VerticalAlignment" Grid.Column="1"/>
-			<TextBlock Margin="0,158.134,98.093,0" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top" Height="56.533" FontSize="10.667" HorizontalAlignment="Right" Width="93.428" Grid.Column="1" TextAlignment="Justify"><Run Text="The drive which "/><Run FontFamily="Walkway Black" FontSize="12" FontWeight="Bold" Text="Sync Butler"/><Run FontWeight="Bold" Text=", "/><Run FontStyle="Italic" FontWeight="Bold" Text="Sync!"/><Run Text="should use"/><Run Text=" to store the files."/></TextBlock>
+			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="0,150.953,81,0" VerticalAlignment="Top" Height="72.609" HorizontalAlignment="Right" Width="119.461" d:LayoutOverrides="VerticalAlignment" Grid.Column="1"/>
+			<TextBlock Margin="0,158.134,90.524,0" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top" Height="72.406" FontSize="10.667" HorizontalAlignment="Right" Width="100.997" Grid.Column="1" TextAlignment="Justify"><Run Text="The drive which "/><Run FontFamily="Walkway Black" FontSize="12" FontWeight="Bold" Text="Sync Butler"/><Run FontWeight="Bold" Text=", "/><Run FontStyle="Italic" FontWeight="Bold" Text="Sync! "/><Run Text="should use"/><Run Text=" to store the files."/></TextBlock>
 			<Image Margin="172.298,188.197,0,0" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Top" Height="22.515" IsHitTestVisible="False" Grid.Column="1" HorizontalAlignment="Left" Width="37.524">
 				<Image.RenderTransform>
 					<TransformGroup>
