@@ -210,14 +210,14 @@ namespace SyncButler.MRU
         /// <returns>true if the file is a shortcut, false otherwise</returns>
         private static bool IsAShortcut(String filename)
         {
+            BinaryReader fs = null;
             try
             {
-                BinaryReader fs = new BinaryReader(new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read));
+                fs = new BinaryReader(new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read));
                 byte[] read_id = new byte[4];
                 byte[] read_guid = new byte[16];
                 read_id = fs.ReadBytes(4);
                 read_guid = fs.ReadBytes(16);
-                fs.Close();
                 return (isEqual(read_id, shortcutid) && isEqual(read_guid, shortcut_guid));
             }
             catch (IOException ex)
@@ -229,6 +229,11 @@ namespace SyncButler.MRU
             {
                 Logging.Logger.GetInstance().WARNING("IOException in MostRecentlyUsedFile.cs: " + ex.Message);
                 return false;
+            }
+            finally
+            {
+                if (fs != null)
+                    fs.Close();
             }
         }
 
