@@ -94,7 +94,7 @@ namespace SyncButler
             }
             else
             {
-                //Not the first instance!!!
+                //Not the first instance
                 mutex.Close();
                 mutex = null;
                 return false;

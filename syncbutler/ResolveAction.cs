@@ -51,6 +51,11 @@ namespace SyncButler
             this.Description = description;
         }
 
+        /// <summary>
+        /// Returns a verbose string representing a Conflict.Action object.
+        /// </summary>
+        /// <param name="a">A Conflict.Action object</param>
+        /// <returns>A descriptive string of the action</returns>
         public static string ActionDescription(Conflict.Action a)
         {
             switch (a)

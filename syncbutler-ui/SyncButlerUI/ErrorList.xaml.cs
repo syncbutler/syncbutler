@@ -34,6 +34,7 @@ namespace SyncButlerUI
 {
 	/// <summary>
 	/// Interaction logic for ErrorList.xaml
+    /// Currently unused.
 	/// </summary>
 	public partial class ErrorList : Window
 	{

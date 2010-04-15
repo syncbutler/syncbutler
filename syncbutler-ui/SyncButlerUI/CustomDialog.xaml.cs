@@ -98,6 +98,11 @@ namespace SyncButlerUI
             return "";
         }
 
+        /// <summary>
+        /// Method exposed to allow for showing of a dialog
+        /// </summary>
+        /// <param name="info">MessageBoxInfo struct containing several parameters</param>
+        /// <returns>the MessageResponse to the message dialog</returns>
         public static MessageResponse Show(MessageBoxInfo info)
         {
             return Show(info.parent, info.messageTemplate, info.messageType, info.defaultResponse, info.message);
