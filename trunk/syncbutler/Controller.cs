@@ -145,7 +145,7 @@ namespace SyncButler
                 SingleInstance.Cleanup();
                 return false;
             }
-            // This is the 1st instance. Handle the arguments if it is not the first run.
+            // This is the 1st instance. Handle the arguments later.
             SaveStartArguments(args);
             return true;
         }

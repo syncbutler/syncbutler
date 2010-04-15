@@ -559,8 +559,8 @@ namespace SyncButler
             // Just to reload the configuration
             ConfigurationManager.RefreshSection(settingName);
             ConfigurationManager.RefreshSection(partnershipName);
-
         }
+
         /// <summary>
         /// When the program is used for the first time, this method
         /// is called to setup the program config file is expectedly,
@@ -618,6 +618,10 @@ namespace SyncButler
             else
                 RestoreEnv();
         }
+
+        /// <summary>
+        /// Sets up the environment for saving the configuration
+        /// </summary>
         private void ConfigurationSetup()
         {
             // The config file will be the name of our app, less the extension
@@ -1095,6 +1099,11 @@ namespace SyncButler
                 sbsEnable = value;
             }
         }
+        }
+
+        /// <summary>
+        /// the partition of the sbs drive
+        /// </summary>
         public static int SBSDrivePartition
         {
             get
@@ -1106,6 +1115,9 @@ namespace SyncButler
                 sbsDrivePartition = value;
             }
         }
+        /// <summary>
+        /// drive id of the sbs drive
+        /// </summary>
         public static string SBSDriveId
         {
             get

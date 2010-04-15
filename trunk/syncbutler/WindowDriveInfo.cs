@@ -56,6 +56,10 @@ namespace SyncButler
             Label = di.VolumeLabel;
         }
 
+        /// <summary>
+        /// The drive letter of this WindowDriveInfo object
+        /// </summary>
+        /// <returns>a char for the drive letter</returns>
         public char GetDriveLetter()
         {
             return this.DriveLetter;
@@ -95,6 +99,11 @@ namespace SyncButler
             return ToRtn;
         }
 
+        /// <summary>
+        /// Use to test if 2 WindowDriveInfo object are content equivalent
+        /// </summary>
+        /// <param name="obj">The WindowDriveInfo to be tested againt the current one</param>
+        /// <returns>true if they are equal, false otherwise</returns>
         public override bool Equals(object obj)
         {
             if (!(obj is WindowDriveInfo))
@@ -108,6 +117,10 @@ namespace SyncButler
             }
         }
 
+        /// <summary>
+        /// Returns the string representation of this object
+        /// </summary>
+        /// <returns>a string representing this object</returns>
         public override string ToString()
         {
             if (Label != null && Label.Length != 0)

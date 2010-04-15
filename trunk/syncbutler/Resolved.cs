@@ -30,7 +30,10 @@ namespace SyncButler
         private ISyncable right;
         private ActionDone action;
 
-        public String Left
+        /// <summary>
+        /// Returns a string representation of the left ISyncable
+        /// </summary>
+        public string Left
         {
             get
             {
@@ -43,6 +46,10 @@ namespace SyncButler
 
             }
         }
+
+        /// <summary>
+        /// Returns a string representation of the right ISyncable
+        /// </summary>
         public string Right
         {
             get
@@ -57,7 +64,10 @@ namespace SyncButler
             }
         }
 
-        public String Action
+        /// <summary>
+        /// Returns a string representation of the action of the resolution
+        /// </summary>
+        public string Action
         {
             get
             {
@@ -84,6 +94,12 @@ namespace SyncButler
             }
         }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="left">ISyncable</param>
+        /// <param name="right">ISyncable</param>
+        /// <param name="action">Action taken to resolve the conflict</param>
         public Resolved(ISyncable left, ISyncable right, ActionDone action)
         {
             this.left = left;
@@ -91,9 +107,16 @@ namespace SyncButler
             this.action = action;
         }
 
+        /// <summary>
+        /// Enumeration of possible actions
+        /// </summary>
         public enum ActionDone
         { DeleteLeft, DeleteRight, DeleteBoth, CopyFromLeft, CopyFromRight, Merged, Ignored }
 
+        /// <summary>
+        /// Converts this Resolved object into a readable string
+        /// </summary>
+        /// <returns>a string representation of this object</returns>
         public override string ToString()
         {
             switch (action)
