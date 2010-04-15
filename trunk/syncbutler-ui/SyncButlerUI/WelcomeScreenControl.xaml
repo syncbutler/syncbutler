@@ -225,12 +225,12 @@
 				<Rectangle Fill="#FF073948" Stroke="#FF006C8D" StrokeThickness="3" RadiusX="5" RadiusY="5" Margin="0,53.2,18.8,0" VerticalAlignment="Top" Height="122.4" HorizontalAlignment="Right" Width="141.2" d:LayoutOverrides="VerticalAlignment"/>
 				<TextBlock Margin="0,59.2,18.8,0" FontWeight="Bold" Foreground="#FF75CBDB" TextWrapping="Wrap" HorizontalAlignment="Right" VerticalAlignment="Top" Width="136.4" Height="42.4"><Run FontSize="13.333" Text=" "/><Run Text="What is a"/><Run Text="..."/><LineBreak/><Run FontSize="16" Text="  &quot;partnership&quot;?"/></TextBlock>
 				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="18.131,0,0,35.458" VerticalAlignment="Bottom" Height="47.2" HorizontalAlignment="Left" Width="144.8"/>
-				<TextBlock FontFamily="Fonts/#Segoe UI" Margin="26.931,0,0,40.658" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="34.4" FontWeight="Bold" HorizontalAlignment="Left" Width="130"><Run Text="Tells "/><Run FontFamily="Walkway Black" FontSize="14.667" Text="Sync Butler"/><Run Text=" which folders to sync."/></TextBlock>
+				<TextBlock FontFamily="Fonts/#Segoe UI" Margin="26.931,0,0,40.658" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="34.4" FontWeight="Bold" HorizontalAlignment="Left" Width="130"><Run Text="Tells "/><Run FontFamily="Fonts/#Segoe UI" FontSize="14.667" Text="Sync Butler"/><Run Text=" which folders to sync."/></TextBlock>
 				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="250.467,0,257.733,8" VerticalAlignment="Bottom" Height="69.6"/>
 				<TextBlock Margin="260.267,0,265.133,10.667" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="57.333" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" FontFamily="Fonts/#Segoe UI"><Run Text="View the folders which "/><Run FontSize="14.667" Text="Sync Butler "/><Run Text="is keeping in sync."/></TextBlock>
 				<Rectangle Fill="Black" Stroke="#FF62DE37" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="0,16.8,187.333,0" VerticalAlignment="Top" Height="68.333" HorizontalAlignment="Right" Width="117.067"/>
-				<TextBlock Margin="0,26.467,187.333,0" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top" Height="58.666" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="107.267"><Run Text="*New* Check out "/><Run FontFamily="Walkway Black" FontSize="14.667" Text="Sync Butler"/><Run Text="'s Hat Trick!"/></TextBlock>
-				<TextBlock Margin="0,100.3,27.2,0" VerticalAlignment="Top" Height="75.3" TextWrapping="Wrap" HorizontalAlignment="Right" Width="122.6"><Run FontFamily="Fonts/#Segoe UI" FontWeight="Normal" Foreground="White" Text="A partnership refers to the (two) folders that "/><Run FontFamily="Walkway Black" FontSize="14.667" FontWeight="Bold" Foreground="White" Text="Sync Butler"/><Run FontFamily="C:\Users\Bryan\Documents\Edu\BComp\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\Fonts\#Segoe UI" FontWeight="Bold" Foreground="White" Text=" "/><Run FontFamily="C:\Users\Bryan\Documents\Edu\BComp\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\Fonts\#Segoe UI" FontWeight="Normal" Foreground="White" Text="should keep in sync."/></TextBlock>
+				<TextBlock Margin="0,26.467,187.333,0" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top" Height="58.666" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="107.267"><Run Text="*New* Check out "/><Run FontFamily="Fonts/#Segoe UI" FontSize="14.667" Text="Sync Butler"/><Run Text="'s Hat Trick!"/></TextBlock>
+				<TextBlock Margin="0,100.3,27.2,0" VerticalAlignment="Top" Height="75.3" TextWrapping="Wrap" HorizontalAlignment="Right" Width="122.6"><Run FontFamily="Fonts/#Segoe UI" FontWeight="Normal" Foreground="White" Text="A partnership refers to the (two) folders that "/><Run FontFamily="Fonts/#Segoe UI" FontSize="14.667" FontWeight="Bold" Foreground="White" Text="Sync Butler"/><Run FontFamily="Fonts/#Segoe UI" FontWeight="Bold" Foreground="White" Text=" "/><Run FontFamily="Fonts/#Segoe UI" FontWeight="Normal" Foreground="White" Text="should keep in sync."/></TextBlock>
 			</Grid>
 			<Image HorizontalAlignment="Right" Margin="0,108.6,495.1,340.2" Width="52" RenderTransformOrigin="0.5,0.5" Source="Images\arrow1.png" Stretch="Fill">
 				<Image.RenderTransform>
@@ -320,7 +320,7 @@
 			<Image Margin="0,224.925,132.8,147.4" Source="Images\HelpScreenFolder.png" Stretch="Fill" HorizontalAlignment="Right" Width="107.675"/>
 			<Image Margin="274.081,238.83,286.457,161.482" Source="Images\logowTransparency.png" Stretch="Fill"/>
 			<Rectangle x:Name="rectangle" Fill="White" Stroke="Black" StrokeThickness="3" RadiusX="15" RadiusY="15" Margin="31.8,70.9,51.8,0" VerticalAlignment="Top" Height="79.2"/>
-			<TextBlock FontFamily="Fonts/#Segoe UI" x:Name="textBlock" Margin="49,88.6,8,0" VerticalAlignment="Top" Height="84.4" FontSize="29.333" TextWrapping="Wrap" FontWeight="Bold"><Run Text="How does "/><Run FontFamily="Walkway Black" Text="Sync Butler"/><Run FontFamily="Fonts/#Segoe UI" Text=" "/><Run Text="sync your files?"/></TextBlock>
+			<TextBlock FontFamily="Fonts/#Segoe UI" x:Name="textBlock" Margin="49,88.6,8,0" VerticalAlignment="Top" Height="84.4" FontSize="29.333" TextWrapping="Wrap" FontWeight="Bold"><Run Text="How does "/><Run FontFamily="Fonts/#Segoe UI" Text="Sync Butler"/><Run FontFamily="Fonts/#Segoe UI" Text=" "/><Run Text="sync your files?"/></TextBlock>
 			<Grid x:Name="grid" Margin="77.3,0,98.7,22.933" VerticalAlignment="Bottom" Height="118.4">
 				<Rectangle Fill="White" Stroke="Black" StrokeThickness="3" RadiusX="15" RadiusY="15" Margin="0,0,3.2,0"/>
 				<TextBlock FontFamily="Fonts/#Segoe UI" Margin="11.2,16.2,0,0" VerticalAlignment="Top" Height="22.4" FontWeight="Bold" TextWrapping="Wrap"><Run Text="He "/><Run Text="scans the folders you chose and does the following automatically:"/></TextBlock>
@@ -340,12 +340,11 @@
 			<VisualStateManager.CustomVisualStateManager>
 				<ic:ExtendedVisualStateManager/>
 			</VisualStateManager.CustomVisualStateManager>
-			<!--Button Name="HelpScreenCloseBtn" VerticalAlignment="Bottom" Height="39.2" Content="Close" FontWeight="Bold" FontSize="18.667" Click="ExitTutorial_Click" HorizontalAlignment="Right" Width="83.2" Margin="0,0,6,6" RenderTransformOrigin="0.637,1.25"/-->
 			<Button x:Name="HelpScreenCloseBtn" HorizontalAlignment="Right" Margin="0,0,6.116,6.116" Content="Close" FontWeight="Bold" FontSize="18.667" Click="ExitSBSTutorial_Click" Width="83.2" VerticalAlignment="Bottom" Height="39.2"/>
 			<Image Margin="97.917,79,183.38,129.6" Source="Images/SBSWindow.png" Stretch="Fill" StretchDirection="DownOnly"/>
 			<Grid x:Name="NewOrRecentlyUsedFilesText" HorizontalAlignment="Right" Margin="0,122.494,53.582,220.706" Width="125.798">
 				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="0,0,0.178,8"/>
-				<TextBlock Margin="7.8,8.8,0,8" FontFamily="Fonts/#Segoe UI" FontSize="12" Foreground="White" TextWrapping="Wrap" FontWeight="Bold"><Run Text="New or recently used files appear here. "/><Run FontFamily="Walkway Black" FontSize="14.667" Text="SyncButler "/><Run Text="will make a duplicate and store it on your "/><Run Text="USB storage device."/></TextBlock>
+				<TextBlock Margin="7.8,8.8,0,8" FontFamily="Fonts/#Segoe UI" FontSize="12" Foreground="White" TextWrapping="Wrap" FontWeight="Bold"><Run Text="New or recently used files appear here. "/><Run FontFamily="Fonts/#Segoe UI" FontSize="14.667" Text="SyncButler "/><Run Text="will make a duplicate and store it on your "/><Run Text="USB storage device."/></TextBlock>
 			</Grid>
 			<Image HorizontalAlignment="Right" Margin="0,220.733,200.734,228.067" Width="52" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill">
 				<Image.RenderTransform>
@@ -412,7 +411,7 @@
 						<RotateTransform/>
 						<TranslateTransform/>
 					</TransformGroup>
-				</TextBlock.RenderTransform><Run FontFamily="Walkway Black" Text="Sync Butler "/><Run Text="is a file and folder synchronization tool for Windows that helps keep your files the same across multiple computers."/></TextBlock>
+				</TextBlock.RenderTransform><Run FontFamily="Fonts/#Segoe UI" Text="Sync Butler "/><Run Text="is a file and folder synchronization tool for Windows that helps keep your files the same across multiple computers."/></TextBlock>
 			<Rectangle x:Name="rectangle_Copy" Fill="White" Stroke="Black" StrokeThickness="3" RadiusX="15" RadiusY="15" Margin="86,23.9,228.4,0" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" Height="79.2">
 				<Rectangle.RenderTransform>
 					<TransformGroup>
@@ -448,7 +447,7 @@
 						<RotateTransform/>
 						<TranslateTransform/>
 					</TransformGroup>
-				</TextBlock.RenderTransform><Run Text="While there are more than a few file synchronization programs "/><LineBreak/><Run Text="available today, "/><Run FontFamily="Walkway Black" Text="Sync Butler "/><Run Text="is the only such program to take"/><LineBreak/><Run Text="ease-of-use seriously. Every feature is designed to simplify"/><LineBreak/><Run Text="interaction between you and "/><Run FontFamily="Walkway Black" Text="Sync Butler "/><Run Text="without compromising"/><LineBreak/><Run Text="the intelligence behind his unique synchronization process."/></TextBlock>
+				</TextBlock.RenderTransform><Run Text="While there are more than a few file synchronization programs "/><LineBreak/><Run Text="available today, "/><Run FontFamily="Fonts/#Segoe UI" Text="Sync Butler "/><Run Text="is the only such program to take"/><LineBreak/><Run Text="ease-of-use seriously. Every feature is designed to simplify"/><LineBreak/><Run Text="interaction between you and "/><Run FontFamily="Fonts/#Segoe UI" Text="Sync Butler "/><Run Text="without compromising"/><LineBreak/><Run Text="the intelligence behind his unique synchronization process."/></TextBlock>
 			<Rectangle x:Name="rectangle_Copy1" Fill="White" Stroke="#FF62DE37" StrokeThickness="3" RadiusX="15" RadiusY="15" Margin="40,212.9,59.9,183.9" RenderTransformOrigin="0.5,0.5">
 				<Rectangle.RenderTransform>
 					<TransformGroup>
@@ -466,7 +465,7 @@
 						<RotateTransform/>
 						<TranslateTransform/>
 					</TransformGroup>
-				</TextBlock.RenderTransform><Run Text="So, what's different in "/><Run FontFamily="Walkway Black" Text="Sync"/><Run FontFamily="Walkway Black" Text=" "/><Run FontFamily="Walkway Black" Text="Butler"/><Run Text="?"/></TextBlock>
+				</TextBlock.RenderTransform><Run Text="So, what's different in "/><Run FontFamily="Fonts/#Segoe UI" Text="Sync"/><Run FontFamily="Fonts/#Segoe UI" Text=" "/><Run FontFamily="Fonts/#Segoe UI" Text="Butler"/><Run Text="?"/></TextBlock>
 			<Image x:Name="image1" Margin="17.579,78,0,0" Source="Images/logowTransparency.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" Height="134" HorizontalAlignment="Left" Width="133.621">
 				<Image.RenderTransform>
 					<TransformGroup>
@@ -497,7 +496,7 @@
 						<RotateTransform/>
 						<TranslateTransform/>
 					</TransformGroup>
-				</TextBlock.RenderTransform><Run Text="'"/><Run FontFamily="Walkway Black" Text="Sync Butler"/><Run Text=", "/><Run FontStyle="Italic" Text="Sync!"/><Run Text="' is a special feature of "/><Run FontFamily="Walkway Black" Text="Sync Butler"/><Run Text=" that syncs the files which you might need later on "/><Run FontStyle="Italic" Text="(with your permission, of course!)"/><Run Text=". This ensures that you'll have your most recent work with you, just in case."/></TextBlock>
+				</TextBlock.RenderTransform><Run Text="'"/><Run FontFamily="Fonts/#Segoe UI" Text="Sync Butler"/><Run Text=", "/><Run FontStyle="Italic" Text="Sync!"/><Run Text="' is a special feature of "/><Run FontFamily="Fonts/#Segoe UI" Text="Sync Butler"/><Run Text=" that syncs the files which you might need later on "/><Run FontStyle="Italic" Text="(with your permission, of course!)"/><Run Text=". This ensures that you'll have your most recent work with you, just in case."/></TextBlock>
 			<Rectangle x:Name="rectangle_Copy2" Fill="White" Stroke="Black" StrokeThickness="3" RadiusX="15" RadiusY="15" Margin="18,17,57.2,0" VerticalAlignment="Top" Height="79.2" RenderTransformOrigin="0.5,0.5">
 				<Rectangle.RenderTransform>
 					<TransformGroup>
@@ -515,7 +514,7 @@
 						<RotateTransform/>
 						<TranslateTransform/>
 					</TransformGroup>
-				</TextBlock.RenderTransform><Run Text="What is"/><Run Text=" '"/><Run FontFamily="Walkway Black" Text="Sync"/><Run FontFamily="Walkway Black" Text=" "/><Run FontFamily="Walkway Black" Text="Butler"/><Run Text=", "/><Run FontStyle="Italic" Text="Sync!"/><Run Text="'"/><Run Text="?"/></TextBlock>
+				</TextBlock.RenderTransform><Run Text="What is"/><Run Text=" '"/><Run FontFamily="Fonts/#Segoe UI" Text="Sync"/><Run FontFamily="Fonts/#Segoe UI" Text=" "/><Run FontFamily="Fonts/#Segoe UI" Text="Butler"/><Run Text=", "/><Run FontStyle="Italic" Text="Sync!"/><Run Text="'"/><Run Text="?"/></TextBlock>
 			<Image x:Name="image4" Margin="0,72.6,37.796,230.7" Source="Images/logowTransparency.png" Stretch="Fill" HorizontalAlignment="Right" Width="173.507"/>
 			<Rectangle x:Name="rectangle1_Copy1" Fill="White" Stroke="Black" StrokeThickness="3" RadiusX="15" RadiusY="15" Margin="42.2,0,128.6,43.3" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Bottom" Height="93.4">
 				<Rectangle.RenderTransform>
@@ -552,7 +551,7 @@
 						<RotateTransform/>
 						<TranslateTransform/>
 					</TransformGroup>
-				</TextBlock.RenderTransform><Run Text="How does "/><Run Text="'"/><Run FontFamily="Walkway Black" Text="Sync"/><Run FontFamily="Walkway Black" Text=" "/><Run FontFamily="Walkway Black" Text="Butler"/><Run Text=", "/><Run FontStyle="Italic" Text="Sync!"/><Run Text="'"/><Run Text=" work"/><Run Text="?"/></TextBlock>
+				</TextBlock.RenderTransform><Run Text="How does "/><Run Text="'"/><Run FontFamily="Fonts/#Segoe UI" Text="Sync"/><Run FontFamily="Fonts/#Segoe UI" Text=" "/><Run FontFamily="Fonts/#Segoe UI" Text="Butler"/><Run Text=", "/><Run FontStyle="Italic" Text="Sync!"/><Run Text="'"/><Run Text=" work"/><Run Text="?"/></TextBlock>
 			<Button x:Name="SBSHelpScreenNextBtn" VerticalAlignment="Bottom" Height="39.2" Content="Next" FontWeight="Bold" FontSize="18.667" Click="GoToSBSDemoHelpScreen_Click" HorizontalAlignment="Right" Width="83.2" TabIndex="1" Margin="0,0,1.5,1.5"/>
 			<Button x:Name="HelpScreenCloseBtn1" HorizontalAlignment="Right" Margin="0,0,1.1,1.954" Content="Close" FontWeight="Bold" FontSize="18.667" Click="ExitSBSTutorial_Click" Width="83.2" VerticalAlignment="Bottom" Height="39.2" Opacity="0"/>
 		</Grid>
