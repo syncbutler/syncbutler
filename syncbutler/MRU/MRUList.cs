@@ -42,16 +42,16 @@ namespace SyncButler.MRU
         [XmlElement(Type = typeof(string))]
         public string ComputerName { get; set; }
 
-        [XmlArray("MRUs"), XmlArrayItem("MRU", typeof(SyncedMRU))]
-        public SyncedMRU[] MRUListing
+        [XmlArray("MRUs"), XmlArrayItem("MRU", typeof(CopiedMRU))]
+        public CopiedMRU[] MRUListing
         {
             get
             {
-                SyncedMRU[] mrus = new SyncedMRU[MRUs.Count];
+                CopiedMRU[] mrus = new CopiedMRU[MRUs.Count];
                 int i = 0;
                 foreach(string mru in MRUs.Values)
                 {
-                    mrus[i] = new SyncedMRU(mru, SyncTo + Path.GetFileName(mru));
+                    mrus[i] = new CopiedMRU(mru, SyncTo + Path.GetFileName(mru));
                     i++;
                 }
                 return mrus;
@@ -60,9 +60,9 @@ namespace SyncButler.MRU
             {
                 if (value == null)
                     return;
-                SyncedMRU[] mru = (SyncedMRU[])value;
+                CopiedMRU[] mru = (CopiedMRU[])value;
                 List<string> mrus = new List<string>();
-                foreach (SyncedMRU s in mru)
+                foreach (CopiedMRU s in mru)
                 {
                     mrus.Add(s.OriginalPath);
                 }
@@ -155,11 +155,6 @@ namespace SyncButler.MRU
         {
             FileInfo sourceFile = new FileInfo(sourcePath);
             FileInfo destFile = new FileInfo(destPath);
-
-            //// Make sure there's enough free space.
-            //if ((sourceFile.Length + 4096) > SystemEnvironment.StorageDevices.GetAvailableSpace(DRIVE LETTER GOES HERE))
-            //    throw new IOException("There is insufficient space to copy the file to " + destFile.nativeFileObj.FullName);
-
             int bufferSize = (int)SyncEnvironment.FileReadBufferSize;
 
             FileStream inputStream = sourceFile.OpenRead();

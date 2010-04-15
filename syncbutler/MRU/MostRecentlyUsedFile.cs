@@ -32,6 +32,19 @@ namespace SyncButler.MRU
     /// </summary>
     public class MostRecentlyUsedFile
     {
+        /// <summary>
+        /// A List of location which is common for user to store their files
+        /// </summary>
+        private static String[] CommonLocations = 
+        {   Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+            Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+            Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory),
+            Environment.GetFolderPath(Environment.SpecialFolder.MyPictures),
+            Environment.GetFolderPath(Environment.SpecialFolder.Personal),
+            Environment.GetFolderPath(Environment.SpecialFolder.MyMusic)
+        };
+
+
         public static SyncableStatusMonitor statusMonitor = null;
 
         /// <summary>
@@ -41,35 +54,22 @@ namespace SyncButler.MRU
         public static List<string> GetAll()
         {
             int depth = 2;
-            int days = 5;
+            int days = 10;
 
             if (statusMonitor != null) statusMonitor(new SyncableStatus("", 0, 7, SyncableStatus.ActionType.Sync));
             List<string> mergedList = (MostRecentlyUsedFile.Get());
-
-            if (statusMonitor != null) statusMonitor(new SyncableStatus("", 0, 14, SyncableStatus.ActionType.Sync));
-            mergedList.AddRange(MostRecentlyUsedFile.Scan(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), depth, days));
-
-            if (statusMonitor != null) statusMonitor(new SyncableStatus("", 0, 21, SyncableStatus.ActionType.Sync));
-            mergedList.AddRange(MostRecentlyUsedFile.Scan(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), depth, days));
-            
-            if (statusMonitor != null) statusMonitor(new SyncableStatus("", 0, 28, SyncableStatus.ActionType.Sync));
-            mergedList.AddRange(MostRecentlyUsedFile.Scan(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), depth, days));
-            
-            if (statusMonitor != null) statusMonitor(new SyncableStatus("", 0, 35, SyncableStatus.ActionType.Sync));
-            mergedList.AddRange(MostRecentlyUsedFile.Scan(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), depth, days));
-            
-            if (statusMonitor != null) statusMonitor(new SyncableStatus("", 0, 42, SyncableStatus.ActionType.Sync));
-            mergedList.AddRange(MostRecentlyUsedFile.Scan(Environment.GetFolderPath(Environment.SpecialFolder.Personal), depth, days));
-            
-            if (statusMonitor != null) statusMonitor(new SyncableStatus("", 0, 49, SyncableStatus.ActionType.Sync));
-            mergedList.AddRange(MostRecentlyUsedFile.Scan(Environment.GetFolderPath(Environment.SpecialFolder.MyMusic), depth, days));
-            
-            if (statusMonitor != null) statusMonitor(new SyncableStatus("", 0, 56, SyncableStatus.ActionType.Sync));
+            int status = 7;
+            foreach (String location in CommonLocations)
+            {
+                if (statusMonitor != null) statusMonitor(new SyncableStatus("", 0, status += 7, SyncableStatus.ActionType.Sync));
+                mergedList.AddRange(MostRecentlyUsedFile.Scan(location,depth,days));
+            }
+            if (statusMonitor != null) statusMonitor(new SyncableStatus("", 0, status += 7, SyncableStatus.ActionType.Sync));
             List<string> drives = SystemEnvironment.StorageDevices.GetNonUSBDriveLetters();           
 
             int done = 1;
-            double toPercent = 0; 
-            if (drives.Count > 0) toPercent = (100 - 56) / drives.Count;
+            double toPercent = 0;
+            if (drives.Count > 0) toPercent = (100 - status) / drives.Count;
 
             foreach (string drive in drives)
             {
@@ -192,7 +192,7 @@ namespace SyncButler.MRU
                             
                             if (fi.Length != 0)
                             {
-                                if (!IsShortcut(filename))
+                                if (!IsAShortcut(filename))
                                 {
                                     filenames.Add(filename);
                                 }
@@ -208,7 +208,7 @@ namespace SyncButler.MRU
         /// </summary>
         /// <param name="filename">file to check</param>
         /// <returns>true if the file is a shortcut, false otherwise</returns>
-        private static bool IsShortcut(String filename)
+        private static bool IsAShortcut(String filename)
         {
             try
             {

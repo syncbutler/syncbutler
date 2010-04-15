@@ -12,7 +12,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
         <table border="1">
           <tr>
             <th>Orginal Path</th>
-            <th>Synced to</th>
+            <th>Copied to</th>
           </tr>
           <xsl:for-each select="MRUList/MRUs/MRU">
             <tr>
@@ -20,7 +20,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
                 <xsl:value-of select="OriginalPath" />
               </td>
               <td>
-                <xsl:value-of select="SyncedTo" />
+                <xsl:value-of select="CopiedTo" />
               </td>
             </tr>
           </xsl:for-each>

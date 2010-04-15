@@ -281,7 +281,7 @@ namespace SyncButler
                     return 0;
                 long AvailableSpace = SystemEnvironment.StorageDevices.GetAvailableSpace(driveLetter);
                 string res = SyncEnvironment.Resolution;
-
+                
                 return GetSizeInResolution(res, AvailableSpace);
             }
             catch (Exceptions.DriveNotSupportedException)
