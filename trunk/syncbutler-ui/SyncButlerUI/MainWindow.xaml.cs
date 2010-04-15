@@ -25,6 +25,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -33,7 +34,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.ComponentModel;
 using SyncButler.Logging;
-using WPF_Explorer_Tree;
 using SyncButler;
 using SyncButler.Exceptions;
 
@@ -166,6 +166,8 @@ namespace SyncButlerUI
 					dialog.WelcomeScreenControl.FirstTimeComputerNameText.Visibility=Visibility.Hidden;
                     dialog.Title = "Sync Butler - Help";
                     dialog.WelcomeScreenControl.GoToSBSScreen();
+					dialog.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner;
+					dialog.ShowInTaskbar = false;
 					dialog.Owner = this;
 					dialog.ShowDialog();
                     if (dialog.WelcomeScreenControl.WantToShowSettingPage() && !Controller.IsSBSEnable())
@@ -188,8 +190,9 @@ namespace SyncButlerUI
 
             dialog.WelcomeScreenControl.FirstTimeComputerNameText.Visibility = Visibility.Hidden;
             dialog.Title = "Sync Butler - Help";
-
+			dialog.ShowInTaskbar = false;
             dialog.WelcomeScreenControl.GoToHelpScreen();
+			dialog.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner;
 			dialog.Owner = this;
             dialog.ShowDialog();
 

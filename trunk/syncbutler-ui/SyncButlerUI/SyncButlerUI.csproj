@@ -93,7 +93,6 @@
     <Compile Include="HomeWindowControl.xaml.cs">
       <DependentUpon>HomeWindowControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="HeaderToImageConverter.cs" />
     <Compile Include="ProgressBar.xaml.cs">
       <DependentUpon>ProgressBar.xaml</DependentUpon>
     </Compile>
