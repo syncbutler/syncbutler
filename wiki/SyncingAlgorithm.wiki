@@ -43,5 +43,8 @@ Same        X      4      3
 Earlier     X      X      X
 }}}
 
+=Folder Sync Algorithm=
 [http://syncbutler.org/WindowsFolderSync.png]
+
+=File Sync Algorithm=
 [http://syncbutler.org/WindowsFileSync.png]
