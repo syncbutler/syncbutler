@@ -316,7 +316,6 @@
 								</Rectangle.Fill>
 							</Rectangle>
 							<ContentPresenter Margin="54,24.5,16.5,1.5" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True" Content="Settings"/>
-							<Image HorizontalAlignment="Left" Margin="10.834,12.168,0,10.499" VerticalAlignment="Stretch" Width="39.333" Height="Auto" Opacity="0.58" Source="Images/Settings.png" Stretch="Fill"/>
 						</Grid>
 						<ControlTemplate.Triggers>
 							<EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
