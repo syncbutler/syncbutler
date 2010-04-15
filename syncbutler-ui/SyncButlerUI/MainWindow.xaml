@@ -453,7 +453,9 @@
 		<local:HomeWindowControl x:Name="homeWindow1" Margin="0,0,156.863,12.283" VerticalAlignment="Bottom" Height="526.184" HorizontalAlignment="Right" Width="770.8" />
 		<Rectangle Fill="Black" RadiusX="1" RadiusY="2" Margin="-2.041,0,140.857,0" VerticalAlignment="Top" Height="56.382"/>
 		<Button x:Name="HomeButton" Margin="14.314,2.795,0,0" Style="{DynamicResource HomeButton}" VerticalAlignment="Top" Height="50.299" Content="Home" HorizontalAlignment="Left" Width="340.782" Click="goHome" Cursor="Hand" FontSize="18.667" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" IsTabStop="False"/>
+		<Rectangle Name="HomeButtonHidden" Visibility="Hidden" Fill="Black" IsHitTestVisible="false" RadiusX="1" RadiusY="2" Margin="-2.041,0,140.857,0" VerticalAlignment="Top" Height="56.382" Opacity="0.5"/>
 		<Button x:Name="SyncButlerSyncButton" Margin="370.124,1.557,230.121,0" Style="{DynamicResource SyncButtonTemplate}" VerticalAlignment="Top" Height="52.78" Content="Sync Butler,Sync" Cursor="Hand" Click="goToSyncButlerSync" Width="340.782" Background="{x:Null}" BorderBrush="{x:Null}" IsTabStop="False"/>
+		<Rectangle Name="SBSButtonHidden"  Fill="Black" IsHitTestVisible="false" RadiusX="1" RadiusY="2" Margin="370.124,1.557,230.121,0" VerticalAlignment="Top" Height="52.78" Opacity="0.5"/>
 		<Button x:Name="HelpButton" Margin="0,1.557,154.419,0" Style="{DynamicResource HelpButton}" VerticalAlignment="Top" Height="52.78" Content="Sync Butler,Sync" Cursor="Hand" Click="Help_Click" Width="63.368" Background="{x:Null}" BorderBrush="{x:Null}" IsTabStop="False" HorizontalAlignment="Right"/>
 		
 	</Grid>

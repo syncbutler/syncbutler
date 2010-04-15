@@ -151,10 +151,19 @@ namespace SyncButlerUI
             if (!homeWindow1.StopExistingOperation()) return;
             //homeWindow1.goHome(sender,e);
             VisualStateManager.GoToState(homeWindow1, "HomeState", false);
+            SetHomeActive();
             homeWindow1.CurrentState = HomeWindowControl.State.Home;
         }
-
-
+        public void SetSBSActive()
+        {
+            SBSButtonHidden.Visibility = Visibility.Hidden;
+            HomeButtonHidden.Visibility = Visibility.Visible;
+        }
+        public void SetHomeActive()
+        {
+            SBSButtonHidden.Visibility = Visibility.Visible;
+            HomeButtonHidden.Visibility = Visibility.Hidden;
+        }
         public void goToSyncButlerSync(object sender, RoutedEventArgs e)
         {
 
@@ -174,6 +183,7 @@ namespace SyncButlerUI
                     {
                         homeWindow1.GoToSetting();
                         homeWindow1.FirstTimeHelp.Visibility = System.Windows.Visibility.Visible;
+                        SetSBSActive();
                         Controller.SetFirstSBSRun();
                         return;
                     }
@@ -181,6 +191,7 @@ namespace SyncButlerUI
 				}
                     homeWindow1.CurrentState = HomeWindowControl.State.SBS;
                     VisualStateManager.GoToState(homeWindow1, nextState, false);
+                    SetSBSActive();
 					homeWindow1.LoadMRUs();
 		}
 
