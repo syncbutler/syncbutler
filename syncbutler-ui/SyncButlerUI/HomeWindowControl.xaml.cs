@@ -668,14 +668,14 @@ namespace SyncButlerUI
                             this.SBSWorkingDriveComboBox.IsEnabled = false;
                             if (this.SBSSettingComboBox.Items.IsEmpty)
                             {
-                                this.SBSSettingComboBox.Items.Add("Enable");
-                                this.SBSSettingComboBox.Items.Add("Disable");
+                                this.SBSSettingComboBox.Items.Add(Controller.SBSstatus.Enabled.ToString());
+                                this.SBSSettingComboBox.Items.Add(Controller.SBSstatus.Disabled.ToString());
                             }
                             if (this.SBSWorkingDriveComboBox.Items.IsEmpty)
                             {
                                 this.SBSSettingDeviceNotFoundTextBox.Visibility = Visibility.Visible;
                             }
-                            this.SBSSettingComboBox.SelectedItem = "Disable";
+                            this.SBSSettingComboBox.SelectedItem = Controller.SBSstatus.Disabled.ToString();
                             this.SBSWorkingDriveComboBox.IsEnabled = false;
                         }
                         this.IsLoadingSBS = false;
@@ -1282,7 +1282,7 @@ namespace SyncButlerUI
             string Resolution = this.resolutionLabel.Content.ToString();
             double userrequestedspace = CalcuateUserRequestedSpace();
 
-            if (SBSEnable.Equals("Enable") && userrequestedspace < 250 * MEGA_BYTE && userrequestedspace > 0)
+            if (SBSEnable.Equals(Controller.SBSstatus.Enabled.ToString()) && userrequestedspace < 250 * MEGA_BYTE && userrequestedspace > 0)
             {
                 if (CustomDialog.Show(this, CustomDialog.MessageTemplate.YesNo, CustomDialog.MessageResponse.No, "Sync Butler needs at least 250MB on your storage device to carry more of your recent files. It may not be able to carry the files you need, when you need them. Do you want to give Sync Bulter more storage space!") ==
                     CustomDialog.MessageResponse.No)
@@ -1299,7 +1299,7 @@ namespace SyncButlerUI
                     
                 }
             }
-            else if(SBSEnable.Equals("Enable") &&userrequestedspace <= 0)
+            else if(SBSEnable.Equals(Controller.SBSstatus.Enabled.ToString()) &&userrequestedspace <= 0)
             {
                 CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Please give Sync Bulter some storage space to work with!");
             }
@@ -1310,7 +1310,7 @@ namespace SyncButlerUI
             }
             else
             {
-                if (!Directory.Exists(DriveLetter + ":\\") && SBSEnable.Equals("Enable"))
+                if (!Directory.Exists(DriveLetter + ":\\") && SBSEnable.Equals(Controller.SBSstatus.Enabled.ToString()))
                 {
                     CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Please check your the status of your portable storage device.\nSync Butler was unable to read it.");
                 }
@@ -1318,7 +1318,7 @@ namespace SyncButlerUI
                 {
                     Controller.SaveSetting(ComputerName, SBSEnable, DriveLetter, FreeSpaceToUse, Resolution);
                     FirstTimeHelp.Visibility = System.Windows.Visibility.Hidden;
-                    if (SBSEnable.Equals("Enable"))
+                    if (SBSEnable.Equals(Controller.SBSstatus.Enabled.ToString()))
                     {
                         String ExtraMsg = String.Format("Sync Butler, Sync! will now save your recent files to:\n\n{0}", Controller.GetSBSPath());
                         CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "The settings has been changed.\r\n\r\n" + ExtraMsg);
@@ -1344,8 +1344,8 @@ namespace SyncButlerUI
         {
             if (this.SBSSettingComboBox.SelectedItem != null)
             {
-                this.SBSWorkingDriveComboBox.IsEnabled = this.SBSSettingComboBox.SelectedItem.Equals("Enable");
-                if (this.SBSSettingComboBox.SelectedItem.Equals("Enable"))
+                this.SBSWorkingDriveComboBox.IsEnabled = this.SBSSettingComboBox.SelectedItem.Equals(Controller.SBSstatus.Enabled.ToString());
+                if (this.SBSSettingComboBox.SelectedItem.Equals(Controller.SBSstatus.Enabled.ToString()))
                 {
                     char driveletter = ((WindowDriveInfo)SBSWorkingDriveComboBox.SelectedItem).GetDriveLetter();
                     if (Directory.Exists(driveletter + ":\\"))
@@ -1374,7 +1374,7 @@ namespace SyncButlerUI
         {
             int minimumSize = 250;
             if (this.SBSSettingComboBox.SelectedIndex != -1 &&
-                this.SBSSettingComboBox.SelectedItem.Equals("Enable") && !IsLoadingSBS)
+                this.SBSSettingComboBox.SelectedItem.Equals(Controller.SBSstatus.Enabled.ToString()) && !IsLoadingSBS)
             {
                 if (SBSWorkingDriveComboBox.SelectedIndex != -1)
                 {
@@ -1495,7 +1495,7 @@ namespace SyncButlerUI
         private void DefaultSetting(object sender, RoutedEventArgs e)
         {
             this.ComputerNameTextBox.Text = "Computer1";
-            this.SBSSettingComboBox.SelectedItem = "Disable";
+            this.SBSSettingComboBox.SelectedItem = Controller.SBSstatus.Disabled.ToString();
             this.SBSWorkingDriveComboBox.SelectedIndex = 0;
             this.SpaceToUseSlide.Value = 0;
             this.SpaceToUseSlide.IsEnabled = false;
@@ -1784,10 +1784,10 @@ namespace SyncButlerUI
                         "Please plug in a portable storage device if you wish to use it with\nSync Butler, Sync!");
                     if (this.SBSSettingComboBox.Items.IsEmpty)
                     {
-                        this.SBSSettingComboBox.Items.Add("Enable");
-                        this.SBSSettingComboBox.Items.Add("Disable");
+                        this.SBSSettingComboBox.Items.Add(Controller.SBSstatus.Enabled.ToString());
+                        this.SBSSettingComboBox.Items.Add(Controller.SBSstatus.Disabled.ToString());
                     }
-                    this.SBSSettingComboBox.SelectedItem = "Disable";
+                    this.SBSSettingComboBox.SelectedItem = Controller.SBSstatus.Disabled.ToString();
                     this.SBSWorkingDriveComboBox.IsEnabled = false;
                     this.SpaceToUseTextbox.Text = "0.0";
                     this.SpaceToUseSlide.IsEnabled = false;
@@ -1834,7 +1834,7 @@ namespace SyncButlerUI
                     if (devicePluggedIn)
                     {
                         #region if the previously assigned device is plugged in
-                        if (Controller.SBSEnable.Equals("Enable"))
+                        if (Controller.SBSEnable.Equals(Controller.SBSstatus.Enabled.ToString()))
                         {
                             this.SpaceToUseSlide.Maximum = this.Controller.GetAvailableSpaceForDrive();
                             this.SpaceToUseSlide.Value = this.Controller.GetFreeSpaceToUse();
@@ -1852,8 +1852,8 @@ namespace SyncButlerUI
 
                         this.SBSWorkingDriveComboBox.IsEnabled = true;
                         this.SBSSettingComboBox.Items.Clear();
-                        this.SBSSettingComboBox.Items.Add("Enable");
-                        this.SBSSettingComboBox.Items.Add("Disable");
+                        this.SBSSettingComboBox.Items.Add(Controller.SBSstatus.Enabled.ToString());
+                        this.SBSSettingComboBox.Items.Add(Controller.SBSstatus.Disabled.ToString());
                         this.SBSSettingComboBox.SelectedItem = Controller.SBSEnable;
                         #endregion
                     }
@@ -1864,9 +1864,9 @@ namespace SyncButlerUI
                         #region if device is not plugged in
                         this.SBSWorkingDriveComboBox.IsEnabled = false;
                         this.SBSSettingComboBox.Items.Clear();
-                        this.SBSSettingComboBox.Items.Add("Enable");
-                        this.SBSSettingComboBox.Items.Add("Disable");
-                        this.SBSSettingComboBox.SelectedItem = "Disable";
+                        this.SBSSettingComboBox.Items.Add(Controller.SBSstatus.Enabled.ToString());
+                        this.SBSSettingComboBox.Items.Add(Controller.SBSstatus.Disabled.ToString());
+                        this.SBSSettingComboBox.SelectedItem = Controller.SBSstatus.Disabled.ToString();
                         this.SpaceToUseTextbox.Text = "0.0";
                         if (this.SBSWorkingDriveComboBox.Items.Count > 0 && Controller.IsSBSEnable())
                             this.SBSSettingDeviceNotFoundTextBox.Visibility = Visibility.Visible;
