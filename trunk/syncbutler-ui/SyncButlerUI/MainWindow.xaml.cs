@@ -164,6 +164,12 @@ namespace SyncButlerUI
             SBSButtonHidden.Visibility = Visibility.Visible;
             HomeButtonHidden.Visibility = Visibility.Hidden;
         }
+
+        public void SetAllInActive()
+        {
+            SBSButtonHidden.Visibility = Visibility.Visible;
+            HomeButtonHidden.Visibility = Visibility.Visible;
+        }
         public void goToSyncButlerSync(object sender, RoutedEventArgs e)
         {
 

@@ -301,6 +301,7 @@ namespace SyncButlerUI
         {
             Controller.ConflictCount = 0;
             VisualStateManager.GoToState(this, "ConflictState", false);
+            ((MainWindow)Window.GetWindow(this)).SetAllInActive();
             CurrentState = State.Conflict;
             if (scanWorker != null)
             {
@@ -690,6 +691,7 @@ namespace SyncButlerUI
         {
             this.FirstTimeHelp.Visibility = System.Windows.Visibility.Hidden;
             VisualStateManager.GoToState(this, "HomeState", false);
+            ((MainWindow)Window.GetWindow(this)).SetHomeActive();
             CurrentState = State.Home;
         }
         private void ShowHelp(object sender, RoutedEventArgs e)
@@ -728,6 +730,7 @@ namespace SyncButlerUI
         internal void GoToCreatePartnership_Click(object sender, RoutedEventArgs e)
         {
             VisualStateManager.GoToState(this, "CreatePartnershipState", false);
+            ((MainWindow)Window.GetWindow(this)).SetAllInActive();
             CurrentState = State.Create;
             this.folderOneTextBox.Clear();
             this.folderTwoTextBox.Clear();
@@ -780,6 +783,7 @@ namespace SyncButlerUI
                 this.Controller.AddPartnership(partnerShipName.Text, sourceFolderPath.Text, destinationFolderPath.Text);
 
                 VisualStateManager.GoToState(this, "CreateDoneState", false);
+                ((MainWindow)Window.GetWindow(this)).SetAllInActive();
                 CurrentState = State.CreateDone;
                 partnershipList.Items.Refresh();
             }
@@ -803,6 +807,7 @@ namespace SyncButlerUI
         private void GoHome(object sender, RoutedEventArgs e)
         {
             GoHome();
+            ((MainWindow)Window.GetWindow(this)).SetHomeActive();
         }
 
         /// <summary>
@@ -813,6 +818,7 @@ namespace SyncButlerUI
         private void GoToViewPartnerships_Click(object sender, RoutedEventArgs e)
         {
             VisualStateManager.GoToState(this, "ViewPartnershipState", false);
+            ((MainWindow)Window.GetWindow(this)).SetAllInActive();
             CurrentState = State.ViewMiniPartnership;
             SortedList<string, Partnership> partnershiplist = this.Controller.GetPartnershipList();
        		this.partnershipList.ItemsSource = partnershiplist.Values;
@@ -826,6 +832,7 @@ namespace SyncButlerUI
         internal void ViewMiniPartnerships_Click(object sender, RoutedEventArgs e)
         {
             VisualStateManager.GoToState(this, "ViewMiniPartnershipState", false);
+            ((MainWindow)Window.GetWindow(this)).SetAllInActive();
             CurrentState = State.ViewMiniPartnership;
             SortedList<string, Partnership> miniPartnershiplist = this.Controller.GetMiniPartnershipList();
 			this.minipartnershiplist.ItemsSource = miniPartnershiplist.Values;
@@ -959,6 +966,7 @@ namespace SyncButlerUI
                 {
 
                     VisualStateManager.GoToState(this, "CreatePartnershipState", false);
+                    ((MainWindow)Window.GetWindow(this)).SetAllInActive();
                     CurrentState = State.Create;
                     FocusControl(() => folderOneTextBox.Focus());
 
@@ -1097,6 +1105,7 @@ namespace SyncButlerUI
                 this.Controller.UpdatePartnership(oldPartnershipName, partnershipName, folderOnePath, folderTwoPath);
 
                 VisualStateManager.GoToState(this, "EditDoneState", false);
+                ((MainWindow)Window.GetWindow(this)).SetAllInActive();
                 CurrentState = State.EditDone;
                 partnershipList.Items.Refresh();
             }
@@ -1128,6 +1137,7 @@ namespace SyncButlerUI
                 partnershipNameTextBox.Text = currentPartnership.Name;
                 oldPartnershipName = currentPartnership.Name;
                 VisualStateManager.GoToState(this, "EditPartnershipState", false);
+                ((MainWindow)Window.GetWindow(this)).SetAllInActive();
                 CurrentState = State.Edit;
                 FocusControl(() => folderOneTextBox.Focus());
             }
@@ -1643,6 +1653,7 @@ namespace SyncButlerUI
         private void ShowResult(object sender, EventArgs e)
         {
             VisualStateManager.GoToState(this, "ResultState", false);
+            ((MainWindow)Window.GetWindow(this)).SetAllInActive();
             CurrentState = State.Result;
             SyncResultListBox.ItemsSource = ResolvedConflicts;
         }
@@ -1754,7 +1765,7 @@ namespace SyncButlerUI
             #endregion
 
             VisualStateManager.GoToState(this, "SettingsState", false);
-
+            ((MainWindow)Window.GetWindow(this)).SetAllInActive();
             BackgroundWorker storageScanWorker = new BackgroundWorker();
             ProgressBar progressWindow = new ProgressBar(storageScanWorker, "Retrieving your settings...", "Searching for Portable Storage Devices");
             progressWindow.HideTotalProgress();
