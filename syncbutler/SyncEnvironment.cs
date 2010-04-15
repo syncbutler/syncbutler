@@ -52,7 +52,6 @@ namespace SyncButler
         private static string sbsEnable;
         private static string sbsDriveId;
         private static int sbsDrivePartition;
-        private static bool enableSyncAll;
         private static char sbsDriveLetter;
         private static string resolution;
         private static double freeSpaceToUse;
@@ -358,7 +357,6 @@ namespace SyncButler
             storedSettings.SystemSettings.Resolution = resolution;
             storedSettings.SystemSettings.SBSDriveId = sbsDriveId;
             storedSettings.SystemSettings.SBSDrivePartition = sbsDrivePartition;
-            storedSettings.SystemSettings.EnableSyncAll = enableSyncAll;
 
             // Write to file
             if (SearchForSettingsFile() == null)
@@ -391,7 +389,6 @@ namespace SyncButler
             storedSettings.SystemSettings.Resolution = Resolution;
             storedSettings.SystemSettings.SBSDriveId = SBSDriveId;
             storedSettings.SystemSettings.SBSDrivePartition = SBSDrivePartition;
-            storedSettings.SystemSettings.EnableSyncAll = enableSyncAll;
 
             // Write to file
             if (SearchForSettingsFile() == null)
@@ -453,8 +450,6 @@ namespace SyncButler
             //Get partition id
             sbsDrivePartition = storedSettings.SystemSettings.SBSDrivePartition;
 
-            //Get if the users want to do sync recent used file with sync all
-            enableSyncAll = storedSettings.SystemSettings.EnableSyncAll;
         }
 
         /// <summary>
@@ -587,7 +582,6 @@ namespace SyncButler
             firstSBSRun = true;
             sbsDrivePartition = -1;
             ConfigurationSetup();
-            enableSyncAll = true;
 
             // Prepare to read the custom sections (Pre declared needed for valid settings
             // file check. (Hint, the first run complete is hidden in the xml file)
@@ -1099,17 +1093,6 @@ namespace SyncButler
             set
             {
                 sbsEnable = value;
-            }
-        }
-        public static bool EnableSyncAll
-        {
-            get
-            {
-                return enableSyncAll;
-            }
-            set
-            {
-                enableSyncAll = value;
             }
         }
         public static int SBSDrivePartition

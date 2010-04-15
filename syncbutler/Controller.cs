@@ -265,7 +265,7 @@ namespace SyncButler
             if (DriveLetters.Count == 0)
                 return false;
             else
-                return Controller.IsSBSEnable() && Controller.IsAutoSyncRecentFileAllowed() && DriveLetters.Contains(Controller.GetSBSDriveLetter());
+                return Controller.IsSBSEnable() && DriveLetters.Contains(Controller.GetSBSDriveLetter());
         }
 
         /// <summary>
@@ -775,22 +775,13 @@ namespace SyncButler
             return !SyncEnvironment.FirstRunComplete || !SyncEnvironment.ComputerNamed;
         }
 
-        /// <summary>
-        /// Check if the auto sync for sbs is allowed
-        /// </summary>
-        /// <returns></returns>
-        public static bool IsAutoSyncRecentFileAllowed()
-        {
-            return (SyncEnvironment.EnableSyncAll);
-        }
-
 		/// <summary>
 		/// Assigns the settings and stores it to disk.
 		/// </summary>
 		/// <param name="ComputerName">Computer name of the user</param>
 		/// <param name="EnableSBS">[Not in use]If the user wants sbs to be enabled</param>
 		/// <param name="SBSDrive">The working drive letter</param>
-        public static void SaveSetting(string computerName, string enableSBS, char SBSDrive, Double freeSpaceToUse, String resolution, bool enableSyncAll)
+        public static void SaveSetting(string computerName, string enableSBS, char SBSDrive, Double freeSpaceToUse, String resolution)
         {
 
             SyncEnvironment.ComputerName = computerName;
@@ -810,8 +801,6 @@ namespace SyncButler
                 SyncEnvironment.SBSDrivePartition = -1;
             }
             
-            SyncEnvironment.EnableSyncAll = enableSyncAll;
-
 
             SyncEnvironment.GetInstance().StoreSettings();
 		}
