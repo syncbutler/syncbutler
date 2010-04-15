@@ -1,4 +1,5 @@
-﻿/*****************************************************************************/
+﻿// Developer to contact: Bryan Chen Shenglong
+/*****************************************************************************/
 // Copyright 2010 Sync Butler and its original developers.
 // This file is part of Sync Butler (http://www.syncbutler.org).
 // 

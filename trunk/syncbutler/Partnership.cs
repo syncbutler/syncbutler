@@ -1,4 +1,5 @@
-﻿/*****************************************************************************/
+﻿// Developer to contact: Tan Chee Eng
+/*****************************************************************************/
 // Copyright 2010 Sync Butler and its original developers.
 // This file is part of Sync Butler (http://www.syncbutler.org).
 // 

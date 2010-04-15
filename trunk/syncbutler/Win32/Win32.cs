@@ -1,4 +1,5 @@
-﻿/*****************************************************************************/
+﻿// Developer to contact: Poh Wei Sheng
+/*****************************************************************************/
 // Copyright 2010 Sync Butler and its original developers.
 // This file is part of Sync Butler (http://www.syncbutler.org).
 // 
