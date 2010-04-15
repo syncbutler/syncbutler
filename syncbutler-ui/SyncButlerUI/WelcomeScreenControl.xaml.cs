@@ -1,4 +1,5 @@
-﻿/*****************************************************************************/
+﻿// Developer to contact: Ng Li Ying, Rachel
+/*****************************************************************************/
 // Copyright 2010 Sync Butler and its original developers.
 // This file is part of Sync Butler (http://www.syncbutler.org).
 // 
