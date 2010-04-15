@@ -1379,13 +1379,13 @@
 					</TransformGroup>
 				</TextBlock.RenderTransform><Run Text="There is another portable storage device that is assigned to this feature. It is not plugged into the system now. Please "/><Run Text="plug in that device to make any changes to this feature."/></TextBlock>
 		</Grid>
-		<Grid x:Name="FirstTimeHelp" Margin="0,0,-1.024,-4" Visibility="Hidden">
+		<Grid x:Name="FirstTimeHelp" Margin="0,0,-1.024,-4">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="0.446*"/>
 				<ColumnDefinition Width="0.554*"/>
 			</Grid.ColumnDefinitions>
 			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="81.67,24.159,168.976,0" VerticalAlignment="Top" Height="45.943" d:LayoutOverrides="VerticalAlignment" Grid.Column="1"/>
-			<TextBlock Margin="92.279,32.959,181.917,0" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top" Height="28.343" FontSize="10.667" Text="This name is used to help us identify the computers you use." Grid.Column="1" TextAlignment="Justify"/>
+			<TextBlock FontFamily="Fonts/#Segoe UI" Margin="92.279,32.959,181.917,0" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top" Height="28.343" FontSize="10.667" Text="This name is used to help us identify the computers you use." Grid.Column="1" TextAlignment="Justify"/>
 			<Image Margin="69.034,85.718,319.589,0" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Top" Height="17.887" IsHitTestVisible="False" Grid.Column="1">
 				<Image.RenderTransform>
 					<TransformGroup>
@@ -1397,7 +1397,7 @@
 				</Image.RenderTransform>
 			</Image>
 			<Rectangle Fill="Black" Stroke="#FFFC0404" StrokeThickness="4" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="112.85,128.71,200.461,0" VerticalAlignment="Top" Height="39.696" d:LayoutOverrides="VerticalAlignment" Grid.Column="1"/>
-			<TextBlock Margin="121.125,132.223,210.85,0" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top" Height="47.612" FontSize="10.667" Grid.Column="1" TextAlignment="Justify"><Run Text="Enable or disable "/><Run FontFamily="Walkway Black" FontSize="12" FontWeight="Bold" Text="Sync Butler"/><Run FontWeight="Bold" Text=", "/><Run FontStyle="Italic" FontWeight="Bold" Text="Sync!"/></TextBlock>
+			<TextBlock FontFamily="Fonts/#Segoe UI" Margin="121.125,132.223,210.85,0" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top" Height="47.612" FontSize="10.667" Grid.Column="1" TextAlignment="Justify"><Run Text="Enable or disable "/><Run FontFamily="Walkway Black" FontSize="12" FontWeight="Bold" Text="Sync Butler"/><Run FontWeight="Bold" Text=", "/><Run FontStyle="Italic" FontWeight="Bold" Text="Sync!"/></TextBlock>
 			<Image Margin="57.232,150.273,0,0" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Top" Height="22.515" IsHitTestVisible="False" Grid.Column="1" HorizontalAlignment="Left" Width="37.528">
 				<Image.RenderTransform>
 					<TransformGroup>
@@ -1409,7 +1409,7 @@
 				</Image.RenderTransform>
 			</Image>
 			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="0,150.953,81,0" VerticalAlignment="Top" Height="72.609" HorizontalAlignment="Right" Width="119.461" d:LayoutOverrides="VerticalAlignment" Grid.Column="1"/>
-			<TextBlock Margin="0,158.134,90.524,0" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top" Height="72.406" FontSize="10.667" HorizontalAlignment="Right" Width="100.997" Grid.Column="1" TextAlignment="Justify"><Run Text="The drive which "/><Run FontFamily="Walkway Black" FontSize="12" FontWeight="Bold" Text="Sync Butler"/><Run FontWeight="Bold" Text=", "/><Run FontStyle="Italic" FontWeight="Bold" Text="Sync! "/><Run Text="should use"/><Run Text=" to store the files."/></TextBlock>
+			<TextBlock FontFamily="Fonts/#Segoe UI" Margin="0,158.134,90.524,0" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top" Height="72.406" FontSize="10.667" HorizontalAlignment="Right" Width="100.997" Grid.Column="1" TextAlignment="Justify"><Run Text="The drive which "/><Run FontFamily="Walkway Black" FontSize="12" FontWeight="Bold" Text="Sync Butler"/><Run FontWeight="Bold" Text=", "/><Run FontStyle="Italic" FontWeight="Bold" Text="Sync! "/><Run Text="should use"/><Run Text=" to store the files."/></TextBlock>
 			<Image Margin="172.298,188.197,0,0" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Top" Height="22.515" IsHitTestVisible="False" Grid.Column="1" HorizontalAlignment="Left" Width="37.524">
 				<Image.RenderTransform>
 					<TransformGroup>
@@ -1421,7 +1421,7 @@
 				</Image.RenderTransform>
 			</Image>
 			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="198.511,296.535,65.468,0" VerticalAlignment="Top" Height="60.704" Grid.Column="1"/>
-			<TextBlock Margin="206.468,0,72.903,179.73" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="47.073" FontSize="10.667" Grid.Column="1" TextAlignment="Justify"><Run Text="This tells "/><Run FontFamily="Walkway Black" FontSize="12" FontWeight="Bold" Text="Sync Butler"/><Run Text=" how much space it is allowed to use in the drive you selected above."/></TextBlock>
+			<TextBlock FontFamily="Fonts/#Segoe UI" Margin="206.468,0,72.903,179.73" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="47.073" FontSize="10.667" Grid.Column="1" TextAlignment="Justify"><Run Text="This tells "/><Run FontFamily="Walkway Black" FontSize="12" FontWeight="Bold" Text="Sync Butler"/><Run Text=" how much space it is allowed to use in the drive you selected above."/></TextBlock>
 			<Image Margin="0,247.786,119.352,250.38" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" HorizontalAlignment="Right" Width="53.362" IsHitTestVisible="False" Grid.Column="1">
 				<Image.RenderTransform>
 					<TransformGroup>
@@ -1443,9 +1443,9 @@
 				</Image.RenderTransform>
 			</Image>
 			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="6.409,388.44,0,0" VerticalAlignment="Top" Height="60.704" Grid.Column="1" HorizontalAlignment="Left" Width="132.446"/>
-			<TextBlock Margin="15.366,0,0,87.825" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="47.073" FontSize="10.667" Text="Click here if you have just plugged in your portable storage device." Grid.Column="1" TextAlignment="Justify" HorizontalAlignment="Left" Width="114.673"/>
+			<TextBlock FontFamily="Fonts/#Segoe UI" Margin="15.366,0,0,87.825" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="47.073" FontSize="10.667" Text="Click here if you have just plugged in your portable storage device." Grid.Column="1" TextAlignment="Justify" HorizontalAlignment="Left" Width="114.673"/>
 			<Rectangle Fill="Black" Stroke="#FF62DE37" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="0,378.095,63.993,0" VerticalAlignment="Top" Height="42.597" Grid.Column="1" HorizontalAlignment="Right" Width="84.827"/>
-			<TextBlock Margin="0,0,73.666,113.492" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="32.787" FontSize="10.667" Text="Hide the help balloons." Grid.Column="1" TextAlignment="Justify" HorizontalAlignment="Right" Width="65.149"/>
+			<TextBlock FontFamily="Fonts/#Segoe UI" Margin="0,0,73.666,113.492" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="32.787" FontSize="10.667" Text="Hide the help balloons." Grid.Column="1" TextAlignment="Justify" HorizontalAlignment="Right" Width="65.149"/>
 			<Image Margin="0,0,108.867,63.797" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" HorizontalAlignment="Right" Width="43.534" IsHitTestVisible="False" Grid.Column="1" VerticalAlignment="Bottom" Height="26.121">
 				<Image.RenderTransform>
 					<TransformGroup>
