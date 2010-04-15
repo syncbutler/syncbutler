@@ -255,6 +255,7 @@ namespace SyncButlerUI
 
             instance.syncButlerMessage.Text = msg;
             instance.messageImage.Source = new BitmapImage(src); ;
+			instance.ShowInTaskbar=false;
             instance.Title = dialogTitle;
             
             if (parent != null) 
