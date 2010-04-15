@@ -548,22 +548,22 @@ namespace SyncButler
         private long GetUserLimit()
         {
             String resolution = this.GetResolution();
-            long freeSpaceTouse = (long)this.GetFreeSpaceToUse();
+            double freeSpaceTouse =  this.GetFreeSpaceToUse();
             if (resolution.Equals("GB"))
             {
-                return freeSpaceTouse * GIGABYTE;
+                return  (long)(freeSpaceTouse * GIGABYTE);
             }
             else if (resolution.Equals("MB"))
             {
-                return freeSpaceTouse * MEGABYTE;
+                return (long)(freeSpaceTouse * MEGABYTE);
             }
             else if (resolution.Equals("KB"))
             {
-                return freeSpaceTouse * KILOBYTE;
+                return (long)(freeSpaceTouse * KILOBYTE);
             }
             else if (resolution.Equals("Bytes"))
             {
-                return freeSpaceTouse;
+                return (long)freeSpaceTouse;
             }
             else
             {
@@ -590,7 +590,7 @@ namespace SyncButler
             MostRecentlyUsedFile.statusMonitor = statusMonitor;
             SortedList<string,SortedList<string,string>> splited = ContentFilters.Spilt(MostRecentlyUsedFile.ConvertToSortedList(MostRecentlyUsedFile.GetAll()));
             
-     
+            
             for (int i = 0; i < mrulevels.Length; i++)
             {
                 CheckAndMerge(interesting, splited[mrulevels[i]], limit);
