@@ -1099,7 +1099,7 @@ namespace SyncButler
                 sbsEnable = value;
             }
         }
-        }
+        
 
         /// <summary>
         /// the partition of the sbs drive
