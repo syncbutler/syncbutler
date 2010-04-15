@@ -1112,7 +1112,7 @@
 					</TransformGroup>
 				</Image.RenderTransform>
 			</Image>
-			<TextBlock Margin="46.126,30.457,0,0" FontFamily="Arial" FontSize="32" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="54.564" FontStyle="Italic" HorizontalAlignment="Left" Width="269.488"><Run FontFamily="Walkway Black" FontStyle="Normal" Text="Sync Butler"/><Run FontStyle="Normal" Text=", "/><Run FontFamily="Fonts/#Segoe UI" FontStyle="Italic" Text="Sync!"/></TextBlock>
+			<TextBlock Margin="46.126,30.457,0,0" FontFamily="Arial" FontSize="32" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="54.564" FontStyle="Italic" HorizontalAlignment="Left" Width="269.488"><Run FontFamily="Fonts/#Segoe UI" FontStyle="Normal" Text="Sync Butler"/><Run FontStyle="Normal" Text=", "/><Run FontFamily="Fonts/#Segoe UI" FontStyle="Italic" Text="Sync!"/></TextBlock>
 			<TextBlock Margin="0,108.521,444.663,0" FontSize="18.667" TextWrapping="Wrap" HorizontalAlignment="Right" Width="301.445" VerticalAlignment="Top" Height="82.22" d:LayoutOverrides="VerticalAlignment" TextAlignment="Center"><Run FontWeight="Bold" Text="These files are copied automatically*, there is"/><LineBreak/><Run FontWeight="Bold" Text="nothing for you to do here!"/><LineBreak/></TextBlock>
 			<ListBox x:Name="Favourites_List"  Margin="348.273,72.384,28.477,95.086" MouseDoubleClick="OpenSelectedOnList" FontSize="14.667" />
 			<TextBlock Margin="348.273,34.957,227.422,0" FontFamily="Fonts/#Segoe UI" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="25.927" Text="Favourites List"/>
@@ -1232,7 +1232,7 @@
 				</Custom:DataGrid.RowDetailsTemplate>
 
 			</Custom:DataGrid>
-			<TextBlock x:Name="CurrentSyncingFile_Copy" Margin="23.736,61.272,158.487,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="78.454" FontSize="14.667" TextAlignment="Justify"><Run FontFamily="Walkway Black" FontSize="16" Text="Sync Butler "/><Run Text="is syncing your files. If "/><Run FontFamily="Walkway Black" FontSize="16" Text="Sync Butler "/><Run Text="do"/><Run Text="es"/><Run Text=" not know what to do with a file, "/><Run Text="he"/><Run Text=" will list it below. "/><Run Text="When that happens, p"/><Run Text="lease select the action you will like "/><Run FontFamily="Walkway Black" FontSize="16" Text="Sync Butler "/><Run Text="to take. When you are done, simply click on"/><Run Text=" the"/><Run Text=" "/><Run FontWeight="Bold" Text="Fix Issues "/><Run Text="button."/></TextBlock>
+			<TextBlock x:Name="CurrentSyncingFile_Copy" Margin="23.736,61.272,158.487,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="78.454" FontSize="14.667" TextAlignment="Justify"><Run FontFamily="Fonts/#Segoe UI" FontSize="16" Text="Sync Butler "/><Run Text="is syncing your files. If "/><Run FontFamily="Fonts/#Segoe UI" FontSize="16" Text="Sync Butler "/><Run Text="do"/><Run Text="es"/><Run Text=" not know what to do with a file, "/><Run Text="he"/><Run Text=" will list it below. "/><Run Text="When that happens, p"/><Run Text="lease select the action you will like "/><Run FontFamily="Fonts/#Segoe UI" FontSize="16" Text="Sync Butler "/><Run Text="to take. When you are done, simply click on"/><Run Text=" the"/><Run Text=" "/><Run FontWeight="Bold" Text="Fix Issues "/><Run Text="button."/></TextBlock>
 			<Button x:Name="resolveButton"  HorizontalAlignment="Right" Margin="0,94.657,22.322,0" VerticalAlignment="Top" Width="119.784" Height="31" Content="Fix Issues" Click="ResolvePartnership_Click" IsEnabled="False" FontSize="14.667">
 				<Button.Background>
 					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
@@ -1294,7 +1294,7 @@
 						<RotateTransform/>
 						<TranslateTransform/>
 					</TransformGroup>
-				</TextBlock.RenderTransform><Run FontFamily="Walkway Black" FontStyle="Normal" Text="Sync Butler"/><Run FontStyle="Normal" Text=", "/><Run FontFamily="D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\Fonts\#Segoe UI" Text="Sync!  "/><Run Text="Settings"/></TextBlock>
+				</TextBlock.RenderTransform><Run FontFamily="Fonts/#Segoe UI" FontStyle="Normal" Text="Sync Butler"/><Run FontStyle="Normal" Text=", "/><Run FontFamily="D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\Fonts\#Segoe UI" Text="Sync!  "/><Run Text="Settings"/></TextBlock>
 			<TextBlock x:Name="NoUSBWarningTextBlock" Margin="30.567,0,0,131.868" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="105.837" FontSize="14.667" HorizontalAlignment="Left" Width="234.763" TextAlignment="Justify" Visibility="Hidden"><TextBlock.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
@@ -1302,7 +1302,7 @@
 						<RotateTransform/>
 						<TranslateTransform/>
 					</TransformGroup>
-				</TextBlock.RenderTransform><Run FontWeight="Bold" Text="Note:"/><LineBreak/><Run Text="No"/><Run Text=" portable storage device was detected. Please plug in a portable storage device if you wish to use it with "/><Run FontFamily="Walkway Black" FontWeight="Bold" Text="Sync Butler"/><Run FontWeight="Bold" Text=", "/><Run FontStyle="Italic" FontWeight="Bold" Text="Sync"/><Run FontWeight="Bold" Text="!"/><LineBreak/><Run Text=""/></TextBlock>
+				</TextBlock.RenderTransform><Run FontWeight="Bold" Text="Note:"/><LineBreak/><Run Text="No"/><Run Text=" portable storage device was detected. Please plug in a portable storage device if you wish to use it with "/><Run FontFamily="Fonts/#Segoe UI" FontWeight="Bold" Text="Sync Butler"/><Run FontWeight="Bold" Text=", "/><Run FontStyle="Italic" FontWeight="Bold" Text="Sync"/><Run FontWeight="Bold" Text="!"/><LineBreak/><Run Text=""/></TextBlock>
 			<Label HorizontalAlignment="Left" Margin="25.046,90.608,0,0" VerticalAlignment="Top" Content="This computer's name:&#xa;" Height="34.044" Width="170.898" FontSize="14.667"/>
 			<TextBlock x:Name="textBlock9_Copy" HorizontalAlignment="Left" Margin="30.497,155.274,0,0" VerticalAlignment="Top" Width="254.986" Height="30" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap" FontSize="14.667"><TextBlock.RenderTransform>
 					<TransformGroup>
@@ -1311,7 +1311,7 @@
 						<RotateTransform/>
 						<TranslateTransform/>
 					</TransformGroup>
-				</TextBlock.RenderTransform><Run FontFamily="Walkway Black" FontWeight="Bold" Text="Sync Butler"/><Run FontWeight="Bold" Text=", "/><Run FontStyle="Italic" FontWeight="Bold" Text="Sync"/><Run FontWeight="Bold" Text="!"/><Run Text=" "/><Run Text="Settings:"/><LineBreak/><Run Text=""/></TextBlock>
+				</TextBlock.RenderTransform><Run FontFamily="Fonts/#Segoe UI" FontWeight="Bold" Text="Sync Butler"/><Run FontWeight="Bold" Text=", "/><Run FontStyle="Italic" FontWeight="Bold" Text="Sync"/><Run FontWeight="Bold" Text="!"/><Run Text=" "/><Run Text="Settings:"/><LineBreak/><Run Text=""/></TextBlock>
 			<TextBox x:Name="ComputerNameTextBox"  Margin="290.925,95.153,193.258,0" VerticalAlignment="Top" TextWrapping="Wrap" Height="24" FontSize="14.667"/>
 			<ComboBox x:Name="SBSSettingComboBox"  Margin="290.925,155.112,365.13,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" SelectionChanged="SBSSettingChanged" Height="24" FontSize="14.667">
 				<ComboBox.RenderTransform>
@@ -1331,7 +1331,7 @@
 						<RotateTransform/>
 						<TranslateTransform/>
 					</TransformGroup>
-				</TextBlock.RenderTransform><Run FontFamily="Walkway Black" FontWeight="Bold" Text="Sync Butler"/><Run FontWeight="Bold" Text=", "/><Run FontStyle="Italic" FontWeight="Bold" Text="Sync"/><Run FontWeight="Bold" Text="! "/><Run Text="Destination Drive:"/><LineBreak/><Run Text=""/></TextBlock>
+				</TextBlock.RenderTransform><Run FontFamily="Fonts/#Segoe UI" FontWeight="Bold" Text="Sync Butler"/><Run FontWeight="Bold" Text=", "/><Run FontStyle="Italic" FontWeight="Bold" Text="Sync"/><Run FontWeight="Bold" Text="! "/><Run Text="Destination Drive:"/><LineBreak/><Run Text=""/></TextBlock>
 			<Slider x:Name="SpaceToUseSlide" Margin="292.554,231.157,193.258,0" ValueChanged="SpaceToUseSlided" FontSize="14.667" VerticalAlignment="Top" Height="26.154"/>
 			<TextBox x:Name="SpaceToUseTextbox" HorizontalAlignment="Right" Margin="0,230.81,98.926,0" TextWrapping="Wrap" Width="72.159" KeyUp="SpaceToUseChanged" FontSize="14.667" VerticalAlignment="Top" Height="26"/>
 			<Button Margin="291.054,0,249.746,174.106" VerticalAlignment="Bottom" Content="Search Again for Portable Storage" Click="RefreshSBSSettingDriveList" FontSize="14.667" Height="32">
@@ -1364,7 +1364,7 @@
 						<RotateTransform/>
 						<TranslateTransform/>
 					</TransformGroup>
-				</TextBlock.RenderTransform><Run FontFamily="Walkway Black" FontWeight="Bold" Text="Sync Butler"/><Run FontWeight="Bold" Text=", "/><Run FontStyle="Italic" FontWeight="Bold" Text="Sync"/><Run FontWeight="Bold" Text="!"/><Run Text=" "/><Run Text="D"/><Run Text="isk "/><Run Text="U"/><Run Text="sage"/><Run Text=":"/></TextBlock>
+				</TextBlock.RenderTransform><Run FontFamily="Fonts/#Segoe UI" FontWeight="Bold" Text="Sync Butler"/><Run FontWeight="Bold" Text=", "/><Run FontStyle="Italic" FontWeight="Bold" Text="Sync"/><Run FontWeight="Bold" Text="!"/><Run Text=" "/><Run Text="D"/><Run Text="isk "/><Run Text="U"/><Run Text="sage"/><Run Text=":"/></TextBlock>
 			<Label HorizontalAlignment="Left" Margin="288.054,260.311,0,234.353" Content="0%" Width="36.723" FontSize="16"/>
 			<Label x:Name="resolutionLabel" HorizontalAlignment="Right" Margin="0,227.31,33.574,0" Content="KB" Width="45.717" FontSize="14.667" VerticalAlignment="Top" Height="29.381"/>
 			<Label x:Name="label" Margin="0,256.311,185.758,233.705" Content="100%" HorizontalAlignment="Right" Width="52.584" FontSize="16"/>
@@ -1396,7 +1396,7 @@
 				</Image.RenderTransform>
 			</Image>
 			<Rectangle Fill="Black" Stroke="#FFFC0404" StrokeThickness="4" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="112.85,128.71,200.461,0" VerticalAlignment="Top" Height="39.696" d:LayoutOverrides="VerticalAlignment" Grid.Column="1"/>
-			<TextBlock FontFamily="Fonts/#Segoe UI" Margin="121.125,132.223,210.85,0" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top" Height="47.612" FontSize="10.667" Grid.Column="1" TextAlignment="Justify"><Run Text="Enable or disable "/><Run FontFamily="Walkway Black" FontSize="12" FontWeight="Bold" Text="Sync Butler"/><Run FontWeight="Bold" Text=", "/><Run FontStyle="Italic" FontWeight="Bold" Text="Sync!"/></TextBlock>
+			<TextBlock FontFamily="Fonts/#Segoe UI" Margin="121.125,132.223,210.85,0" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top" Height="47.612" FontSize="10.667" Grid.Column="1" TextAlignment="Justify"><Run Text="Enable or disable "/><Run FontFamily="Fonts/#Segoe UI" FontSize="12" FontWeight="Bold" Text="Sync Butler"/><Run FontWeight="Bold" Text=", "/><Run FontStyle="Italic" FontWeight="Bold" Text="Sync!"/></TextBlock>
 			<Image Margin="57.232,150.273,0,0" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Top" Height="22.515" IsHitTestVisible="False" Grid.Column="1" HorizontalAlignment="Left" Width="37.528">
 				<Image.RenderTransform>
 					<TransformGroup>
@@ -1408,7 +1408,7 @@
 				</Image.RenderTransform>
 			</Image>
 			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="0,150.953,81,0" VerticalAlignment="Top" Height="72.609" HorizontalAlignment="Right" Width="119.461" d:LayoutOverrides="VerticalAlignment" Grid.Column="1"/>
-			<TextBlock FontFamily="Fonts/#Segoe UI" Margin="0,158.134,90.524,0" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top" Height="72.406" FontSize="10.667" HorizontalAlignment="Right" Width="100.997" Grid.Column="1" TextAlignment="Justify"><Run Text="The drive which "/><Run FontFamily="Walkway Black" FontSize="12" FontWeight="Bold" Text="Sync Butler"/><Run FontWeight="Bold" Text=", "/><Run FontStyle="Italic" FontWeight="Bold" Text="Sync! "/><Run Text="should use"/><Run Text=" to store the files."/></TextBlock>
+			<TextBlock FontFamily="Fonts/#Segoe UI" Margin="0,158.134,90.524,0" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top" Height="72.406" FontSize="10.667" HorizontalAlignment="Right" Width="100.997" Grid.Column="1" TextAlignment="Justify"><Run Text="The drive which "/><Run FontFamily="Fonts/#Segoe UI" FontSize="12" FontWeight="Bold" Text="Sync Butler"/><Run FontWeight="Bold" Text=", "/><Run FontStyle="Italic" FontWeight="Bold" Text="Sync! "/><Run Text="should use"/><Run Text=" to store the files."/></TextBlock>
 			<Image Margin="172.298,188.197,0,0" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Top" Height="22.515" IsHitTestVisible="False" Grid.Column="1" HorizontalAlignment="Left" Width="37.524">
 				<Image.RenderTransform>
 					<TransformGroup>
@@ -1420,7 +1420,7 @@
 				</Image.RenderTransform>
 			</Image>
 			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="198.511,296.535,65.468,0" VerticalAlignment="Top" Height="60.704" Grid.Column="1"/>
-			<TextBlock FontFamily="Fonts/#Segoe UI" Margin="206.468,0,72.903,179.73" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="47.073" FontSize="10.667" Grid.Column="1" TextAlignment="Justify"><Run Text="This tells "/><Run FontFamily="Walkway Black" FontSize="12" FontWeight="Bold" Text="Sync Butler"/><Run Text=" how much space it is allowed to use in the drive you selected above."/></TextBlock>
+			<TextBlock FontFamily="Fonts/#Segoe UI" Margin="206.468,0,72.903,179.73" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="47.073" FontSize="10.667" Grid.Column="1" TextAlignment="Justify"><Run Text="This tells "/><Run FontFamily="Fonts/#Segoe UI" FontSize="12" FontWeight="Bold" Text="Sync Butler"/><Run Text=" how much space it is allowed to use in the drive you selected above."/></TextBlock>
 			<Image Margin="0,247.786,119.352,250.38" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" HorizontalAlignment="Right" Width="53.362" IsHitTestVisible="False" Grid.Column="1">
 				<Image.RenderTransform>
 					<TransformGroup>
