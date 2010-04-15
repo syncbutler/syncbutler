@@ -2,9 +2,9 @@
 #labels Featured
 
 = Introduction =
-Modern day computer users work on several machines in one day (think work and home). It is not uncommon to have copies of the same file duplicated on those machines.
+Modern day computer users work on several machines everyday (think work and home). It is common to have copies of the same file on those machines.
 Some users resort to manually copying files from one system to another using a portable storage device. This is repeated every time when there are changes. Add to that, the difficulty of keeping track of the latest version of the file. Finally, do that for all the files you have.
-Thus, it is not hard to imagine why it takes quite a bit of effort to manually keep files in sync on users’ workstations. This is how file synchronisation software like Sync Butler is handy. We do the work for you!
+Thus, it is not hard to imagine why it takes quite a bit of effort to manually keep files in sync on users’ workstations. This is where file synchronisation tools like Sync Butler come in handy. It does all this work for you automatically!
 
 http://syncbutler.googlecode.com/files/SyncButlerSync.png
 <br />
@@ -12,8 +12,8 @@ _Ah... so that is what it is does_
 <br />
 
 == What is File Synchronisation ==
-As it was briefly described above, file synchronisation software automates the process of keeping your files the same on your systems. They just do it in slightly different manner.
-We at Sync Butler strive to make it really easy and painless for the user to sync their files. Sync Butler resolves most differences in the two folders without prompting you for a decision. For those file conflicts that Sync Butler cannot resolve, you simply have to tick the box you wish to take the copy from.
+As it was briefly described above, file synchronisation software automates the process of keeping your files the same on your systems. They just do it in a slightly different manner.
+We at Sync Butler strive to make it really easy and painless for the user to sync their files. Sync Butler resolves most differences in the two folders without prompting you for a decision. For those file conflicts that Sync Butler cannot resolve, you simply have to tick the box you wish to copy the file from.
 At the end of the process, you will have two identical folders which were initially out-of-sync.
 
 == Common Terms ==
@@ -25,10 +25,9 @@ At the end of the process, you will have two identical folders which were initia
 == Usage Scenarios ==
 Here are some uses of File Synchronisation
 
-=== Example Scenario 2 ===
-You produce presentations on the office’s desktop and present them using your laptop. Sync Butler automatically copy over your new presentation materials to your laptop when you sync the two machines using a thumb drive.
+=== Example Scenario 1 ===
+You produce presentations on the office’s desktop and present them using your laptop. Sync Butler automatically copies over your new presentation materials to your laptop when you sync the two machines using a thumb drive.
 
 === Example Scenario 2 ===
-You carry your laptop to college daily and play hard on the desktop at home. Sync Butler automatically copies your new project files on your laptop to your desktop for backup and reference using your portable hard disk drive.
-Getting the Most out of Sync Butler
-Run the software just before you start or end your computing session (at different workstation) will keep your files in sync! There is nothing to be tweaked in Sync Butler because we have built in many of the intelligence we have developed at Sync Butler studios. It would be nice if you could continue reading this manual all the way through!
+You work on your laptop daily and keep your desktop at home for your gaming needs. Using your portable hard disk drive as the intermediate storage device, Sync Butler automatically copies your new project files on your laptop to your desktop for backup and reference.
+Get the most out of Sync Butler by running the software just before you start or end your computing sessions!
