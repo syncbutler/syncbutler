@@ -96,13 +96,11 @@ namespace SyncButlerUI
 		{
             CurrentState = State.AllowClose;
 			VisualStateManager.GoToState(this, "HelpScreenState", false);
-            ((MainWindow)Window.GetWindow(this)).SetAllInActive();
 			FocusControl(() => HelpScreen1NextBtn.Focus());
 		}
         public void GoToSBSHelpScreen()
         {
             VisualStateManager.GoToState(this, "SBSHelpState", false);
-            ((MainWindow)Window.GetWindow(this)).SetAllInActive();
             FocusControl(() => SBSHelpScreenNextBtn.Focus());
             IsSBSHelpButton = true;
         }
@@ -110,7 +108,6 @@ namespace SyncButlerUI
 		{
             CurrentState = State.AllowClose;
 			VisualStateManager.GoToState(this, "FeatureHelpState", false);
-            ((MainWindow)Window.GetWindow(this)).SetAllInActive();
 			FocusControl(() => FeatureHelpNextBtn.Focus());
 		}
         private bool IsSBSHelpButton;
@@ -118,20 +115,17 @@ namespace SyncButlerUI
 		{
             CurrentState = State.AllowClose;
 			VisualStateManager.GoToState(this, "FeatureSBSHelpState", false);
-            ((MainWindow)Window.GetWindow(this)).SetAllInActive();
 			FocusControl(() => HelpScreenCloseBtn.Focus());
 		}
         public void GoToSBSScreen()
         {
             VisualStateManager.GoToState(this, "SBSHelpState", false);
-            ((MainWindow)Window.GetWindow(this)).SetAllInActive();
             FocusControl(() => SBSHelpScreenNextBtn.Focus());
         }
 		
 		public void GoToDemoSBSScreen()
         {
             VisualStateManager.GoToState(this, "SBSHelpScreenState", false);
-            ((MainWindow)Window.GetWindow(this)).SetAllInActive();
             FocusControl(() => HelpScreenCloseBtn.Focus());
         }
 		/// <summary>
@@ -142,7 +136,6 @@ namespace SyncButlerUI
 		private void GoToHelpScreen2_Click(object sender,RoutedEventArgs e)
         {
             VisualStateManager.GoToState(this,"SecondHelpScreenState",false);
-            ((MainWindow)Window.GetWindow(this)).SetAllInActive();
             FocusControl(() => HelpScreenFinishBtn.Focus());
 		}
 	    private bool wantToShowSettingPage;
