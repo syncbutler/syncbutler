@@ -341,12 +341,12 @@
 				<ic:ExtendedVisualStateManager/>
 			</VisualStateManager.CustomVisualStateManager>
 			<Button x:Name="HelpScreenCloseBtn" HorizontalAlignment="Right" Margin="0,0,6.116,6.116" Content="Close" FontWeight="Bold" FontSize="18.667" Click="ExitSBSTutorial_Click" Width="83.2" VerticalAlignment="Bottom" Height="39.2"/>
-			<Image Margin="97.917,79,183.38,129.6" Source="Images/SBSWindow.png" Stretch="Fill" StretchDirection="DownOnly"/>
+			<Image Margin="137.917,110,143.38,98.6" Source="Images/SBSWindow.png" Stretch="Fill" StretchDirection="DownOnly"/>
 			<Grid x:Name="NewOrRecentlyUsedFilesText" HorizontalAlignment="Right" Margin="0,122.494,53.582,220.706" Width="125.798">
-				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="0,0,0.178,8"/>
-				<TextBlock Margin="7.8,8.8,0,8" FontFamily="Fonts/#Segoe UI" FontSize="12" Foreground="White" TextWrapping="Wrap" FontWeight="Bold"><Run Text="New or recently used files appear here. "/><Run FontFamily="Fonts/#Segoe UI" FontSize="14.667" Text="SyncButler "/><Run Text="will make a duplicate and store it on your "/><Run Text="USB storage device."/></TextBlock>
+				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="42,41,-41.822,-33"/>
+				<TextBlock Margin="49.8,47.8,-32.822,-31" FontFamily="Fonts/#Segoe UI" FontSize="12" Foreground="White" TextWrapping="Wrap" FontWeight="Bold"><Run Text="New or recently used files appear here. "/><Run FontFamily="Fonts/#Segoe UI" FontSize="14.667" Text="SyncButler "/><Run Text="will make a duplicate and store it on your "/><Run Text="USB storage device."/></TextBlock>
 			</Grid>
-			<Image HorizontalAlignment="Right" Margin="0,220.733,200.734,228.067" Width="52" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill">
+			<Image HorizontalAlignment="Right" Margin="0,217.733,166.734,231.067" Width="52" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill">
 				<Image.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
@@ -357,15 +357,15 @@
 				</Image.RenderTransform>
 			</Image>
 			<Grid x:Name="ClickToShowHelpText" Margin="251.453,0,268.9,53.034" VerticalAlignment="Bottom" Height="72.566">
-				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" VerticalAlignment="Top" Height="72.566"/>
-				<TextBlock Margin="13.447,10.966,15.8,10.5" FontFamily="Fonts/#Segoe UI" Foreground="White" TextWrapping="Wrap" FontWeight="Bold" Text="Click this button to show this help again!"/>
+				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" VerticalAlignment="Top" Height="55.566" Margin="34,16,-66,0"/>
+				<TextBlock Margin="47.447,26.966,-54.2,13.5" FontFamily="Fonts/#Segoe UI" Foreground="White" TextWrapping="Wrap" FontWeight="Bold" Text="Click this button to show this help again!"/>
 			</Grid>
-			<Image HorizontalAlignment="Left" Margin="190.449,0,0,141.97" Width="58.026" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="34.816">
+			<Image HorizontalAlignment="Left" Margin="219.449,0,0,116.97" Width="58.026" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="34.816">
 				<Image.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
 						<SkewTransform/>
-						<RotateTransform Angle="229.663"/>
+						<RotateTransform Angle="222.489"/>
 						<TranslateTransform X="1.93" Y="-11.382"/>
 					</TransformGroup>
 				</Image.RenderTransform>
@@ -376,15 +376,15 @@
 					<ColumnDefinition Width="0.277*"/>
 				</Grid.ColumnDefinitions>
 
-				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Grid.ColumnSpan="2"/>
-				<TextBlock Margin="10.1,6.5,9.033,8.5" FontFamily="Fonts/#Segoe UI" Foreground="White" TextWrapping="Wrap" FontWeight="Bold" Text="Click this button to change where it saves the file to and how much disk space it should use." Grid.ColumnSpan="2"/>
+				<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="-13,-133,29.128,0" VerticalAlignment="Top" Height="105.6"/>
+				<TextBlock Margin="0,-122.5,39.1,0" FontFamily="Fonts/#Segoe UI" Foreground="White" TextWrapping="Wrap" FontWeight="Bold" Text="Click this button to change where it saves the file to and how much disk space it should use." VerticalAlignment="Top" Height="86.6"/>
 			</Grid>
-			<Image Margin="99.925,0,0,129.804" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="34.816" HorizontalAlignment="Left" Width="58.026">
+			<Image Margin="120.925,0,0,113.804" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Bottom" Height="34.816" HorizontalAlignment="Left" Width="58.026">
 				<Image.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
 						<SkewTransform/>
-						<RotateTransform Angle="302.785"/>
+						<RotateTransform Angle="387.262"/>
 						<TranslateTransform X="1.93" Y="-11.382"/>
 					</TransformGroup>
 				</Image.RenderTransform>
