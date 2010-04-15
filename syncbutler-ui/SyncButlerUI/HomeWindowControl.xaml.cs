@@ -36,7 +36,6 @@ using System.IO;
 using System.Data;
 using System.Threading;
 using System.ComponentModel;
-using WPF_Explorer_Tree;
 using SyncButler;
 using SyncButler.Exceptions;
 using System.Collections.ObjectModel;
@@ -709,7 +708,9 @@ namespace SyncButlerUI
                 dialog.WelcomeScreenControl.FirstTimeComputerNameText.Visibility = Visibility.Hidden;
                 Controller.SetFirstSBSRun();
                 dialog.Title = "Sync Butler - Help";
+				dialog.ShowInTaskbar = false;
                 dialog.WelcomeScreenControl.GoToSBSHelpScreen();
+				dialog.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner;
 				dialog.Owner = Window.GetWindow(this);
                 dialog.ShowDialog();
             }
@@ -909,8 +910,9 @@ namespace SyncButlerUI
             
             dialog.WelcomeScreenControl.FirstTimeComputerNameText.Visibility = Visibility.Hidden;
             dialog.Title = "Sync Butler - Help";
-            
+            dialog.ShowInTaskbar = false;
             dialog.WelcomeScreenControl.GoToFeaturesScreen();
+			dialog.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner;
 			dialog.Owner = Window.GetWindow(this);
             dialog.ShowDialog();
             if (dialog.WelcomeScreenControl.WantToShowSettingPage() && !Controller.IsSBSEnable())

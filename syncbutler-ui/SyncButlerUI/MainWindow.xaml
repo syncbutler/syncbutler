@@ -4,7 +4,6 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d" xmlns:Microsoft_Windows_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" xmlns:Custom="http://schemas.microsoft.com/wpf/2008/toolkit" xmlns:ic="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
 	xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-	xmlns:WPF_Explorer_Tree="clr-namespace:WPF_Explorer_Tree"
 	xmlns:local="clr-namespace:SyncButlerUI"
 	x:Class="SyncButlerUI.MainWindow"
 	x:Name="Window"
