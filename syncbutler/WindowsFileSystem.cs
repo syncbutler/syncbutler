@@ -524,6 +524,10 @@ namespace SyncButler
         /// <returns>true if they are equal</returns>
         internal static bool PathsEqual(string path1, string path2)
         {
+            if (path1.ToLower().StartsWith("missing") || path1.ToLower().StartsWith("missing"))
+            {
+                return false;
+            }
             FileSystemInfo fsi1 = new FileInfo(path1);
             FileSystemInfo fsi2 = new FileInfo(path2);
             char[] standard = { '\\', ' ' };
