@@ -6,7 +6,7 @@
 This page contains some links to supplementary materials for the developer's guide which can be found at http://code.google.com/p/syncbutler/downloads/list
 
 = API =
-[http://syncbutler.googlecode.com/files/SyncButler%20Generated%20API%20r295.zip Download]
+[http://syncbutler.googlecode.com/files/SyncButler_Generated_API%20_443.zip Download]
 
 = Diagrams =
 
