@@ -499,7 +499,7 @@ namespace SyncButler
                 foreach (string key in FileListToCheck.Keys)
                 {
                     CurrentFileSize = WindowsFile.SizeOf(FileListToCheck[key]);
-                    if (totalSizeSoFar + CurrentFileSize <= limit)
+                    if ((totalSizeSoFar += CurrentFileSize) <= limit)
                     {
                         ToMerge.Add(key, FileListToCheck[key]);
                         //return false;
