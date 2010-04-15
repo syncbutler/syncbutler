@@ -1379,7 +1379,7 @@
 					</TransformGroup>
 				</TextBlock.RenderTransform><Run Text="There is another portable storage device that is assigned to this feature. It is not plugged into the system now. Please "/><Run Text="plug in that device to make any changes to this feature."/></TextBlock>
 		</Grid>
-		<Grid x:Name="FirstTimeHelp" Margin="0,0,-1.024,-4">
+		<Grid x:Name="FirstTimeHelp" Margin="0,0,-1.024,-4" Visibility="Hidden">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="0.446*"/>
 				<ColumnDefinition Width="0.554*"/>
