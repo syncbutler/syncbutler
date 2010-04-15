@@ -517,6 +517,7 @@ namespace SyncButler
         /// <returns>the size in the specified resolution</returns>
         private static long GetSizeInResolution(string resolution, long size)
         {
+            
             if (resolution.Equals("GB"))
             {
                 return size / GIGABYTE;

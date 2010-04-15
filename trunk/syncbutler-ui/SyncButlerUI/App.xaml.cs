@@ -81,7 +81,6 @@ namespace SyncButlerUI
                         }
                     }
                     base.Shutdown(0);                    
-                    //base.OnStartup(e);
                 }
         }
 	}

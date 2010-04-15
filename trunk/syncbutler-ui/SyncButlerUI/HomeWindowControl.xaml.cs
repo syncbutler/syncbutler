@@ -86,6 +86,8 @@ namespace SyncButlerUI
         private Semaphore resolveLock = new Semaphore(1, 1);
         private Semaphore waitForErrorResponse = new Semaphore(0, 1);
         private Queue<Conflict> newConflicts = new Queue<Conflict>();
+
+        public enum Volume { MB = 1024 * 1024, KB = 1024, GB = 1024 * 1024 * 1024, Bytes = 1 };
         // Keeps track of last selected index of conflict list
 
         #region constantAttributes
@@ -344,12 +346,9 @@ namespace SyncButlerUI
 
                 if (operationCancelled)
                 {
-                    //CurrentSyncingFile.Text = "Scan cancelled.\nConflicts automatically processed: " + autoResolveCount +
-                    //    "\nConflicts manually processed: " + manualResolveCount;
                     CurrentSyncingFile.Text = "Scan Cancelled.";
                     scanWorker = null;
                     CancelButton.IsEnabled = false;
-
                     return;
                 }
 
@@ -577,10 +576,6 @@ namespace SyncButlerUI
 
         #region UIcode
         /// <summary>
-        /// Interaction logic for Creating Partnership
-        /// </summary>
-
-        /// <summary>
         /// Expand and Collaspses the partnership conflicts.
         /// </summary>
         /// <param name="sender"></param>
@@ -598,6 +593,11 @@ namespace SyncButlerUI
             }
         }
 
+        /// <summary>
+        /// Refresh the list of device to user
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RefreshSBSSettingDriveList(object sender, RoutedEventArgs e)
 		{
             BackgroundWorker storageScanWorker = new BackgroundWorker();
@@ -791,6 +791,8 @@ namespace SyncButlerUI
             }
         }
         #endregion
+
+
         /// <summary>
         /// goes back to Home state
         /// </summary>
@@ -1264,6 +1266,7 @@ namespace SyncButlerUI
             else
             {
                 CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "Sync Butler, Sync! is currently not enabled.\r\n\r\nYou may turn on the feature later by click on the Sync Butler, Sync! button.");
+                FirstTimeHelp.Visibility = Visibility.Hidden;
                 VisualStateManager.GoToState(this, "HomeState", false);
                 CurrentState = State.Home;
             }
@@ -1286,12 +1289,15 @@ namespace SyncButlerUI
                     CustomDialog.MessageResponse.No)
                 {
                     Controller.SaveSetting(ComputerName, SBSEnable, DriveLetter, FreeSpaceToUse, Resolution, enableSyncAll);
-
+                    
                     String ExtraMsg = String.Format("Sync Butler, Sync! will now save your recent files to:\n\n{0}", Controller.GetSBSPath());
                     CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "The settings has been changed.\r\n\r\n" + ExtraMsg);
-                    VisualStateManager.GoToState(this, "SbsState", false);
-                    LoadMRUs();
                     CurrentState = State.SBS;
+                    FirstTimeHelp.Visibility = Visibility.Hidden;
+                    VisualStateManager.GoToState(this, "SbsState", false);
+                    
+                    LoadMRUs();
+                    
                 }
             }
             else if(SBSEnable.Equals("Enable") &&userrequestedspace <= 0)
@@ -1317,6 +1323,7 @@ namespace SyncButlerUI
                     {
                         String ExtraMsg = String.Format("Sync Butler, Sync! will now save your recent files to:\n\n{0}", Controller.GetSBSPath());
                         CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "The settings has been changed.\r\n\r\n" + ExtraMsg);
+                        FirstTimeHelp.Visibility = Visibility.Hidden;
                         VisualStateManager.GoToState(this, "SbsState", false);
                         LoadMRUs();
                         CurrentState = State.SBS;
@@ -1380,46 +1387,47 @@ namespace SyncButlerUI
 
                     if (freespace / GIGA_BYTE > 10)
                     {
-                        resolutionLabel.Content = "GB";
+                        resolutionLabel.Content = Volume.GB;
                         SpaceToUseSlide.Maximum = freespace / GIGA_BYTE;
 
                     }
                     else if (freespace / GIGA_BYTE <= 10 && freespace / MEGA_BYTE >= 2)
                     {
-                        resolutionLabel.Content = "MB";
+                        resolutionLabel.Content = Volume.MB;
                         SpaceToUseSlide.Maximum = freespace / MEGA_BYTE;
                     }
                     else if (freespace / MEGA_BYTE < 2 )
                     {
-                        resolutionLabel.Content = "KB";
+                        resolutionLabel.Content = Volume.KB;
                         SpaceToUseSlide.Maximum = freespace / KILO_BYTE;
                     }
                     else
                     {
-                        resolutionLabel.Content = "Bytes";
+                        resolutionLabel.Content = Volume.Bytes;
                         SpaceToUseSlide.Maximum = freespace;
                     }
                     if (freespace <= minimumSize * MEGA_BYTE)
                     {
                         CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok,
                             "Sync Butler needs at least 250MB on your storage device to carry your recent files.\r\nIt may not be able to carry the files you need, when you need them.\r\nPlease use a device with a bigger space");
-                        //SpaceToUseSlide.IsEnabled = false;
-                        //SpaceToUseTextbox.IsEnabled = false;
                     }
-                    //else
-                    //{
                         int preferredSize = (int) (freespace * 0.1 / MEGA_BYTE);
                         if (preferredSize < minimumSize) preferredSize = minimumSize;
 
-                        if (resolutionLabel.Content.Equals("MB"))
-                            SpaceToUseSlide.Value = preferredSize;
-                        else if (resolutionLabel.Content.Equals("KB"))
-                            SpaceToUseSlide.Value = preferredSize * KILO_BYTE;
-                        else if (resolutionLabel.Content.Equals("GB"))
-                            SpaceToUseSlide.Value = preferredSize * GIGA_BYTE;
+                        Volume curRes = (Volume)resolutionLabel.Content;
+                        switch (curRes)
+                        {
+                            case Volume.MB:
+                                SpaceToUseSlide.Value = preferredSize;
+                                break;
+                            case Volume.KB:
+                                SpaceToUseSlide.Value = preferredSize * KILO_BYTE;
+                                break;
+                            case Volume.GB:
+                                SpaceToUseSlide.Value = preferredSize * GIGA_BYTE;
+                                break;
 
-                    //}
-
+                        }
                 }
             }
         }
@@ -1459,14 +1467,23 @@ namespace SyncButlerUI
         private double CalcuateUserRequestedSpace()
         {
             double value = double.Parse(this.SpaceToUseTextbox.Text);
-            if (resolutionLabel.Content.Equals("GB"))
-                return value * GIGA_BYTE;
-            else if (resolutionLabel.Content.Equals("MB"))
-                return value * MEGA_BYTE;
-            else if (resolutionLabel.Content.Equals("KB"))
-                return value * KILO_BYTE;
-            else
-                return value;
+            Volume curRes;
+                if(resolutionLabel.Content is Volume)
+                    curRes = (Volume)resolutionLabel.Content;
+                else if(resolutionLabel.Content is String)
+                    curRes = (Volume)Enum.Parse(typeof(Volume),(String)resolutionLabel.Content,true);
+                else
+                    return 0.0;
+            switch (curRes)
+            {
+                case Volume.MB:
+                    return value * MEGA_BYTE;
+                case Volume.KB:
+                    return value * KILO_BYTE;
+                case Volume.GB:
+                    return value * GIGA_BYTE;
+            }
+            return value;
         }
 
         private void SpaceToUseSlided(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)

@@ -143,6 +143,7 @@ namespace SyncButlerUI
         }
 
         #endregion
+
         private void goHome(object sender, RoutedEventArgs e)
         {
             homeWindow1.FirstTimeHelp.Visibility = System.Windows.Visibility.Hidden;
@@ -175,7 +176,6 @@ namespace SyncButlerUI
                     }
                     Controller.SetFirstSBSRun();
 				}
-                    //homeWindow1.CheckIfEnoughSpace();
                     homeWindow1.CurrentState = HomeWindowControl.State.SBS;
                     VisualStateManager.GoToState(homeWindow1, nextState, false);
 					homeWindow1.LoadMRUs();
