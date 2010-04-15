@@ -182,7 +182,7 @@ namespace SyncButlerUI
                 ProgressText.Content = progress.taskDescription;
             }
         }
-
+        
         /// <summary>
         /// Event handler for the Cancel Button
         /// </summary>
@@ -209,7 +209,13 @@ namespace SyncButlerUI
         /// <param name="e"></param>
         private void WindowClosing(object sender, CancelEventArgs e)
         {
-            if (!isClosing) e.Cancel = true;
+            //CancelBtn(null, null);
+            if (!isClosing)
+            {
+                if(taskWorker.WorkerSupportsCancellation)
+                    CancelBtn(null, null);
+                e.Cancel = true;
+            }
         }
 	}
 }
