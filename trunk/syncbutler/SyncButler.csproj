@@ -69,7 +69,7 @@
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="MRU\MostRecentlyUsedFile.cs" />
     <Compile Include="MRU\MRUList.cs" />
-    <Compile Include="MRU\SyncedMRU.cs" />
+    <Compile Include="MRU\CopiedMRU.cs" />
     <Compile Include="ProgramEnvironment\PartnershipElement.cs" />
     <Compile Include="ProgramEnvironment\PartnershipCollection.cs" />
     <Compile Include="ProgramEnvironment\PartnershipSection.cs" />

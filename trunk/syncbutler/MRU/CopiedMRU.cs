@@ -27,20 +27,30 @@ namespace SyncButler.MRU
     /// <summary>
     /// This is a data container to faciliate the usage of XMLSerializer 
     /// </summary>
-    public class SyncedMRU
+    public class CopiedMRU
     {
-
+        /// <summary>
+        /// Where the file used to be
+        /// </summary>
         public string OriginalPath { get; set; }
 
-        public string SyncedTo { get; set; }
+        /// <summary>
+        /// Where the file is synced to
+        /// </summary>
+        public string CopiedTo { get; set; }
 
-        public SyncedMRU(string OriginalPath, string SyncedTo)
+        /// <summary>
+        /// To create an instance of a mru that has been synced.
+        /// </summary>
+        /// <param name="OriginalPath">The orginal path of the file</param>
+        /// <param name="CopiedTo">The path where the file is copied to</param>
+        public CopiedMRU(string OriginalPath, string CopiedTo)
         {
             this.OriginalPath = OriginalPath;
-            this.SyncedTo = SyncedTo;
+            this.CopiedTo = CopiedTo;
         }
 
-        public SyncedMRU()
+        public CopiedMRU()
         {
 
         }
