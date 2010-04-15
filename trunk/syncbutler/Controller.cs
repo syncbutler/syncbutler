@@ -37,7 +37,7 @@ namespace SyncButler
         private const long KILOBYTE = 1024;
         private const long MEGABYTE = KILOBYTE * 1024;
         private const long GIGABYTE = MEGABYTE * 1024;
-
+		public enum SBSstatus {	Enabled	,Disabled}
         private SyncEnvironment syncEnvironment;
         private IGUI mainWindow;
         private static List<string> errorList = new List<string>();
@@ -251,7 +251,7 @@ namespace SyncButler
         /// <returns>true if it is enabled, false otherwise</returns>
         public static bool IsSBSEnable()
         {
-            return SyncEnvironment.SBSEnable.Equals("Enable");
+            return SyncEnvironment.SBSEnable.Equals(SBSstatus.Enabled.ToString());
         }
 
         /// <summary>
@@ -788,7 +788,7 @@ namespace SyncButler
             SyncEnvironment.SBSEnable = enableSBS;
             SyncEnvironment.FreeSpaceToUse = freeSpaceToUse;
             SyncEnvironment.Resolution = resolution;
-            if (enableSBS.Equals("Enable"))
+            if (enableSBS.Equals(SBSstatus.Enabled.ToString()))
             {
                 SyncEnvironment.SBSDriveLetter = SBSDrive;
                 SyncEnvironment.SBSDriveId = SystemEnvironment.StorageDevices.GetDriveID(SBSDrive + ":");
@@ -829,7 +829,7 @@ namespace SyncButler
         /// </summary>
         public static string SBSEnable
         {
-            get { return (SyncEnvironment.SBSEnable == null) ? "Disable" : SyncEnvironment.SBSEnable; }
+            get { return (SyncEnvironment.SBSEnable == null) ? SBSstatus.Disabled.ToString() : SyncEnvironment.SBSEnable; }
             set { SyncEnvironment.SBSEnable = value; }
         }
 
