@@ -1136,7 +1136,7 @@
 			<Label x:Name="SBSPathLabel" Margin="0,0,47.144,44" VerticalAlignment="Bottom" Height="29.893" Content="Label" FontSize="14.667" FontWeight="Bold" HorizontalAlignment="Right" Width="209.198" Foreground="White"/>
 			<TextBlock x:Name="SBSfeatureDisabledTextBlock" Margin="0,0,47.144,41" VerticalAlignment="Bottom" Height="38.096" Text="This feature is turned off in Settings. The files listed above are for preview only and will not be copied." TextWrapping="Wrap" FontSize="13.333" HorizontalAlignment="Right" Width="306.113" Foreground="White"/>
 			<TextBlock x:Name="SBSDriveNotPluggedInDisabledTextBlock" Margin="0,0,64.287,26.037" VerticalAlignment="Bottom" Height="62.059" Text="The assigned portable storage is not attached to the system now. The files listed above are for preview only and will not be copied." TextWrapping="Wrap" FontSize="13.333" HorizontalAlignment="Right" Width="288.97" Foreground="White"/>
-			<Image x:Name="SBSWarningImage" Margin="374.207,0,358.257,41.655" VerticalAlignment="Bottom" Height="39.809" Source="Warning.png" Stretch="Fill"/>
+			<Image x:Name="SBSWarningImage" Margin="374.207,0,358.257,41.655" VerticalAlignment="Bottom" Height="39.809" Source="Images/Warning.png" Stretch="Fill"/>
 		</Grid>
 		<Grid x:Name="Conflict" Margin="0.027,0,0.449,-4" VerticalAlignment="Bottom" Height="528" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
 			<Grid.RowDefinitions>
