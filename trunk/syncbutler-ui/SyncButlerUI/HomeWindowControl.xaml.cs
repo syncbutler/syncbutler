@@ -1280,7 +1280,6 @@ namespace SyncButlerUI
             char DriveLetter = ((WindowDriveInfo)this.SBSWorkingDriveComboBox.SelectedItem).GetDriveLetter();
             double FreeSpaceToUse = double.Parse(this.LastWorkingFreeSpace);
             string Resolution = this.resolutionLabel.Content.ToString();
-            bool enableSyncAll = (bool)this.SBSSettingEnableSyncAll.IsChecked;
             double userrequestedspace = CalcuateUserRequestedSpace();
 
             if (SBSEnable.Equals("Enable") && userrequestedspace < 250 * MEGA_BYTE && userrequestedspace > 0)
@@ -1288,7 +1287,7 @@ namespace SyncButlerUI
                 if (CustomDialog.Show(this, CustomDialog.MessageTemplate.YesNo, CustomDialog.MessageResponse.No, "Sync Butler needs at least 250MB on your storage device to carry more of your recent files. It may not be able to carry the files you need, when you need them. Do you want to give Sync Bulter more storage space!") ==
                     CustomDialog.MessageResponse.No)
                 {
-                    Controller.SaveSetting(ComputerName, SBSEnable, DriveLetter, FreeSpaceToUse, Resolution, enableSyncAll);
+                    Controller.SaveSetting(ComputerName, SBSEnable, DriveLetter, FreeSpaceToUse, Resolution);
                     
                     String ExtraMsg = String.Format("Sync Butler, Sync! will now save your recent files to:\n\n{0}", Controller.GetSBSPath());
                     CustomDialog.Show(this, CustomDialog.MessageTemplate.OkOnly, CustomDialog.MessageResponse.Ok, "The settings has been changed.\r\n\r\n" + ExtraMsg);
@@ -1317,7 +1316,7 @@ namespace SyncButlerUI
                 }
                 else
                 {
-                    Controller.SaveSetting(ComputerName, SBSEnable, DriveLetter, FreeSpaceToUse, Resolution, enableSyncAll);
+                    Controller.SaveSetting(ComputerName, SBSEnable, DriveLetter, FreeSpaceToUse, Resolution);
                     FirstTimeHelp.Visibility = System.Windows.Visibility.Hidden;
                     if (SBSEnable.Equals("Enable"))
                     {
@@ -1840,7 +1839,6 @@ namespace SyncButlerUI
                             this.SpaceToUseSlide.Maximum = this.Controller.GetAvailableSpaceForDrive();
                             this.SpaceToUseSlide.Value = this.Controller.GetFreeSpaceToUse();
                             this.resolutionLabel.Content = this.Controller.GetResolution();
-                            this.SBSSettingEnableSyncAll.IsChecked = Controller.IsAutoSyncRecentFileAllowed();
                             this.SBSSettingDeviceNotFoundTextBox.Visibility = Visibility.Hidden;
                         }
                         else
