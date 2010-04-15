@@ -1,0 +1,44 @@
+﻿<Window
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	x:Class="SyncButlerUI.ErrorList"
+	x:Name="Window"
+	Title="ErrorList"
+    Closing="ErrorList_Closing"
+	Width="640" Height="480">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <FlowDocumentReader VerticalAlignment="Stretch" ViewingMode="Scroll" IsFindEnabled="False" IsPageViewEnabled="False" IsPrintEnabled="False">
+            <FlowDocument>
+                <Table Name="errorTable" CellSpacing="5" Background="Black">
+                    <Table.Columns>
+                        <TableColumn/>
+                        <TableColumn/>
+                    </Table.Columns>
+                    <TableRowGroup>
+                        <!-- Title row for the table. -->
+                        <TableRow Background="#FFA3A3A3">
+                            <TableCell ColumnSpan="3" TextAlignment="Center">
+                                <Paragraph FontSize="12pt" FontWeight="Bold">Errors have occured when attempting to add the following:</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <!-- Header row for the table. -->
+                        <TableRow Background="#FFFFFFFF">
+                            <TableCell>
+                                <Paragraph FontSize="10pt" FontWeight="Bold">Path</Paragraph>
+                            </TableCell>
+                            <TableCell ColumnSpan="2">
+                                <Paragraph FontSize="10pt" FontWeight="Bold">Error</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                    <TableRowGroup/>
+                </Table>
+            </FlowDocument>
+        </FlowDocumentReader>
+        <Button x:Name="closeWindow" HorizontalAlignment="Center" VerticalAlignment="Top" Width="75" Content="Close" Grid.Row="1" Margin="0,5" Click="closeWindow_Click"/>
+    </Grid>
+</Window>

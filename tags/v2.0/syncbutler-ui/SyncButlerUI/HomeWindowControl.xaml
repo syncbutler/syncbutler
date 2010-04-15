@@ -1,0 +1,1893 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	xmlns:Microsoft_Windows_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+	xmlns:Custom="http://schemas.microsoft.com/wpf/2008/toolkit"
+	xmlns:System="clr-namespace:System;assembly=mscorlib"
+	x:Class="SyncButlerUI.HomeWindowControl"
+	x:Name="UserControl" d:DesignHeight="444" RenderTransformOrigin="0.5,0.5" Width="770.8" Height="526.184">
+	<UserControl.Resources>
+		<Style x:Key="SyncButton" TargetType="{x:Type Button}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type Button}">
+						<ControlTemplate.Resources>
+							<Storyboard x:Key="MouseoverSync" RepeatBehavior="Forever">
+								<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="image" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)">
+									<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:04" Value="360"/>
+								</DoubleAnimationUsingKeyFrames>
+							</Storyboard>
+							<Storyboard x:Key="ButtonHighlight">
+								<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="bigButton_Copy" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
+									<SplineColorKeyFrame KeyTime="00:00:00" Value="#FF00945C"/>
+									<SplineColorKeyFrame KeyTime="00:00:04" Value="#FF00945C"/>
+								</ColorAnimationUsingKeyFrames>
+								<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="bigButton_Copy" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Offset)">
+									<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.545"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:04" Value="0.76"/>
+								</DoubleAnimationUsingKeyFrames>
+							</Storyboard>
+						</ControlTemplate.Resources>
+						<Grid x:Name="Sync_Button" Margin="0.318,0,0,0" Width="770.8">
+							<Rectangle x:Name="bigButton_Copy" Margin="-2.19,0,0.645,0.269" VerticalAlignment="Bottom" Height="335.651" Cursor="Hand">
+								<Rectangle.Fill>
+									<RadialGradientBrush RadiusX="1.264" RadiusY="1.006">
+										<GradientStop Color="#00000000" Offset="0.522"/>
+										<GradientStop Color="#FF007994"/>
+									</RadialGradientBrush>
+								</Rectangle.Fill>
+							</Rectangle>
+							<Image x:Name="image" Cursor="Hand" HorizontalAlignment="Stretch" Margin="99,83.347,488.015,78.876" Width="183.785" Opacity="0.6" RenderTransformOrigin="0.5,0.5" Source="Images\Synchonize.png" Stretch="Fill" Height="Auto">
+								<Image.RenderTransform>
+									<TransformGroup>
+										<ScaleTransform ScaleX="1" ScaleY="1"/>
+										<SkewTransform AngleX="0" AngleY="0"/>
+										<RotateTransform Angle="0"/>
+										<TranslateTransform/>
+									</TransformGroup>
+								</Image.RenderTransform>
+							</Image>
+							<Rectangle x:Name="Reflection" VerticalAlignment="Stretch" Height="Auto" Opacity="0.06" Margin="0,5,-3.81,147.729" RadiusX="7" RadiusY="6" Cursor="Hand">
+								<Rectangle.Effect>
+									<BlurEffect/>
+								</Rectangle.Effect>
+								<Rectangle.Fill>
+									<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+										<GradientStop Color="Black" Offset="0"/>
+										<GradientStop Color="White" Offset="0.43"/>
+									</LinearGradientBrush>
+								</Rectangle.Fill>
+							</Rectangle>
+							<TextBlock Cursor="Hand" Margin="299.709,171,88.884,86.376" Opacity="0.7" FontFamily="Arial" FontSize="18.667" Foreground="White" TextWrapping="Wrap" d:LayoutOverrides="VerticalAlignment"><Run Text="Work anywhere."/><LineBreak/><Run Text="Start sy"/><Run Text="nchronizing your files!"/></TextBlock>
+							<ContentPresenter Margin="299.5,124.5,92.524,0" VerticalAlignment="Top" Height="46.5" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Content="Start Syncing" RecognizesAccessKey="True"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<EventTrigger RoutedEvent="FrameworkElement.Loaded" SourceName="bigButton_Copy">
+								<BeginStoryboard x:Name="MouseoverSync_BeginStoryboard" Storyboard="{StaticResource MouseoverSync}"/>
+								<PauseStoryboard BeginStoryboardName="MouseoverSync_BeginStoryboard"/>
+							</EventTrigger>
+							<Trigger Property="IsFocused" Value="True"/>
+							<Trigger Property="IsDefaulted" Value="True"/>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Trigger.EnterActions>
+									<ResumeStoryboard BeginStoryboardName="MouseoverSync_BeginStoryboard"/>
+									<BeginStoryboard x:Name="ButtonHighlight_BeginStoryboard1" Storyboard="{StaticResource ButtonHighlight}"/>
+								</Trigger.EnterActions>
+								<Trigger.ExitActions>
+									<PauseStoryboard BeginStoryboardName="MouseoverSync_BeginStoryboard"/>
+									<StopStoryboard BeginStoryboardName="ButtonHighlight_BeginStoryboard1"/>
+								</Trigger.ExitActions>
+							</Trigger>
+							<Trigger Property="IsPressed" Value="True"/>
+							<Trigger Property="IsEnabled" Value="False"/>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Arial"/>
+			<Setter Property="FontSize" Value="29.333"/>
+			<Setter Property="Foreground" Value="White"/>
+		</Style>
+		<Style TargetType="{x:Type Button}" x:Key="ViewPartnershipButton">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type Button}">
+						<ControlTemplate.Resources>
+							<Storyboard x:Key="ViewPartnershipAnimation">
+								<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="bigButton_Copy">
+									<SplineColorKeyFrame KeyTime="00:00:00" Value="#FF005F74"/>
+									<SplineColorKeyFrame KeyTime="00:00:02" Value="#FF00945C"/>
+								</ColorAnimationUsingKeyFrames>
+								<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Offset)" Storyboard.TargetName="bigButton_Copy">
+									<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.564"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:02" Value="0.668"/>
+								</DoubleAnimationUsingKeyFrames>
+								<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="image" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+									<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:00.5000000" Value="4.524"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:01" Value="5.237"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:01.5000000" Value="0.716"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:02" Value="-4.761"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:02.5000000" Value="-9.048"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:03" Value="-9.285"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:03.5000000" Value="-5"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:04" Value="0"/>
+								</DoubleAnimationUsingKeyFrames>
+								<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="image" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+									<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:00.5000000" Value="-4.762"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:01" Value="-12.856"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:01.5000000" Value="-15.793"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:02" Value="-13.97"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:02.5000000" Value="-9.127"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:03" Value="-4.285"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:03.5000000" Value="-0.714"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:04" Value="0"/>
+								</DoubleAnimationUsingKeyFrames>
+							</Storyboard>
+						</ControlTemplate.Resources>
+						<Grid Margin="-2.585,-0.286,-0.461,0.286" Width="Auto" Height="181.794">
+							<Rectangle x:Name="bigButton_Copy" Margin="-0.334,0,-0.327,0" VerticalAlignment="Stretch" Height="Auto" Cursor="Hand" Width="Auto">
+								<Rectangle.Fill>
+									<RadialGradientBrush RadiusX="1.901" RadiusY="0.853">
+										<GradientStop Color="#00000000" Offset="0.564"/>
+										<GradientStop Color="#FF005F74"/>
+									</RadialGradientBrush>
+								</Rectangle.Fill>
+							</Rectangle>
+							<TextBlock Margin="102.667,77.217,0,0" Opacity="0.5" FontFamily="Arial" FontSize="16" Foreground="White" TextWrapping="Wrap" Cursor="Hand" TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140.307" Height="56.957"><Run Text="View and "/><LineBreak/><Run Text="manage your"/><LineBreak/><Run Text="partnerships"/></TextBlock>
+							<Image x:Name="image" Cursor="Hand" HorizontalAlignment="Left" Margin="13.666,61.402,0,37.452" Width="82.939" Opacity="0.6" Source="Images\Search.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="82.939" d:LayoutOverrides="HorizontalAlignment, VerticalMargin">
+								<Image.RenderTransform>
+									<TransformGroup>
+										<ScaleTransform/>
+										<SkewTransform/>
+										<RotateTransform/>
+										<TranslateTransform/>
+									</TransformGroup>
+								</Image.RenderTransform>
+							</Image>
+							<TextBlock Margin="0.975,21.769,11.739,0" VerticalAlignment="Top" Height="49" TextWrapping="Wrap" TextAlignment="Center" Opacity="0.7"><Run FontStyle="Normal" Text="View "/><Run Text="Partnerships"/></TextBlock>
+							<Rectangle x:Name="Reflection_Copy" Opacity="0.045" Margin="0.032,0,0.58,94.258" RadiusX="7" RadiusY="3" VerticalAlignment="Stretch" Height="Auto" Cursor="Hand" Width="Auto">
+								<Rectangle.Effect>
+									<BlurEffect/>
+								</Rectangle.Effect>
+								<Rectangle.Fill>
+									<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+										<GradientStop Color="Black"/>
+										<GradientStop Color="White" Offset="1"/>
+									</LinearGradientBrush>
+								</Rectangle.Fill>
+							</Rectangle>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
+							<Trigger Property="IsFocused" Value="True"/>
+							<Trigger Property="IsDefaulted" Value="True"/>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Trigger.ExitActions>
+									<StopStoryboard BeginStoryboardName="ViewPartnershipAnimation_BeginStoryboard"/>
+								</Trigger.ExitActions>
+								<Trigger.EnterActions>
+									<BeginStoryboard x:Name="ViewPartnershipAnimation_BeginStoryboard" Storyboard="{StaticResource ViewPartnershipAnimation}"/>
+								</Trigger.EnterActions>
+							</Trigger>
+							<Trigger Property="IsPressed" Value="True"/>
+							<Trigger Property="IsEnabled" Value="False"/>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Arial"/>
+			<Setter Property="FontSize" Value="21.333"/>
+			<Setter Property="FontStyle" Value="Italic"/>
+			<Setter Property="Foreground" Value="White"/>
+		</Style>
+		<Style x:Key="CreatePartnersButton" TargetType="{x:Type Button}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type Button}">
+						<ControlTemplate.Resources>
+							<Storyboard x:Key="CreatePartnershipAnimation">
+								<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="image" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+									<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:02" Value="10.953"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:04" Value="0"/>
+								</DoubleAnimationUsingKeyFrames>
+								<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="image" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+									<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:02" Value="-12.857"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:04" Value="0"/>
+								</DoubleAnimationUsingKeyFrames>
+								<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="image1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+									<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:02" Value="-14.761"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:04" Value="0"/>
+								</DoubleAnimationUsingKeyFrames>
+								<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="image1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+									<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:02" Value="8.572"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:04" Value="0"/>
+								</DoubleAnimationUsingKeyFrames>
+								<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="bigButton_Copy">
+									<SplineColorKeyFrame KeyTime="00:00:02" Value="#FF00945C"/>
+								</ColorAnimationUsingKeyFrames>
+								<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Offset)" Storyboard.TargetName="bigButton_Copy">
+									<SplineDoubleKeyFrame KeyTime="00:00:02" Value="0.668"/>
+								</DoubleAnimationUsingKeyFrames>
+							</Storyboard>
+						</ControlTemplate.Resources>
+						<Grid x:Name="CreatePartners" Margin="-1.262,-0.135,0.168,-1.214" Width="Auto">
+							<Rectangle x:Name="bigButton_Copy" Margin="-0.5,-0.148,-0.922,0" VerticalAlignment="Top" Height="175.429" Cursor="Hand" Width="Auto">
+								<Rectangle.Fill>
+									<RadialGradientBrush RadiusX="1.901" RadiusY="0.853">
+										<GradientStop Color="#00000000" Offset="0.564"/>
+										<GradientStop Color="#FF005F74"/>
+									</RadialGradientBrush>
+								</Rectangle.Fill>
+							</Rectangle>
+							<TextBlock Margin="100.736,76.753,28.732,0" VerticalAlignment="Top" Height="49.052" Opacity="0.5" FontFamily="Arial" FontSize="16" Foreground="White" TextWrapping="Wrap" Cursor="Hand" TextAlignment="Left"><Run Text="Select what "/><LineBreak/><Run Text="you want to sync"/></TextBlock>
+							<Image x:Name="image" Margin="13.485,71.929,0,21.936" Source="Images\Folder.png" Stretch="Fill" Opacity="0.595" HorizontalAlignment="Left" Width="82.939" RenderTransformOrigin="0.5,0.5" Height="82.939" d:LayoutOverrides="VerticalAlignment">
+								<Image.RenderTransform>
+									<TransformGroup>
+										<ScaleTransform/>
+										<SkewTransform/>
+										<RotateTransform/>
+										<TranslateTransform/>
+									</TransformGroup>
+								</Image.RenderTransform>
+							</Image>
+							<TextBlock Margin="1.073,21.221,-4.445,0" VerticalAlignment="Top" Height="36.571" TextAlignment="Center" TextWrapping="Wrap" Opacity="0.68" d:LayoutOverrides="VerticalAlignment"><Run FontStyle="Normal" Text="Create"/><Run Text=" Partnership"/></TextBlock>
+							<Image x:Name="image1" Margin="19.485,0,0,36.957" Source="Images\Folder.png" Stretch="Fill" HorizontalAlignment="Left" Width="82.939" Opacity="0.595" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Bottom" Height="82.939">
+								<Image.RenderTransform>
+									<TransformGroup>
+										<ScaleTransform/>
+										<SkewTransform/>
+										<RotateTransform/>
+										<TranslateTransform/>
+									</TransformGroup>
+								</Image.RenderTransform>
+							</Image>
+							<Rectangle x:Name="Reflection_Copy" Opacity="0.045" Margin="-0.5,1.207,-0.571,89.813" RadiusX="7" RadiusY="7" VerticalAlignment="Stretch" Height="Auto" Cursor="Hand">
+								<Rectangle.Effect>
+									<BlurEffect/>
+								</Rectangle.Effect>
+								<Rectangle.Fill>
+									<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+										<GradientStop Color="Black"/>
+										<GradientStop Color="White" Offset="1"/>
+									</LinearGradientBrush>
+								</Rectangle.Fill>
+							</Rectangle>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<EventTrigger RoutedEvent="FrameworkElement.Loaded" SourceName="bigButton_Copy"/>
+							<Trigger Property="IsFocused" Value="True"/>
+							<Trigger Property="IsDefaulted" Value="True"/>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Trigger.ExitActions>
+									<StopStoryboard BeginStoryboardName="CreatePartnershipAnimation_BeginStoryboard"/>
+								</Trigger.ExitActions>
+								<Trigger.EnterActions>
+									<BeginStoryboard x:Name="CreatePartnershipAnimation_BeginStoryboard" Storyboard="{StaticResource CreatePartnershipAnimation}"/>
+								</Trigger.EnterActions>
+							</Trigger>
+							<Trigger Property="IsPressed" Value="True"/>
+							<Trigger Property="IsEnabled" Value="False"/>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Arial"/>
+			<Setter Property="FontSize" Value="21.333"/>
+			<Setter Property="FontStyle" Value="Italic"/>
+			<Setter Property="Foreground" Value="White"/>
+		</Style>
+
+		<SolidColorBrush x:Key="ListBorder" Color="#828790"/>
+		
+		
+		<Style TargetType="{x:Type ListBoxItem}" x:Key="ListBoxItemStyle1">
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+			<Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+			<Setter Property="Padding" Value="2,0,0,0"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type ListBoxItem}">
+						<Border x:Name="Bd" SnapsToDevicePixels="true" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" Height="96.638" Width="724.742">
+							<Grid Height="95.638" Margin="-2,0,0,0" VerticalAlignment="Bottom" Width="Auto">
+								<ContentPresenter HorizontalAlignment="Right" VerticalAlignment="Top" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="0,4.5,168.132,0" Content="" Visibility="Hidden"/>
+								<Image Margin="1,26.96,0,16.31" Source="Images\Misc.png" Stretch="Fill" HorizontalAlignment="Left" Width="60.956" VerticalAlignment="Stretch" Height="Auto"/>
+								<TextBlock x:Name="folder1" HorizontalAlignment="Left" Margin="126.883,29.96,0,40.127" Width="550" TextTrimming="CharacterEllipsis" ToolTip="{Binding LeftFullPath}" Text="{Binding LeftFullPath}" TextWrapping="NoWrap" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Stretch" Height="Auto">
+									<TextBlock.RenderTransform>
+										<TransformGroup>
+											<ScaleTransform ScaleX="1"/>
+											<SkewTransform/>
+											<RotateTransform/>
+											<TranslateTransform/>
+										</TransformGroup>
+									</TextBlock.RenderTransform>
+								</TextBlock>
+								<TextBlock x:Name="folder2" HorizontalAlignment="Left" Margin="126.656,0,0,7.167" Width="550" TextTrimming="CharacterEllipsis" ToolTip="{Binding RightFullPath}" Text="{Binding RightFullPath}" TextWrapping="NoWrap" VerticalAlignment="Bottom" Height="32.96" d:LayoutOverrides="VerticalAlignment" RenderTransformOrigin="0.5,0.5">
+									<TextBlock.RenderTransform>
+										<TransformGroup>
+											<ScaleTransform ScaleX="1"/>
+											<SkewTransform/>
+											<RotateTransform/>
+											<TranslateTransform/>
+										</TransformGroup>
+									</TextBlock.RenderTransform>
+								</TextBlock>
+								<TextBlock x:Name="partnershipName" Margin="6,1.5,0,0" Text="{Binding Name}" TextWrapping="NoWrap" ToolTip="{Binding Name}" TextTrimming="CharacterEllipsis" HorizontalAlignment="Left" Width="600" VerticalAlignment="Top" Height="24.46" FontWeight="Bold" FontSize="18"/>
+								<TextBlock Margin="67.689,31.46,0,0" FontSize="12" FontWeight="Bold" Text="Folder 1:" TextWrapping="Wrap" TextAlignment="Right" HorizontalAlignment="Left" Width="55.876" VerticalAlignment="Top" Height="15.96"/>
+								<TextBlock Margin="66.608,0,0,22.167" FontSize="12" FontWeight="Bold" Text="Folder 2:" TextWrapping="Wrap" TextAlignment="Right" HorizontalAlignment="Left" Width="55.876" VerticalAlignment="Bottom" Height="15.96"/>
+							</Grid>
+						</Border>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsSelected" Value="true">
+								<Setter Property="Background" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+								<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
+							</Trigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsSelected" Value="true"/>
+									<Condition Property="Selector.IsSelectionActive" Value="false"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Background" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+								<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+							</MultiTrigger>
+							<Trigger Property="IsEnabled" Value="false">
+								<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+							</Trigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	
+		<Style x:Key="weirdFilesListItemsStyle" TargetType="{x:Type ListBox}">
+			<Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+			<Setter Property="BorderBrush" Value="{StaticResource ListBorder}"/>
+			<Setter Property="BorderThickness" Value="1"/>
+			<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+			<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+			<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+			<Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type ListBox}">
+						<Border x:Name="Bd" SnapsToDevicePixels="true" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="1">
+							<ScrollViewer Padding="{TemplateBinding Padding}" Focusable="false" Template="{DynamicResource weirdListItemScrollViewerControlTemplate2}">
+								<ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+							</ScrollViewer>
+						</Border>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsEnabled" Value="false">
+								<Setter Property="Background" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+							</Trigger>
+							<Trigger Property="IsGrouping" Value="true">
+								<Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+							</Trigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		<ControlTemplate x:Key="weirdListItemScrollViewerControlTemplate2" TargetType="{x:Type ScrollViewer}">
+			<ControlTemplate.Resources>
+				<Storyboard x:Key="ShowWeirdFiles">
+					<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="PART_ScrollContentPresenter" Storyboard.TargetProperty="(UIElement.Visibility)">
+						<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+					</ObjectAnimationUsingKeyFrames>
+				</Storyboard>
+			</ControlTemplate.Resources>
+			<Grid x:Name="Grid" Background="{TemplateBinding Background}" OpacityMask="Black">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="Auto"/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+				<Rectangle x:Name="Corner" Fill="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Grid.Column="1" Grid.Row="1"/>
+				<ScrollContentPresenter x:Name="PART_ScrollContentPresenter" Margin="{TemplateBinding Padding}" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Grid.Column="0" Grid.Row="0" CanContentScroll="{TemplateBinding CanContentScroll}" CanHorizontallyScroll="False" CanVerticallyScroll="False" Visibility="Hidden"/>
+				<ScrollBar x:Name="PART_VerticalScrollBar" Cursor="Arrow" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Grid.Column="1" Grid.Row="0" ViewportSize="{TemplateBinding ViewportHeight}" Maximum="{TemplateBinding ScrollableHeight}" Minimum="0" Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" AutomationProperties.AutomationId="VerticalScrollBar"/>
+				<ScrollBar x:Name="PART_HorizontalScrollBar" Cursor="Arrow" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" Grid.Column="0" Grid.Row="1" Orientation="Horizontal" ViewportSize="{TemplateBinding ViewportWidth}" Maximum="{TemplateBinding ScrollableWidth}" Minimum="0" Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" AutomationProperties.AutomationId="HorizontalScrollBar"/>
+			</Grid>
+			<ControlTemplate.Triggers>
+				<EventTrigger RoutedEvent="Mouse.MouseEnter">
+					<BeginStoryboard x:Name="ShowWeirdFiles_BeginStoryboard" Storyboard="{StaticResource ShowWeirdFiles}"/>
+				</EventTrigger>
+				<EventTrigger RoutedEvent="Mouse.MouseLeave">
+					<StopStoryboard BeginStoryboardName="ShowWeirdFiles_BeginStoryboard"/>
+					<StopStoryboard BeginStoryboardName="ShowWeirdFiles_BeginStoryboard"/>
+				</EventTrigger>
+			</ControlTemplate.Triggers>
+		</ControlTemplate>
+		<Style TargetType="{x:Type Button}" x:Key="ExploreFeaturesButton">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type Button}">
+						<ControlTemplate.Resources>
+							<Storyboard x:Key="ExploreFeaturesAnimation" RepeatBehavior="1x">
+								<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="bigButton_Copy" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
+									<SplineColorKeyFrame KeyTime="00:00:00" Value="#FF005F74"/>
+									<SplineColorKeyFrame KeyTime="00:00:02" Value="#FF00945C"/>
+								</ColorAnimationUsingKeyFrames>
+								<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="image" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+									<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:00.6000000" Value="1.3"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:01.3000000" Value="1"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:02" Value="1.3"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:02.7000000" Value="1"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:03.4000000" Value="1.3"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:04" Value="1"/>
+								</DoubleAnimationUsingKeyFrames>
+								<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="image" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+									<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:00.6000000" Value="1.3"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:01.3000000" Value="1"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:02" Value="1.3"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:02.7000000" Value="1"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:03.4000000" Value="1.3"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:04" Value="1"/>
+								</DoubleAnimationUsingKeyFrames>
+								<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="image" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+									<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:00.6000000" Value="1"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:01.3000000" Value="0"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:02" Value="1"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:02.7000000" Value="0"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:03.4000000" Value="1"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:04" Value="0"/>
+								</DoubleAnimationUsingKeyFrames>
+								<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="image" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+									<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:00.6000000" Value="1"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:01.3000000" Value="0"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:02" Value="1"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:02.7000000" Value="0"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:03.4000000" Value="1"/>
+									<SplineDoubleKeyFrame KeyTime="00:00:04" Value="0"/>
+								</DoubleAnimationUsingKeyFrames>
+							</Storyboard>
+						</ControlTemplate.Resources>
+						<Grid Margin="0,0,7,1.111">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="*"/>
+							</Grid.RowDefinitions>
+							<Rectangle x:Name="bigButton_Copy" Margin="-1.334,0,0,-2.111" VerticalAlignment="Bottom" Height="185.984" Cursor="Hand" HorizontalAlignment="Left" Width="262.735" Grid.RowSpan="1">
+								<Rectangle.Fill>
+									<RadialGradientBrush RadiusX="1.901" RadiusY="0.853">
+										<GradientStop Color="#00000000" Offset="0.564"/>
+										<GradientStop Color="#FF005F74"/>
+									</RadialGradientBrush>
+								</Rectangle.Fill>
+							</Rectangle>
+							<TextBlock Margin="0,19.448,2.376,89.235" VerticalAlignment="Stretch" Height="Auto" Opacity="0.6" FontFamily="Arial" FontSize="21.333" Foreground="White" TextAlignment="Center" TextWrapping="Wrap" Cursor="Hand" HorizontalAlignment="Right" Width="257.485"><Run Text="Explore "/><Run FontStyle="Italic" Text="Features"/></TextBlock>
+							<TextBlock Margin="99.621,75.852,-1.344,0" VerticalAlignment="Top" Height="51.212" Opacity="0.5" FontFamily="Arial" FontSize="16" Foreground="White" TextWrapping="Wrap" TextAlignment="Left" Cursor="Hand" Grid.Row="0"><Run Text="Discover a new"/><LineBreak/><Run Text="way of syncing"/></TextBlock>
+							<Rectangle x:Name="Reflection_Copy" Opacity="0.045" Margin="0,2.588,-1.059,86.378" RadiusX="7" RadiusY="6" VerticalAlignment="Stretch" Height="Auto" Cursor="Hand" HorizontalAlignment="Right" Width="252.374">
+								<Rectangle.Effect>
+									<BlurEffect/>
+								</Rectangle.Effect>
+								<Rectangle.Fill>
+									<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+										<GradientStop Color="Black"/>
+										<GradientStop Color="White" Offset="1"/>
+									</LinearGradientBrush>
+								</Rectangle.Fill>
+							</Rectangle>
+							<Image x:Name="image" Margin="3.639,39.995,0,23.384" Source="Images\star.png" Stretch="Fill" Opacity="0.6" RenderTransformOrigin="0.5,0.5" Width="110.331" Height="Auto" HorizontalAlignment="Left">
+								<Image.RenderTransform>
+									<TransformGroup>
+										<ScaleTransform/>
+										<SkewTransform/>
+										<RotateTransform/>
+										<TranslateTransform/>
+									</TransformGroup>
+								</Image.RenderTransform>
+							</Image>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsFocused" Value="True"/>
+							<Trigger Property="IsDefaulted" Value="True"/>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Trigger.ExitActions>
+									<StopStoryboard BeginStoryboardName="ExploreFeaturesAnimation_BeginStoryboard"/>
+								</Trigger.ExitActions>
+								<Trigger.EnterActions>
+									<BeginStoryboard x:Name="ExploreFeaturesAnimation_BeginStoryboard" Storyboard="{StaticResource ExploreFeaturesAnimation}"/>
+								</Trigger.EnterActions>
+							</Trigger>
+							<Trigger Property="IsPressed" Value="True"/>
+							<Trigger Property="IsEnabled" Value="False"/>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		
+		<LinearGradientBrush x:Key="VerticalScrollBarBackground" EndPoint="1,0" StartPoint="0,0">
+			<GradientStop Color="#E1E1E1" Offset="0"/>
+			<GradientStop Color="#EDEDED" Offset="0.20"/>
+			<GradientStop Color="#EDEDED" Offset="0.80"/>
+			<GradientStop Color="#E3E3E3" Offset="1"/>
+		</LinearGradientBrush>
+		<SolidColorBrush x:Key="ScrollBarDisabledBackground" Color="#F4F4F4"/>
+		<Style x:Key="ScrollBarButton" TargetType="{x:Type RepeatButton}">
+			<Setter Property="OverridesDefaultStyle" Value="true"/>
+			<Setter Property="Focusable" Value="false"/>
+			<Setter Property="IsTabStop" Value="false"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type RepeatButton}">
+						<Microsoft_Windows_Themes:ScrollChrome x:Name="Chrome" SnapsToDevicePixels="true" RenderMouseOver="{TemplateBinding IsMouseOver}" RenderPressed="{TemplateBinding IsPressed}" Microsoft_Windows_Themes:ScrollChrome.ScrollGlyph="{TemplateBinding Microsoft_Windows_Themes:ScrollChrome.ScrollGlyph}"/>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		<Style x:Key="VerticalScrollBarPageButton" TargetType="{x:Type RepeatButton}">
+			<Setter Property="OverridesDefaultStyle" Value="true"/>
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="Focusable" Value="false"/>
+			<Setter Property="IsTabStop" Value="false"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type RepeatButton}">
+						<Rectangle Fill="{TemplateBinding Background}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"/>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		<Style x:Key="ScrollBarThumb" TargetType="{x:Type Thumb}">
+			<Setter Property="OverridesDefaultStyle" Value="true"/>
+			<Setter Property="IsTabStop" Value="false"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type Thumb}">
+						<Microsoft_Windows_Themes:ScrollChrome x:Name="Chrome" SnapsToDevicePixels="true" RenderMouseOver="{TemplateBinding IsMouseOver}" RenderPressed="{TemplateBinding IsDragging}" Microsoft_Windows_Themes:ScrollChrome.ScrollGlyph="{TemplateBinding Microsoft_Windows_Themes:ScrollChrome.ScrollGlyph}"/>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		<LinearGradientBrush x:Key="HorizontalScrollBarBackground" EndPoint="0,1" StartPoint="0,0">
+			<GradientStop Color="#E1E1E1" Offset="0"/>
+			<GradientStop Color="#EDEDED" Offset="0.20"/>
+			<GradientStop Color="#EDEDED" Offset="0.80"/>
+			<GradientStop Color="#E3E3E3" Offset="1"/>
+		</LinearGradientBrush>
+		<Style x:Key="HorizontalScrollBarPageButton" TargetType="{x:Type RepeatButton}">
+			<Setter Property="OverridesDefaultStyle" Value="true"/>
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="Focusable" Value="false"/>
+			<Setter Property="IsTabStop" Value="false"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type RepeatButton}">
+						<Rectangle Fill="{TemplateBinding Background}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"/>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		<Style x:Key="ListBoxStyle1" TargetType="{x:Type ListBox}">
+			<Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+			<Setter Property="BorderBrush" Value="{StaticResource ListBorder}"/>
+			<Setter Property="BorderThickness" Value="1"/>
+			<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+			<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+			<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+			<Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type ListBox}">
+						<Border x:Name="Bd" SnapsToDevicePixels="true" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="1">
+							<ScrollViewer Padding="{TemplateBinding Padding}" Focusable="false">
+								<ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+							</ScrollViewer>
+						</Border>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsEnabled" Value="false">
+								<Setter Property="Background" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+							</Trigger>
+							<Trigger Property="IsGrouping" Value="true">
+								<Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+							</Trigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+			<Style x:Key="ConflictDataGridCellStyle" TargetType="{x:Type Custom:DataGridCell}">
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="BorderBrush" Value="Transparent"/>
+			<Setter Property="BorderThickness" Value="1"/>
+			<Setter Property="Template">		
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type Custom:DataGridCell}">
+						<Border SnapsToDevicePixels="True" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Height="35" Width="724.742">
+							<Grid Width="724.742" Height="33">
+								<ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" ContentTemplate="{TemplateBinding ContentTemplate}" HorizontalAlignment="Stretch" Margin="44.087,12.334,93.82,-0.834" VerticalAlignment="Stretch" Height="Auto"/>
+								<Image Margin="19.091,2.333,0,6.046" VerticalAlignment="Stretch" Height="Auto" Source="Images/Folder.png" Stretch="Fill" HorizontalAlignment="Left" Width="24.621" Opacity="0.445" />
+								<Image HorizontalAlignment="Left" Margin="15.576,3.214,0,5.165" VerticalAlignment="Stretch" Width="24.621" Height="Auto" Source="Images\Folder.png" Stretch="Fill" Opacity="0.41"/>
+								<TextBlock HorizontalAlignment="Left" Margin="45.087,-1.166,0,0" Width="113.5" Text="Partnership Name:" TextWrapping="Wrap" VerticalAlignment="Top" Height="17" FontWeight="Bold" />
+								<TextBlock x:Name="ConflictNo" HorizontalAlignment="Stretch" Margin="204.94,-0.994,356.227,7.993" Width="Auto" TextWrapping="Wrap" Text="(No Outstanding Issues)" VerticalAlignment="Stretch" Height="Auto">
+									<TextBlock.Style>
+										<Style TargetType="{x:Type TextBlock}">
+										<Setter Property="Visibility" Value="Collapsed"/>
+										<Style.Triggers>
+											<DataTrigger Binding="{Binding Path=Conflicts.Count}" Value="0">
+											<Setter Property="Visibility" Value="Visible"/>
+											</DataTrigger>
+										</Style.Triggers>
+									</Style>
+								</TextBlock.Style>
+								</TextBlock>
+								<Button HorizontalAlignment="Left" Margin="3,10.833,0,12" Style="{DynamicResource ExpandButton}" Width="10.167" Content="Button" Click="ExpandCollapseCoflicts" />						
+							</Grid>
+						</Border>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Style.Triggers>
+				<Trigger Property="IsSelected" Value="True">
+					<Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+					<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
+					<Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+				</Trigger>
+				<Trigger Property="IsKeyboardFocusWithin" Value="True">
+					<Setter Property="BorderBrush" Value="{DynamicResource {ComponentResourceKey ResourceId=FocusBorderBrushKey, TypeInTargetAssembly={x:Type Custom:DataGrid}}}"/>
+				</Trigger>
+			</Style.Triggers>
+		</Style>
+			<Style x:Key="ExpandButton" TargetType="{x:Type Button}">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type Button}">
+							<Grid>
+								<Image x:Name="ButtonImg">
+								<Image.Style>
+										<Style TargetType="{x:Type Image}" >
+										<Setter Property="Source" Value="Images/bullet_toggle_plus.png"/>
+										<Style.Triggers>
+											<DataTrigger Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Custom:DataGridCell}}}" Value="True">
+											<Setter Property="Source" Value="Images/bullet_toggle_minus.png" />
+											</DataTrigger>
+											<DataTrigger Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Custom:DataGridCell}}}" Value="False">
+											<Setter Property="Source" Value="Images/bullet_toggle_plus.png" />
+											</DataTrigger>
+										</Style.Triggers>
+										</Style>
+								</Image.Style>	
+								</Image>
+							</Grid>
+							<ControlTemplate.Triggers>
+								<Trigger Property="IsFocused" Value="True"/>
+								<Trigger Property="IsDefaulted" Value="True"/>
+								<Trigger Property="IsMouseOver" Value="True"/>
+								<Trigger Property="IsPressed" Value="True"/>
+								<Trigger Property="IsEnabled" Value="False"/>
+							</ControlTemplate.Triggers>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Style>
+		<Style x:Key="ListBoxMiniPartnershipItemStyle" TargetType="{x:Type ListBoxItem}">
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+			<Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+			<Setter Property="Padding" Value="2,0,0,0"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type ListBoxItem}">
+						<Border x:Name="Bd" SnapsToDevicePixels="true" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" Height="96.638" Width="724.742">
+							<Grid Height="95.638" Margin="-2,0,0,0" VerticalAlignment="Bottom" Width="Auto">
+								<ContentPresenter HorizontalAlignment="Right" VerticalAlignment="Top" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="0,4.5,168.132,0" Content="" Visibility="Hidden"/>
+								<Image Margin="1,23.96,0,16.31" Source="Images\file.png" Stretch="Fill" HorizontalAlignment="Left" Width="60.956" VerticalAlignment="Stretch" Height="Auto"/>
+								<TextBlock x:Name="folder1" Margin="118.883,21.96,0,40.127" ToolTip="{Binding LeftFullPath}" Text="{Binding LeftFullPath}" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Stretch" Height="Auto">
+									<TextBlock.RenderTransform>
+										<TransformGroup>
+											<ScaleTransform ScaleX="1"/>
+											<SkewTransform/>
+											<RotateTransform/>
+											<TranslateTransform/>
+										</TransformGroup>
+									</TextBlock.RenderTransform>
+								</TextBlock>
+								<TextBlock x:Name="folder2" Margin="118.656,0,0,5.167" ToolTip="{Binding RightFullPath}" Text="{Binding RightFullPath}" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="32.96" d:LayoutOverrides="VerticalAlignment" RenderTransformOrigin="0.5,0.5">
+									<TextBlock.RenderTransform>
+										<TransformGroup>
+											<ScaleTransform ScaleX="1"/>
+											<SkewTransform/>
+											<RotateTransform/>
+											<TranslateTransform/>
+										</TransformGroup>
+									</TextBlock.RenderTransform>
+								</TextBlock>
+								<TextBlock x:Name="partnershipName" Margin="6,1.5,0,0" Text="{Binding Name}" TextWrapping="Wrap" HorizontalAlignment="Stretch" Width="Auto" VerticalAlignment="Top" Height="20.46" FontWeight="Bold"/>
+								<TextBlock Margin="67.689,21.46,0,0" Text="Folder 1:" TextWrapping="Wrap" TextAlignment="Right" HorizontalAlignment="Left" Width="46.876" VerticalAlignment="Top" Height="15.96"/>
+								<TextBlock Margin="66.608,0,0,22.167" Text="Folder 2:" TextWrapping="Wrap" TextAlignment="Right" HorizontalAlignment="Left" Width="47.957" VerticalAlignment="Bottom" Height="15.96"/>
+							</Grid>
+						</Border>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsSelected" Value="true">
+								<Setter Property="Background" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+								<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
+							</Trigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsSelected" Value="true"/>
+									<Condition Property="Selector.IsSelectionActive" Value="false"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Background" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+								<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+							</MultiTrigger>
+							<Trigger Property="IsEnabled" Value="false">
+								<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+							</Trigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		<Storyboard x:Key="HideTextOnMouseOver"/>
+	</UserControl.Resources>
+	<UserControl.RenderTransform>
+		<TransformGroup>
+			<ScaleTransform ScaleX="1.05" ScaleY="1.05"/>
+			<SkewTransform/>
+			<RotateTransform/>
+			<TranslateTransform/>
+		</TransformGroup>
+	</UserControl.RenderTransform>
+
+	<Grid x:Name="LayoutRoot" Margin="0,0,-4.762,0">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition/>
+		</Grid.ColumnDefinitions>
+		<VisualStateManager.VisualStateGroups>
+			<VisualStateGroup x:Name="VisualStateGroup">
+				<VisualState x:Name="HomeState">
+					<Storyboard>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="HomeWindow" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+					</Storyboard>
+				</VisualState>
+				<VisualState x:Name="CreatePartnershipState">
+					<Storyboard>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="HomeWindow" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="CreatePartnership" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+					</Storyboard>
+				</VisualState>
+				<VisualState x:Name="CreateDoneState">
+					<Storyboard>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="HomeWindow" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="CreateDoneGrid" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+					</Storyboard>
+				</VisualState>
+				<VisualState x:Name="ViewPartnershipState">
+					<Storyboard>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="HomeWindow" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="ViewPartnership" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock13" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+					</Storyboard>
+				</VisualState>
+				<VisualState x:Name="SbsState">
+					<Storyboard>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="HomeWindow" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="sbs" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+					</Storyboard>
+				</VisualState>
+				<VisualState x:Name="ConflictState">
+					<Storyboard>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="Conflict" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="HomeWindow" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+					</Storyboard>
+				</VisualState>
+				<VisualState x:Name="SettingsState">
+					<Storyboard>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="Settings" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+					</Storyboard>
+				</VisualState>
+				<VisualState x:Name="EditPartnershipState">
+					<Storyboard>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="HomeWindow" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="CreatePartnership" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock3_Copy" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="CreatePartnershipBtn" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="EditPartnershipControl" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+					</Storyboard>
+				</VisualState>
+				<VisualState x:Name="EditDoneState">
+					<Storyboard>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="HomeWindow" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="CreateDoneGrid" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="createAnotherPartnershipBtn" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock2_Copy" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="Edit" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="button6" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="6"/>
+						</DoubleAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="button6" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-3"/>
+						</DoubleAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.022"/>
+						</DoubleAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+							<SplineDoubleKeyFrame KeyTime="00:00:00" Value="4.286"/>
+						</DoubleAnimationUsingKeyFrames>
+					</Storyboard>
+				</VisualState>
+				<VisualState x:Name="ResultState">
+					<Storyboard>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="HomeWindow" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="Result" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+					</Storyboard>
+				</VisualState>
+				<VisualState x:Name="ViewMiniPartnershipState">
+					<Storyboard>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="ViewPartnership" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock1" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="minipartnershiplist" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock4" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="textBlock5" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="partnershipList" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="Create" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="button4_Copy" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="button3_Copy" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="button2" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="button4" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="button3" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="viewMiniPartnershipBtn" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="viewPartnershipBtn" Storyboard.TargetProperty="(UIElement.Visibility)">
+							<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+						</ObjectAnimationUsingKeyFrames>
+					</Storyboard>
+				</VisualState>
+			</VisualStateGroup>
+		</VisualStateManager.VisualStateGroups>
+		<Grid x:Name="HomeWindow" VerticalAlignment="Bottom" Height="526.184" Margin="0,0,0.476,0">
+			<Rectangle x:Name="background" RadiusX="1" RadiusY="2" Margin="0,0,-0.212,0" Cursor="Arrow">
+				<Rectangle.Fill>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.504,0.026">
+						<GradientStop Color="Black" Offset="1"/>
+						<GradientStop Color="Black"/>
+					</LinearGradientBrush>
+				</Rectangle.Fill>
+			</Rectangle>
+			<Button x:Name="SyncButton" Margin="0,0,-0.213,180.176" Style="{DynamicResource SyncButton}" Content="" Cursor="Hand" Click="Sync" IsTabStop="False" />
+			<Button x:Name="ViewPartnerships" HorizontalAlignment="Right" Margin="0,350.741,256.43,0.011" Style="{DynamicResource ViewPartnershipButton}" Width="256.981" Content="" Click="GoToViewPartnerships_Click" Cursor="Hand"  Background="{x:Null}" BorderBrush="{x:Null}" IsTabStop="False" RenderTransformOrigin="0.5,0.5">
+				<Button.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Button.RenderTransform>
+			</Button>
+			<Button x:Name="ExploreFeaturesButton" HorizontalAlignment="Right" Margin="0,0,-5.524,-0.286" Style="{DynamicResource ExploreFeaturesButton}" VerticalAlignment="Bottom" Width="261.954" Height="174.821" Content="" Click="GoToExploreFeatures_Click"  Cursor="Hand" d:LayoutOverrides="VerticalAlignment" IsTabStop="False"/>
+			<Button x:Name="CreatePartnershipButton" HorizontalAlignment="Left" Margin="1.854,0,0,-0.013" Style="{DynamicResource CreatePartnersButton}" Width="256.981" Content="" Cursor="Hand" Click="GoToCreatePartnership_Click"  RenderTransformOrigin="0.5,0.5" VerticalAlignment="Bottom" Height="175.456" BorderBrush="{x:Null}" Background="{x:Null}" IsTabStop="False">
+				<Button.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Button.RenderTransform>
+			</Button>
+		</Grid>
+		<Grid x:Name="ViewPartnership" Margin="-2.973,0,3.449,-4" VerticalAlignment="Bottom" Height="532" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
+			<Grid.RenderTransform>
+				<TransformGroup>
+					<ScaleTransform/>
+					<SkewTransform/>
+					<RotateTransform/>
+					<TranslateTransform/>
+				</TransformGroup>
+			</Grid.RenderTransform>
+			<Rectangle x:Name="background_Copy" RadiusX="1" RadiusY="2" VerticalAlignment="Top" Height="530.558" Cursor="Arrow" RenderTransformOrigin="0.5,0.5">
+				<Rectangle.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Rectangle.RenderTransform>
+				<Rectangle.Fill>
+					<RadialGradientBrush GradientOrigin="0.265,0.184" RadiusX="1.237" RadiusY="1.237">
+						<GradientStop Color="Black" Offset="1"/>
+						<GradientStop Color="White"/>
+						<GradientStop Color="#FFA3A3A3" Offset="1"/>
+						<GradientStop Color="#FFA1A1A1" Offset="1"/>
+						<GradientStop Color="White" Offset="0.378"/>
+					</RadialGradientBrush>
+				</Rectangle.Fill>
+			</Rectangle>
+			<Image x:Name="image1_Copy" Margin="347.582,118.519,7.131,1.442" Source="Images\logo.png" Stretch="Fill" Opacity="0.06" RenderTransformOrigin="0.5,0.5">
+				<Image.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Image.RenderTransform>
+			</Image>
+			<Image HorizontalAlignment="Left" Margin="43.279,27.608,0,0" VerticalAlignment="Top" Width="71.494" Height="70.773" Source="Images\Doc.png" Stretch="Fill"/>
+			<TextBlock x:Name="textBlock4" Margin="118.691,37.303,228.145,0" VerticalAlignment="Top" Height="59.623" FontFamily="Fonts/#Segoe UI" FontSize="24" FontWeight="Bold" Text="View Partnership" TextWrapping="Wrap"/>
+			<TextBlock x:Name="textBlock1" Margin="118.691,65.211,228.145,0" VerticalAlignment="Top" Height="40.926" FontSize="14.667" TextWrapping="Wrap" Text="List of partnerships you have created"/>
+			<ListBox x:Name="partnershipList" Margin="32.163,107.706,29.169,81.727"  ItemContainerStyle="{DynamicResource ListBoxItemStyle1}" Background="White" BorderBrush="#FF787878" Foreground="Black" RenderTransformOrigin="0.5,0.5" Style="{DynamicResource ListBoxStyle1}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single" FontSize="14.667"  >
+				<ListBox.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</ListBox.RenderTransform>
+			</ListBox>
+			<Button x:Name="button2" Margin="224.116,0,483.684,25.803"  VerticalAlignment="Bottom" Height="32.962" Content="Edit" Click="GoToEditPartnership_Click" Cursor="Hand" FontSize="14.667" Width="63"/>
+			<Button x:Name="button4"  Margin="311.96,0,395.84,25.803" VerticalAlignment="Bottom" Height="32.962" Content="Delete" Click="DeletePartnership_Click" RenderTransformOrigin="0.5,0.5" Cursor="Hand" FontSize="14.667" Width="63">
+				<Button.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Button.RenderTransform>
+			</Button>
+			<Button x:Name="Create"  Margin="0,0,308.465,25.803" VerticalAlignment="Bottom" Height="32.962" Content="Create" Click="GoToCreatePartnership_Click" HorizontalAlignment="Right" Width="63" Cursor="Hand" FontSize="14.667"/>
+			<Button x:Name="button3" Margin="488.455,0,219.345,25.803"  VerticalAlignment="Bottom" Height="32.962" Content="Sync" Click="SyncPartnership_Click" RenderTransformOrigin="0.5,0.5" Cursor="Hand" FontSize="14.667" Width="63">
+				<Button.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Button.RenderTransform>
+			</Button>
+			<TextBlock x:Name="textBlock13" Margin="0,100.926,22.93,81.727" TextWrapping="Wrap" HorizontalAlignment="Right" Width="241.987" FontSize="14.667" TextAlignment="Justify"><Run FontSize="21.333" FontWeight="Bold" Text="Welcome to"/><LineBreak/><Run FontSize="21.333" FontWeight="Bold" Text="Mini-Partnerships!"/><LineBreak/><LineBreak/><Run FontSize="16" Text="The mini-partnerships on the left are created automatically when you use the &quot;"/><Run FontSize="16" FontWeight="Bold" Text="Mini-Sync"/><Run FontSize="16" Text="&quot; feature."/><LineBreak/><LineBreak/><Run FontSize="16" Text="You can easily "/><Run FontSize="16" FontWeight="Bold" Text="create "/><Run FontSize="16" Text="more "/><Run FontSize="16" FontWeight="Bold" Text="mini-partnerships"/><Run FontSize="16" Text=" by "/><Run FontSize="16" FontWeight="Bold" Text="right-clicking "/><Run FontSize="16" Text="a folder or file and then selecting &quot;"/><Run FontSize="16" FontWeight="Bold" Text="Mini-Sync This!&quot;"/><Run FontSize="16" Text="."/><LineBreak/><LineBreak/><Run FontSize="16" Text="If you "/><Run FontSize="16" FontWeight="Bold" Text="edit "/><Run FontSize="16" Text="these files on other computers, you just need to click on "/><Run FontSize="16" FontWeight="Bold" Text="Sync All"/><Run FontSize="16" Text=" (in "/><Run FontSize="16" FontWeight="Bold" Text="Home"/><Run FontSize="16" Text=") to update the copy that is on this computer!"/></TextBlock>
+			<Button x:Name="viewMiniPartnershipBtn" HorizontalAlignment="Right" Margin="0,46.303,31.169,0" VerticalAlignment="Top" Width="182" Height="35.715" Content="Show Mini Partnerships" Click="ViewMiniPartnerships_Click" Cursor="Hand" FontSize="16" Visibility="Hidden">
+				<Button.Background>
+					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+						<GradientStop Color="#FFF3F3F3" Offset="0"/>
+						<GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+						<GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+						<GradientStop Color="#FFD2FF87" Offset="1"/>
+					</LinearGradientBrush>
+				</Button.Background>
+			</Button>
+			<TextBlock x:Name="textBlock" Margin="118.691,37.303,250.346,0" VerticalAlignment="Top" Height="59.623" FontFamily="Fonts/#Segoe UI" FontSize="24" FontWeight="Bold" Text="View Mini Partnership" TextWrapping="Wrap" Visibility="Hidden"/>
+			<ListBox x:Name="minipartnershiplist" Margin="32.163,107.706,282.026,81.727"  ItemContainerStyle="{DynamicResource ListBoxMiniPartnershipItemStyle}" Background="White" BorderBrush="#FF787878" Foreground="Black" RenderTransformOrigin="0.5,0.5" Style="{DynamicResource ListBoxStyle1}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single"  Visibility="Hidden"  >
+				<ListBox.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</ListBox.RenderTransform>
+			</ListBox>
+			<TextBlock x:Name="textBlock5" Margin="118.691,65.211,250.346,0" VerticalAlignment="Top" Height="40.926" FontSize="14.667" TextWrapping="Wrap" Text="List of mini partnerships you have created" Visibility="Hidden"/>
+			<Button  x:Name="button4_Copy"  Margin="163.96,0,0,25.803" VerticalAlignment="Bottom" Height="32.962" Content="Delete" Click="DeleteMiniPartnership_Click" RenderTransformOrigin="0.5,0.5" Visibility="Hidden" Cursor="Hand" Width="80" HorizontalAlignment="Left" d:LayoutOverrides="Width">
+				<Button.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Button.RenderTransform>
+			</Button>
+			<Button x:Name="button3_Copy" Margin="273.295,0,417.505,25.803"  VerticalAlignment="Bottom" Height="32.962" Content="Sync All" Click="SyncMiniPartnership_Click" RenderTransformOrigin="0.5,0.5" Visibility="Hidden" Cursor="Hand" Width="80">
+				<Button.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Button.RenderTransform>
+			</Button>
+			<Button x:Name="viewPartnershipBtn" HorizontalAlignment="Right" Margin="0,46.303,31.169,0" VerticalAlignment="Top" Width="182" Height="35.715" Content="Show Partnerships" Visibility="Hidden" Click="GoToViewPartnerships_Click" Cursor="Hand" FontSize="16">
+				<Button.Background>
+					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+						<GradientStop Color="#FFF3F3F3" Offset="0"/>
+						<GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+						<GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+						<GradientStop Color="#FFD2FF87" Offset="1"/>
+					</LinearGradientBrush>
+				</Button.Background>
+			</Button>
+		</Grid>
+		<Grid x:Name="sbs" Margin="0.027,0,-1.024,0" VerticalAlignment="Bottom" Height="526.184" Background="Black" Visibility="Hidden" >
+			<Rectangle x:Name="background_Copy2" RadiusX="1" RadiusY="2" Margin="0,0,-3.2,0" VerticalAlignment="Top" Height="526.184" Cursor="Arrow">
+				<Rectangle.Fill>
+					<RadialGradientBrush GradientOrigin="0.265,0.184" RadiusX="1.237" RadiusY="1.237">
+						<GradientStop Color="Black" Offset="1"/>
+						<GradientStop Color="White"/>
+						<GradientStop Color="#FFA3A3A3" Offset="1"/>
+						<GradientStop Color="#FFA1A1A1" Offset="1"/>
+						<GradientStop Color="White" Offset="0.378"/>
+					</RadialGradientBrush>
+				</Rectangle.Fill>
+			</Rectangle>
+			<Image x:Name="image1_Copy1" Margin="364.078,93.521,-3.784,16.88" Source="Images\logo.png" Stretch="Fill" Opacity="0.06" RenderTransformOrigin="0.5,0.5">
+				<Image.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Image.RenderTransform>
+			</Image>
+			<TextBlock Margin="46.126,30.457,0,0" FontFamily="Arial" FontSize="32" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="54.564" FontStyle="Italic" HorizontalAlignment="Left" Width="269.488"><Run FontFamily="Fonts/#Segoe UI" FontStyle="Normal" Text="Sync Butler"/><Run FontStyle="Normal" Text=", "/><Run FontFamily="Fonts/#Segoe UI" FontStyle="Italic" Text="Sync!"/></TextBlock>
+			<TextBlock Margin="0,108.521,444.663,0" FontSize="18.667" TextWrapping="Wrap" HorizontalAlignment="Right" Width="301.445" VerticalAlignment="Top" Height="82.22" d:LayoutOverrides="VerticalAlignment" TextAlignment="Center"><Run FontWeight="Bold" Text="These files are copied automatically*, there is"/><LineBreak/><Run FontWeight="Bold" Text="nothing for you to do here!"/><LineBreak/></TextBlock>
+			<ListBox x:Name="Favourites_List"  Margin="348.273,72.384,28.477,95.086" MouseDoubleClick="OpenSelectedOnList" FontSize="14.667" />
+			<TextBlock Margin="348.273,34.957,227.422,0" FontFamily="Fonts/#Segoe UI" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="25.927" Text="Favourites List"/>
+			<Button x:Name="SBSSettings" Margin="83.953,0,0,49.893" VerticalAlignment="Bottom" Height="30" Content="Settings" RenderTransformOrigin="0.79,1.043" Cursor="Hand" Click="GoToSetting" FontSize="14.667" HorizontalAlignment="Left" Width="84">
+				<Button.Background>
+					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+						<GradientStop Color="#FFF3F3F3" Offset="0"/>
+						<GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+						<GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+						<GradientStop Color="#FFD2FF87" Offset="1"/>
+					</LinearGradientBrush>
+				</Button.Background>
+			</Button>			
+			<Button Margin="191.242,0,0,50.441" VerticalAlignment="Bottom" Content="Show Help" Click="ShowHelp" Height="30" FontSize="14.667" HorizontalAlignment="Left" Width="84"/>
+			<Path Stretch="Fill" Stroke="#FF908A8A" StrokeThickness="2" Margin="38.093,76.925,0,0" VerticalAlignment="Top" Height="2" Data="M1.0000301,0.99999902 L187.03178,0.99999902" HorizontalAlignment="Left" Width="276.52"/>
+			<Path Stretch="Fill" Stroke="#FF908A8A" StrokeThickness="2" Margin="37.093,219.741,0,0" Data="M1.0000301,0.99999902 L187.03178,0.99999902" VerticalAlignment="Top" Height="2" HorizontalAlignment="Left" Width="281.365"/>
+			<TextBlock Margin="0,248.233,444.663,0" FontSize="14.667" TextWrapping="Wrap" HorizontalAlignment="Right" Width="301.445" VerticalAlignment="Top" Height="142.738" TextAlignment="Justify"><Run Text="The files shown in the "/><Run FontWeight="Bold" Text="Favourites List"/><Run Text=" box will be "/><Run FontWeight="Bold" Text="automatically copied "/><Run Text="to your selected portable storage device."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="Simply click on "/><Run FontWeight="Bold" Text="Start Syncing"/><Run Text=" in the "/><Run FontWeight="Bold" Text="Home"/><Run Text=" page to copy these files to your "/><Run FontWeight="Bold" Text="portable storage device"/><Run Text="!"/></TextBlock>
+			<TextBlock FontFamily="Fonts/#Segoe UI" Margin="0,411.702,473.869,0" TextWrapping="Wrap" HorizontalAlignment="Right" Width="272.239" VerticalAlignment="Top" Height="16.158" TextAlignment="Justify" RenderTransformOrigin="0.503,6.252" FontStyle="Italic" FontSize="10.667"><Run Text="*Only if you "/><Run FontWeight="Bold" Text="enable "/><Run Text="this feature in the settings, of course!"/></TextBlock>
+			<Rectangle Fill="Black" Stroke="#FF62DE37" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="354.273,435.088,32.953,0" VerticalAlignment="Top" Height="63.059"/>
+			<TextBlock x:Name="SBSPathTextBlock" Margin="364.033,0,255.86,47" VerticalAlignment="Bottom" Height="23.738" TextWrapping="Wrap" FontSize="16" Text="Files will be saved to: " Foreground="White"/>
+			<Label x:Name="SBSPathLabel" Margin="0,0,47.144,44" VerticalAlignment="Bottom" Height="29.893" Content="Label" FontSize="14.667" FontWeight="Bold" HorizontalAlignment="Right" Width="209.198" Foreground="White"/>
+			<TextBlock x:Name="SBSfeatureDisabledTextBlock" Margin="0,0,47.144,41" VerticalAlignment="Bottom" Height="38.096" Text="This feature is turned off in Settings. The files listed above are for preview only and will not be copied." TextWrapping="Wrap" FontSize="13.333" HorizontalAlignment="Right" Width="306.113" Foreground="White"/>
+			<TextBlock x:Name="SBSDriveNotPluggedInDisabledTextBlock" Margin="0,0,64.287,26.037" VerticalAlignment="Bottom" Height="62.059" Text="The assigned portable storage is not attached to the system now. The files listed above are for preview only and will not be copied." TextWrapping="Wrap" FontSize="13.333" HorizontalAlignment="Right" Width="288.97" Foreground="White"/>
+			<Image x:Name="SBSWarningImage" Margin="374.207,0,358.257,41.655" VerticalAlignment="Bottom" Height="39.809" Source="Images/Warning.png" Stretch="Fill"/>
+		</Grid>
+		<Grid x:Name="Conflict" Margin="0.027,0,0.449,-4" VerticalAlignment="Bottom" Height="528" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
+			<Grid.RowDefinitions>
+				<RowDefinition/>
+			</Grid.RowDefinitions>
+			<Grid.RenderTransform>
+				<TransformGroup>
+					<ScaleTransform/>
+					<SkewTransform/>
+					<RotateTransform/>
+					<TranslateTransform/>
+				</TransformGroup>
+			</Grid.RenderTransform>
+			<Rectangle x:Name="background_Copy3" RadiusX="1" RadiusY="2" Margin="0,-6,8,0" VerticalAlignment="Top" Height="534" Cursor="Arrow" RenderTransformOrigin="0.5,0.5">
+				<Rectangle.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Rectangle.RenderTransform>
+				<Rectangle.Fill>
+					<RadialGradientBrush GradientOrigin="0.265,0.184" RadiusX="1.237" RadiusY="1.237">
+						<GradientStop Color="Black" Offset="1"/>
+						<GradientStop Color="White"/>
+						<GradientStop Color="#FFA3A3A3" Offset="1"/>
+						<GradientStop Color="#FFA1A1A1" Offset="1"/>
+						<GradientStop Color="White" Offset="0.378"/>
+					</RadialGradientBrush>
+				</Rectangle.Fill>
+			</Rectangle>
+			<Image x:Name="image1_Copy2" Margin="182.092,130.331,9.455,22.247" Source="Images\logo.png" Stretch="Fill" Opacity="0.04"/>
+			<Rectangle Stroke="Black" RadiusX="5" RadiusY="2" Margin="18.798,374.118,17.383,0" VerticalAlignment="Top" Height="142.286"/>
+			<TextBlock x:Name="PartnershipName" Margin="29.169,0,267.738,111.641" VerticalAlignment="Bottom" Height="36.427" FontSize="14.667" FontWeight="Bold" Text="Partnership Name" TextWrapping="Wrap"/>
+			<TextBlock x:Name="CurrentSyncingFile" Margin="29.169,0,27.582,70.903" VerticalAlignment="Bottom" Height="35.738" TextTrimming="CharacterEllipsis" TextWrapping="Wrap" Text="Currently Syncing: C:/doc/xml.xml" FontSize="13.333"/>
+			<ProgressBar x:Name="SubProgressBar" Margin="162.316,0,27.582,46.081" VerticalAlignment="Bottom" Height="16.776"/>
+			<ProgressBar x:Name="TotalProgressBar" Margin="162.316,0,27.582,23.467" VerticalAlignment="Bottom" Height="16.776"/>
+			<TextBlock x:Name="ConflictsLabel" Margin="22.749,18.326,124.473,0" FontSize="24" FontWeight="Bold" Text="Sync Status" TextWrapping="Wrap" VerticalAlignment="Top" Height="42.946"/>
+			<Custom:DataGrid x:Name="ConflictList"  Margin="23.736,130.331,22.322,163.948" RowDetailsVisibilityMode="VisibleWhenSelected"  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True" CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False" GridLinesVisibility="Vertical" HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding StaticResource, Mode=TwoWay}" Custom:SelectiveScrollingGrid.SelectiveScrollingOrientation="Horizontal" CanUserResizeRows="False" HeadersVisibility="None" VerticalScrollBarVisibility="Visible" RenderTransformOrigin="0.5,0.5" EnableRowVirtualization="True" RowBackground="White" AlternatingRowBackground="WhiteSmoke" CellStyle="{DynamicResource ConflictDataGridCellStyle}" Focusable="False" Grid.IsSharedSizeScope="True" SelectedIndex="-1" SelectionMode="Single">
+			<Custom:DataGrid.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Custom:DataGrid.RenderTransform>
+				<Custom:DataGrid.Columns>
+					<Custom:DataGridTextColumn x:Name="conflictlistPartnershipName" Width="724.742
+					" MinWidth="724.742" Header="Partnerships" Binding="{Binding PartnershipName}" CanUserSort="False" CanUserResize="False" CanUserReorder="False" IsReadOnly="True"/>
+				</Custom:DataGrid.Columns>
+				<Custom:DataGrid.RowDetailsTemplate>
+					<DataTemplate>
+						<ListBox x:Name="conflictsListBox" MaxHeight="165" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding Conflicts}" BorderThickness="1" BorderBrush="Black" Width="705">
+							<ListBox.Style>
+									<Style TargetType="{x:Type ListBox}">
+										<Setter Property="Visibility" Value="Visible"/>
+									<Style.Triggers>
+										<DataTrigger Binding="{Binding Path=Conflicts.Count}" Value="0">
+										<Setter Property="Visibility" Value="Hidden"/>
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>	
+							</ListBox.Style>
+							<ListBox.ItemTemplate>
+								<DataTemplate>
+										<Grid Height="75" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="680" >
+										<TextBlock x:Name="Offending_Path" FontWeight="Bold" Margin="38.191,3.502,170.431,1.457" VerticalAlignment="Stretch" HorizontalAlignment="Left" Width="400" Height="Auto" Text="{Binding FriendlyOffendingPath}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" ToolTip="{Binding FriendlyOffendingPath}" d:LayoutOverrides="VerticalAlignment"/>
+										<TextBlock x:Name="Folder1_Label" FontWeight="Bold" HorizontalAlignment="Stretch" Margin="48.191,20.502,170.431,1.457" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Text="Folder 1:" TextWrapping="Wrap" d:LayoutOverrides="VerticalAlignment"/>
+										<TextBlock x:Name="Folder1_Path" Margin="101.191,20.502,170.431,1.457" TextWrapping="NoWrap" HorizontalAlignment="Left" ToolTip="{Binding LeftFolder}" VerticalAlignment="Stretch" Width="430" Height="Auto" Text="{Binding LeftFolder}" d:LayoutOverrides="VerticalAlignment" TextTrimming="CharacterEllipsis"/>
+										<TextBlock x:Name="Folder2_Label" FontWeight="Bold" HorizontalAlignment="Stretch" Margin="48.191,37.502,170.431,1.457" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Text="Folder 2:" TextWrapping="Wrap" d:LayoutOverrides="VerticalAlignment"/>
+										<TextBlock x:Name="Folder2_Path" Margin="101.191,37.502,170.431,1.457" TextWrapping="NoWrap" HorizontalAlignment="Left" ToolTip="{Binding RightFolder}" VerticalAlignment="Stretch" Width="430" Height="Auto" Text="{Binding RightFolder}" d:LayoutOverrides="VerticalAlignment" TextTrimming="CharacterEllipsis"/>
+										<TextBlock x:Name="Reason_Label" FontWeight="Bold" HorizontalAlignment="Stretch" Margin="48.191,53.502,170.431,1.457" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Text="Reason:" TextWrapping="Wrap" d:LayoutOverrides="VerticalAlignment"/>
+										<TextBlock x:Name="Reason_Actual" Margin="101.191,53.502,170.431,1.457" TextWrapping="NoWrap" HorizontalAlignment="Left" ToolTip="{Binding Reason}" VerticalAlignment="Stretch" Width="430" Height="Auto" Text="{Binding Reason}" d:LayoutOverrides="VerticalAlignment" TextTrimming="CharacterEllipsis"/>
+										<ComboBox x:Name="Action_Taken"  ItemsSource="{Binding Path=userActions}" DisplayMemberPath="Description" SelectedItem="{Binding userActions.SelectedAction}" Margin="0,5.769,6.135,15" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="22" HorizontalAlignment="Right" Width="114.522" >
+											<ComboBox.RenderTransform>
+												<TransformGroup>
+													<ScaleTransform/>
+													<SkewTransform/>
+													<RotateTransform/>
+													<TranslateTransform/>
+												</TransformGroup>
+											</ComboBox.RenderTransform>
+										</ComboBox>
+										<Image Margin="1.924,3.435,0,1.037" Source="Images/File.png" Stretch="Uniform" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="27.743" Height="Auto"/>
+										<TextBlock HorizontalAlignment="Right" FontWeight="Bold" Margin="0,8.638,131.302,6.655" Width="43" Text="Action:" TextWrapping="NoWrap" VerticalAlignment="Stretch" Height="Auto"/>		
+									</Grid>
+								</DataTemplate>
+							</ListBox.ItemTemplate>
+						</ListBox>
+					</DataTemplate>
+				</Custom:DataGrid.RowDetailsTemplate>
+
+			</Custom:DataGrid>
+			<TextBlock x:Name="CurrentSyncingFile_Copy" Margin="23.736,61.272,158.487,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="78.454" FontSize="14.667" TextAlignment="Justify"><Run FontFamily="Fonts/#Segoe UI" FontSize="16" Text="Sync Butler "/><Run Text="is syncing your files. If "/><Run FontFamily="Fonts/#Segoe UI" FontSize="16" Text="Sync Butler "/><Run Text="do"/><Run Text="es"/><Run Text=" not know what to do with a file, "/><Run Text="he"/><Run Text=" will list it below. "/><Run Text="When that happens, p"/><Run Text="lease select the action you will like "/><Run FontFamily="Fonts/#Segoe UI" FontSize="16" Text="Sync Butler "/><Run Text="to take. When you are done, simply click on"/><Run Text=" the"/><Run Text=" "/><Run FontWeight="Bold" Text="Fix Issues "/><Run Text="button."/></TextBlock>
+			<Button x:Name="resolveButton"  HorizontalAlignment="Right" Margin="0,94.657,22.322,0" VerticalAlignment="Top" Width="119.784" Height="31" Content="Fix Issues" Click="ResolvePartnership_Click" IsEnabled="False" FontSize="14.667">
+				<Button.Background>
+					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+						<GradientStop Color="#FFF3F3F3" Offset="0"/>
+						<GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+						<GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+						<GradientStop Color="#FFD2FF87" Offset="1"/>
+					</LinearGradientBrush>
+				</Button.Background>
+			</Button>
+			<Button x:Name="doneButton" HorizontalAlignment="Right"  Margin="0,0,175.892,115.99" VerticalAlignment="Bottom" Width="75.3" Height="29.078" Content="Close" IsEnabled="False" Click="GoHome" FontSize="14.667"/>
+			<Button x:Name="goToResultPageButton" HorizontalAlignment="Right"  Margin="0,0,27.582,115.99" VerticalAlignment="Bottom" Width="132" Height="29.078" Content="Go To Result Page" IsEnabled="False" Click="ShowResult" FontSize="14.667"/>
+			<Button x:Name="CancelButton" IsTabStop="False"  Margin="0,57.621,22.322,0" VerticalAlignment="Top" Height="31" Content="Cancel Sync" Click="CancelButton_Click" HorizontalAlignment="Right" Width="119.784" FontSize="14.667"/>
+			<Label HorizontalAlignment="Left" Margin="24.724,0,0,37.418" VerticalAlignment="Bottom" Content="Current File Progress:" FontWeight="Bold" Width="129.283" Height="30.485"/>
+			<Label HorizontalAlignment="Left" Margin="24.23,0,0,15.944" VerticalAlignment="Bottom" Content="Overall Progress:" FontWeight="Bold" Width="104.16" Height="30.485"/>
+		</Grid>
+		<Grid x:Name="Settings" Margin="0.027,0,0.449,0" VerticalAlignment="Bottom" Height="526.184" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
+			<Grid.RenderTransform>
+				<TransformGroup>
+					<ScaleTransform/>
+					<SkewTransform/>
+					<RotateTransform/>
+					<TranslateTransform/>
+				</TransformGroup>
+			</Grid.RenderTransform>
+			<Rectangle x:Name="background_Copy5" RadiusX="1" RadiusY="2" VerticalAlignment="Top" Height="526.184" Cursor="Arrow" RenderTransformOrigin="0.5,0.5">
+				<Rectangle.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Rectangle.RenderTransform>
+				<Rectangle.Fill>
+					<RadialGradientBrush GradientOrigin="0.265,0.184" RadiusX="1.237" RadiusY="1.237">
+						<GradientStop Color="Black" Offset="1"/>
+						<GradientStop Color="White"/>
+						<GradientStop Color="#FFA3A3A3" Offset="1"/>
+						<GradientStop Color="#FFA1A1A1" Offset="1"/>
+						<GradientStop Color="White" Offset="0.378"/>
+					</RadialGradientBrush>
+				</Rectangle.Fill>
+			</Rectangle>
+			<Image x:Name="image1_Copy3" Margin="361.231,118.257,0.812,2.916" Source="Images\logo.png" Stretch="Fill" Opacity="0.06" RenderTransformOrigin="0.5,0.5">
+				<Image.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Image.RenderTransform>
+			</Image>
+			<TextBlock x:Name="ConflictsLabel1" Margin="25.046,40.341,352.007,0" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="46.267" RenderTransformOrigin="0.5,0.5"><TextBlock.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</TextBlock.RenderTransform><Run FontFamily="Fonts/#Segoe UI" FontStyle="Normal" Text="Sync Butler"/><Run FontStyle="Normal" Text=", "/><Run FontFamily="D:\University\CS3215 - Software Engineering Project\SyncButler\syncbutler-ui\SyncButlerUI\Fonts\#Segoe UI" Text="Sync!  "/><Run Text="Settings"/></TextBlock>
+			<TextBlock x:Name="NoUSBWarningTextBlock" Margin="30.567,0,0,131.868" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="105.837" FontSize="14.667" HorizontalAlignment="Left" Width="234.763" TextAlignment="Justify" Visibility="Hidden"><TextBlock.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</TextBlock.RenderTransform><Run FontWeight="Bold" Text="Note:"/><LineBreak/><Run Text="No"/><Run Text=" portable storage device was detected. Please plug in a portable storage device if you wish to use it with "/><Run FontFamily="Fonts/#Segoe UI" FontWeight="Bold" Text="Sync Butler"/><Run FontWeight="Bold" Text=", "/><Run FontStyle="Italic" FontWeight="Bold" Text="Sync"/><Run FontWeight="Bold" Text="!"/><LineBreak/><Run Text=""/></TextBlock>
+			<Label HorizontalAlignment="Left" Margin="25.046,90.608,0,0" VerticalAlignment="Top" Content="This computer's name:&#xa;" Height="34.044" Width="170.898" FontSize="14.667"/>
+			<TextBlock x:Name="textBlock9_Copy" HorizontalAlignment="Left" Margin="30.497,155.274,0,0" VerticalAlignment="Top" Width="254.986" Height="30" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap" FontSize="14.667"><TextBlock.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</TextBlock.RenderTransform><Run FontFamily="Fonts/#Segoe UI" FontWeight="Bold" Text="Sync Butler"/><Run FontWeight="Bold" Text=", "/><Run FontStyle="Italic" FontWeight="Bold" Text="Sync"/><Run FontWeight="Bold" Text="!"/><Run Text=" "/><Run Text="Settings:"/><LineBreak/><Run Text=""/></TextBlock>
+			<TextBox x:Name="ComputerNameTextBox"  Margin="290.925,95.153,193.258,0" VerticalAlignment="Top" TextWrapping="Wrap" Height="24" FontSize="14.667"/>
+			<ComboBox x:Name="SBSSettingComboBox"  Margin="290.925,155.112,365.13,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" SelectionChanged="SBSSettingChanged" Height="24" FontSize="14.667">
+				<ComboBox.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</ComboBox.RenderTransform>
+			</ComboBox>
+			<ComboBox x:Name="SBSWorkingDriveComboBox"  Margin="290.925,191.743,249.746,0" SelectionChanged="SBSUpdateSpaceDetails" VerticalAlignment="Top" Height="24" FontSize="14.667"/>
+			<TextBlock x:Name="textBlock9" HorizontalAlignment="Left" Margin="29.764,192.243,0,0" Width="274.132" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" FontSize="14.667"><TextBlock.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</TextBlock.RenderTransform><Run FontFamily="Fonts/#Segoe UI" FontWeight="Bold" Text="Sync Butler"/><Run FontWeight="Bold" Text=", "/><Run FontStyle="Italic" FontWeight="Bold" Text="Sync"/><Run FontWeight="Bold" Text="! "/><Run Text="Destination Drive:"/><LineBreak/><Run Text=""/></TextBlock>
+			<Slider x:Name="SpaceToUseSlide" Margin="292.554,231.157,193.258,0" ValueChanged="SpaceToUseSlided" FontSize="14.667" VerticalAlignment="Top" Height="26.154"/>
+			<TextBox x:Name="SpaceToUseTextbox" HorizontalAlignment="Right" Margin="0,230.81,98.926,0" TextWrapping="Wrap" Width="72.159" KeyUp="SpaceToUseChanged" FontSize="14.667" VerticalAlignment="Top" Height="26"/>
+			<Button Margin="291.054,0,249.746,174.106" VerticalAlignment="Bottom" Content="Search Again for Portable Storage" Click="RefreshSBSSettingDriveList" FontSize="14.667" Height="32">
+				<Button.Background>
+					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+						<GradientStop Color="#FFF3F3F3" Offset="0"/>
+						<GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+						<GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+						<GradientStop Color="#FF9EB0EE" Offset="1"/>
+					</LinearGradientBrush>
+				</Button.Background>
+			</Button>
+			<Button x:Name="SaveSettingButton"  HorizontalAlignment="Left" Margin="30.567,0,0,40.122" VerticalAlignment="Bottom" Width="95" Content="Save" Click="SaveSetting" Height="33" FontSize="14.667">
+				<Button.Background>
+					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+						<GradientStop Color="#FFF3F3F3" Offset="0"/>
+						<GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+						<GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+						<GradientStop Color="#FFD2FF87" Offset="1"/>
+					</LinearGradientBrush>
+				</Button.Background>
+			</Button>
+			<Button x:Name="CancelSettingButton"  Margin="141.739,0,0,40.122" VerticalAlignment="Bottom" Content="Cancel" Click="SBSSettingCancel" HorizontalAlignment="Left" Width="95" Height="33" FontSize="14.667" />
+			<Button x:Name="DefaultSettingButton" IsTabStop="False" HorizontalAlignment="Right" Margin="0,0,187.342,40.122" VerticalAlignment="Bottom" Width="130" Content="Restore Defaults"  Click="DefaultSetting" Height="33" FontSize="14.667"/>
+			<Button Margin="0,0,37.342,40.122" VerticalAlignment="Bottom" Content="Show Help" HorizontalAlignment="Right" Width="130" Click="ShowHelp" Height="33" FontSize="14.667"/>
+			<TextBlock x:Name="textBlock9_Copy1" Margin="29.764,227.81,0,0" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap" FontSize="14.667" HorizontalAlignment="Left" Width="235.566" VerticalAlignment="Top" Height="30"><TextBlock.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</TextBlock.RenderTransform><Run FontFamily="Fonts/#Segoe UI" FontWeight="Bold" Text="Sync Butler"/><Run FontWeight="Bold" Text=", "/><Run FontStyle="Italic" FontWeight="Bold" Text="Sync"/><Run FontWeight="Bold" Text="!"/><Run Text=" "/><Run Text="D"/><Run Text="isk "/><Run Text="U"/><Run Text="sage"/><Run Text=":"/></TextBlock>
+			<Label HorizontalAlignment="Left" Margin="288.054,260.311,0,234.353" Content="0%" Width="36.723" FontSize="16"/>
+			<Label x:Name="resolutionLabel" HorizontalAlignment="Right" Margin="0,227.31,33.574,0" Content="KB" Width="45.717" FontSize="14.667" VerticalAlignment="Top" Height="29.381"/>
+			<Label x:Name="label" Margin="0,256.311,185.758,233.705" Content="100%" HorizontalAlignment="Right" Width="52.584" FontSize="16"/>
+			<Path Stretch="Fill" Stroke="#FF908A8A" StrokeThickness="2" HorizontalAlignment="Left" Margin="23.656,75.973,0,0" VerticalAlignment="Top" Width="192.794" Height="2" Data="M1.0000301,0.99999902 L187.03178,0.99999902"/>
+			<TextBlock x:Name="SBSSettingDeviceNotFoundTextBox" Margin="222.339,0,158.377,99.383" RenderTransformOrigin="0.5,0.5" TextWrapping="Wrap" FontSize="14.667" VerticalAlignment="Bottom" Height="66.328" TextAlignment="Justify"><TextBlock.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</TextBlock.RenderTransform><Run Text="There is another portable storage device that is assigned to this feature. It is not plugged into the system now. Please "/><Run Text="plug in that device to make any changes to this feature."/></TextBlock>
+		</Grid>
+		<Grid x:Name="FirstTimeHelp" Margin="0,0,-1.024,-4" Visibility="Hidden">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="0.446*"/>
+				<ColumnDefinition Width="0.554*"/>
+			</Grid.ColumnDefinitions>
+			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="81.67,24.159,168.976,0" VerticalAlignment="Top" Height="45.943" d:LayoutOverrides="VerticalAlignment" Grid.Column="1"/>
+			<TextBlock FontFamily="Fonts/#Segoe UI" Margin="92.279,32.959,181.917,0" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top" Height="28.343" FontSize="10.667" Text="This name is used to help us identify the computers you use." Grid.Column="1" TextAlignment="Justify"/>
+			<Image Margin="69.034,85.718,319.589,0" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Top" Height="17.887" IsHitTestVisible="False" Grid.Column="1">
+				<Image.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform Angle="106.012"/>
+						<TranslateTransform X="1.93" Y="-11.382"/>
+					</TransformGroup>
+				</Image.RenderTransform>
+			</Image>
+			<Rectangle Fill="Black" Stroke="#FFFC0404" StrokeThickness="4" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="112.85,128.71,200.461,0" VerticalAlignment="Top" Height="39.696" d:LayoutOverrides="VerticalAlignment" Grid.Column="1"/>
+			<TextBlock FontFamily="Fonts/#Segoe UI" Margin="121.125,132.223,210.85,0" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top" Height="47.612" FontSize="10.667" Grid.Column="1" TextAlignment="Justify"><Run Text="Enable or disable "/><Run FontFamily="Fonts/#Segoe UI" FontSize="12" FontWeight="Bold" Text="Sync Butler"/><Run FontWeight="Bold" Text=", "/><Run FontStyle="Italic" FontWeight="Bold" Text="Sync!"/></TextBlock>
+			<Image Margin="57.232,150.273,0,0" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Top" Height="22.515" IsHitTestVisible="False" Grid.Column="1" HorizontalAlignment="Left" Width="37.528">
+				<Image.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform Angle="165.741"/>
+						<TranslateTransform X="1.93" Y="-11.382"/>
+					</TransformGroup>
+				</Image.RenderTransform>
+			</Image>
+			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="0,150.953,81,0" VerticalAlignment="Top" Height="72.609" HorizontalAlignment="Right" Width="119.461" d:LayoutOverrides="VerticalAlignment" Grid.Column="1"/>
+			<TextBlock FontFamily="Fonts/#Segoe UI" Margin="0,158.134,90.524,0" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top" Height="72.406" FontSize="10.667" HorizontalAlignment="Right" Width="100.997" Grid.Column="1" TextAlignment="Justify"><Run Text="The drive which "/><Run FontFamily="Fonts/#Segoe UI" FontSize="12" FontWeight="Bold" Text="Sync Butler"/><Run FontWeight="Bold" Text=", "/><Run FontStyle="Italic" FontWeight="Bold" Text="Sync! "/><Run Text="should use"/><Run Text=" to store the files."/></TextBlock>
+			<Image Margin="172.298,188.197,0,0" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" VerticalAlignment="Top" Height="22.515" IsHitTestVisible="False" Grid.Column="1" HorizontalAlignment="Left" Width="37.524">
+				<Image.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform Angle="180"/>
+						<TranslateTransform X="1.93" Y="-11.382"/>
+					</TransformGroup>
+				</Image.RenderTransform>
+			</Image>
+			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="198.511,296.535,65.468,0" VerticalAlignment="Top" Height="60.704" Grid.Column="1"/>
+			<TextBlock FontFamily="Fonts/#Segoe UI" Margin="206.468,0,72.903,179.73" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="47.073" FontSize="10.667" Grid.Column="1" TextAlignment="Justify"><Run Text="This tells "/><Run FontFamily="Fonts/#Segoe UI" FontSize="12" FontWeight="Bold" Text="Sync Butler"/><Run Text=" how much space it is allowed to use in the drive you selected above."/></TextBlock>
+			<Image Margin="0,247.786,119.352,250.38" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" HorizontalAlignment="Right" Width="53.362" IsHitTestVisible="False" Grid.Column="1">
+				<Image.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform Angle="-95.658"/>
+						<TranslateTransform X="1.93" Y="-11.382"/>
+					</TransformGroup>
+				</Image.RenderTransform>
+			</Image>
+			<Image Margin="31.494,0,0,153.559" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" HorizontalAlignment="Left" Width="43.534" IsHitTestVisible="False" Grid.Column="1" VerticalAlignment="Bottom" Height="26.121">
+				<Image.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform Angle="-96.582"/>
+						<TranslateTransform X="1.93" Y="-11.382"/>
+					</TransformGroup>
+				</Image.RenderTransform>
+			</Image>
+			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="6.409,388.44,0,0" VerticalAlignment="Top" Height="60.704" Grid.Column="1" HorizontalAlignment="Left" Width="132.446"/>
+			<TextBlock FontFamily="Fonts/#Segoe UI" Margin="15.366,0,0,87.825" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="47.073" FontSize="10.667" Text="Click here if you have just plugged in your portable storage device." Grid.Column="1" TextAlignment="Justify" HorizontalAlignment="Left" Width="114.673"/>
+			<Rectangle Fill="Black" Stroke="#FF62DE37" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="0,378.095,63.993,0" VerticalAlignment="Top" Height="42.597" Grid.Column="1" HorizontalAlignment="Right" Width="84.827"/>
+			<TextBlock FontFamily="Fonts/#Segoe UI" Margin="0,0,73.666,113.492" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="32.787" FontSize="10.667" Text="Hide the help balloons." Grid.Column="1" TextAlignment="Justify" HorizontalAlignment="Right" Width="65.149"/>
+			<Image Margin="0,0,108.867,63.797" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" HorizontalAlignment="Right" Width="43.534" IsHitTestVisible="False" Grid.Column="1" VerticalAlignment="Bottom" Height="26.121">
+				<Image.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform Angle="80.417"/>
+						<TranslateTransform X="1.93" Y="-11.382"/>
+					</TransformGroup>
+				</Image.RenderTransform>
+			</Image>
+			<Image Margin="142.261,263.594,0,237.958" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill" HorizontalAlignment="Left" Width="47.719" IsHitTestVisible="False" Grid.Column="1">
+				<Image.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform Angle="-131.12"/>
+						<TranslateTransform X="1.93" Y="-11.382"/>
+					</TransformGroup>
+				</Image.RenderTransform>
+			</Image>
+		</Grid>
+		<Grid x:Name="Result" Margin="0.027,0,0.449,0" VerticalAlignment="Bottom" Height="528" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
+			<Grid.RenderTransform>
+				<TransformGroup>
+					<ScaleTransform/>
+					<SkewTransform/>
+					<RotateTransform/>
+					<TranslateTransform/>
+				</TransformGroup>
+			</Grid.RenderTransform>
+			<Rectangle x:Name="background_Copy6" RadiusX="1" RadiusY="2" VerticalAlignment="Top" Height="528" Cursor="Arrow" RenderTransformOrigin="0.5,0.5">
+				<Rectangle.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Rectangle.RenderTransform>
+				<Rectangle.Fill>
+					<RadialGradientBrush GradientOrigin="0.265,0.184" RadiusX="1.237" RadiusY="1.237">
+						<GradientStop Color="Black" Offset="1"/>
+						<GradientStop Color="White"/>
+						<GradientStop Color="#FFA3A3A3" Offset="1"/>
+						<GradientStop Color="#FFA1A1A1" Offset="1"/>
+						<GradientStop Color="White" Offset="0.378"/>
+					</RadialGradientBrush>
+				</Rectangle.Fill>
+			</Rectangle>
+			<Image x:Name="image1_Copy5" Margin="184.002,136.825,1.47,14.143" Source="Images\logo.png" Stretch="Fill" Opacity="0.04"/>
+			<TextBlock x:Name="ConflictsLabel3" Margin="119.547,40.335,0,0" FontSize="24" FontWeight="Bold" Text="Result of Sync" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Width="177.273" Height="33.673"/>
+			<Custom:DataGrid x:Name="SyncResultListBox" IsReadOnly="True" Margin="29.138,104.5,21.662,0" SelectionUnit="FullRow" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"  CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False" Width="720" VerticalAlignment="Top" Height="355" > 
+				<Custom:DataGrid.Columns>
+					<Custom:DataGridTextColumn Header="Folder 1" MinWidth="285" Binding="{Binding Left}"/>
+					<Custom:DataGridTextColumn Header="Action Taken" MinWidth="145" Binding="{Binding Action}"/>
+					<Custom:DataGridTextColumn Header="Folder 2" MinWidth="285" Binding="{Binding Right}"/>
+				</Custom:DataGrid.Columns>
+				
+				
+			</Custom:DataGrid>
+			<Button HorizontalAlignment="Right"  Margin="0,0,22.674,29.453" VerticalAlignment="Bottom" Width="74.854" Content="Ok!" Click="GoHome" Height="25.882" FontSize="14.667">
+				<Button.Background>
+					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+						<GradientStop Color="#FFF3F3F3" Offset="0"/>
+						<GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+						<GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+						<GradientStop Color="#FFD2FF87" Offset="1"/>
+					</LinearGradientBrush>
+				</Button.Background>
+			</Button>
+			<Image HorizontalAlignment="Left" Margin="29.138,15.941,0,0" VerticalAlignment="Top" Width="81.835" Height="81.835" Source="Images/Symbol-Refresh.png" Stretch="Fill"/>
+		</Grid>
+		<Grid x:Name="CreatePartnership" RenderTransformOrigin="0.5,0.5" Margin="0,-6,-4.217,6" Visibility="Hidden" >
+			<Grid.RowDefinitions>
+				<RowDefinition Height="0.185*"/>
+				<RowDefinition Height="0.815*"/>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<Grid.RenderTransform>
+				<TransformGroup>
+					<ScaleTransform/>
+					<SkewTransform/>
+					<RotateTransform/>
+					<TranslateTransform/>
+				</TransformGroup>
+			</Grid.RenderTransform>
+			<Rectangle x:Name="background_Copy4" Cursor="Arrow" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="776.3" Margin="0,8,-0.807,-15.357" Grid.RowSpan="2">
+				<Rectangle.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Rectangle.RenderTransform>
+				<Rectangle.Fill>
+					<RadialGradientBrush GradientOrigin="0.265,0.184" RadiusX="1.237" RadiusY="1.237">
+						<GradientStop Color="Black" Offset="1"/>
+						<GradientStop Color="White"/>
+						<GradientStop Color="#FFA3A3A3" Offset="1"/>
+						<GradientStop Color="#FFA1A1A1" Offset="1"/>
+						<GradientStop Color="White" Offset="0.378"/>
+					</RadialGradientBrush>
+				</Rectangle.Fill>
+			</Rectangle>
+			<Image x:Name="image1_Copy4" Margin="363.323,28.181,0.585,-4.583" Source="Images\logo.png" Stretch="Fill" Opacity="0.06" RenderTransformOrigin="0.5,0.5" Grid.Row="1">
+				<Image.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Image.RenderTransform>
+			</Image>
+			<TextBlock x:Name="PathLabel" Margin="0,31.851,217.955,375.958" FontSize="14.667" TextWrapping="Wrap" HorizontalAlignment="Right" Width="103.588" RenderTransformOrigin="0.5,0.5" Text="Folder 1's Path:" d:LayoutOverrides="HorizontalAlignment" Grid.Row="1"><TextBlock.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</TextBlock.RenderTransform></TextBlock>
+			<TextBlock x:Name="textBlock3_Copy" Margin="119.463,39.547,286.887,24.171" FontFamily="Fonts/#Segoe UI" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" Text="Creating a Sync Partnership"/>
+			<TextBlock x:Name="textBlock12" Margin="0,38.126,416.17,0" FontSize="14.667" TextWrapping="Wrap" HorizontalAlignment="Right" Width="337.024" TextAlignment="Justify" VerticalAlignment="Top" Height="50.735" Text="Please select a folder that contains your media and documents." Grid.Row="1"/>
+			<Image x:Name="image2_Copy" Margin="0,0,331.673,347.83" Source="Images\Misc.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Bottom" Height="41.93" HorizontalAlignment="Right" Width="42.604" Grid.Row="1">
+				<Image.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Image.RenderTransform>
+			</Image>
+			<TextBlock Margin="0,6.288,643.187,0" FontSize="16" TextWrapping="Wrap" Text="Step 1 of 3 :" HorizontalAlignment="Right" Width="114.074" VerticalAlignment="Top" Height="29.338" FontWeight="Bold" TextDecorations="Underline" FontStyle="Italic" Grid.Row="1"/>
+			<TextBlock Margin="0,149.325,416.044,183.021" FontSize="14.667" TextWrapping="Wrap" HorizontalAlignment="Right" Width="337.15" TextAlignment="Justify" Grid.Row="1"><Run Text="Please select another folder you want to "/><Run FontWeight="Bold" Text="keep in sync "/><Run Text="with the folder selected above."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="Usually, this folder is found on "/><Run FontWeight="Bold" Text="a portable storage device "/><Run Text="so you may carry your files with you."/><LineBreak/><Run Text=""/></TextBlock>
+			<Image x:Name="image3_Copy" HorizontalAlignment="Right" Margin="0,169.482,331.673,0" Width="42.604" Source="Images\Folder.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" Height="41.93" Grid.Row="1">
+				<Image.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Image.RenderTransform>
+			</Image>
+			<TextBlock x:Name="textBlock11_Copy" Margin="0,160.781,219.161,247.028" FontSize="14.667" TextWrapping="Wrap" HorizontalAlignment="Right" Width="102.382" Text="Folder 2's Path:" RenderTransformOrigin="0.5,0.5" d:LayoutOverrides="HorizontalAlignment" Grid.Row="1">
+				<TextBlock.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</TextBlock.RenderTransform>
+			</TextBlock>
+			<TextBlock Margin="0,117.353,416.044,0" FontSize="16" TextWrapping="Wrap" Text="Step 2 of 3 :" HorizontalAlignment="Right" Width="341.217" VerticalAlignment="Top" Height="30.972" FontWeight="Bold" TextDecorations="Underline" FontStyle="Italic" Grid.Row="1"/>
+			<TextBlock x:Name="textBlock14_Copy" Margin="0,0,163.651,104.986" FontSize="14.667" Text="Partnership Name:" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="21.464" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="158.108" Grid.Row="1">
+				<TextBlock.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</TextBlock.RenderTransform>
+			</TextBlock>
+			<TextBlock Margin="0,0,416.17,13.959" FontSize="14.667" TextWrapping="Wrap" HorizontalAlignment="Right" Width="337.024" TextAlignment="Justify" VerticalAlignment="Bottom" Height="95.527" Grid.Row="1"><Run Text="Please give this partnership a name that will allow you to identify the partnership easily."/><LineBreak/><Run Text=""/><LineBreak/><Run Text="For example, &quot;Work Files&quot; or &quot;Music Collection&quot; or &quot;School Projects&quot;."/></TextBlock>
+			<TextBlock Margin="0,0,489.408,110.986" FontSize="16" TextWrapping="Wrap" Text="Step 3 of 3 :" HorizontalAlignment="Right" Width="267.853" VerticalAlignment="Bottom" Height="30.972" FontWeight="Bold" TextDecorations="Underline" FontStyle="Italic" Grid.Row="1"/>
+			<Rectangle Margin="25.301,99.086,19.344,0" VerticalAlignment="Top" Height="1.27" RenderTransformOrigin="0.5,0.5" Fill="#54575757" Grid.Row="1">
+				<Rectangle.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform ScaleY="-1"/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Rectangle.RenderTransform>
+			</Rectangle>
+			<Rectangle Fill="#54575757" Margin="21.086,0,19.749,158.499" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Bottom" Height="1.27" Grid.Row="1">
+				<Rectangle.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform ScaleY="-1"/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Rectangle.RenderTransform>
+			</Rectangle>
+			<Rectangle Fill="Black" Stroke="White" StrokeThickness="3" RadiusX="5" RadiusY="5" Opacity="0.495" Margin="0,21.5,33.32,0" VerticalAlignment="Top" Height="60.906" HorizontalAlignment="Right" Width="143.456"/>
+			<TextBlock Margin="0,33.5,79.207,24.17" Foreground="White" TextWrapping="Wrap" FontWeight="Bold" HorizontalAlignment="Right" Width="83.429" FontSize="13.333"><Run FontFamily="Fonts/#Segoe UI" Text="Keeping Files in Sync?"/></TextBlock>
+			<Grid x:Name="EditPartnershipControl" Margin="10.834,2.5,-0.807,2.917" Visibility="Hidden" Grid.RowSpan="2">
+				<TextBlock x:Name="textBlock3" FontFamily="Fonts/#Segoe UI" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" Text="Editing a Sync Partnership" VerticalAlignment="Top" Height="34.929" Margin="108.463,37,341.243,0"/>
+				<Button x:Name="EditPartnershipButon" VerticalAlignment="Bottom" Height="31" Content="Save" RenderTransformOrigin="0.79,1.043" Click="SavePartnership_Click"  HorizontalAlignment="Right" Width="80" Margin="0,0,25.555,16.993" FontSize="16" >
+					<Button.Background>
+						<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+							<GradientStop Color="#FFF3F3F3" Offset="0"/>
+							<GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+							<GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+							<GradientStop Color="#FFD2FF87" Offset="1"/>
+						</LinearGradientBrush>
+					</Button.Background>
+				</Button>
+			</Grid>
+			<Image HorizontalAlignment="Right" Margin="0,24.685,38.75,41.691" Width="52" RenderTransformOrigin="0.809,0.775" Source="Images\arrow1.png" Stretch="Fill">
+				<Image.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform Angle="-88.349"/>
+						<TranslateTransform X="1.93" Y="-11.382"/>
+					</TransformGroup>
+				</Image.RenderTransform>
+			</Image>
+			<Image Margin="39.741,21.658,0,6.584" Source="Images/Folder.png" Stretch="Fill" HorizontalAlignment="Left" Width="69.334"/>
+			<Image Margin="56.043,29.435,0,10.871" Source="Images/Edit.png" Stretch="Fill" HorizontalAlignment="Left" Width="57.27"/>
+			<Image x:Name="image3_Copy1" HorizontalAlignment="Right" Margin="0,0,327.673,78.886" Width="42.604" Source="Images\Folder.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Bottom" Height="41.93" Opacity="0.895" Grid.Row="1">
+				<Image.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Image.RenderTransform>
+			</Image>
+			<Image x:Name="image3_Copy2" HorizontalAlignment="Right" Margin="0,0,331.006,73.172" Width="42.604" Source="Images\Folder.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Bottom" Height="41.93" Opacity="0.895" Grid.Row="1">
+				<Image.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Image.RenderTransform>
+			</Image>
+			<TextBox x:Name="folderOneTextBox" Margin="0,61.351,24.32,0" VerticalAlignment="Top" MaxLength="300"  RenderTransformOrigin="0.372,1.387" KeyDown="SourceTextBox_Enter" d:LayoutOverrides="VerticalAlignment" Height="24" FontSize="14.667" HorizontalAlignment="Right" Width="297.999" Grid.Row="1" >
+				<TextBox.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</TextBox.RenderTransform>
+			</TextBox>
+			<Button x:Name="BrowseButtonforFolderOne" Content="Browse" Width="72.621" RenderTransformOrigin="0.5,0.5" Click="GetFolderOneUserPath" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,24.32,371.757" Height="25" FontSize="14.667" Grid.Row="1">
+				<Button.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Button.RenderTransform>
+			</Button>
+			<TextBox x:Name="folderTwoTextBox" Margin="0,189.781,24.32,0" VerticalAlignment="Top" MaxLength="300"  RenderTransformOrigin="0.372,1.387" KeyDown="SourceTextBox_Enter" Height="24" FontSize="14.667" HorizontalAlignment="Right" Width="298.407" Grid.Row="1" d:LayoutOverrides="VerticalAlignment" >
+				<TextBox.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</TextBox.RenderTransform>
+			</TextBox>
+			<Button x:Name="BrowseButtonforFolderTwo" Content="Browse" RenderTransformOrigin="0.5,0.5" Click="GetFolderTwoUserPath" VerticalAlignment="Bottom" Margin="0,0,24.32,242.827" HorizontalAlignment="Right" Width="68.735" Height="25" FontSize="14.667" Grid.Row="1">
+				<Button.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Button.RenderTransform>
+			</Button>
+			<TextBox x:Name="partnershipNameTextBox" Margin="0,0,24.32,77.162" VerticalAlignment="Bottom" Height="24"  KeyDown="PartnershipNameTextBox_Enter" RenderTransformOrigin="0.5,0.5" FontSize="14.667" HorizontalAlignment="Right" Width="297.439" Grid.Row="1" >
+				<TextBox.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</TextBox.RenderTransform>
+			</TextBox>
+			<Button x:Name="CreatePartnershipBtn" Margin="0,0,24.32,21.459" VerticalAlignment="Bottom" Height="31" Content="Create!" RenderTransformOrigin="0.79,1.043" Click="CreatePartnership_Click"  HorizontalAlignment="Right" Width="80" FontSize="16" Grid.Row="1" >
+				<Button.Background>
+					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+						<GradientStop Color="#FFF3F3F3" Offset="0"/>
+						<GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+						<GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+						<GradientStop Color="#FFD2FF87" Offset="1"/>
+					</LinearGradientBrush>
+				</Button.Background>
+			</Button>
+		</Grid>
+		<Grid x:Name="CreateDoneGrid" RenderTransformOrigin="0.5,0.5" Margin="0,3,0.449,0" Visibility="Hidden" >
+			<Grid.RowDefinitions>
+				<RowDefinition Height="0.093*"/>
+				<RowDefinition Height="0.907*"/>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="0.177*"/>
+				<ColumnDefinition Width="0.823*"/>
+			</Grid.ColumnDefinitions>
+			<Grid.RenderTransform>
+				<TransformGroup>
+					<ScaleTransform/>
+					<SkewTransform/>
+					<RotateTransform/>
+					<TranslateTransform/>
+				</TransformGroup>
+			</Grid.RenderTransform>
+			<Rectangle x:Name="background_Copy1" VerticalAlignment="Top" Height="522.311" Cursor="Arrow" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="771.938" Margin="0,0,-1.111,0" Grid.ColumnSpan="2" Grid.RowSpan="2">
+				<Rectangle.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Rectangle.RenderTransform>
+				<Rectangle.Fill>
+					<RadialGradientBrush GradientOrigin="0.265,0.184" RadiusX="1.237" RadiusY="1.237">
+						<GradientStop Color="Black" Offset="1"/>
+						<GradientStop Color="White"/>
+						<GradientStop Color="#FFA3A3A3" Offset="1"/>
+						<GradientStop Color="#FFA1A1A1" Offset="1"/>
+						<GradientStop Color="White" Offset="0.378"/>
+					</RadialGradientBrush>
+				</Rectangle.Fill>
+			</Rectangle>
+			<Image x:Name="image1_Copy6" Margin="224.674,69.465,0.274,0.873" Source="Images\logo.png" Stretch="Fill" Opacity="0.06" RenderTransformOrigin="0.5,0.5" Grid.Column="1" Grid.Row="1">
+				<Image.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Image.RenderTransform>
+			</Image>
+			<TextBlock x:Name="textBlock7" Margin="224.674,0,221.368,184.584" FontSize="21.333" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Bottom" Height="32.025" Grid.Column="1" Grid.Row="1"><TextBlock.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</TextBlock.RenderTransform><Run FontWeight="Bold" Text="Would you like to:"/></TextBlock>
+			<Image x:Name="image" Margin="28.98,-11.327,32.356,0" VerticalAlignment="Top" Height="74.526" Opacity="0.79" Source="Images\Symbol-Check.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Grid.Row="1">
+				<Image.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Image.RenderTransform>
+			</Image>
+			<TextBlock x:Name="textBlock6" Margin="29.366,100.572,-106.368,0" FontSize="20" FontWeight="Bold" Text="Folder 1's Path" TextWrapping="Wrap" VerticalAlignment="Top" Height="26.633" FontFamily="Fonts/#Segoe UI" Grid.Row="1"/>
+			<TextBlock x:Name="textBlock10" Margin="29.366,0,-106.368,188.538" FontSize="20" FontWeight="Bold" Text="Folder 2's Path" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="26.634" FontFamily="Fonts/#Segoe UI" Grid.Row="1"/>
+			<TextBlock x:Name="textBlock11" Margin="224.674,100.571,26.161,0" FontSize="20" FontWeight="Bold" Text="Partnership Name" TextWrapping="Wrap" VerticalAlignment="Top" Height="26.634" Grid.Column="1" FontFamily="Fonts/#Segoe UI" Grid.Row="1"/>
+			<TextBlock x:Name="sourceFolderPath" Margin="-107.456,131.205,0,224.308" FontSize="14.667" TextWrapping="Wrap" HorizontalAlignment="Left" Width="285.253" Grid.Column="1" Grid.Row="1"/>
+			<TextBlock x:Name="destinationFolderPath" Margin="-107.456,0,0,69.099" FontSize="14.667" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="115.439" HorizontalAlignment="Left" Width="285.253" Grid.Column="1" Grid.Row="1"/>
+			<TextBlock x:Name="partnerShipName" Margin="224.674,133.107,16,0" FontSize="14.667" TextWrapping="Wrap" Grid.Column="1" VerticalAlignment="Top" Height="102.128" Grid.Row="1"/>
+			<Grid x:Name="EditDoneGrid" RenderTransformOrigin="0.5,0.5" Margin="0,0,-1.111,0.873" Grid.ColumnSpan="2" Grid.RowSpan="2" >
+				<Grid.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Grid.RenderTransform>
+			</Grid>
+			<TextBlock x:Name="textBlock2_Copy" Margin="-18.857,2.568,22,0" VerticalAlignment="Top" Height="61.048" FontFamily="Fonts/#Segoe UI" FontSize="24" FontWeight="Bold" Text="Partnership Created" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" Grid.Column="1" Grid.Row="1">
+				<TextBlock.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</TextBlock.RenderTransform>
+			</TextBlock>
+			<Button x:Name="button1" HorizontalAlignment="Right" Margin="0,0,159.62,99.562" VerticalAlignment="Bottom" Width="110" Height="52.143" Content="   Sync this&#xa; Partnership" RenderTransformOrigin="0.79,1.043" Click="SyncThisPartnership_Click" FontSize="14.667" Grid.Column="1" Grid.Row="1" >
+				<Button.Background>
+					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+						<GradientStop Color="#FFF3F3F3" Offset="0"/>
+						<GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+						<GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+						<GradientStop Color="#FFD2FF87" Offset="1"/>
+					</LinearGradientBrush>
+				</Button.Background>
+			</Button>
+			<Button x:Name="button7" Margin="232.174,0,291.831,99.562" Content="Go back to&#xa;Home Page" RenderTransformOrigin="0.79,1.043" Click="GoHome"  VerticalAlignment="Bottom" Height="52.143" FontSize="14.667" Grid.Column="1" Grid.Row="1">
+				<Button.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Button.RenderTransform>
+			</Button>
+			<Grid x:Name="Edit" Margin="-29.467,1.839,26.161,76.233" Visibility="Hidden" Grid.Column="1" Grid.Row="1">
+				<TextBlock x:Name="textBlock2" VerticalAlignment="Top" Height="58.934" FontFamily="Fonts/#Segoe UI" FontSize="24" FontWeight="Bold" Text="Partnership Edited" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" Margin="11,1,-13.934,0">
+					<TextBlock.RenderTransform>
+						<TransformGroup>
+							<ScaleTransform/>
+							<SkewTransform/>
+							<RotateTransform/>
+							<TranslateTransform/>
+						</TransformGroup>
+					</TextBlock.RenderTransform>
+				</TextBlock>
+				<Button x:Name="button6" HorizontalAlignment="Right" Margin="0,0,-1.504,21.132" VerticalAlignment="Bottom" Width="120.22" Height="52.143" Content="Go back to View&#xa;    Partnership" RenderTransformOrigin="0.79,1.043" Click="GoToViewPartnerships_Click" FontSize="14.667" >
+					<Button.RenderTransform>
+						<TransformGroup>
+							<ScaleTransform/>
+							<SkewTransform/>
+							<RotateTransform/>
+							<TranslateTransform/>
+						</TransformGroup>
+					</Button.RenderTransform>
+				</Button>
+			</Grid>
+			<Button x:Name="createAnotherPartnershipBtn" HorizontalAlignment="Right" Margin="0,0,31.643,99.562" VerticalAlignment="Bottom" Width="110" Height="52.143" Content="Create another&#xa;   Partnership" RenderTransformOrigin="0.79,1.043" Click="GoToCreatePartnership_Click" FontSize="14.667" Grid.Column="1" Grid.Row="1" />
+			<Rectangle x:Name="rectangle" Stroke="#FF908A8A" StrokeThickness="2" RadiusX="5" RadiusY="2" Margin="214.388,0,0,8" VerticalAlignment="Bottom" Height="213.109" Grid.Column="1" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Width="402" d:IsHidden="True" Grid.Row="1">
+				<Rectangle.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Rectangle.RenderTransform>
+			</Rectangle>
+		</Grid>
+	</Grid>
+</UserControl>
