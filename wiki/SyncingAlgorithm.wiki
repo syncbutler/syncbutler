@@ -42,3 +42,6 @@ Later       2      2      1
 Same        X      4      3
 Earlier     X      X      X
 }}}
+
+[http://syncbutler.org/WindowsFolderSync.png]
+[http://syncbutler.org/WindowsFileSync.png]
