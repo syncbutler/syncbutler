@@ -28,61 +28,109 @@ using System.Threading;
 using SyncButler;
 using SyncButler.Exceptions;
 using System.IO;
+using System.Windows.Forms;
 
 namespace SyncButlerUI
 {
-	/// <summary>
-	/// Interaction logic for App.xaml
-	/// </summary>
-	public partial class App : Application
-	{
+    /// <summary>
+    /// Interaction logic for App.xaml
+    /// </summary>
+    public partial class App : System.Windows.Application
+    {
         [System.STAThreadAttribute()]
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public static void Main()
         {
+            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
             //AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve); 
             SyncButlerUI.App app = new SyncButlerUI.App();
             app.InitializeComponent();
-            app.Run();           
+            app.Run();
+
         }
+
         /// <summary>
-        ///  This method will be fire if some assembly is missing, can be used to spawn the missing files, if required.
+        /// This method is called if an unhandled exception is thrown.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            String msg = "";
+            try
+            {
+                Exception ex = (Exception)e.ExceptionObject;
+                msg = "Exception Message: " + ex.Message + "\r\n";
+                msg += "Stack Trace: \r\n" + ex.StackTrace;
+                String filename =  DateTime.Now.ToString("yyyyMMddhhmmss") + ".log";
+                TextWriter tw = new StreamWriter(filename);
+                tw.WriteLine(msg);
+                tw.Close();
+                System.Windows.MessageBox.Show("Sorry an error has occured!\r\nPlease contact the developers with the following"
+                      + " File:\n\n" + filename,
+                      "Fatal Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Stop);
+            }
+            catch (Exception)
+            {
+                if (String.IsNullOrEmpty(msg))
+                {
+                    System.Windows.MessageBox.Show("Sorry an unknown error has occured! Please download a new copy of a program and try again, if you get this message again please contact the developers\r\n"
+                        ,"Fatal Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Stop);
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("Sorry an error has occured!\r\nPlease contact the developers with the screen shot of this error\r\n"
+                          + msg,
+                          "Fatal Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Stop);
+                }
+            }
+            finally
+            {
+                System.Windows.Forms.Application.Exit();
+            }
+        }
+
+       
+        /// <summary>
+        /// [Disabled] This method will be fire if some assembly is missing, can be used to spawn the missing files, if required.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
         /// <returns></returns>
         static System.Reflection.Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
         {
-            MessageBox.Show("Some important files are missing\r\nSBS will not run.");
+            System.Windows.Forms.MessageBox.Show("Some important files are missing\r\nSBS will not run.");
             Environment.Exit(-1);
             return null;
-        } 
+        }
+
+
         /// <summary>
         /// Overrides the default OnStartup to provide for testing of single instance.
         /// </summary>
         /// <param name="e">Contains arguments from the event; used to access command line parameters.</param>
         protected override void OnStartup(StartupEventArgs e)
         {
-                if (Controller.IsOnCDRom())
+            if (Controller.IsOnCDRom())
+            {
+                System.Windows.Forms.MessageBox.Show("Running SBS on CD Rom is Not Supported", "Not Supported", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
+                Environment.Exit(-1);
+            }
+            else
+            {
+                if (Controller.TestSingleInstance(e.Args))
                 {
-                    MessageBox.Show("Running SBS on CD Rom is Not Supported", "Not Supported", MessageBoxButton.OK, MessageBoxImage.Information);
-                    Environment.Exit(-1);
-                }
-                else
-                {
-                    if (Controller.TestSingleInstance(e.Args))
+                    try
                     {
-                        try
-                        {
-                            (new MainWindow()).ShowDialog();
-                        }
-                        catch (UserCancelledException)
-                        {
-                            base.Shutdown(0);
-                        }
+                        (new MainWindow()).ShowDialog();
                     }
-                    base.Shutdown(0);                    
+                    catch (UserCancelledException)
+                    {
+                        base.Shutdown(0);
+                    }
                 }
+                base.Shutdown(0);
+            }
         }
-	}
+    }
 }
