@@ -285,7 +285,21 @@ namespace SyncButler
         {
             if (recoverable)
             {
-                FileSystem.DeleteDirectory(nativeDirObj.FullName, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+                try
+                {
+                    FileSystem.DeleteDirectory(nativeDirObj.FullName, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+                }
+                catch (Exception e)
+                {
+                    if (e.Message.Contains("Unknown error (0x402)"))
+                    {
+                        nativeDirObj.Delete(true);
+                    }
+                    else
+                    {
+                        throw e;
+                    }
+                }
             }
             else
             {
