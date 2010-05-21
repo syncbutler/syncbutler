@@ -283,30 +283,41 @@ namespace SyncButler
         /// <returns></returns>
         public override void Delete(bool recoverable)
         {
-            if (recoverable)
+            // windows xp;
+            if (Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Major == 5 && Environment.OSVersion.Version.Minor == 3)
             {
-                try
-                {
-                    FileSystem.DeleteDirectory(nativeDirObj.FullName, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
-                }
-                catch (Exception e)
-                {
-                    if (e.Message.Contains("Unknown error (0x402)"))
-                    {
-                        nativeDirObj.Delete(true);
-                    }
-                    else
-                    {
-                        throw e;
-                    }
-                }
+                nativeDirObj.Delete(true);
+                this.RemoveStoredChecksum();
             }
             else
             {
-                nativeDirObj.Delete(true);
-            }
+                if (recoverable)
+                {
+                    try
+                    {
+                        FileSystem.DeleteDirectory(nativeDirObj.FullName, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+                        this.RemoveStoredChecksum();
+                    }
+                    catch (Exception e)
+                    {
+                        if (e.Message.Contains("Unknown error (0x402)"))
+                        {
+                            nativeDirObj.Delete(true);
+                        }
+                        else
+                        {
+                            throw e;
+                        }
+                    }
+                }
 
-            this.RemoveStoredChecksum();
+                else
+                {
+                    nativeDirObj.Delete(true);
+                }
+
+            }
+            
         }
 
         /// <summary>
