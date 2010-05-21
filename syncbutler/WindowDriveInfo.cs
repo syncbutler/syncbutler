@@ -95,7 +95,10 @@ namespace SyncButler
             List<WindowDriveInfo> ToRtn = new List<WindowDriveInfo>(); 
             foreach (String s in DriveLetters)
             {
-                ToRtn.Add(new WindowDriveInfo(s));
+                if (Directory.Exists(s[0]+":\\"))
+                {
+                    ToRtn.Add(new WindowDriveInfo(s));
+                }
             }
             return ToRtn;
         }
