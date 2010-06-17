@@ -62,7 +62,7 @@ namespace SyncButler
             syncEnvironment = SyncEnvironment.GetInstance();
             //console = new SyncButlerConsole.Form1();
             //console.Show();
-            AddRegistryKey();
+            //AddRegistryKey();
         }
 
         /// <summary>
@@ -979,23 +979,22 @@ namespace SyncButler
         /// <summary>
         /// Adds the registry key for Mini-Sync right-click function.
         /// </summary>
-        public void AddRegistryKey()
-        {
-            try
-            {
-
-                RegistryKey key = Registry.CurrentUser.CreateSubKey(@"Software\Classes\Folder\shell");
-                key.SetValue(null, "open");
-                RegistryKey sbs = key.CreateSubKey("Sync this folder!");
-                sbs.CreateSubKey("command").SetValue(null, System.Reflection.Assembly.GetEntryAssembly().Location + " -addmini \"%1\" ");
-                sbs.SetValue("icon", System.Reflection.Assembly.GetEntryAssembly().Location);
-                sbs.SetValue("MultiSelectModel", "Single");
-            }
-            catch (Exception e)
-            {
-                Logging.Logger.GetInstance().WARNING("Error on adding registry key" + e.Message);
-            }
-        }
+        //public void AddRegistryKey()
+        //{
+        //    try
+        //    {
+        //        RegistryKey key = Registry.CurrentUser.CreateSubKey(@"Software\Classes\Folder\shell");
+        //        //key.SetValue(null, "open");
+        //        RegistryKey sbs = key.CreateSubKey("Sync this folder!");
+        //        sbs.CreateSubKey("command").SetValue(null, System.Reflection.Assembly.GetEntryAssembly().Location + " -addmini \"%1\" ");
+        //        sbs.SetValue("icon", System.Reflection.Assembly.GetEntryAssembly().Location);
+        //        sbs.SetValue("MultiSelectModel", "Single");
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Logging.Logger.GetInstance().WARNING("Error on adding registry key" + e.Message);
+        //    }
+        //}
 
         /// <summary>
         /// Called after initialisation to process the startup arguments.
