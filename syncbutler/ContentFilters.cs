@@ -25,7 +25,7 @@ using System.Text.RegularExpressions;
 namespace SyncButler
 {
     /// <summary>
-    /// This class recongises a large list of file formats and their relative importance
+    /// This class recognises a large list of file formats and their relative importance
     /// to the user. Its knowledge is used to select useful files for the user.
     /// The secondary role of the class is to filter out private or personal folders and
     /// preventing them from being synced (or taken out of the system). This filter is limited
